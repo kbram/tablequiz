@@ -146,3 +146,9 @@ Route::redirect('/php', '/phpinfo', 301);
 //sam route can start here
 
 //christy route can start from here
+
+//kanu routes
+Route::get('setup/create', 'QuizController@create');
+
+Route::post('setup', 'QuizController@store');
+
