@@ -54,7 +54,7 @@
         @include('scripts.ga-analytics')
     </head>
     <body>
-        <div id="app">
+        <div id="app1">
 
             @include('partials.nav')
 

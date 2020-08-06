@@ -40,6 +40,9 @@ Route::group(['middleware' => ['web', 'activity', 'checkblocked']], function () 
 
     // Route to for user to reactivate their user deleted account.
     Route::get('/re-activate/{token}', ['as' => 'user.reactivate', 'uses' => 'RestoreUserController@userReActivate']);
+
+    Route::get('/fe/tablequiz', 'WelcomeController@tablequizhome');
+
 });
 
 // Registered and Activated User Routes

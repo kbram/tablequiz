@@ -1,4 +1,6 @@
-<?php include 'head.php';?>
+@extends('layouts.tablequizapp')
+
+@section('content')
 <div class="container-fluid d-flex flex-column p-0 no-gutters">
 	<section class="container page__inner homepage p-0 d-flex align-items-center">
 		<div class="row">
@@ -22,7 +24,7 @@
 
 	<section class="homepage__white_section container-fluid">
 		<div class="curve">
-			<?php echo file_get_contents('images/curve.svg');?>
+			{!! file_get_contents('site_design/images/curve.svg') !!}
 		</div>
 		<div class="container somepage__white_section__inner text-body">
 			<div class="row align-items-center">
@@ -70,4 +72,8 @@
 	</div>
 </div>
 
-<?php include 'footer.php';?>
+@endsection
+
+@section('footer_scripts')
+
+@endsection
