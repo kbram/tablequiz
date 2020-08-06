@@ -1,0 +1,121 @@
+/* Reusable header and footer styles */
+
+footer {
+    height:var(--footerHeight);
+    background-color:transparent;
+    margin-top:calc(-1 * var(--footerHeight));
+    padding:15px var(--gutter);
+	border-top:1px solid rgba(255,255,255,0.085);
+}
+
+.footer__logo {
+    width:220px;
+    max-width:100%;
+}
+header {
+    height:var(--headerHeight);
+    background-color:transparent;
+    color:#ffffff;
+    @include display_flex();
+    @include align-items(center);
+    @include justify-content(space-between);
+    width:100%;
+	left:0;
+    padding:10px var(--gutter);
+    position:absolute;
+    //position:sticky;
+    top:0;
+    z-index:5;
+}
+
+#menu__btn {
+    color:white;
+    display:none;
+    position:absolute;
+    right:30px;
+    top:15px;
+    font-size:200%;
+    cursor:pointer;
+    @include device {
+        display:block;
+    }
+}
+
+nav.main__navigation {
+    color:white;
+    & ul {
+        list-style:none;
+        margin-bottom:0;
+        @include display_flex();
+        @include flex-direction(row);
+        @include align-items(center);
+        font-size:110%;
+        & li {
+            margin:0 10px;
+			@include device {
+				width:33%;
+			}
+            & a {
+                color:white;
+                text-decoration:none;
+            }
+            &.social__icons {
+                font-size:90%;
+                & a {
+                    margin:0 3px;
+                }
+            }
+			&.sign_up {
+				@include device {
+					& .btn {
+//						color:#222;
+//						outline-color: #222;
+//						border-color:#222;
+					}
+				}
+			}
+        }
+    }
+    @include device {
+        display:none;
+    }
+    
+    &.menuOpen {
+        width:100%;
+        @include display_flex();
+        position: absolute;
+        left: 0;
+        top: var(--headerHeight);
+        background: var(--purpleGradient);
+        padding-bottom: 15px;
+		box-shadow: 0 7px 7px rgba(0,0,0,0.3);
+        & ul {
+            @include flex-direction(column);
+            width:100%;
+            padding:15px 0 0 0;
+            margin:0;
+            & li {
+                font-size:145%;
+                padding-bottom:20px;
+				& a {
+					color:#fff;
+				}
+                &.social__icons a {
+                    margin:0 7px;
+                }
+            }
+        }
+    }
+}
+
+.navigation__logo {
+    height:var(--headerHeight);
+    @include display_flex();
+    @include align-items(center);
+    & img {
+        width: auto;
+        max-height: 98%;
+        margin-top: 0%;
+		max-width: 200px;
+    }
+}
