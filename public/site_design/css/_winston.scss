@@ -1,0 +1,325 @@
+// Include "flex-mixins" SCSS file before this one
+
+@mixin prefix($property, $value, $prefixes: ()) {
+  @each $prefix in $prefixes {
+    #{'-' + $prefix + '-' + $property}: $value;
+  }
+ 
+  // Output standard non-prefixed declaration
+  #{$property}: $value;
+}
+
+$cubic: cubic-bezier(0.19, 1, 0.22, 1);
+
+
+/* Mixins */
+/* Usage: @include phone { css here } */
+
+$device: 768px;
+$medium: 992px;
+$xl: 1200px;
+
+@mixin phone { // Targets phones *only*
+	@media (max-width:#{$device}){
+		@content;
+	}
+}
+
+@mixin phone-up {
+	@media (min-width:#{$device + 1px}){
+		@content;
+	}
+}
+
+@mixin device { //Targets phones, ipads and small browsers
+	@media (max-width:#{$medium - 1px}){
+		@content;
+	}
+}
+
+@mixin desktop { // Targets desktops
+	@media (min-width:#{$medium}){
+		@content;
+	}
+}
+
+@mixin xl { // Targets desktops
+	@media (min-width:#{$xl}){
+		@content;
+	}
+}
+
+@mixin print { // Targets printed pages
+  @media print {
+    @content;
+  }
+}
+
+//////////////
+
+
+
+.col-fifth {
+	@include flex(0 0 20%);
+    max-width: 20%;
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.col-sm-fifth {
+    @media (min-width: 576px) {
+		@include flex(0 0 20%);
+		max-width: 20%;
+		position: relative;
+		width: 100%;
+		min-height: 1px;
+		padding-right: 15px;
+		padding-left: 15px;
+    }
+}
+
+.col-md-fifth {
+    @media (min-width: 768px) {
+		@include flex(0 0 20%);
+		max-width: 20%;
+		position: relative;
+		width: 100%;
+		min-height: 1px;
+		padding-right: 15px;
+		padding-left: 15px;
+    }
+}
+
+.col-lg-fifth {
+    @media (min-width: 1200px) {
+		@include flex(0 0 20%);
+        max-width: 20%;
+        position: relative;
+		width: 100%;
+		min-height: 1px;
+		padding-right: 15px;
+		padding-left: 15px;
+    }
+}
+
+
+//////////////
+
+
+.fade {
+	opacity:0;
+	transition:opacity $cubic 0.4s, transform $cubic 0.45s;
+    @include prefix(transform, translateY(30px),webkit ms);
+    &.in {
+        opacity:1;
+        
+        @include prefix(transform, translateY(0px),webkit ms);
+    }
+	&.wait {
+		transition-delay: 0.25s;
+	}
+}
+
+.hidden-xs {
+	@include phone {
+		display:none!important;
+	}
+}
+
+.hidden-xs-up {
+	@include phone-up {
+		display:none!important;
+	}
+}
+
+
+///// Bootstrap support for old webkit browsers
+
+
+.col-1 {
+	@include flex(0 0 8.333333%);
+}.col-2 {
+	@include flex(0 0 16.666667%);
+}.col-3 {
+	@include flex(0 0 25%);
+}.col-4 {
+	@include flex(0 0 33.333333%);
+}.col-5 {
+	@include flex(0 0 41.666667%);
+}.col-6 {
+	@include flex(0 0 50%);
+}.col-7 {
+	@include flex(0 0 58.333333%);
+}.col-8 {
+	@include flex(0 0 66.666667%);
+}.col-9 {
+	@include flex(0 0 75%);
+}.col-10 {
+	@include flex(0 0 83.333333%);
+}.col-11 {
+	@include flex(0 0 91.666667%);
+}.col-12 {
+	@include flex(0 0 100%);
+}
+
+@media (min-width: 576px) {
+	.col-sm-1 {
+		@include flex(0 0 8.333333%);
+	}
+	.col-sm-2 {
+		@include flex(0 0 16.666667%);
+		}
+	.col-sm-3 {
+		@include flex(0 0 25%);
+		}
+	.col-sm-4 {
+		@include flex(0 0 33.333333%);
+		}
+	.col-sm-5 {
+		@include flex(0 0 41.666667%);
+		}
+	.col-sm-6 {
+		@include flex(0 0 50%);
+		}
+	.col-sm-7 {
+		@include flex(0 0 58.333333%);
+		}
+	.col-sm-8 {
+		@include flex(0 0 66.666667%);
+		}
+	.col-sm-9 {
+		@include flex(0 0 75%);
+		}
+	.col-sm-10 {
+		@include flex(0 0 83.333333%);
+		}
+	.col-sm-11 {
+		@include flex(0 0 91.666667%);
+		}
+	.col-sm-12 {
+		@include flex(0 0 100%);
+		}
+	
+}
+
+@media (min-width: 768px) {
+	.col-md-1 {
+		@include flex(0 0 8.333333%);
+	}
+	.col-md-2 {
+		@include flex(0 0 16.666667%);
+		}
+	.col-md-3 {
+		@include flex(0 0 25%);
+		}
+	.col-md-4 {
+		@include flex(0 0 33.333333%);
+		}
+	.col-md-5 {
+		@include flex(0 0 41.666667%);
+		}
+	.col-md-6 {
+		@include flex(0 0 50%);
+		}
+	.col-md-7 {
+		@include flex(0 0 58.333333%);
+		}
+	.col-md-8 {
+		@include flex(0 0 66.666667%);
+		}
+	.col-md-9 {
+		@include flex(0 0 75%);
+		}
+	.col-md-10 {
+		@include flex(0 0 83.333333%);
+		}
+	.col-md-11 {
+		@include flex(0 0 91.666667%);
+		}
+	.col-md-12 {
+		@include flex(0 0 100%);
+		}
+	
+}
+@media (min-width: 992px) {
+	.col-lg-1 {
+		@include flex(0 0 8.333333%);
+	}
+	.col-lg-2 {
+		@include flex(0 0 16.666667%);
+		}
+	.col-lg-3 {
+		@include flex(0 0 25%);
+		}
+	.col-lg-4 {
+		@include flex(0 0 33.333333%);
+		}
+	.col-lg-5 {
+		@include flex(0 0 41.666667%);
+		}
+	.col-lg-6 {
+		@include flex(0 0 50%);
+		}
+	.col-lg-7 {
+		@include flex(0 0 58.333333%);
+		}
+	.col-lg-8 {
+		@include flex(0 0 66.666667%);
+		}
+	.col-lg-9 {
+		@include flex(0 0 75%);
+		}
+	.col-lg-10 {
+		@include flex(0 0 83.333333%);
+		}
+	.col-lg-11 {
+		@include flex(0 0 91.666667%);
+		}
+	.col-lg-12 {
+		@include flex(0 0 100%);
+		}
+	
+}
+@media (min-width: 1200px) {
+	.col-xl-1 {
+		@include flex(0 0 8.333333%);
+	}
+	.col-xl-2 {
+		@include flex(0 0 16.666667%);
+		}
+	.col-xl-3 {
+		@include flex(0 0 25%);
+		}
+	.col-xl-4 {
+		@include flex(0 0 33.333333%);
+		}
+	.col-xl-5 {
+		@include flex(0 0 41.666667%);
+		}
+	.col-xl-6 {
+		@include flex(0 0 50%);
+		}
+	.col-xl-7 {
+		@include flex(0 0 58.333333%);
+		}
+	.col-xl-8 {
+		@include flex(0 0 66.666667%);
+		}
+	.col-xl-9 {
+		@include flex(0 0 75%);
+		}
+	.col-xl-10 {
+		@include flex(0 0 83.333333%);
+		}
+	.col-xl-11 {
+		@include flex(0 0 91.666667%);
+		}
+	.col-xl-12 {
+		@include flex(0 0 100%);
+		}
+	
+}
+

@@ -1,0 +1,288 @@
+<?php include '../head.php';?>
+
+<section class="container page__inner dashboard">
+	<div class="row dashboard__wrapper">
+		
+		<aside class="col-lg-3 dashboard__sidebar d-flex flex-column">
+			<h2>Menu</h2>
+			<div class="dashboard__container flex-grow-1 d-flex flex-column justify-content-between">
+				
+				<ul class="list-unstyled m-0 p-0 text-sm-center text-lg-left">
+					<li>
+						<a href="../admin/home.php">
+							<span><i class="fas fa-home"></i></span>
+							Overview
+						</a>
+					</li>
+					<li>
+						<a href="../admin/quizzes.php">
+							<span><i class="fas fa-briefcase"></i></span>
+							Quizzes
+						</a>
+					</li>
+					<li>
+						<a href="../admin/users.php">
+							<span><i class="fas fa-users"></i></span>
+							Users
+						</a>
+					</li>
+					<li class="active">
+						<a href="../admin/financials.php">
+							<span><i class="fas fa-coins"></i></span>
+							Financials
+						</a>
+					</li>
+					<li>
+						<a href="../admin/categories.php">
+							<span><i class="fas fa-th-large"></i></span>
+							Categories
+						</a>
+					</li>
+					<li>
+						<a href="../admin/questions.php">
+							<span><i class="fas fa-question-circle"></i></span>
+							Questions
+						</a>
+					</li>
+					
+				</ul>
+				<a href="../quiz/setup.php" class="btn btn-primary hasPlus d-block">New Quiz</a>
+			</div>
+		</aside>
+		
+		<section class="col-lg-9 dashboard__content">
+			<div class="row">
+				<div class="col-12">
+					<div class="row">
+						<div class="col pl-0">
+							<h2>Financials</h2>
+						</div>
+					</div>
+					<div class="row">
+						<div class="dashboard__container col">
+							<h3>Set price band for questions</h3>
+							<form class="form-row pt-4 align-items-center mb-0" action="" method="" id="price__band__questions">
+								<div class="col-4 col-md-1">
+									<span>From</span>
+								</div>
+								<div class="col-8 col-md-4 d-flex flex-row align-items-center justify-content-md-center">
+									<input maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1" name="band__from" placeholder="1">
+									<span>to</span>
+									<input name="band__to" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" 
+										   placeholder="10">
+								</div>
+								<div class="col-4 col-md-3 pt-2 pt-md-0">
+								<span style="line-height: 1.1" class="d-block  ">questions costs</span>
+								</div>
+								<div class="col-8 col-md-4 pt-2 pt-md-0">
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text">&euro;</span>
+										</div>
+										<input name="band__costs" maxlength="3" class="form-control" placeholder="0.00">
+									</div>
+								</div>
+							
+							</form>
+							<form class="form-row pt-4 align-items-center mb-0" action="" method="" id="price__band__questions">
+								<div class="col-4 col-md-1">
+									<span>From</span>
+								</div>
+								<div class="col-8 col-md-4 d-flex flex-row align-items-center justify-content-md-center">
+									<input maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1" name="band__from" placeholder="11">
+									<span>to</span>
+									<input name="band__to" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" 
+										   placeholder="29">
+								</div>
+								<div class="col-4 col-md-3 pt-2 pt-md-0">
+								<span style="line-height: 1.1" class="d-block  ">questions costs</span>
+								</div>
+								<div class="col-8 col-md-4 pt-2 pt-md-0">
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text">&euro;</span>
+										</div>
+										<input name="band__costs" maxlength="3" class="form-control" placeholder="0.00">
+									</div>
+								</div>
+							
+							</form>
+							<form class="form-row pt-4 align-items-center mb-0" action="" method="" id="price__band__questions">
+								<div class="col-4 col-md-1">
+									<span>From</span>
+								</div>
+								<div class="col-8 col-md-4 d-flex flex-row align-items-center justify-content-md-center">
+									<input maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1" name="band__from" placeholder="30">
+									<span>to</span>
+									<input name="band__to" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" 
+										   placeholder="49">
+								</div>
+								<div class="col-4 col-md-3 pt-2 pt-md-0">
+								<span style="line-height: 1.1" class="d-block  ">questions costs</span>
+								</div>
+								<div class="col-8 col-md-4 pt-2 pt-md-0">
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text">&euro;</span>
+										</div>
+										<input name="band__costs" maxlength="3" class="form-control" placeholder="0.00">
+									</div>
+								</div>
+							
+							</form>
+							
+							
+						</div>
+					</div>
+					<div class="row mt-3">
+						<div class="dashboard__container col">
+							<h3>Set price band for no. backgrounds</h3>
+							<form class="form-row pt-4 align-items-center mb-0" action="" method="" id="price__band__questions">
+								<div class="col-4 col-md-1">
+									<span>From</span>
+								</div>
+								<div class="col-8 col-md-4 d-flex flex-row align-items-center justify-content-md-center">
+									<input maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1" name="band__from" placeholder="1">
+									<span>to</span>
+									<input name="band__to" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="10">
+								</div>
+								<div class="col-4 col-md-3 pt-2 pt-md-0">
+								<span style="line-height: 1.1" class="d-block  ">backgrounds costs</span>
+								</div>
+								<div class="col-8 col-md-4 pt-2 pt-md-0">
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text">&euro;</span>
+										</div>
+										<input name="band__costs" maxlength="3" class="form-control" placeholder="0.00">
+									</div>
+								</div>
+							
+							</form>
+							<form class="form-row pt-4 align-items-center mb-0" action="" method="" id="price__band__questions">
+								<div class="col-4 col-md-1">
+									<span>From</span>
+								</div>
+								<div class="col-8 col-md-4 d-flex flex-row align-items-center justify-content-md-center">
+									<input maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1" name="band__from" placeholder="11">
+									<span>to</span>
+									<input name="band__to" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="30">
+								</div>
+								<div class="col-4 col-md-3 pt-2 pt-md-0">
+								<span style="line-height: 1.1" class="d-block  ">backgrounds costs</span>
+								</div>
+								<div class="col-8 col-md-4 pt-2 pt-md-0">
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text">&euro;</span>
+										</div>
+										<input name="band__costs" maxlength="3" class="form-control" placeholder="0.00">
+									</div>
+								</div>
+							
+							</form>
+							<form class="form-row pt-4 align-items-center mb-0" action="" method="" id="price__band__questions">
+								<div class="col-4 col-md-1">
+									<span>From</span>
+								</div>
+								<div class="col-8 col-md-4 d-flex flex-row align-items-center justify-content-md-center">
+									<input maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1" name="band__from" placeholder="31">
+									<span>to</span>
+									<input name="band__to" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="50">
+								</div>
+								<div class="col-4 col-md-3 pt-2 pt-md-0">
+								<span style="line-height: 1.1" class="d-block  ">backgrounds costs</span>
+								</div>
+								<div class="col-8 col-md-4 pt-2 pt-md-0">
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text">&euro;</span>
+										</div>
+										<input name="band__costs" maxlength="3" class="form-control" placeholder="0.00">
+									</div>
+								</div>
+							
+							</form>
+							
+						</div>
+					</div>
+					<div class="row mt-3">
+						<div class="dashboard__container col">
+							<h3>Set price band for no. participants</h3>
+							<form class="form-row pt-4 align-items-center mb-0" action="" method="" id="price__band__questions">
+								<div class="col-4 col-md-1">
+									<span>From</span>
+								</div>
+								<div class="col-8 col-md-4 d-flex flex-row align-items-center justify-content-md-center">
+									<input maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1" name="band__from" placeholder="1">
+									<span>to</span>
+									<input name="band__to" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="10">
+								</div>
+								<div class="col-4 col-md-3 pt-2 pt-md-0">
+								<span style="line-height: 1.1" class="d-block  ">participants costs</span>
+								</div>
+								<div class="col-8 col-md-4 pt-2 pt-md-0">
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text">&euro;</span>
+										</div>
+										<input name="band__costs" maxlength="3" class="form-control" placeholder="0.00">
+									</div>
+								</div>
+							
+							</form>
+							<form class="form-row pt-4 align-items-center mb-0" action="" method="" id="price__band__questions">
+								<div class="col-4 col-md-1">
+									<span>From</span>
+								</div>
+								<div class="col-8 col-md-4 d-flex flex-row align-items-center justify-content-md-center">
+									<input maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1" name="band__from" placeholder="1">
+									<span>to</span>
+									<input name="band__to" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="10">
+								</div>
+								<div class="col-4 col-md-3 pt-2 pt-md-0">
+								<span style="line-height: 1.1" class="d-block  ">participants costs</span>
+								</div>
+								<div class="col-8 col-md-4 pt-2 pt-md-0">
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text">&euro;</span>
+										</div>
+										<input name="band__costs" maxlength="3" class="form-control" placeholder="0.00">
+									</div>
+								</div>
+							
+							</form>
+							<form class="form-row pt-4 align-items-center mb-0" action="" method="" id="price__band__questions">
+								<div class="col-4 col-md-1">
+									<span>From</span>
+								</div>
+								<div class="col-8 col-md-4 d-flex flex-row align-items-center justify-content-md-center">
+									<input maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1" name="band__from" placeholder="1">
+									<span>to</span>
+									<input name="band__to" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="10">
+								</div>
+								<div class="col-4 col-md-3 pt-2 pt-md-0">
+								<span style="line-height: 1.1" class="d-block  ">participants costs</span>
+								</div>
+								<div class="col-8 col-md-4 pt-2 pt-md-0">
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text">&euro;</span>
+										</div>
+										<input name="band__costs" maxlength="3" class="form-control" placeholder="0.00">
+									</div>
+								</div>
+							
+							</form>
+							
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</section>
+	</div>
+</section>
+
+<?php include '../footer.php';?>
