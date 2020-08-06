@@ -136,6 +136,12 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
 
     //admin routes here
     Route::get('admin/home', 'AdminDetailsController@home');
+    Route::get('admin/categories', 'AdminDetailsController@categories');
+    Route::get('admin/financials', 'AdminDetailsController@financials');
+    Route::get('admin/questions', 'AdminDetailsController@questions');
+    Route::get('admin/quizzes', 'AdminDetailsController@quizzes');
+    Route::get('admin/users', 'AdminDetailsController@users');
+
 
 });
 
