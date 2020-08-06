@@ -144,5 +144,9 @@ Route::redirect('/php', '/phpinfo', 301);
 //kopi route can start here
 
 //sam route can start here
+Route::get('playquiz', 'PlayController@play');
+Route::get('startquiz', 'PlayController@start');
+
+
 
 //christy route can start from here

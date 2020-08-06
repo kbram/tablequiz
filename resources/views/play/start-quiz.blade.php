@@ -1,6 +1,6 @@
-<?php include '../head.php';?>
+@extends('layouts.app')
 
-<section class="container page__inner">
+@section('content')
 	<div class="row">
 		<div class="col text-center">
 			<img class="rounded-circle" src="../images/quiz_bg.jpg" style="width:200px;height:200px;object-fit: cover;">
@@ -21,6 +21,6 @@
 			</form>
 		</div>
 	</div>
-</section>
-
-<?php include '../footer.php';?>
+	@endsection
+@section('footer_scripts')
+@endsection
