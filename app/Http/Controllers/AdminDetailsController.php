@@ -43,4 +43,9 @@ class AdminDetailsController extends Controller
 
         return view('pages.admin.active-users', ['users' => $users]);
     }
+
+    public function home()
+    {   
+        return view('admin.home');
+    }
 }

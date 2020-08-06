@@ -40,6 +40,9 @@ Route::group(['middleware' => ['web', 'activity', 'checkblocked']], function () 
 
     // Route to for user to reactivate their user deleted account.
     Route::get('/re-activate/{token}', ['as' => 'user.reactivate', 'uses' => 'RestoreUserController@userReActivate']);
+
+    Route::get('/fe/tablequiz', 'WelcomeController@tablequizhome');
+
 });
 
 // Registered and Activated User Routes
@@ -130,6 +133,16 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
     Route::get('routes', 'AdminDetailsController@listRoutes');
     Route::get('active-users', 'AdminDetailsController@activeUsers');
+
+    //admin routes here
+    Route::get('admin/home', 'AdminDetailsController@home');
+
 });
 
 Route::redirect('/php', '/phpinfo', 301);
+
+//kopi route can start here
+
+//sam route can start here
+
+//christy route can start from here

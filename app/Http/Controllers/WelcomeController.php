@@ -13,4 +13,9 @@ class WelcomeController extends Controller
     {
         return view('welcome');
     }
+
+    public function tablequizhome()
+    {
+        return view('home2');
+    }
 }
