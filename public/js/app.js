@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -98226,3 +98227,5 @@ module.exports = __webpack_require__(/*! /home/sampavi/tablequiz/resources/asset
 /***/ })
 
 /******/ });
+=======
+>>>>>>> 6ef50ea800906567c3eef50af9ff00083e2d0b70

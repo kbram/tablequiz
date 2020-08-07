@@ -156,3 +156,9 @@ Route::get('startquiz', 'PlayController@start');
 
 
 //christy route can start from here
+
+//kanu routes
+Route::get('setup/create', 'QuizController@create');
+
+Route::post('setup', 'QuizController@store');
+
