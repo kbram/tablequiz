@@ -149,3 +149,6 @@ Route::redirect('/php', '/phpinfo', 301);
 Route::get('/dashboard/home','DashboardController@index');
 Route::get('/dashboard/my-quizzes','DashboardController@myQuiz');
 Route::get('dashboard/settings','DashboardController@setting');
+
+//adminquestionccontroller
+Route::get('/admin/questions','AdminQuestionController@create');
