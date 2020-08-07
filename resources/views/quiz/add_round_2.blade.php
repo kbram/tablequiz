@@ -1,7 +1,7 @@
 <?php 
-	/*include '../head.php'; 
-	$quizName = $_GET['quiz__name'];
-*/?>
+	
+	/*$quizName = $_GET['quiz__name'];*/
+?>
 @extends('layouts.tablequizapp')
 
 @section('content')
@@ -617,7 +617,7 @@
 	</section>
 </section>
 
-<?/*php include '../footer.php';*/?>
+
 @endsection
 
 @section('footer_scripts')

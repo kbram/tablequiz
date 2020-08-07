@@ -1,4 +1,4 @@
-<?/*php include '../head.php';*/ ?>
+
 @extends('layouts.tablequizapp')
 
 @section('content')
@@ -226,7 +226,6 @@
 	</div>
 </section>
 
-<?/*php include '../footer.php';*/?>
 @endsection
 
 @section('footer_scripts')
