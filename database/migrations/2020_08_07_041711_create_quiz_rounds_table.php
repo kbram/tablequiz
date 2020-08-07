@@ -14,7 +14,7 @@ class CreateQuizRoundsTable extends Migration
     public function up()
     {
         Schema::create('quiz_rounds', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('round_name');
             $table->string('round_slug');
             $table->timestamps();
