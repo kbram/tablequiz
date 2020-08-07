@@ -1,14 +1,22 @@
 <?php 
-	include '../head.php'; 
-	$quizName = $_GET['quiz__name'];
+	
+	/*$quizName = $_GET['quiz__name'];*/
 ?>
+@extends('layouts.tablequizapp')
+
+@section('content')
+
 
 <section class="container page__inner">
 	<form class="is_container row" id="add_round" action="" role="main">
 		<article class="col-12">
-			<div class="article__heading">
-				<h1>Round 1 Setup</h1>
-				<?php if($quizName) echo "<h2>".$quizName."</h2>";?>
+			<div class="article__heading position-relative border-0">
+				<h1>Round 2 Setup</h1>
+				<select class="form-control details">
+					<option>Round 1</option>
+					<option selected>Round 2</option>
+					
+				</select>
 			</div>
 			<div class="form-row mt-md-5">
 				<div class="col-md-4">
@@ -244,7 +252,6 @@
 		</article>
 
 		<div class="button__holder w-100 pt-0 mt-5 justify-content-center d-md-flex" id="add-new-question">
-			
 			<div class="col-md-4 p-0">
 				<a class="btn btn-white d-block" id="addQuestion" href="#add-new-question">Add Question</a>
 			</div>
@@ -589,7 +596,12 @@
                     </ul>
                 </div>
               </div>
-
+<!--
+              <div class="modal-footer d-none border-0 justify-content-center">
+                <button type="button" class="btn btn-secondary d-none" id="suggested__modal__back">Back</button>  
+                <button type="button" class="btn btn-primary" id="category__chosen__next">Next</button>
+              </div>
+-->
             </div>
           </div>
         </div>
@@ -605,4 +617,9 @@
 	</section>
 </section>
 
-<?php include '../footer.php';?>
+
+@endsection
+
+@section('footer_scripts')
+
+@endsection
