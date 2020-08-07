@@ -162,3 +162,6 @@ Route::get('setup/create', 'QuizController@create');
 
 Route::post('setup', 'QuizController@store');
 
+Route::get('/dashboard/home','DashboardController@index');
+Route::get('/dashboard/my-quizzes','DashboardController@myQuiz');
+Route::get('dashboard/settings','DashboardController@setting');
