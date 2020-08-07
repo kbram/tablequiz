@@ -16,7 +16,7 @@
 						</a>
 					</li>
 					<li class="active">
-						<a href="/dashboard/my-quizzes">
+						<a href="">
 							<span><i class="fas fa-briefcase"></i></span>
 							My Quizzes
 						</a>
@@ -236,6 +236,7 @@
 		</section>
 	</div>
 </section>
+@endsection
 @section('footer_scripts')
 @endsection
-@endsection
+

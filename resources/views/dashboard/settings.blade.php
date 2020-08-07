@@ -21,7 +21,7 @@
 						</a>
 					</li>
 					<li class="active">
-						<a href="settings.blade.php">
+						<a href="">
 							<span><i class="fas fa-cog"></i></span>
 							Settings
 						</a>
@@ -182,7 +182,6 @@
 		</section>
 	</div>
 </section>
-
-@section('footer_scripts')
 @endsection
+@section('footer_scripts')
 @endsection
