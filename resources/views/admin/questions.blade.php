@@ -1,5 +1,6 @@
-<?php include '../head.php';?>
+@extends('layouts.tablequizapp')
 
+@section('content')
 <section class="container page__inner dashboard">
 	<div class="row dashboard__wrapper">
 		
@@ -336,4 +337,8 @@
 	</div>
 </section>
 
-<?php include '../footer.php';?>
+@endsection
+
+@section('footer_scripts')
+
+@endsection

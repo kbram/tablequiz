@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -98214,10 +98215,17 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
+__webpack_require__(/*! /home/manchulani/Desktop/tablequiz/resources/assets/js/app.js */"./resources/assets/js/app.js");
+module.exports = __webpack_require__(/*! /home/manchulani/Desktop/tablequiz/resources/assets/sass/app.scss */"./resources/assets/sass/app.scss");
+=======
 __webpack_require__(/*! /home/sampavi/tablequiz/resources/assets/js/app.js */"./resources/assets/js/app.js");
 module.exports = __webpack_require__(/*! /home/sampavi/tablequiz/resources/assets/sass/app.scss */"./resources/assets/sass/app.scss");
+>>>>>>> ad8fab7b7889287437a80cc28d7a2ae078c998e2
 
 
 /***/ })
 
 /******/ });
+=======
+>>>>>>> 6ef50ea800906567c3eef50af9ff00083e2d0b70

@@ -1,106 +1,4 @@
-## Laravel Auth
 
-#### Laravel Auth is a Complete Build of Laravel 7 with Email Registration Verification, Social Authentication, User Roles and Permissions, User Profiles, and Admin restricted user management system. Built on Bootstrap 4.
-[![Build Status](https://travis-ci.org/jeremykenedy/laravel-auth.svg?branch=master)](https://travis-ci.org/jeremykenedy/laravel-auth)
-[![StyleCI](https://styleci.io/repos/44714043/shield?branch=master)](https://styleci.io/repos/44714043)
-[![Build Status](https://scrutinizer-ci.com/g/jeremykenedy/laravel-auth/badges/build.png?b=master)](https://scrutinizer-ci.com/g/jeremykenedy/laravel-auth/build-status/master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/jeremykenedy/laravel-auth/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/jeremykenedy/laravel-auth/?branch=master)
-[![Code Intelligence Status](https://scrutinizer-ci.com/g/jeremykenedy/laravel-auth/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
-[![All Contributors](https://img.shields.io/badge/all_contributors-23-orange.svg?style=flat-square)](#contributors)
-[![MadeWithLaravel.com shield](https://madewithlaravel.com/storage/repo-shields/1342-shield.svg)](https://madewithlaravel.com/p/laravel-auth/shield-link)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
- ### Sponsor
-<table>
-    <tr>
-        <td>
-            <img src="https://cdn.auth0.com/styleguide/components/1.0.8/media/logos/img/badge.png" alt="Auth0" width="50">
-        </td>
-        <td>
-            If you want to quickly add secure token-based authentication to Laravel apps, feel free to check Auth0's Laravel SDK and free plan at <a href="https://auth0.com/overview?utm_source=GHsponsor&utm_medium=GHsponsor&utm_campaign=laravel-auth&utm_content=auth" target="_blank">https://auth0.com/overview</a>.
-        </td>
-    </tr>
-</table>
-
-#### Table of contents
-- [About](#about)
-- [Features](#features)
-- [Installation Instructions](#installation-instructions)
-    - [Build the Front End Assets with Mix](#build-the-front-end-assets-with-mix)
-    - [Optionally Build Cache](#optionally-build-cache)
-- [Seeds](#seeds)
-    - [Seeded Roles](#seeded-roles)
-    - [Seeded Permissions](#seeded-permissions)
-    - [Seeded Users](#seeded-users)
-    - [Themes Seed List](#themes-seed-list)
-- [Routes](#routes)
-- [Socialite](#socialite)
-    - [Get Socialite Login API Keys](#get-socialite-login-api-keys)
-    - [Add More Socialite Logins](#add-more-socialite-logins)
-- [Other API keys](#other-api-keys)
-- [Environment File](#environment-file)
-- [Updates](#updates)
-- [Screenshots](#screenshots)
-- [File Tree](#file-tree)
-- [Opening an Issue](#opening-an-issue)
-- [Laravel Auth License](#laravel-auth-license)
-- [Contributors](#Contributors)
-
-### About
-Laravel 7 with user authentication, registration with email confirmation, social media authentication, password recovery, and captcha protection. Uses official [Bootstrap 4](https://getbootstrap.com). This also makes full use of Controllers for the routes, templates for the views, and makes use of middleware for routing. Project can be stood up in minutes.
-
-### Features
-#### A [Laravel](https://laravel.com/) 7.x with [Bootstrap](https://getbootstrap.com) 4.x project.
-
-| Laravel Auth Features  |
-| :------------ |
-|Built on [Laravel](https://laravel.com/) 7|
-|Built on [Bootstrap](https://getbootstrap.com/) 4|
-|Uses [MySQL](https://github.com/mysql) Database (can be changed)|
-|Uses [Artisan](https://laravel.com/docs/master/artisan) to manage database migration, schema creations, and create/publish page controller templates|
-|Dependencies are managed with [COMPOSER](https://getcomposer.org/)|
-|Laravel Scaffolding **User** and **Administrator Authentication**.|
-|User [Socialite Logins](https://github.com/laravel/socialite) ready to go - See API list used below|
-|[Google Maps API v3](https://developers.google.com/maps/documentation/javascript/) for User Location lookup and Geocoding|
-|CRUD (Create, Read, Update, Delete) Themes Management|
-|CRUD (Create, Read, Update, Delete) User Management|
-|Robust [Laravel Logging](https://laravel.com/docs/master/errors#logging) with admin UI using MonoLog|
-|Google [reCaptcha Protection with Google API](https://developers.google.com/recaptcha/)|
-|User Registration with email verification|
-|Makes use of Laravel [Mix](https://laravel.com/docs/master/mix) to compile assets|
-|Makes use of [Language Localization Files](https://laravel.com/docs/master/localization)|
-|Active Nav states using [Laravel Requests](https://laravel.com/docs/master/requests)|
-|Restrict User Email Activation Attempts|
-|Capture IP to users table upon signup|
-|Uses [Laravel Debugger](https://github.com/barryvdh/laravel-debugbar) for development|
-|Makes use of [Password Strength Meter](https://github.com/elboletaire/password-strength-meter)|
-|Makes use of [hideShowPassword](https://github.com/cloudfour/hideShowPassword)|
-|User Avatar Image AJAX Upload with [Dropzone.js](https://www.dropzonejs.com/#configuration)|
-|User Gravatar using [Gravatar API](https://github.com/creativeorange/gravatar)|
-|User Password Reset via Email Token|
-|User Login with remember password|
-|User [Roles/ACL Implementation](https://github.com/jeremykenedy/laravel-roles)|
-|Roles and Permissions GUI|
-|Makes use of [Laravel's Soft Delete Structure](https://laravel.com/docs/master/eloquent#soft-deleting)|
-|Soft Deleted Users Management System|
-|Permanently Delete Soft Deleted Users|
-|User Delete Account with Goodbye email|
-|User Restore Deleted Account Token|
-|Restore Soft Deleted Users|
-|View Soft Deleted Users|
-|Captures Soft Delete Date|
-|Captures Soft Delete IP|
-|Admin Routing Details UI|
-|Admin PHP Information UI|
-|Eloquent user profiles|
-|User Themes|
-|404 Page|
-|403 Page|
-|Configurable Email Notification via [Laravel-Exception-Notifier](https://github.com/jeremykenedy/laravel-exception-notifier)|
-|Activity Logging using [Laravel-logger](https://github.com/jeremykenedy/laravel-logger)|
-|Optional 2-step account login verfication with [Laravel 2-Step Verification](https://github.com/jeremykenedy/laravel2step)|
-|Uses [Laravel PHP Info](https://github.com/jeremykenedy/laravel-phpinfo) package|
-|Uses [Laravel Blocker](https://github.com/jeremykenedy/laravel-blocker) package|
 
 ### Installation Instructions
 1. Run `git clone https://github.com/jeremykenedy/laravel-auth.git laravel-auth`
@@ -116,7 +14,7 @@ Laravel 7 with user authentication, registration with email confirmation, social
 php artisan vendor:publish --tag=laravelroles &&
 php artisan vendor:publish --tag=laravel2step
 ```
-7. From the projects root folder run `sudo chmod -R 755 ../laravel-auth`
+7. From the projects root folder run `sudo chmod -R 755 ../tablequiz`
 8. From the projects root folder run `php artisan key:generate`
 9. From the projects root folder run `php artisan migrate`
 10. From the projects root folder run `composer dump-autoload`
