@@ -13,7 +13,7 @@ class CreateQuizCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('QuizCategories', function (Blueprint $table) {
+        Schema::create('quiz_categories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('category_name');
             $table->string('slug');
@@ -28,6 +28,6 @@ class CreateQuizCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('QuizCategory');
+        Schema::dropIfExists('quiz_categories');
     }
 }
