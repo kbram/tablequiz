@@ -1,4 +1,4 @@
-<?php include '../head.php';?>
+@extends('layouts.tablequizapp')
 
 <section class="container page__inner dashboard">
 	<div class="row dashboard__wrapper">
@@ -245,5 +245,4 @@
 		</section>
 	</div>
 </section>
-
-<?php include '../footer.php';?>
+@section('footer_scripts')
