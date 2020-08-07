@@ -17,7 +17,8 @@ class UsersTableSeeder extends Seeder
         $faker = Faker\Factory::create();
         $profile = new Profile();
         $adminRole = Role::whereName('Admin')->first();
-        $userRole = Role::whereName('User')->first();
+        $participantRole = Role::whereName('Participant')->first();
+        $quizMasterRole = Role::whereName('QuizMaster')->first();
 
         // Seed test admin
         $seededAdminEmail = 'admin@admin.com';
@@ -40,14 +41,14 @@ class UsersTableSeeder extends Seeder
             $user->save();
         }
 
-        // Seed test user
-        $user = User::where('email', '=', 'user@user.com')->first();
+        // Seed test participant
+        $user = User::where('email', '=', 'participant@participant.com')->first();
         if ($user === null) {
             $user = User::create([
                 'name'                           => $faker->userName,
                 'first_name'                     => $faker->firstName,
                 'last_name'                      => $faker->lastName,
-                'email'                          => 'user@user.com',
+                'email'                          => 'participant@participant.com',
                 'password'                       => Hash::make('password'),
                 'token'                          => str_random(64),
                 'activated'                      => true,
@@ -56,7 +57,28 @@ class UsersTableSeeder extends Seeder
             ]);
 
             $user->profile()->save(new Profile());
-            $user->attachRole($userRole);
+            $user->attachRole($participantRole);
+            $user->save();
+        }
+
+
+        // Seed test user
+        $user = User::where('email', '=', 'quiz@master.com')->first();
+        if ($user === null) {
+            $user = User::create([
+                'name'                           => $faker->userName,
+                'first_name'                     => $faker->firstName,
+                'last_name'                      => $faker->lastName,
+                'email'                          => 'quiz@master.com',
+                'password'                       => Hash::make('password'),
+                'token'                          => str_random(64),
+                'activated'                      => true,
+                'signup_ip_address'              => $faker->ipv4,
+                'signup_confirmation_ip_address' => $faker->ipv4,
+            ]);
+
+            $user->profile()->save(new Profile());
+            $user->attachRole($quizMasterRole);
             $user->save();
         }
 

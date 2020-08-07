@@ -1,5 +1,6 @@
 @extends('layouts.tablequizapp')
 
+@section('content')
 <section class="container page__inner dashboard">
 	<div class="row dashboard__wrapper">
 		
@@ -352,6 +353,11 @@
 	</div>
 </section>
 
+<<<<<<< HEAD:resources/views/admin/questions.blade.php
+=======
+@endsection
+
+>>>>>>> 21feccafa3ad9d8ac5038c83b85332745f377fe1:resources/views/admin/questions.blade.php
 @section('footer_scripts')
 
 @endsection

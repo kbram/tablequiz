@@ -1,3 +1,7 @@
+@extends('layouts.tablequizapp')
+
+@section('content')
+
 <div id="ss-holder" class="ss-holder">
 		<div id="effects"><!-- script will add automatically the scroll effect class here -->
 			<article id="articlehold">
@@ -48,3 +52,9 @@
 		</div>
 	</div>
 </div>
+
+@endsection
+
+@section('footer_scripts')
+
+@endsection
