@@ -69,19 +69,19 @@
 					<div class="dashboard__container flex-grow-0 pt-4 mb-3">
 						<h3>Add new question</h3>
 						
-						<form action="/admin/questions" method="" class="pt-3 add__new__in__admin">
+						<form action="" method="" class="pt-3 add__new__in__admin">
 							<div class="form-row">
 								<div class="col-md-4">
-									<label for="category__type">Category</label>
+									<label for="question__type">Category</label>
 								</div>
 								<div class="col-md-4">
-									<select id="category__type" class="form-control">
+									<select id="question__type" class="form-control">
 										<option value="category__music">Music</option>
-										<option value="category__sport">Sport</option>
-										<option value="category__geography">Geography</option>
-										<option value="category__history">History</option>
-										<option value="category__politics">Politics</option>
-										<option value="category__popular_culture">Popular Culture</option>
+										<option value="category__music">Sport</option>
+										<option value="category__music">Geography</option>
+										<option value="category__music">History</option>
+										<option value="category__music">Politics</option>
+										<option value="category__music">Popular Culture</option>
 
 									</select>
 								</div>
@@ -93,7 +93,7 @@
 								<div class="col-md-4">
 									<select id="question__type" class="form-control">
 										<option value="standard__question">Standard</option>
-										<option value="multiple__choice_question">Multiple choice</option>
+										<option value="multiple__choice__question">Multiple choice</option>
 										<option value="numeric__question">Numeric</option>
 
 									</select>
@@ -215,7 +215,7 @@
 									<label for="time__limit">Time limit</label>
 								</div>
 								<div class="col-md-4">
-									<input class="form-control" type="number" name="time_limit">
+									<input class="form-control" type="number" name="time__limit">
 								</div>
 								<div class="col">
 									<small class="form-text text-muted">Seconds</small>
@@ -227,7 +227,7 @@
 						<hr>
 						<div class="row justify-content-center">
 							<div class="col-4">
-								<a href="/admin/questions" class="d-block btn btn-primary">Save</a>
+								<a href="#" class="d-block btn btn-primary">Save</a>
 							</div>
 						</div>
 					</div>
@@ -336,6 +336,9 @@
 		</section>
 	</div>
 </section>
+
 @endsection
+
 @section('footer_scripts')
+
 @endsection

@@ -48,4 +48,29 @@ class AdminDetailsController extends Controller
     {   
         return view('admin.home');
     }
+
+    public function categories()
+    {   
+        return view('admin.categories');
+    }
+
+    public function financials()
+    {   
+        return view('admin.financials');
+    }
+
+    public function questions()
+    {   
+        return view('admin.questions');
+    }
+
+    public function quizzes()
+    {   
+        return view('admin.quizzes');
+    }
+
+    public function users()
+    {   
+        return view('admin.users');
+    }
 }
