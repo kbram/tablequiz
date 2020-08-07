@@ -9,7 +9,7 @@
 				
 				<ul class="list-unstyled m-0 p-0 text-sm-center text-lg-left">
 					<li class="active">
-						<a href="home.blade.php">
+						<a href="">
 							<span><i class="fas fa-home"></i></span>
 							Overview
 						</a>
@@ -245,6 +245,7 @@
 		</section>
 	</div>
 </section>
+@endsection
 @section('footer_scripts')
 @endsection
-@endsection
+
