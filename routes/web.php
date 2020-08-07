@@ -147,3 +147,5 @@ Route::redirect('/php', '/phpinfo', 301);
 
 //christy route can start from here
 Route::get('/dashboard/home','DashboardController@index');
+Route::get('/dashboard/my-quizzes','DashboardController@myQuiz');
+Route::get('dashboard/settings','DashboardController@setting');
