@@ -1,4 +1,4 @@
-<?php include '../head.php';?>
+@extends('layouts.tablequizapp')
 
 <section class="container page__inner dashboard">
 	<div class="row dashboard__wrapper">
@@ -39,7 +39,7 @@
 						</a>
 					</li>
 					<li class="active">
-						<a href="../admin/questions.php">
+						<a href="/admin/questions">
 							<span><i class="fas fa-question-circle"></i></span>
 							Questions
 						</a>
@@ -68,20 +68,34 @@
 					<div class="dashboard__container flex-grow-0 pt-4 mb-3">
 						<h3>Add new question</h3>
 						
-						<form action="" method="" class="pt-3 add__new__in__admin">
+						<form action="/questions" method="post" class="pt-3 add__new__in__admin">
+							@csrf
 							<div class="form-row">
 								<div class="col-md-4">
-									<label for="question__type">Category</label>
+									<label for="category__type">Category</label>
 								</div>
 								<div class="col-md-4">
-									<select id="question__type" class="form-control">
+									<select id="category__type" name="category__type" class="form-control">
 										<option value="category__music">Music</option>
-										<option value="category__music">Sport</option>
-										<option value="category__music">Geography</option>
-										<option value="category__music">History</option>
-										<option value="category__music">Politics</option>
-										<option value="category__music">Popular Culture</option>
+										<option value="category__sport">Sport</option>
+										<option value="category__geography">Geography</option>
+										<option value="category__history">History</option>
+										<option value="category__politics">Politics</option>
+										<option value="category__culture">Popular Culture</option>
 
+										<li class="active">
+						<a href="/admin/questions">
+							<span><i class="fas fa-question-circle"></i></span>
+							Questions
+						</a>
+					</li>
+					
+				</ul>
+				<a href="../quiz/setup.php" class="btn btn-primary hasPlus d-block">New Quiz</a>
+			</div>
+		</aside>
+		
+		<section class="col-lg-9 dashboard__conte
 									</select>
 								</div>
 							</div>
@@ -90,12 +104,14 @@
 									<label for="question__type">Question type</label>
 								</div>
 								<div class="col-md-4">
+								<div class="input-group">
 									<select id="question__type" class="form-control">
 										<option value="standard__question">Standard</option>
 										<option value="multiple__choice__question">Multiple choice</option>
 										<option value="numeric__question">Numeric</option>
 
 									</select>
+								</div>
 								</div>
 							</div>
 							<div class="form-row">
@@ -220,15 +236,15 @@
 									<small class="form-text text-muted">Seconds</small>
 								</div>
 							</div>
-							
-						</form>
-						
-						<hr>
+							<hr>
 						<div class="row justify-content-center">
 							<div class="col-4">
-								<a href="#" class="d-block btn btn-primary">Save</a>
+							<button  class="d-block btn btn-primary" type="submit">Save</button>
 							</div>
 						</div>
+						</form>
+						
+						
 					</div>
 					<div class="dashboard__container flex-grow-1">
 						<table class="table table-striped table-borderless m-0 h-100 my__quizzes">
@@ -336,4 +352,6 @@
 	</div>
 </section>
 
-<?php include '../footer.php';?>
+@section('footer_scripts')
+
+@endsection

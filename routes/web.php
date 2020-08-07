@@ -150,5 +150,8 @@ Route::redirect('/php', '/phpinfo', 301);
 //kanu routes
 Route::get('setup/create', 'QuizController@create');
 
+Route::get('questions/create', 'AdminQuestionController@create');
+Route::post('questions', 'AdminQuestionController@store');
+
 Route::post('setup', 'QuizController@store');
 
