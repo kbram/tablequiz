@@ -16,7 +16,7 @@ class CreateQuizCategoriesTable extends Migration
         Schema::create('quiz_categories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('category_name');
-            $table->string('slug');
+            $table->string('category_slug');
             $table->timestamps();
         });
     }

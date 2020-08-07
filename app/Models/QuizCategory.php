@@ -14,8 +14,7 @@ class QuizCategory extends Model
 
     protected $fillable = [
         'category_name',
-        'slug',
-        'image_id',
+        'category_slug',
     ];
 
 
