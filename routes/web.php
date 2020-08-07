@@ -147,6 +147,7 @@ Route::redirect('/php', '/phpinfo', 301);
 Route::get('playquiz', 'PlayController@play');
 Route::get('startquiz', 'PlayController@start');
 
-
+//my-quizzes dashbord route
+Route::get('dashboard/myquizzes','DashboardController@myQuizzes');
 
 //christy route can start from here
