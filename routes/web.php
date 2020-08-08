@@ -164,6 +164,9 @@ Route::get('show','DashboardController@showMyQuizzes');
 //kanu routes
 Route::get('setup/create', 'QuizController@create');
 
+Route::get('questions/create', 'AdminQuestionController@create');
+Route::post('questions', 'AdminQuestionController@store');
+
 Route::post('setup', 'QuizController@store');
 
 Route::get('/dashboard/home','DashboardController@index');
