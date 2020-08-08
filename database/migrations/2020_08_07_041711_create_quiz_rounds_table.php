@@ -15,6 +15,8 @@ class CreateQuizRoundsTable extends Migration
     {
         Schema::create('quiz_rounds', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('quiz_id')->unsigned();
+            $table->foreign('quiz_id')->references('id')->on('quizzes')->onDelete('cascade');
             $table->string('round_name');
             $table->string('round_slug');
             $table->timestamps();

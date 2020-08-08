@@ -41,13 +41,43 @@
 							<thead>
 								<tr>
 									<th>Quiz name</th>
-									<th>Questions</th>
 									<th>Rounds</th>
+									<th>Questions</th>
 									<th class="text-right">Actions</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
+
+							@foreach($quizzes as $quiz)
+							<tr>
+
+									 <td>{{ $quiz->quiz_name}}</td>
+									 <td>{{$roundCount[$quiz->id]}}</td>
+
+								<td></td>	
+								<td class="quiz_actions d-flex flex-row justify-content-lg-end">
+										<div class="d-flex flex-column pl-0 pl-md-4">
+											<i class="fas fa-edit"></i>
+											<span>Edit</span>
+										</div>
+										<div class="d-flex flex-column">
+											<i class="fas fa-share-alt"></i>
+											<span>Share</span>
+										</div>
+										<a href="../quiz/start-quiz.php">
+											<div class="d-flex flex-column">
+												<i class="fas fa-play"></i>
+												<span>Start</span>
+											</div>
+										</a>
+										</td>
+
+										@endforeach
+
+								</tr>
+
+
+								<!-- <tr>
 									<td>Mad Dog's Geography Quiz</td>
 									<td>20</td>
 									<td>4</td>
@@ -220,29 +250,22 @@
 										</a>
 									</td>
 								</tr>
-								
+								 -->
 							</tbody>
-							<tfoot>
+							<!-- <tfoot>
 								<tr>
 									
 									<td colspan="4" class="text-center text-muted"><small><a href="#">View more</a></small></td>
 								</tr>
-							</tfoot>
+							</tfoot> -->
 						</table>
 						
-					</div>
-				</div>
+					</div>			</div>
 			</div>
 		</section>
 	</div>
 </section>
-@endsection
+
 @section('footer_scripts')
 @endsection
 
-<<<<<<< HEAD:resources/views/dashboard/my-quizzes.blade.php
-@section('footer_scripts')
-
-@endsection
-=======
->>>>>>> 21feccafa3ad9d8ac5038c83b85332745f377fe1:resources/views/dashboard/my-quizzes.blade.php
