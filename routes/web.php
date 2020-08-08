@@ -152,3 +152,11 @@ Route::redirect('/php', '/phpinfo', 301);
 //sam route can start here
 
 //christy route can start from here
+
+//quiz category route
+Route::get('admin/categories', 'QuizCategoriesController@create');
+Route::post('admin/categories', 'QuizCategoriesController@store');
+
+
+
+
