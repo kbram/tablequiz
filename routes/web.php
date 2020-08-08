@@ -148,8 +148,16 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
 Route::redirect('/php', '/phpinfo', 301);
 
 //kopi route can start here
-
+Route::get('quiz/start_quiz', 'QuizController@start_quiz');
+Route::get('quiz/slider', 'QuizController@slider');
+Route::get('quiz/add_round', 'QuizController@add_round');
+Route::get('quiz/add_round_2', 'QuizController@add_round_2');
+Route::get('quiz/setup', 'QuizController@setup');
 //sam route can start here
+Route::get('playquiz', 'PlayController@play');
+Route::get('startquiz', 'PlayController@start');
+
+
 
 //christy route can start from here
 
@@ -160,3 +168,11 @@ Route::post('admin/categories', 'QuizCategoriesController@store');
 
 
 
+//kanu routes
+Route::get('setup/create', 'QuizController@create');
+
+Route::post('setup', 'QuizController@store');
+
+Route::get('/dashboard/home','DashboardController@index');
+Route::get('/dashboard/my-quizzes','DashboardController@myQuiz');
+Route::get('dashboard/settings','DashboardController@setting');

@@ -1,14 +1,17 @@
 <?php 
-	include '../head.php'; 
-	$quizName = $_GET['quiz__name'];
+
+	/*$quizName = $_GET['quiz__name'];*/
 ?>
+@extends('layouts.tablequizapp')
+
+@section('content')
 
 <section class="container page__inner">
 	<form class="is_container row" id="add_round" action="" role="main">
 		<article class="col-12">
 			<div class="article__heading">
 				<h1>Round 1 Setup</h1>
-				<?php if($quizName) echo "<h2>".$quizName."</h2>";?>
+				<?php /*if($quizName) echo "<h2>".$quizName."</h2>";*/?>
 			</div>
 			<div class="form-row mt-md-5">
 				<div class="col-md-4">
@@ -605,4 +608,8 @@
 	</section>
 </section>
 
-<?php include '../footer.php';?>
+@endsection
+
+@section('footer_scripts')
+
+@endsection

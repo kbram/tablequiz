@@ -1,5 +1,4 @@
-<?php include '../head.php';?>
-
+@extends('layouts.tablequizapp')
 <section class="container page__inner">
 	<div class="row">
 		<div class="col text-center">
@@ -22,5 +21,5 @@
 		</div>
 	</div>
 </section>
-
-<?php include '../footer.php';?>
+@section('footer_scripts')
+@endsection
