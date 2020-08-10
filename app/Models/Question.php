@@ -24,6 +24,7 @@ class Question extends Model
         'question_type',
         'question',
         'answer',
+        'round_id',
         'time_limit',
         'timestamps',
         
@@ -38,6 +39,9 @@ class Question extends Model
     {
         return $this->belongsTo('App\Models\QuizCategory', 'category_id');
     }
-
+    public function rounds()
+    {
+        return $this->belongsTo('App\Models\QuizRound', 'round_id');
+    }
 
 }

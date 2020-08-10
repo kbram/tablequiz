@@ -158,7 +158,7 @@ Route::get('playquiz', 'PlayController@play');
 Route::get('startquiz', 'PlayController@start');
 
 //my-quizzes dashbord route
-Route::get('show','DashboardController@showMyQuizzes');
+Route::get('showMyquizzes','DashboardController@showMyQuizzes');
 //christy route can start from here
 
 //kanu routes
