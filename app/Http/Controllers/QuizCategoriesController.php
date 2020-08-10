@@ -24,7 +24,8 @@ class QuizCategoriesController extends Controller
 
         $validator = Validator::make($request->all(),
         [
-            'category_name'  => 'required',            
+            'category_name'  => 'required',
+            'category_image'  => 'required',            
         ]
         );
 
@@ -32,15 +33,19 @@ class QuizCategoriesController extends Controller
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
+        
+        //$request->category_image->store('category_image');
+
         $categories=new QuizCategory;
         $categories -> category_name     =  $request->input('category_name');
         $categories -> category_slug = Str::slug($request->input('category_name'),'-');
+        $categories -> category_image = $request->file('category_image')->store('category_image');
         
        // dd($categories);
        $categories->save();
        
        // return('admin.categories');
-        return redirect('admin/categories');
+       return redirect()->back();
     }
 
 }

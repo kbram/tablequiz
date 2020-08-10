@@ -17,6 +17,7 @@ class CreateQuizCategoriesTable extends Migration
             $table->bigIncrements('id');
             $table->string('category_name');
             $table->string('category_slug');
+            $table->string('category_image');
             $table->timestamps();
         });
     }
