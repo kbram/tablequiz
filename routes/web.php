@@ -171,4 +171,6 @@ Route::get('/dashboard/my-quizzes','DashboardController@myQuiz');
 Route::get('dashboard/settings','DashboardController@setting');
 
 //adminquestionccontroller
-Route::get('/admin/questions','AdminQuestionController@create');
+Route::get('/admin/questions','AdminQuestionController@index');
+Route::post('search-questions','AdminQuestionController@search')->name('search-questions');
+
