@@ -136,6 +136,12 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
 
     //admin routes here
     Route::get('admin/home', 'AdminDetailsController@home');
+    Route::get('admin/categories', 'AdminDetailsController@categories');
+    Route::get('admin/financials', 'AdminDetailsController@financials');
+    Route::get('admin/questions', 'AdminDetailsController@questions');
+    Route::get('admin/quizzes', 'AdminDetailsController@quizzes');
+    Route::get('admin/users', 'AdminDetailsController@users');
+
 
 });
 
@@ -155,5 +161,18 @@ Route::get('contact_us',function(){
     return view('contact_us');
 });
 //sam route can start here
+Route::get('playquiz', 'PlayController@play');
+Route::get('startquiz', 'PlayController@start');
+
+
 
 //christy route can start from here
+
+//kanu routes
+Route::get('setup/create', 'QuizController@create');
+
+Route::post('setup', 'QuizController@store');
+
+Route::get('/dashboard/home','DashboardController@index');
+Route::get('/dashboard/my-quizzes','DashboardController@myQuiz');
+Route::get('dashboard/settings','DashboardController@setting');

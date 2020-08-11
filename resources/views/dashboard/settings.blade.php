@@ -1,5 +1,5 @@
-<?php include '../head.php';?>
-
+@extends('layouts.tablequizapp')
+@section('content')
 <section class="container page__inner dashboard">
 	<div class="row dashboard__wrapper">
 		
@@ -9,19 +9,19 @@
 				
 				<ul class="list-unstyled m-0 p-0">
 					<li>
-						<a href="home.php">
+						<a href="/dashboard/home">
 							<span><i class="fas fa-home"></i></span>
 							Overview
 						</a>
 					</li>
 					<li>
-						<a href="my-quizzes.php">
+						<a href="/dashboard/my-quizzes">
 							<span><i class="fas fa-briefcase"></i></span>
 							My Quizzes
 						</a>
 					</li>
 					<li class="active">
-						<a href="settings.php">
+						<a href="">
 							<span><i class="fas fa-cog"></i></span>
 							Settings
 						</a>
@@ -182,5 +182,6 @@
 		</section>
 	</div>
 </section>
-
-<?php include '../footer.php';?>
+@endsection
+@section('footer_scripts')
+@endsection

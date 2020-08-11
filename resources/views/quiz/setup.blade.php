@@ -1,5 +1,5 @@
-
 @extends('layouts.tablequizapp')
+
 
 @section('content')
 <section class="container page__inner">
@@ -224,8 +224,8 @@
 			
 		</article>
 	</div>
-</section>
-
+	</section>
+	
 @endsection
 
 @section('footer_scripts')
