@@ -16,7 +16,7 @@ class CreateQuizRoundsTable extends Migration
         Schema::create('quiz_rounds', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('round_name');
-            $table->string('round_slug');
+            $table->text('round_slug');
             $table->timestamps();
         });
         
