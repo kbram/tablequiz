@@ -18,7 +18,7 @@ class CreatePriceBandsTable extends Migration
             $table->integer('from')->unigned();
             $table->integer('to')->unsigned();
             $table->string('band_type');
-            $table->integer('cost')->unsigned();
+            $table->decimal('cost',8,2)->unsigned();
             $table->timestamps();
         });
     }

@@ -159,13 +159,13 @@ Route::get('startquiz', 'PlayController@start');
 
 
 
-//christy route can start from here
 
 //kanu routes
 Route::get('setup/create', 'QuizController@create');
 
 Route::post('setup', 'QuizController@store');
 
+//christy route can start from here
 Route::get('/dashboard/home','DashboardController@index');
 Route::get('/dashboard/my-quizzes','DashboardController@myQuiz');
 Route::get('dashboard/settings','DashboardController@setting');
@@ -173,4 +173,7 @@ Route::get('dashboard/settings','DashboardController@setting');
 //adminquestionccontroller
 Route::get('/admin/questions','AdminQuestionController@index');
 Route::post('search-questions','AdminQuestionController@search')->name('search-questions');
+
+//admin financial controller
+Route::get('admin/financials','PriceBandsController@index');
 
