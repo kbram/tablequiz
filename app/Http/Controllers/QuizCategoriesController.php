@@ -6,7 +6,8 @@ use Validator;
 use Auth;
 use Image;
 use Illuminate\Http\Request;
-use App\Model\QuizCategory;
+use App\Models\QuizCategory;
+use App\Models\QuizCategoryImage;
 use Illuminate\Support\Str;
 
 use File;
@@ -42,28 +43,39 @@ class QuizCategoriesController extends Controller
         $categories=new QuizCategory;
         $categories -> category_name     =  $request->input('category_name');
         $categories -> category_slug = Str::slug($request->input('category_name'),'-');
-        $categories -> category_image = $request->file('category_image');
+        //$categories -> category_image = $request->file('category_image');
 
+        $categories->save();
+
+        $category_id=QuizCategory::where('category_name',$categories -> category_name)->first()->id;
+//dd($caegory_id);
         if ($request->hasFile('category_image')) {
 
             $category_image = $request->file('category_image');
             $filename = 'category_image.'.$category_image->getClientOriginalExtension();
-            $save_path = storage_path().'/admin/categories/id/'.$categories->id.'/uploads/images/category_images/';
+            $save_path = storage_path().'categories/'.$category_id.'/category_images/';
             $path = $save_path.$filename;
-            $public_path = '/images/'.$categories->id.'/category_image/'.$filename;
+            $public_path = '/images/category_image/'.$category_id.'/category_image/'.$filename;
 
             // Make the user a folder and set permissions
             File::makeDirectory($save_path, $mode = 0755, true, true);
 
             // Save the file to the server
-            Image::make($category_image)->resize(300, 300)->save($save_path.$filename);
+            //Image::make($category_image)->save($save_path.$filename);
+            $category_image->move($save_path, $filename);
 
-            // Save the public image path
+            //$category = QuizCategory::find($id);
 
-        
+            $categoryImage = new QuizCategoryImage;
+
+            $categoryImage->public_path       = $public_path;
+            $categoryImage->local_path        = $save_path . '/' . $filename;
+            $categoryImage->category_id       =$category_id;
+
+            $categoryImage->save();
+
+
         }
-
-       $categories->save();
        
        return redirect()->back();
     }

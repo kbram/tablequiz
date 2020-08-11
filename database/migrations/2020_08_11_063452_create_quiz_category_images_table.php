@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateQuizCategoriesTable extends Migration
+class CreateQuizCategoryImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateQuizCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('quiz_categories', function (Blueprint $table) {
+        Schema::create('quiz_category_images', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('category_name');
-            $table->string('category_slug');
+            $table->string('local_path');
+            $table->string('public_path');
+            $table->bigInteger('category_id')->unsigned();
+            $table->foreign('category_id')->references('id')->on('quiz_categories')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateQuizCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('quiz_categories');
+        Schema::dropIfExists('quiz_category_images');
     }
 }

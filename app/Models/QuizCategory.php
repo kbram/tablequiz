@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,8 +15,12 @@ class QuizCategory extends Model
     protected $fillable = [
         'category_name',
         'category_slug',
-        'category_image',
     ];
+
+    public function quizCategoryImages()
+    {
+        return $this->hasOne('App\Models\QuizCategoryImage');
+    }
 
 
     
