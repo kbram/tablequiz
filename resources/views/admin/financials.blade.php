@@ -131,7 +131,7 @@
 									<input name="band__to" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="{{$participantCost->to}}">
 								</div>
 								<div class="col-4 col-md-3 pt-2 pt-md-0">
-								<span style="line-height: 1.1" class="d-block  ">{{$participantCost->band_type}}s</span>
+								<span style="line-height: 1.1" class="d-block  ">{{$participantCost->band_type}}</span>
 								</div>
 								<div class="col-8 col-md-4 pt-2 pt-md-0">
 									<div class="input-group">
