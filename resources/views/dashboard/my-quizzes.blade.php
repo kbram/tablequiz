@@ -53,19 +53,8 @@
                                     
 									 <td>{{$quiz->quiz_name}}</td>
 									 <td>{{$roundCount[$quiz->id]}}</td>
+ 									 <td>{{$questionCounts[$quiz->id]}}</td>
 
-									 <td>
-										@if(!empty($questionCounts))
-										
-											{{$questionCounts[$quiz->id]}}
-											
-										@else
-								          {{$questionCounts=0}}
-										
-										
-										@endif
-
-									  </td>
  
 									<td class="quiz_actions d-flex flex-row justify-content-lg-end">
 										<div class="d-flex flex-column pl-0 pl-md-4">

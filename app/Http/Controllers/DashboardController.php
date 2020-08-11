@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\Quiz;
 use App\Models\QuizRound;
 use App\Models\Question;
+use App\User;
 
 use Auth;
 
@@ -13,24 +14,17 @@ class DashboardController extends Controller
 {
    
     public function showMyQuizzes(){
-        $quizzes=Auth::user()->quizzes()->get();
+       $quizzes=Auth::user()->quizzes()->get();
        
         foreach($quizzes as $quiz)
         { 
-            $questionCount =0 ;
-            $rounds=QuizRound::where('quiz_id',$quiz->id)->get(); 
-            $quiz = $quiz->id;
-            $roundCount[$quiz] = $rounds->count();
+            // $rounds=QuizRound::where('quiz_id',$quiz->id)->get(); 
+            // $roundCount[$quiz->id] = $rounds->count();
+            $roundCount[$quiz->id]=$quiz->rounds()->count();
 
-          foreach($rounds as $round)
-          {
-            $questions=Question::where('round_id',$round->id)->get();          
-            $questionCount = $questionCount + $questions->count();
-            $questionCounts[$quiz] = $questionCount;
-
-          }
+            $questionCounts[$quiz->id]=$quiz->questions()->count();
         }
-  
+        // dd($roundCount);
 
 
         

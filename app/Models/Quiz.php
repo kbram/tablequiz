@@ -34,6 +34,10 @@ class Quiz extends Model
     {
         return $this->hasMany('App\Models\QuizRound');
     }
+    public function questions(){
+
+    return $this->hasManyThrough('App\Models\Question','App\Models\QuizRound','quiz_id','round_id');
+    }
    
 
 }

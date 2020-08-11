@@ -22,10 +22,10 @@ class QuizRound extends Model
     {
         return $this->belongsTo('App\Models\Quiz','quiz_id');
     }
-    public function questions()
-    {
-        return $this->hasMany('App\Models\Question');
-    }
+     public function questions()
+     {
+         return $this->hasMany('App\Models\Question');
+     }
    
 
 }
