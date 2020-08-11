@@ -20,7 +20,7 @@
             usersTable.hide();
             clearSearchTrigger.show();
             let noResulsHtml = '<tr>' +
-                                '<td>{!! trans("usersmanagement.search.no-results") !!}</td>' +
+                                '<td>No results</td>' +
                                 '<td></td>' +
                                 '<td class="hidden-xs"></td>' +
                                 '<td class="hidden-xs"></td>' +
