@@ -83,6 +83,8 @@
 											<span class="input-group-text">&euro;</span>
 										</div>
 										<input name="band__costs" maxlength="3" class="form-control" placeholder="{{$questionCost->cost}}">
+										
+										<button id="{{$questionCost->id}}" name="band__costs" maxlength="3" class=" form-control ml-1" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
 									</div>
 								</div>
 							</form>
@@ -111,6 +113,7 @@
 											<span class="input-group-text">&euro;</span>
 										</div>
 										<input name="band__costs" maxlength="3" class="form-control" placeholder="{{$backgroundCost->cost}}">
+										<button id="{{$backgroundCost->id}}" name="band__costs" maxlength="3" class=" form-control ml-1" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
 									</div>
 								</div>
 							</form>
@@ -139,6 +142,7 @@
 											<span class="input-group-text">&euro;</span>
 										</div>
 										<input name="band__costs" maxlength="3" class="form-control" placeholder="{{$participantCost->cost}}">
+										<button id="{{$participantCost->id}}" name="band__costs" maxlength="3" class=" form-control ml-1" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
 									</div>
 								</div>
 							</form>
