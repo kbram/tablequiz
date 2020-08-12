@@ -177,8 +177,17 @@ Route::get('/dashboard/my-quizzes','DashboardController@myQuiz');
 Route::get('dashboard/settings','DashboardController@setting');
 
 
-
-//thusha created for test sessions
+//home
 Route::get('/', function () {
     return view('home2');
+});
+
+//aboutus
+Route::get('/about', function () {
+    return view('about_us');
+});
+
+//contactus
+Route::get('/contact', function () {
+    return view('contact_us');
 });
