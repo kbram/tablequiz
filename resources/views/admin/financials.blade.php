@@ -80,9 +80,9 @@
 										<div class="input-group-prepend">
 											<span class="input-group-text">&euro;</span>
 										</div>
-										<input name="band__costs" maxlength="3" class="form-control" placeholder="{{$questionCost->cost}}">
+										<input id="cost{{$questionCost->id}}" maxlength="3" class="form-control" placeholder="{{$questionCost->cost}}">
 										
-										<button id="{{$questionCost->id}}" name="band__costs" maxlength="3" class=" form-control ml-1" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
+										<button id="btn{{$questionCost->id}}"  maxlength="3" class=" form-control ml-1" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
 									</div>
 								</div>
 							</form>
@@ -110,8 +110,13 @@
 										<div class="input-group-prepend">
 											<span class="input-group-text">&euro;</span>
 										</div>
+<<<<<<< HEAD
 										<input name="band__costs" maxlength="3" class="form-control" placeholder="{{$backgroundCost->cost}}">
 										<button id="{{$backgroundCost->id}}" maxlength="3" class=" form-control ml-1" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
+=======
+										<input id="cost{{$backgroundCost->id}}" maxlength="3" class="form-control" placeholder="{{$backgroundCost->cost}}">
+										<button id="btn{{$backgroundCost->id}}"  maxlength="3" class=" form-control ml-1" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
+>>>>>>> ac6b1cc156795f395b8c5e01a1d4b8107b38f205
 									</div>
 								</div>
 							</form>
@@ -139,8 +144,8 @@
 										<div class="input-group-prepend">
 											<span class="input-group-text">&euro;</span>
 										</div>
-										<input name="band__costs" maxlength="3" class="form-control" placeholder="{{$participantCost->cost}}">
-										<button id="{{$participantCost->id}}" name="band__costs" maxlength="3" class=" form-control ml-1" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
+										<input id="cost{{$participantCost->id}}" maxlength="3" class="form-control" placeholder="{{$participantCost->cost}}">
+										<button id="btn{{$participantCost->id}}"  maxlength="3" class=" form-control ml-1" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
 									</div>
 								</div>
 							</form>
@@ -157,6 +162,12 @@
 @endsection
 
 @section('footer_scripts')
+<<<<<<< HEAD
 @include('scripts.financials')
 
+=======
+@if(config('usersmanagement.enableSearchUsers'))
+@include('scripts.financials');
+@endif
+>>>>>>> ac6b1cc156795f395b8c5e01a1d4b8107b38f205
 @endsection
