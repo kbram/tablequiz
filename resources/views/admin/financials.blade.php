@@ -68,10 +68,10 @@
 									<span>From</span>
 								</div>
 								<div class="col-8 col-md-4 d-flex flex-row align-items-center justify-content-md-center">
-									<input name="band__to" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" 
+									<input id="from{{$questionCost->id}}" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" 
 										   placeholder="{{$questionCost->from}}">
 									<span>to</span>
-									<input name="band__to" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" 
+									<input id="to{{$questionCost->id}}" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" 
 										   placeholder="{{$questionCost->to}}">
 								</div>
 								<div class="col-4 col-md-3 pt-2 pt-md-0">
@@ -84,7 +84,7 @@
 										</div>
 										<input id="cost{{$questionCost->id}}" maxlength="3" class="form-control" placeholder="{{$questionCost->cost}}">
 										
-										<button id="btn{{$questionCost->id}}"  maxlength="3" class=" form-control ml-1" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
+										<button id="{{$questionCost->id}}"  maxlength="3" class=" form-control ml-1" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
 									</div>
 								</div>
 							</form>
@@ -100,9 +100,9 @@
 									<span>From</span>
 								</div>
 								<div class="col-8 col-md-4 d-flex flex-row align-items-center justify-content-md-center">
-									<input maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1" name="band__from" placeholder="{{$backgroundCost->from}}">
+									<input id="from{{$backgroundCost->id}}" maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1"  placeholder="{{$backgroundCost->from}}">
 									<span>to</span>
-									<input name="band__to" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="{{$backgroundCost->to}}">
+									<input id="to{{$backgroundCost->id}}"  maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="{{$backgroundCost->to}}">
 								</div>
 								<div class="col-4 col-md-3 pt-2 pt-md-0">
 								<span style="line-height: 1.1" class="d-block  ">{{$backgroundCost->band_type}}</span>
@@ -113,7 +113,7 @@
 											<span class="input-group-text">&euro;</span>
 										</div>
 										<input id="cost{{$backgroundCost->id}}" maxlength="3" class="form-control" placeholder="{{$backgroundCost->cost}}">
-										<button id="btn{{$backgroundCost->id}}"  maxlength="3" class=" form-control ml-1" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
+										<button id="{{$backgroundCost->id}}"  maxlength="3" class=" form-control ml-1" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
 									</div>
 								</div>
 							</form>
@@ -129,9 +129,9 @@
 									<span>From</span>
 								</div>
 								<div class="col-8 col-md-4 d-flex flex-row align-items-center justify-content-md-center">
-									<input maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1" name="band__from" placeholder="{{$participantCost->from}}">
+									<input id="from{{$participantCost->id}}" maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1"  placeholder="{{$participantCost->from}}">
 									<span>to</span>
-									<input name="band__to" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="{{$participantCost->to}}">
+									<input id="to{{$participantCost->id}}" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="{{$participantCost->to}}">
 								</div>
 								<div class="col-4 col-md-3 pt-2 pt-md-0">
 								<span style="line-height: 1.1" class="d-block  ">{{$participantCost->band_type}}</span>
@@ -142,7 +142,7 @@
 											<span class="input-group-text">&euro;</span>
 										</div>
 										<input id="cost{{$participantCost->id}}" maxlength="3" class="form-control" placeholder="{{$participantCost->cost}}">
-										<button id="btn{{$participantCost->id}}"  maxlength="3" class=" form-control ml-1" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
+										<button id="{{$participantCost->id}}"  maxlength="3" class=" form-control ml-1" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
 									</div>
 								</div>
 							</form>

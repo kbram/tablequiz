@@ -160,6 +160,7 @@ Route::get('about_us',function(){
 Route::get('contact_us',function(){
     return view('contact_us');
 });
+Route::post('admin/financials', 'PriceBandsController@update')->name('update');
 //sam route can start here
 Route::get('playquiz', 'PlayController@play');
 Route::get('startquiz', 'PlayController@start');

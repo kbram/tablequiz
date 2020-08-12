@@ -1,24 +1,25 @@
 <script type="text/javascript">
   $(document).ready(function() {
-
-    $("#btn1").click(function(e) {
-      
+    
+    $("button").click(function(e) {
+      var id=e.target.id;
     e.preventDefault();
     $.ajax({
         type: "POST",
-        url: "/financial",
+        url: "{{route('update')}}",
         dataType: 'json',
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
         data:{
-             get_cost1 : $('#cost1').val(),
-             get_cost2 : $('#cost2').val(),
-             get_cost3 : $('#cost3').val(),
+             id   : id,
+             get_from : $('#from'+id).val(), 
+             get_to : $('#to'+id).val(), 
+             get_cost : $('#cost'+id).val(), 
         },
         success: function(results) {
-            alert('ok');
+           
         },
         error: function(result) {
-          alert('erro');
+         
         },
         
     });
