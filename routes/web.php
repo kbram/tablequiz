@@ -178,3 +178,7 @@ Route::get('dashboard/settings','DashboardController@setting');
 
 
 
+//thusha created for test sessions
+Route::get('/', function () {
+    return view('home2');
+});
