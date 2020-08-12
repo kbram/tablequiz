@@ -68,17 +68,11 @@
 									<span>From</span>
 								</div>
 								<div class="col-8 col-md-4 d-flex flex-row align-items-center justify-content-md-center">
-<<<<<<< HEAD
-									<input name="band__from" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="{{$questionCost->from}}">
-									<span>to</span>
-									<input name="band__to" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="{{$questionCost->to}}">
-=======
 									<input id="from{{$questionCost->id}}" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" 
 										   placeholder="{{$questionCost->from}}">
 									<span>to</span>
 									<input id="to{{$questionCost->id}}" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" 
 										   placeholder="{{$questionCost->to}}">
->>>>>>> 11943b87106409536b193cc2131121c3486e551a
 								</div>
 								<div class="col-4 col-md-3 pt-2 pt-md-0">
 								<span style="line-height: 1.1" class="d-block  ">{{$questionCost->band_type}}</span>
@@ -118,17 +112,9 @@
 										<div class="input-group-prepend">
 											<span class="input-group-text">&euro;</span>
 										</div>
-<<<<<<< HEAD
 										<input name="band__costs" maxlength="3" class="form-control" placeholder="{{$backgroundCost->cost}}">
 										<button id="{{$backgroundCost->id}}" maxlength="3" class=" form-control ml-1" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
-=======
-										<input id="cost{{$backgroundCost->id}}" maxlength="3" class="form-control" placeholder="{{$backgroundCost->cost}}">
-<<<<<<< HEAD
-										<button id="btn{{$backgroundCost->id}}"  maxlength="3" class=" form-control ml-1" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
->>>>>>> ac6b1cc156795f395b8c5e01a1d4b8107b38f205
-=======
-										<button id="{{$backgroundCost->id}}"  maxlength="3" class=" form-control ml-1" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
->>>>>>> 11943b87106409536b193cc2131121c3486e551a
+										
 									</div>
 								</div>
 							</form>
@@ -174,12 +160,7 @@
 @endsection
 
 @section('footer_scripts')
-<<<<<<< HEAD
-@include('scripts.financials')
-
-=======
 @if(config('usersmanagement.enableSearchUsers'))
 @include('scripts.financials');
 @endif
->>>>>>> ac6b1cc156795f395b8c5e01a1d4b8107b38f205
 @endsection
