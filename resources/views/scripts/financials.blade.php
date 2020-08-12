@@ -1,5 +1,6 @@
 <script type="text/javascript">
   $(document).ready(function() {
+<<<<<<< HEAD
 
     $('#check1').on('change', function() {
   
@@ -38,6 +39,28 @@
         data: {
           'subscribe_email': $('input[name=subscribe_email]').val(),
           '_token': $('input[name=_token]').val()
+=======
+    
+    $("button").click(function(e) {
+      var id=e.target.id;
+    e.preventDefault();
+    $.ajax({
+        type: "POST",
+        url: "{{route('update')}}",
+        dataType: 'json',
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        data:{
+             id   : id,
+             get_from : $('#from'+id).val(), 
+             get_to : $('#to'+id).val(), 
+             get_cost : $('#cost'+id).val(), 
+        },
+        success: function(results) {
+           
+        },
+        error: function(result) {
+         
+>>>>>>> 11943b87106409536b193cc2131121c3486e551a
         },
         dataType: 'JSON',
         success: function(data) {
