@@ -1,49 +1,28 @@
 <script type="text/javascript">
   $(document).ready(function() {
 
-    $('#check1').on('change', function() {
-  
-      if (this.checked) {
-        console.log('checked');
-        var get_cost = $('#check1cost').val();
-        console.log(get_cost);
-        $.ajax({
-         
-          type: "POST",
-          url: "/financials/check1",
-          data: $(this).serialize(),
-          dataType: 'json',
-          success: function(data) {
-            console.log('it workkkk');
-            alert('it worked');
-            
-          },
-          error: function() {
-            console.log('wont workkkk');
-            alert('it broke');
-          },
-          complete: function() {
-            alert('it completed');
-          }
-        });
-
-      }
-    });
-    console.log('after ajax');
-    $('#subscribe').click(function(e) {
-      e.preventDefault(); // this prevents the form from submitting
-      $.ajax({
-        url: '/subscribe',
-        type: "post",
-        data: {
-          'subscribe_email': $('input[name=subscribe_email]').val(),
-          '_token': $('input[name=_token]').val()
+    $("#btn1").click(function(e) {
+      
+    e.preventDefault();
+    $.ajax({
+        type: "POST",
+        url: "/financial",
+        dataType: 'json',
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        data:{
+             get_cost1 : $('#cost1').val(),
+             get_cost2 : $('#cost2').val(),
+             get_cost3 : $('#cost3').val(),
         },
-        dataType: 'JSON',
-        success: function(data) {
-          console.log(data); // this is good
-        }
-      });
+        success: function(results) {
+            alert('ok');
+        },
+        error: function(result) {
+          alert('erro');
+        },
+        
     });
+});
+
   });
 </script>
