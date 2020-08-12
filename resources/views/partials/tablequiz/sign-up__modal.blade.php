@@ -1,20 +1,39 @@
 <div class="modal" id="publishQuizModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content" id="modal__login">
+
+
+  <!-- thusha_dev -->
+
+
+  @guest
+    <div class="modal-content " id="modal__login">
+		@endguest
+
+		@auth
+		<div class="modal-content d-none " id="modal__login">
+@endauth
+  <!-- thusha_dev -->
+
+
+
       <div class="modal-header justify-content-center d-flex">
         <h1 class="modal-title" id="publishQuizModalLabel">Login</h1>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
-      <div class="modal-body">
-        <form class="popupLogIn text-body px-4 pt-4">
+	  </div>
+	  
+
+      <div class="modal-body ">
+
+        <form class="popupLogIn text-body px-4 pt-4" method="POST" action="{{ route('login') }}">
+		@csrf
 		  	<div class="form-row">
 				<div class="col-md-5">
 			  		<label for="login__user">Username/email</label>
 				</div>
 			  	<div class="col-md-7">
-					<input type="text" class="form-control" name="login__user"> 
+					<input id="email" type="email" name="email"  type="text" class="form-control" name="login__user"> 
 				</div>
 			</div>
 			<div class="form-row">
@@ -22,29 +41,43 @@
 			  		<label for="login__pass">Password</label>
 				</div>
 			  	<div class="col-md-7">
-					<input type="password" class="form-control" name="login__pass"> 
+					<input id="password" name="password" type="password" class="form-control" name="login__pass"> 
 				</div>
 			</div>
 			<div class="form-row d-flex justify-content-center mt-5">
 				<div class="col-10 col-md-4">
-					<input class="d-block btn to__checkout btn-primary" type="submit" value="Log In">
+					<input class="d-block btn  btn-primary" type="submit" value="Log In">
+					<!-- for check out view -> to__checkout -->
 				</div>
 			</div>
 		</form>
+
 		<div class="or__separator"><span>OR</span></div> 
 		
 		<div class="modal__social_login row flex-column align-items-center">
 			<div class="col-sm-6">	
+			
+			<a href="{{route('social.redirect', ['provider' => 'facebook'])}}" > 
 				<button class="btn social__login facebook">Login with Facebook</button>
+				</a>
 			</div>
-			<div class="col-sm-6">	
+			<div class="col-sm-6">
+			<a href="{{route('social.redirect', ['provider' => 'twitter'])}}" > 
+	
 				<button class="btn social__login twitter">Login with Twitter</button>
+				</a>
 			</div>
 			<div class="col-sm-6">	
+			<a href="{{route('social.redirect', ['provider' => 'google'])}}" > 
+
 				<button class="btn social__login google">Login with Google</button>
+				</a>
 			</div>
 			<div class="col-sm-6">	
+			<a href="{{route('social.redirect', ['provider' => 'instagram'])}}" > 
+
 				<button class="btn social__login instagram">Login with Instagram</button>
+				</a>
 			</div>
 		</div>
 		  
@@ -68,13 +101,14 @@
 		  <a class="back_to__login" href="#"><i class="fa fa-angle-left"></i><span>Back</span></a>
       </div>
       <div class="modal-body">
-        <form class="popupLogIn text-body px-4">
+        <form class="popupLogIn text-body px-4" method="POST" action="{{ route('register') }}">
+		@csrf
 		  	<div class="form-row">
 				<div class="col-md-5">
 			  		<label for="signup__user_firstname">First Name</label>
 				</div>
 			  	<div class="col-md-7">
-					<input type="text" class="form-control" name="signup__user_firstname"> 
+					<input id="first_name"  type="text" class="form-control" name="first_name"> 
 				</div>
 			</div>
 			<div class="form-row">
@@ -82,7 +116,7 @@
 			  		<label for="signup__user_lastname">Last Name</label>
 				</div>
 			  	<div class="col-md-7">
-					<input type="text" class="form-control" name="signup__user_lastname"> 
+					<input id="last_name" type="text" class="form-control" name="last_name"> 
 				</div>
 			</div>
 			<div class="form-row">
@@ -90,7 +124,7 @@
 			  		<label for="signup__username">Username</label>
 				</div>
 			  	<div class="col-md-7">
-					<input type="text" class="form-control" name="signup__username"> 
+					<input id="name" name="name" type="text" class="form-control" name="signup__username"> 
 				</div>
 			</div>
 			<div class="form-row">
@@ -98,7 +132,7 @@
 			  		<label for="signup__email">Email</label>
 				</div>
 			  	<div class="col-md-7">
-					<input type="email" class="form-control" name="signup__email"> 
+					<input id="email" type="email" class="form-control" name="email"> 
 				</div>
 			</div>
 			<div class="form-row">
@@ -106,7 +140,7 @@
 			  		<label for="signup__pass">Password</label>
 				</div>
 			  	<div class="col-md-7">
-					<input type="password" class="form-control" name="signup__pass"> 
+					<input id="password" type="password" class="form-control" name="password"> 
 				</div>
 			</div>
 			<div class="form-row">
@@ -114,7 +148,7 @@
 			  		<label for="signup__pass">Confirm Password</label>
 				</div>
 			  	<div class="col-md-7">
-					<input type="password" class="form-control" name="signup__pass"> 
+					<input id="password-confirm" type="password" class="form-control" name="password_confirmation"> 
 				</div>
 			</div>
 			<div class="form-row d-flex justify-content-center mt-5">
@@ -127,23 +161,45 @@
 		
 		<div class="modal__social_login row">
 			<div class="col-sm-6">	
+			<a href="{{route('social.redirect', ['provider' => 'facebook'])}}" > 
+
 				<button class="btn social__login facebook">Sign up with Facebook</button>
+				</a>
 			</div>
 			<div class="col-sm-6">	
+			<a href="{{route('social.redirect', ['provider' => 'twitter'])}}" > 
+
 				<button class="btn social__login twitter">Sign up with Twitter</button>
+				</a>
 			</div>
-			<div class="col-sm-6">	
+			<div class="col-sm-6">
+			<a href="{{route('social.redirect', ['provider' => 'google'])}}" > 
+	
 				<button class="btn social__login google">Sign up with Google</button>
+				</a>
 			</div>
 			<div class="col-sm-6">	
+			<a href="{{route('social.redirect', ['provider' => 'instagram'])}}" > 
+
 				<button class="btn social__login instagram">Sign up with Instagram</button>
+				</a>
 			</div>
 		</div>
 		
       </div>
 		
-    </div>
-	<div class="modal-content d-none" id="modal__payment">
+	</div>
+
+	<!-- thusha dev -->
+@guest
+	<div class="modal-content d-none " id="modal__payment">
+		@endguest
+@auth
+<div class="modal-content  " id="modal__payment">
+
+@endauth
+	<!-- thusha dev -->
+
       <div class="modal-header justify-content-center d-flex">
         <h1 class="modal-title" id="publishQuizModalLabel">Your cart</h1>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
