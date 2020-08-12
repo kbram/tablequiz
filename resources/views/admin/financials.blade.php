@@ -62,9 +62,12 @@
 					<div class="row">
 						<div class="dashboard__container col">
 							<h3>Set price band for questions</h3>
+							
 							@foreach($questionCosts as $questionCost)
+							<span id="msg{{$questionCost->id}}" class="text-success" ></span>
 							<form class="form-row pt-4 align-items-center mb-0" action="" method="" id="price__band__questions">
 								<div class="col-4 col-md-1">
+								
 									<span>From</span>
 								</div>
 								<div class="col-8 col-md-4 d-flex flex-row align-items-center justify-content-md-center">
@@ -82,9 +85,11 @@
 										<div class="input-group-prepend">
 											<span class="input-group-text">&euro;</span>
 										</div>
+										
 										<input id="cost{{$questionCost->id}}" maxlength="3" class="form-control" placeholder="{{$questionCost->cost}}">
 										
 										<button id="{{$questionCost->id}}"  maxlength="3" class=" form-control ml-1" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
+									
 									</div>
 								</div>
 							</form>
@@ -95,6 +100,7 @@
 						<div class="dashboard__container col">
 							<h3>Set price band for no. backgrounds</h3>
 							@foreach($backgroundCosts as $backgroundCost)
+							<span id="msg{{$backgroundCost->id}}" class="text-success"></span>
 							<form class="form-row pt-4 align-items-center mb-0" action="" method="" id="price__band__questions">
 								<div class="col-4 col-md-1">
 									<span>From</span>
@@ -124,6 +130,7 @@
 						<div class="dashboard__container col">
 							<h3>Set price band for no. participants</h3>
 							@foreach($participantCosts as $participantCost)
+							<span id="msg{{$participantCost->id}}" class="text-success"></span>
 							<form class="form-row pt-4 align-items-center mb-0" action="" method="" id="price__band__questions">
 								<div class="col-4 col-md-1">
 									<span>From</span>

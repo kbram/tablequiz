@@ -7,7 +7,6 @@
     $.ajax({
         type: "POST",
         url: "{{route('update')}}",
-        dataType: 'json',
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
         data:{
              id   : id,
@@ -17,9 +16,14 @@
         },
         success: function(results) {
            
+           $('#msg'+id).text('updated sucessfully');
+           setTimeout(function() {
+        $("#msg"+id).text('')
+    }, 1000);
         },
-        error: function(result) {
-         
+        error: function(result,error) {
+         alert('error');
+        
         },
         
     });
