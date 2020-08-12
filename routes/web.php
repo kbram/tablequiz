@@ -183,4 +183,5 @@ Route::post('search-questions','AdminQuestionController@search')->name('search-q
 
 //admin financial controller
 Route::get('admin/financials','PriceBandsController@index');
+Route::
 

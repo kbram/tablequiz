@@ -68,11 +68,9 @@
 									<span>From</span>
 								</div>
 								<div class="col-8 col-md-4 d-flex flex-row align-items-center justify-content-md-center">
-									<input name="band__to" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" 
-										   placeholder="{{$questionCost->from}}">
+									<input name="band__from" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="{{$questionCost->from}}">
 									<span>to</span>
-									<input name="band__to" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" 
-										   placeholder="{{$questionCost->to}}">
+									<input name="band__to" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="{{$questionCost->to}}">
 								</div>
 								<div class="col-4 col-md-3 pt-2 pt-md-0">
 								<span style="line-height: 1.1" class="d-block  ">{{$questionCost->band_type}}</span>
@@ -113,7 +111,7 @@
 											<span class="input-group-text">&euro;</span>
 										</div>
 										<input name="band__costs" maxlength="3" class="form-control" placeholder="{{$backgroundCost->cost}}">
-										<button id="{{$backgroundCost->id}}" name="band__costs" maxlength="3" class=" form-control ml-1" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
+										<button id="{{$backgroundCost->id}}" maxlength="3" class=" form-control ml-1" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
 									</div>
 								</div>
 							</form>
@@ -159,5 +157,6 @@
 @endsection
 
 @section('footer_scripts')
+@include('scripts.financials')
 
 @endsection

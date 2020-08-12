@@ -36,9 +36,9 @@ class PriceBandsController extends Controller
 
     $priceBand = PriceBand::find($id);
 
-    $priceBand->from     =  $request->input('name');
-    $priceBand->to       =  $request->input('to');
-    $priceBand->cost     =  $request->input('cost');
+    $priceBand->from     =  $request->input('band__from');
+    $priceBand->to       =  $request->input('band__to');
+    $priceBand->cost     =  $request->input('band__costs');
     
 
     $priceBand->save();
