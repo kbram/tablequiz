@@ -69,40 +69,40 @@
 							<thead>
 								<tr>
 									<th>Quiz name <span><small><i class="fa fa-angle-down"></i></small></span</th>
-									<th>Created by <span><small><i class="fa fa-angle-down"></i></small></span</th>
-									<th>Rounds <span><small><i class="fa fa-angle-down"></i></small></span</th>
-									<th class="text-center">Questions <span><small><i class="fa fa-angle-down"></i></small></span</th>
+									<th>Quiz Link <span><small><i class="fa fa-angle-down"></i></small></span</th>
+									<th class="text-center">No Of Participants<span><small><i class="fa fa-angle-down"></i></small></span</th>
 									<th class="text-center">Actions</th>
 								</tr>
 							</thead>
 							<tbody>
 								
-								
+							@foreach($quizzes as $quiz)
 								<tr>
-									<td>Mad Dog's Geography Quiz</td>
-									<td>SenanCronin2020</td>
-									<td class="text-lg-center">10</td>
-									<td class="text-lg-center">100</td>
+								
+								<span id="msg{{$quiz->id}}" class="text-success" ></span>
+									<td>{{$quiz -> quiz_name}}</td>
+									<td id="quizLink{{$quiz->id}}">{{$quiz -> quiz_link}}</td>
+									<td class="text-lg-center">{{$quiz->no_of_participants}}</td>
 									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
 										<div class="d-flex flex-column pl-0">
 											<i class="far fa-eye"></i>
 											<span>View Qs</span>
 										</div>
-										
-										<button class="btn p-0  btn-primary-outline" value="copy" onclick="copyToClipboard()">
 										<div class="d-flex flex-column">
-											<i class="fas fa-share-alt"></i>
-											<span>Share</span>
-										</div>
+										<i class="fas fa-share-alt"></i>
+											<button class="btn p-0  btn-primary-outline"  id="{{$quiz->id}}" >Share
+										
 											</button>
-										
+										</div>
 										<div class="d-flex flex-column">
 											<i class="fas fa-times-circle"></i>
 											<span>Block</span>
 										</div>
 									</td>
+									
 								</tr>
-								<tr>
+								@endforeach
+								<!-- <tr>
 									<td>Mad Dog's Geography Quiz</td>
 									<td>SenanCronin2020</td>
 									<td class="text-lg-center">10</td>
@@ -282,7 +282,7 @@
 										</div>
 									</td>
 								</tr>
-								
+								 -->
 								
 								
 							</tbody>
@@ -305,5 +305,6 @@
 @endsection
 
 @section('footer_scripts')
+@include('scripts.share-quiz')
 
 @endsection
