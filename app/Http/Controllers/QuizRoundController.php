@@ -43,7 +43,7 @@ class QuizRoundController extends Controller
                 $path_thumb    = $save_path_thumb . $img_name_thumb;
 
                 $public_path        = '/bg_images/' . $round_id . '/' . $img_name;
-            $public_path_thumb  = '/bg_images/' . $round_id . '/thumb/' . $img_name_thumb;
+                $public_path_thumb  = '/bg_images/' . $round_id . '/thumb/' . $img_name_thumb;
 
                 // Make the user a folder and set permissions
 
