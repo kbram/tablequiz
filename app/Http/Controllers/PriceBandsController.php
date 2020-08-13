@@ -19,12 +19,12 @@ class PriceBandsController extends Controller
     
   public function update(Request $request)
   {   
-      
+      dd($request);
     $validator = Validator::make(
         $request->all(),
         [
         'get_from' => 'required',
-        'get_to' => 'required',
+        'get_to'   => 'required',
         'get_cost' => 'required',
         
         ]

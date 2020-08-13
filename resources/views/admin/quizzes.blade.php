@@ -88,10 +88,14 @@
 											<i class="far fa-eye"></i>
 											<span>View Qs</span>
 										</div>
+										
+										<button class="btn p-0  btn-primary-outline" value="copy" onclick="copyToClipboard()">
 										<div class="d-flex flex-column">
 											<i class="fas fa-share-alt"></i>
 											<span>Share</span>
 										</div>
+											</button>
+										
 										<div class="d-flex flex-column">
 											<i class="fas fa-times-circle"></i>
 											<span>Block</span>
