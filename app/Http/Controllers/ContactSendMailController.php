@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
+use Config;
 
 class ContactSendMailController extends Controller
 {
@@ -27,7 +28,7 @@ class ContactSendMailController extends Controller
             
         );
 
-     Mail::to('thushaebay1996@gmail.com')->send(new SendMail($data));
+     Mail::to(Config::get('mail.from.toaddress'))->send(new SendMail($data));
      return back()->with('success', 'Thanks for contacting us ! We will contact you soon');
 
     }
