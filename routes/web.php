@@ -153,6 +153,13 @@ Route::get('quiz/slider', 'QuizController@slider');
 Route::get('quiz/add_round', 'QuizController@add_round');
 Route::get('quiz/add_round_2', 'QuizController@add_round_2');
 Route::get('quiz/setup', 'QuizController@setup');
+Route::post('round/store', 'QuizRoundController@store');
+Route::get('about_us',function(){
+    return view('about_us');
+});
+Route::get('contact_us',function(){
+    return view('contact_us');
+});
 //sam route can start here
 Route::get('playquiz', 'PlayController@play');
 Route::get('startquiz', 'PlayController@start');
