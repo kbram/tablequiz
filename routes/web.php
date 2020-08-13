@@ -171,6 +171,9 @@ Route::get('startquiz', 'PlayController@start');
 //quiz category route
 Route::get('admin/categories', 'QuizCategoriesController@create');
 Route::post('admin/categories', 'QuizCategoriesController@store');
+Route::get('admin/categories/edit/{id}', 'QuizCategoriesController@edit');
+Route::post('admin/categories/update/{id}', 'QuizCategoriesController@update');
+
 
 
 
