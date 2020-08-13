@@ -38,6 +38,10 @@ class Quiz extends Model
 
     return $this->hasManyThrough('App\Models\Question','App\Models\QuizRound','quiz_id','round_id');
     }
+
+    public function icon(){
+        return $this->hasOne('App\Models\QuizSetupIcon');
+    }
    
 
 }

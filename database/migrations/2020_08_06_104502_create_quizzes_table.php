@@ -20,7 +20,8 @@ class CreateQuizzesTable extends Migration
             $table->string('quiz_name');
             $table->string('quiz_password');
             $table->string('quiz_link');
-            $table->integer('no_of_participants');
+            $table->string('quiz_icon')->nullable();
+            $table->string('no_of_participants');
             $table->timestamps();
             
         });

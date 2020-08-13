@@ -38,5 +38,8 @@ return view('dashboard.my-quizzes',compact('quizzes','roundCount','questionCount
            
         return view('dashboard.settings');
     }
-}
+
+
+    
+ }
 

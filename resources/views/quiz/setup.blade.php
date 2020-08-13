@@ -8,8 +8,9 @@
 			<div class="article__heading">
 				<h1>Quiz Setup</h1>
 			</div>		
-			<form id="quiz__setup" action="add_round.php" class="pt-2 pt-lg-4">
-				
+			<form action="/setup" method="post" enctype="multipart/form-data" class="pt-2 pt-lg-4" >
+			@csrf
+
 <!-- QUIZ NAME -->
 				<div class="form-row">
 					<div class="col-md-4">
@@ -17,7 +18,15 @@
 					</div>
 					<div class="col-md-8">
 						<input autocomplete="nothanks" type="text" name="quiz__name" class="form-control">
+					
+						@if ($errors->has('quiz__name'))
+                                    <span class="help-block">
+                                            <p>{{ $errors->first('quiz__name') }}</p>
+                                    </span>
+                        @endif
 					</div>
+			
+					
 				</div>
 <!-- QUIZ PASSWORD -->
 				<div class="form-row">
@@ -40,6 +49,11 @@
 					</div>
 					<div class="col-sm">
 						<input type="text" name="quiz__link" class="form-control">
+						@if ($errors->has('quiz__link'))
+                                    <span class="help-block">
+                                            <p>{{ $errors->first('quiz__link') }}</p>
+                                    </span>
+                        @endif
 						<input tabindex="-1" type="text" id="full__uri">
 					</div>
 					<span class="copy__icon quiz__link" id="copy" title="Copy text"><i class="fa fa-copy"></i></span>
@@ -81,7 +95,7 @@
 						  <div class="modal-footer justify-content-center row no-gutters">
 							 <div class="col-md-3"> 
 								 <label class="d-block" for="upload__quiz__icon">Upload
-									<input type="file" class="form-control-file" id="upload__quiz__icon" value="Upload">
+									<input type="file"  class="form-control-file" id="upload__quiz__icon" name="upload__quiz__icon" value="Upload">
 								</label>
 							</div>
 							<div class="col-md-3">
@@ -143,10 +157,10 @@
 <!-- QUIZ PARTICIPANTS -->
 				<div class="form-row">
 					<div class="col-md-4">
-						<label for="quiz__participants">No. of participants</label>
+						<label for="quiz__participants">No.of participants</label>
 					</div>
 					<div class="col-md-4">
-						<select id="quiz__participants" class="form-control">
+						<select id="quiz__participants" class="form-control" name="quiz__participants">
 							<option disabled selected>Please choose...</option>
 							<option value="1-5">1-5</option>
 							<option value="5-9">5-9</option>
@@ -155,6 +169,12 @@
 							<option value="30-49">30-49</option>
 							<option value="50+">50+</option>
 						</select>
+						@if ($errors->has('quiz__participants'))
+                                    <span class="help-block">
+                                            <p>{{ $errors->first('quiz__participants') }}</p>
+                                    </span>
+                        @endif
+						
 					</div>
 					<div class="modal" id="select_participants__modal" tabindex="-1" role="dialog" aria-labelledby="select_participants__modal" aria-hidden="true">
 					  <div class="modal-dialog modal-dialog-centered" role="document">
@@ -217,7 +237,7 @@
 <!-- END -->				
 				<div class="form-row form-footer">
 					<div class="text-center offset-md-4 col-md-4">
-						<input class="d-block btn btn-primary hasArrow" type="submit" value="Next">
+						<button class="d-block btn btn-primary hasArrow" type="submit" value="Next">Next</button>
 					</div>
 				</div>
 			</form>

@@ -57,10 +57,11 @@
 
  
 									<td class="quiz_actions d-flex flex-row justify-content-lg-end">
+										<a href="quizzes/{{$quiz->id}}/edit">			
 										<div class="d-flex flex-column pl-0 pl-md-4">
 											<i class="fas fa-edit"></i>
 											<span>Edit</span>
-										</div>
+										</div></a>
 										<div class="d-flex flex-column">
 											<i class="fas fa-share-alt"></i>
 											<span>Share</span>
