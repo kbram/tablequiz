@@ -62,15 +62,15 @@
 					
 					
 					<div class="dashboard__container flex-grow-0 pt-4 mb-3">
-						<h3>Add new category</h3>
-						<form action="/admin/categories" enctype="multipart/form-data" method="post" class="pt-3">
+						<h3>Edit category</h3>
+						<form action="/admin/categories/update/{{$category->id}}" enctype="multipart/form-data" method="post" class="pt-3">
 						@csrf
 							<div class="form-row">
 								<div class="col-12 col-md-3 text-left">
 									<label for="category__name"class="justify-content-start"><small>Category name</small></label>
 								</div>
 								<div class="col-12 col-md-4 pr-md-2 mb-2 mb-md-0">
-									<input type="text" name="category_name" class="w-100 form-control mx-lg-2 flex-grow-1 d-block">
+									<input type="text" value="{{$category->category_name}}" name="category_name" class="w-100 form-control mx-lg-2 flex-grow-1 d-block" >
 								</div>
 							</div>
 							<div class="form-row">
@@ -78,6 +78,7 @@
 									<label class="justify-content-start"><small>Category image</small></label>
 								</div>
 								<div class="col-6">
+								    
 									<label for="category_image" class="orange_text d-block d-md-inline">
 									<input type="file" class="orange_text form-control-file" name="category_image" value="Upload"></label>
 								</div>
@@ -105,7 +106,7 @@
 								</tr>
 							</thead>
 
-							
+						
 							<tbody>
 							  	@foreach($categories as $category)
                                         <tr>
@@ -126,7 +127,8 @@
                                             
                              	@endforeach
 								
-							</tbody>
+                            </tbody>
+                
 							<tfoot>
 								<tr>
 									<td colspan="6" class="text-center text-muted">

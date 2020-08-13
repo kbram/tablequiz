@@ -245,7 +245,7 @@
 		</section>
 	</div>
 </section>
-@endsection
+@end
 @section('footer_scripts')
 @endsection
 

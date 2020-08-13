@@ -5,15 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class QuizRound extends Model
-{    
+{
     protected $table = 'quiz_rounds';
-   
-    protected $fillable = [
-        'round_name','round_slug'
+
+    protected $guarded = [
+        'id',
     ];
 
-    public function getImage()
+    protected $fillable = [
+        'round_name',
+        'round_slug',
+
+    ];
+
+    public function images()
     {
-        return $this->hasOne('App\Models\QuizRoundImage');
-    } 
+        return $this->hasMany('App\Models\QuizRoundImage');
+    }
 }

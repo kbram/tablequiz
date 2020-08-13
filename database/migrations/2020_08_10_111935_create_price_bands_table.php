@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateQuizRoundsTable extends Migration
+class CreatePriceBandsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateQuizRoundsTable extends Migration
      */
     public function up()
     {
-        Schema::create('quiz_rounds', function (Blueprint $table) {
+        Schema::create('price_bands', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('round_name');
-            $table->text('round_slug');
+            $table->integer('from')->unigned();
+            $table->integer('to')->unsigned();
+            $table->string('band_type');
+            $table->decimal('cost',8,2)->unsigned();
             $table->timestamps();
         });
-        
     }
 
     /**
@@ -29,6 +30,6 @@ class CreateQuizRoundsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('quiz_rounds');
+        Schema::dropIfExists('prize_bands');
     }
 }

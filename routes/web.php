@@ -160,19 +160,38 @@ Route::get('about_us',function(){
 Route::get('contact_us',function(){
     return view('contact_us');
 });
+Route::post('admin/financials', 'PriceBandsController@update')->name('update');
 //sam route can start here
 Route::get('playquiz', 'PlayController@play');
 Route::get('startquiz', 'PlayController@start');
 
 
 
-//christy route can start from here
+
+//quiz category route
+Route::get('admin/categories', 'QuizCategoriesController@create');
+Route::post('admin/categories', 'QuizCategoriesController@store');
+Route::get('admin/categories/edit/{id}', 'QuizCategoriesController@edit');
+Route::post('admin/categories/update/{id}', 'QuizCategoriesController@update');
+
+
+
+
 
 //kanu routes
 Route::get('setup/create', 'QuizController@create');
 
 Route::post('setup', 'QuizController@store');
 
+//christy route can start from here
 Route::get('/dashboard/home','DashboardController@index');
 Route::get('/dashboard/my-quizzes','DashboardController@myQuiz');
 Route::get('dashboard/settings','DashboardController@setting');
+
+//adminquestionccontroller
+Route::get('/admin/questions','AdminQuestionController@index');
+Route::post('search-questions','AdminQuestionController@search')->name('search-questions');
+
+//admin financial controller
+Route::get('admin/financials','PriceBandsController@index');
+

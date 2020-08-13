@@ -58,10 +58,11 @@
 						<div class="col-lg-9">
 							<h2>Questions</h2>
 						</div>
-						<div class="col-lg-3">
-							<form action="" method="" class="p-0">
-								<input type="text" list="quizzes" name="quiz" placeholder="Search..." class="form-control mb-2 mt-n2">
-							</form>
+						<div class="col-lg-3 d-flex">
+							@if(config('usersmanagement.enableSearchUsers'))
+								@include('partials.search-questions-form')
+							@endif
+							
 						</div>
 					</div>
 					
@@ -72,16 +73,16 @@
 						<form action="" method="" class="pt-3 add__new__in__admin">
 							<div class="form-row">
 								<div class="col-md-4">
-									<label for="question__type">Category</label>
+									<label for="category_type">Category</label>
 								</div>
 								<div class="col-md-4">
-									<select id="question__type" class="form-control">
+									<select id="category_type" class="form-control">
 										<option value="category__music">Music</option>
-										<option value="category__music">Sport</option>
-										<option value="category__music">Geography</option>
-										<option value="category__music">History</option>
-										<option value="category__music">Politics</option>
-										<option value="category__music">Popular Culture</option>
+										<option value="category__sport">Sport</option>
+										<option value="category__Geography">Geography</option>
+										<option value="category__History">History</option>
+										<option value="category__Politics">Politics</option>
+										<option value="category__popular_culture">Popular Culture</option>
 
 									</select>
 								</div>
@@ -240,12 +241,12 @@
 									<th class="text-center">Actions</th>
 								</tr>
 							</thead>
-							<tbody>
-								
+							<tbody id="questions_table">
+								@foreach($questions as $question)
 								
 								<tr>
-									<td>History</td>
-									<td>10</td>
+									<td>{{$question->question}}</td>
+									<td>{{$question->category}}</td>
 									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
 										<div class="d-flex flex-column">
 											<i class="fas fa-pencil-alt"></i>
@@ -257,70 +258,11 @@
 										</div>
 									</td>
 								</tr>
-								<tr>
-									<td>Lord of the Rings</td>
-									<td>10</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column">
-											<i class="fas fa-pencil-alt"></i>
-											<span>Edit</span>
-										</div>									
-										<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Delete</span>
-										</div>
-									</td>
-								</tr>
-								
-								
-								<tr>
-									<td>Cricket</td>
-									<td>10</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column">
-											<i class="fas fa-pencil-alt"></i>
-											<span>Edit</span>
-										</div>									
-										<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Delete</span>
-										</div>
-									</td>
-								</tr>
-								
-								<tr>
-									<td>Papa Roach Members</td>
-									<td>10</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column">
-											<i class="fas fa-pencil-alt"></i>
-											<span>Edit</span>
-										</div>									
-										<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Delete</span>
-										</div>
-									</td>
-								</tr>
-								
-								<tr>
-									<td>South Park Episodes, 1998-2002</td>
-									<td>10</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column">
-											<i class="fas fa-pencil-alt"></i>
-											<span>Edit</span>
-										</div>									
-										<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Delete</span>
-										</div>
-									</td>
-								</tr>
-								
-								
-								
-							</tbody>
+								@endforeach
+							<tbody id="search_questions"></tbody>
+							@if(config('usersmanagement.enableSearchUsers'))
+								<tbody id="search_results"></tbody>
+							@endif
 							<tfoot>
 								<tr>
 									<td colspan="6" class="text-center text-muted">
@@ -340,5 +282,8 @@
 @endsection
 
 @section('footer_scripts')
-
+	@if(config('usersmanagement.enableSearchUsers'))
+        @include('scripts.search-questions')
+    @endif
+	
 @endsection
