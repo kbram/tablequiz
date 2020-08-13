@@ -115,7 +115,7 @@
 									<label for="question">Question</label>
 								</div>
 								<div class="col-md-8">
-									<input name="question" type="text" class="form-control" required >
+									<input name="question" type="text" class="form-control"  >
 									
 								</div>
 							</div>
@@ -280,17 +280,17 @@
 								<div class="col-md-8">
 
 									<div class="row multiple__choice__row pb-3 align-items-center">
-										<div class="col-7">
-											<input name="multiple__choice__answer__1" class="form-control" type="text" >		   
+										<div  id="choice_ans" class="col-7">
+											<input  name="multiple__choice__answer__1[]" class="form-control" type="text" >		   
 										</div>
 										<div class="col-1 justify-content-center">
 											&nbsp;
 										</div>
-										<div class="col-1 justify-content-center">
+										<div class="col-1 justify-content-center" onclick="getclick()">
 											<span class="plus">+</span>
 										</div>
 										<div class="col-3 text-center form-check">
-											<input type="radio" class="" name="multiple__choice__correct__answer" value=1 >
+											<input type="radio" class="" name="multiple__choice__correct__answer" value=0 >
 										</div>
 									</div>
 
@@ -303,7 +303,7 @@
 									<label for="time__limit">Time limit</label>
 								</div>
 								<div class="col-md-4">
-									<input class="form-control" type="number" name="time__limit" required>
+									<input class="form-control" type="number" name="time__limit" >
 								</div>
 								<div class="col">
 									<small class="form-text text-muted">Seconds</small>
@@ -329,43 +329,27 @@
 								</tr>
 							</thead>
 							<tbody>
-							<!-- <tr>	
+							
 							@foreach($questions as $question)
+
+							<tr>	
 								<td>{{$question->question}}</td>  
-							@endforeach
-							 @foreach($categories as $category)
- 										<tr>	 <td>{{$category->category_name}}</td>
-                                             <td class="quiz_actions d-flex flex-row justify-content-lg-center">
- 												<div class="d-flex flex-column">
- 													<i class="fas fa-pencil-alt"></i>
- 													<span>Edit</span>
- 												</div>									
- 												<div class="d-flex flex-column">
- 													<i class="fas fa-times-circle"></i>
- 													<span>Delete</span>
- 												</div>
- 											</td>
-											 
-							@endforeach          
-                                     </tr>    
-								 -->
-								<tr>
-									<td>South Park Episodes, 1998-2002</td>
-									<td>10</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column">
-											<i class="fas fa-pencil-alt"></i>
-											<span>Edit</span>
-										</div>									
-										<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Delete</span>
-										</div>
-									</td>
-								</tr>
+							    <td>{{$cat_name[$question->id]}}</td>
+						       
+						       <td class="quiz_actions d-flex flex-row justify-content-lg-center">
+							   <div class="d-flex flex-column">
+									<i class="fas fa-pencil-alt"></i>
+									<span>Edit</span>
+								</div>									
+								<div class="d-flex flex-column">
+									<i class="fas fa-times-circle"></i>
+									<span>Delete</span>
+								</div>
+							    </td>
+							</tr>
+							 @endforeach
 								
-								
-								
+								 
 							</tbody>
 							<tfoot>
 								<tr>
@@ -381,8 +365,17 @@
 			</div>
 		</section>
 	</div>
+	
 </section>
 
+<script>
+    function getclick(){
+		console.log("hello");
+        var x= document.getElementById("choice_ans");
+		x.innerHTML="<input  name=\"multiple__choice__answer__1[]\" class=\"form-control\" type=\"text\">"
+	}
+
+</script>
 
 @section('footer_scripts')
 

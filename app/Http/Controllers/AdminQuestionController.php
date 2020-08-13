@@ -6,6 +6,7 @@ use App\Models\GlobalQuestion;
 use App\Models\QuizCategory;
 use App\Models\GlobalQuestionMedia;
 use App\Models\GlobalAnswer;
+use DB;
 use Validator;
 
 use File;
@@ -23,8 +24,13 @@ class AdminQuestionController extends Controller
     
         $categories= QuizCategory::all();
         $questions=GlobalQuestion::all();
-        return view('admin.questions',compact('categories','questions'));
-
+        
+        foreach($questions as $question){
+        
+            $cat_name[$question->id] = QuizCategory::where('id', $question->category_id)->value('category_name'); 
+        }   
+        
+        return view('admin.questions',compact('categories','questions','cat_name'));
     }
 
     /**
@@ -61,7 +67,7 @@ class AdminQuestionController extends Controller
             'question'            => $request->input('question'),
             'time_limit'          => $request->input('time__limit'), 
              ]);
-        // dd($question);
+        
         $question->save();
 
         // Creating new global question end
@@ -185,10 +191,31 @@ class AdminQuestionController extends Controller
             }
 
             else if($question->question_type == 'multiple__choice__question'){
+              
+                $global_answer= $request->input('multiple__choice__answer__1');
+                for($i = 0 ; $i < 5 ; $i++)
+                {                
+                   
+
+                    
+                     //dd($global_answer)[$i];
+                     $answer    = new GlobalAnswer;
+                     $answer_get = $global_answer;
+                     $answer->answer              = $answer_get;
+                   
+                  
+                // }
+                // $multi_answers[] = request('multiple__choice__answer__1');
+                // dd($multi_answers);
+                // if(is_array($multi_answers)){
+                // foreach($multi_answers as $multi_answer) {
+                //         $answer    = new GlobalAnswer;
+                //         $answer ->answer    = $multi_answer;
+                //         $answer ->answer_stat =$request->get('multiple__choice__correct__answer', 0);
+                // }   
+            }
                 
-                $answer    = new GlobalAnswer;
-                $answer->answer              = $request->input('multiple__choice__answer__1');
-                $answer->answer_stat         = $request->get('multiple__choice__correct__answer', 0);
+                
              
             }
             
@@ -205,6 +232,15 @@ class AdminQuestionController extends Controller
 
            return redirect()->action( 'AdminQuestionController@create');
         }
-
+        public function edit($id, $question_id)
+        {    
+            // $categories          = QuizCategory::all();
+            // $global_question     = GlobalQuestion::findorfail($id);
+            // $cat_name            = QuizCategory::where('id', $global_question->category_id)->value('category_name'); 
+            // $global_answer              = $global_question->answer()->get();
+            // $global_question_media      = $global_question->media()->get();
+          
+            // return view('admin.questions',compact('cat_name','categories', 'global_question','global_answer','global_question_media'));
+        }
 
  }
