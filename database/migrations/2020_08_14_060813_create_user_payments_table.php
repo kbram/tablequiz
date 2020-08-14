@@ -23,6 +23,8 @@ class CreateUserPaymentsTable extends Migration
             $table->integer('exp_month');
             $table->integer('exp_year');
             $table->integer('cvv');
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

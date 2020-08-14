@@ -21,6 +21,7 @@ class UserPayment extends Model
         'exp_month',
         'exp_year',
         'cvv',
+        'user_id'
     ];
 
     public function user()
