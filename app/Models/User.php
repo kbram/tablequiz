@@ -163,4 +163,10 @@ class User extends Authenticatable
     {
         return $this->profiles()->detach($profile);
     }
+
+
+    public function userPayment()
+    {
+        return $this->belongsTo('App\Models\UserPayment');
+    }
 }
