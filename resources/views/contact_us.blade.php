@@ -20,9 +20,7 @@ display:none;
 	width:100% !important;
 	display:ingerit;
 }
-img{
 
-}
 
 
 
@@ -47,7 +45,7 @@ img{
 @csrf
 <div class="raw d-flex">
 
-<div class="f col-xl-8 col-md-12 col-xs-12 col-sm-10">
+<div class="f col-xl-8 col-lg-8 col-md-12 col-xs-12 col-sm-10">
   <div class="form-group d-flex">
     <label class="text-secondary" for="">Full Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
     <input  name="name" class="form-control ml-5" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
@@ -66,8 +64,8 @@ img{
   <button type="submit" class="btn btn-primary float-right">Submit</button>
 </div>
 
-<div class="conimg col-xl-4 ">
-<img src="site_design/images/homepage__logo.png" class="homepage__logo" alt="TableQuiz.app logo" width="150px" height="150px" >
+<div class="conimg col-md-4 ">
+<img src="site_design/images/contact1.png" class="homepage__logo" alt="TableQuiz.app logo" width="50" height="200px" >
 </div>
 
 </div>
