@@ -57,10 +57,11 @@ class QuizController extends Controller
         return view('quiz.slider');
     }
 
-    public function add_round()
+   /* public function add_round()
     {
         return view('quiz.add_round');
     }
+    */
 
     public function add_round_2()
     {

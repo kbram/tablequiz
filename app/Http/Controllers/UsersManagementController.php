@@ -309,11 +309,11 @@ class UsersManagementController extends Controller
           
         } else {
             $validator = Validator::make($request->all(), [
-                'name'          => 'required|max:255',
-                'first_name'    => 'required',
-                'last_name'     => 'required',
-                'password'      => 'required|confirmed',
-               'password_confirmation' => 'required|same:password',
+                'name'          => 'required|max:255|unique:users|alpha_dash',
+                'first_name'    => 'required|alpha_dash',
+                'last_name'     => 'required|alpha_dash',
+                'password'      => 'confirmed',
+               'password_confirmation' => 'same:password',
             ]);
            
         }
