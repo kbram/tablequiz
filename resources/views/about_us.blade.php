@@ -134,7 +134,15 @@ Quizzes can be setup and ran free of charge and ran using a simple link, no inst
 </div>
 <br>
 <br>
-<a href="/quiz/setup.php" class="btn btn-primary d-block" width="50px">Create a quiz</a>
+<br>
+<div class="raw d-flex">
+	<div class="col-4"></div>
+<div class="col-4 col-centered">
+<a href="/quiz/setup.php" class="btn btn-primary d-block" width="50px">Get started ></a>
+<div class="col-4"></div>
+
+</div>
+</div>
 <br>
 <br>
 </div>
