@@ -165,6 +165,9 @@ Route::get('quizzes/{id}/edit','QuizController@editQuiz');
 //kanu routes
 Route::get('setup/create', 'QuizController@create');
 Route::post('setup','QuizController@store');
+// Route::put('setup/update/{id}','QuizController@update');
+
+
 
 Route::get('questions/create', 'AdminQuestionController@create');
 Route::post('questions', 'AdminQuestionController@store');
