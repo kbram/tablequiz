@@ -258,7 +258,7 @@
                             method="post" 
                             class="require-validation text-body px-2"
                             data-cc-on-file="false"
-                            data-stripe-publishable-key="{{$pub_key}}"
+                            data-stripe-publishable-key="{{$pub_key ?? ''}}"
                             >
 							@csrf
 			<h3 class="text-center mb-5">Payment details</h3>

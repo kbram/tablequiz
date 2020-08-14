@@ -38,6 +38,6 @@ class StripePaymentController extends Controller
   
         Session::flash('success', 'Payment successful!');
           
-        return back();
+        return view('dashboard.home');
     }
 }
