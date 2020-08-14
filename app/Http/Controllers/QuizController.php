@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Models\Quiz;
 use Illuminate\Http\Request;
 use Validator;
+
+use Config;
 class QuizController extends Controller
 {
     public function create()
@@ -59,7 +61,9 @@ class QuizController extends Controller
 
     public function add_round()
     {
-        return view('quiz.add_round');
+        $pub_key = Config::get('stripe.stripe_key');
+        
+        return view('quiz.add_round', compact('pub_key'));
     }
 
     public function add_round_2()
