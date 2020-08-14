@@ -194,3 +194,6 @@ Route::get('/contact', function () {
 
 //send mail
 Route::post('/sendmail', 'ContactSendMailController@send');
+
+//payment
+Route::post('stripe', 'StripePaymentController@stripePost')->name('stripe.post');

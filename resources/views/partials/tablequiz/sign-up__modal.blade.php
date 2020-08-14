@@ -249,18 +249,31 @@
 			  </tfoot>
 		  </table>
 		  
-		  <form id="modal__checkout" action="/dashboard/home.php" method="post" class="text-body px-2">
+
+
+		  
+		  <form id="modal__checkout"  
+		                    role="form" 
+                            action="{{ route('stripe.post') }}" 
+                            method="post" 
+                            class="require-validation text-body px-2"
+                            data-cc-on-file="false"
+                            data-stripe-publishable-key="{{$pub_key}}"
+                            >
+							@csrf
 			<h3 class="text-center mb-5">Payment details</h3>
+			  
 			  <div class="form-row">
-				  <div class="col-md-5">
+				  <div  class="col-md-5 required">
 					  <label for="cardholder_name">Cardholder name:</label>
 					 </div>
 				  <div class="col-md-7">
-					  <input class="form-control" type="text" name="cardholder_name">
+					  <input class="form-control" id="card-holder-name" type="text" name="cardholder_name">
 				  </div>
 			 </div>
+
 			 <div class="form-row">
-				  <div class="col-md-5">
+                <div class="col-md-5">
 					  <label for="cardholder_street">Street:</label>
 					 </div>
 				  <div class="col-md-7">
@@ -282,41 +295,60 @@
 				  <div class="col-md-7">
 					  <input class="form-control" type="text" name="cardholder_country">
 				  </div>
-			 </div>
-			 <div class="form-row mt-5">
-				  <div class="col-md-5">
+              </div>
+			
+			 <div class="form-row ">
+				  <div class="col-md-5 ">
 					  <label for="cardholder_number">Card number:</label>
 					 </div>
 				  <div class="col-md-7">
-					  <input class="form-control" type="number" name="cardholder_number">
+					  <input   class="form-control card-number" size='20' type="number" name="cardholder_number">
 				  </div>
 			 </div>
+
+
 			 <div class="form-row">
 				  <div class="col-md-5">
-					  <label for="cardholder_expiry">Card expiry:</label>
+					  <label for="cardholder_expiry">Card expiry Month:</label>
 					 </div>
 				  <div class="col-md-7">
-					  <input class="form-control" type="number" name="cardholder_expiry">
+					  <input class="form-control card-expiry-month" placeholder='MM' size='2' type="number" name="cardholder_expiry_month">
 				  </div>
 			 </div>
+
+
+			 <div class="form-row">
+				  <div class="col-md-5">
+					  <label for="cardholder_expiry">Card expiry Year:</label>
+					 </div>
+				  <div class="col-md-7">
+					  <input class="form-control card-expiry-year" placeholder='YYYY' size='4' type="number" name="cardholder_expiry_year">
+				  </div>
+			 </div>
+
 			 <div class="form-row">
 				  <div class="col-md-5">
 					  <label for="cardholder_cvv">CVV:</label>
 					 </div>
 				  <div class="col-md-7">
-					  <input class="form-control w-25" maxlength="4	" type="text" name="cardholder_cvv">
+					  <input  class="form-control w-25 card-cvc" maxlength="4	" type="text" name="card-cvc" placeholder='' size='4'
+                                    >
 				  </div>
 			 </div>
+
+			 <div class='form-row row'>
+                            <div class='col-md-12 error form-group hide d-none'>
+                                <div class='alert-danger alert'>Please correct the errors and try
+                                    again.</div>
+                            </div>
+                        </div>
+
 			  <div class="form-row justify-content-center mt-5">
 				  <div class="col-8 col-sm-4">
-				  		<button class="d-block btn btn-success">Pay Now</button>
+				  		<button id="card-button"class="d-block btn btn-success" type="submit">Pay Now</button>
 					 </div>
 				 </div>
-			  
-    	  </form>
-		  
-      </div>
-		
-    </div>
-  </div>
-</div>
+
+
+				  @include('scripts.stripe') 
+

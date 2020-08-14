@@ -1,3 +1,5 @@
+
+
 <?php 
 
 	/*$quizName = $_GET['quiz__name'];*/
@@ -6,12 +8,23 @@
 
 @section('content')
 
+
 <section class="container page__inner">
 	<form class="is_container row" id="add_round" action="" role="main">
 		<article class="col-12">
 			<div class="article__heading">
 				<h1>Round 1 Setup</h1>
 				<?php /*if($quizName) echo "<h2>".$quizName."</h2>";*/?>
+
+
+@if (Session::has('success'))
+                        <div class="alert alert-success text-center">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                            <p>{{ Session::get('success') }}</p>
+                        </div>
+                    @endif
+
+
 			</div>
 			<div class="form-row mt-md-5">
 				<div class="col-md-4">
@@ -603,7 +616,7 @@
 			<a href="add_round_2.php" class="btn btn-secondary d-block"><span class="pr-3"><i class="fa fa-plus"></i></span>Next round</a>
 		</div>
 		<div class="col-md-4 px-0 px-md-4">
-			<a href="#" data-toggle="modal" data-target="#publishQuizModal" class="btn btn-primary d-block">Publish Quiz</a>
+			<a href="#" data-toggle="modal" data-target="#publishQuizModal" class="btn btn-primary d-block">Publish  Quiz</a>
 		</div>
 	</section>
 </section>
