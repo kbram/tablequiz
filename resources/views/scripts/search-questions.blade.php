@@ -38,8 +38,8 @@
                             
                             resultsContainer.append('<tr>' +
                                 
-                                '<td>' + val.category + '</td>' +
-                                '<td class="hidden-xs">' + val.question + '</td>' +
+                                '<td>' + val.question + '</td>' +
+                                '<td class="hidden-xs">' + val.category + '</td>' +
                                '<td class="quiz_actions  justify-content-lg-center">' + editCellHtml + '</td>' +
                                 '<td class="quiz_actions   justify-content-lg-center" >' + deleteCellHtml + '</td>' +
 
