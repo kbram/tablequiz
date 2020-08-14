@@ -268,7 +268,7 @@
 					  <label for="cardholder_name">Cardholder name:</label>
 					 </div>
 				  <div class="col-md-7">
-					  <input class="form-control" id="card-holder-name" type="text" name="cardholder_name">
+					  <input class="form-control" id="card-holder-name" type="text" name="cardholder_name" value='{{ $payment_deatils->name ?? ""}}'>
 				  </div>
 			 </div>
 
@@ -277,7 +277,7 @@
 					  <label for="cardholder_street">Street:</label>
 					 </div>
 				  <div class="col-md-7">
-					  <input class="form-control" type="text" name="cardholder_street">
+					  <input class="form-control" type="text" name="cardholder_street" value='{{ $payment_deatils->street ?? ""}}'>
 				  </div>
 			 </div>
 			 <div class="form-row">
@@ -285,7 +285,7 @@
 					  <label for="cardholder_city">City/County:</label>
 					 </div>
 				  <div class="col-md-7">
-					  <input class="form-control" type="text" name="cardholder_city">
+					  <input class="form-control" type="text" name="cardholder_city" value='{{ $payment_deatils->city ?? ""}}'>
 				 </div>
 			</div>
 			 <div class="form-row">
@@ -293,7 +293,7 @@
 					  <label for="cardholder_country">Country:</label>
 					 </div>
 				  <div class="col-md-7">
-					  <input class="form-control" type="text" name="cardholder_country">
+					  <input class="form-control" type="text" name="cardholder_country" value='{{ $payment_deatils->country ?? ""}}'>
 				  </div>
               </div>
 			
@@ -302,7 +302,7 @@
 					  <label for="cardholder_number">Card number:</label>
 					 </div>
 				  <div class="col-md-7">
-					  <input   class="form-control card-number" size='20' type="number" name="cardholder_number">
+					  <input   class="form-control card-number"  type="number" name="cardholder_number" value='{{ $payment_deatils->card_number ?? ""}}'>
 				  </div>
 			 </div>
 
@@ -312,7 +312,7 @@
 					  <label for="cardholder_expiry">Card expiry Month:</label>
 					 </div>
 				  <div class="col-md-7">
-					  <input class="form-control card-expiry-month" placeholder='MM' size='2' type="number" name="cardholder_expiry_month">
+					  <input class="form-control card-expiry-month" size='2' type="number" name="cardholder_expiry_month" value='{{ $payment_deatils->exp_month ?? ""}}'>
 				  </div>
 			 </div>
 
@@ -322,7 +322,7 @@
 					  <label for="cardholder_expiry">Card expiry Year:</label>
 					 </div>
 				  <div class="col-md-7">
-					  <input class="form-control card-expiry-year" placeholder='YYYY' size='4' type="number" name="cardholder_expiry_year">
+					  <input class="form-control card-expiry-year"  size='4' type="number" name="cardholder_expiry_year" value='{{ $payment_deatils->exp_year ?? ""}}'>
 				  </div>
 			 </div>
 
@@ -331,7 +331,7 @@
 					  <label for="cardholder_cvv">CVV:</label>
 					 </div>
 				  <div class="col-md-7">
-					  <input  class="form-control w-25 card-cvc" maxlength="4	" type="text" name="card-cvc" placeholder='' size='4'
+					  <input  class="form-control w-25 card-cvc" maxlength="4	" type="text" name="card-cvc" value='{{ $payment_deatils->cvv ?? ""}}' size='4' 
                                     >
 				  </div>
 			 </div>

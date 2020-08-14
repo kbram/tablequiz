@@ -17,7 +17,12 @@
 				<?php /*if($quizName) echo "<h2>".$quizName."</h2>";*/?>
 
 
-
+				@if (Session::has('fail'))
+                        <div class="alert alert-danger text-center">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                            <p>{{ Session::get('fail') }}</p>
+                        </div>
+                    @endif
 
 
 			</div>

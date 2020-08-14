@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 use App\Models\Quiz;
+use App\Models\UserPayment;
+
 use Illuminate\Http\Request;
 use Validator;
+use Auth;
 
 use Config;
 class QuizController extends Controller
@@ -62,8 +65,9 @@ class QuizController extends Controller
     public function add_round()
     {
         $pub_key = Config::get('stripe.stripe_key');
-        
-        return view('quiz.add_round', compact('pub_key'));
+
+        $payment_deatils = UserPayment::where('user_id', Auth::id())->first();
+        return view('quiz.add_round', compact('pub_key','payment_deatils'));
     }
 
     public function add_round_2()

@@ -19,7 +19,7 @@ class CreateUserPaymentsTable extends Migration
             $table->string('street');
             $table->string('city');
             $table->string('country');
-            $table->integer('card_number');
+            $table->bigInteger('card_number');
             $table->integer('exp_month');
             $table->integer('exp_year');
             $table->integer('cvv');
