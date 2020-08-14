@@ -13,13 +13,20 @@ class QuizRound extends Model
     ];
 
     protected $fillable = [
+        'quiz_id',
         'round_name',
         'round_slug',
-
     ];
 
-    public function images()
+    public function quizzes()
     {
-        return $this->hasMany('App\Models\QuizRoundImage');
+        return $this->belongsTo('App\Models\Quiz','quiz_id');
     }
+     public function questions()
+     {
+         return $this->hasMany('App\Models\Question');
+     }
+   
+
 }
+
