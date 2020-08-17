@@ -58,11 +58,12 @@
 						<div class="col-lg-9">
 							<h2>Latest Quizzes</h2>
 						</div>
-						<div class="col-lg-3">
-							<form action="" method="" class="p-0">
-								<input type="text" list="quizzes" name="quiz" placeholder="Search..." class="form-control mb-2">
-							</form>
+						<div class="col-lg-3 d-flex">
+							@if(config('usersmanagement.enableSearchUsers'))
+								@include('partials.search-quizzes-form')
+							@endif
 						</div>
+						
 					</div>
 					<div class="dashboard__container flex-grow-1 p-0">
 						<table class="table table-striped table-borderless m-0 h-100 my__quizzes">
@@ -74,7 +75,7 @@
 									<th class="text-center">Actions</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="quizzes_table">
 								
 							@foreach($quizzes as $quiz)
 								<tr>
@@ -104,6 +105,10 @@
 								
 								
 							</tbody>
+							<tbody id="quizzes_table"></tbody>
+							@if(config('usersmanagement.enableSearchUsers'))
+								<tbody id="search_results"></tbody>
+							@endif
 							<tfoot>
 								<tr>
 									<td colspan="6" class="text-center text-muted">
@@ -123,6 +128,8 @@
 @endsection
 
 @section('footer_scripts')
+@if(config('usersmanagement.enableSearchUsers'))
+        @include('scripts.search-quizzes')
+@endif
 @include('scripts.share-quiz')
-
 @endsection

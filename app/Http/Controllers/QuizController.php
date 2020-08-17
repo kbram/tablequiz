@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Quiz;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Validator;
 class QuizController extends Controller
 {
@@ -50,6 +51,38 @@ class QuizController extends Controller
 
         $quiz->save();
     }
+    public function search(Request $request)
+    {
+        $searchTerm = $request->input('quiz_search_box');
+    
+        $searchRules = [
+            'quiz_search_box' => 'required|string|max:255',
+        ];
+        $searchMessages = [
+            'quiz_search_box.required' => 'Search term is required',
+            'quiz_search_box.string'   => 'Search term has invalid characters',
+            'quiz_search_box.max'      => 'Search term has too many characters - 255 allowed',
+        ];
+
+        $validator = Validator::make($request->all(), $searchRules, $searchMessages);
+
+        if ($validator->fails()) {
+            return response()->json([
+                json_encode($validator),
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        $results = Quiz::where('id', 'like', $searchTerm.'%')
+                            ->orWhere('quiz_name', 'like', $searchTerm.'%')->get();
+                            
+
+
+        return response()->json([
+            json_encode($results),
+        ], Response::HTTP_OK);
+        
+    }
+
         
         
     public function start_quiz()

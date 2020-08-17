@@ -2,10 +2,10 @@
 
     $(function() {
         
-        var questionsTable = $('#questions_table');
+        var quizTable = $('#quizzes_table');
         var resultsContainer = $('#search_results');
-        var searchform = $('#search_questions');
-        var searchformInput = $('#question_search_box');
+        var searchform = $('#search_quizzes');
+        var searchformInput = $('#quiz_search_box');
         var searchSubmit = $('#search_trigger');
         
         searchform.submit(function(e) {
@@ -17,16 +17,16 @@
                                 '<td></td>' +
                                 '<td></td>'+
                                 '</tr>';
-                                
+                           
             $.ajax({
                 type:'POST',
-                url: "{{ route('search-questions') }}",
+                url: "{{ route('search-quizzes') }}",
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 data: searchform.serialize(),
                 success: function (results) {
                     let jsonData = JSON.parse(results);
                     if (jsonData.length != 0) {
-                        questionsTable.hide();
+                        quizTable.hide();
                         $.each(jsonData, function(index, val) {
                             let editCellHtml = '<div class="d-flex flex-column"><i class="fas fa-pencil-alt"></i><span>Edit</span><div>';
                             let deleteCellHtml =  '<div class="d-flex flex-column"><i class="fas fa-times-circle"></i><span>Delete</span></div>';
@@ -34,10 +34,10 @@
                             
                             
                             resultsContainer.append('<tr>' +
-                                '<td>' + val.question + '</td>' +
-                                '<td>' + val.category + '</td>' +
-                                '<td class="quiz_actions d-flex flex-row justify-content-lg-center">'+
-                               '<td>' + editCellHtml + '</td>' +
+                                '<td>' + val.quiz_name + '</td>' +
+                                '<td>' + val.quiz_link + '</td>' +
+                                '<td>'+val.no_of_participants+'</td>'+
+                                '<td>' + editCellHtml + '</td>' +
                                 '<td>' + deleteCellHtml + '</td>' +
                                 '</td>'+
                             '</tr>');
@@ -59,12 +59,12 @@
             searchform.submit();
         });
         searchformInput.keyup(function(event) {
-            if ($('#question_search_box').val() != '') {
-                questionsTable.hide();
+            if ($('#quiz_search_box').val() != '') {
+                quizTable.hide();
             } else {
                 
                 resultsContainer.html('');
-                questionsTable.show();
+                quizTable.show();
                 
             };
         });

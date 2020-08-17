@@ -259,7 +259,8 @@
 									</td>
 								</tr>
 								@endforeach
-							<tbody id="search_questions"></tbody>
+								</tbody>
+							<tbody id="questions_table"></tbody>
 							@if(config('usersmanagement.enableSearchUsers'))
 								<tbody id="search_results"></tbody>
 							@endif

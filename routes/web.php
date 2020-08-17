@@ -178,10 +178,12 @@ Route::get('/dashboard/home','DashboardController@index');
 Route::get('/dashboard/my-quizzes','DashboardController@myQuiz');
 Route::get('dashboard/settings','DashboardController@setting');
 Route::get('admin/quizzes','QuizController@index');
+Route::post('search-quizzes','QuizController@search')->name('search-quizzes');
 
 //adminquestionccontroller
 Route::get('/admin/questions','AdminQuestionController@index');
 Route::post('search-questions','AdminQuestionController@search')->name('search-questions');
+
 
 //admin financial controller
 Route::get('admin/financials','PriceBandsController@index');
