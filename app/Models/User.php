@@ -110,6 +110,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Social');
     }
 
+    public function questions()
+    {
+        return $this->hasMany('App\Models\Question');
+    }
+
     /**
      * Get the profile associated with the user.
      */
@@ -168,5 +173,8 @@ class User extends Authenticatable
     public function userPayment()
     {
         return $this->belongsTo('App\Models\UserPayment');
+    }
+    public function quizzes(){
+        return $this->hasMany('App\Models\Quiz');
     }
 }
