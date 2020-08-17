@@ -10,7 +10,8 @@
 
 
 <section class="container page__inner">
-	<form class="is_container row" id="add_round" action="" role="main">
+	<form class="is_container row" id="add_round" action="/round/store" method="post" enctype="multipart/form-data" role="main">
+		 @csrf
 		<article class="col-12">
 			<div class="article__heading">
 				<h1>Round 1 Setup</h1>
@@ -31,7 +32,7 @@
 					<label for="round__name">Round name</label>
 				</div>
 				<div class="col-md-8">
-					<input autocomplete="nothanks" type="text" name="round__name" class="form-control">
+					<input autocomplete="nothanks" type="text" name="round_name" class="form-control">
 				</div>
 			</div>
 			<div class="form-row">
@@ -85,21 +86,30 @@
 					  <div class="modal-footer justify-content-center row no-gutters align-items-stretch">
 						 <div class="col-md-3 mr-0 mr-lg-1"> 
 							 <label class="d-block" for="upload__quiz__icon">Upload
-								<input type="file" class="form-control-file" id="upload__quiz__icon" value="Upload">
+								<input type="file" class="form-control-file" id="upload__quiz__icon" name="bg_image"  value="Upload">
 							</label>
 						</div>
 						<div class="col-md-3 ml-0 ml-lg-1 d-flex">
-							<button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
+							<button type="submit" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
+							
 						</div>
 					  </div>
 					</div>
 				  </div>
 				</div>
-				
 			</div>
+
+			<div class="form-row justify-content-center pt-3">
+							<div class="col-md-4">	
+							 <input class="justify-content-center px-4" type="submit" value="Save">
+							
+							</div>
+						</div>
+					  </div>
 		</article>
-        
-<!-- QUESTION -->		
+	</form>
+<!-- QUESTION -->	
+<form class="is_container row" id="add_round" action="/round_question/store" method="post" enctype="multipart/form-data" role="main">	
 		<article class="col-12">
 			<div class="article__heading">
 				<h1>Question 1</h1>
@@ -257,6 +267,14 @@
 				</div>
 				
 			</div>
+			 
+			<div class="form-row justify-content-center pt-3">
+							<div class="col-md-1">	
+							 <input class="justify-content-center" type="submit" value="Save">
+							</div>
+						</div>
+					  </div>
+			
 		</article>
 
 		<div class="button__holder w-100 pt-0 mt-5 justify-content-center d-md-flex" id="add-new-question">
@@ -536,6 +554,14 @@
                             </div>
                             <div class="single__suggested__question__answer row pb-3">
 								<div class="offset-3 col-9">
+								</div>
+                            </div>
+                            <div class="single__suggested__question__question pt-4 row">
+                                <p class="col-3"><span class="d-inline-block w-25">Question: </span></p>
+                                <p class="col-9 the_question"><input type="text" class="form-control readonly" readonly value="What country's flag is this?"></p>
+                            </div>
+                            <div class="single__suggested__question__answer row pb-3">
+								<div class="offset-3 col-9">
 									<div class="form-row" style="min-height:0">
 										<div class="offset-10 col">
 											<small class="form-text text-center d-none correct_answer_heading">Correct:</small>
@@ -597,8 +623,9 @@
                                 </div>
                             </div>
                             <div class="single__suggested__question__footer border-top pt-3 d-flex justify-content-center align-items-center">
-                                <button class="btn btn-primary mr-1" data-dismiss="modal">Add question</button>
-                                <button class="btn btn-secondary ml-1 edit__question">Edit question</button>
+                                <button class="btn btn-primary mr-1" data-dismiss="modal">Add questions</button>
+								<button class="btn btn-secondary ml-1 edit__question">Edit question</button>
+								
                             </div>
                         </li>
                         
