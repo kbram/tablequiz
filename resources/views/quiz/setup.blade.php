@@ -17,7 +17,7 @@
 						<label for="quiz__name">Quiz name</label>
 					</div>
 					<div class="col-md-8">
-						<input autocomplete="nothanks" type="text" name="quiz__name" class="form-control">
+						<input autocomplete="nothanks" type="text" name="quiz__name" class="form-control" value="{{ old('quiz__name') }}">
 					
 						@if ($errors->has('quiz__name'))
                                     <span class="help-block">
@@ -34,7 +34,7 @@
 						<label for="quiz__password">Quiz password</label>
 					</div>
 					<div class="col-md-8">
-						<input type="text" name="quiz__password" class="form-control" placeholder="(optional)">
+						<input type="text" name="quiz__password" class="form-control" placeholder="(optional)" >
 					</div>
 				</div>
 <!-- QUIZ LINK -->
@@ -48,7 +48,7 @@
 						<p class="disabled__text">TableQuiz.app/</p>
 					</div>
 					<div class="col-sm">
-						<input type="text" name="quiz__link" class="form-control">
+						<input type="text" name="quiz__link" class="form-control" value="{{ old('quiz__link') }}">
 						@if ($errors->has('quiz__link'))
                                     <span class="help-block">
                                             <p>{{ $errors->first('quiz__link') }}</p>
@@ -82,7 +82,7 @@
 						  <div class="modal-body">
 							<div class="modal__edit__image">
 								<div class="modal__edit__image__mask"></div>
-								<img class="modal__edit__image__image" src="" id="image_preview_container">
+								<img class="modal__edit__image__image" src="" id="image_preview_container" value="{{ old('image_preview_container') }}">
 							</div>
 							<div class="modal__edit__image__range">
 								<div class="form-group">
@@ -161,7 +161,7 @@
 					</div>
 					<div class="col-md-4">
 						<select id="quiz__participants" class="form-control" name="quiz__participants">
-							<option disabled selected>Please choose...</option>
+							<option disabled selected>{{(old('quiz__participants') != '' ? old('quiz__participants') : 'Please Choose...')}}</option>
 							<option value="1-5">1-5</option>
 							<option value="5-9">5-9</option>
 							<option value="10-19">10-19</option>

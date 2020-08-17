@@ -31,7 +31,7 @@ class QuizController extends Controller
         {
         $validator = Validator::make($request->all(),
         [
-          'quiz__name'                => 'required',
+          'quiz__name'                => 'required|unique:quizzes',
           'quiz__link'                => 'required',
           'quiz__participants'       => 'required',
                     
@@ -42,7 +42,7 @@ class QuizController extends Controller
             return back()->withErrors($validator)->withInput();
         }
         $quiz =new Quiz;
-            $quiz -> quiz_name              = $request->input('quiz__name');
+            $quiz -> quiz__name              = $request->input('quiz__name');
             $quiz -> quiz_password          = $request->input('quiz__password');
             $quiz -> quiz_link              = $request->input('quiz__link');
             $quiz-> no_of_participants     = $request->input('quiz__participants');
@@ -51,7 +51,7 @@ class QuizController extends Controller
             $quiz->save();
 
 
-           $quiz_id=Quiz::where('quiz_name',$quiz -> quiz_name)->first()->id;
+           $quiz_id=Quiz::where('quiz__name',$quiz -> quiz__name)->first()->id;
 
 
            if ($request->hasFile('upload__quiz__icon')) {
@@ -120,7 +120,7 @@ class QuizController extends Controller
 
     //     $quiz = Quiz::find($id);
 
-    //         $quiz -> quiz_name              = $request->input('quiz__name');
+    //         $quiz -> quiz__name              = $request->input('quiz__name');
     //         $quiz -> quiz_password          = $request->input('quiz__password');
     //         $quiz -> quiz_link              = $request->input('quiz__link');
     //         $quiz-> no_of_participants     = $request->input('quiz__participants');
