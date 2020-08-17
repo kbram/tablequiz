@@ -19,7 +19,7 @@ class Quiz extends Model
      */
     protected $fillable = [
         'user_id',
-        'quiz_name',
+        'quiz__name',
         'quiz_password',
         'quiz_link',
         'no_of_participants',
