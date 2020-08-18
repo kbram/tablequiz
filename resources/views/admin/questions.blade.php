@@ -287,7 +287,7 @@
 										<div class="col-1 justify-content-center">
 											&nbsp;
 										</div>
-										<div class="col-1 justify-content-center" onclick="getclick()">
+										<div class="col-1 justify-content-center">
 											<span class="plus">+</span>
 										</div>
 										<div class="col-3 text-center form-check">
@@ -329,29 +329,28 @@
 									<th class="text-center">Actions</th>
 								</tr>
 							</thead>
-							<tbody>
-							
-							@foreach($questions as $question)
-
-							<tr>	
-								<td>{{$question->question}}</td>  
-							    <td>{{$cat_name[$question->id]}}</td>
-						       
-						       <td class="quiz_actions d-flex flex-row justify-content-lg-center">
-							   <div class="d-flex flex-column">
-									<i class="fas fa-pencil-alt"></i>
-									<span>Edit</span>
-								</div>									
-								<div class="d-flex flex-column">
-									<i class="fas fa-times-circle"></i>
-									<span>Delete</span>
-								</div>
-							    </td>
-							</tr>
-							 @endforeach
+							<tbody id="questions_table">
+								@foreach($questions as $question)
 								
-								 
-							</tbody>
+								<tr>
+									<td>{{$question->question}}</td>
+									<td>{{$question->category}}</td>
+									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
+										<div class="d-flex flex-column">
+											<i class="fas fa-pencil-alt"></i>
+											<span>Edit</span>
+										</div>									
+										<div class="d-flex flex-column">
+											<i class="fas fa-times-circle"></i>
+											<span>Delete</span>
+										</div>
+									</td>
+								</tr>
+								@endforeach
+							<tbody id="search_questions"></tbody>
+							@if(config('usersmanagement.enableSearchUsers'))
+								<tbody id="search_results"></tbody>
+							@endif
 							<tfoot>
 								<tr>
 									<td colspan="6" class="text-center text-muted">
@@ -374,16 +373,4 @@
         @include('scripts.search-questions')
     @endif
 	
-<script>
-    function getclick(){
-		console.log("hello");
-        var x= document.getElementById("choice_ans");
-		x.innerHTML="<input  name=\"multiple__choice__answer__1[]\" class=\"form-control\" type=\"text\">"
-	}
-
-</script>
-
-@section('footer_scripts')
-
-@endsection
 @endsection
