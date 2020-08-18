@@ -18,14 +18,30 @@ class Quiz extends Model
      * @var array
      */
     protected $fillable = [
-        'quiz_name',
+        'user_id',
+        'quiz__name',
         'quiz_password',
         'quiz_link',
         'no_of_participants',
-        'timestamps',
         
     ];
 
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User','user_id');
+    }
+    public function rounds()
+    {
+        return $this->hasMany('App\Models\QuizRound');
+    }
+    public function questions(){
 
+    return $this->hasManyThrough('App\Models\Question','App\Models\QuizRound','quiz_id','round_id');
+    }
+
+    public function icon(){
+        return $this->hasOne('App\Models\QuizSetupIcon');
+    }
+   
 
 }

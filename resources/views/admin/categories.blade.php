@@ -63,34 +63,38 @@
 					
 					<div class="dashboard__container flex-grow-0 pt-4 mb-3">
 						<h3>Add new category</h3>
-						<form action="" method="" class="form-inline py-4">
-							<div class="form-row w-100">
+						<form action="/admin/categories" enctype="multipart/form-data" method="post" class="pt-3">
+						@csrf
+							<div class="form-row">
 								<div class="col-12 col-md-3 text-left">
 									<label for="category__name"class="justify-content-start"><small>Category name</small></label>
 								</div>
 								<div class="col-12 col-md-4 pr-md-2 mb-2 mb-md-0">
-									<input type="text" class="w-100 form-control mx-lg-2 flex-grow-1 d-block">
+									<input type="text" name="category_name" class="w-100 form-control mx-lg-2 flex-grow-1 d-block">
 								</div>
-								<div class="col-6 col-md-3 text-left">
-									<label class="mx-lg-2 justify-content-start"><small>Category image</small></label>
+							</div>
+							<div class="form-row">
+								<div class="col-12 col-md-3 text-left">
+									<label class="justify-content-start"><small>Category image</small></label>
 								</div>
-								<div class="col-6 col-md-2">
-									<label for="upload__category__image" class="orange_text d-block d-md-inline">Upload
-									<input type="file" class="orange_text form-control-file" name="upload__category__image" value="Upload"></label>
+								<div class="col-6">
+									<label for="category_image" class="orange_text d-block d-md-inline">
+									<input type="file" class="orange_text form-control-file" name="category_image" value="Upload"></label>
 								</div>
 							</div>
 							
-							
-							
+							<hr>
+							<div class="row justify-content-center">
+								<div class="col-4">
+									<button  class="d-block btn btn-primary" type="submit">Save</button>
+								</div>
+							</div>						
 							
 						</form>
-						<hr>
-						<div class="row justify-content-center">
-							<div class="col-4">
-								<a href="#" class="d-block btn btn-primary">Save</a>
-							</div>
-						</div>
+						
 					</div>
+
+					
 					<div class="dashboard__container flex-grow-1">
 						<table class="table table-striped table-borderless m-0 h-100 my__quizzes">
 							<thead>
@@ -100,7 +104,10 @@
 									<th class="text-center">Actions</th>
 								</tr>
 							</thead>
+
+							
 							<tbody>
+<<<<<<< HEAD
 								
 								
 								<tr>
@@ -179,6 +186,26 @@
 								</tr>
 								 -->
 								
+=======
+							  	@foreach($categories as $category)
+                                        <tr>
+                                            <td>{{$category->category_name}}</td>
+											<td>{{$category->created_at}}</td>
+                                            <td class="quiz_actions d-flex flex-row justify-content-lg-center">
+												<div class="d-flex flex-column">
+													<i class="fas fa-pencil-alt"></i>
+													<span>Edit</span>
+												</div>									
+												<div class="d-flex flex-column">
+													<i class="fas fa-times-circle"></i>
+													<span>Delete</span>
+												</div>
+											</td>
+                                            
+                                        </tr>
+                                            
+                             	@endforeach
+>>>>>>> 6e272e9202afcccdffc2527bc8bbcf57542c7326
 								
 							</tbody>
 							<tfoot>
@@ -196,7 +223,6 @@
 		</section>
 	</div>
 </section>
-
 @endsection
 
 @section('footer_scripts')

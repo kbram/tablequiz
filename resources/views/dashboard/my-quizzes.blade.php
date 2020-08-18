@@ -16,7 +16,7 @@
 						</a>
 					</li>
 					<li class="active">
-						<a href="">
+						<a href="/dashboard/my-quizzes">
 							<span><i class="fas fa-briefcase"></i></span>
 							My Quizzes
 						</a>
@@ -41,21 +41,27 @@
 							<thead>
 								<tr>
 									<th>Quiz name</th>
-									<th>Questions</th>
 									<th>Rounds</th>
+									<th>Questions</th>
 									<th class="text-right">Actions</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<td>Mad Dog's Geography Quiz</td>
-									<td>20</td>
-									<td>4</td>
+							<tbody id="users">
+							@foreach($quizzes as $quiz)
+
+							<tr>
+                                    
+									 <td>{{$quiz->quiz_name}}</td>
+									 <td>{{$roundCount[$quiz->id]}}</td>
+ 									 <td>{{$questionCounts[$quiz->id]}}</td>
+
+ 
 									<td class="quiz_actions d-flex flex-row justify-content-lg-end">
+										<a href="quizzes/{{$quiz->id}}/edit">			
 										<div class="d-flex flex-column pl-0 pl-md-4">
 											<i class="fas fa-edit"></i>
 											<span>Edit</span>
-										</div>
+										</div></a>
 										<div class="d-flex flex-column">
 											<i class="fas fa-share-alt"></i>
 											<span>Share</span>
@@ -66,161 +72,13 @@
 												<span>Start</span>
 											</div>
 										</a>
-									</td>
+										</td>
+										@endforeach
 								</tr>
+
+
 								
-								<tr>
-									<td>Mad Dog's Geography Quiz</td>
-									<td>20</td>
-									<td>4</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-end">
-										<div class="d-flex flex-column pl-0 pl-md-4">
-											<i class="fas fa-edit"></i>
-											<span>Edit</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-share-alt"></i>
-											<span>Share</span>
-										</div>
-										<a href="../quiz/start-quiz.php">
-											<div class="d-flex flex-column">
-												<i class="fas fa-play"></i>
-												<span>Start</span>
-											</div>
-										</a>
-									</td>
-								</tr>
-								
-								<tr>
-									<td>Mad Dog's Geography Quiz</td>
-									<td>20</td>
-									<td>4</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-end">
-										<div class="d-flex flex-column pl-0 pl-md-4">
-											<i class="fas fa-edit"></i>
-											<span>Edit</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-share-alt"></i>
-											<span>Share</span>
-										</div>
-										<a href="../quiz/start-quiz.php">
-											<div class="d-flex flex-column">
-												<i class="fas fa-play"></i>
-												<span>Start</span>
-											</div>
-										</a>
-									</td>
-								</tr>
-								
-								<tr>
-									<td>Mad Dog's Geography Quiz</td>
-									<td>20</td>
-									<td>4</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-end">
-										<div class="d-flex flex-column pl-0 pl-md-4">
-											<i class="fas fa-edit"></i>
-											<span>Edit</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-share-alt"></i>
-											<span>Share</span>
-										</div>
-										<a href="../quiz/start-quiz.php">
-											<div class="d-flex flex-column">
-												<i class="fas fa-play"></i>
-												<span>Start</span>
-											</div>
-										</a>
-									</td>
-								</tr>
-								
-								<tr>
-									<td>Mad Dog's Geography Quiz</td>
-									<td>20</td>
-									<td>4</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-end">
-										<div class="d-flex flex-column pl-0 pl-md-4">
-											<i class="fas fa-edit"></i>
-											<span>Edit</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-share-alt"></i>
-											<span>Share</span>
-										</div>
-										<a href="../quiz/start-quiz.php">
-											<div class="d-flex flex-column">
-												<i class="fas fa-play"></i>
-												<span>Start</span>
-											</div>
-										</a>
-									</td>
-								</tr>
-								
-								<tr>
-									<td>Mad Dog's Geography Quiz</td>
-									<td>20</td>
-									<td>4</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-end">
-										<div class="d-flex flex-column pl-0 pl-md-4">
-											<i class="fas fa-edit"></i>
-											<span>Edit</span>
-										</div>									<div class="d-flex flex-column">
-											<i class="fas fa-share-alt"></i>
-											<span>Share</span>
-										</div>
-										
-										<a href="../quiz/start-quiz.php">
-											<div class="d-flex flex-column">
-												<i class="fas fa-play"></i>
-												<span>Start</span>
-											</div>
-										</a>
-									</td>
-								</tr>
-								
-								<tr>
-									<td>Mad Dog's Geography Quiz</td>
-									<td>20</td>
-									<td>4</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-end">
-										<div class="d-flex flex-column pl-0 pl-md-4">
-											<i class="fas fa-edit"></i>
-											<span>Edit</span>
-										</div>									<div class="d-flex flex-column">
-											<i class="fas fa-share-alt"></i>
-											<span>Share</span>
-										</div>
-										<a href="../quiz/start-quiz.php">
-											<div class="d-flex flex-column">
-												<i class="fas fa-play"></i>
-												<span>Start</span>
-											</div>
-										</a>
-									</td>
-								</tr>
-								
-								<tr>
-									<td>Mad Dog's Geography Quiz</td>
-									<td>20</td>
-									<td>4</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-end">
-										<div class="d-flex flex-column pl-0 pl-md-4">
-											<i class="fas fa-edit"></i>
-											<span>Edit</span>
-										</div>									<div class="d-flex flex-column">
-											<i class="fas fa-share-alt"></i>
-											<span>Share</span>
-										</div>
-										<a href="../quiz/start-quiz.php">
-											<div class="d-flex flex-column">
-												<i class="fas fa-play"></i>
-												<span>Start</span>
-											</div>
-										</a>
-									</td>
-								</tr>
-								
+<<<<<<< HEAD
 							</tbody>
 							<tfoot>
 								<tr>
@@ -228,14 +86,20 @@
 									<td colspan="4" class="text-center text-muted"><small><a href="">View more</a></small></td>
 								</tr>
 							</tfoot>
+=======
+>>>>>>> 6e272e9202afcccdffc2527bc8bbcf57542c7326
 						</table>
 						
-					</div>
-				</div>
+					</div>			</div>
 			</div>
 		</section>
 	</div>
 </section>
+<style>
+.row dashboard__wrapper{
+	margin-bottom:50px;
+}
+</style>
 @endsection
 @section('footer_scripts')
 @endsection
