@@ -10,44 +10,44 @@
 				
 				<ul class="list-unstyled m-0 p-0 text-sm-center text-lg-left">
 					<li>
-						<a href="../admin/home.php">
+						<a href="/admin/home">
 							<span><i class="fas fa-home"></i></span>
 							Overview
 						</a>
 					</li>
 					<li class="active">
-						<a href="../admin/quizzes.php">
+						<a href="#">
 							<span><i class="fas fa-briefcase"></i></span>
 							Quizzes
 						</a>
 					</li>
 					<li>
-						<a href="../admin/users.php">
+						<a href="/admin/users">
 							<span><i class="fas fa-users"></i></span>
 							Users
 						</a>
 					</li>
 					<li>
-						<a href="../admin/financials.php">
+						<a href="/admin/financials">
 							<span><i class="fas fa-coins"></i></span>
 							Financials
 						</a>
 					</li>
 					<li>
-						<a href="../admin/categories.php">
+						<a href="/admin/categories">
 							<span><i class="fas fa-th-large"></i></span>
 							Categories
 						</a>
 					</li>
 					<li>
-						<a href="../admin/categories.php">
+						<a href="/admin/categories">
 							<span><i class="fas fa-question-circle"></i></span>
 							Questions
 						</a>
 					</li>
 					
 				</ul>
-				<a href="../quiz/setup.php" class="btn btn-primary hasPlus d-block">New Quiz</a>
+				<a href="/quiz/setup" class="btn btn-primary hasPlus d-block">New Quiz</a>
 			</div>
 		</aside>
 		
@@ -87,7 +87,7 @@
 									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
 										<div class="d-flex flex-column pl-0">
 											<i class="far fa-eye"></i>
-											<span>View Qs</span>
+											<a href=""><span>View Qs</span></a>
 										</div>
 										<div>
 											<button class="btn p-0 d-flex flex-column btn-primary-outline"  id="{{$quiz->id}}" ><i class="fas fa-share-alt"></i>Share
@@ -112,7 +112,7 @@
 							<tfoot>
 								<tr>
 									<td colspan="6" class="text-center text-muted">
-										<a href="../dashboard/my-quizzes.php"><small>View all</small></a>
+										<a href="/dashboard/my-quizzes"><small>View all</small></a>
 									</td>
 								</tr>
 							</tfoot>

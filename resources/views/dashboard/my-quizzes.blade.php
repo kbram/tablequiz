@@ -225,7 +225,7 @@
 							<tfoot>
 								<tr>
 									
-									<td colspan="4" class="text-center text-muted"><small><a href="#">View more</a></small></td>
+									<td colspan="4" class="text-center text-muted"><small><a href="">View more</a></small></td>
 								</tr>
 							</tfoot>
 						</table>
