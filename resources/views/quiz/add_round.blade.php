@@ -5,6 +5,45 @@
 @extends('layouts.tablequizapp')
 
 @section('content')
+<style>
+	#img-wrapper{
+  /*width: 820px;
+  height: 100px;
+  overflow: hidden;*/
+}
+#img-wrapper.rotate90,
+#img-wrapper.rotate270 {
+  /*width: 100px;
+  height: 820px*/
+}
+#blah{
+  transform-origin: top left;
+  /* IE 10+, Firefox, etc. */
+  -webkit-transform-origin: top left;
+  /* Chrome */
+  -ms-transform-origin: top left;
+  /* IE 9 */
+}
+#img-wrapper.rotate90 #blah {
+  transform: rotate(90deg) translateY(-100%);
+  -webkit-transform: rotate(90deg) translateY(-100%);
+  -ms-transform: rotate(90deg) translateY(-100%);
+}
+
+#img-wrapper.rotate180 #blah {
+  transform: rotate(180deg) translate(-100%, -100%);
+  -webkit-transform: rotate(180deg) translate(-100%, -100%);
+  -ms-transform: rotate(180deg) translateX(-100%, -100%);
+}
+
+#img-wrapper.rotate270 #image {
+	
+  transform: rotate(270deg) translateX(-100%);
+  -webkit-transform: rotate(270deg) translateX(-100%);
+  -ms-transform: rotate(270deg) translateX(-100%);
+}
+
+</style>
 
 <section class="container page__inner">
 	<form class="is_container row" id="add_round" action="/round/store" method="post" enctype="multipart/form-data" role="main">
@@ -47,7 +86,10 @@
 					  <div class="modal-body">
 						<div class="modal__edit__image position-relative">
 							<div class="modal__edit__image__mask"></div>
-							<img class="modal__edit__image__image" src="/images/quiz__banner.jpg">
+							<div id="img-wrapper" style="margin:auto;">
+							  <img id="blah" class="modal__edit__image__image" src="#">
+							</div>
+							
 						</div>
 						<div class="modal__edit__image__range">
 							<div class="form-row align-items-center">
@@ -56,7 +98,7 @@
 								</div>
 								<div class="col-9 d-flex">
 									<div class="p-2 border d-flex align-items-center justify-content-center rounded">
-										<i class="fas fa-undo"></i>
+									<button type="button" id="rotate"><i class="fas fa-undo"></i></button>
 									</div>
 								</div>
 							</div>
@@ -65,7 +107,7 @@
 									<label for="formControlRange"><small>Edit size</small></label>
 								</div>
 								<div class="col-9">
-									<input type="range" class="form-control-range" id="formControlRange">
+									<input type="range" min="1" max="100" onchange="resizeImage()" class="form-control-range" id="formControlRange">
 								</div>
 							  </div>
 						</div>
@@ -638,5 +680,5 @@
 @endsection
 
 @section('footer_scripts')
-
+@include('scripts.bg-image');
 @endsection

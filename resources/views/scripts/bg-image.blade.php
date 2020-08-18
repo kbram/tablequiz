@@ -1,4 +1,24 @@
 <script type="text/javascript">
+ //Image zoom size
+var slider = document.getElementById("formControlRange");
+slider.oninput = function() {
+
+  var image = document.getElementById('img-wrapper'),
+      ranger = document.getElementById('formControlRange');
+      image.style.width = 20*(this.value / 1)+'px';
+}
+
+
+//Image Rotate
+var angle = 0,
+  img = document.getElementById('img-wrapper');
+document.getElementById('rotate').onclick = function() {
+  angle = (angle + 90) % 360;
+  img.className = "rotate" + angle;
+}
+
+
+
 
   $(document).ready(function() {
     function readURL(input) {
@@ -16,10 +36,12 @@
 
 
 $("#upload__quiz__icon").change(function() {
-   console.log('clickeddd');
+  
   readURL(this);
   
 });
+
+
 
   });
 </script>
