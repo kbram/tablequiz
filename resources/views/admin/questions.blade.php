@@ -329,28 +329,29 @@
 									<th class="text-center">Actions</th>
 								</tr>
 							</thead>
-							<tbody id="questions_table">
-								@foreach($questions as $question)
+							<tbody>
+							
+							@foreach($questions as $question)
+
+							<tr>	
+								<td>{{$question->question}}</td>  
+							    <td>{{$cat_name[$question->id]}}</td>
+						       
+						       <td class="quiz_actions d-flex flex-row justify-content-lg-center">
+							   <div class="d-flex flex-column">
+									<i class="fas fa-pencil-alt"></i>
+									<span>Edit</span>
+								</div>									
+								<div class="d-flex flex-column">
+									<i class="fas fa-times-circle"></i>
+									<span>Delete</span>
+								</div>
+							    </td>
+							</tr>
+							 @endforeach
 								
-								<tr>
-									<td>{{$question->question}}</td>
-									<td>{{$question->category}}</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column">
-											<i class="fas fa-pencil-alt"></i>
-											<span>Edit</span>
-										</div>									
-										<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Delete</span>
-										</div>
-									</td>
-								</tr>
-								@endforeach
-							<tbody id="search_questions"></tbody>
-							@if(config('usersmanagement.enableSearchUsers'))
-								<tbody id="search_results"></tbody>
-							@endif
+								 
+							</tbody>
 							<tfoot>
 								<tr>
 									<td colspan="6" class="text-center text-muted">
@@ -367,7 +368,7 @@
 	</div>
 	
 </section>
-
+@endsection
 @section('footer_scripts')
 	@if(config('usersmanagement.enableSearchUsers'))
         @include('scripts.search-questions')
