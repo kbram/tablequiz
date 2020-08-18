@@ -15,9 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 // Homepage Route
 Route::group(['middleware' => ['web', 'checkblocked']], function () {
-    Route::get('/', 'WelcomeController@welcome')->name('welcome');
+    // Route::get('/', 'WelcomeController@welcome')->name('welcome');
     Route::get('/terms', 'TermsController@terms')->name('terms');
 });
 
@@ -57,13 +58,18 @@ Route::group(['middleware' => ['auth', 'activated', 'activity', 'checkblocked']]
 Route::group(['middleware' => ['auth', 'activated', 'activity', 'twostep', 'checkblocked']], function () {
 
     //  Homepage Route - Redirect based on user role is in controller.
-    Route::get('/home', ['as' => 'public.home',   'uses' => 'UserController@index']);
+    Route::get('/homelaravel', ['as' => 'public.home',   'uses' => 'UserController@index']);
 
     // Show users profile - viewable by other users.
     Route::get('profile/{username}', [
         'as'   => '{username}',
         'uses' => 'ProfilesController@show',
     ]);
+    Route::get('home', function () {
+         return view('home2');
+     });
+
+
 });
 
 // Registered, activated, and is current user routes.
@@ -153,6 +159,13 @@ Route::get('quiz/slider', 'QuizController@slider');
 Route::get('quiz/add_round', 'QuizController@add_round');
 Route::get('quiz/add_round_2', 'QuizController@add_round_2');
 Route::get('quiz/setup', 'QuizController@setup');
+Route::post('round/store', 'QuizRoundController@store');
+Route::get('about_us',function(){
+    return view('about_us');
+});
+Route::get('contact_us',function(){
+    return view('contact_us');
+});
 //sam route can start here
 Route::get('playquiz', 'PlayController@play');
 Route::get('startquiz', 'PlayController@start');
@@ -165,6 +178,13 @@ Route::post('setup/update/{id}','QuizController@update');
 
 //christy route can start from here
 
+//quiz category route
+Route::get('admin/categories', 'QuizCategoriesController@create');
+Route::post('admin/categories', 'QuizCategoriesController@store');
+
+
+
+
 //kanu routes
 Route::get('setup/create', 'QuizController@create');
 
@@ -175,3 +195,25 @@ Route::post('questions', 'AdminQuestionController@store');
 
 Route::get('/dashboard/home','DashboardController@index');
 Route::get('dashboard/settings','DashboardController@setting');
+
+
+//home
+Route::get('/', function () {
+    return view('home2');
+});
+
+//aboutus
+Route::get('/about', function () {
+    return view('about_us');
+});
+
+//contactus
+Route::get('/contact', function () {
+    return view('contact_us');
+});
+
+//send mail
+Route::post('/sendmail', 'ContactSendMailController@send');
+
+//payment
+Route::post('stripe', 'StripePaymentController@stripePost')->name('stripe.post');

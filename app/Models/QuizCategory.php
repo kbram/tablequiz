@@ -17,6 +17,11 @@ class QuizCategory extends Model
         'category_slug',
     ];
 
+    public function quizCategoryImages()
+    {
+        return $this->hasOne('App\Models\QuizCategoryImage');
+    }
+
 
     
 }

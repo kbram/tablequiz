@@ -3,11 +3,9 @@
 		<div class="row">
 			<div class="col">
 				<ul class="list-unstyled d-flex flex-column flex-md-row justify-content-center align-items-center">
-					<li><a href="#">About</a></li>
-					<li><a href="#">Contact</a></li>
-					<li><a href="/admin/home.php">Admin (for dev)</a></li>
-					<li><a href="/dashboard/home.php">Dashboard (for dev)</a></li>
-					<li><a href="/play/start-quiz.php">Play quiz (for dev)</a></li>
+					<li><a href="about">About</a></li>
+					<li><a href="contact">Contact</a></li>
+					
 				</ul>
 			</div>
 		</div>

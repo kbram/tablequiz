@@ -169,6 +169,11 @@ class User extends Authenticatable
         return $this->profiles()->detach($profile);
     }
 
+
+    public function userPayment()
+    {
+        return $this->belongsTo('App\Models\UserPayment');
+    }
     public function quizzes(){
         return $this->hasMany('App\Models\Quiz');
     }

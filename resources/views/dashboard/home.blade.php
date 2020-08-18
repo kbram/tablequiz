@@ -1,5 +1,11 @@
 @extends('layouts.tablequizapp')
+
+
+
 @section('content')
+
+
+
 <section class="container page__inner dashboard">
 	<div class="row dashboard__wrapper">
 		
@@ -35,6 +41,17 @@
 			<div class="row">
 				<div class="col-lg-8 d-flex flex-column latest__results__container">
 					<h2>Latest results</h2>
+
+					@if (Session::has('success'))
+                        <div class="alert alert-success text-center">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                            <p>{{ Session::get('success') }}</p>
+                        </div>
+                    @endif
+
+					
+
+
 					<div class="dashboard__container flex-grow-1 p-0">
 						<table class="table table-striped table-borderless latest__results m-0 h-100">
 							<thead>
@@ -113,6 +130,10 @@
 			<div class="row mt-3">
 				<div class="col-12">
 					<h2>My Quizzes</h2>
+
+
+
+
 					<div class="dashboard__container flex-grow-1 p-0">
 						<table class="table table-striped table-borderless m-0 h-100 my__quizzes">
 							<thead>
