@@ -7,7 +7,7 @@
 @section('content')
 
 <section class="container page__inner">
-	<form class="is_container row" id="add_round" action="/round/store" method="post" enctype="multipart/form-data" role="main">
+	<form class="is_container row" id="add_round" action="/round/upload" method="post" enctype="multipart/form-data" role="main">
 		 @csrf
 		<article class="col-12">
 			<div class="article__heading">

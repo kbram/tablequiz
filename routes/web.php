@@ -157,6 +157,7 @@ Route::get('quiz/setup', 'QuizController@setup');
 Route::post('round/store', 'QuizRoundController@store');
 Route::get('round/edit', 'QuizRoundController@edit');
 Route::get('round/show', 'QuizRoundController@show');
+Route::post('round/upload', 'QuizRoundController@upload');
 Route::get('about_us',function(){
     return view('about_us');
 });
