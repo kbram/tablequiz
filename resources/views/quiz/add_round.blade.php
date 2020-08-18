@@ -99,20 +99,23 @@
 				</div>
 			</div>
 
-			<div class="form-row justify-content-center pt-3">
-							<div class="col-md-4">	
-							 <input class="justify-content-center px-4" type="submit" value="Save">
-							
-							</div>
-						</div>
-					  </div>
+			<!-- <div class="form-row justify-content-center pt-3">
+				<div class="col-md-4">	
+					<input class="justify-content-center px-4" type="submit" value="Save">
+				
+				</div>
+			</div> -->
+			</div>
 		</article>
 	</form>
 <!-- QUESTION -->	
+<div id="sections">
+  <div class="section">
 <form class="is_container row" id="add_round" action="/round_question/store" method="post" enctype="multipart/form-data" role="main">	
+
 		<article class="col-12">
 			<div class="article__heading">
-				<h1>Question 1</h1>
+				<h1>Question <span id="number"> 1</span></h1>
 				
 			</div>
 			
@@ -268,23 +271,17 @@
 				
 			</div>
 			 
-			<div class="form-row justify-content-center pt-3">
-							<div class="col-md-1">	
-							 <input class="justify-content-center" type="submit" value="Save">
-							</div>
-						</div>
-					  </div>
+			<!-- <div class="form-row justify-content-center pt-3">
+				<div class="col-md-1">	
+					<input class="justify-content-center" type="submit" value="Save">
+				</div>
+			</div> -->
+			</div>
 			
 		</article>
 
-		<div class="button__holder w-100 pt-0 mt-5 justify-content-center d-md-flex" id="add-new-question">
-			
-			<div class="col-md-4 p-0">
-				<a class="btn btn-white d-block" id="addQuestion" href="#add-new-question">Add Question</a>
-			</div>
 
-		</div>
-        
+		       
         
         <!-- Suggested Question modal -->
         <div class="modal" id="suggestedQuestion" tabindex="-1" role="dialog" aria-labelledby="suggestedQuestion" aria-hidden="true">
@@ -636,8 +633,17 @@
             </div>
           </div>
         </div>
-        
+		
 	</form>
+	</div>
+	</div>
+	<div class="button__holder w-100 pt-0 mt-5 justify-content-center d-md-flex" id="add-new-question">
+			
+			<div class="col-md-4 p-0">
+				<a class="btn btn-white d-block" id="addQuestion" href="#">Add Question</a>
+			</div>
+
+	</div>
 	<section class="row round__page__buttons justify-content-center align-items-center pt-5 mt-5 border-top">
 		<div class="col-md-4 mb-3 mb-md-0 px-0 px-md-4">
 			<a href="add_round_2.php" class="btn btn-secondary d-block"><span class="pr-3"><i class="fa fa-plus"></i></span>Next round</a>
