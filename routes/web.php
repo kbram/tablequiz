@@ -174,5 +174,4 @@ Route::get('questions/create', 'AdminQuestionController@create');
 Route::post('questions', 'AdminQuestionController@store');
 
 Route::get('/dashboard/home','DashboardController@index');
-Route::get('/dashboard/my-quizzes','DashboardController@myQuiz');
 Route::get('dashboard/settings','DashboardController@setting');

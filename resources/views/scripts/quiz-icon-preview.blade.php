@@ -22,7 +22,6 @@
 //Image zoom size
 var slider = document.getElementById("formControlRange");
 slider.oninput = function() {
-console.log("sam");
   var image = document.getElementById('img-wrapper'),
       ranger = document.getElementById('formControlRange');
       image.style.width = 20*(this.value / 1)+'px';
