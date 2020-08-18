@@ -94,4 +94,18 @@ class AdminQuestionController extends Controller
         ], Response::HTTP_OK);
         
     }
+    public function destroy($id)
+  {
+    //
+  
+    $question = Question::find($id);
+
+    if ($question->id) {
+      $question->delete();
+
+      return redirect('/admin/questions')->with('success','Delete successfully');
+    }
+
+    return back()->with('error', 'Question is not deleted');
+  }
 }

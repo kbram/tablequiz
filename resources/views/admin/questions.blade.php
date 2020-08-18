@@ -255,11 +255,9 @@
 										
 										<div class="d-flex flex-column">
 											<!-- <a href="/admin/questions/{{$question->id}}"><span>Delete</span></a> -->
-											<form method="POST" action="/admin/questions/{{$question->id}}">
+											<form method="POST" action="/admin/questions/{{$question->id}}" class="p-0">
 												{{ csrf_field() }}
-												{{ method_field('DELETE') }}
-												
-													<button type="submit" class=""  ><i class="fas fa-times-circle"></i>Delete</button>
+													<button type="submit" class="d-flex flex-column" id="delete"><i class="fas fa-times-circle"></i>Delete</button>
 											</form>
 										</div>
 									</td>
@@ -292,5 +290,5 @@
 	@if(config('usersmanagement.enableSearchUsers'))
         @include('scripts.search-questions')
     @endif
-	
+@include('scripts.delete-model')	
 @endsection
