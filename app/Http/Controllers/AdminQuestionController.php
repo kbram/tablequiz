@@ -21,7 +21,7 @@ class AdminQuestionController extends Controller
 
     public function create()
     {
-    
+        
         $categories= QuizCategory::all();
         $questions=GlobalQuestion::all();
         
@@ -41,7 +41,7 @@ class AdminQuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request);            
+           
      
     //    $validator = Validator::make($request->all(),
     //     [
@@ -190,34 +190,33 @@ class AdminQuestionController extends Controller
                 $answer->answer_stat         = true;
             }
 
-            else if($question->question_type == 'multiple__choice__question'){
+            else if($request->question__type == 'multiple__choice__question'){
               
-                $global_answer= $request->input('multiple__choice__answer__1');
-                for($i = 0 ; $i < 5 ; $i++)
-                {                
+                $arr=$request->multiple__choice__answer__1;
+                $ca=$request->multiple__choice__correct__answer;
+            
+                
+                for($i = 0 ; $i < count($arr) ; $i++)
+                {     
+                    $answer = new GlobalAnswer;
+                      if($ca==$i){
+                        $answer->answer_stat= true;
+                       
+                      }
+                            
+                     $answer->answer= $arr[$i];
+                     $answer->question_id=$question_id;
+                     $answer->save();
                    
-
-                    
-                     //dd($global_answer)[$i];
-                     $answer    = new GlobalAnswer;
-                     $answer_get = $global_answer;
-                     $answer->answer              = $answer_get;
-                   
-                  
-                // }
-                // $multi_answers[] = request('multiple__choice__answer__1');
-                // dd($multi_answers);
-                // if(is_array($multi_answers)){
-                // foreach($multi_answers as $multi_answer) {
-                //         $answer    = new GlobalAnswer;
-                //         $answer ->answer    = $multi_answer;
-                //         $answer ->answer_stat =$request->get('multiple__choice__correct__answer', 0);
-                // }   
+                 
+                }
+               
+             
             }
                 
                 
              
-            }
+           
             
             else if($question->question_type == 'numeric__question'){
                     
@@ -243,4 +242,9 @@ class AdminQuestionController extends Controller
             // return view('admin.questions',compact('cat_name','categories', 'global_question','global_answer','global_question_media'));
         }
 
- }
+
+
+       
+ 
+ 
+    }

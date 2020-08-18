@@ -16,7 +16,7 @@ class CreateGlobalAnswersTable extends Migration
         Schema::create('global_answers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('answer');
-            $table->boolean('answer_stat')->default(true);
+            $table->boolean('answer_stat')->default(false);
             $table->bigInteger('question_id')->unsigned();
             $table->foreign('question_id')->references('id')->on('global_questions');
             
