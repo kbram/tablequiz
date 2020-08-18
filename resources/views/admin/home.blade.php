@@ -133,7 +133,7 @@
 									</td>
 								</tr>
 								
-								<tr>
+								<!-- <tr>
 									<td>Mad Dog's Geography Quiz</td>
 									<td>SenanCronin2020</td>
 									<td class="quiz_actions db d-flex flex-row justify-content-lg-center">
@@ -269,7 +269,7 @@
 											<span>Message</span>
 										</div>
 									</td>
-								</tr>
+								</tr> -->
 								
 								
 								

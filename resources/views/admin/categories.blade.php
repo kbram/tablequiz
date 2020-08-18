@@ -117,7 +117,7 @@
 										</div>
 									</td>
 								</tr>
-								<tr>
+								<!-- <tr>
 									<td>Lord of the Rings</td>
 									<td>10/01/2020</td>
 									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
@@ -177,7 +177,7 @@
 										</div>
 									</td>
 								</tr>
-								
+								 -->
 								
 								
 							</tbody>
