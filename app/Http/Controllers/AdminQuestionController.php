@@ -24,10 +24,11 @@ class AdminQuestionController extends Controller
         
         $categories= QuizCategory::all();
         $questions=GlobalQuestion::all();
-        
+           $cat_name =[];
         foreach($questions as $question){
-        
+          
             $cat_name[$question->id] = QuizCategory::where('id', $question->category_id)->value('category_name'); 
+            
         }   
         
         return view('admin.questions',compact('categories','questions','cat_name'));
