@@ -159,13 +159,14 @@ Route::get('startquiz', 'PlayController@start');
 
 //my-quizzes dashbord route
 Route::get('showMyquizzes','DashboardController@showMyQuizzes');
+Route::post('setup','QuizController@store');
 Route::get('quizzes/{id}/edit','QuizController@editQuiz');
+Route::post('setup/update/{id}','QuizController@update');
+
 //christy route can start from here
 
 //kanu routes
 Route::get('setup/create', 'QuizController@create');
-Route::post('setup','QuizController@store');
-// Route::put('setup/update/{id}','QuizController@update');
 
 
 
