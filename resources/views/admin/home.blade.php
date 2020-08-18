@@ -105,22 +105,25 @@
 							<thead>
 								<tr>
 									<th>Quiz name</th>
-									<th>Created by</th>
+									<th>Quiz link</th>
 									<th class="text-center">Actions</th>
 								</tr>
 							</thead>
 							<tbody>
+								@foreach($quizzes as $quiz)
+								
+								
 								<tr>
-									<td>Mad Dog's Geography Quiz</td>
-									<td>SenanCronin2020</td>
+									<td>{{$quiz -> quiz_name}}</td>
+									<td id="quizLink{{$quiz -> id}}">{{$quiz -> quiz_link}}</td>
 									<td class="quiz_actions db d-flex flex-row justify-content-lg-center">
 										<div class="d-flex flex-column">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
+										<a href="/admin/home/{{$quiz ->quiz_name}}/view">	<i class="far fa-eye"></i>
+											<span>View Qs</span></a>
 										</div>
 										<div class="d-flex flex-column">
-											<i class="fas fa-share-alt"></i>
-											<span>Share</span>
+										<button class="btn p-0 d-flex flex-column btn-primary-outline share"  id="{{$quiz->id}}" ><i class="fas fa-share-alt"></i>Share
+											</button>
 										</div>
 										<div class="d-flex flex-column">
 											<i class="fas fa-times-circle"></i>
@@ -132,7 +135,7 @@
 										</div>
 									</td>
 								</tr>
-								
+								@endforeach
 								<!-- <tr>
 									<td>Mad Dog's Geography Quiz</td>
 									<td>SenanCronin2020</td>
@@ -293,5 +296,5 @@
 @endsection
 
 @section('footer_scripts')
-
+@include('scripts.share-quiz')
 @endsection

@@ -160,6 +160,12 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
     Route::post('search-questions','AdminQuestionController@search')->name('search-questions');
     Route::post('admin/questions/{id}','AdminQuestionController@destroy');
 
+    //admin categories
+    Route::post('/admin/categories/{id}','QuizCategoriesController@destroy');
+
+    //admin home view quiz
+    Route::get('admin/home/{quiz_name}/view','AdminDetailsController@quizView');
+
 });
 
 Route::redirect('/php', '/phpinfo', 301);

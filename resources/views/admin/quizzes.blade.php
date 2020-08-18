@@ -90,7 +90,7 @@
 											<a href=""><span>View Qs</span></a>
 										</div>
 										<div>
-											<button class="btn p-0 d-flex flex-column btn-primary-outline"  id="{{$quiz->id}}" ><i class="fas fa-share-alt"></i>Share
+											<button class="btn p-0 d-flex flex-column btn-primary-outline share"  id="{{$quiz->id}}" ><i class="fas fa-share-alt"></i>Share
 											</button>
 										</div>
 										<div class="d-flex flex-column">

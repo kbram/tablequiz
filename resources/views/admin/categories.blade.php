@@ -107,86 +107,6 @@
 
 							
 							<tbody>
-<<<<<<< HEAD
-								
-								
-								<tr>
-									<td>History</td>
-									<td>10/01/2020</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column">
-											<i class="fas fa-pencil-alt"></i>
-											<span>Edit</span>
-										</div>									
-										<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Delete</span>
-										</div>
-									</td>
-								</tr>
-								<!-- <tr>
-									<td>Lord of the Rings</td>
-									<td>10/01/2020</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column">
-											<i class="fas fa-pencil-alt"></i>
-											<span>Edit</span>
-										</div>									
-										<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Delete</span>
-										</div>
-									</td>
-								</tr>
-								
-								
-								<tr>
-									<td>Cricket</td>
-									<td>10/01/2020</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column">
-											<i class="fas fa-pencil-alt"></i>
-											<span>Edit</span>
-										</div>									
-										<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Delete</span>
-										</div>
-									</td>
-								</tr>
-								
-								<tr>
-									<td>Papa Roach Members</td>
-									<td>10/01/2020</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column">
-											<i class="fas fa-pencil-alt"></i>
-											<span>Edit</span>
-										</div>									
-										<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Delete</span>
-										</div>
-									</td>
-								</tr>
-								
-								<tr>
-									<td>South Park Episodes, 1998-2002</td>
-									<td>10/01/2020</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column">
-											<i class="fas fa-pencil-alt"></i>
-											<span>Edit</span>
-										</div>									
-										<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Delete</span>
-										</div>
-									</td>
-								</tr>
-								 -->
-								
-=======
 							  	@foreach($categories as $category)
                                         <tr>
                                             <td>{{$category->category_name}}</td>
@@ -197,15 +117,16 @@
 													<span>Edit</span>
 												</div>									
 												<div class="d-flex flex-column">
-													<i class="fas fa-times-circle"></i>
-													<span>Delete</span>
+												<form method="POST" action="/admin/categories/{{$category->id}}" class="p-0">
+												{{ csrf_field() }}
+													<button type="submit" class="d-flex flex-column" id="delete"><i class="fas fa-times-circle"></i>Delete</button>
+											</form>
 												</div>
 											</td>
                                             
                                         </tr>
                                             
                              	@endforeach
->>>>>>> 6e272e9202afcccdffc2527bc8bbcf57542c7326
 								
 							</tbody>
 							<tfoot>
@@ -226,5 +147,5 @@
 @endsection
 
 @section('footer_scripts')
-
+@include('scripts.delete-model')
 @endsection

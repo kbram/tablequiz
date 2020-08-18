@@ -99,7 +99,6 @@ class QuizController extends Controller
        return view('quiz.add_round');
     
     }
-<<<<<<< HEAD
     public function search(Request $request)
     {
         $searchTerm = $request->input('quiz_search_box');
@@ -132,7 +131,6 @@ class QuizController extends Controller
         
     }
 
-=======
     public function editQuiz($id){
 
         $quiz = Quiz::findorfail($id);    
@@ -140,7 +138,6 @@ class QuizController extends Controller
         // dd($image);
 
         return view('quiz.edit-setup',compact('quiz','image'));
->>>>>>> 6e272e9202afcccdffc2527bc8bbcf57542c7326
         
     }
     // public function update(Request $request, $id)

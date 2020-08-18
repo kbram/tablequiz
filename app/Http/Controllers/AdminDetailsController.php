@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Quiz;
 use Illuminate\Support\Facades\Route;
 
 class AdminDetailsController extends Controller
@@ -46,7 +47,8 @@ class AdminDetailsController extends Controller
 
     public function home()
     {   
-        return view('admin.home');
+        $quizzes = Quiz::all();
+        return view('admin.home',compact('quizzes'));
     }
 
     public function categories()
@@ -72,5 +74,9 @@ class AdminDetailsController extends Controller
     public function users()
     {   
         return view('admin.users');
+    }
+    public function quizView(){
+        $quizzes = Quiz::all();
+        return view('quiz.show-setup',compact('quizzes'));
     }
 }
