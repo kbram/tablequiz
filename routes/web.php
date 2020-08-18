@@ -193,7 +193,7 @@ Route::get('setup/create', 'QuizController@create');
 Route::post('setup','QuizController@store');
 
 Route::get('questions/create', 'AdminQuestionController@create');
-Route::post('questions', 'AdminQuestionController@store');
+Route::post('questions/create', 'AdminQuestionController@store');
 
 //christy route can start from here
 Route::get('/dashboard/home','DashboardController@index');
