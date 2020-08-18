@@ -3,18 +3,15 @@
 	/*$quizName = $_GET['quiz__name'];*/
 ?>
 @extends('layouts.tablequizapp')
+@section('template_linked_css')
 
-@section('content')
 <style>
 	#img-wrapper{
-  /*width: 820px;
-  height: 100px;
-  overflow: hidden;*/
+
 }
 #img-wrapper.rotate90,
 #img-wrapper.rotate270 {
-  /*width: 100px;
-  height: 820px*/
+
 }
 #blah{
   transform-origin: top left;
@@ -44,6 +41,10 @@
 }
 
 </style>
+@endsection
+@section('content')
+
+
 
 <section class="container page__inner">
 	<form class="is_container row" id="add_round" action="/round/store" method="post" enctype="multipart/form-data" role="main">
