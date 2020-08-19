@@ -48,7 +48,10 @@ class AdminDetailsController extends Controller
     public function home()
     {   
         $quizzes = Quiz::all();
-        return view('admin.home',compact('quizzes'));
+        foreach($quizzes as $quiz){
+        $result[$quiz->id] = $quiz->user()->first()->email;
+        }
+        return view('admin.home',compact('quizzes','result'));
     }
 
     public function categories()
