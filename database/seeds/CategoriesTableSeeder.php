@@ -13,33 +13,33 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         DB::table('quiz_categories')->insert([
-           'category'  => 'Music' ,  
-             'slug'         => 'music'
+           'category_name'         => 'Music' ,  
+           'category_slug'         => 'music'
 
         ]);
         DB::table('quiz_categories')->insert([
-            'category_name'  => 'Sports' ,  
-              'slug'         => 'sports'
+            'category_name'           => 'Sports' ,  
+              'category_slug'         => 'sports'
  
          ]);
          DB::table('quiz_categories')->insert([
-            'category_name'  => 'Geography' ,  
-              'slug'         => 'geography'
+            'category_name'           => 'Geography' ,  
+              'category_slug'         => 'geography'
  
          ]);
          DB::table('quiz_categories')->insert([
             'category_name'  => 'History' ,  
-              'slug'         => 'history'
+              'category_slug'         => 'history'
  
          ]);
          DB::table('quiz_categories')->insert([
-            'category_name'  => 'Politics' ,  
-              'slug'         => 'politics'
+            'category_name'           => 'Politics' ,  
+              'category_slug'         => 'politics'
  
          ]);
          DB::table('quiz_categories')->insert([
             'category_name'  => 'Popular Culture' ,  
-              'slug'         => 'popular-culture'
+              'category_slug'         => 'popular-culture'
         ]);
     }
 }

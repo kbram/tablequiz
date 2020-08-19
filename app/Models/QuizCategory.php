@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,6 +17,9 @@ class QuizCategory extends Model
         'category_slug',
     ];
 
-
+    public function questions()
+    {
+        return $this->hasMany('App\Models\Question');
+    }
     
 }
