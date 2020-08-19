@@ -15,9 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 // Homepage Route
 Route::group(['middleware' => ['web', 'checkblocked']], function () {
-    Route::get('/', 'WelcomeController@welcome')->name('welcome');
+    // Route::get('/', 'WelcomeController@welcome')->name('welcome');
     Route::get('/terms', 'TermsController@terms')->name('terms');
 });
 
@@ -57,13 +58,18 @@ Route::group(['middleware' => ['auth', 'activated', 'activity', 'checkblocked']]
 Route::group(['middleware' => ['auth', 'activated', 'activity', 'twostep', 'checkblocked']], function () {
 
     //  Homepage Route - Redirect based on user role is in controller.
-    Route::get('/home', ['as' => 'public.home',   'uses' => 'UserController@index']);
+    Route::get('/homelaravel', ['as' => 'public.home',   'uses' => 'UserController@index']);
 
     // Show users profile - viewable by other users.
     Route::get('profile/{username}', [
         'as'   => '{username}',
         'uses' => 'ProfilesController@show',
     ]);
+    Route::get('home', function () {
+         return view('home2');
+     });
+
+
 });
 
 // Registered, activated, and is current user routes.
@@ -167,9 +173,17 @@ Route::get('contact_us',function(){
 Route::post('admin/financials', 'PriceBandsController@update')->name('update');
 Route::post('dashboard/user-update', 'UsersManagementController@user_update');
 
+
 //sam route can start here
-Route::get('playquiz', 'PlayController@play');
-Route::get('startquiz', 'PlayController@start');
+Route::get('playquiz/{quiz_id}/{round_id}/{question_id}', 'PlayController@testplay')->name('play.quiz');
+Route::post('startquiz', 'PlayController@start');
+
+//error
+Route::get('startquiz-password/{id}', 'PlayController@errorpassword');
+Route::get('startquiz-team/{id}', 'PlayController@errorteam');
+
+
+
 
 
 
@@ -191,6 +205,9 @@ Route::get('quizzes/{id}/edit','QuizController@editQuiz');
 //kanu routes
 Route::get('setup/create', 'QuizController@create');
 Route::post('setup','QuizController@store');
+// Route::put('setup/update/{id}','QuizController@update');
+
+
 
 Route::get('questions/create', 'AdminQuestionController@create');
 Route::post('questions/create', 'AdminQuestionController@store');
@@ -206,4 +223,39 @@ Route::post('search-questions','AdminQuestionController@search')->name('search-q
 
 //admin financial controller
 Route::get('admin/financials','PriceBandsController@index');
+
+//home
+Route::get('/', function () {
+    return view('home2');
+});
+
+//aboutus
+Route::get('/about', function () {
+    return view('about_us');
+});
+
+//contactus
+Route::get('/contact', function () {
+    return view('contact_us');
+});
+
+//send mail
+Route::post('/sendmail', 'ContactSendMailController@send');
+
+//payment
+Route::post('stripe', 'StripePaymentController@stripePost')->name('stripe.post');
+
+//play quiz url
+
+
+Route::get('/{quiz_name}','PlayController@selecturl');
+
+
+//TEST
+Route::get('/test/test' , function(){
+    return view('play.play-quiz'); 
+});
+
+//test answer
+Route::post('playquiz/answer', 'PlayController@answer');
 
