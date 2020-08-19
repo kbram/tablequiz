@@ -34,7 +34,7 @@
                             
                             
                             resultsContainer.append('<tr>' +
-                                '<td>' + val.quiz_name + '</td>' +
+                                '<td>' + val.quiz__name + '</td>' +
                                 '<td>' + val.quiz_link + '</td>' +
                                 '<td>'+val.no_of_participants+'</td>'+
                                 '<td>' + editCellHtml + '</td>' +

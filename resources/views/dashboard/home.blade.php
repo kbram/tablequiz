@@ -139,23 +139,27 @@
 							<thead>
 								<tr>
 									<th>Quiz name</th>
+									<th class="d-none">Quiz Link</th>
 									<th>Questions</th>
 									<th>Rounds</th>
 									<th class="text-right">Actions</th>
 								</tr>
 							</thead>
 							<tbody>
+								@foreach($quizzes as $quiz)
 								<tr>
-									<td>Mad Dog's Geography Quiz</td>
+									<td>{{$quiz -> quiz__name}}</td>
+									<td class="d-none" id="quizLink{{$quiz->id}}">{{$quiz ->quiz_link}}</td>
 									<td>20</td>
 									<td>4</td>
 									<td class="quiz_actions d-flex flex-row justify-content-lg-end">
 										<div class="d-flex flex-column">
 											<i class="fas fa-edit"></i>
 											<span>Edit</span>
-										</div>									<div class="d-flex flex-column">
+										</div>
+										<div class="d-flex flex-column">
 											<i class="fas fa-share-alt"></i>
-											<span>Share</span>
+											<span class="share" id="{{$quiz->id}}">Share</span>
 										</div>
 										<a href="../quiz/start-quiz.php">
 											<div class="d-flex flex-column">
@@ -165,8 +169,8 @@
 										</a>
 									</td>
 								</tr>
-								
-								<tr>
+								@endforeach
+								<!-- <tr>
 									<td>Mad Dog's Geography Quiz</td>
 									<td>20</td>
 									<td>4</td>
@@ -248,7 +252,7 @@
 											</div>
 										</a>
 									</td>
-								</tr>
+								</tr> -->
 								
 							</tbody>
 							<tfoot>
@@ -266,7 +270,8 @@
 		</section>
 	</div>
 </section>
-@end
+@endsection
 @section('footer_scripts')
+@include('scripts.share-quiz')
 @endsection
 

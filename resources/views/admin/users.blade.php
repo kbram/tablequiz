@@ -62,6 +62,7 @@
 							<form action="" method="" class="p-0">
 								<input type="text" list="quizzes" name="quiz" placeholder="Search..." class="form-control mb-2 mt-n2">	
 							</form>
+							
 						</div>
 					</div>
 					
@@ -78,8 +79,31 @@
 							</thead>
 							<tbody>
 								
-					
+								@foreach($users as $user)
 								<tr>
+									<td>{{$user -> name}}</td>
+									<td class="d-none" id="emailLink{{$user -> id}}">{{$user -> email}}</td>
+									<td>15</td>
+									<td>322</td>
+									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
+										<div class="d-flex flex-column pl-0">
+											<i class="far fa-eye"></i>
+											<span>View Qs</span>
+										</div>
+										<div class="d-flex flex-column">
+											<i class="fas fa-times-circle"></i>
+											<span>Block</span>
+										</div>
+
+										<div class="d-flex flex-column">
+											<i class="fas fa-envelope"></i>
+											<span class="message" id="{{$user->id}}">Message</span>
+										</div>
+
+									</td>
+								</tr>
+								@endforeach
+								<!-- <tr>
 									<td>SenanCronin2020</td>
 									<td>15</td>
 									<td>322</td>
@@ -91,12 +115,11 @@
 											<i class="fas fa-times-circle"></i>
 											<span>Block</span>
 										</div>
-<!--
 										<div class="d-flex flex-column">
 											<i class="fas fa-envelope"></i>
 											<span>Message</span>
 										</div>
--->
+
 									</td>
 								</tr>
 								<tr>
@@ -111,12 +134,10 @@
 											<i class="fas fa-times-circle"></i>
 											<span>Block</span>
 										</div>
-<!--
 										<div class="d-flex flex-column">
 											<i class="fas fa-envelope"></i>
 											<span>Message</span>
 										</div>
--->
 									</td>
 								</tr>
 								<tr>
@@ -131,12 +152,11 @@
 											<i class="fas fa-times-circle"></i>
 											<span>Block</span>
 										</div>
-<!--
+
 										<div class="d-flex flex-column">
 											<i class="fas fa-envelope"></i>
 											<span>Message</span>
 										</div>
--->
 									</td>
 								</tr>
 								<tr>
@@ -151,12 +171,10 @@
 											<i class="fas fa-times-circle"></i>
 											<span>Block</span>
 										</div>
-<!--
 										<div class="d-flex flex-column">
 											<i class="fas fa-envelope"></i>
 											<span>Message</span>
 										</div>
--->
 									</td>
 								</tr>
 								<tr>
@@ -171,12 +189,11 @@
 											<i class="fas fa-times-circle"></i>
 											<span>Block</span>
 										</div>
-<!--
+
 										<div class="d-flex flex-column">
 											<i class="fas fa-envelope"></i>
 											<span>Message</span>
 										</div>
--->
 									</td>
 								</tr>
 								<tr>
@@ -191,12 +208,10 @@
 											<i class="fas fa-times-circle"></i>
 											<span>Block</span>
 										</div>
-<!--
 										<div class="d-flex flex-column">
 											<i class="fas fa-envelope"></i>
 											<span>Message</span>
 										</div>
--->
 									</td>
 								</tr>
 								<tr>
@@ -211,12 +226,11 @@
 											<i class="fas fa-times-circle"></i>
 											<span>Block</span>
 										</div>
-<!--
+
 										<div class="d-flex flex-column">
 											<i class="fas fa-envelope"></i>
 											<span>Message</span>
 										</div>
--->
 									</td>
 								</tr>
 								<tr>
@@ -231,12 +245,10 @@
 											<i class="fas fa-times-circle"></i>
 											<span>Block</span>
 										</div>
-<!--
 										<div class="d-flex flex-column">
 											<i class="fas fa-envelope"></i>
 											<span>Message</span>
 										</div>
--->
 									</td>
 								</tr>
 								<tr>
@@ -251,37 +263,16 @@
 											<i class="fas fa-times-circle"></i>
 											<span>Block</span>
 										</div>
-<!--
+
 										<div class="d-flex flex-column">
 											<i class="fas fa-envelope"></i>
 											<span>Message</span>
 										</div>
--->
-									</td>
-								</tr>
-								<tr>
-									<td>SenanCronin2020</td>
-									<td>15</td>
-									<td>322</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column pl-0">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>									<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-<!--
-										<div class="d-flex flex-column">
-											<i class="fas fa-envelope"></i>
-											<span>Message</span>
-										</div>
--->
 									</td>
 								</tr>
 								
 								
-								
+								 -->
 							</tbody>
 							<tfoot>
 								<tr>
@@ -301,5 +292,5 @@
 @endsection
 
 @section('footer_scripts')
-
+@include('scripts.message')
 @endsection

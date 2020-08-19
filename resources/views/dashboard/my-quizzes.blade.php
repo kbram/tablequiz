@@ -78,16 +78,6 @@
 
 
 								
-<<<<<<< HEAD
-							</tbody>
-							<tfoot>
-								<tr>
-									
-									<td colspan="4" class="text-center text-muted"><small><a href="">View more</a></small></td>
-								</tr>
-							</tfoot>
-=======
->>>>>>> 6e272e9202afcccdffc2527bc8bbcf57542c7326
 						</table>
 						
 					</div>			</div>
@@ -102,5 +92,6 @@
 </style>
 @endsection
 @section('footer_scripts')
+@include('scripts.share-quiz')
 @endsection
 

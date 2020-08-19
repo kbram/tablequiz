@@ -76,7 +76,8 @@ class AdminDetailsController extends Controller
 
     public function users()
     {   
-        return view('admin.users');
+        $users = User::all();
+        return view('admin.users',compact('users'));
     }
     public function quizView(){
         $quizzes = Quiz::all();

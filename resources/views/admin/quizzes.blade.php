@@ -81,7 +81,7 @@
 								<tr>
 								
 								<span id="msg{{$quiz->id}}" class="text-success" ></span>
-									<td>{{$quiz -> quiz_name}}</td>
+									<td>{{$quiz -> quiz__name}}</td>
 									<td id="quizLink{{$quiz->id}}">{{$quiz -> quiz_link}}</td>
 									<td class="text-lg-center">{{$quiz->no_of_participants}}</td>
 									<td class="quiz_actions d-flex flex-row justify-content-lg-center">

@@ -32,7 +32,8 @@ return view('dashboard.my-quizzes',compact('quizzes','roundCount','questionCount
     }
 
     public function index(){
-        return view('dashboard.home');
+        $quizzes = Quiz::all();
+        return view('dashboard.home',compact('quizzes'));
     }
        public function setting(){
            
