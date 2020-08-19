@@ -85,13 +85,13 @@
 									<td id="quizLink{{$quiz->id}}">{{$quiz -> quiz_link}}</td>
 									<td class="text-lg-center">{{$quiz->no_of_participants}}</td>
 									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column pl-0">
+										<div class="d-flex flex-column">
 											<i class="far fa-eye"></i>
-											<a href=""><span>View Qs</span></a>
+											<span>View Qs</span>
 										</div>
-										<div>
-											<button class="btn p-0 d-flex flex-column btn-primary-outline share"  id="{{$quiz->id}}" ><i class="fas fa-share-alt"></i>Share
-											</button>
+										<div class="d-flex flex-column">
+									    <i class="fas fa-share-alt"></i>
+										<span class="share" id="{{$quiz->id}}">Share</span>
 										</div>
 										<div class="d-flex flex-column">
 											<i class="fas fa-times-circle"></i>

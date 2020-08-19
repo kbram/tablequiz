@@ -250,14 +250,17 @@
 									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
 										<div class="d-flex flex-column">
 											<i class="fas fa-pencil-alt"></i>
-											<a href="/quiz/setup"><span>Edit</span></a>
+											<span>Edit</span>
 										</div>									
 										
-										<div class="d-flex flex-column">
-											<!-- <a href="/admin/questions/{{$question->id}}"><span>Delete</span></a> -->
+										
+										<div class="p-0">
+										
 											<form method="POST" action="/admin/questions/{{$question->id}}" class="p-0">
 												{{ csrf_field() }}
-													<button type="submit" class="d-flex flex-column" id="delete"><i class="fas fa-times-circle"></i>Delete</button>
+												<div class="d-flex flex-column">
+											<i class="fas fa-times-circle "></i><span class="delete" >Delete</span>
+											</div>
 											</form>
 										</div>
 									</td>

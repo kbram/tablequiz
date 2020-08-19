@@ -116,12 +116,14 @@
 													<i class="fas fa-pencil-alt"></i>
 													<span>Edit</span>
 												</div>									
-												<div class="d-flex flex-column">
+												
 												<form method="POST" action="/admin/categories/{{$category->id}}" class="p-0">
-												{{ csrf_field() }}
-													<button type="submit" class="d-flex flex-column" id="delete"><i class="fas fa-times-circle"></i>Delete</button>
-											</form>
+												{{ csrf_field() }}	
+												<div class="d-flex flex-column">
+												<i class="fas fa-times-circle" ></i><span class="delete"  >Delete</span>
 												</div>
+											</form>
+												
 											</td>
                                             
                                         </tr>

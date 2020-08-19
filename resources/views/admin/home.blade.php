@@ -114,24 +114,24 @@
 								
 								
 								<tr>
-									<td>{{$quiz -> quiz_name}}</td>
+									<td>{{$quiz -> quiz__name}}</td>
 									<td id="quizLink{{$quiz -> id}}">{{$quiz -> quiz_link}}</td>
 									<td class="quiz_actions db d-flex flex-row justify-content-lg-center">
 										<div class="d-flex flex-column">
-										<a href="/admin/home/{{$quiz ->quiz_name}}/view">	<i class="far fa-eye"></i>
-											<span>View Qs</span></a>
+											<i class="far fa-eye"></i>
+											<span>View Qs</span>
 										</div>
 										<div class="d-flex flex-column">
-										<button class="btn p-0 d-flex flex-column btn-primary-outline share"  id="{{$quiz->id}}" ><i class="fas fa-share-alt"></i>Share
-											</button>
+										<i class="fas fa-share-alt"></i><span class="share" id="{{$quiz->id}}">Share</span>
+										
 										</div>
 										<div class="d-flex flex-column">
 											<i class="fas fa-times-circle"></i>
 											<span>Block</span>
 										</div>
 										<div class="d-flex flex-column">
-											<i class="fas fa-envelope"></i>
-											<span>Message</span>
+											<i class="fas fa-envelope"></i><span>Message</span>
+											
 										</div>
 									</td>
 								</tr>
@@ -297,4 +297,5 @@
 
 @section('footer_scripts')
 @include('scripts.share-quiz')
+@include('scripts.message')
 @endsection

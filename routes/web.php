@@ -158,7 +158,7 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
     //adminquestionccontroller
     Route::get('/admin/questions','AdminQuestionController@index');
     Route::post('search-questions','AdminQuestionController@search')->name('search-questions');
-    Route::post('admin/questions/{id}','AdminQuestionController@destroy');
+    Route::post('/admin/questions/{id}','AdminQuestionController@destroy');
 
     //admin categories
     Route::post('/admin/categories/{id}','QuizCategoriesController@destroy');

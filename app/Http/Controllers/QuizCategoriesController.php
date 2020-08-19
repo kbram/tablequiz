@@ -81,10 +81,9 @@ class QuizCategoriesController extends Controller
     }
     public function destroy($id)
     {
-        
     
         $category = QuizCategory::find($id);
-
+        
         if ($category->id) {
         $category->delete();
 

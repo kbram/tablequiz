@@ -96,7 +96,7 @@ class AdminQuestionController extends Controller
     }
     public function destroy($id)
   {
-    //
+    
   
     $question = Question::find($id);
 

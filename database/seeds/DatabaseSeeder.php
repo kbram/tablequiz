@@ -19,12 +19,9 @@ class DatabaseSeeder extends Seeder
         $this->call(ConnectRelationshipsSeeder::class);
         $this->call(ThemesTableSeeder::class);
         $this->call(UsersTableSeeder::class);
-<<<<<<< HEAD
         $this->call(PriceBandsTableSeeder::class);
-=======
         $this->call(CategoriesTableSeeder::class);
 
->>>>>>> 6e272e9202afcccdffc2527bc8bbcf57542c7326
 
         Model::reguard();
     }
