@@ -30,7 +30,7 @@ class QuizCategoriesController extends Controller
         $validator = Validator::make($request->all(),
         [
             'category_name'  => 'required',
-            'category_image'  => 'required',            
+            'upload__category__image'  => 'required',            
         ]
         );
 
@@ -42,16 +42,16 @@ class QuizCategoriesController extends Controller
 
         $categories=new QuizCategory;
         $categories -> category_name     =  $request->input('category_name');
-        $categories -> category_slug = Str::slug($request->input('category_name'),'-');
+        $categories -> category_slug = Str::slug($request->input('upload__category__image'),'-');
         //$categories -> category_image = $request->file('category_image');
 
         $categories->save();
 
-        $category_id=QuizCategory::where('category_name',$categories -> category_name)->first()->id;
-//dd($caegory_id);
-        if ($request->hasFile('category_image')) {
+        $category_id=$categories->id;
 
-            $category_image = $request->file('category_image');
+        if ($request->hasFile('upload__category__image')) {
+
+            $category_image = $request->file('upload__category__image');
             $filename = 'category_image.'.$category_image->getClientOriginalExtension();
             $save_path = storage_path().'categories/'.$category_id.'/category_images/';
             $path = $save_path.$filename;
