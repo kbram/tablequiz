@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use jeremykenedy\LaravelRoles\Models\Role;
-use SebastianBergmann\Environment\Console;
 use Validator;
 
 class UsersManagementController extends Controller
@@ -287,73 +286,4 @@ class UsersManagementController extends Controller
         ], Response::HTTP_OK);
     }
 
-
-    public function user_update(Request $request)
-                   
-    {    
-        
-        $user_data = auth()->user();
-        $user=User::find($user_data->id);
-        $emailCheck = ($request->input('email') !== '') && ($request->input('email') !== $user_data->email);
-        $ipAddress = new CaptureIpTrait();
-        
-        if ($emailCheck) { 
-            $validator = Validator::make($request->all(), [
-                'name'          => 'required|max:255|unique:users|alpha_dash',
-                'email'         => 'email|max:255|unique:users',
-                'first_name'    => 'alpha_dash',
-                'last_name'     => 'alpha_dash',
-                'password'      => 'present|confirmed',
-                'password_confirmation' => 'required|same:password',
-            ]);
-          
-        } else {
-            $validator = Validator::make($request->all(), [
-                'name'          => 'required|max:255|unique:users|alpha_dash',
-                'first_name'    => 'required|alpha_dash',
-                'last_name'     => 'required|alpha_dash',
-                'password'      => 'confirmed',
-               'password_confirmation' => 'same:password',
-            ]);
-           
-        }
-        
-        if ($validator->fails()) {
-           
-            return back()->withErrors($validator)->withInput();
-        }
-        
-        $user->name = strip_tags($request->input('name'));
-        $user->first_name = strip_tags($request->input('first_name'));
-        $user->last_name = strip_tags($request->input('last_name'));
-      
-        if ($emailCheck) {
-            $user->email = $request->input('email');
-        }
-     
-        if ($request->input('password') !== null) {
-            $user->password = Hash::make($request->input('password'));
-        }
-
-        $userRole = $request->input('role');
-        if ($userRole !== null) {
-            $user->detachAllRoles();
-            $user->attachRole($userRole);
-        }
-
-        $user->updated_ip_address = $ipAddress->getClientIp();
-
-        switch ($userRole) {
-            case 3:
-                $user->activated = 0;
-                break;
-
-            default:
-                $user->activated = 1;
-                break;
-        }
-        
-        $user->save();
-        return back()->with('success', trans('usersmanagement.updateSuccess'));
-    }
 }

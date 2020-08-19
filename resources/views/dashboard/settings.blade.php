@@ -39,7 +39,7 @@
 			</div>
 			<div class="row">
 				<div class="dashboard__container col">
-					<form class="settings pt-1" action="/dashboard/user-update" method="post">
+					<form class="settings pt-1" action="/profile/{{$user->id }}/updateUserAccount" method="post">
 					     @csrf
 						<h3>Edit my details</h3>
 						<div class="form-row mt-4">
