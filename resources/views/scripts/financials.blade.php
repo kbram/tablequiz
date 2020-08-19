@@ -25,9 +25,11 @@
          alert('error');
         
         },
-        
+        dataType: 'JSON',
+        success: function(data) {
+          console.log(data); // this is good
+        }
+      });
     });
-});
-
   });
 </script>

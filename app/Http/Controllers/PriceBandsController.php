@@ -19,32 +19,32 @@ class PriceBandsController extends Controller
     
   public function update(Request $request)
   {   
-      
+      dd($request);
     $validator = Validator::make(
-      $request->all(),
-      [
-        'get_from'       => 'required',
-        'get_to'         => 'required',
-        'get_cost'       => 'required',
-
-      ]
-    );
-    if ($validator->fails()) {
-      return back()->withErrors($validator)->withInput();
-    }
-
-    
-
-    $priceBand = PriceBand::find($request->id);
-
-    $priceBand->from     =  $request->get_from;
-    $priceBand->to       =  $request->get_to;
-    $priceBand->cost     =  $request->get_cost;
-    
-
-    $priceBand->save();
-
-    return back()->with('success', 'Price Band update Success');
+        $request->all(),
+        [
+        'get_from' => 'required',
+        'get_to'   => 'required',
+        'get_cost' => 'required',
+        
+        ]
+        );
+        if ($validator->fails()) {
+        return back()->withErrors($validator)->withInput();
+        }
+        
+        
+        
+        $priceBand = PriceBand::find($request->id);
+        
+        $priceBand->from = $request->get_from;
+        $priceBand->to = $request->get_to;
+        $priceBand->cost = $request->get_cost;
+        
+        
+        $priceBand->save();
+        
+        return back()->with('success', 'Price Band update Success');
   }
 
 

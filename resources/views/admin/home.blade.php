@@ -10,37 +10,37 @@
 				
 				<ul class="list-unstyled m-0 p-0 text-sm-center text-lg-left">
 					<li class="active">
-						<a href="../admin/home.php">
+						<a href="#">
 							<span><i class="fas fa-home"></i></span>
 							Overview
 						</a>
 					</li>
 					<li>
-						<a href="../admin/quizzes.php">
+						<a href="/admin/quizzes">
 							<span><i class="fas fa-briefcase"></i></span>
 							Quizzes
 						</a>
 					</li>
 					<li>
-						<a href="../admin/users.php">
+						<a href="/admin/users">
 							<span><i class="fas fa-users"></i></span>
 							Users
 						</a>
 					</li>
 					<li>
-						<a href="../admin/financials.php">
+						<a href="/admin/financials">
 							<span><i class="fas fa-coins"></i></span>
 							Financials
 						</a>
 					</li>
 					<li>
-						<a href="../admin/categories.php">
+						<a href="/admin/categories">
 							<span><i class="fas fa-th-large"></i></span>
 							Categories
 						</a>
 					</li>
 					<li>
-						<a href="../admin/categories.php">
+						<a href="/admin/categories">
 							<span><i class="fas fa-question-circle"></i></span>
 							Questions
 						</a>
@@ -105,12 +105,38 @@
 							<thead>
 								<tr>
 									<th>Quiz name</th>
-									<th>Created by</th>
+									<th>Quiz link</th>
 									<th class="text-center">Actions</th>
 								</tr>
 							</thead>
 							<tbody>
+								@foreach($quizzes as $quiz)
+								
+								
 								<tr>
+									<td>{{$quiz -> quiz__name}}</td>
+									<td id="quizLink{{$quiz -> id}}">{{$quiz -> quiz_link}}</td>
+									<td class="quiz_actions db d-flex flex-row justify-content-lg-center">
+										<div class="d-flex flex-column">
+											<i class="far fa-eye"></i>
+											<span>View Qs</span>
+										</div>
+										<div class="d-flex flex-column">
+										<i class="fas fa-share-alt"></i><span class="share" id="{{$quiz->id}}">Share</span>
+										
+										</div>
+										<div class="d-flex flex-column">
+											<i class="fas fa-times-circle"></i>
+											<span>Block</span>
+										</div>
+										<div class="d-flex flex-column">
+											<i class="fas fa-envelope"></i><span>Message</span>
+											
+										</div>
+									</td>
+								</tr>
+								@endforeach
+								<!-- <tr>
 									<td>Mad Dog's Geography Quiz</td>
 									<td>SenanCronin2020</td>
 									<td class="quiz_actions db d-flex flex-row justify-content-lg-center">
@@ -246,30 +272,7 @@
 											<span>Message</span>
 										</div>
 									</td>
-								</tr>
-								
-								<tr>
-									<td>Mad Dog's Geography Quiz</td>
-									<td>SenanCronin2020</td>
-									<td class="quiz_actions db d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-share-alt"></i>
-											<span>Share</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-envelope"></i>
-											<span>Message</span>
-										</div>
-									</td>
-								</tr>
+								</tr> -->
 								
 								
 								
@@ -293,5 +296,6 @@
 @endsection
 
 @section('footer_scripts')
-
+@include('scripts.share-quiz')
+@include('scripts.message')
 @endsection

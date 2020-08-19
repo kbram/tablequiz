@@ -1,25 +1,12 @@
-<?php 
 
-	/*$quizName = $_GET['quiz__name'];*/
-?>
 @extends('layouts.tablequizapp')
 @section('template_linked_css')
-
 <style>
-	#img-wrapper{
 
-}
-#img-wrapper.rotate90,
-#img-wrapper.rotate270 {
-
-}
 #blah{
   transform-origin: top left;
-  /* IE 10+, Firefox, etc. */
   -webkit-transform-origin: top left;
-  /* Chrome */
   -ms-transform-origin: top left;
-  /* IE 9 */
 }
 #img-wrapper.rotate90 #blah {
   transform: rotate(90deg) translateY(-100%);
@@ -43,9 +30,6 @@
 </style>
 @endsection
 @section('content')
-
-
-
 <section class="container page__inner">
 	<form class="is_container row" id="add_round" action="/round/store" method="post" enctype="multipart/form-data" role="main">
 		 @csrf
@@ -53,6 +37,16 @@
 			<div class="article__heading">
 				<h1>Round 1 Setup</h1>
 				<?php /*if($quizName) echo "<h2>".$quizName."</h2>";*/?>
+
+
+				@if (Session::has('fail'))
+                        <div class="alert alert-danger text-center">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                            <p>{{ Session::get('fail') }}</p>
+                        </div>
+                    @endif
+
+
 			</div>
 			<div class="form-row mt-md-5">
 				<div class="col-md-4">
@@ -673,7 +667,7 @@
 			<a href="add_round_2.php" class="btn btn-secondary d-block"><span class="pr-3"><i class="fa fa-plus"></i></span>Next round</a>
 		</div>
 		<div class="col-md-4 px-0 px-md-4">
-			<a href="#" data-toggle="modal" data-target="#publishQuizModal" class="btn btn-primary d-block">Publish Quiz</a>
+			<a href="#" data-toggle="modal" data-target="#publishQuizModal" class="btn btn-primary d-block">Publish  Quiz</a>
 		</div>
 	</section>
 </section>

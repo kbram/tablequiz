@@ -48,7 +48,6 @@ class QuizCategoriesController extends Controller
         $categories->save();
 
         $category_id=QuizCategory::where('category_name',$categories -> category_name)->first()->id;
-
         if ($request->hasFile('category_image')) {
 
             $category_image = $request->file('category_image');
@@ -78,6 +77,19 @@ class QuizCategoriesController extends Controller
         }
        
        return redirect()->back();
+    }
+    public function destroy($id)
+    {
+    
+        $category = QuizCategory::find($id);
+        
+        if ($category->id) {
+        $category->delete();
+
+        return redirect('/admin/categories')->with('success','Delete successfully');
+        }
+
+        return back()->with('error', 'Question is not deleted');
     }
 
 

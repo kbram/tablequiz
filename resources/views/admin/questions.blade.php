@@ -10,44 +10,44 @@
 				
 				<ul class="list-unstyled m-0 p-0 text-sm-center text-lg-left">
 					<li>
-						<a href="../admin/home.php">
+						<a href="/admin/home">
 							<span><i class="fas fa-home"></i></span>
 							Overview
 						</a>
 					</li>
 					<li>
-						<a href="../admin/quizzes.php">
+						<a href="/admin/quizzes">
 							<span><i class="fas fa-briefcase"></i></span>
 							Quizzes
 						</a>
 					</li>
 					<li>
-						<a href="../admin/users.php">
+						<a href="/admin/users">
 							<span><i class="fas fa-users"></i></span>
 							Users
 						</a>
 					</li>
 					<li>
-						<a href="../admin/financials.php">
+						<a href="/admin/financials">
 							<span><i class="fas fa-coins"></i></span>
 							Financials
 						</a>
 					</li>
 					<li>
-						<a href="../admin/categories.php">
+						<a href="/admin/categories">
 							<span><i class="fas fa-th-large"></i></span>
 							Categories
 						</a>
 					</li>
 					<li class="active">
-						<a href="/admin/questions">
+						<a href="#">
 							<span><i class="fas fa-question-circle"></i></span>
 							Questions
 						</a>
 					</li>
 					
 				</ul>
-				<a href="../quiz/setup.php" class="btn btn-primary hasPlus d-block">New Quiz</a>
+				<a href="/quiz/setup" class="btn btn-primary hasPlus d-block">New Quiz</a>
 			</div>
 		</aside>
 		
@@ -93,6 +93,20 @@
 		</aside>
 		
 		<section class="col-lg-9 dashboard__container">
+						<form action="" method="" class="pt-3 add__new__in__admin">
+							<div class="form-row">
+								<div class="col-md-4">
+									<label for="category_type">Category</label>
+								</div>
+								<div class="col-md-4">
+									<select id="category_type" class="form-control">
+										<option value="category__music">Music</option>
+										<option value="category__sport">Sport</option>
+										<option value="category__Geography">Geography</option>
+										<option value="category__History">History</option>
+										<option value="category__Politics">Politics</option>
+										<option value="category__popular_culture">Popular Culture</option>
+
 									</select>
 								</div>
 							</div>
@@ -103,12 +117,12 @@
 								<div class="col-md-4">
 								
 									<select id="question__type" name="question__type" class="form-control">
+									<select id="question__type" class="form-control">
 										<option value="standard__question">Standard</option>
 										<option value="multiple__choice__question">Multiple choice</option>
 										<option value="numeric__question">Numeric</option>
 
 									</select>
-							
 								</div>
 							</div>
 							<div class="form-row">
@@ -310,15 +324,15 @@
 									<small class="form-text text-muted">Seconds</small>
 								</div>
 							</div>
-							<hr>
-						<div class="row justify-content-center">
-							<div class="col-4">
-							<button  class="d-block btn btn-primary" type="submit">Save</button>
-							</div>
-						</div>
+							
 						</form>
 						
-						
+						<hr>
+						<div class="row justify-content-center">
+							<div class="col-4">
+								<a href="#" class="d-block btn btn-primary">Save</a>
+							</div>
+						</div>
 					</div>
 					<div class="dashboard__container flex-grow-1">
 						<table class="table table-striped table-borderless m-0 h-100 my__quizzes">
@@ -352,6 +366,33 @@
 								
 								 
 							</tbody>
+								<tr>
+									<td>{{$question->question}}</td>
+									<td>{{$question->category}}</td>
+									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
+										<div class="d-flex flex-column">
+											<i class="fas fa-pencil-alt"></i>
+											<span>Edit</span>
+										</div>									
+										
+										
+										<div class="p-0">
+										
+											<form method="POST" action="/admin/questions/{{$question->id}}" class="p-0">
+												{{ csrf_field() }}
+												<div class="d-flex flex-column">
+											<i class="fas fa-times-circle "></i><span class="delete" >Delete</span>
+											</div>
+											</form>
+										</div>
+									</td>
+								</tr>
+								@endforeach
+								</tbody>
+							<tbody id="questions_table"></tbody>
+							@if(config('usersmanagement.enableSearchUsers'))
+								<tbody id="search_results"></tbody>
+							@endif
 							<tfoot>
 								<tr>
 									<td colspan="6" class="text-center text-muted">
@@ -373,5 +414,5 @@
 	@if(config('usersmanagement.enableSearchUsers'))
         @include('scripts.search-questions')
     @endif
-	
+@include('scripts.delete-model')	
 @endsection

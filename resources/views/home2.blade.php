@@ -16,7 +16,7 @@
 				</div>
 			</div>
 			<div class="col-md-6 order-0 order-md-1">
-				<img src="/images/homepage__logo.png" class="homepage__logo" alt="TableQuiz.app logo">
+				<img src="site_design/images/homepage__logo.png" class="homepage__logo" alt="TableQuiz.app logo">
 			</div>
 
 		</div>
@@ -29,7 +29,7 @@
 		<div class="container somepage__white_section__inner text-body">
 			<div class="row align-items-center">
 				<div class="col-lg-6">
-					<img src="/images/homepage__lower.jpg" class="homepage__lower">
+					<img src="site_design/images/homepage__lower.jpg" class="homepage__lower">
 				</div>
 				<div class="col-lg-6 mt-5 mt-lg-0">
 					<h1 class="my-5">Why use TableQuiz.app for your next quiz?</h1>

@@ -10,7 +10,7 @@
 			</div>		
 			<form action="/setup" method="post" enctype="multipart/form-data" class="pt-2 pt-lg-4" >
 			@csrf
-
+                
 <!-- QUIZ NAME -->
 				<div class="form-row">
 					<div class="col-md-4">

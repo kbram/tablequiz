@@ -6,14 +6,15 @@ use App\Models\GlobalQuestion;
 use App\Models\QuizCategory;
 use App\Models\GlobalQuestionMedia;
 use App\Models\GlobalAnswer;
+use Illuminate\Http\Request;
+use App\Models\Question;
+use Illuminate\Http\Response;
 use DB;
 use Validator;
 
 use File;
 use Illuminate\Database\Eloquent\Model;
 
-
-use Illuminate\Http\Request;
 
 class AdminQuestionController extends Controller
 {
@@ -249,3 +250,22 @@ class AdminQuestionController extends Controller
  
  
     }
+        return response()->json([
+            json_encode($results),
+        ], Response::HTTP_OK);
+        
+    }
+    public function destroy($id)
+  {
+    
+    $question = Question::find($id);
+
+    if ($question->id) {
+      $question->delete();
+
+      return redirect('/admin/questions')->with('success','Delete successfully');
+    }
+
+    return back()->with('error', 'Question is not deleted');
+  }
+}

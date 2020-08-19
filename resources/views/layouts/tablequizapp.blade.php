@@ -73,7 +73,7 @@
         <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
         <!-- end -->
         <script src="{{asset('site_design/js/scripts.js?version=20')}}"></script>
-
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         
         {{-- Scripts --}}
         @yield('footer_scripts')
