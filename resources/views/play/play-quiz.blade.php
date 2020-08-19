@@ -1,6 +1,16 @@
 @extends('layouts.tablequizapp')
 
+@section('template_linked_css')
+
+<style>
+.small{
+	color:#5A37BA;
+}
+</style>
+
+@endsection
 @section('content')
+
 
 <!-- <section class="container page__inner"> -->
 <!--
@@ -12,14 +22,23 @@
 -->
 	<div class="row">
 		<div class="col-12 d-flex justify-content-between">
-			<p class="text-white">MadDog's Geography Quiz</p>
+			<p class="text-white" style="min-width:13vw !important;">{{$quiz->quiz__name}}</p>
 			<p><a href="#" class="text-white"><small>Exit quiz</small></a></p>
 		</div>
 		<article class="col-12 pb-5">
+
+		<div class="col-12 d-flex justify-content-between">
+
+		<p ><a href="#" class="text-white"><small class="small">previous quiz</small></a></p>
+		<p><a href="#" class="text-white"><small class="small">next quiz</small></a></p>
+
+		</div>
+
+
 			<div class="row border-bottom pb-2 mb-5">
 				<div class="col-12 d-flex justify-content-center flex-column">
-					<p class="mb-0 text-center"><strong>Round 2 of 10</strong></p>
-					<p class="bernhard round__name my-2 text-center">The multifarious waterways of Ireland</p>
+					<p class="mb-0 text-center"><strong>Round {{$round->id}} of {{$roundCount}}</strong></p>
+					<p class="bernhard round__name my-2 text-center">{{$round->round_name}}</p>
 				</div>
 				<div class="col-12">
 					<div>
@@ -32,28 +51,64 @@
 					<img src="../images/suir.jpg" >
 				</div>
 				<div class="col-12 text-center">
-					<h4 class="bernhard">Question 4</h4>
+					<h4 class="bernhard">Question {{$question->id}}</h4>
 				</div>
 				<div class="col-12 the__question text-center mB-2">
-					<h4 class="">What river, pictured, runs through Waterford city?</h4>
+					<h4 class="" style="min-width:38vw !important;"> {{$question->question}} </h4>
 				</div>
 			</div>
 			<div class="row answer__options pt-4 justify-content-center flex-wrap">
-				<div class="col-md-3 single__answer bg-white mb-2 mb-md-0 px-3 py-4 text-center mx-2">
-					<p class="m-0">Liffey</p>
+
+
+				
+				@foreach($answers as $answer)
+				<div id=" {{$answer->id}}" class="col-md-3 single__answer bg-white mb-2 mb-md-0 px-3 py-4 text-center mx-2 answers">
+				<form action="/playquiz/answer" method="post" name="form" id="{{$answer->id}}">
+				@csrf
+				<input type="text" name="answer" hidden value="{{$answer->id}}"/>
+				<input type="text" name="question" hidden value="{{$question->id}}"/>
+				<input type="text" name="round" hidden value="{{$round->id}}"/>
+				<input type="text" name="quiz" hidden value="{{$quiz->id}}"/>
+
+				<p onclick="document.getElementById('{{$answer->id}}').submit()">{{$answer->answer}}</p> 
+				</form>
+
 				</div>
-				<div class="col-md-3 single__answer bg-white mb-2 mb-md-0 px-3 py-4 text-center mx-2">
-					<p class="m-0">Suir</p>
-				</div>
-				<div class="col-md-3 single__answer bg-white mb-2 mb-md-0 px-3 py-4 text-center mx-2">
-					<p class="m-0">Corrib</p>
-				</div>
+				@endforeach
+				
 				
 			</div>
 		</article>
 		
 	</div>
 <!-- </section> -->
+
+<script>
+
+    var jobs = {!! json_encode($correct_answer ?? '') !!};
+
+	if (jobs !== undefined){
+	document.getElementById(jobs).style.border = "thick solid green";
+	$('.answers').children().addClass("disabled");
+	onClick="this.form.submit(); this.disabled=true;  "
+
+	}
+    var jobs = {!! json_encode($worng_answer ?? '') !!};
+
+	if (jobs !== undifined){
+		document.getElementById(jobs).style.border = "solid red";
+	$('.answers').children().addClass("disabled");
+	onClick="this.form.submit(); this.disabled=true;  "
+	}
+
+	console.log(jobs);
+</script>
+
+@include('scripts.playquiz')
+
 @endsection
 @section('footer_scripts')
 @endsection
+
+
+
