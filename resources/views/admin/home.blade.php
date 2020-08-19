@@ -3,11 +3,11 @@
 @section('content')
 <section class="container page__inner dashboard">
 	<div class="row dashboard__wrapper">
-		
+
 		<aside class="col-lg-3 dashboard__sidebar d-flex flex-column">
 			<h2>Menu</h2>
 			<div class="dashboard__container flex-grow-1 d-flex flex-column justify-content-between">
-				
+
 				<ul class="list-unstyled m-0 p-0 text-sm-center text-lg-left">
 					<li class="active">
 						<a href="#">
@@ -45,19 +45,19 @@
 							Questions
 						</a>
 					</li>
-					
+
 				</ul>
 				<a href="../quiz/setup.php" class="btn btn-primary hasPlus d-block">New Quiz</a>
 			</div>
 		</aside>
-		
+
 		<section class="col-lg-9 dashboard__content">
 			<div class="row">
 				<div class="col-12">
 					<h2>Latest Stats</h2>
 				</div>
 				<div class="col-4 px-2">
-					<div class="dashboard__container row align-items-center no-gutters">	
+					<div class="dashboard__container row align-items-center no-gutters">
 						<div class="col-lg-5 justify-content-center justify-content-lg-start d-flex">
 							<span class="admin_home__icon">
 								<i class="fas fa-question-circle"></i>
@@ -67,11 +67,11 @@
 							<p class="number mb-0 mb-lg-3 d-flex justify-content-center justify-content-lg-start"><strong>220</strong></p>
 							<p class="d-flex justify-content-center justify-content-lg-start text-center text-lg-left">Quizzes created</p>
 						</div>
-					</div>		
+					</div>
 				</div>
-				
+
 				<div class="col-4 px-2">
-					<div class="dashboard__container row align-items-center no-gutters">	
+					<div class="dashboard__container row align-items-center no-gutters">
 						<div class="col-lg-5 justify-content-center justify-content-lg-start d-flex">
 							<span class="admin_home__icon">
 								<i class="fas fa-user-friends"></i>
@@ -81,10 +81,10 @@
 							<p class="number mb-0 mb-lg-3 d-flex justify-content-center justify-content-lg-start"><strong>1,104</strong></p>
 							<p class="d-flex justify-content-center justify-content-lg-start text-center text-lg-left">Users registered</p>
 						</div>
-					</div>		
+					</div>
 				</div>
 				<div class="col-4 px-2">
-					<div class="dashboard__container row align-items-center no-gutters">	
+					<div class="dashboard__container row align-items-center no-gutters">
 						<div class="col-lg-5 justify-content-center justify-content-lg-start d-flex">
 							<span class="admin_home__icon">
 								<i class="fas fa-coins"></i>
@@ -94,7 +94,7 @@
 							<p class="number mb-0 mb-lg-3 d-flex justify-content-center justify-content-lg-start"><strong>€0.04</strong></p>
 							<p class="d-flex justify-content-center justify-content-lg-start text-center text-lg-left">Money earned</p>
 						</div>
-					</div>		
+					</div>
 				</div>
 			</div>
 			<div class="row mt-3">
@@ -110,31 +110,66 @@
 								</tr>
 							</thead>
 							<tbody>
+
 								@foreach($quizzes as $quiz)
-								
-								
+
+								@if ($quiz->is_blocked)
 								<tr>
-									<td>{{$quiz -> quiz__name}}</td>
+									<td>{{$quiz -> quiz_name}}</td>
+									<td id="quizLink{{$quiz -> id}}">{{$quiz -> quiz_link}}</td>
+									<td class="quiz_actions db d-flex flex-row justify-content-lg-center">
+										<div class="d-flex flex-column"  style=" pointer-events: none;opacity: 0.4;">
+											<i class="far fa-eye"></i>
+											<a href="/admin/home/view/{{$quiz->id}}"><span class="view-qz" id="view-qz{{$quiz->id}}">View Qs</span></a>
+										</div>
+										<div class="d-flex flex-column "  style=" pointer-events: none;opacity: 0.4;">
+											<i class="fas fa-share-alt"></i><span class="share" id="{{$quiz->id}}">Share</span>
+
+										</div>
+									
+										<form method="POST" action="/admin/home/un-block/{{$quiz->id}}" class="p-0">
+										      @csrf
+											<div class="d-flex flex-column" >
+												<i class="fas fa-times-circle"></i>
+												<span class="block" id="block{{$quiz->id}}">un-block</span>
+											</div>
+										</form>
+									
+										<div class="d-flex flex-column"  style=" pointer-events: none;opacity: 0.4;">
+											<i class="fas fa-envelope"></i><span>Message</span>
+
+										</div>
+									</td>
+								</tr>
+								@else
+								<tr>
+									<td>{{$quiz->quiz_name}}</td>
 									<td id="quizLink{{$quiz -> id}}">{{$quiz -> quiz_link}}</td>
 									<td class="quiz_actions db d-flex flex-row justify-content-lg-center">
 										<div class="d-flex flex-column">
 											<i class="far fa-eye"></i>
-											<span>View Qs</span>
+											<a href="/admin/home/view/{{$quiz->id}}"><span class="view-qz" id="view-qz{{$quiz->id}}">View Qs</span></a>
 										</div>
 										<div class="d-flex flex-column">
-										<i class="fas fa-share-alt"></i><span class="share" id="{{$quiz->id}}">Share</span>
-										
+											<i class="fas fa-share-alt"></i><span class="share" id="{{$quiz->id}}">Share</span>
+
 										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
+									
+										<form method="POST" action="/admin/home/block/{{$quiz->id}}" class="p-0">
+										             @csrf
+											<div class="d-flex flex-column">
+												<i class="fas fa-times-circle"></i>
+												<span class="block" id="block{{$quiz->id}}">block</span>
+											</div>
+										</form>
+									
 										<div class="d-flex flex-column">
 											<i class="fas fa-envelope"></i><span>Message</span>
-											
+
 										</div>
 									</td>
 								</tr>
+								@endif
 								@endforeach
 								<!-- <tr>
 									<td>Mad Dog's Geography Quiz</td>
@@ -273,9 +308,9 @@
 										</div>
 									</td>
 								</tr> -->
-								
-								
-								
+
+
+
 							</tbody>
 							<tfoot>
 								<tr>
@@ -285,7 +320,7 @@
 								</tr>
 							</tfoot>
 						</table>
-						
+
 					</div>
 				</div>
 			</div>
@@ -298,4 +333,6 @@
 @section('footer_scripts')
 @include('scripts.share-quiz')
 @include('scripts.message')
+@include('scripts.view-quiz')
+@include('scripts.block-quiz')
 @endsection

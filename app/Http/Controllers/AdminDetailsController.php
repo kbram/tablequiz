@@ -48,6 +48,7 @@ class AdminDetailsController extends Controller
     public function home()
     {   
         $quizzes = Quiz::all();
+       // dd($quizzes);
         return view('admin.home',compact('quizzes'));
     }
 
@@ -75,8 +76,20 @@ class AdminDetailsController extends Controller
     {   
         return view('admin.users');
     }
-    public function quizView(){
-        $quizzes = Quiz::all();
+    public function quizView($id){
+        
+        $quizzes = Quiz::find($id);
+       // dd($quizzes);
         return view('quiz.show-setup',compact('quizzes'));
+    }
+
+    public function block($id){
+        Quiz::where('id', $id)->update(['is_blocked' =>true]);
+          return redirect()->back();
+    }
+
+    public function un_block($id){
+        Quiz::where('id', $id)->update(['is_blocked' =>false]);
+        return redirect()->back();
     }
 }
