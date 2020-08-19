@@ -139,7 +139,7 @@ else{
     public function selecturl($quiz_name){
 
         $quiz=Quiz::where('quiz_link',$quiz_name)->first();
-        $image=QuizSetupIcon::where('id',$quiz->id)->first()->local_path;
+        $image=QuizSetupIcon::where('quiz_id',$quiz->id)->first()->local_path;
         $roundCount=$quiz->rounds()->count();
         $questionCounts=$quiz->questions()->count();
         return view('play.start-quiz',compact('quiz','roundCount','questionCounts','image'));
@@ -150,6 +150,9 @@ else{
         $quiz_id = $request->input('quiz');
         $round_id = $request->input('round');
         $question_id = $request->input('question');
+
+        $session_key = $quiz_id."-".$round_id."-".$question_id ;
+
         $user_answer = $request->input('answer');
 
         $correct_answer = Question::where('id',$question_id)->first()->answer;
