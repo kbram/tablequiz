@@ -22,8 +22,8 @@ class AdminQuestionController extends Controller
     public function create()
     {
     
-        $categories= QuizCategory::all();
-        $questions=GlobalQuestion::all();
+        $categories = QuizCategory::all();
+        $questions  = GlobalQuestion::all();
         
         foreach($questions as $question){
         
@@ -41,32 +41,29 @@ class AdminQuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request);            
+                
      
-    //    $validator = Validator::make($request->all(),
-    //     [
-    //       'category__type'              => 'required',
-    //       'question__type'              => 'required',
-    //       'question'                    => 'required',
-    //       'answer'                      => 'required',
-    //       'time__limit'                 => 'required',
-    //     ]);
-          
-    
-    //     if ($validator->fails()) {
+       $validator = Validator::make( $request->all(),
+       
+    [   
+        'category__type'    => 'required',
+        'question__type'    => 'required',
+        'question'          => 'required', 
+        'time__limit'       => 'required',                         
+       ]);
+
+       
+             if ($validator->fails()) {
+                 return back()->withErrors($validator)->withInput();
+            }
             
-    //         return back()->withErrors($validator)->withInput();
-    //         dd($validator);
-    //     }
-        
-        
-        // Creating new global question 
-        $question = GlobalQuestion::create([
-            'category_id'         => $request->input('category__type'),
-            'question_type'       => $request->input('question__type'),
-            'question'            => $request->input('question'),
-            'time_limit'          => $request->input('time__limit'), 
-             ]);
+         // Creating new global question 
+        $question = new GlobalQuestion;
+        $question->category_id         = $request->input('category__type');
+        $question->question_type       = $request->input('question__type');
+        $question->question            = $request->input('question');
+        $question->time_limit          = $request->input('time__limit'); 
+            
         
         $question->save();
 
@@ -82,7 +79,7 @@ class AdminQuestionController extends Controller
                 $image_media = $request->file('image_media'); 
                 
                 $file_name = 'image_media.'.$image_media->getClientOriginalExtension();
-                $save_path = storage_path().'global_questions/'.$question_id.'/image_media/';
+                $save_path = storage_path('app/public'). '/global_questions/'.$question_id.'/image_media/';
                 $path = $save_path.$file_name;
                 $public_path = '/global_questions/image_media/'.$question_id.'/image_media/'.$file_name;
 
@@ -103,10 +100,10 @@ class AdminQuestionController extends Controller
                 }
                 elseif ($request->input('add_link_to_image__media')){
                     
-                $image_media = $request->input('add_link_to_image__media'); 
+                $image_link = $request->input('add_link_to_image__media'); 
                 $media_image = new GlobalQuestionMedia;
                 $media_image->media_type        = "Image";
-                $media_image->media_link        = $image_media;
+                $media_image->media_link        = $image_link;
                 $media_image->question_id       =$question_id;
                         
                 $media_image->save();
@@ -118,7 +115,7 @@ class AdminQuestionController extends Controller
                       
                 $audio_media = $request->file('audio_media'); 
                 $file_name = 'audio_media.'.$audio_media->getClientOriginalExtension();
-                $save_path = storage_path().'global_questions/'.$question_id.'/audio_media/';
+                $save_path = storage_path('app/public'). '/global_questions/'.$question_id.'/audio_media/';
                 $path = $save_path.$file_name;
                 $public_path = '/global_questions/audio_media/'.$question_id.'/audio_media/'.$file_name;
 
@@ -137,10 +134,10 @@ class AdminQuestionController extends Controller
                      }
                      elseif ($request->input('add_link_to_audio__media')){
                             
-                            $media_audio = $request->input('add_link_to_audio__media'); 
+                            $audio_link = $request->input('add_link_to_audio__media'); 
                             $media_audio = new GlobalQuestionMedia;
                             $media_audio->media_type        = "Audio";
-                            $media_audio->media_link        = $image_media;
+                            $media_audio->media_link        = $audio_link;
                             $media_audio->question_id       =$question_id;
                                    
                             $media_audio->save();
@@ -153,7 +150,7 @@ class AdminQuestionController extends Controller
                        
                         $video_media = $request->file('video_media'); 
                             $file_name = 'video_media.'.$video_media->getClientOriginalExtension();
-                            $save_path = storage_path().'global_questions/'.$question_id.'/video_media/';
+                            $save_path = storage_path('app/public'). '/global_questions/'.$question_id.'/video_media/';
                             $path = $save_path.$file_name;
                             $public_path = '/global_questions/video_media/'.$question_id.'/video_media/'.$file_name;
 
@@ -172,11 +169,11 @@ class AdminQuestionController extends Controller
                      }
                      elseif ($request->input('add_link_to_video__media')){
               
-                        $media_video = $request->input('add_link_to_video__media'); 
+                        $video_link = $request->input('add_link_to_video__media'); 
                         $media_video = new GlobalQuestionMedia;
                         $media_video->media_type        = "Video";
-                        $media_video->media_link        = $image_media;
-                        $media_video->question_id       =$question_id;
+                        $media_video->media_link        = $video_link;
+                        $media_video->question_id       = $question_id;
                                
                         $media_video->save();
                      
@@ -193,37 +190,23 @@ class AdminQuestionController extends Controller
             else if($question->question_type == 'multiple__choice__question'){
               
                 $global_answer= $request->input('multiple__choice__answer__1');
+                // dd($global_answer);
                 for($i = 0 ; $i < 5 ; $i++)
                 {                
-                   
+                     $answer_get= $global_answer;
+                }
 
-                    
-                     //dd($global_answer)[$i];
-                     $answer    = new GlobalAnswer;
-                     $answer_get = $global_answer;
-                     $answer->answer              = $answer_get;
-                   
-                  
-                // }
-                // $multi_answers[] = request('multiple__choice__answer__1');
-                // dd($multi_answers);
-                // if(is_array($multi_answers)){
-                // foreach($multi_answers as $multi_answer) {
-                //         $answer    = new GlobalAnswer;
-                //         $answer ->answer    = $multi_answer;
-                //         $answer ->answer_stat =$request->get('multiple__choice__correct__answer', 0);
-                // }   
-            }
-                
-                
-             
-            }
+                $answer    = new GlobalAnswer;
+                $answer->answer              = $answer_get;
+                $answer->answer_stat         = true;
+               
+             }
             
             else if($question->question_type == 'numeric__question'){
                     
-                    $answer    = new GlobalAnswer;
-                    $answer->answer              = $request->input('numeric__question__answer');
-                    $answer->answer_stat         = true;
+                    $answer     = new GlobalAnswer;
+                    $answer->answer         = $request->input('numeric__question__answer');
+                    $answer->answer_stat    = true;
             }
            //end answer_type for each question_type
             $answer ->question_id  =  $question_id;
@@ -232,15 +215,178 @@ class AdminQuestionController extends Controller
 
            return redirect()->action( 'AdminQuestionController@create');
         }
-        public function edit($id, $question_id)
-        {    
-            // $categories          = QuizCategory::all();
-            // $global_question     = GlobalQuestion::findorfail($id);
-            // $cat_name            = QuizCategory::where('id', $global_question->category_id)->value('category_name'); 
-            // $global_answer              = $global_question->answer()->get();
-            // $global_question_media      = $global_question->media()->get();
-          
-            // return view('admin.questions',compact('cat_name','categories', 'global_question','global_answer','global_question_media'));
+        public function edit($id)
+          {    
+         
+            $questions                      = GlobalQuestion::find($id);
+            $cat_name[$questions->id]       = QuizCategory::where('id', $questions->category_id)->value('category_name');
+            $categories                     = QuizCategory::all();
+            $global_answer                  = GlobalAnswer::where('question_id', $questions->id)->value('answer');
+            $image_media                    = GlobalQuestionMedia::where('question_id', $questions->id)->get();
+            $audio_media                    = GlobalQuestionMedia::where('question_id', $questions->id)->get();
+            $video_media                    = GlobalQuestionMedia::where('question_id', $questions->id)->get();
+            
+            return view('admin.questions-edit',compact('cat_name','categories','questions','global_answer','image_media','audio_media','video_media'));
+        
         }
 
+
+        public function update(Request $request,$id)
+        {
+    
+                $validator = Validator::make( $request->all(),
+              [ 
+                  'category__type'    => 'required',
+                  'question__type'    => 'required',
+                  'question'          => 'required', 
+                  'time__limit'       => 'required',                         
+             ]);
+            if ($validator->fails()) {
+                return back()->withErrors($validator)->withInput();
+            }
+
+        $questions = GlobalQuestion::findorfail($id);    
+        
+        $questions->category_id           = $request->input('category__type');
+        $questions->question_type         = $request->input('question__type');
+        $questions->question              = $request->input('question');
+        $questions->time_limit            = $request->input('time__limit');
+        
+        $questions->save();
+        
+       $question_id = $questions->id;
+            
+         
+        // Image media 
+        if($request->hasFile('image_media')) {
+            dd($request);
+                 $image_media = $request->file('image_media'); 
+                 $file_name = 'image_media.'.$image_media->getClientOriginalExtension();
+                 $save_path = storage_path('app/public'). '/global_questions/'.$question_id.'/image_media/';
+                 $path = $save_path.$file_name;
+                 $public_path = '/global_questions/image_media/'.$question_id.'/image_media/'.$file_name;
+              File::makeDirectory($save_path, $mode = 0755, true, true);
+                 $image_media->move($save_path, $file_name);      
+                 $media_image = GlobalQuestionMedia::where('question_id',$id)->first();
+                 $media_image->media_type        = "Image";
+                 $media_image->public_path       = $public_path;
+                 $media_image->local_path        = $save_path . '/' . $file_name;
+                 $media_image->question_id       = $question_id;
+                
+                $media_image->save();
+            }
+            
+                elseif ($request->input('add_link_to_image__media')){
+                    
+                $image_link = $request->input('add_link_to_image__media'); 
+                $media_image = GlobalQuestionMedia::where('question_id',$id)->first();
+
+                $media_image->media_type        = "Image";
+                $media_image->media_link        = $image_link;
+                $media_image->question_id       = $question_id;
+                        
+                $media_image->save();
+            }
+
+       //Audio media
+       
+       if ($request->hasFile('audio_media')) {
+                      
+                $audio_media = $request->file('audio_media'); 
+                $file_name = 'audio_media.'.$audio_media->getClientOriginalExtension();
+                $save_path = storage_path('app/public'). '/global_questions/'.$question_id.'/audio_media/';
+                $path = $save_path.$file_name;
+                $public_path = '/global_questions/audio_media/'.$question_id.'/audio_media/'.$file_name;
+
+                File::makeDirectory($save_path, $mode = 0755, true, true);
+
+                $audio_media->move($save_path, $file_name);      
+                            
+                        $media_audio = GlobalQuestionMedia::where('question_id',$id)->first();
+                        
+                        $media_audio->media_type        = "Audio";
+                        $media_audio->public_path       = $public_path;
+                        $media_audio->local_path        = $save_path . '/' . $file_name;
+                        $media_audio->question_id       = $question_id;
+                       
+                        $media_audio->save();
+                     }
+                     elseif ($request->input('add_link_to_audio__media')){
+                            
+                            $audio_link  = $request->input('add_link_to_audio__media'); 
+                            $media_audio = GlobalQuestionMedia::where('question_id',$id)->first();
+                            $media_audio->media_type        = "Audio";
+                            $media_audio->media_link        = $audio_link;
+                            $media_audio->question_id       = $question_id;
+                                   
+                            $media_audio->save();
+                         
+                        }
+          
+         //Video media               
+        
+         if ($request->hasFile('video_media')) {
+                       
+                        $video_media = $request->file('video_media'); 
+                            $file_name = 'video_media.'.$video_media->getClientOriginalExtension();
+                            $save_path = storage_path('app/public'). '/global_questions/'.$question_id.'/video_media/';
+                            $path = $save_path.$file_name;
+                            $public_path = '/global_questions/video_media/'.$question_id.'/video_media/'.$file_name;
+
+                            File::makeDirectory($save_path, $mode = 0755, true, true);
+
+                            $video_media->move($save_path, $file_name);      
+                            
+                        $media_video = GlobalQuestionMedia::where('question_id',$id)->first();
+                        
+                        $media_video->media_type        = "Video";
+                        $media_video->public_path       = $public_path;
+                        $media_video->local_path        = $save_path . '/' . $file_name;
+                        $media_video->question_id       = $question_id;
+                       
+                        $media_video->save();
+                     }
+                     elseif ($request->input('add_link_to_video__media')){
+              
+                        $video_link = $request->input('add_link_to_video__media'); 
+                        $media_video = GlobalQuestionMedia::where('question_id',$id)->first();
+                        $media_video->media_type        = "Video";
+                        $media_video->media_link        = $video_link;
+                        $media_video->question_id       = $question_id;
+                               
+                        $media_video->save();
+                     
+                    }
+            
+            //answer_type for each question_type
+           if($questions->question_type == 'standard__question'){
+             
+                $answer                      =  GlobalAnswer::where('question_id',$id)->first();
+                $answer->answer              = $request->input('standard__question__answer');
+                $answer->answer_stat         = true; 
+            }
+
+            else if($questions->question_type == 'multiple__choice__question'){
+              
+                $answer                      =  GlobalAnswer::where('question_id',$id)->first();
+                $answer->answer              = $answer_get;
+                $answer->answer_stat         = true;
+               
+             }
+            
+            else if($questions->question_type == 'numeric__question'){
+                    
+                    $answer                      =  GlobalAnswer::where('question_id',$id)->first();
+                    $answer->answer              = $request->input('numeric__question__answer');
+                    $answer->answer_stat         = true;
+            }
+           //end answer_type for each question_type
+            $answer ->question_id  =  $question_id;
+            
+            $answer->save();
+
+        
+        return redirect()->action( 'AdminQuestionController@create');    
+          
+        } 
  }
