@@ -294,61 +294,30 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
+
               <div class="modal-body categories d-flex w-100 pb-4">
                 <div class="row suggested__categories px-3 w-100 no-gutters">
-                    <div class="suggested_category__icon col-6 col-sm-4 text-center p-2">
-						<div class="d-flex flex-column h-100 participants__choice justify-content-center align-items-center p-4">
-							<div class="icon pb-2">
-								<i class="far fa-futbol"></i>
+
+					@foreach($categories as $category)
+						<div class="suggested_category__icon col-6 col-sm-4 text-center p-2">
+							<div class="d-flex flex-column h-100 participants__choice justify-content-center align-items-center p-4">
+								<div class="icon pb-2">
+									<i class="far fa-futbol"></i>
+								</div>
+								<p class="">
+									
+										{{$category->category_name}}
+									
+								</p>
 							</div>
-							<p class="">Sport</p>
 						</div>
-                    </div>
-                    <div class="suggested_category__icon col-6 col-sm-4 text-center p-2">
-						<div class="d-flex flex-column h-100 participants__choice justify-content-center align-items-center p-4">
-							<div class="icon pb-2">
-								<i class="fas fa-headphones-alt"></i>
-							</div>
-							<p class="">Music</p>
-						</div>
-                    </div>
-                    <div class="suggested_category__icon col-6 col-sm-4 text-center p-2">
-						<div class="d-flex flex-column h-100 participants__choice justify-content-center align-items-center p-4">
-							<div class="icon pb-2">
-								<i class="fas fa-award"></i>
-							</div>
-							<p class="">Politics</p>
-						</div>
-                    </div>
-                    <div class="suggested_category__icon col-6 col-sm-4 text-center p-2">
-						<div class="d-flex flex-column h-100 participants__choice justify-content-center align-items-center p-4">
-							<div class="icon pb-2">
-								<i class="far fa-grin-hearts"></i>
-							</div>
-							<p class="">Pop culture</p>
-						</div>
-                    </div>
-                    <div class="suggested_category__icon col-6 col-sm-4 text-center p-2">
-						<div class="d-flex flex-column h-100 participants__choice justify-content-center align-items-center p-4">
-							<div class="icon pb-2">
-								<i class="fas fa-globe-africa"></i>
-							</div>
-							<p class="">Geography</p>
-						</div>
-                    </div>
-                    <div class="suggested_category__icon col-6 col-sm-4 text-center p-2">
-						<div class="d-flex flex-column h-100 participants__choice justify-content-center align-items-center p-4">
-							<div class="icon pb-2">
-								<i class="fas fa-landmark"></i>
-							</div>
-							<p class="">History</p>
-						</div>
-                    </div>
-                    
+					@endforeach
                 </div>
               </div>
+			  
               <div class="modal-body question_types d-none">
                 <div class="row suggested__categories px-3 w-100">
+				
                     <div class="suggested_category__icon col-6 text-center p-2">
 						<div class="d-flex flex-column h-100 participants__choice justify-content-center align-items-center p-4">
 							<div class="icon pb-2">
