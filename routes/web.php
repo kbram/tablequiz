@@ -190,7 +190,7 @@ Route::post('setup','QuizController@store');
 
 
 Route::get('questions/create', 'AdminQuestionController@create');
-Route::post('questions', 'AdminQuestionController@store');
+Route::post('questions/create', 'AdminQuestionController@store');
 
 Route::get('/dashboard/home','DashboardController@index');
 Route::get('/dashboard/my-quizzes','DashboardController@myQuiz');
