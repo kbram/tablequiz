@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateQuizRoundsTable extends Migration
+class CreateMasterAnswersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,14 @@ class CreateQuizRoundsTable extends Migration
      */
     public function up()
     {
-        Schema::create('quiz_rounds', function (Blueprint $table) {
+        Schema::create('master_answers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('quiz_id')->unsigned();
-            $table->foreign('quiz_id')->references('id')->on('quizzes')->onDelete('cascade');
-            $table->string('round_name');
-            $table->string('round_slug');
+            $table->string('answer');
+            $table->boolean('answer_stat')->default(true);
+            $table->bigInteger('question_id')->unsigned();
+            $table->foreign('question_id')->references('id')->on('master_questions');
             $table->timestamps();
         });
-        
     }
 
     /**
@@ -31,6 +30,6 @@ class CreateQuizRoundsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('quiz_rounds');
+        Schema::dropIfExists('master_answers');
     }
 }

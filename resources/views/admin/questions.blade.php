@@ -375,8 +375,6 @@
 	
 </section>
 
-@endsection
-
 @section('footer_scripts')
 
 

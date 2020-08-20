@@ -21,5 +21,11 @@ class QuizCategory extends Model
     {
         return $this->hasMany('App\Models\Question');
     }
+    public function quizCategoryImages()
+    {
+        return $this->hasOne('App\Models\QuizCategoryImage');
+    }
+
+
     
 }

@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 Use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use App\Models\QuizCategory;
 
 class CategoriesTableSeeder extends Seeder
 {
@@ -41,5 +43,7 @@ class CategoriesTableSeeder extends Seeder
             'category_name'  => 'Popular Culture' ,  
               'category_slug'         => 'popular-culture'
         ]);
+      }
+        
     }
-}
+
