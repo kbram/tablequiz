@@ -55,6 +55,7 @@ class QuizController extends Controller
 
 
            if ($request->hasFile('upload__quiz__icon')) {
+               dd($request->hasFile('upload__quiz__icon'));
  
             $quiz_icon = $request->file('upload__quiz__icon');
 
@@ -88,7 +89,25 @@ class QuizController extends Controller
             $quizIcon->thumb_path        = $public_path_thumb;
 
            $quizIcon->save();
+
            } 
+           else{
+            $filename = 'homepage__logo.png'; 
+            $save_path1 = '/storage'; 
+            $save_path = storage_path('app/public');
+            $public_path = storage_path('app/public');
+            $public_path_thumb= storage_path('app/public').'/thumb';
+
+            $quizIcon = new QuizSetupIcon;
+
+            $quizIcon->public_path       = $public_path;
+            $quizIcon->local_path        = $save_path1 . '/' . $filename;
+            $quizIcon->quiz_id           =$quiz_id;
+            $quizIcon->thumb_path        = $public_path_thumb;
+
+            $quizIcon->save();
+
+           }
        
        return view('quiz.add_round');
     
