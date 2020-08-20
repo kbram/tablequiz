@@ -104,7 +104,7 @@
 								<div class="col-md-4">
 								
 									<select id="question__type" name="question__type" class="form-control" >
-                                        <option selected value="{{($questions->question_type != '' ? $questions->question_type : '')}}">{{$questions->question_type}}</option>
+                                        <option selected value="{{$questions->question_type}}" >{{$questions->question_type}}</option>
 										<option value="standard__question">Standard</option>
 										<option value="multiple__choice__question">Multiple choice</option>
 										<option value="numeric__question">Numeric</option>
@@ -260,7 +260,7 @@
 									<label for="standard__question__answer">Answer</label>
 								</div>
 								<div class="col-md-8">
-									<input class="form-control" name="standard__question__answer" type="text" value="{{($global_answer != '' ? $global_answer : '')}}" >
+									<input class="form-control" name="standard__question__answer" type="text" value="{{($standard_answer != '' ? $standard_answer : '')}}" >
 								</div>
 							</div>
 							<div class="form-row d-none" id="numeric__answer" name="numeric__answer">
@@ -268,7 +268,7 @@
 									<label for="numeric__question__answer">Answer</label>
 								</div>
 								<div class="col-md-8">
-									<input class="form-control" name="numeric__question__answer" type="number" value="{{($global_answer != '' ? $global_answer : '')}}" >
+									<input class="form-control" name="numeric__question__answer" type="number" value="{{($numeric_answer != '' ? $numeric_answer : '')}}" >
 								</div>
 							</div>
 							<div class="form-row d-none" style="min-height:0;" id="multiple__choice__legend">
@@ -286,7 +286,7 @@
 										<div  id="dynamicTable" class="col-7">
 										
 											
-									 <input  name="multiple__choice__answer__1" class="form-control" type="text" value="{{($global_answer != '' ? $global_answer : '')}}" >		   
+									 <input  name="multiple__choice__answer__1" class="form-control" type="text" value="{{($multiple_answer != '' ? $multiple_answer : '')}}" >		   
 										</div> 
 										<div class="col-1 justify-content-center">
 											&nbsp;
@@ -325,38 +325,7 @@
 						
 						
 					</div>
-					<div class="dashboard__container flex-grow-1">
-						<table class="table table-striped table-borderless m-0 h-100 my__quizzes">
-							<thead>
-								<tr>
-									<th>Question <span><small><i class="fa fa-angle-down"></i></small></span</th>
-									<th>Category <span><small><i class="fa fa-angle-down"></i></small></span</th>
-									<th class="text-center">Actions</th>
-								</tr>
-							</thead>
-							<tbody>
-							
-							<tr>	
-								
-						       
-						       <td class="quiz_actions d-flex flex-row justify-content-lg-center">
-							   <div class="d-flex flex-column">
-									<i class="fas fa-pencil-alt"></i>
-									<span><a  data-toggle="tooltip" title="edit">
-                                                   Edit
-                                                </a></span>
-								</div>									
-								<div class="d-flex flex-column">
-									<i class="fas fa-times-circle"></i>
-									<span> <a  data-id="" data-model="GlobalQuestion"  data-toggle="tooltip" title="delete" >
-                                               Delete
-                                                </a></span>
-								</div>
-							    </td>
-							</tr>
-							
-								 
-							</tbody>
+					
 							<tfoot>
 								<tr>
 									<td colspan="6" class="text-center text-muted">

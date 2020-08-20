@@ -280,7 +280,7 @@
 
 									<div class="row multiple__choice__row pb-3 align-items-center">
 										<div  id="dynamicTable" class="col-7">
-										<!-- <input id="qiz"  name="yana" class="form-control" type="text" >		    -->
+										
 											
 									 <input  name="multiple__choice__answer__1" class="form-control" type="text" >		   
 										</div> 
@@ -374,27 +374,7 @@
 	</div>
 	
 </section>
-<script>
- var i = 0;
 
-function getclick()
-{
-	// var x = document.getElementsByName("multiple__choice__answer__1");
-	console.log("hello");
-
-}
-
-//     function getclick(){
-// 		console.log("hello christy");
-// 		++i;
-// 		var x= document.getElementById("dynamicTable");
-    	
-//    $("#dynamicTable").append('<div id="dynamicTable" class="col-7"> <input  name="[0][multiple__choice__answer__1]" class="form-control" type="text" > </div>');
-//    answer_array.push(x.value);
-// 	};
-
-
-   </script>
 @endsection
 
 @section('footer_scripts')
