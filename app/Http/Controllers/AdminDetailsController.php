@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Models\User;
 use App\Models\Quiz;
 use Illuminate\Support\Facades\Route;
@@ -83,4 +84,6 @@ class AdminDetailsController extends Controller
         $quizzes = Quiz::all();
         return view('quiz.show-setup',compact('quizzes'));
     }
+
+    
 }

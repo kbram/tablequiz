@@ -166,6 +166,9 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
     //admin home view quiz
     Route::get('admin/home/{quiz_name}/view','AdminDetailsController@quizView');
 
+    //admin user search
+   
+
 });
 
 Route::redirect('/php', '/phpinfo', 301);

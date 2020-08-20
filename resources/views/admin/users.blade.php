@@ -59,9 +59,9 @@
 							<h2>Users</h2>
 						</div>
 						<div class="col-lg-3">
-							<form action="" method="" class="p-0">
-								<input type="text" list="quizzes" name="quiz" placeholder="Search..." class="form-control mb-2 mt-n2">	
-							</form>
+						@if(config('usersmanagement.enableSearchUsers'))
+								@include('partials.search-user-form')
+							@endif
 						</div>
 					</div>
 					
@@ -76,9 +76,8 @@
 									<th class="text-center">Actions</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="users_table">
 								@foreach($users as $user)
-					
 								<tr>
 									<td>{{$user -> name}}</td>
 									<td>15</td>
@@ -103,6 +102,10 @@
 								</tr>
 								@endforeach
 							</tbody>
+							<tbody id="users_table"></tbody>
+							@if(config('usersmanagement.enableSearchUsers'))
+								<tbody id="search_results"></tbody>
+							@endif
 							<tfoot>
 								<tr>
 									
@@ -122,4 +125,7 @@
 
 @section('footer_scripts')
 @include('scripts.message')
+@if(config('usersmanagement.enableSearchUsers'))
+        @include('scripts.search-user')
+@endif
 @endsection
