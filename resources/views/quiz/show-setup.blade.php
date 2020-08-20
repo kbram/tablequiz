@@ -17,7 +17,7 @@
 						<label for="quiz__name">Quiz name</label>
 					</div>
 					<div class="col-md-8">
-						<input autocomplete="nothanks" type="text" name="quiz__name" class="form-control" value="{{ old('quiz__name') }}">
+						<input autocomplete="nothanks" type="text" name="quiz__name" class="form-control" value="{{$quizzes->quiz_name}}">
 					
 						@if ($errors->has('quiz__name'))
                                     <span class="help-block">
@@ -48,7 +48,7 @@
 						<p class="disabled__text">TableQuiz.app/</p>
 					</div>
 					<div class="col-sm">
-						<input type="text" name="quiz__link" class="form-control" value="{{ old('quiz__link') }}">
+						<input type="text" name="quiz__link" class="form-control" value="{{$quizzes->quiz_link}}">
 						@if ($errors->has('quiz__link'))
                                     <span class="help-block">
                                             <p>{{ $errors->first('quiz__link') }}</p>
@@ -161,7 +161,7 @@
 					</div>
 					<div class="col-md-4">
 						<select id="quiz__participants" class="form-control" name="quiz__participants">
-							<option disabled selected>{{(old('quiz__participants') != '' ? old('quiz__participants') : 'Please Choose...')}}</option>
+							<option disabled selected>{{$quizzes->no_of_participants}}</option>
 							<option value="1-5">1-5</option>
 							<option value="5-9">5-9</option>
 							<option value="10-19">10-19</option>
@@ -186,7 +186,25 @@
 							</button>
 						  </div>
 						  <div class="modal-body row no-gutters participants">
-								<div class="col-6 col-sm-4 participants__number p-1">
+						  @foreach($participants as $participant)
+						  <div class="col-6 col-sm-4 participants__number p-1">
+									<div class="participants__choice p-3">
+										 @if(($participant->from) && ($participant->to)== null)
+										    <p>{{$participant->from}}+</p>
+										 @else
+										    <p>{{$participant->from}}-{{$participant->to}}</p>
+										 @endif
+
+
+										@if(($participant->cost)!= 0)
+										   <p>{{$participant->cost}}</p>
+										@else
+										   <p>Free</p>
+										@endif
+									</div>
+								</div>
+						  @endforeach
+								<!-- <div class="col-6 col-sm-4 participants__number p-1">
 									<div class="participants__choice p-3">
 										<p>1-5</p>
 										<p>Free</p>
@@ -221,7 +239,7 @@
 										<p>50+</p>
 										<p>€29.99</p>
 									</div>
-								</div>
+								</div> -->
 						  </div>
 						  <div class="modal-footer justify-content-center row no-gutters">
 							<div class="col-md-3">

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Quiz;
 use Illuminate\Support\Facades\Route;
-
+use App\Models\Participant;
 class AdminDetailsController extends Controller
 {
     /**
@@ -77,10 +77,9 @@ class AdminDetailsController extends Controller
         return view('admin.users');
     }
     public function quizView($id){
-        
+        $participants=Participant::all();
         $quizzes = Quiz::find($id);
-       // dd($quizzes);
-        return view('quiz.show-setup',compact('quizzes'));
+        return view('quiz.show-setup',compact('quizzes','participants'));
     }
 
     public function block($id){

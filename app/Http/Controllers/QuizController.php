@@ -23,8 +23,8 @@ class QuizController extends Controller
         return view('admin.quizzes',compact('quizzes'));
     }
     public function create()
-    {
-        return view('quiz.setup');
+    {    $participants=Participant::all();
+        return view('quiz.setup',compact('participants'));
     }
 
     /**

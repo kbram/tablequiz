@@ -333,6 +333,5 @@
 @section('footer_scripts')
 @include('scripts.share-quiz')
 @include('scripts.message')
-@include('scripts.view-quiz')
 @include('scripts.block-quiz')
 @endsection
