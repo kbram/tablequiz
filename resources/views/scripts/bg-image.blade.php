@@ -1,17 +1,24 @@
 <script type="text/javascript">
  //Image zoom size
 var slider = document.getElementById("formControlRange");
+
 slider.oninput = function() {
 
-  var image = document.getElementById('img-wrapper'),
-      ranger = document.getElementById('formControlRange');
-      image.style.width = 20*(this.value / 1)+'px';
+  var image = document.getElementById('blah');
+      image.style.width = 20*(this.value)+'px';
+      image.style.height = 20*(this.value)+'px';
+     
+      if(this.value < 20){ image.style.marginTop = (100-this.value)+'px';}
+      else{
+        image.style.marginTop ='auto';
+      }
+    
 }
 
 
 //Image Rotate
 var angle = 0,
-  img = document.getElementById('img-wrapper');
+  img = document.getElementById('blah');
 document.getElementById('rotate').onclick = function() {
   angle = (angle + 90) % 360;
   img.className = "rotate" + angle;
