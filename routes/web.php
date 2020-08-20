@@ -219,3 +219,4 @@ Route::post('/sendmail', 'ContactSendMailController@send');
 Route::post('stripe', 'StripePaymentController@stripePost')->name('stripe.post');
 
 Route::get('test','MasterQuestionController@index');
+

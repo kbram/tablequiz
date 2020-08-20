@@ -30,7 +30,7 @@ class QuizCategoriesController extends Controller
         $validator = Validator::make($request->all(),
         [
             'category_name'  => 'required',
-            'upload__category__image'  => 'required',            
+            //'upload__category__image'  => 'required',            
         ]
         );
 

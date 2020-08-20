@@ -306,7 +306,7 @@
 								</div>
 								<p class="">
 									
-										{{$category->category_name}}
+									{{$category->category_name}}
 									
 								</p>
 							</div>
@@ -317,7 +317,7 @@
 			  
               <div class="modal-body question_types d-none">
                 <div class="row suggested__categories px-3 w-100">
-				
+
                     <div class="suggested_category__icon col-6 text-center p-2">
 						<div class="d-flex flex-column h-100 participants__choice justify-content-center align-items-center p-4">
 							<div class="icon pb-2">
@@ -353,10 +353,13 @@
                     
                 </div>
               </div>
+
+
               <div class="modal-body questions d-none">
                 <div class="row suggested__question px-3">
                     <ul class="all_suggested_questions list-unstyled p-0 m-0">
                         <li class="single__suggested__question text-body p-3 border rounded mb-4">
+
                             <div class="single__suggested__question__image position-relative">
                                 <img src="../images/moscow__image.jpeg" class="w-100">
                                 <div class="change__image position-absolute px-4 invisible">
@@ -365,6 +368,8 @@
                                     </label>
                                 </div>
                             </div>
+
+
                             <div class="single__suggested__question__attributes row pt-3">
 								<div class="col-md-3 text-center d-flex align-items-center justify-content-center">
 									<span class="pr-2">
