@@ -47,9 +47,11 @@ class AdminDetailsController extends Controller
 
     public function home()
     {   
+        $cusers=User::count();
+        $cquzzes=Quiz::count();
         $quizzes = Quiz::all();
-       // dd($quizzes);
-        return view('admin.home',compact('quizzes'));
+       
+        return view('admin.home',compact('quizzes','cusers','cquzzes'));
     }
 
     public function categories()
