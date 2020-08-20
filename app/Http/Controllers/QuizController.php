@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Quiz;
 use App\Models\UserPayment;
-
+use App\Models\Participant;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Validator;
@@ -200,7 +200,8 @@ class QuizController extends Controller
     }
 
     public function setup()
-    {
-        return view('quiz.setup');
+    {    
+        $participants=Participant::all();
+        return view('quiz.setup',compact('participants'));
     }
 }

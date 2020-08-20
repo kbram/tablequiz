@@ -186,7 +186,25 @@
 							</button>
 						  </div>
 						  <div class="modal-body row no-gutters participants">
-								<div class="col-6 col-sm-4 participants__number p-1">
+						  @foreach($participants as $participant)
+						  <div class="col-6 col-sm-4 participants__number p-1">
+									<div class="participants__choice p-3">
+										 @if(($participant->from) && ($participant->to)== null)
+										    <p>{{$participant->from}}+</p>
+										 @else
+										    <p>{{$participant->from}}-{{$participant->to}}</p>
+										 @endif
+
+
+										@if(($participant->cost)!= 0)
+										   <p>{{$participant->cost}}</p>
+										@else
+										   <p>Free</p>
+										@endif
+									</div>
+								</div>
+						  @endforeach
+								<!-- <div class="col-6 col-sm-4 participants__number p-1">
 									<div class="participants__choice p-3">
 										<p>1-5</p>
 										<p>Free</p>
@@ -221,7 +239,7 @@
 										<p>50+</p>
 										<p>€29.99</p>
 									</div>
-								</div>
+								</div> -->
 						  </div>
 						  <div class="modal-footer justify-content-center row no-gutters">
 							<div class="col-md-3">
