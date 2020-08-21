@@ -28,7 +28,7 @@
 						</a>
 					</li>
 				</ul>
-				<a href="../quiz/setup.php" class="btn btn-primary hasPlus d-block">New Quiz</a>
+				<a href="/setup/create" class="btn btn-primary hasPlus d-block">New Quiz</a>
 			</div>
 		</aside>
 		
@@ -51,7 +51,7 @@
 
 							<tr>
                                     
-									 <td>{{$quiz->quiz_name}}</td>
+									 <td>{{$quiz->quiz__name}}</td>
 									 <td>{{$roundCount[$quiz->id]}}</td>
  									 <td>{{$questionCounts[$quiz->id]}}</td>
 
@@ -66,7 +66,7 @@
 											<i class="fas fa-share-alt"></i>
 											<span>Share</span>
 										</div>
-										<a href="../quiz/start-quiz.php">
+										<a href="/quiz/start_quiz">
 											<div class="d-flex flex-column">
 												<i class="fas fa-play"></i>
 												<span>Start</span>
@@ -75,12 +75,11 @@
 										</td>
 										@endforeach
 								</tr>
-
-
 								
 						</table>
 						
-					</div>			</div>
+					</div>
+					</div>
 			</div>
 		</section>
 	</div>

@@ -161,6 +161,13 @@ Route::get('quiz/add_round_2', 'QuizController@add_round_2');
 Route::get('quiz/setup', 'QuizController@setup');
 
 
+Route::post('round/store', 'QuizRoundController@store');
+Route::get('about_us',function(){
+    return view('about_us');
+});
+Route::get('contact_us',function(){
+    return view('contact_us');
+});
 //sam route can start here
 Route::get('playquiz/{quiz_id}/{round_id}/{question_id}', 'PlayController@testplay')->name('play.quiz');
 Route::post('startquiz', 'PlayController@start');
@@ -174,20 +181,28 @@ Route::get('startquiz-team/{id}', 'PlayController@errorteam');
 
 //my-quizzes dashbord route
 Route::get('showMyquizzes','DashboardController@showMyQuizzes');
+// Route::post('setup','QuizController@store');
 Route::get('quizzes/{id}/edit','QuizController@editQuiz');
+Route::post('setup/update/{id}','QuizController@update');
+
 //christy route can start from here
 
 //quiz category route
 Route::get('admin/categories', 'QuizCategoriesController@create');
 Route::post('admin/categories', 'QuizCategoriesController@store');
 
+//quizmaster question routes
+Route::post('/quiz','MasterQuestionController@postQuiz');
+Route::post('/round','MasterQuestionController@postRound');
+Route::post('/question','MasterQuestionController@postQuestion');
+Route::post('/quizsetup','MasterQuestionController@store');
+Route::get('/addround/{id}','QuizRoundController@getRound');
+
 
 
 
 //kanu routes
 Route::get('setup/create', 'QuizController@create');
-Route::post('setup','QuizController@store');
-// Route::put('setup/update/{id}','QuizController@update');
 
 
 
@@ -195,7 +210,6 @@ Route::get('questions/create', 'AdminQuestionController@create');
 Route::post('questions', 'AdminQuestionController@store');
 
 Route::get('/dashboard/home','DashboardController@index');
-Route::get('/dashboard/my-quizzes','DashboardController@myQuiz');
 Route::get('dashboard/settings','DashboardController@setting');
 
 

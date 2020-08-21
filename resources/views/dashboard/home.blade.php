@@ -33,7 +33,7 @@
 						</a>
 					</li>
 				</ul>
-				<a href="../quiz/setup.php" class="btn btn-primary hasPlus d-block">New Quiz</a>
+				<a href="/setup/create" class="btn btn-primary hasPlus d-block">New Quiz</a>
 			</div>
 		</aside>
 		
@@ -144,111 +144,38 @@
 									<th class="text-right">Actions</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<td>Mad Dog's Geography Quiz</td>
-									<td>20</td>
-									<td>4</td>
+						
+							<tbody id="users">
+							@foreach($quizzes as $quiz)
+
+							<tr>
+                                    
+									 <td>{{$quiz->quiz__name}}</td>
+									 <td>{{$roundCount[$quiz->id]}}</td>
+ 									 <td>{{$questionCounts[$quiz->id]}}</td>
+
+ 
 									<td class="quiz_actions d-flex flex-row justify-content-lg-end">
-										<div class="d-flex flex-column">
+										<a href="quizzes/{{$quiz->id}}/edit">			
+										<div class="d-flex flex-column pl-0 pl-md-4">
 											<i class="fas fa-edit"></i>
 											<span>Edit</span>
-										</div>									<div class="d-flex flex-column">
+										</div></a>
+										<div class="d-flex flex-column">
 											<i class="fas fa-share-alt"></i>
 											<span>Share</span>
 										</div>
-										<a href="../quiz/start-quiz.php">
+										<a href="/quiz/start_quiz">
 											<div class="d-flex flex-column">
 												<i class="fas fa-play"></i>
 												<span>Start</span>
 											</div>
 										</a>
-									</td>
+										</td>
+										@endforeach
 								</tr>
+
 								
-								<tr>
-									<td>Mad Dog's Geography Quiz</td>
-									<td>20</td>
-									<td>4</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-end">
-										<div class="d-flex flex-column">
-											<i class="fas fa-edit"></i>
-											<span>Edit</span>
-										</div>									<div class="d-flex flex-column">
-											<i class="fas fa-share-alt"></i>
-											<span>Share</span>
-										</div>
-										<a href="../quiz/start-quiz.php">
-											<div class="d-flex flex-column">
-												<i class="fas fa-play"></i>
-												<span>Start</span>
-											</div>
-										</a>
-									</td>
-								</tr>
-								
-								<tr>
-									<td>Mad Dog's Geography Quiz</td>
-									<td>20</td>
-									<td>4</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-end">
-										<div class="d-flex flex-column">
-											<i class="fas fa-edit"></i>
-											<span>Edit</span>
-										</div>									<div class="d-flex flex-column">
-											<i class="fas fa-share-alt"></i>
-											<span>Share</span>
-										</div>									
-										<a href="../quiz/start-quiz.php">
-											<div class="d-flex flex-column">
-												<i class="fas fa-play"></i>
-												<span>Start</span>
-											</div>
-										</a>
-									</td>
-								</tr>
-								
-								<tr>
-									<td>Mad Dog's Geography Quiz</td>
-									<td>20</td>
-									<td>4</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-end">
-										<div class="d-flex flex-column">
-											<i class="fas fa-edit"></i>
-											<span>Edit</span>
-										</div>									<div class="d-flex flex-column">
-											<i class="fas fa-share-alt"></i>
-											<span>Share</span>
-										</div>			
-										<a href="../quiz/start-quiz.php">
-											<div class="d-flex flex-column">
-												<i class="fas fa-play"></i>
-												<span>Start</span>
-											</div>
-										</a>
-									</td>
-								</tr>
-								
-								<tr>
-									<td>Mad Dog's Geography Quiz</td>
-									<td>20</td>
-									<td>4</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-end">
-										<div class="d-flex flex-column">
-											<i class="fas fa-edit"></i>
-											<span>Edit</span>
-										</div>									<div class="d-flex flex-column">
-											<i class="fas fa-share-alt"></i>
-											<span>Share</span>
-										</div>
-										<a href="../quiz/start-quiz.php">
-											<div class="d-flex flex-column">
-												<i class="fas fa-play"></i>
-												<span>Start</span>
-											</div>
-										</a>
-									</td>
-								</tr>
 								
 							</tbody>
 							<tfoot>

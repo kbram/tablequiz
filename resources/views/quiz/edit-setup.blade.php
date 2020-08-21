@@ -9,15 +9,15 @@
 			<div class="article__heading">
 				<h1>Quiz Setup</h1>
 			</div>		
-			<form id="quiz__setup" action="/setup/update/{id}" class="pt-2 pt-lg-4">
-				
+			<form id="quiz__setup" action="/setup/update/{{$quiz->id}}"  enctype="multipart/form-data" method="post" class="pt-2 pt-lg-4">
+				@csrf
 <!-- QUIZ NAME -->
 				<div class="form-row">
 					<div class="col-md-4">
 						<label for="quiz__name">Quiz name</label>
 					</div>
 					<div class="col-md-8">
-						<input autocomplete="nothanks" type="text" name="quiz__name" class="form-control" value="{{ ($quiz->quiz_name != '' ? $quiz->quiz_name : '') }}">
+						<input autocomplete="nothanks" type="text" name="quiz__name" class="form-control" value="{{ ($quiz->quiz__name != '' ? $quiz->quiz__name : '') }}">
 					</div>
 				</div>
 <!-- QUIZ PASSWORD -->
@@ -70,20 +70,23 @@
 						  <div class="modal-body">
 							<div class="modal__edit__image">
 								<div class="modal__edit__image__mask"></div>
-								<img class="modal__edit__image__image" src="{{ $image }}">
+								<div class="modal__edit__size" id="img-wrapper">
+								<img class="modal__edit__image__image" src="{{ $image }}" id="image_preview_container" name="image_preview_container">
+								</div>
+
 							</div>
 							<div class="modal__edit__image__range">
 								<div class="form-group">
 									<label for="formControlRange">Edit size</label>
-									<input type="range" class="form-control-range" id="formControlRange">
+									<input type="range" class="form-control-range" id="formControlRange" name="formControlRange">
 									<div id="demo" class="d-none"></div>
 								  </div>
 							</div>
 						  </div>
 						  <div class="modal-footer justify-content-center row no-gutters">
 							 <div class="col-md-3"> 
-								 <label class="d-block" for="upload__quiz__icon">Upload
-									<input type="file" class="form-control-file" id="upload__quiz__icon" value="Upload">
+								 <label class="d-block" for="upload__quiz__icon">Upload 
+									<input type="file" class="form-control-file" name="upload__quiz__icon"  id="upload__quiz__icon"  value="Upload">
 								</label>
 							</div>
 							<div class="col-md-3">
@@ -94,61 +97,15 @@
 					  </div>
 					</div>
 				</div>
-<!-- QUIZ CHARGE ?-->
-				<div class="form-row">
-					<div class="col-md-4">
-						<label>Charge for entry?</label>
-						<span class="helper__text" data-placement="left"
-							  data-toggle="tooltip" title="TableQuiz.app allows users to charge entry. Set custom amounts to easily collect for a charity or for prize money."><i class="fa fa-info-circle"></i></span>
-					</div>
-					<div class="col">
-						<div class="form-check form-check-inline">
-						  <input class="form-check-input" type="radio" name="quiz__charge_entry" id="quiz_charge__yes" value="yes">
-						  <label class="form-check-label" for="quiz_charge__yes">Yes</label>
-						</div>
-						<div class="form-check form-check-inline">
-						  <input class="form-check-input" type="radio" name="quiz__charge_entry" id="quiz_charge__no" value="no" checked>
-						  <label class="form-check-label" for="quiz_charge__no">No</label>
-						</div>
-					</div>
-					
-				</div>
-<!-- ENTRY FEE -->
-				<div class="form-row d-none entry__fee">
-					<div class="col-md-4">
-						<label for="quiz__entry_fee">Entry fee</label>
-					</div>
-					<div class="col-md-4">
-						<div class="input-group">
-							<div class="input-group-prepend">
-							  <div class="input-group-text">€</div>
-							</div>
-							<input type="text" class="form-control" id="quiz__entry_fee">
-						</div>
-					</div>
-					
-				</div>
-				
-<!-- ENTRY FEE MESSAGE-->
-				
-				<div class="form-row d-none entry__fee">
-					<div class="col-md-4">
-						<label for="quiz__entry_fee__message">Message</label>
-						<span class="helper__text" data-placement="left"
-							  data-toggle="tooltip" title="This message will be displayed before your quiz with a fee request."><i class="fa fa-info-circle"></i></span>
-					</div>
-					<div class="col-md-7">
-						<textarea width="100%" id="quiz__entry_fee__message" class="form-control"></textarea>
-					</div>
-					
-				</div>
+
+			
 <!-- QUIZ PARTICIPANTS -->
 				<div class="form-row">
 					<div class="col-md-4">
 						<label for="quiz__participants">No. of participants</label>
 					</div>
 					<div class="col-md-4">
-						<select id="quiz__participants" class="form-control">
+						<select  class="form-control" name="quiz__participants">
                             <option selected>{{($quiz->no_of_participants != '' ? $quiz->no_of_participants : 'Please Choose...')}}</option>
 							<option value="1-5">1-5</option>
 							<option value="5-9">5-9</option>
@@ -231,6 +188,7 @@
 	</section>
 	
 @endsection
+@include('scripts.quiz-icon-preview')
 
 @section('footer_scripts')
 
