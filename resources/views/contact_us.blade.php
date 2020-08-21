@@ -1,7 +1,6 @@
 @extends('layouts.tablequizapp')
 
 @section('content')
-<<<<<<< HEAD
 <section class="mb-4 container page__inner">
 	 <!--Section heading-->
 	 <h2 class="h1-responsive font-weight-bold text-center my-4">Contact us</h2>
@@ -93,7 +92,7 @@
 
 	</div>
 </div>
-=======
+
 <style>
 .abouthead{
     color:#7544C1;
@@ -169,7 +168,7 @@ img{
 		</article>
 	</div>
 	</div>	
->>>>>>> 6e272e9202afcccdffc2527bc8bbcf57542c7326
+
 </section>
 @endsection
 

@@ -2,7 +2,7 @@
 
 
 @section('content')
-<<<<<<< HEAD
+
 <section class="container page__inner">
 	<div class="row">
 		<article class="col-12">
@@ -12,7 +12,7 @@
 			
 		</article>
 	</div>
-=======
+
 <style>
 .abouthead{
 	color:#7544C1;
@@ -149,7 +149,7 @@ Quizzes can be setup and ran free of charge and ran using a simple link, no inst
 
 	</div>
 
->>>>>>> 6e272e9202afcccdffc2527bc8bbcf57542c7326
+
 </section>
 @endsection
 

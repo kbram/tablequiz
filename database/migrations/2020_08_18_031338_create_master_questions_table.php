@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateQuizRoundsTable extends Migration
+class CreateMasterQuestionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateQuizRoundsTable extends Migration
      */
     public function up()
     {
-        Schema::create('quiz_rounds', function (Blueprint $table) {
-            $table->id();
-            $table->string('round_name');
-            $table->string('round_slug');
+        Schema::create('master_questions', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('question_type');
+            $table->string('question');
+            $table->string('time_limit');
             $table->timestamps();
-        
         });
     }
 
@@ -29,6 +29,6 @@ class CreateQuizRoundsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('quiz_rounds');
+        Schema::dropIfExists('master_questions');
     }
 }

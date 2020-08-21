@@ -409,6 +409,9 @@
 	</div>
 	
 </section>
+
+@section('footer_scripts')
+
 @endsection
 @section('footer_scripts')
 	@if(config('usersmanagement.enableSearchUsers'))
