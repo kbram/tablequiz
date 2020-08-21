@@ -1,6 +1,5 @@
 @extends('layouts.tablequizapp')
 @section('content')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 <section class="container page__inner">
 	<div class="row">
@@ -82,12 +81,12 @@
 						  <div class="modal-body">
 							<div class="modal__edit__image">
 								<div class="modal__edit__image__mask"></div>
-								<img class="modal__edit__image__image" src="" id="image_preview_container" value="{{ old('image_preview_container') }}">
+								<img class="modal__edit__image__image" src="" id="image_preview_co            ntainer" value="{{ old('image_preview_container') }}">
 							</div>
 							<div class="modal__edit__image__range">
 								<div class="form-group">
 									<label for="formControlRange">Edit size</label>
-									<input type="range" class="form-control-range" id="formControlRange">
+									<input type="range" class="form-control-range" id="formControlRange" class="slider" >
 									<div id="demo" class="d-none"></div>
 								  </div>
 							</div>
@@ -106,54 +105,8 @@
 					  </div>
 					</div>
 				</div>
-<!-- QUIZ CHARGE ?-->
-				<div class="form-row">
-					<div class="col-md-4">
-						<label>Charge for entry?</label>
-						<span class="helper__text" data-placement="left"
-							  data-toggle="tooltip" title="TableQuiz.app allows users to charge entry. Set custom amounts to easily collect for a charity or for prize money."><i class="fa fa-info-circle"></i></span>
-					</div>
-					<div class="col">
-						<div class="form-check form-check-inline">
-						  <input class="form-check-input" type="radio" name="quiz__charge_entry" id="quiz_charge__yes" value="yes">
-						  <label class="form-check-label" for="quiz_charge__yes">Yes</label>
-						</div>
-						<div class="form-check form-check-inline">
-						  <input class="form-check-input" type="radio" name="quiz__charge_entry" id="quiz_charge__no" value="no" checked>
-						  <label class="form-check-label" for="quiz_charge__no">No</label>
-						</div>
-					</div>
-					
-				</div>
-<!-- ENTRY FEE -->
-				<div class="form-row d-none entry__fee">
-					<div class="col-md-4">
-						<label for="quiz__entry_fee">Entry fee</label>
-					</div>
-					<div class="col-md-4">
-						<div class="input-group">
-							<div class="input-group-prepend">
-							  <div class="input-group-text">€</div>
-							</div>
-							<input type="text" class="form-control" id="quiz__entry_fee">
-						</div>
-					</div>
-					
-				</div>
-				
-<!-- ENTRY FEE MESSAGE-->
-				
-				<div class="form-row d-none entry__fee">
-					<div class="col-md-4">
-						<label for="quiz__entry_fee__message">Message</label>
-						<span class="helper__text" data-placement="left"
-							  data-toggle="tooltip" title="This message will be displayed before your quiz with a fee request."><i class="fa fa-info-circle"></i></span>
-					</div>
-					<div class="col-md-7">
-						<textarea width="100%" id="quiz__entry_fee__message" class="form-control"></textarea>
-					</div>
-					
-				</div>
+
+
 <!-- QUIZ PARTICIPANTS -->
 				<div class="form-row">
 					<div class="col-md-4">
@@ -241,28 +194,7 @@
 					</div>
 				</div>
 			</form>
-	
-	<script>
-	function readURL(input) {
-  	if (input.files && input.files[0]) {
-    var reader = new FileReader();
-    
-    reader.onload = function(e) {
-      $('#image_preview_container').attr('src', e.target.result);
-    }
-    
-    reader.readAsDataURL(input.files[0]); // convert to base64 string
-  }
-}
-
-$("#upload__quiz__icon").change(function() {
-  readURL(this);
-});
-	</script>
-	
-	
-	
-	
+			
 		</article>
 	</div>
 	</section>
@@ -270,5 +202,6 @@ $("#upload__quiz__icon").change(function() {
 @endsection
 
 @section('footer_scripts')
+@include('scripts.quiz-icon-preview')
 
 @endsection

@@ -172,7 +172,10 @@ Route::get('startquiz', 'PlayController@start');
 
 //my-quizzes dashbord route
 Route::get('showMyquizzes','DashboardController@showMyQuizzes');
+Route::post('setup','QuizController@store');
 Route::get('quizzes/{id}/edit','QuizController@editQuiz');
+Route::post('setup/update/{id}','QuizController@update');
+
 //christy route can start from here
 
 //quiz category route
@@ -184,8 +187,6 @@ Route::post('admin/categories', 'QuizCategoriesController@store');
 
 //kanu routes
 Route::get('setup/create', 'QuizController@create');
-Route::post('setup','QuizController@store');
-// Route::put('setup/update/{id}','QuizController@update');
 
 
 
@@ -195,7 +196,6 @@ Route::get('questions/{id}/edit', 'AdminQuestionController@edit');
 Route::post('questions/{id}/update', 'AdminQuestionController@update');
 
 Route::get('/dashboard/home','DashboardController@index');
-Route::get('/dashboard/my-quizzes','DashboardController@myQuiz');
 Route::get('dashboard/settings','DashboardController@setting');
 
 
