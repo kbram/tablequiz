@@ -166,9 +166,18 @@ Route::get('about_us',function(){
 Route::get('contact_us',function(){
     return view('contact_us');
 });
+
+
 //sam route can start here
-Route::get('playquiz', 'PlayController@play');
-Route::get('startquiz', 'PlayController@start');
+Route::get('playquiz/{quiz_id}/{round_id}/{question_id}', 'PlayController@testplay')->name('play.quiz');
+Route::post('startquiz', 'PlayController@start');
+
+//error
+Route::get('startquiz-password/{id}', 'PlayController@errorpassword');
+Route::get('startquiz-team/{id}', 'PlayController@errorteam');
+
+
+
 
 //my-quizzes dashbord route
 Route::get('showMyquizzes','DashboardController@showMyQuizzes');
@@ -224,3 +233,19 @@ Route::post('/sendmail', 'ContactSendMailController@send');
 
 //payment
 Route::post('stripe', 'StripePaymentController@stripePost')->name('stripe.post');
+
+//play quiz url
+
+
+Route::get('/{quiz_name}','PlayController@selecturl');
+
+
+//TEST
+Route::get('/test/test' , function(){
+    return view('play.play-quiz'); 
+});
+
+//test answer
+Route::post('playquiz/answer', 'PlayController@answer');
+
+Route::post('playquiz/{id}', 'PlayController@play');

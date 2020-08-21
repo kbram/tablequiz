@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Quiz;
 use App\Models\UserPayment;
 
+
 use Illuminate\Http\Request;
 use Validator;
 use Auth;

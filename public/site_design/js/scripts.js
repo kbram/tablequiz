@@ -55,6 +55,14 @@ $('.login__from__modal').click(function(){
 	
 })
 
+$('.card__from__modal').click(function(){
+		
+	$('#modal__signup').addClass('d-none');
+	$('#modal__login').addClass('d-none')
+	$('#modal__payment').removeClass('d-none')
+
+	
+})
 
 	$('a.back_to__login').click(function(e){
 		e.preventDefault();
