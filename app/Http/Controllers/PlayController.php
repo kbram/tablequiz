@@ -7,9 +7,10 @@ use App\Models\Quiz;
 use App\Models\QuizRound;
 use App\Models\Question;
 use App\Models\Answer;
+use Image;
 
-
-use App\Models\TeamQuiz;
+use App\Models\QuizTeam;
+use App\Models\TeamAnswer;
 use App\Models\QuizSetupIcon;
 
 
@@ -50,7 +51,7 @@ class PlayController extends Controller
 
 
     //check team already registed
-     if(TeamQuiz::where('team_name', $request->input('quiz__team'))->first())
+     if(QuizTeam::where('team_name', $request->input('quiz__team'))->first())
      {
         Session::put('failteam','team already join for this quiz');
 
@@ -61,14 +62,15 @@ class PlayController extends Controller
      //not registed
      else{
         Session::forget('failteam');
+        Session::put('teamname',$request->input('quiz__team'));
 
-
-    $teamquiz = new TeamQuiz;
+    $teamquiz = new QuizTeam;
     $teamquiz -> quiz_id = $quiz->id;
     $teamquiz -> team_name = $request->input('quiz__team');
     $teamquiz->save();
 
-    
+    return redirect('playquiz/'.$quiz->id.'/1/1');
+
     return view('play.play-quiz',compact('quiz','roundCount'));    
  }   
 }
@@ -83,8 +85,10 @@ else{
 }
 else{
 
-    if(TeamQuiz::where('team_name', $request->input('quiz__team'))->first())
+    if(QuizTeam::where('team_name', $request->input('quiz__team'))->first())
      {
+        Session::put('failteam','team already join for this quiz');
+
 
         return redirect('startquiz-team/'.$quiz->id);
 
@@ -93,15 +97,16 @@ else{
      else{
 
         Session::forget('failteam');
+        Session::put('teamname',$request->input('quiz__team'));
 
 
-        $teamquiz = new TeamQuiz;
+        $teamquiz = new QuizTeam;
         $teamquiz -> quiz_id = $quiz->id;
         $teamquiz -> team_name = $request->input('quiz__team');
         $teamquiz->save();
     
     
-        return view('play.play-quiz',compact('quiz','roundCount'));    
+        return redirect('playquiz/'.$quiz->id.'/1/1');
     }  
 
      
@@ -121,6 +126,7 @@ else{
     {   
         $quiz=Quiz::where('id',$id)->first();
         $image=QuizSetupIcon::where('id',$quiz->id)->first()->local_path;
+
             $roundCount=$quiz->rounds()->count();
             $questionCounts=$quiz->questions()->count();
         return view('play.start-quiz',compact('quiz','roundCount','questionCounts','image'));
@@ -130,6 +136,7 @@ else{
     {   
         $quiz=Quiz::where('id',$id)->first();
         $image=QuizSetupIcon::where('id',$quiz->id)->first()->local_path;
+
             $roundCount=$quiz->rounds()->count();
             $questionCounts=$quiz->questions()->count();
         return view('play.start-quiz',compact('quiz','roundCount','questionCounts','image'));
@@ -140,43 +147,72 @@ else{
 
         $quiz=Quiz::where('quiz_link',$quiz_name)->first();
         $image=QuizSetupIcon::where('id',$quiz->id)->first()->local_path;
+
+
         $roundCount=$quiz->rounds()->count();
         $questionCounts=$quiz->questions()->count();
         return view('play.start-quiz',compact('quiz','roundCount','questionCounts','image'));
 
     }
-
-    public function answer(Request $request){
+//answer
+public function answer(Request $request){
         $quiz_id = $request->input('quiz');
         $round_id = $request->input('round');
         $question_id = $request->input('question');
         $user_answer = $request->input('answer');
-
-        $correct_answer = Question::where('id',$question_id)->first()->answer;
-
+        $correct_answer = Answer::where('question_id',$question_id)->where('status',1)->first()->id;
         $quiz = Quiz::find($quiz_id);
         $roundCount=$quiz->rounds()->count();
-
         $round = QuizRound::find($round_id);
         $question = Question::find($question_id);
-
         $answers = Answer::where('question_id',$question_id)->get();
 
+        $session_key = $quiz_id."-".$round_id."-".$question_id;
+        $session_key_wrong = $quiz_id."-".$question_id;
 
-        $worng_answer = "hi";
-   if($correct_answer == $request->input('answer')){
+
+        //restric anothorise 
+
+        if(TeamAnswer::where('quiz_id',$quiz_id)
+                       ->where('question_id',$question_id)
+                       ->where('team_name',Session::get('teamname'))->first()){
+                        return view('play.play-quiz',compact('quiz','roundCount','round','question','answers'));    
+
+                       }                       
+     else{
+
+        $team_answer = new TeamAnswer ;
+        
+        $team_answer -> team_name = Session::get('teamname');
+        $team_answer -> answer_id = $user_answer ;
+        $team_answer -> question_id = $question_id ;
+        $team_answer -> quiz_id = $quiz_id ;
+        $team_answer -> round_id = $round_id;
+ 
+        $team_answer -> save();
+
+   if($correct_answer == $user_answer){
    
+    Session::put($session_key,$correct_answer);
+    Session::forget($session_key_wrong);
 
-    return view('play.play-quiz',compact('quiz','roundCount','round','question','answers','correct_answer'));    
+
+    return view('play.play-quiz',compact('quiz','roundCount','round','question','answers'));    
 
      }
      
      else{
+        Session::forget($session_key);
+        Session::put($session_key_wrong,$user_answer); 
 
-      return view('play.play-quiz',compact('quiz','roundCount','round','question','answers','worng_answer'));    
+
+      return view('play.play-quiz',compact('quiz','roundCount','round','question','answers'));    
     }
 
 
     }
+}
 
 }
+
+

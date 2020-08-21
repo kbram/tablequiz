@@ -234,3 +234,4 @@ Route::get('/test/test' , function(){
 //test answer
 Route::post('playquiz/answer', 'PlayController@answer');
 
+Route::post('playquiz/{id}', 'PlayController@play');

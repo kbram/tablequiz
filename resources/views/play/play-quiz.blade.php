@@ -57,13 +57,14 @@
 					<h4 class="" style="min-width:38vw !important;"> {{$question->question}} </h4>
 				</div>
 			</div>
-			<div class="row answer__options pt-4 justify-content-center flex-wrap">
 
 
-				
+			<div id="all-answer" class="row answer__options pt-4 justify-content-center flex-wrap">
+
+			
 				@foreach($answers as $answer)
-				<div id=" {{$answer->id}}" class="col-md-3 single__answer bg-white mb-2 mb-md-0 px-3 py-4 text-center mx-2 answers">
-				<form action="/playquiz/answer" method="post" name="form" id="{{$answer->id}}">
+			<form action="/playquiz/answer" method="post" name="form" id="{{$answer->id}}" class="col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers ">
+
 				@csrf
 				<input type="text" name="answer" hidden value="{{$answer->id}}"/>
 				<input type="text" name="question" hidden value="{{$question->id}}"/>
@@ -73,11 +74,10 @@
 				<p onclick="document.getElementById('{{$answer->id}}').submit()">{{$answer->answer}}</p> 
 				</form>
 
-				</div>
 				@endforeach
 				
-				
 			</div>
+
 		</article>
 		
 	</div>
@@ -85,23 +85,35 @@
 
 <script>
 
-    var jobs = {!! json_encode($correct_answer ?? '') !!};
+	var correct = {!! json_encode(Session::get("$quiz->id-$round->id-$question->id") ) !!};
 
-	if (jobs !== undefined){
-	document.getElementById(jobs).style.border = "thick solid green";
-	$('.answers').children().addClass("disabled");
-	onClick="this.form.submit(); this.disabled=true;  "
+    var wrong = {!! json_encode(Session::get("$quiz->id-$question->id") ) !!};
+	var allele =  document.getElementsByClassName("answers");
+	var all = document.getElementById("all-answer");
 
+
+	if (correct ){
+	var ele = document.getElementById(correct);
+
+	ele.classList.remove("single__answer");
+    ele.classList.add("single__answer_correct");
+	all.classList.add("cursor_not");
+
+
+	console.log(correct);
+
+    }
+
+	if (wrong){
+	var ele = document.getElementById(wrong);
+	ele.classList.remove("single__answer");
+    ele.classList.add("single__answer_wrong");
+	all.classList.add("cursor_not");
+
+
+	console.log(worng);
 	}
-    var jobs = {!! json_encode($worng_answer ?? '') !!};
 
-	if (jobs !== undifined){
-		document.getElementById(jobs).style.border = "solid red";
-	$('.answers').children().addClass("disabled");
-	onClick="this.form.submit(); this.disabled=true;  "
-	}
-
-	console.log(jobs);
 </script>
 
 @include('scripts.playquiz')
