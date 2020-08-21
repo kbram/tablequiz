@@ -28,11 +28,11 @@
 		<article class="col-12 pb-5">
 
 		<div class="col-12 d-flex justify-content-between">
-
+<!-- 
 		<p ><a href="#" class="text-white"><small class="small">previous quiz</small></a></p>
 		<p><a href="#" class="text-white"><small class="small">next quiz</small></a></p>
 
-		</div>
+		</div> -->
 
 
 			<div class="row border-bottom pb-2 mb-5">
