@@ -164,7 +164,7 @@
 										<div class="form-row justify-content-center pt-3">
 											<div class="col-md-3">	
 											   <label class="d-block" for="upload__image__media__file">Upload
-													<input type="file" class="form-control-file" id="upload__image__media__file" value="{{ ($image_media != '' ? $image_media : 'upload') }}"  name="image_media">
+													<input type="file" class="form-control-file" id="upload__image__media__file" value="{{ ($image_media_edit != '' ? $image_media_edit : 'upload') }}"  name="image_media">
 												</label>
 											</div>
 										</div>
@@ -202,7 +202,7 @@
 										<div class="form-row justify-content-center pt-3">
 											<div class="col-md-3">	
 											   <label class="d-block" for="upload__audio__media__file">Upload
-													<input type="file" class="form-control-file" id="upload__audio__media__file" value="Upload" name="audio_media" value="{{ ($audio_media != '' ? $audio_media : 'upload') }}">
+													<input type="file" class="form-control-file" id="upload__audio__media__file" value="Upload" name="audio_media" value="{{ ($audio_media_edit != '' ? $audio_media_edit : 'upload') }}">
 												</label>
 											</div>
 										</div>
@@ -240,7 +240,7 @@
 										<div class="form-row justify-content-center pt-3">
 											<div class="col-md-3">	
 											   <label class="d-block" for="upload__video__media__file">Upload
-													<input type="file" class="form-control-file" id="upload__video__media__file" value="Upload" name="video_media" value="{{ ($video_media != '' ? $video_media : 'upload') }}">
+													<input type="file" class="form-control-file" id="upload__video__media__file" value="Upload" name="video_media" value="{{ ($video_media_edit != '' ? $video_media_edit : 'upload') }}">
 												</label>
 											</div>
 										</div>

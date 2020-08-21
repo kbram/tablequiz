@@ -355,9 +355,10 @@
 							    </td>
 							</tr>
 							 @endforeach
-								
+							
 								 
 							</tbody>
+							
 							<tfoot>
 								<tr>
 									<td colspan="6" class="text-center text-muted">
@@ -366,7 +367,7 @@
 								</tr>
 							</tfoot>
 						</table>
-						
+						{{ $questions->links() }}
 					</div>
 				</div>
 			</div>
@@ -374,8 +375,7 @@
 	</div>
 	
 </section>
-
+@endsection
 @section('footer_scripts')
 
 
-@endsection

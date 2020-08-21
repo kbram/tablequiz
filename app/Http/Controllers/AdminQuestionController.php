@@ -6,10 +6,12 @@ use App\Models\GlobalQuestion;
 use App\Models\QuizCategory;
 use App\Models\GlobalQuestionMedia;
 use App\Models\GlobalAnswer;
-use DB;
 use Validator;
+use Illuminate\Support\Facades\DB;
 
 use File;
+
+use Illuminate\Http\Response;
 use Illuminate\Database\Eloquent\Model;
 
 
@@ -20,17 +22,16 @@ class AdminQuestionController extends Controller
 
 
     public function create()
-    {
+    { 
+      $categories = QuizCategory::all();
+      $questions = DB::table('global_questions')->paginate(2);
+       foreach($questions as $question){
+            $cat_name[$question->id] = QuizCategory::where('id', $question->category_id)->value('category_name'); 
+       }
     
         $categories = QuizCategory::all();
         $questions  = GlobalQuestion::all();
-        
-        foreach($questions as $question){
-        
-            $cat_name[$question->id] = QuizCategory::where('id', $question->category_id)->value('category_name'); 
-        }   
-        
-        return view('admin.questions',compact('categories','questions','cat_name'));
+      return view('admin.questions',compact('categories','questions','cat_name'));
     }
 
     /**
@@ -206,8 +207,7 @@ class AdminQuestionController extends Controller
             else if($question->question_type == 'multiple__choice__question'){
               
                 $global_answer= $request->input('multiple__choice__answer__1');
-                // dd($global_answer);
-                for($i = 0 ; $i < 5 ; $i++)
+                //               for($i = 0 ; $i < 5 ; $i++)
                 {                
                      $answer_get= $global_answer;
                 }
@@ -241,11 +241,12 @@ class AdminQuestionController extends Controller
             $standard_answer                = GlobalAnswer::where('question_id', $questions->id)->value('answer');
             $multiple_answer                = GlobalAnswer::where('question_id', $questions->id)->value('answer');
             $numeric_answer                 = GlobalAnswer::where('question_id', $questions->id)->value('answer');
-            $image_media                    = GlobalQuestionMedia::where('question_id', $questions->id)->get();
-            $audio_media                    = GlobalQuestionMedia::where('question_id', $questions->id)->get();
-            $video_media                    = GlobalQuestionMedia::where('question_id', $questions->id)->get();
+           
+            $image_media_edit          = GlobalQuestionMedia::where('question_id', $questions->id)->where('media_type','=','Image')->get();
+            $audio_media_edit          = GlobalQuestionMedia::where('question_id', $questions->id)->where('media_type','=','Audio')->get();
+            $video_media_edit          = GlobalQuestionMedia::where('question_id', $questions->id)->where('media_type','=','Video')->get();
             
-            return view('admin.questions-edit',compact('cat_name','categories','questions','standard_answer','multiple_answer','numeric_answer','image_media','audio_media','video_media'));
+            return view('admin.questions-edit',compact('cat_name','categories','questions','standard_answer','multiple_answer','numeric_answer','image_media_edit','audio_media_edit','video_media_edit'));
         
         }
 
@@ -261,7 +262,6 @@ class AdminQuestionController extends Controller
                'time__limit'       => 'required',                         
             ]);
             if($request->input('question__type') == 'standard__question'){
-              //  dd("kanu1");
                  $validator = Validator::make($request->all(),
                  [
                    'standard__question__answer'   => 'required',
@@ -294,8 +294,7 @@ class AdminQuestionController extends Controller
         $questions->save();
         
        $question_id = $questions->id;
-        // dd($question_id);   
-         
+              
         // Image Media 
         if($request->hasFile('image_media')) {
             
@@ -398,8 +397,7 @@ class AdminQuestionController extends Controller
                         $media_video->save();
                      
                     }
-            // dd($question_id);
-            //answer_type for each question_type
+            //         //answer_type for each question_type
            if($request->input('question__type') == 'standard__question'){
              
                 $answer                      =  GlobalAnswer::where('question_id',$id)->first();
@@ -416,13 +414,11 @@ class AdminQuestionController extends Controller
              }
             
             elseif($request->input('question__type') == 'numeric__question'){
-                 //  dd($request); 
-                    $answer                 = GlobalAnswer::where('question_id',$id)->first();
+                 //               $answer                 = GlobalAnswer::where('question_id',$id)->first();
                     $answer->answer         = $request->input('numeric__question__answer');
                     $answer->answer_stat    = true;
             }
-           // dd($question_id);
-           //end answer_type for each question_type
+           //        //end answer_type for each question_type
             $answer ->question_id  =  $question_id;
             
             $answer->save();
