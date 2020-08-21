@@ -172,7 +172,7 @@ Route::get('startquiz', 'PlayController@start');
 
 //my-quizzes dashbord route
 Route::get('showMyquizzes','DashboardController@showMyQuizzes');
-Route::post('setup','QuizController@store');
+// Route::post('setup','QuizController@store');
 Route::get('quizzes/{id}/edit','QuizController@editQuiz');
 Route::post('setup/update/{id}','QuizController@update');
 
@@ -181,6 +181,13 @@ Route::post('setup/update/{id}','QuizController@update');
 //quiz category route
 Route::get('admin/categories', 'QuizCategoriesController@create');
 Route::post('admin/categories', 'QuizCategoriesController@store');
+
+//quizmaster question routes
+Route::post('/quiz','MasterQuestionController@postQuiz');
+Route::post('/round','MasterQuestionController@postRound');
+Route::post('/question','MasterQuestionController@postQuestion');
+Route::post('/quizsetup','MasterQuestionController@store');
+Route::get('/addround/{id}','QuizRoundController@getRound');
 
 
 

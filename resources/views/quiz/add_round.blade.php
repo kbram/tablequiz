@@ -10,11 +10,11 @@
 
 
 <section class="container page__inner">
-	<form class="is_container row" id="add_round" action="/round/store" method="post" enctype="multipart/form-data" role="main">
+	<form class="is_container row" id="add_round" action="/round" method="post" enctype="multipart/form-data" role="main">
 		 @csrf
 		<article class="col-12">
 			<div class="article__heading">
-				<h1>Round 1 Setup</h1>
+				<h1>Round {{$id ?? '1'}} Setup</h1>
 				<?php /*if($quizName) echo "<h2>".$quizName."</h2>";*/?>
 
 
@@ -111,7 +111,8 @@
 <!-- QUESTION -->	
 <div id="sections">
   <div class="section">
-<form class="is_container row" id="add_round" action="/round_question/store" method="post" enctype="multipart/form-data" role="main">	
+<form class="is_container row" id="add_round" action="/question" method="post" enctype="multipart/form-data" role="main">
+@csrf	
 
 		<article class="col-12">
 			<div class="article__heading">
@@ -126,7 +127,7 @@
 				<div class="col-md-8">
 					<div class="row align-items-center">
 						<div class="col-lg-6">
-							<select id="question__type" class="form-control">
+							<select id="question__type" class="form-control" name="question__type">
 								<option value="standard__question">Standard</option>
 								<option value="multiple__choice__question">Multiple choice</option>
 								<option value="numeric__question">Numeric</option>
@@ -150,6 +151,11 @@
 				<div class="col-md-8">
 					<input name="question" type="text" class="form-control">
 				</div>
+				@if ($errors->has('question'))
+                        <span class="help-block">
+                            <p>{{ $errors->first('question') }}</p>
+                        </span>
+                        @endif
 			</div>
 			<div class="form-row">
 				<div class="col-md-4">
@@ -158,55 +164,132 @@
 				<div class="col-md-8">
 					<div class="row mt-3">
 						<div class="col-md-4 pr-md-0 mb-3 mb-lg-0">
-							<a href="#" class="px-4 btn btn-outline-secondary grey d-flex align-items-center justify-content-center" data-toggle="modal" data-target="#add__media" data-title="Image" data-add-text="an image"><span class="pr-2 icon_"><i class="far fa-image"></i></span>Image </a>
+							<a href="#" class="px-4 btn btn-outline-secondary grey d-flex align-items-center justify-content-center" data-toggle="modal" data-target="#add__image__media" data-title="Image" data-add-text="an image"><span class="pr-2 icon_"><i class="far fa-image"></i></span>Image </a>
 						</div>
 						<div class="col-md-4 pr-md-0 mb-3 mb-lg-0">
-							<a href="#" class="px-4 btn btn-outline-secondary grey d-flex align-items-center justify-content-center" data-toggle="modal" data-target="#add__media" data-title="Audio" data-add-text="any audio file"><span class="pr-2 icon_"><i class="fas fa-music"></i></span>Audio </a></a>
+							<a href="#" class="px-4 btn btn-outline-secondary grey d-flex align-items-center justify-content-center" data-toggle="modal" data-target="#add__audio__media" data-title="Audio" data-add-text="any audio file"><span class="pr-2 icon_"><i class="fas fa-music"></i></span>Audio </a></a>
 						</div>
 						<div class="col-md-4 pr-md-0 pr-md-3">
-							<a href="#" class="px-4 btn btn-outline-secondary grey d-flex align-items-center justify-content-center" data-toggle="modal" data-target="#add__media" data-title="Video" data-add-text="any video file"><span class="pr-2 icon_"><i class="fas fa-video"></i></span>Video </a></a>
+							<a href="#" class="px-4 btn btn-outline-secondary grey d-flex align-items-center justify-content-center" data-toggle="modal" data-target="#add__video__media" data-title="Video" data-add-text="any video file"><span class="pr-2 icon_"><i class="fas fa-video"></i></span>Video </a></a>
 						</div>
 					</div>
-				</div>
-				<div class="modal" id="add__media" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-				  <div class="modal-dialog" role="document">
-					<div class="modal-content">
-					  <div class="modal-header justify-content-center border-0">
-						<h1 class="modal-title" id="add__media__modal__heading"></h1>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						  <span aria-hidden="true">&times;</span>
-						</button>
-					  </div>
-					  <div class="modal-body">
-						<p class="text-center py-2">Add <span id="add__media__text"></span> to reference in your question</p>
-						<div class="form-row justify-content-center">
-							<div class="col-md-3 d-flex align-items-md-end">
-								<label>Add link</label>
-							</div>
-							<div class="col-md-6">
-								<input type="url" name="add_link_to_media" class="form-control">
-							</div>
-						</div>
-						<div class="text-center w-100">
-							 <span>OR</span>
-						</div>
-						<div class="form-row justify-content-center pt-3">
-							<div class="col-md-3">	
-							   <label class="d-block" for="upload__media__file">Upload
-									<input type="file" class="form-control-file" id="upload__media__file" value="Upload">
-								</label>
-							</div>
-						</div>
-					  </div>
-					  <div class="modal-footer justify-content-center">
-						  <div class="col-sm-4 px-0 px-md-4">
-							<button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
-						  </div>
-					  </div>
-					</div>
-				  </div>
-				</div>
 				
+				<div class="modal" id="add__image__media" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+ 								  <div class="modal-dialog" role="document">
+ 									<div class="modal-content">
+ 									  <div class="modal-header justify-content-center">
+ 										<h1 class="modal-title" id="add__image__media__modal__heading"></h1>
+ 										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+ 										  <span aria-hidden="true">&times;</span>
+ 										</button>
+ 									  </div>
+ 									  <div class="modal-body">
+ 										<p class="text-center py-2">Add <span id="add__image__media__text"></span> to reference in your question</p>
+ 										<div class="form-row">
+ 											<div class="col-md-4">
+ 												<label>Add link</label>
+ 											</div>
+ 											<div class="col-md-8">
+ 												<input type="url" name="add_link_to_image__media" class="form-control" id="add__image__media__text">
+ 											</div>
+ 										</div>
+ 										<div class="text-center w-100">
+ 											 <span>OR</span>
+ 										</div>
+ 										<div class="form-row justify-content-center pt-3">
+ 											<div class="col-md-3">	
+ 											   <label class="d-block" for="upload__image__media__file">Upload
+ 													<input type="file" class="form-control-file" id="upload__image__media__file" value="Upload" name="image_media">
+ 												</label>
+ 											</div>
+ 										</div>
+ 									  </div>
+ 									  <div class="modal-footer justify-content-center">
+ 										  <div class="col-sm-4">
+ 											<button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
+ 										  </div>
+ 									  </div>
+ 									</div>
+ 								  </div>
+ 								</div>
+								 </div>
+
+                             	<div class="modal" id="add__audio__media" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+ 								  <div class="modal-dialog" role="document">
+ 									<div class="modal-content">
+ 									  <div class="modal-header justify-content-center">
+ 										<h1 class="modal-title" id="add__audio__media__modal__heading"></h1>
+ 										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+ 										  <span aria-hidden="true">&times;</span>
+ 										</button>
+ 									  </div>
+ 									  <div class="modal-body">
+ 										<p class="text-center py-2">Add <span id="add__audio__media__text"></span> to reference in your question</p>
+ 										<div class="form-row">
+ 											<div class="col-md-4">
+ 												<label>Add link</label>
+ 											</div>
+ 											<div class="col-md-8">
+												<input type="url" name="add_link_to_audio__media" class="form-control" id="add__audio__media__text">
+ 											</div>
+ 										</div>
+ 										<div class="text-center w-100">
+ 											 <span>OR</span>
+ 										</div>
+ 										<div class="form-row justify-content-center pt-3">
+ 											<div class="col-md-3">	
+ 											   <label class="d-block" for="upload__audio__media__file">Upload
+ 													<input type="file" class="form-control-file" id="upload__audio__media__file" value="Upload" name="audio_media">
+ 												</label>
+ 											</div>
+ 										</div>
+ 									  </div>
+ 									  <div class="modal-footer justify-content-center">
+ 										  <div class="col-sm-4">
+ 											<button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
+ 										  </div>
+ 									  </div>
+ 									</div>
+ 								  </div>
+ 								</div>
+ 								<div class="modal" id="add__video__media" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+ 								  <div class="modal-dialog" role="document">
+ 									<div class="modal-content">
+ 									  <div class="modal-header justify-content-center">
+ 										<h1 class="modal-title" id="add__video__media__modal__heading"></h1>
+ 										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+ 										  <span aria-hidden="true">&times;</span>
+ 										</button>
+ 									  </div>
+ 									  <div class="modal-body">
+ 										<p class="text-center py-2">Add <span id="add__video__media__text"></span>to reference in your question</p>
+ 										<div class="form-row">
+ 											<div class="col-md-4">
+ 												<label>Add link</label>
+ 											</div>
+ 											<div class="col-md-8">
+											<input type="url" name="add_link_to_video__media" class="form-control" id="add__video__media__text">
+ 											</div>
+ 										</div>
+ 										<div class="text-center w-100">
+										 <span>OR</span>
+ 										</div>
+ 										<div class="form-row justify-content-center pt-3">
+ 											<div class="col-md-3">	
+ 											   <label class="d-block" for="upload__video__media__file">Upload
+ 													<input type="file" class="form-control-file" id="upload__video__media__file" value="Upload" name="video_media">
+ 												</label>
+ 											</div>
+ 										</div>
+ 									  </div>
+ 									  <div class="modal-footer justify-content-center">
+ 										  <div class="col-sm-4">
+ 											<button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
+ 										  </div>
+ 									  </div>
+ 									</div>
+ 								  </div>
+ 								</div>
 			</div>
 			<div class="form-row d-flex" id="standard__answer">
 				<div class="col-md-4">
@@ -263,13 +346,21 @@
 						<div class="col-md-4 pr-md-0">
 							<input class="form-control" type="number" name="time__limit">
 						</div>
+						@if ($errors->has('time__limit'))
+                        <span class="help-block">
+                            <p>{{ $errors->first('time__limit') }}</p>
+                        </span>
+                        @endif
+						
 						<div class="col-md-2 text-right d-flex align-items-center justify-content-end">
 							<small class="form-text text-muted mt-0">Seconds</small>
 						</div>
+						
 					</div>
 				</div>
 				
 			</div>
+					
 			 
 			<!-- <div class="form-row justify-content-center pt-3">
 				<div class="col-md-1">	
@@ -277,6 +368,7 @@
 				</div>
 			</div> -->
 			</div>
+			
 			
 		</article>
 
@@ -633,6 +725,7 @@
             </div>
           </div>
         </div>
+	
 		
 	</form>
 	</div>
@@ -645,8 +738,8 @@
 
 	</div>
 	<section class="row round__page__buttons justify-content-center align-items-center pt-5 mt-5 border-top">
-		<div class="col-md-4 mb-3 mb-md-0 px-0 px-md-4">
-			<a href="add_round_2.php" class="btn btn-secondary d-block"><span class="pr-3"><i class="fa fa-plus"></i></span>Next round</a>
+		<div class="col-md-4 mb-3 mb-md-0 px-0 px-md-4" id="add-new-round">
+			<a href="/addround/{{$id  ?? '1'}}" class="btn btn-secondary d-block" id="nextRound"><span class="pr-3"><i class="fa fa-plus"></i></span>Next round</a>
 		</div>
 		<div class="col-md-4 px-0 px-md-4">
 			<a href="#" data-toggle="modal" data-target="#publishQuizModal" class="btn btn-primary d-block">Publish  Quiz</a>

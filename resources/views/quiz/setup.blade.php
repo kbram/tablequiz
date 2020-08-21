@@ -7,7 +7,7 @@
 			<div class="article__heading">
 				<h1>Quiz Setup</h1>
 			</div>		
-			<form action="/setup" method="post" enctype="multipart/form-data" class="pt-2 pt-lg-4" >
+			<form action="/quiz" method="post" enctype="multipart/form-data" class="pt-2 pt-lg-4" >
 			@csrf
 
 <!-- QUIZ NAME -->
@@ -81,7 +81,9 @@
 						  <div class="modal-body">
 							<div class="modal__edit__image">
 								<div class="modal__edit__image__mask"></div>
-								<img class="modal__edit__image__image" src="" id="image_preview_co            ntainer" value="{{ old('image_preview_container') }}">
+								<div class="modal__edit__size" id="img-wrapper">
+								<img class="modal__edit__image__image" src="" id="image_preview_container">
+								</div>
 							</div>
 							<div class="modal__edit__image__range">
 								<div class="form-group">

@@ -50,5 +50,11 @@ class QuizRoundController extends Controller
     abort(500, 'Could not upload image :(');
     }
 
+    public function getRound($id)
+{
+    $id+=1;
+    return view('quiz.add_round',compact('id'));
+}
+
    
 }
