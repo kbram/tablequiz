@@ -16,8 +16,8 @@ use Illuminate\Http\Request;
 class MasterQuestionController extends Controller
 {
     public function postQuiz(Request $request){
+
         Session::forget('quiz');
-        Session::forget('image');
 
         $validator = Validator::make(
             $request->all(),
@@ -50,7 +50,7 @@ class MasterQuestionController extends Controller
              $quiz_icon = $request->file('upload__quiz__icon');
  
              $filename = 'quiz_icon.'.$quiz_icon->getClientOriginalExtension();
-             $quiz_id=Session::get('quiz_id'); 
+             $quiz_id=Session::get(''); 
 
 
              $save_path1 = '/storage/quizicon/'.$quiz_id.'/quiz_icon/';
@@ -87,13 +87,16 @@ class MasterQuestionController extends Controller
              $quizIcon->save();
  
             }
-            $request->session()->put('image', $request->file());
+            $request->session()->put('image', $quizIcon->local_path);
 
          }  
             return view('quiz.add_round');
 
     }
     public function postRound(Request $request){
+
+dd(Session::get('image'),Session::get('quiz'));
+
             Session::forget('round');
             Session::forget('image');
 
