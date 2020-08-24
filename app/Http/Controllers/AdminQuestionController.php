@@ -24,13 +24,13 @@ class AdminQuestionController extends Controller
     public function create()
     { 
       $categories = QuizCategory::all();
-      $questions = DB::table('global_questions')->paginate(2);
+      $questions = DB::table('global_questions')->paginate(10);
        foreach($questions as $question){
             $cat_name[$question->id] = QuizCategory::where('id', $question->category_id)->value('category_name'); 
        }
     
         $categories = QuizCategory::all();
-        $questions  = GlobalQuestion::all();
+       
       return view('admin.questions',compact('categories','questions','cat_name'));
     }
 
@@ -84,7 +84,7 @@ class AdminQuestionController extends Controller
         
         $question->save();
 
-        // Creating new global question end
+        //  end
 
         $question_id = $question->id;
             
@@ -241,10 +241,9 @@ class AdminQuestionController extends Controller
             $standard_answer                = GlobalAnswer::where('question_id', $questions->id)->value('answer');
             $multiple_answer                = GlobalAnswer::where('question_id', $questions->id)->value('answer');
             $numeric_answer                 = GlobalAnswer::where('question_id', $questions->id)->value('answer');
-           
-            $image_media_edit          = GlobalQuestionMedia::where('question_id', $questions->id)->where('media_type','=','Image')->get();
-            $audio_media_edit          = GlobalQuestionMedia::where('question_id', $questions->id)->where('media_type','=','Audio')->get();
-            $video_media_edit          = GlobalQuestionMedia::where('question_id', $questions->id)->where('media_type','=','Video')->get();
+            $image_media_edit               = GlobalQuestionMedia::where('question_id',$questions->id)->where('media_type','=','Image')->get();
+            $audio_media_edit               = GlobalQuestionMedia::where('question_id',$questions->id)->where('media_type','=','Audio')->get();
+            $video_media_edit               = GlobalQuestionMedia::where('question_id',$questions->id)->where('media_type','=','Video')->get();
             
             return view('admin.questions-edit',compact('cat_name','categories','questions','standard_answer','multiple_answer','numeric_answer','image_media_edit','audio_media_edit','video_media_edit'));
         
@@ -297,6 +296,7 @@ class AdminQuestionController extends Controller
               
         // Image Media 
         if($request->hasFile('image_media')) {
+            if(GlobalQuestionMedia::where('question_id',$id)->where('media_type','Image')->first()){
             
                  $image_media = $request->file('image_media'); 
                  $file_name = 'image_media.'.$image_media->getClientOriginalExtension();
@@ -307,7 +307,8 @@ class AdminQuestionController extends Controller
                  File::makeDirectory($save_path, $mode = 0755, true, true);
                   $image_media->move($save_path, $file_name);      
                 
-                  $media_image = GlobalQuestionMedia::where('question_id',$id)->first();
+                 $media_image =  GlobalQuestionMedia::where('question_id',$id)->where('media_type','Image')->first();
+               
                  $media_image->media_type        = "Image";
                  $media_image->public_path       = $public_path;
                  $media_image->local_path        = $save_path . '/' . $file_name;
@@ -315,7 +316,25 @@ class AdminQuestionController extends Controller
                 
                 $media_image->save();
             }
-            
+         
+              else {
+                  $image_media = $request->file('image_media'); 
+                  $file_name = 'image_media.'.$image_media->getClientOriginalExtension();
+                  $save_path = storage_path('app/public'). '/global_questions/'.$question_id.'/image_media/';
+                  $path = $save_path.$file_name;
+                  $public_path = '/global_questions/image_media/'.$question_id.'/image_media/'.$file_name;
+               
+                  File::makeDirectory($save_path, $mode = 0755, true, true);
+                  $image_media->move($save_path, $file_name);      
+               
+                  $media_image = new GlobalQuestionMedia;
+                  $media_image->media_type        = "Image";
+                  $media_image->public_path       = $public_path;
+                  $media_image->local_path        = $save_path . '/' . $file_name;
+                  $media_image->question_id       = $question_id;
+                  $media_image->save();
+           }
+      }
                 elseif ($request->input('add_link_to_image__media')){
                     
                 $image_link = $request->input('add_link_to_image__media'); 
@@ -331,7 +350,8 @@ class AdminQuestionController extends Controller
        //Audio Media
        
        if ($request->hasFile('audio_media')) {
-                      
+         if(GlobalQuestionMedia::where('question_id',$id)->where('media_type','Audio')->first()) { 
+                    
                 $audio_media = $request->file('audio_media'); 
                 $file_name = 'audio_media.'.$audio_media->getClientOriginalExtension();
                 $save_path = storage_path('app/public'). '/global_questions/'.$question_id.'/audio_media/';
@@ -342,7 +362,7 @@ class AdminQuestionController extends Controller
 
                 $audio_media->move($save_path, $file_name);      
                             
-                        $media_audio = GlobalQuestionMedia::where('question_id',$id)->first();
+                        $media_audio = GlobalQuestionMedia::where('question_id',$id)->where('media_type','Audio')->first();
                         
                         $media_audio->media_type        = "Audio";
                         $media_audio->public_path       = $public_path;
@@ -351,6 +371,27 @@ class AdminQuestionController extends Controller
                        
                         $media_audio->save();
                      }
+             else{
+               $audio_media = $request->file('audio_media'); 
+               $file_name = 'audio_media.'.$audio_media->getClientOriginalExtension();
+               $save_path = storage_path('app/public'). '/global_questions/'.$question_id.'/audio_media/';
+               $path = $save_path.$file_name;
+               $public_path = '/global_questions/audio_media/'.$question_id.'/audio_media/'.$file_name;
+
+               File::makeDirectory($save_path, $mode = 0755, true, true);
+
+               $audio_media->move($save_path, $file_name);      
+                           
+                       $media_audio = new GlobalQuestionMedia;
+                       
+                       $media_audio->media_type        = "Audio";
+                       $media_audio->public_path       = $public_path;
+                       $media_audio->local_path        = $save_path . '/' . $file_name;
+                       $media_audio->question_id       = $question_id;
+                      
+                       $media_audio->save();
+             }
+         }
                      elseif ($request->input('add_link_to_audio__media')){
                             
                             $audio_link  = $request->input('add_link_to_audio__media'); 
@@ -366,7 +407,8 @@ class AdminQuestionController extends Controller
          //Video Media               
         
          if ($request->hasFile('video_media')) {
-                       
+            if(GlobalQuestionMedia::where('question_id',$id)->where('media_type','Video')->first()){
+               
                         $video_media = $request->file('video_media'); 
                             $file_name = 'video_media.'.$video_media->getClientOriginalExtension();
                             $save_path = storage_path('app/public'). '/global_questions/'.$question_id.'/video_media/';
@@ -377,7 +419,7 @@ class AdminQuestionController extends Controller
 
                             $video_media->move($save_path, $file_name);      
                             
-                        $media_video = GlobalQuestionMedia::where('question_id',$id)->first();
+                        $media_video = GlobalQuestionMedia::where('question_id',$id)->where('media_type','Video')->first();
                         
                         $media_video->media_type        = "Video";
                         $media_video->public_path       = $public_path;
@@ -386,6 +428,28 @@ class AdminQuestionController extends Controller
                        
                         $media_video->save();
                      }
+                      else{
+                        $video_media = $request->file('video_media'); 
+                        $file_name = 'video_media.'.$video_media->getClientOriginalExtension();
+                        $save_path = storage_path('app/public'). '/global_questions/'.$question_id.'/video_media/';
+                        $path = $save_path.$file_name;
+                        $public_path = '/global_questions/video_media/'.$question_id.'/video_media/'.$file_name;
+
+                        File::makeDirectory($save_path, $mode = 0755, true, true);
+
+                        $video_media->move($save_path, $file_name);      
+                        
+                        $media_video = new GlobalQuestionMedia;
+                        
+                        $media_video->media_type        = "Video";
+                        $media_video->public_path       = $public_path;
+                        $media_video->local_path        = $save_path . '/' . $file_name;
+                        $media_video->question_id       = $question_id;
+                        
+                        $media_video->save();
+
+                      }
+                  }
                      elseif ($request->input('add_link_to_video__media')){
               
                         $video_link = $request->input('add_link_to_video__media'); 
@@ -414,7 +478,7 @@ class AdminQuestionController extends Controller
              }
             
             elseif($request->input('question__type') == 'numeric__question'){
-                 //               $answer                 = GlobalAnswer::where('question_id',$id)->first();
+                    $answer                 = GlobalAnswer::where('question_id',$id)->first();
                     $answer->answer         = $request->input('numeric__question__answer');
                     $answer->answer_stat    = true;
             }
