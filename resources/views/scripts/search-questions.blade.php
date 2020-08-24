@@ -28,17 +28,16 @@
                     if (jsonData.length != 0) {
                         questionsTable.hide();
                         $.each(jsonData, function(index, val) {
-                            let editCellHtml = '<i class="fas fa-pencil-alt"></i><span>Edit</span>';
-                            let deleteCellHtml = '<i class="fas fa-times-circle"></i><span>Delete</span>';
+                            let editCellHtml = '<div class="d-flex flex-column"><i class="fas fa-pencil-alt"></i><span>Edit</span></div> ';
+                            let deleteCellHtml = '<div class="d-flex flex-column"><i class="fas fa-times-circle"></i><span>Delete</span></div>';
 											
                             
                             
                             resultsContainer.append('<tr>' +
                                 '<td>' + val.question + '</td>' +
-                                '<td>' + val.category + '</td>' +
-                               '<td>' + editCellHtml + '</td>' +
-                                '<td>' + deleteCellHtml + '</td>' +
-                                
+                                '<td >' + val.category + '</td>' +
+                               '<td class="quiz_actions d-flex flex-row justify-content-lg-center">' + editCellHtml + deleteCellHtml + '</td>' +
+                               
                             '</tr>');
                         });
                     } else {

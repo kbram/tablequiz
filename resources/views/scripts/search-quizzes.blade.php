@@ -29,9 +29,9 @@
                     if (jsonData.length != 0) {
                         quizTable.hide();
                         $.each(jsonData, function(index, val) {
-                            let viewCellHtml = '<i class="far fa-eye"></i><span>Edit</span>';
-                            let shareCellHtml =  '<i class="fas fa-share-alt"></i><span>Share</span>';
-                            let blockCellHtml =  '<i class="fas fa-times-circle"></i><span>Block</span>';
+                            let viewCellHtml = '<div class=" d-flex flex-column"><i class="far fa-eye"></i><span>Edit</span></div>';
+                            let shareCellHtml =  '<div class="d-flex flex-column"><i class="fas fa-share-alt"></i><span>Share</span></div>';
+                            let blockCellHtml =  '<div class="d-flex flex-column"><i class="fas fa-times-circle"></i><span>Block</span></div>';
 											
                             
                             
@@ -39,9 +39,8 @@
                                 '<td>' + val.quiz__name + '</td>' +
                                 '<td>' + val.quiz_link + '</td>' +
                                 '<td>'+val.no_of_participants+'</td>'+
-                                '<td>' + viewCellHtml + '</td>' +
-                                '<td>' + shareCellHtml + '</td>' +
-                                '<td>' + blockCellHtml + '</td>' +
+                                '<td class="quiz_actions d-flex flex-row justify-content-lg-center">' + viewCellHtml + shareCellHtml +blockCellHtml +  '</td>' +
+
                             '</tr>');
                         });
                     } else {

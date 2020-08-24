@@ -26,10 +26,10 @@
                     let jsonData = JSON.parse(results);
                     if (jsonData.length != 0) {
                         userTable.hide();
-                        $.each(jsonData, function(users, val) {
-                            let viewCellHtml = '<div class="d-flex flex-column"><i class="far fa-eye"></i><span>View Qs</span><div>';
+                        $.each(jsonData, function(index, val) {
+                            let viewCellHtml = '<div class="d-flex flex-column"><i class="far fa-eye"></i><span>View Qs</span></div>';
                             let blockCellHtml =  '<div class="d-flex flex-column"><i class="fas fa-times-circle"></i><span>Block</span></div>';
-                            let messageCellHtml =  '<div class="d-flex flex-column"><i class="fas fa-envelope"></i><spanclass="message" id="{{$user->id}}" >Message</span></div>';
+                            let messageCellHtml =  '<div class="d-flex flex-column"><i class="fas fa-envelope"></i><span>Message</span></div>';
 											
                             
                             
@@ -38,11 +38,7 @@
                                 '<td>' +  + '</td>' +
                                 '<td>'+    +'</td>'+
                                 '<td class="d-none">'+val.email+'</td>'+
-                                '<td class=" d-flex flex-row justify-content-lg-center">'+
-                                '<td>' + viewCellHtml + '</td>' +
-                                '<td>' + blockCellHtml + '</td>' +
-                                '<td>' + messageCellHtml + '</td>' +
-                                '</td>'+
+                                '<td class="quiz_actions d-flex flex-row justify-content-lg-center">'+ viewCellHtml +blockCellHtml + messageCellHtml +'</td>'+
                             '</tr>');
                         });
                     } else {
