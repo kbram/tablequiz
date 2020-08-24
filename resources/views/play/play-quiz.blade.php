@@ -48,7 +48,9 @@
 				<div class="col-md-3 single__answer bg-white mb-2 mb-md-0 px-3 py-4 text-center mx-2">
 					<p class="m-0">Corrib</p>
 				</div>
-				
+				<div class="col-md-3 single__answer bg-white mb-2 mb-md-0 px-3 py-4 text-center mx-2">
+					<p class="m-0">Corrib</p>
+				</div>
 			</div>
 		</article>
 		

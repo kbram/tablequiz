@@ -139,20 +139,20 @@
 							<thead>
 								<tr>
 									<th>Quiz name</th>
-									<th class="d-none">Quiz Link</th>
 									<th>Questions</th>
 									<th>Rounds</th>
-									<th class="text-right">Actions</th>
+									<th class="d-none">Quiz Link</th>
+									<th class="text-center">Actions</th>
 								</tr>
 							</thead>
 							<tbody>
 								@foreach($quizzes as $quiz)
 								<tr>
 									<td>{{$quiz -> quiz__name}}</td>
-									<td class="d-none" id="quizLink{{$quiz->id}}">{{$quiz ->quiz_link}}</td>
 									<td>20</td>
 									<td>4</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-end">
+									<td class="d-none" id="quizLink{{$quiz->id}}">{{$quiz ->quiz_link}}</td>
+									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
 										<div class="d-flex flex-column">
 											<i class="fas fa-edit"></i>
 											<span>Edit</span>

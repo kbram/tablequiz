@@ -215,7 +215,7 @@ Route::post('questions', 'AdminQuestionController@store');
 
 //christy route can start from here
 Route::get('/dashboard/home','DashboardController@index');
-Route::get('/dashboard/my-quizzes','DashboardController@myQuiz');
+Route::get('/dashboard/my-quizzes','DashboardController@showMyQuizzes');
 Route::get('dashboard/settings','DashboardController@setting');
 
 

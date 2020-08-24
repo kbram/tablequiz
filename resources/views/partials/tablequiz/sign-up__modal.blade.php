@@ -24,7 +24,7 @@
 	  </div>
 	  
 
-      <div class="modal-body ">
+     <div class="modal-body ">
 
         <form class="popupLogIn text-body px-4 pt-4" method="POST" action="{{ route('login') }}">
 		@csrf
@@ -47,6 +47,13 @@
 			<div class="form-row d-flex justify-content-center mt-5">
 				<div class="col-10 col-md-4">
 					<input class="d-block btn  btn-primary" type="submit" value="Log In">
+					<!-- for check out view -> to__checkout -->
+				</div>
+				<div class="col-10 col-md-4 mt-3">
+
+				 <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    {{ __('auth.forgot') }}
+                </a>
 					<!-- for check out view -> to__checkout -->
 				</div>
 			</div>
@@ -348,6 +355,8 @@
 				  		<button id="card-button"class="d-block btn btn-success" type="submit">Pay Now</button>
 					 </div>
 				 </div>
+
+				 
 
 
 				  @include('scripts.stripe') 

@@ -16,6 +16,7 @@
                                 '<td>{!! trans("usersmanagement.search.no-results") !!}</td>' +
                                 '<td></td>' +
                                 '<td></td>'+
+                                '<td></td>'+
                                 '</tr>';
                            
             $.ajax({
@@ -28,9 +29,9 @@
                     if (jsonData.length != 0) {
                         quizTable.hide();
                         $.each(jsonData, function(index, val) {
-                            let viewCellHtml = '<div class="d-flex flex-column justify-content-lg-center"><i class="far fa-eye"></i><span>Edit</span><div>';
-                            let shareCellHtml =  '<div class="d-flex flex-column justify-content-lg-center"><i class="fas fa-share-alt"></i><span>Share</span></div>';
-                            let blockCellHtml =  '<div class="d-flex flex-column justify-content-lg-center"><i class="fas fa-times-circle"></i><span>Block</span></div>';
+                            let viewCellHtml = '<i class="far fa-eye"></i><span>Edit</span>';
+                            let shareCellHtml =  '<i class="fas fa-share-alt"></i><span>Share</span>';
+                            let blockCellHtml =  '<i class="fas fa-times-circle"></i><span>Block</span>';
 											
                             
                             
@@ -38,11 +39,9 @@
                                 '<td>' + val.quiz__name + '</td>' +
                                 '<td>' + val.quiz_link + '</td>' +
                                 '<td>'+val.no_of_participants+'</td>'+
-                                '<td class="quiz_actions d-flex flex-row ">'+
                                 '<td>' + viewCellHtml + '</td>' +
                                 '<td>' + shareCellHtml + '</td>' +
                                 '<td>' + blockCellHtml + '</td>' +
-                                '</td>'+
                             '</tr>');
                         });
                     } else {
