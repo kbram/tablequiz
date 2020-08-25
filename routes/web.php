@@ -169,6 +169,9 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
     Route::post('admin/home/block/{id}','AdminDetailsController@block');
     Route::post('admin/home/un-block/{id}','AdminDetailsController@un_block');
 
+    //admin user search
+   
+
 });
 
 Route::redirect('/php', '/phpinfo', 301);
@@ -240,6 +243,7 @@ Route::post('questions/{id}/update', 'AdminQuestionController@update');
 
 //christy route can start from here
 Route::get('/dashboard/home','DashboardController@index');
+Route::get('/dashboard/my-quizzes','DashboardController@showMyQuizzes');
 Route::get('dashboard/settings','DashboardController@setting');
 
 //adminquestionccontroller

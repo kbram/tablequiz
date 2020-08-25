@@ -58,7 +58,7 @@
 						<div class="col-lg-9">
 							<h2>Questions</h2>
 						</div>
-						<div class="col-lg-3 d-flex">
+						<div class="col-lg-3 ">
 							@if(config('usersmanagement.enableSearchUsers'))
 								@include('partials.search-questions-form')
 							@endif

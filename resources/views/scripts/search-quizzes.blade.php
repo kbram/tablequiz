@@ -16,6 +16,7 @@
                                 '<td>{!! trans("usersmanagement.search.no-results") !!}</td>' +
                                 '<td></td>' +
                                 '<td></td>'+
+                                '<td></td>'+
                                 '</tr>';
                            
             $.ajax({
@@ -28,18 +29,18 @@
                     if (jsonData.length != 0) {
                         quizTable.hide();
                         $.each(jsonData, function(index, val) {
-                            let editCellHtml = '<div class="d-flex flex-column"><i class="fas fa-pencil-alt"></i><span>Edit</span><div>';
-                            let deleteCellHtml =  '<div class="d-flex flex-column"><i class="fas fa-times-circle"></i><span>Delete</span></div>';
+                            let viewCellHtml = '<div class=" d-flex flex-column"><i class="far fa-eye"></i><span>Edit</span></div>';
+                            let shareCellHtml =  '<div class="d-flex flex-column"><i class="fas fa-share-alt"></i><span>Share</span></div>';
+                            let blockCellHtml =  '<div class="d-flex flex-column"><i class="fas fa-times-circle"></i><span>Block</span></div>';
 											
                             
                             
                             resultsContainer.append('<tr>' +
-                                '<td>' + val.quiz_name + '</td>' +
+                                '<td>' + val.quiz__name + '</td>' +
                                 '<td>' + val.quiz_link + '</td>' +
                                 '<td>'+val.no_of_participants+'</td>'+
-                                '<td>' + editCellHtml + '</td>' +
-                                '<td>' + deleteCellHtml + '</td>' +
-                                '</td>'+
+                                '<td class="quiz_actions d-flex flex-row justify-content-lg-center">' + viewCellHtml + shareCellHtml +blockCellHtml +  '</td>' +
+
                             '</tr>');
                         });
                     } else {

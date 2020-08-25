@@ -140,7 +140,7 @@ class QuizController extends Controller
         }
 
         $results = Quiz::where('id', 'like', $searchTerm.'%')
-                            ->orWhere('quiz_name', 'like', $searchTerm.'%')->get();
+                            ->orWhere('quiz__name', 'like', $searchTerm.'%')->get();
                             
 
 

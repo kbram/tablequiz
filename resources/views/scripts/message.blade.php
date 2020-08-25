@@ -1,10 +1,12 @@
 
+
 <script type="text/javascript">
-$('.message').click(function(e){
+$('span.message').click(function(e){
     var id=e.target.id;
-    var text  = document.getElementById("quizLink"+id).innerHTML;
+    console.log("Hi");
+    var text  = document.getElementById("emailLink"+id).innerHTML;
     copyText(text);
-    alert("Quiz Master email copied");==
+    swal("Quiz Creator email copied","","success");
 
     function copyText(text) {
     navigator.clipboard.writeText(text);

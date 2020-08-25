@@ -117,6 +117,7 @@
 								<tr>
 									<td>{{$quiz -> quiz_name}}</td>
 									<td id="quizLink{{$quiz -> id}}">{{$quiz -> quiz_link}}</td>
+									<td class="d-none" id="emailLink{{$quiz->id}}">{{$result[$quiz->id]}}</td>
 									<td class="quiz_actions db d-flex flex-row justify-content-lg-center">
 										<div class="d-flex flex-column"  style=" pointer-events: none;opacity: 0.4;">
 											<i class="far fa-eye"></i>
@@ -164,8 +165,8 @@
 										</form>
 									
 										<div class="d-flex flex-column">
-											<i class="fas fa-envelope"></i><span>Message</span>
-
+											<i class="fas fa-envelope"></i><span class="message" id="{{$quiz->id}}">Message</span>
+											
 										</div>
 									</td>
 								</tr>

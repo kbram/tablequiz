@@ -141,7 +141,8 @@
 									<th>Quiz name</th>
 									<th>Questions</th>
 									<th>Rounds</th>
-									<th class="text-right">Actions</th>
+									<th class="d-none">Quiz Link</th>
+									<th class="text-center">Actions</th>
 								</tr>
 							</thead>
 						
@@ -154,27 +155,32 @@
 									 <td>{{$roundCount[$quiz->id]}}</td>
  									 <td>{{$questionCounts[$quiz->id]}}</td>
 
- 
+									<td class="d-none" id="quizLink{{$quiz->id}}">{{$quiz ->quiz_link}}</td>
 									<td class="quiz_actions d-flex flex-row justify-content-lg-end">
 										<a href="quizzes/{{$quiz->id}}/edit">			
 										<div class="d-flex flex-column pl-0 pl-md-4">
 											<i class="fas fa-edit"></i>
 											<span>Edit</span>
 										</div></a>
+							
+									
+									
+							
 										<div class="d-flex flex-column">
 											<i class="fas fa-share-alt"></i>
-											<span>Share</span>
+											<span class="share" id="{{$quiz->id}}">Share</span>
 										</div>
-										<a href="/quiz/start_quiz">
+										<a href="../quiz/start-quiz.php">
 											<div class="d-flex flex-column">
 												<i class="fas fa-play"></i>
 												<span>Start</span>
 											</div>
 										</a>
-										</td>
-										@endforeach
+									</td>
 								</tr>
-
+								@endforeach
+								
+									
 								
 								
 							</tbody>
@@ -193,7 +199,8 @@
 		</section>
 	</div>
 </section>
-@end
+@endsection
 @section('footer_scripts')
+@include('scripts.share-quiz')
 @endsection
 
