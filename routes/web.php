@@ -289,3 +289,4 @@ Route::get('/test/test' , function(){
 Route::post('playquiz/answer', 'PlayController@answer');
 Route::get('test','MasterQuestionController@index');
 
+Route::post('playquiz/{id}', 'PlayController@play');

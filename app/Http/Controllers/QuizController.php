@@ -47,6 +47,7 @@ class QuizController extends Controller
             
             return back()->withErrors($validator)->withInput();
         }
+        
         $quiz =new Quiz;
             $quiz -> quiz__name              = $request->input('quiz__name');
             $quiz -> quiz_password          = $request->input('quiz__password');

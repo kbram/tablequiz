@@ -46,6 +46,24 @@ jQuery(document).ready(function($){
 		$('#modal__signup').removeClass('d-none')
 		
 	})
+
+//thushapan
+$('.login__from__modal').click(function(){
+		
+	$('#modal__signup').addClass('d-none');
+	$('#modal__login').removeClass('d-none')
+	
+})
+
+$('.card__from__modal').click(function(){
+		
+	$('#modal__signup').addClass('d-none');
+	$('#modal__login').addClass('d-none')
+	$('#modal__payment').removeClass('d-none')
+
+	
+})
+
 	$('a.back_to__login').click(function(e){
 		e.preventDefault();
 		$('#modal__login').removeClass('d-none');

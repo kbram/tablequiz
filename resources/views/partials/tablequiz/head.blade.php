@@ -40,6 +40,11 @@
                                 @csrf
                             </form>
 				</li>
+
+				<li>
+				<a data-toggle="modal" data-target="#publishQuizModal" class="btn btn-primary d-block d-lg-inline-block card__from__modal" href="#">view card</a>
+
+				</li>
 				
 				<!-- This is the avatar to be used when logged in
 				<li class="logged_in">
