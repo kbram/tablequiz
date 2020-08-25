@@ -11,11 +11,7 @@ use App\Models\Question;
 use Illuminate\Http\Response;
 use DB;
 use Validator;
-use Illuminate\Support\Facades\DB;
-
 use File;
-
-use Illuminate\Http\Response;
 use Illuminate\Database\Eloquent\Model;
 
 
