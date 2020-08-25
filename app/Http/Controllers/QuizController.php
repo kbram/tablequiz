@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Quiz;
 use App\Models\UserPayment;
 
+
 use Illuminate\Http\Request;
 use Validator;
 use Auth;
@@ -41,6 +42,7 @@ class QuizController extends Controller
             
             return back()->withErrors($validator)->withInput();
         }
+        
         $quiz =new Quiz;
             $quiz -> quiz__name              = $request->input('quiz__name');
             $quiz -> quiz_password          = $request->input('quiz__password');
@@ -112,6 +114,8 @@ class QuizController extends Controller
        return view('quiz.add_round');
     
     }
+
+
     public function editQuiz($id){
 
         $quiz = Quiz::find($id);    

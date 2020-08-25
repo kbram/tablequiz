@@ -58,8 +58,8 @@ Quizzes can be setup and ran free of charge and ran using a simple link, no inst
 </div>
 </div>
 
-<div class="col-4  img-1st">
-<img src="site_design/images/homepage__logo.png" class="homepage__logo" alt="TableQuiz.app logo" width="150px" height="150px" >
+<div class="col-6  img-1st">
+<img src="site_design/images/about1.jpeg" class="homepage__logo" alt="TableQuiz.app logo"  >
 </div>
 
 </div>	
@@ -71,8 +71,8 @@ Quizzes can be setup and ran free of charge and ran using a simple link, no inst
 <br>
 <div class="raw d-flex">
 
-<div class="col-4 img-1st">
-<img src="site_design/images/homepage__logo.png" class="homepage__logo" alt="TableQuiz.app logo" width="150px" height="150px" >
+<div class="col-6 img-1st">
+<img src="site_design/images/about2.jpeg" class="homepage__logo" alt="TableQuiz.app logo" >
 </div>
 
 <div class=" ">
@@ -129,9 +129,22 @@ Quizzes can be setup and ran free of charge and ran using a simple link, no inst
 </div>
 
 <div class="col-4 img-1st">
-<img src="site_design/images/homepage__logo.png" class="homepage__logo" alt="TableQuiz.app logo" width="150px" height="150px" >
+<img src="site_design/images/about3.jpeg" class="homepage__logo" alt="TableQuiz.app logo"  >
 </div>
 </div>
+<br>
+<br>
+<br>
+<div class="raw d-flex">
+	<div class="col-4"></div>
+<div class="col-4 col-centered">
+<a href="/setup/create/" class="btn btn-primary d-block" width="50px">Get started ></a>
+<div class="col-4"></div>
+
+</div>
+</div>
+<br>
+<br>
 </div>
 		</article>
 
