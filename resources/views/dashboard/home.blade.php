@@ -151,7 +151,7 @@
 
 							<tr>
                                     
-									 <td>{{$quiz->quiz_name}}</td>
+									 <td>{{$quiz->quiz__name}}</td>
 									 <td>{{$roundCount[$quiz->id]}}</td>
  									 <td>{{$questionCounts[$quiz->id]}}</td>
 

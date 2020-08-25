@@ -99,10 +99,8 @@ class QuizRoundController extends Controller
     public function edit(){
         return view('quiz.add_round_edit');
     }
-
-
-
-
+    
+    
     public function upload(Request $request,$id){
 
         $round=QuizRound::find($id);
@@ -172,6 +170,12 @@ class QuizRoundController extends Controller
            
 }
 
+
+    public function getRound($id)
+{
+    $id+=1;
+    return view('quiz.add_round',compact('id'));
+}
 
    
 }

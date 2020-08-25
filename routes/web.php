@@ -182,6 +182,8 @@ Route::get('quiz/slider', 'QuizController@slider');
 //Route::get('quiz/add_round', 'QuizController@add_round');
 Route::get('quiz/add_round_2', 'QuizController@add_round_2');
 Route::get('quiz/setup', 'QuizController@setup');
+
+
 Route::post('round/store', 'QuizRoundController@store');
 Route::get('round/edit', 'QuizRoundController@edit');
 Route::get('round/show', 'QuizRoundController@show');
@@ -211,7 +213,7 @@ Route::get('startquiz-team/{id}', 'PlayController@errorteam');
 
 //my-quizzes dashbord route
 Route::get('showMyquizzes','DashboardController@showMyQuizzes');
-Route::post('setup','QuizController@store');
+// Route::post('setup','QuizController@store');
 Route::get('quizzes/{id}/edit','QuizController@editQuiz');
 Route::post('setup/update/{id}','QuizController@update');
 
@@ -222,6 +224,13 @@ Route::get('admin/categories', 'QuizCategoriesController@create');
 Route::post('admin/categories', 'QuizCategoriesController@store');
 Route::get('admin/categories/edit/{id}', 'QuizCategoriesController@edit');
 Route::post('admin/categories/update/{id}', 'QuizCategoriesController@update');
+
+//quizmaster question routes
+Route::post('/quiz','MasterQuestionController@postQuiz');
+Route::post('/round','MasterQuestionController@postRound');
+Route::post('/question','MasterQuestionController@postQuestion');
+Route::post('/quizsetup','MasterQuestionController@store');
+Route::get('/addround/{id}','QuizRoundController@getRound');
 
 
 
@@ -277,7 +286,7 @@ Route::post('stripe', 'StripePaymentController@stripePost')->name('stripe.post')
 //play quiz url
 
 
-Route::get('/{quiz_name}','PlayController@selecturl');
+Route::get('test/{quiz_name}','PlayController@selecturl');
 
 
 //TEST

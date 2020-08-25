@@ -26,6 +26,10 @@ class MasterQuestion extends Model
         
     ];
 
+    public function round(){
+        return $this->belongsTo('App\Models\QuizRound');
+    }
+
     public function masterAnswer()
     {
         return $this->hasMany('App\Models\MasterAnswer');

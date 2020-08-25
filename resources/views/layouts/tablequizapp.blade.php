@@ -76,6 +76,9 @@
         <!-- end -->
         <script src="{{asset('site_design/js/scripts.js?version=20')}}"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+        <script src="https://use.fontawesome.com/releases/v5.3.0/js/all.js"></script>
+
         
         {{-- Scripts --}}
         @yield('footer_scripts')
