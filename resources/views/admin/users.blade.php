@@ -10,37 +10,37 @@
 				
 				<ul class="list-unstyled m-0 p-0 text-sm-center text-lg-left">
 					<li>
-						<a href="../admin/home">
+						<a href="/admin/home">
 							<span><i class="fas fa-home"></i></span>
 							Overview
 						</a>
 					</li>
 					<li>
-						<a href="../admin/quizzes">
+						<a href="/admin/quizzes">
 							<span><i class="fas fa-briefcase"></i></span>
 							Quizzes
 						</a>
 					</li>
 					<li class="active">
-						<a href="../admin/users">
+						<a href="">
 							<span><i class="fas fa-users"></i></span>
 							Users
 						</a>
 					</li>
 					<li>
-						<a href="../admin/financials">
+						<a href="/admin/financials">
 							<span><i class="fas fa-coins"></i></span>
 							Financials
 						</a>
 					</li>
 					<li>
-						<a href="../admin/categories">
+						<a href="/admin/categories">
 							<span><i class="fas fa-th-large"></i></span>
 							Categories
 						</a>
 					</li>
 					<li>
-						<a href="../admin/questions">
+						<a href="/admin/questions">
 							<span><i class="fas fa-question-circle"></i></span>
 							Questions
 						</a>

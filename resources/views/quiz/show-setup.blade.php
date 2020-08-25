@@ -1,5 +1,6 @@
 @extends('layouts.tablequizapp')
 @section('content')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 <section class="container page__inner">
 	<div class="row">
@@ -9,14 +10,14 @@
 			</div>		
 			<form action="/setup" method="post" enctype="multipart/form-data" class="pt-2 pt-lg-4" >
 			@csrf
-
+                
 <!-- QUIZ NAME -->
 				<div class="form-row">
 					<div class="col-md-4">
 						<label for="quiz__name">Quiz name</label>
 					</div>
 					<div class="col-md-8">
-						<input autocomplete="nothanks" type="text" name="quiz__name" class="form-control" value="{{ old('quiz__name') }}">
+						<input autocomplete="nothanks" type="text" name="quiz__name" class="form-control" value="{{$quizzes->quiz_name}}">
 					
 						@if ($errors->has('quiz__name'))
                                     <span class="help-block">
@@ -47,7 +48,7 @@
 						<p class="disabled__text">TableQuiz.app/</p>
 					</div>
 					<div class="col-sm">
-						<input type="text" name="quiz__link" class="form-control" value="{{ old('quiz__link') }}">
+						<input type="text" name="quiz__link" class="form-control" value="{{$quizzes->quiz_link}}">
 						@if ($errors->has('quiz__link'))
                                     <span class="help-block">
                                             <p>{{ $errors->first('quiz__link') }}</p>
@@ -81,12 +82,12 @@
 						  <div class="modal-body">
 							<div class="modal__edit__image">
 								<div class="modal__edit__image__mask"></div>
-								<img class="modal__edit__image__image" src="" id="image_preview_co            ntainer" value="{{ old('image_preview_container') }}">
+								<img class="modal__edit__image__image" src="" id="image_preview_container" value="{{ old('image_preview_container') }}">
 							</div>
 							<div class="modal__edit__image__range">
 								<div class="form-group">
 									<label for="formControlRange">Edit size</label>
-									<input type="range" class="form-control-range" id="formControlRange" class="slider" >
+									<input type="range" class="form-control-range" id="formControlRange">
 									<div id="demo" class="d-none"></div>
 								  </div>
 							</div>
@@ -105,8 +106,54 @@
 					  </div>
 					</div>
 				</div>
-
-
+<!-- QUIZ CHARGE ?-->
+				<div class="form-row">
+					<div class="col-md-4">
+						<label>Charge for entry?</label>
+						<span class="helper__text" data-placement="left"
+							  data-toggle="tooltip" title="TableQuiz.app allows users to charge entry. Set custom amounts to easily collect for a charity or for prize money."><i class="fa fa-info-circle"></i></span>
+					</div>
+					<div class="col">
+						<div class="form-check form-check-inline">
+						  <input class="form-check-input" type="radio" name="quiz__charge_entry" id="quiz_charge__yes" value="yes">
+						  <label class="form-check-label" for="quiz_charge__yes">Yes</label>
+						</div>
+						<div class="form-check form-check-inline">
+						  <input class="form-check-input" type="radio" name="quiz__charge_entry" id="quiz_charge__no" value="no" checked>
+						  <label class="form-check-label" for="quiz_charge__no">No</label>
+						</div>
+					</div>
+					
+				</div>
+<!-- ENTRY FEE -->
+				<div class="form-row d-none entry__fee">
+					<div class="col-md-4">
+						<label for="quiz__entry_fee">Entry fee</label>
+					</div>
+					<div class="col-md-4">
+						<div class="input-group">
+							<div class="input-group-prepend">
+							  <div class="input-group-text">€</div>
+							</div>
+							<input type="text" class="form-control" id="quiz__entry_fee">
+						</div>
+					</div>
+					
+				</div>
+				
+<!-- ENTRY FEE MESSAGE-->
+				
+				<div class="form-row d-none entry__fee">
+					<div class="col-md-4">
+						<label for="quiz__entry_fee__message">Message</label>
+						<span class="helper__text" data-placement="left"
+							  data-toggle="tooltip" title="This message will be displayed before your quiz with a fee request."><i class="fa fa-info-circle"></i></span>
+					</div>
+					<div class="col-md-7">
+						<textarea width="100%" id="quiz__entry_fee__message" class="form-control"></textarea>
+					</div>
+					
+				</div>
 <!-- QUIZ PARTICIPANTS -->
 				<div class="form-row">
 					<div class="col-md-4">
@@ -114,7 +161,7 @@
 					</div>
 					<div class="col-md-4">
 						<select id="quiz__participants" class="form-control" name="quiz__participants">
-							<option disabled selected>{{(old('quiz__participants') != '' ? old('quiz__participants') : 'Please Choose...')}}</option>
+							<option disabled selected>{{$quizzes->no_of_participants}}</option>
 							<option value="1-5">1-5</option>
 							<option value="5-9">5-9</option>
 							<option value="10-19">10-19</option>
@@ -212,7 +259,28 @@
 					</div>
 				</div>
 			</form>
-			
+	
+	<script>
+	function readURL(input) {
+  	if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    
+    reader.onload = function(e) {
+      $('#image_preview_container').attr('src', e.target.result);
+    }
+    
+    reader.readAsDataURL(input.files[0]); // convert to base64 string
+  }
+}
+
+$("#upload__quiz__icon").change(function() {
+  readURL(this);
+});
+	</script>
+	
+	
+	
+	
 		</article>
 	</div>
 	</section>
@@ -220,6 +288,5 @@
 @endsection
 
 @section('footer_scripts')
-@include('scripts.quiz-icon-preview')
 
 @endsection

@@ -16,7 +16,13 @@ class QuizRound extends Model
         'quiz_id',
         'round_name',
         'round_slug',
+
     ];
+
+    public function image()
+    {
+        return $this->hasMany('App\Models\QuizRoundImage');
+    }
 
     public function quizzes()
     {
@@ -31,6 +37,7 @@ class QuizRound extends Model
     {
         return $this->hasOne('App\Models\QuizRoundImage');
     } 
+
 
 }
 

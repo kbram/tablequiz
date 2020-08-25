@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Quiz;
 use Illuminate\Support\Facades\Route;
-
+use App\Models\Participant;
 class AdminDetailsController extends Controller
 {
     /**
@@ -46,7 +47,11 @@ class AdminDetailsController extends Controller
 
     public function home()
     {   
-        return view('admin.home');
+        $cusers=User::count();
+        $cquzzes=Quiz::count();
+        $quizzes = Quiz::all();
+       
+        return view('admin.home',compact('quizzes','cusers','cquzzes'));
     }
 
     public function categories()
@@ -72,5 +77,20 @@ class AdminDetailsController extends Controller
     public function users()
     {   
         return view('admin.users');
+    }
+    public function quizView($id){
+        $participants=Participant::all();
+        $quizzes = Quiz::find($id);
+        return view('quiz.show-setup',compact('quizzes','participants'));
+    }
+
+    public function block($id){
+        Quiz::where('id', $id)->update(['is_blocked' =>true]);
+          return redirect()->back();
+    }
+
+    public function un_block($id){
+        Quiz::where('id', $id)->update(['is_blocked' =>false]);
+        return redirect()->back();
     }
 }

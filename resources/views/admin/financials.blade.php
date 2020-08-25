@@ -10,44 +10,44 @@
 				
 				<ul class="list-unstyled m-0 p-0 text-sm-center text-lg-left">
 					<li>
-						<a href="../admin/home">
+						<a href="/admin/home">
 							<span><i class="fas fa-home"></i></span>
 							Overview
 						</a>
 					</li>
 					<li>
-						<a href="../admin/quizzes">
+						<a href="/admin/quizzes">
 							<span><i class="fas fa-briefcase"></i></span>
 							Quizzes
 						</a>
 					</li>
 					<li>
-						<a href="../admin/users">
+						<a href="/admin/users">
 							<span><i class="fas fa-users"></i></span>
 							Users
 						</a>
 					</li>
 					<li class="active">
-						<a href="../admin/financials">
+						<a href="#">
 							<span><i class="fas fa-coins"></i></span>
 							Financials
 						</a>
 					</li>
 					<li>
-						<a href="../admin/categories">
+						<a href="/admin/categories">
 							<span><i class="fas fa-th-large"></i></span>
 							Categories
 						</a>
 					</li>
 					<li>
-						<a href="../admin/questions">
+						<a href="/admin/questions">
 							<span><i class="fas fa-question-circle"></i></span>
 							Questions
 						</a>
 					</li>
 					
 				</ul>
-				<a href="../quiz/setup" class="btn btn-primary hasPlus d-block">New Quiz</a>
+				<a href="/quiz/setup" class="btn btn-primary hasPlus d-block">New Quiz</a>
 			</div>
 		</aside>
 		
@@ -118,8 +118,9 @@
 										<div class="input-group-prepend">
 											<span class="input-group-text">&euro;</span>
 										</div>
-										<input id="cost{{$backgroundCost->id}}" maxlength="3" class="form-control" placeholder="{{$backgroundCost->cost}}">
-										<button id="{{$backgroundCost->id}}"  maxlength="3" class=" form-control ml-1" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
+										<input name="band__costs" maxlength="3" class="form-control" placeholder="{{$backgroundCost->cost}}">
+										<button id="{{$backgroundCost->id}}" maxlength="3" class=" form-control ml-1" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
+										
 									</div>
 								</div>
 							</form>

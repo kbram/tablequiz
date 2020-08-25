@@ -149,6 +149,25 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
     Route::get('admin/users', 'AdminDetailsController@users');
     
 
+    //admin question
+    Route::get('admin/quizzes','QuizController@index');
+    Route::post('search-quizzes','QuizController@search')->name('search-quizzes');
+
+    //admin financial controller
+    Route::get('admin/financials','PriceBandsController@index');
+
+    //adminquestionccontroller
+    Route::get('/admin/questions','AdminQuestionController@index');
+    Route::post('search-questions','AdminQuestionController@search')->name('search-questions');
+    Route::post('/admin/questions/{id}','AdminQuestionController@destroy');
+
+    //admin categories
+    Route::post('/admin/categories/{id}','QuizCategoriesController@destroy');
+
+    //admin home view quiz
+    Route::get('admin/home/view/{id}','AdminDetailsController@quizView');
+    Route::post('admin/home/block/{id}','AdminDetailsController@block');
+    Route::post('admin/home/un-block/{id}','AdminDetailsController@un_block');
 
 });
 
