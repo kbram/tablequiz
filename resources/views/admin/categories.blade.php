@@ -10,44 +10,44 @@
 				
 				<ul class="list-unstyled m-0 p-0 text-sm-center text-lg-left">
 					<li>
-						<a href="../admin/home.php">
+						<a href="../admin/home">
 							<span><i class="fas fa-home"></i></span>
 							Overview
 						</a>
 					</li>
 					<li>
-						<a href="../admin/quizzes.php">
+						<a href="../admin/quizzes">
 							<span><i class="fas fa-briefcase"></i></span>
 							Quizzes
 						</a>
 					</li>
 					<li>
-						<a href="../admin/users.php">
+						<a href="../admin/users">
 							<span><i class="fas fa-users"></i></span>
 							Users
 						</a>
 					</li>
 					<li>
-						<a href="../admin/financials.php">
+						<a href="../admin/financials">
 							<span><i class="fas fa-coins"></i></span>
 							Financials
 						</a>
 					</li>
 					<li class="active">
-						<a href="../admin/categories.php">
+						<a href="../admin/categories">
 							<span><i class="fas fa-th-large"></i></span>
 							Categories
 						</a>
 					</li>
 					<li>
-						<a href="../admin/questions.php">
+						<a href="../admin/questions">
 							<span><i class="fas fa-question-circle"></i></span>
 							Questions
 						</a>
 					</li>
 					
 				</ul>
-				<a href="../quiz/setup.php" class="btn btn-primary hasPlus d-block">New Quiz</a>
+				<a href="../quiz/setup" class="btn btn-primary hasPlus d-block">New Quiz</a>
 			</div>
 		</aside>
 		
@@ -65,24 +65,25 @@
 						<h3>Add new category</h3>
 						<form action="/admin/categories" enctype="multipart/form-data" method="post" class="pt-3">
 						@csrf
-							<div class="form-row">
+							<div class="form-row w-100">
 								<div class="col-12 col-md-3 text-left">
 									<label for="category__name"class="justify-content-start"><small>Category name</small></label>
 								</div>
 								<div class="col-12 col-md-4 pr-md-2 mb-2 mb-md-0">
-									<input type="text" name="category_name" class="w-100 form-control mx-lg-2 flex-grow-1 d-block">
+									<input type="text" name="category_name" class="w-100 form-control mx-lg-2 flex-grow-1 d-block" required>
 								</div>
-							</div>
-							<div class="form-row">
-								<div class="col-12 col-md-3 text-left">
-									<label class="justify-content-start"><small>Category image</small></label>
-								</div>
-								<div class="col-6">
-									<label for="category_image" class="orange_text d-block d-md-inline">
-									<input type="file" class="orange_text form-control-file" name="category_image" value="Upload"></label>
-								</div>
-							</div>
 							
+
+
+								<div class="col-6 col-md-3 text-left">
+										<label class="mx-lg-2 justify-content-start"><small>Category image</small></label>
+								</div>
+								<div class="col-6 col-md-2">
+									<label for="upload__category__image" class="orange_text d-block d-md-inline">Upload
+									<input type="file" class="orange_text form-control-file" id="upload__category__image" name="upload__category__image" value="Upload"></label>
+								</div>
+							
+								</div>
 							<hr>
 							<div class="row justify-content-center">
 								<div class="col-4">

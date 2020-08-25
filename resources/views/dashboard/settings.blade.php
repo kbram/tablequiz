@@ -27,7 +27,7 @@
 						</a>
 					</li>
 				</ul>
-				<a href="../quiz/setup.php" class="btn btn-primary hasPlus d-block">New Quiz</a>
+				<a href="/setup/create" class="btn btn-primary hasPlus d-block">New Quiz</a>
 			</div>
 		</aside>
 		

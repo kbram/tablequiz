@@ -187,6 +187,13 @@ Route::get('startquiz-team/{id}', 'PlayController@errorteam');
 
 
 
+//my-quizzes dashbord route
+Route::get('showMyquizzes','DashboardController@showMyQuizzes');
+Route::post('setup','QuizController@store');
+Route::get('quizzes/{id}/edit','QuizController@editQuiz');
+Route::post('setup/update/{id}','QuizController@update');
+
+//christy route can start from here
 
 //quiz category route
 Route::get('admin/categories', 'QuizCategoriesController@create');
@@ -204,17 +211,16 @@ Route::get('quizzes/{id}/edit','QuizController@editQuiz');
 
 //kanu routes
 Route::get('setup/create', 'QuizController@create');
-Route::post('setup','QuizController@store');
-// Route::put('setup/update/{id}','QuizController@update');
 
 
 
-Route::get('questions/create', 'AdminQuestionController@create');
-Route::post('questions/create', 'AdminQuestionController@store');
+Route::get('admin/questions', 'AdminQuestionController@create');
+Route::post('admin/questions', 'AdminQuestionController@store');
+Route::get('questions/{id}/edit', 'AdminQuestionController@edit');
+Route::post('questions/{id}/update', 'AdminQuestionController@update');
 
 //christy route can start from here
 Route::get('/dashboard/home','DashboardController@index');
-Route::get('/dashboard/my-quizzes','DashboardController@myQuiz');
 Route::get('dashboard/settings','DashboardController@setting');
 
 //adminquestionccontroller
@@ -258,4 +264,5 @@ Route::get('/test/test' , function(){
 
 //test answer
 Route::post('playquiz/answer', 'PlayController@answer');
+Route::get('test','MasterQuestionController@index');
 

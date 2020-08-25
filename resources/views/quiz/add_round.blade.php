@@ -140,20 +140,23 @@
 				</div>
 			</div>
 
-			<div class="form-row justify-content-center pt-3">
-							<div class="col-md-4">	
-							 <input class="justify-content-center px-4" type="submit" value="Save">
-							
-							</div>
-						</div>
-					  </div>
+			<!-- <div class="form-row justify-content-center pt-3">
+				<div class="col-md-4">	
+					<input class="justify-content-center px-4" type="submit" value="Save">
+				
+				</div>
+			</div> -->
+			</div>
 		</article>
 	</form>
 <!-- QUESTION -->	
+<div id="sections">
+  <div class="section">
 <form class="is_container row" id="add_round" action="/round_question/store" method="post" enctype="multipart/form-data" role="main">	
+
 		<article class="col-12">
 			<div class="article__heading">
-				<h1>Question 1</h1>
+				<h1>Question <span id="number"> 1</span></h1>
 				
 			</div>
 			
@@ -309,23 +312,17 @@
 				
 			</div>
 			 
-			<div class="form-row justify-content-center pt-3">
-							<div class="col-md-1">	
-							 <input class="justify-content-center" type="submit" value="Save">
-							</div>
-						</div>
-					  </div>
+			<!-- <div class="form-row justify-content-center pt-3">
+				<div class="col-md-1">	
+					<input class="justify-content-center" type="submit" value="Save">
+				</div>
+			</div> -->
+			</div>
 			
 		</article>
 
-		<div class="button__holder w-100 pt-0 mt-5 justify-content-center d-md-flex" id="add-new-question">
-			
-			<div class="col-md-4 p-0">
-				<a class="btn btn-white d-block" id="addQuestion" href="#add-new-question">Add Question</a>
-			</div>
 
-		</div>
-        
+		       
         
         <!-- Suggested Question modal -->
         <div class="modal" id="suggestedQuestion" tabindex="-1" role="dialog" aria-labelledby="suggestedQuestion" aria-hidden="true">
@@ -338,61 +335,30 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
+
               <div class="modal-body categories d-flex w-100 pb-4">
                 <div class="row suggested__categories px-3 w-100 no-gutters">
-                    <div class="suggested_category__icon col-6 col-sm-4 text-center p-2">
-						<div class="d-flex flex-column h-100 participants__choice justify-content-center align-items-center p-4">
-							<div class="icon pb-2">
-								<i class="far fa-futbol"></i>
+
+					@foreach($categories as $category)
+						<div class="suggested_category__icon col-6 col-sm-4 text-center p-2">
+							<div class="d-flex flex-column h-100 participants__choice justify-content-center align-items-center p-4">
+								<div class="icon pb-2">
+									<i class="far fa-futbol"></i>
+								</div>
+								<p class="">
+									
+									{{$category->category_name}}
+									
+								</p>
 							</div>
-							<p class="">Sport</p>
 						</div>
-                    </div>
-                    <div class="suggested_category__icon col-6 col-sm-4 text-center p-2">
-						<div class="d-flex flex-column h-100 participants__choice justify-content-center align-items-center p-4">
-							<div class="icon pb-2">
-								<i class="fas fa-headphones-alt"></i>
-							</div>
-							<p class="">Music</p>
-						</div>
-                    </div>
-                    <div class="suggested_category__icon col-6 col-sm-4 text-center p-2">
-						<div class="d-flex flex-column h-100 participants__choice justify-content-center align-items-center p-4">
-							<div class="icon pb-2">
-								<i class="fas fa-award"></i>
-							</div>
-							<p class="">Politics</p>
-						</div>
-                    </div>
-                    <div class="suggested_category__icon col-6 col-sm-4 text-center p-2">
-						<div class="d-flex flex-column h-100 participants__choice justify-content-center align-items-center p-4">
-							<div class="icon pb-2">
-								<i class="far fa-grin-hearts"></i>
-							</div>
-							<p class="">Pop culture</p>
-						</div>
-                    </div>
-                    <div class="suggested_category__icon col-6 col-sm-4 text-center p-2">
-						<div class="d-flex flex-column h-100 participants__choice justify-content-center align-items-center p-4">
-							<div class="icon pb-2">
-								<i class="fas fa-globe-africa"></i>
-							</div>
-							<p class="">Geography</p>
-						</div>
-                    </div>
-                    <div class="suggested_category__icon col-6 col-sm-4 text-center p-2">
-						<div class="d-flex flex-column h-100 participants__choice justify-content-center align-items-center p-4">
-							<div class="icon pb-2">
-								<i class="fas fa-landmark"></i>
-							</div>
-							<p class="">History</p>
-						</div>
-                    </div>
-                    
+					@endforeach
                 </div>
               </div>
+			  
               <div class="modal-body question_types d-none">
                 <div class="row suggested__categories px-3 w-100">
+
                     <div class="suggested_category__icon col-6 text-center p-2">
 						<div class="d-flex flex-column h-100 participants__choice justify-content-center align-items-center p-4">
 							<div class="icon pb-2">
@@ -428,10 +394,13 @@
                     
                 </div>
               </div>
+
+
               <div class="modal-body questions d-none">
                 <div class="row suggested__question px-3">
                     <ul class="all_suggested_questions list-unstyled p-0 m-0">
                         <li class="single__suggested__question text-body p-3 border rounded mb-4">
+
                             <div class="single__suggested__question__image position-relative">
                                 <img src="../images/moscow__image.jpeg" class="w-100">
                                 <div class="change__image position-absolute px-4 invisible">
@@ -440,6 +409,8 @@
                                     </label>
                                 </div>
                             </div>
+
+
                             <div class="single__suggested__question__attributes row pt-3">
 								<div class="col-md-3 text-center d-flex align-items-center justify-content-center">
 									<span class="pr-2">
@@ -677,8 +648,17 @@
             </div>
           </div>
         </div>
-        
+		
 	</form>
+	</div>
+	</div>
+	<div class="button__holder w-100 pt-0 mt-5 justify-content-center d-md-flex" id="add-new-question">
+			
+			<div class="col-md-4 p-0">
+				<a class="btn btn-white d-block" id="addQuestion" href="#">Add Question</a>
+			</div>
+
+	</div>
 	<section class="row round__page__buttons justify-content-center align-items-center pt-5 mt-5 border-top">
 		<div class="col-md-4 mb-3 mb-md-0 px-0 px-md-4">
 			<a href="add_round_2.php" class="btn btn-secondary d-block"><span class="pr-3"><i class="fa fa-plus"></i></span>Next round</a>

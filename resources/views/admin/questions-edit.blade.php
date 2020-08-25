@@ -58,19 +58,18 @@
 						<div class="col-lg-9">
 							<h2>Questions</h2>
 						</div>
-						<div class="col-lg-3 d-flex">
-							@if(config('usersmanagement.enableSearchUsers'))
-								@include('partials.search-questions-form')
-							@endif
-							
+						<div class="col-lg-3">
+							<form action="" method="" class="p-0">
+								<input type="text" list="quizzes" name="quiz" placeholder="Search..." class="form-control mb-2 mt-n2">
+							</form>
 						</div>
 					</div>
 					
 					
 					<div class="dashboard__container flex-grow-0 pt-4 mb-3">
-						<h3>Add new question</h3>
+						<h3>Edit Question</h3>
 						
-						<form action="/questions/create" enctype="multipart/form-data" method="post" class="pt-3 add__new__in__admin">
+						<form action="/questions/{{$questions->id}}/update" enctype="multipart/form-data" method="post" class="pt-3 add__new__in__admin">
 							@csrf
 							<div class="form-row">
 								<div class="col-md-4">
@@ -79,8 +78,10 @@
 								<div class="col-md-4">
 
 								<select name="category__type" id="category__type" class="form-control" >
+                                              <option selected value="{{($questions->category_id != '' ? $questions->category_id : '')}}">{{$cat_name[$questions->id]}}</option>
                                                 @foreach($categories as $category)
-                                                    <option value="{{$category->id }}" value="show" >{{ $category->category_name }}</option>
+                                                
+                                                <option value="{{$category->id }}" value="show" >{{ $category->category_name }}</option>
 													
                                                 @endforeach
                                    	<li class="active">
@@ -103,9 +104,11 @@
 								<div class="col-md-4">
 								
 									<select id="question__type" name="question__type" class="form-control" >
-									    <option value="standard__question">Standard</option>
+                                        <option selected value="{{$questions->question_type}}" >{{$questions->question_type}}</option>
+										<option value="standard__question">Standard</option>
 										<option value="multiple__choice__question">Multiple choice</option>
 										<option value="numeric__question">Numeric</option>
+
 									</select>
 							
 								</div>
@@ -115,7 +118,7 @@
 									<label for="question">Question</label>
 								</div>
 								<div class="col-md-8">
-									<input name="question" type="text" class="form-control" >
+									<input name="question" type="text" class="form-control" value="{{ ($questions->question != '' ? $questions->question : '') }}">
 									
 								</div>
 							</div>
@@ -152,7 +155,7 @@
 												<label>Add link</label>
 											</div>
 											<div class="col-md-8">
-												<input type="url" name="add_link_to_image__media" class="form-control" id="add__image__media__text">
+												<input type="url" name="add_link_to_image__media" class="form-control" id="add__image__media__text" >
 											</div>
 										</div>
 										<div class="text-center w-100">
@@ -161,7 +164,7 @@
 										<div class="form-row justify-content-center pt-3">
 											<div class="col-md-3">	
 											   <label class="d-block" for="upload__image__media__file">Upload
-													<input type="file" class="form-control-file" id="upload__image__media__file" value="Upload" name="image_media">
+													<input type="file" class="form-control-file" id="upload__image__media__file" name="image_media" value="{{ ($image_media_edit != '' ? $image_media_edit : 'upload') }}"  >
 												</label>
 											</div>
 										</div>
@@ -190,7 +193,7 @@
 												<label>Add link</label>
 											</div>
 											<div class="col-md-8">
-												<input type="url" name="add_link_to_audio__media" class="form-control" id="add__audio__media__text">
+												<input type="url" name="add_link_to_audio__media" class="form-control" >
 											</div>
 										</div>
 										<div class="text-center w-100">
@@ -199,7 +202,7 @@
 										<div class="form-row justify-content-center pt-3">
 											<div class="col-md-3">	
 											   <label class="d-block" for="upload__audio__media__file">Upload
-													<input type="file" class="form-control-file" id="upload__audio__media__file" value="Upload" name="audio_media">
+													<input type="file" class="form-control-file" id="upload__audio__media__file" value="Upload" name="audio_media" value="{{ ($audio_media_edit != '' ? $audio_media_edit : 'upload') }}">
 												</label>
 											</div>
 										</div>
@@ -228,7 +231,7 @@
 												<label>Add link</label>
 											</div>
 											<div class="col-md-8">
-												<input type="url" name="add_link_to_video__media" class="form-control" id="add__video__media__text">
+												<input type="url" name="add_link_to_video__media" class="form-control">
 											</div>
 										</div>
 										<div class="text-center w-100">
@@ -237,7 +240,7 @@
 										<div class="form-row justify-content-center pt-3">
 											<div class="col-md-3">	
 											   <label class="d-block" for="upload__video__media__file">Upload
-													<input type="file" class="form-control-file" id="upload__video__media__file" value="Upload" name="video_media">
+													<input type="file" class="form-control-file" id="upload__video__media__file" value="Upload" name="video_media" value="{{ ($video_media_edit != '' ? $video_media_edit : 'upload') }}">
 												</label>
 											</div>
 										</div>
@@ -252,12 +255,12 @@
 								</div>
 
 							</div>
-							<div class="form-row d-flex" id="standard__answer" >
+							<div class="form-row d-flex" id="standard__answer">
 								<div class="col-md-4">
 									<label for="standard__question__answer">Answer</label>
 								</div>
 								<div class="col-md-8">
-									<input class="form-control" name="standard__question__answer" type="text" >
+									<input class="form-control" name="standard__question__answer" type="text" value="{{($standard_answer != '' ? $standard_answer : '')}}" >
 								</div>
 							</div>
 							<div class="form-row d-none" id="numeric__answer" name="numeric__answer">
@@ -265,7 +268,7 @@
 									<label for="numeric__question__answer">Answer</label>
 								</div>
 								<div class="col-md-8">
-									<input class="form-control" name="numeric__question__answer" type="number" >
+									<input class="form-control" name="numeric__question__answer" type="number" value="{{($numeric_answer != '' ? $numeric_answer : '')}}" >
 								</div>
 							</div>
 							<div class="form-row d-none" style="min-height:0;" id="multiple__choice__legend">
@@ -283,12 +286,12 @@
 										<div  id="dynamicTable" class="col-7">
 										
 											
-									 <input  name="multiple__choice__answer__1" class="form-control" type="text" >		   
+									 <input  name="multiple__choice__answer__1" class="form-control" type="text" value="{{($multiple_answer != '' ? $multiple_answer : '')}}" >		   
 										</div> 
 										<div class="col-1 justify-content-center">
 											&nbsp;
 										</div>
-										<div class="col-1 justify-content-center" >
+										<div class="col-1 justify-content-center">
 											<span class="plus" id="add">+</span>
 											
 										</div>
@@ -306,7 +309,7 @@
 									<label for="time__limit">Time limit</label>
 								</div>
 								<div class="col-md-4">
-									<input class="form-control" type="number" name="time__limit" >
+									<input class="form-control" type="number" name="time__limit" value="{{($questions->time_limit != '' ? $questions->time_limit : '')}}"  >
 								</div>
 								<div class="col">
 									<small class="form-text text-muted">Seconds</small>
@@ -322,44 +325,7 @@
 						
 						
 					</div>
-					<div class="dashboard__container flex-grow-1">
-						<table class="table table-striped table-borderless m-0 h-100 my__quizzes">
-							<thead>
-								<tr>
-									<th>Question <span><small><i class="fa fa-angle-down"></i></small></span</th>
-									<th>Category <span><small><i class="fa fa-angle-down"></i></small></span</th>
-									<th class="text-center">Actions</th>
-								</tr>
-							</thead>
-							<tbody>
-							
-							@foreach($questions as $question)
-							
-
-							<tr>	
-								<td>{{$question->question}}</td>  
-							    <td>{{$cat_name[$question->id]}}</td>
-						       
-						       <td class="quiz_actions d-flex flex-row justify-content-lg-center">
-							   <div class="d-flex flex-column">
-									<i class="fas fa-pencil-alt"></i>
-									<span><a href="{{ URL::to('questions/'. $question->id .'/edit') }}" data-toggle="tooltip" title="edit">
-                                                   Edit
-                                                </a></span>
-								</div>									
-								<div class="d-flex flex-column">
-									<i class="fas fa-times-circle"></i>
-									<span> <a  data-id="{{$question->question}}" data-model="GlobalQuestion"  data-toggle="tooltip" title="delete" >
-                                               Delete
-                                                </a></span>
-								</div>
-							    </td>
-							</tr>
-							 @endforeach
-							
-								 
-							</tbody>
-							
+					
 							<tfoot>
 								<tr>
 									<td colspan="6" class="text-center text-muted">
@@ -368,7 +334,7 @@
 								</tr>
 							</tfoot>
 						</table>
-						{{ $questions->links() }}
+						
 					</div>
 				</div>
 			</div>
@@ -376,10 +342,10 @@
 	</div>
 	
 </section>
+
 @endsection
+
 @section('footer_scripts')
-	@if(config('usersmanagement.enableSearchUsers'))
-        @include('scripts.search-questions')
-    @endif
-	
+
+
 @endsection
