@@ -55,7 +55,7 @@ class QuizController extends Controller
 
 
            if ($request->hasFile('upload__quiz__icon')) {
-               dd($request->hasFile('upload__quiz__icon'));
+              // dd($request->hasFile('upload__quiz__icon'));
  
             $quiz_icon = $request->file('upload__quiz__icon');
 

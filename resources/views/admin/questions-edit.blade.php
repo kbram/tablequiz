@@ -10,31 +10,31 @@
 				
 				<ul class="list-unstyled m-0 p-0 text-sm-center text-lg-left">
 					<li>
-						<a href="../admin/home.php">
+						<a href="../admin/home">
 							<span><i class="fas fa-home"></i></span>
 							Overview
 						</a>
 					</li>
 					<li>
-						<a href="../admin/quizzes.php">
+						<a href="../admin/quizzes">
 							<span><i class="fas fa-briefcase"></i></span>
 							Quizzes
 						</a>
 					</li>
 					<li>
-						<a href="../admin/users.php">
+						<a href="../admin/users">
 							<span><i class="fas fa-users"></i></span>
 							Users
 						</a>
 					</li>
 					<li>
-						<a href="../admin/financials.php">
+						<a href="../admin/financials">
 							<span><i class="fas fa-coins"></i></span>
 							Financials
 						</a>
 					</li>
 					<li>
-						<a href="../admin/categories.php">
+						<a href="../admin/categories">
 							<span><i class="fas fa-th-large"></i></span>
 							Categories
 						</a>
@@ -47,7 +47,7 @@
 					</li>
 					
 				</ul>
-				<a href="../quiz/setup.php" class="btn btn-primary hasPlus d-block">New Quiz</a>
+				<a href="../quiz/setup" class="btn btn-primary hasPlus d-block">New Quiz</a>
 			</div>
 		</aside>
 		
@@ -89,7 +89,7 @@
 					</li>
 					
 				</ul>
-				<a href="../quiz/setup.php" class="btn btn-primary hasPlus d-block">New Quiz</a>
+				<a href="../quiz/setup" class="btn btn-primary hasPlus d-block">New Quiz</a>
 			</div>
 		</aside>
 		

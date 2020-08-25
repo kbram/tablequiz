@@ -190,8 +190,8 @@ Route::get('setup/create', 'QuizController@create');
 
 
 
-Route::get('questions/create', 'AdminQuestionController@create');
-Route::post('questions/create', 'AdminQuestionController@store');
+Route::get('admin/questions', 'AdminQuestionController@create');
+Route::post('admin/questions', 'AdminQuestionController@store');
 Route::get('questions/{id}/edit', 'AdminQuestionController@edit');
 Route::post('questions/{id}/update', 'AdminQuestionController@update');
 
