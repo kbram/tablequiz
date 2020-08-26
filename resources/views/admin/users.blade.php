@@ -78,11 +78,11 @@
 							</thead>
 							<tbody>
 								
-					
+					               @foreach($users as $user)
 								<tr>
-									<td>SenanCronin2020</td>
-									<td>15</td>
-									<td>322</td>
+									<td>{{$user->name}}</td>
+									<td>{{$quizcount[$user->id]}}</td>
+									<td>{{$questioncount[$user->id]}}</td>
 									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
 										<div class="d-flex flex-column pl-0">
 											<i class="far fa-eye"></i>
@@ -91,198 +91,17 @@
 											<i class="fas fa-times-circle"></i>
 											<span>Block</span>
 										</div>
-<!--
-										<div class="d-flex flex-column">
+
+										<!-- <div class="d-flex flex-column">
 											<i class="fas fa-envelope"></i>
 											<span>Message</span>
-										</div>
--->
+										</div> -->
+
 									</td>
 								</tr>
-								<tr>
-									<td>SenanCronin2020</td>
-									<td>15</td>
-									<td>322</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column pl-0">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>									<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-<!--
-										<div class="d-flex flex-column">
-											<i class="fas fa-envelope"></i>
-											<span>Message</span>
-										</div>
--->
-									</td>
-								</tr>
-								<tr>
-									<td>SenanCronin2020</td>
-									<td>15</td>
-									<td>322</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column pl-0">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>									<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-<!--
-										<div class="d-flex flex-column">
-											<i class="fas fa-envelope"></i>
-											<span>Message</span>
-										</div>
--->
-									</td>
-								</tr>
-								<tr>
-									<td>SenanCronin2020</td>
-									<td>15</td>
-									<td>322</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column pl-0">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>									<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-<!--
-										<div class="d-flex flex-column">
-											<i class="fas fa-envelope"></i>
-											<span>Message</span>
-										</div>
--->
-									</td>
-								</tr>
-								<tr>
-									<td>SenanCronin2020</td>
-									<td>15</td>
-									<td>322</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column pl-0">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>									<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-<!--
-										<div class="d-flex flex-column">
-											<i class="fas fa-envelope"></i>
-											<span>Message</span>
-										</div>
--->
-									</td>
-								</tr>
-								<tr>
-									<td>SenanCronin2020</td>
-									<td>15</td>
-									<td>322</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column pl-0">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>									<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-<!--
-										<div class="d-flex flex-column">
-											<i class="fas fa-envelope"></i>
-											<span>Message</span>
-										</div>
--->
-									</td>
-								</tr>
-								<tr>
-									<td>SenanCronin2020</td>
-									<td>15</td>
-									<td>322</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column pl-0">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>									<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-<!--
-										<div class="d-flex flex-column">
-											<i class="fas fa-envelope"></i>
-											<span>Message</span>
-										</div>
--->
-									</td>
-								</tr>
-								<tr>
-									<td>SenanCronin2020</td>
-									<td>15</td>
-									<td>322</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column pl-0">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>									<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-<!--
-										<div class="d-flex flex-column">
-											<i class="fas fa-envelope"></i>
-											<span>Message</span>
-										</div>
--->
-									</td>
-								</tr>
-								<tr>
-									<td>SenanCronin2020</td>
-									<td>15</td>
-									<td>322</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column pl-0">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>									<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-<!--
-										<div class="d-flex flex-column">
-											<i class="fas fa-envelope"></i>
-											<span>Message</span>
-										</div>
--->
-									</td>
-								</tr>
-								<tr>
-									<td>SenanCronin2020</td>
-									<td>15</td>
-									<td>322</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column pl-0">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>									<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-<!--
-										<div class="d-flex flex-column">
-											<i class="fas fa-envelope"></i>
-											<span>Message</span>
-										</div>
--->
-									</td>
-								</tr>
+								@endforeach
 								
-								
-								
-							</tbody>
+						      </tbody>
 							<tfoot>
 								<tr>
 									

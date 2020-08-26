@@ -77,12 +77,12 @@
 							</thead>
 							<tbody>
 								
-								
+							@foreach($quizzes as $quiz)						
 								<tr>
-									<td>Mad Dog's Geography Quiz</td>
-									<td>SenanCronin2020</td>
-									<td class="text-lg-center">10</td>
-									<td class="text-lg-center">100</td>
+									<td>{{ $quiz->quiz__name }}</td>
+									<td>{{ $user[$quiz->id]}}</td>
+									<td class="text-lg-center">{{$roundCount[$quiz->id]}}</td>
+									<td class="text-lg-center">{{$questionCounts[$quiz->id]}}</td>
 									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
 										<div class="d-flex flex-column pl-0">
 											<i class="far fa-eye"></i>
@@ -98,187 +98,7 @@
 										</div>
 									</td>
 								</tr>
-								<tr>
-									<td>Mad Dog's Geography Quiz</td>
-									<td>SenanCronin2020</td>
-									<td class="text-lg-center">10</td>
-									<td class="text-lg-center">100</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column pl-0">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-share-alt"></i>
-											<span>Share</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td>Mad Dog's Geography Quiz</td>
-									<td>SenanCronin2020</td>
-									<td class="text-lg-center">10</td>
-									<td class="text-lg-center">100</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column pl-0">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-share-alt"></i>
-											<span>Share</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td>Mad Dog's Geography Quiz</td>
-									<td>SenanCronin2020</td>
-									<td class="text-lg-center">10</td>
-									<td class="text-lg-center">100</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column pl-0">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-share-alt"></i>
-											<span>Share</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td>Mad Dog's Geography Quiz</td>
-									<td>SenanCronin2020</td>
-									<td class="text-lg-center">10</td>
-									<td class="text-lg-center">100</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column pl-0">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-share-alt"></i>
-											<span>Share</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td>Mad Dog's Geography Quiz</td>
-									<td>SenanCronin2020</td>
-									<td class="text-lg-center">10</td>
-									<td class="text-lg-center">100</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column pl-0">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-share-alt"></i>
-											<span>Share</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td>Mad Dog's Geography Quiz</td>
-									<td>SenanCronin2020</td>
-									<td class="text-lg-center">10</td>
-									<td class="text-lg-center">100</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column pl-0">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-share-alt"></i>
-											<span>Share</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td>Mad Dog's Geography Quiz</td>
-									<td>SenanCronin2020</td>
-									<td class="text-lg-center">10</td>
-									<td class="text-lg-center">100</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column pl-0">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-share-alt"></i>
-											<span>Share</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td>Mad Dog's Geography Quiz</td>
-									<td>SenanCronin2020</td>
-									<td class="text-lg-center">10</td>
-									<td class="text-lg-center">100</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column pl-0">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-share-alt"></i>
-											<span>Share</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td>Mad Dog's Geography Quiz</td>
-									<td>SenanCronin2020</td>
-									<td class="text-lg-center">10</td>
-									<td class="text-lg-center">100</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column pl-0">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-share-alt"></i>
-											<span>Share</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-									</td>
-								</tr>
-								
+								@endforeach
 								
 								
 							</tbody>

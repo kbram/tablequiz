@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Quiz;
 use Illuminate\Support\Facades\Route;
 
 class AdminDetailsController extends Controller
@@ -66,11 +67,26 @@ class AdminDetailsController extends Controller
 
     public function quizzes()
     {   
-        return view('admin.quizzes');
+         $quizzes = Quiz::all();
+        
+         foreach($quizzes as $quiz){
+           $user[$quiz->id]   = User::where('id', $quiz->user_id)->value('name'); 
+           $roundCount[$quiz->id]=$quiz->rounds()->count();
+           $questionCounts[$quiz->id]=$quiz->questions()->count();
+        }
+        
+        return view('admin.quizzes',compact('quizzes','user','roundCount','questionCounts'));
     }
 
     public function users()
     {   
-        return view('admin.users');
+
+        $users = User::all();
+        
+            foreach($users as $user){
+             $quizcount[$user->id] =$user->quizzes()->count();
+             $questioncount[$user->id] =$user->questions()->count();
+       }
+        return view('admin.users',compact('users','quizcount','questioncount'));
     }
 }
