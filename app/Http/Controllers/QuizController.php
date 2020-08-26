@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 use App\Models\Quiz;
 use App\Models\UserPayment;
-
-
+use App\Models\Participant;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Validator;
 use Auth;
 
@@ -17,9 +17,14 @@ use App\Models\QuizSetupIcon;
 
 class QuizController extends Controller
 {
+    public function index(){
+        $quizzes = Quiz::all();
+        
+        return view('admin.quizzes',compact('quizzes'));
+    }
     public function create()
-    {
-        return view('quiz.setup');
+    {    $participants=Participant::all();
+        return view('quiz.setup',compact('participants'));
     }
 
     /**
@@ -42,6 +47,7 @@ class QuizController extends Controller
             
             return back()->withErrors($validator)->withInput();
         }
+        
         $quiz =new Quiz;
             $quiz -> quiz__name              = $request->input('quiz__name');
             $quiz -> quiz_password          = $request->input('quiz__password');
@@ -56,7 +62,7 @@ class QuizController extends Controller
 
 
            if ($request->hasFile('upload__quiz__icon')) {
-               dd($request->hasFile('upload__quiz__icon'));
+              // dd($request->hasFile('upload__quiz__icon'));
  
             $quiz_icon = $request->file('upload__quiz__icon');
 
@@ -113,6 +119,38 @@ class QuizController extends Controller
        return view('quiz.add_round');
     
     }
+    public function search(Request $request)
+    {
+        $searchTerm = $request->input('quiz_search_box');
+    
+        $searchRules = [
+            'quiz_search_box' => 'required|string|max:255',
+        ];
+        $searchMessages = [
+            'quiz_search_box.required' => 'Search term is required',
+            'quiz_search_box.string'   => 'Search term has invalid characters',
+            'quiz_search_box.max'      => 'Search term has too many characters - 255 allowed',
+        ];
+
+        $validator = Validator::make($request->all(), $searchRules, $searchMessages);
+
+        if ($validator->fails()) {
+            return response()->json([
+                json_encode($validator),
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        $results = Quiz::where('id', 'like', $searchTerm.'%')
+                            ->orWhere('quiz__name', 'like', $searchTerm.'%')->get();
+                            
+
+
+        return response()->json([
+            json_encode($results),
+        ], Response::HTTP_OK);
+        
+    }
+
     public function editQuiz($id){
 
         $quiz = Quiz::find($id);    
@@ -200,13 +238,14 @@ class QuizController extends Controller
         return view('quiz.slider');
     }
 
-    public function add_round()
+   /* public function add_round()
     {
         $pub_key = Config::get('stripe.stripe_key');
 
         $payment_deatils = UserPayment::where('user_id', Auth::id())->first();
         return view('quiz.add_round', compact('pub_key','payment_deatils'));
     }
+    */
 
     public function add_round_2()
     {
@@ -214,7 +253,8 @@ class QuizController extends Controller
     }
 
     public function setup()
-    {
-        return view('quiz.setup');
+    {    
+        $participants=Participant::all();
+        return view('quiz.setup',compact('participants'));
     }
 }

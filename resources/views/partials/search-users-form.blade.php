@@ -11,7 +11,7 @@
                             {!! trans('usersmanagement.tooltips.clear-search') !!}
                         </span>
                     </a>
-                    <a href="#" class="input-group-addon btn btn-secondary" id="search_trigger" data-toggle="tooltip" data-placement="bottom" title="{{ trans('usersmanagement.tooltips.submit-search') }}" >
+                    
                         <i class="fa fa-search fa-fw" aria-hidden="true"></i>
                         <span class="sr-only">
                             {!!  trans('usersmanagement.tooltips.submit-search') !!}

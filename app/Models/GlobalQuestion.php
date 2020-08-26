@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Question extends Model
+class GlobalQuestion extends Model
 {
-    protected $table = 'questions';
+    protected $table = 'global_questions';
 
     protected $guarded = [
         'id',
@@ -18,30 +18,29 @@ class Question extends Model
      * @var array
      */
     protected $fillable = [
-        //'category_id',
-        'category',
-        'user_id',
+        
+        'category_id',
         'question_type',
         'question',
-        'answer',
-        'round_id',
         'time_limit',
         'timestamps',
         
     ];
 
-    public function user()
+   
+    public function answer()
     {
-        return $this->belongsTo('App\Models\User', 'user_id');
+        return $this->hasMany('App\Models\GlobalAnswer');
+    }
+    public function media()
+    {
+        return $this->hasMany('App\Models\GlobalQuestionMedia');
     }
 
     public function category()
     {
         return $this->belongsTo('App\Models\QuizCategory', 'category_id');
     }
-    public function rounds()
-    {
-        return $this->belongsTo('App\Models\QuizRound', 'round_id');
-    }
+
 
 }

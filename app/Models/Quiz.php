@@ -36,7 +36,7 @@ class Quiz extends Model
     }
     public function questions(){
 
-    return $this->hasManyThrough('App\Models\Question','App\Models\QuizRound','quiz_id','round_id');
+    return $this->hasManyThrough('App\Models\GlobalQuestion','App\Models\QuizRound','quiz_id','round_id');
     }
 
     public function icon(){

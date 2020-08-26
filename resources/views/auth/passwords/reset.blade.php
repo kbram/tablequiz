@@ -1,13 +1,17 @@
-@extends('layouts.app')
+@extends('layouts.tablequizapp')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+            <div class="container page__inner">
+            <div class="text-center col">
+            <h2 class="bernhard">Reset Password</h2>
 
-                <div class="card-body">
+
+        </div>
+
+                <div class="modal-body ">
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
@@ -18,53 +22,54 @@
 
                         <input type="hidden" name="token" value="{{ $token }}">
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ $email or old('email') }}" required autofocus>
-
+                        <div class="form-row">
+                            <div class="col-md-5">
+                                <label for="email">Email Address</label>
+                            </div>
+                            <div class="col-md-7">
+                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="" required autofocus>
+                            </div>
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
-                            </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
+                        <div class="form-row">
+                            <div class="col-md-5">
+                                <label for="password" >Password</label>
+                            </div>
+                            <div class="col-md-7">
                                 <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
+                            </div>
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                 @endif
-                            </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-                            <div class="col-md-6">
+                        <div class="form-row">
+                            <div class="col-md-5">
+                                <label for="password-confirm">Confirm Password</label>
+                            </div>
+                            <div class="col-md-7">
                                 <input id="password-confirm" type="password" class="form-control{{ $errors->has('password_confirmation') ? ' is-invalid' : '' }}" name="password_confirmation" required>
-
+                            </div>
                                 @if ($errors->has('password_confirmation'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('password_confirmation') }}</strong>
                                     </span>
                                 @endif
-                            </div>
                         </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Reset Password') }}
+                        <div class="form-row mb-0">
+                            <div class="col-md-12 ">
+                                <button type="submit" class="btn btn-primary d-block">
+                                    Reset Password
                                 </button>
-                            </div>
+                             </div>
                         </div>
                     </form>
                 </div>
@@ -73,3 +78,9 @@
     </div>
 </div>
 @endsection
+
+
+
+
+
+

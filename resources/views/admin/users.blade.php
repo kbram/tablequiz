@@ -10,44 +10,44 @@
 				
 				<ul class="list-unstyled m-0 p-0 text-sm-center text-lg-left">
 					<li>
-						<a href="../admin/home.php">
+						<a href="/admin/home">
 							<span><i class="fas fa-home"></i></span>
 							Overview
 						</a>
 					</li>
 					<li>
-						<a href="../admin/quizzes.php">
+						<a href="/admin/quizzes">
 							<span><i class="fas fa-briefcase"></i></span>
 							Quizzes
 						</a>
 					</li>
 					<li class="active">
-						<a href="../admin/users.php">
+						<a href="">
 							<span><i class="fas fa-users"></i></span>
 							Users
 						</a>
 					</li>
 					<li>
-						<a href="../admin/financials.php">
+						<a href="/admin/financials">
 							<span><i class="fas fa-coins"></i></span>
 							Financials
 						</a>
 					</li>
 					<li>
-						<a href="../admin/categories.php">
+						<a href="/admin/categories">
 							<span><i class="fas fa-th-large"></i></span>
 							Categories
 						</a>
 					</li>
 					<li>
-						<a href="../admin/questions.php">
+						<a href="/admin/questions">
 							<span><i class="fas fa-question-circle"></i></span>
 							Questions
 						</a>
 					</li>
 					
 				</ul>
-				<a href="../quiz/setup.php" class="btn btn-primary hasPlus d-block">New Quiz</a>
+				<a href="../quiz/setup" class="btn btn-primary hasPlus d-block">New Quiz</a>
 			</div>
 		</aside>
 		
@@ -59,9 +59,9 @@
 							<h2>Users</h2>
 						</div>
 						<div class="col-lg-3">
-							<form action="" method="" class="p-0">
-								<input type="text" list="quizzes" name="quiz" placeholder="Search..." class="form-control mb-2 mt-n2">	
-							</form>
+						@if(config('usersmanagement.enableSearchUsers'))
+								@include('partials.search-user-form')
+							@endif
 						</div>
 					</div>
 					
@@ -76,213 +76,36 @@
 									<th class="text-center">Actions</th>
 								</tr>
 							</thead>
-							<tbody>
-								
-					
+							<tbody id="users_table">
+								@foreach($users as $user)
 								<tr>
-									<td>SenanCronin2020</td>
+									<td>{{$user -> name}}</td>
 									<td>15</td>
 									<td>322</td>
+									<td class="d-none" id="emailLink{{$user -> id}}">{{$user -> email}}</td>
 									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
 										<div class="d-flex flex-column pl-0">
 											<i class="far fa-eye"></i>
 											<span>View Qs</span>
-										</div>									<div class="d-flex flex-column">
+										</div>
+										<div class="d-flex flex-column">
 											<i class="fas fa-times-circle"></i>
 											<span>Block</span>
 										</div>
-<!--
+
 										<div class="d-flex flex-column">
 											<i class="fas fa-envelope"></i>
-											<span>Message</span>
+											<span class="message" id="{{$user->id}}">Message</span>
 										</div>
--->
+
 									</td>
 								</tr>
-								<tr>
-									<td>SenanCronin2020</td>
-									<td>15</td>
-									<td>322</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column pl-0">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>									<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-<!--
-										<div class="d-flex flex-column">
-											<i class="fas fa-envelope"></i>
-											<span>Message</span>
-										</div>
--->
-									</td>
-								</tr>
-								<tr>
-									<td>SenanCronin2020</td>
-									<td>15</td>
-									<td>322</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column pl-0">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>									<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-<!--
-										<div class="d-flex flex-column">
-											<i class="fas fa-envelope"></i>
-											<span>Message</span>
-										</div>
--->
-									</td>
-								</tr>
-								<tr>
-									<td>SenanCronin2020</td>
-									<td>15</td>
-									<td>322</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column pl-0">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>									<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-<!--
-										<div class="d-flex flex-column">
-											<i class="fas fa-envelope"></i>
-											<span>Message</span>
-										</div>
--->
-									</td>
-								</tr>
-								<tr>
-									<td>SenanCronin2020</td>
-									<td>15</td>
-									<td>322</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column pl-0">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>									<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-<!--
-										<div class="d-flex flex-column">
-											<i class="fas fa-envelope"></i>
-											<span>Message</span>
-										</div>
--->
-									</td>
-								</tr>
-								<tr>
-									<td>SenanCronin2020</td>
-									<td>15</td>
-									<td>322</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column pl-0">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>									<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-<!--
-										<div class="d-flex flex-column">
-											<i class="fas fa-envelope"></i>
-											<span>Message</span>
-										</div>
--->
-									</td>
-								</tr>
-								<tr>
-									<td>SenanCronin2020</td>
-									<td>15</td>
-									<td>322</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column pl-0">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>									<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-<!--
-										<div class="d-flex flex-column">
-											<i class="fas fa-envelope"></i>
-											<span>Message</span>
-										</div>
--->
-									</td>
-								</tr>
-								<tr>
-									<td>SenanCronin2020</td>
-									<td>15</td>
-									<td>322</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column pl-0">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>									<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-<!--
-										<div class="d-flex flex-column">
-											<i class="fas fa-envelope"></i>
-											<span>Message</span>
-										</div>
--->
-									</td>
-								</tr>
-								<tr>
-									<td>SenanCronin2020</td>
-									<td>15</td>
-									<td>322</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column pl-0">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>									<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-<!--
-										<div class="d-flex flex-column">
-											<i class="fas fa-envelope"></i>
-											<span>Message</span>
-										</div>
--->
-									</td>
-								</tr>
-								<tr>
-									<td>SenanCronin2020</td>
-									<td>15</td>
-									<td>322</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column pl-0">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>									<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-<!--
-										<div class="d-flex flex-column">
-											<i class="fas fa-envelope"></i>
-											<span>Message</span>
-										</div>
--->
-									</td>
-								</tr>
-								
-								
-								
+								@endforeach
 							</tbody>
+							<tbody id="users_table"></tbody>
+							@if(config('usersmanagement.enableSearchUsers'))
+								<tbody id="search_results"></tbody>
+							@endif
 							<tfoot>
 								<tr>
 									
@@ -301,5 +124,8 @@
 @endsection
 
 @section('footer_scripts')
-
+@include('scripts.message')
+@if(config('usersmanagement.enableSearchUsers'))
+        @include('scripts.search-user')
+@endif
 @endsection

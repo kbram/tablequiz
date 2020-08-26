@@ -1,0 +1,17 @@
+
+
+<script type="text/javascript">
+$('span.message').click(function(e){
+    var id=e.target.id;
+    console.log("Hi");
+    var text  = document.getElementById("emailLink"+id).innerHTML;
+    copyText(text);
+    swal("Quiz Creator email copied","","success");
+
+    function copyText(text) {
+    navigator.clipboard.writeText(text);
+    }
+  });
+
+
+</script>

@@ -39,14 +39,15 @@
 			</div>
 			<div class="row">
 				<div class="dashboard__container col">
-					<form class="settings pt-1" action="" method="post">
+					<form class="settings pt-1" action="/profile/{{$user->id }}/updateUserAccount" method="post">
+					     @csrf
 						<h3>Edit my details</h3>
 						<div class="form-row mt-4">
 							<div class="col-sm-4">
 								<label for="first_name_">First name</label>
 							</div>
 							<div class="col-sm-6">
-								<input class="form-control" name="first_name_" value="Senan">
+								<input class="form-control" name="first_name" value="{{$user->first_name}}">
 							</div>
 						</div>
 						<div class="form-row">
@@ -54,7 +55,7 @@
 								<label for="last_name_">Last name</label>
 							</div>
 							<div class="col-sm-6">
-								<input class="form-control" name="last_name_" value="Cronin">
+								<input class="form-control" name="last_name" value="{{$user->last_name}}">
 							</div>
 						</div>
 						<div class="form-row">
@@ -62,7 +63,7 @@
 								<label for="username_">Username</label>
 							</div>
 							<div class="col-sm-6">
-								<input class="form-control" name="username_" value="senancronin2020">
+								<input class="form-control" name="name" value="{{$user->name}}">
 							</div>
 						</div>
 						<div class="form-row">
@@ -70,7 +71,7 @@
 								<label for="username_">Email address</label>
 							</div>
 							<div class="col-sm-6">
-								<input class="form-control" name="email_" value="senancronin2020@tablequiz.app" type="email">
+								<input class="form-control" name="email" value="{{$user->email}}" type="email">
 							</div>
 						</div>
 						<div class="form-row">
@@ -78,7 +79,7 @@
 								<label for="confirm_password_">Password</label>
 							</div>
 							<div class="col-sm-6">
-								<input class="form-control" name="password_" value="senancronin2020" type="password">
+								<input class="form-control" name="password" value="" type="password">
 							</div>
 						</div>
 						<div class="form-row">
@@ -86,7 +87,13 @@
 								<label for="confirm_password_">Confirm password</label>
 							</div>
 							<div class="col-sm-6">
-								<input class="form-control" name="confirm_password_" value="senancronin2020" type="password">
+								<input class="form-control" name="password_confirmation" value="" type="password">
+							</div>
+						</div>
+						<div class="form-row d-flex justify-content-center pt-4 mb-0">
+							<div class="col-4">
+								<input type="submit" class="btn d-block btn-primary" value="Save">
+								
 							</div>
 						</div>
 					</form>
@@ -173,7 +180,7 @@
 						</div>
 						<div class="form-row d-flex justify-content-center pt-4 mb-0">
 							<div class="col-4">
-								<a class="btn d-block btn-primary" href="#">Save</a>
+								<button type="submit" class="btn d-block btn-primary">Save</button>
 							</div>
 						</div>
 					</form>

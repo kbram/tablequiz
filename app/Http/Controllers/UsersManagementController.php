@@ -40,6 +40,7 @@ class UsersManagementController extends Controller
         $roles = Role::all();
 
         return View('usersmanagement.show-users', compact('users', 'roles'));
+       
     }
 
     /**
@@ -273,15 +274,16 @@ class UsersManagementController extends Controller
                             ->orWhere('email', 'like', $searchTerm.'%')->get();
 
         // Attach roles to results
-        foreach ($results as $result) {
-            $roles = [
-                'roles' => $result->roles,
-            ];
-            $result->push($roles);
-        }
+        // foreach ($results as $result) {
+        //     $roles = [
+        //         'roles' => $result->roles,
+        //     ];
+        //     $result->push($roles);
+        // }
 
         return response()->json([
             json_encode($results),
         ], Response::HTTP_OK);
     }
+
 }

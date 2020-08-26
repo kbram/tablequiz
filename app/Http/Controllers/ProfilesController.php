@@ -148,6 +148,7 @@ class ProfilesController extends Controller
      */
     public function updateUserAccount(Request $request, $id)
     {
+
         $currentUser = \Auth::user();
         $user = User::findOrFail($id);
         $emailCheck = ($request->input('email') !== '') && ($request->input('email') !== $user->email);
@@ -177,7 +178,12 @@ class ProfilesController extends Controller
             'last_name'  => 'nullable|string|max:255',
         ];
 
-        $rules = array_merge($usernameRules, $emailRules, $additionalRules);
+        $password_rules = [
+            'password'              => 'nullable|min:6|max:20|confirmed',
+            'password_confirmation' => 'nullable|same:password',
+        ];
+
+        $rules = array_merge($usernameRules, $emailRules, $additionalRules, $password_rules);
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
@@ -192,11 +198,17 @@ class ProfilesController extends Controller
             $user->email = $request->input('email');
         }
 
+        if ($request->input('password') !== null) {
+            $user->password = Hash::make($request->input('password'));
+        }
+
         $user->updated_ip_address = $ipAddress->getClientIp();
 
         $user->save();
+        
+        return redirect()->back();
 
-        return redirect('profile/'.$user->name.'/edit')->with('success', trans('profile.updateAccountSuccess'));
+        // return redirect('profile/'.$user->name.'/edit')->with('success', trans('profile.updateAccountSuccess'));
     }
 
     /**

@@ -10,44 +10,44 @@
 				
 				<ul class="list-unstyled m-0 p-0 text-sm-center text-lg-left">
 					<li>
-						<a href="../admin/home.php">
+						<a href="/admin/home">
 							<span><i class="fas fa-home"></i></span>
 							Overview
 						</a>
 					</li>
 					<li>
-						<a href="../admin/quizzes.php">
+						<a href="/admin/quizzes">
 							<span><i class="fas fa-briefcase"></i></span>
 							Quizzes
 						</a>
 					</li>
 					<li>
-						<a href="../admin/users.php">
+						<a href="/admin/users">
 							<span><i class="fas fa-users"></i></span>
 							Users
 						</a>
 					</li>
 					<li class="active">
-						<a href="../admin/financials.php">
+						<a href="#">
 							<span><i class="fas fa-coins"></i></span>
 							Financials
 						</a>
 					</li>
 					<li>
-						<a href="../admin/categories.php">
+						<a href="/admin/categories">
 							<span><i class="fas fa-th-large"></i></span>
 							Categories
 						</a>
 					</li>
 					<li>
-						<a href="../admin/questions.php">
+						<a href="/admin/questions">
 							<span><i class="fas fa-question-circle"></i></span>
 							Questions
 						</a>
 					</li>
 					
 				</ul>
-				<a href="../quiz/setup.php" class="btn btn-primary hasPlus d-block">New Quiz</a>
+				<a href="/quiz/setup" class="btn btn-primary hasPlus d-block">New Quiz</a>
 			</div>
 		</aside>
 		
@@ -62,221 +62,99 @@
 					<div class="row">
 						<div class="dashboard__container col">
 							<h3>Set price band for questions</h3>
+							
+							@foreach($questionCosts as $questionCost)
+							<span id="msg{{$questionCost->id}}" class="text-success" ></span>
 							<form class="form-row pt-4 align-items-center mb-0" action="" method="" id="price__band__questions">
 								<div class="col-4 col-md-1">
+								
 									<span>From</span>
 								</div>
 								<div class="col-8 col-md-4 d-flex flex-row align-items-center justify-content-md-center">
-									<input maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1" name="band__from" placeholder="1">
+									<input id="from{{$questionCost->id}}" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" 
+										   placeholder="{{$questionCost->from}}">
 									<span>to</span>
-									<input name="band__to" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" 
-										   placeholder="10">
+									<input id="to{{$questionCost->id}}" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" 
+										   placeholder="{{$questionCost->to}}">
 								</div>
 								<div class="col-4 col-md-3 pt-2 pt-md-0">
-								<span style="line-height: 1.1" class="d-block  ">questions costs</span>
+								<span style="line-height: 1.1" class="d-block  ">{{$questionCost->band_type}}</span>
 								</div>
 								<div class="col-8 col-md-4 pt-2 pt-md-0">
 									<div class="input-group">
 										<div class="input-group-prepend">
 											<span class="input-group-text">&euro;</span>
 										</div>
-										<input name="band__costs" maxlength="3" class="form-control" placeholder="0.00">
+										
+										<input id="cost{{$questionCost->id}}" maxlength="3" class="form-control" placeholder="{{$questionCost->cost}}">
+										
+										<button id="{{$questionCost->id}}"  maxlength="3" class=" form-control ml-1" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
+									
 									</div>
 								</div>
-							
 							</form>
-							<form class="form-row pt-4 align-items-center mb-0" action="" method="" id="price__band__questions">
-								<div class="col-4 col-md-1">
-									<span>From</span>
-								</div>
-								<div class="col-8 col-md-4 d-flex flex-row align-items-center justify-content-md-center">
-									<input maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1" name="band__from" placeholder="11">
-									<span>to</span>
-									<input name="band__to" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" 
-										   placeholder="29">
-								</div>
-								<div class="col-4 col-md-3 pt-2 pt-md-0">
-								<span style="line-height: 1.1" class="d-block  ">questions costs</span>
-								</div>
-								<div class="col-8 col-md-4 pt-2 pt-md-0">
-									<div class="input-group">
-										<div class="input-group-prepend">
-											<span class="input-group-text">&euro;</span>
-										</div>
-										<input name="band__costs" maxlength="3" class="form-control" placeholder="0.00">
-									</div>
-								</div>
-							
-							</form>
-							<form class="form-row pt-4 align-items-center mb-0" action="" method="" id="price__band__questions">
-								<div class="col-4 col-md-1">
-									<span>From</span>
-								</div>
-								<div class="col-8 col-md-4 d-flex flex-row align-items-center justify-content-md-center">
-									<input maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1" name="band__from" placeholder="30">
-									<span>to</span>
-									<input name="band__to" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" 
-										   placeholder="49">
-								</div>
-								<div class="col-4 col-md-3 pt-2 pt-md-0">
-								<span style="line-height: 1.1" class="d-block  ">questions costs</span>
-								</div>
-								<div class="col-8 col-md-4 pt-2 pt-md-0">
-									<div class="input-group">
-										<div class="input-group-prepend">
-											<span class="input-group-text">&euro;</span>
-										</div>
-										<input name="band__costs" maxlength="3" class="form-control" placeholder="0.00">
-									</div>
-								</div>
-							
-							</form>
-							
-							
+							@endforeach
 						</div>
 					</div>
 					<div class="row mt-3">
 						<div class="dashboard__container col">
 							<h3>Set price band for no. backgrounds</h3>
+							@foreach($backgroundCosts as $backgroundCost)
+							<span id="msg{{$backgroundCost->id}}" class="text-success"></span>
 							<form class="form-row pt-4 align-items-center mb-0" action="" method="" id="price__band__questions">
 								<div class="col-4 col-md-1">
 									<span>From</span>
 								</div>
 								<div class="col-8 col-md-4 d-flex flex-row align-items-center justify-content-md-center">
-									<input maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1" name="band__from" placeholder="1">
+									<input id="from{{$backgroundCost->id}}" maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1"  placeholder="{{$backgroundCost->from}}">
 									<span>to</span>
-									<input name="band__to" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="10">
+									<input id="to{{$backgroundCost->id}}"  maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="{{$backgroundCost->to}}">
 								</div>
 								<div class="col-4 col-md-3 pt-2 pt-md-0">
-								<span style="line-height: 1.1" class="d-block  ">backgrounds costs</span>
+								<span style="line-height: 1.1" class="d-block  ">{{$backgroundCost->band_type}}</span>
 								</div>
 								<div class="col-8 col-md-4 pt-2 pt-md-0">
 									<div class="input-group">
 										<div class="input-group-prepend">
 											<span class="input-group-text">&euro;</span>
 										</div>
-										<input name="band__costs" maxlength="3" class="form-control" placeholder="0.00">
+										<input name="band__costs" maxlength="3" class="form-control" placeholder="{{$backgroundCost->cost}}">
+										<button id="{{$backgroundCost->id}}" maxlength="3" class=" form-control ml-1" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
+										
 									</div>
 								</div>
-							
 							</form>
-							<form class="form-row pt-4 align-items-center mb-0" action="" method="" id="price__band__questions">
-								<div class="col-4 col-md-1">
-									<span>From</span>
-								</div>
-								<div class="col-8 col-md-4 d-flex flex-row align-items-center justify-content-md-center">
-									<input maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1" name="band__from" placeholder="11">
-									<span>to</span>
-									<input name="band__to" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="30">
-								</div>
-								<div class="col-4 col-md-3 pt-2 pt-md-0">
-								<span style="line-height: 1.1" class="d-block  ">backgrounds costs</span>
-								</div>
-								<div class="col-8 col-md-4 pt-2 pt-md-0">
-									<div class="input-group">
-										<div class="input-group-prepend">
-											<span class="input-group-text">&euro;</span>
-										</div>
-										<input name="band__costs" maxlength="3" class="form-control" placeholder="0.00">
-									</div>
-								</div>
-							
-							</form>
-							<form class="form-row pt-4 align-items-center mb-0" action="" method="" id="price__band__questions">
-								<div class="col-4 col-md-1">
-									<span>From</span>
-								</div>
-								<div class="col-8 col-md-4 d-flex flex-row align-items-center justify-content-md-center">
-									<input maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1" name="band__from" placeholder="31">
-									<span>to</span>
-									<input name="band__to" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="50">
-								</div>
-								<div class="col-4 col-md-3 pt-2 pt-md-0">
-								<span style="line-height: 1.1" class="d-block  ">backgrounds costs</span>
-								</div>
-								<div class="col-8 col-md-4 pt-2 pt-md-0">
-									<div class="input-group">
-										<div class="input-group-prepend">
-											<span class="input-group-text">&euro;</span>
-										</div>
-										<input name="band__costs" maxlength="3" class="form-control" placeholder="0.00">
-									</div>
-								</div>
-							
-							</form>
-							
+							@endforeach
 						</div>
 					</div>
 					<div class="row mt-3">
 						<div class="dashboard__container col">
 							<h3>Set price band for no. participants</h3>
+							@foreach($participantCosts as $participantCost)
+							<span id="msg{{$participantCost->id}}" class="text-success"></span>
 							<form class="form-row pt-4 align-items-center mb-0" action="" method="" id="price__band__questions">
 								<div class="col-4 col-md-1">
 									<span>From</span>
 								</div>
 								<div class="col-8 col-md-4 d-flex flex-row align-items-center justify-content-md-center">
-									<input maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1" name="band__from" placeholder="1">
+									<input id="from{{$participantCost->id}}" maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1"  placeholder="{{$participantCost->from}}">
 									<span>to</span>
-									<input name="band__to" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="10">
+									<input id="to{{$participantCost->id}}" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="{{$participantCost->to}}">
 								</div>
 								<div class="col-4 col-md-3 pt-2 pt-md-0">
-								<span style="line-height: 1.1" class="d-block  ">participants costs</span>
+								<span style="line-height: 1.1" class="d-block  ">{{$participantCost->band_type}}</span>
 								</div>
 								<div class="col-8 col-md-4 pt-2 pt-md-0">
 									<div class="input-group">
 										<div class="input-group-prepend">
 											<span class="input-group-text">&euro;</span>
 										</div>
-										<input name="band__costs" maxlength="3" class="form-control" placeholder="0.00">
+										<input id="cost{{$participantCost->id}}" maxlength="3" class="form-control" placeholder="{{$participantCost->cost}}">
+										<button id="{{$participantCost->id}}"  maxlength="3" class=" form-control ml-1" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
 									</div>
 								</div>
-							
 							</form>
-							<form class="form-row pt-4 align-items-center mb-0" action="" method="" id="price__band__questions">
-								<div class="col-4 col-md-1">
-									<span>From</span>
-								</div>
-								<div class="col-8 col-md-4 d-flex flex-row align-items-center justify-content-md-center">
-									<input maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1" name="band__from" placeholder="1">
-									<span>to</span>
-									<input name="band__to" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="10">
-								</div>
-								<div class="col-4 col-md-3 pt-2 pt-md-0">
-								<span style="line-height: 1.1" class="d-block  ">participants costs</span>
-								</div>
-								<div class="col-8 col-md-4 pt-2 pt-md-0">
-									<div class="input-group">
-										<div class="input-group-prepend">
-											<span class="input-group-text">&euro;</span>
-										</div>
-										<input name="band__costs" maxlength="3" class="form-control" placeholder="0.00">
-									</div>
-								</div>
-							
-							</form>
-							<form class="form-row pt-4 align-items-center mb-0" action="" method="" id="price__band__questions">
-								<div class="col-4 col-md-1">
-									<span>From</span>
-								</div>
-								<div class="col-8 col-md-4 d-flex flex-row align-items-center justify-content-md-center">
-									<input maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1" name="band__from" placeholder="1">
-									<span>to</span>
-									<input name="band__to" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="10">
-								</div>
-								<div class="col-4 col-md-3 pt-2 pt-md-0">
-								<span style="line-height: 1.1" class="d-block  ">participants costs</span>
-								</div>
-								<div class="col-8 col-md-4 pt-2 pt-md-0">
-									<div class="input-group">
-										<div class="input-group-prepend">
-											<span class="input-group-text">&euro;</span>
-										</div>
-										<input name="band__costs" maxlength="3" class="form-control" placeholder="0.00">
-									</div>
-								</div>
-							
-							</form>
-							
+							@endforeach
 						</div>
 					</div>
 					
@@ -289,5 +167,7 @@
 @endsection
 
 @section('footer_scripts')
-
+@if(config('usersmanagement.enableSearchUsers'))
+@include('scripts.financials');
+@endif
 @endsection
