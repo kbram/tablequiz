@@ -31,8 +31,9 @@ var numeric__answer
 
   $(document).ready(function() {
   
-    $("body").on('click','.add-answer','click',function(e) {console.log('i am getting late');
-        $(this).before('<div class="form-row multiple__choice__row__in_modal pb-0 mb-2 align-items-center"><div class="col input-group"><input name="multiple__choice__answer__1" class="form-control readonly" type="text" value=""><div  class="input-group-prepend"><span class="input-group-text text-white border-danger bg-danger rounded-right "><i class="far fa-trash-alt"></i></span></div></div><div class="col-2 text-center form-check"><input type="radio" class="readonly" name="multiple__choice__correct__answer"></div></div>');
+    $("body").on('click','.add-answer','click',function(e) {
+      var get_id=$(this).closest('.single__suggested__question').find('.add-question').attr('id');
+        $(this).before('<div class="form-row multiple__choice__row__in_modal pb-0 mb-2 align-items-center"><div class="col input-group"><input name="multiple__choice__answer__1" class="answer'+get_id+' form-control readonly" type="text" value=""><div  class="input-group-prepend"><span class="input-group-text text-white border-danger bg-danger rounded-right "><i class="far fa-trash-alt"></i></span></div></div><div class="col-2 text-center form-check"><input type="radio" class="readonly" name="multiple__choice__correct__answer"></div></div>');
        
 });
 
@@ -458,7 +459,7 @@ $('body').on('click','button.add-question',function(e){
                multiple__choice__legend.addClass('d-flex').removeClass('d-none');
                multiple__choice__answer.addClass('d-flex').removeClass('d-none');
                numeric__answer.removeClass('d-flex').addClass('d-none');  
-               
+
                get_first_multi_choice_append.val(values[0].value);
             }
             for(var i=1; i<values.length; i++){
