@@ -51,8 +51,9 @@ class PlayController extends Controller
 
 
     //check team already registed
-     if(QuizTeam::where('team_name', $request->input('quiz__team'))->first())
-     {
+    if(QuizTeam::where('team_name', $request->input('quiz__team'))->where('quiz_id',$id)->first())
+    {
+
         Session::put('failteam','team already join for this quiz');
 
         return redirect('startquiz-team/'.$quiz->id);
@@ -74,6 +75,7 @@ class PlayController extends Controller
     return view('play.play-quiz',compact('quiz','roundCount'));    
  }   
 }
+
 
 else{
     Session::put('fail','password incorrect');
@@ -125,8 +127,7 @@ else{
     public function errorpassword($id)
     {   
         $quiz=Quiz::where('id',$id)->first();
-        $image=QuizSetupIcon::where('id',$quiz->id)->first()->local_path;
-
+        $image=QuizSetupIcon::where('quiz_id',$quiz->id)->first()->local_path;
             $roundCount=$quiz->rounds()->count();
             $questionCounts=$quiz->questions()->count();
         return view('play.start-quiz',compact('quiz','roundCount','questionCounts','image'));
@@ -135,7 +136,7 @@ else{
     public function errorteam($id)
     {   
         $quiz=Quiz::where('id',$id)->first();
-        $image=QuizSetupIcon::where('id',$quiz->id)->first()->local_path;
+        $image=QuizSetupIcon::where('quiz_id',$quiz->id)->first()->local_path;
 
             $roundCount=$quiz->rounds()->count();
             $questionCounts=$quiz->questions()->count();
@@ -147,6 +148,8 @@ else{
 
         $quiz=Quiz::where('quiz_link',$quiz_name)->first();
         $image=QuizSetupIcon::where('quiz_id',$quiz->id)->first()->local_path;
+
+
         $roundCount=$quiz->rounds()->count();
         $questionCounts=$quiz->questions()->count();
         return view('play.start-quiz',compact('quiz','roundCount','questionCounts','image'));
@@ -157,9 +160,6 @@ public function answer(Request $request){
         $quiz_id = $request->input('quiz');
         $round_id = $request->input('round');
         $question_id = $request->input('question');
-
-        $session_key = $quiz_id."-".$round_id."-".$question_id ;
-
         $user_answer = $request->input('answer');
         $correct_answer = Answer::where('question_id',$question_id)->where('status',1)->first()->id;
         $quiz = Quiz::find($quiz_id);
@@ -215,5 +215,3 @@ public function answer(Request $request){
 }
 
 }
-
-

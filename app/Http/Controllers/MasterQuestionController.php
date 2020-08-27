@@ -209,6 +209,9 @@ class MasterQuestionController extends Controller
             $request->session()->put('image', $quizIcon->local_path);
 
          }  
+
+         $cat = QuizCategory::all();
+
             return view('quiz.add_round',compact('cat'));
 
     }
