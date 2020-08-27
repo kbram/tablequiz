@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\Quiz;
+use App\Models\QuizCategory;
+
 use App\Models\UserPayment;
 use App\Models\Participant;
 use Illuminate\Http\Request;
@@ -35,6 +37,8 @@ class QuizController extends Controller
      */
     public function store(Request $request)
         {
+        $cat = QuizCategory::all();
+
         $validator = Validator::make($request->all(),
         [
           'quiz__name'                => 'required|unique:quizzes',
@@ -116,7 +120,7 @@ class QuizController extends Controller
 
            }
        
-       return view('quiz.add_round');
+       return view('quiz.add_round',compact('cat'));
     
     }
     public function search(Request $request)

@@ -380,10 +380,7 @@
 				</div>
 
 			</div>
-<<<<<<< HEAD
 					
-=======
-<<<<<<< HEAD
 
 			<div class="form-row justify-content-center pt-3">
 				<div class="col-md-1">
@@ -507,7 +504,7 @@
               <div class="modal-body categories d-flex w-100 pb-4">
                 <div class="row suggested__categories px-3 w-100 no-gutters">
 
-					@foreach($categories as $category)
+					@foreach($cat as $category)
 						<div class="suggested_category__icon col-6 col-sm-4 text-center p-2">
 							<div class="d-flex flex-column h-100 participants__choice justify-content-center align-items-center p-4">
 								<div class="icon pb-2">
@@ -515,7 +512,7 @@
 								</div>
 								<p class="">
 									
-									{{$category->category_name}}
+									{{$category->category_name ?? ''}}
 									
 								</p>
 							</div>

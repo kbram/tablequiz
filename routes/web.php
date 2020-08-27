@@ -144,7 +144,7 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
     Route::get('admin/home', 'AdminDetailsController@home');
     Route::get('admin/categories', 'AdminDetailsController@categories');
     Route::get('admin/financials', 'AdminDetailsController@financials');
-    Route::get('admin/questions', 'AdminDetailsController@questions');
+    // Route::get('admin/questions', 'AdminDetailsController@questions');
     Route::get('admin/quizzes', 'AdminDetailsController@quizzes');
     Route::get('admin/users', 'AdminDetailsController@users');
     
@@ -157,7 +157,6 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
     Route::get('admin/financials','PriceBandsController@index');
 
     //adminquestionccontroller
-    Route::get('/admin/questions','AdminQuestionController@index');
     Route::post('search-questions','AdminQuestionController@search')->name('search-questions');
     Route::post('/admin/questions/{id}','AdminQuestionController@destroy');
 
@@ -226,7 +225,8 @@ Route::get('admin/categories/edit/{id}', 'QuizCategoriesController@edit');
 Route::post('admin/categories/update/{id}', 'QuizCategoriesController@update');
 
 //quizmaster question routes
-Route::post('/quiz','MasterQuestionController@postQuiz');
+Route::post('/quiz','QuizController@store');
+// Route::post('/quiz','MasterQuestionController@postQuiz');
 Route::post('/round','MasterQuestionController@postRound');
 Route::post('/question','MasterQuestionController@postQuestion');
 Route::post('/quizsetup','MasterQuestionController@store');
@@ -256,7 +256,7 @@ Route::get('/dashboard/my-quizzes','DashboardController@showMyQuizzes');
 Route::get('dashboard/settings','DashboardController@setting');
 
 //adminquestionccontroller
-Route::get('/admin/questions','AdminQuestionController@index');
+// Route::get('/admin/questions','AdminQuestionController@index');
 Route::post('search-questions','AdminQuestionController@search')->name('search-questions');
 
 //admin financial controller

@@ -17,7 +17,7 @@
 						<label for="quiz__name">Quiz name</label>
 					</div>
 					<div class="col-md-8">
-						<input autocomplete="nothanks" type="text" name="quiz__name" class="form-control" value="{{$quizzes->quiz_name}}">
+						<input autocomplete="nothanks" type="text" name="quiz__name" class="form-control" value="{{$quizzes->quiz__name}}" disabled>
 					
 						@if ($errors->has('quiz__name'))
                                     <span class="help-block">
@@ -34,7 +34,7 @@
 						<label for="quiz__password">Quiz password</label>
 					</div>
 					<div class="col-md-8">
-						<input type="text" name="quiz__password" class="form-control" placeholder="(optional)" >
+						<input type="text" name="quiz__password" class="form-control" placeholder="(optional)" disabled >
 					</div>
 				</div>
 <!-- QUIZ LINK -->
@@ -48,7 +48,7 @@
 						<p class="disabled__text">TableQuiz.app/</p>
 					</div>
 					<div class="col-sm">
-						<input type="text" name="quiz__link" class="form-control" value="{{$quizzes->quiz_link}}">
+						<input type="text" name="quiz__link" class="form-control" value="{{$quizzes->quiz_link}}" disabled>
 						@if ($errors->has('quiz__link'))
                                     <span class="help-block">
                                             <p>{{ $errors->first('quiz__link') }}</p>
@@ -82,7 +82,7 @@
 						  <div class="modal-body">
 							<div class="modal__edit__image">
 								<div class="modal__edit__image__mask"></div>
-								<img class="modal__edit__image__image" src="" id="image_preview_container" value="{{ old('image_preview_container') }}">
+								<img class="modal__edit__image__image" src="{{ $image }}" id="image_preview_container" value="{{ old('image_preview_container') }}" >
 							</div>
 							<div class="modal__edit__image__range">
 								<div class="form-group">
@@ -95,7 +95,7 @@
 						  <div class="modal-footer justify-content-center row no-gutters">
 							 <div class="col-md-3"> 
 								 <label class="d-block" for="upload__quiz__icon">Upload
-									<input type="file"  class="form-control-file" id="upload__quiz__icon" name="upload__quiz__icon" value="Upload">
+									<input type="file"  class="form-control-file" id="upload__quiz__icon" name="upload__quiz__icon" value="Upload" disabled>
 								</label>
 							</div>
 							<div class="col-md-3">
@@ -106,62 +106,17 @@
 					  </div>
 					</div>
 				</div>
-<!-- QUIZ CHARGE ?-->
-				<div class="form-row">
-					<div class="col-md-4">
-						<label>Charge for entry?</label>
-						<span class="helper__text" data-placement="left"
-							  data-toggle="tooltip" title="TableQuiz.app allows users to charge entry. Set custom amounts to easily collect for a charity or for prize money."><i class="fa fa-info-circle"></i></span>
-					</div>
-					<div class="col">
-						<div class="form-check form-check-inline">
-						  <input class="form-check-input" type="radio" name="quiz__charge_entry" id="quiz_charge__yes" value="yes">
-						  <label class="form-check-label" for="quiz_charge__yes">Yes</label>
-						</div>
-						<div class="form-check form-check-inline">
-						  <input class="form-check-input" type="radio" name="quiz__charge_entry" id="quiz_charge__no" value="no" checked>
-						  <label class="form-check-label" for="quiz_charge__no">No</label>
-						</div>
-					</div>
-					
-				</div>
-<!-- ENTRY FEE -->
-				<div class="form-row d-none entry__fee">
-					<div class="col-md-4">
-						<label for="quiz__entry_fee">Entry fee</label>
-					</div>
-					<div class="col-md-4">
-						<div class="input-group">
-							<div class="input-group-prepend">
-							  <div class="input-group-text">€</div>
-							</div>
-							<input type="text" class="form-control" id="quiz__entry_fee">
-						</div>
-					</div>
-					
-				</div>
-				
-<!-- ENTRY FEE MESSAGE-->
-				
-				<div class="form-row d-none entry__fee">
-					<div class="col-md-4">
-						<label for="quiz__entry_fee__message">Message</label>
-						<span class="helper__text" data-placement="left"
-							  data-toggle="tooltip" title="This message will be displayed before your quiz with a fee request."><i class="fa fa-info-circle"></i></span>
-					</div>
-					<div class="col-md-7">
-						<textarea width="100%" id="quiz__entry_fee__message" class="form-control"></textarea>
-					</div>
-					
-				</div>
+
+
+
 <!-- QUIZ PARTICIPANTS -->
 				<div class="form-row">
 					<div class="col-md-4">
 						<label for="quiz__participants">No.of participants</label>
 					</div>
 					<div class="col-md-4">
-						<select id="quiz__participants" class="form-control" name="quiz__participants">
-							<option disabled selected>{{$quizzes->no_of_participants}}</option>
+						<select id="quiz__participants" class="form-control" name="quiz__participants" disabled>
+							<option selected>{{$quizzes->no_of_participants}}</option>
 							<option value="1-5">1-5</option>
 							<option value="5-9">5-9</option>
 							<option value="10-19">10-19</option>
@@ -204,42 +159,8 @@
 									</div>
 								</div>
 						  @endforeach
-								<!-- <div class="col-6 col-sm-4 participants__number p-1">
-									<div class="participants__choice p-3">
-										<p>1-5</p>
-										<p>Free</p>
-									</div>
-								</div>
-								<div class="col-6 col-sm-4 participants__number p-1">
-									<div class="participants__choice p-3">
-										<p>5-9</p>
-										<p>Free</p>
-									</div>
-								</div>
-								<div class="col-6 col-sm-4 participants__number p-1">
-									<div class="participants__choice p-3">
-										<p>10-19</p>
-										<p>€4.99</p>
-									</div>
-								</div>
-								<div class="col-6 col-sm-4 participants__number p-1">
-									<div class="participants__choice p-3">
-										<p>20-29</p>
-										<p>€9.99</p>
-									</div>
-								</div>
-								<div class="col-6 col-sm-4 participants__number p-1">
-									<div class="participants__choice p-3">
-										<p>30-49</p>
-										<p>€19.99</p>
-									</div>
-								</div>
-								<div class="col-6 col-sm-4 participants__number p-1">
-									<div class="participants__choice p-3">
-										<p>50+</p>
-										<p>€29.99</p>
-									</div>
-								</div> -->
+								
+							
 						  </div>
 						  <div class="modal-footer justify-content-center row no-gutters">
 							<div class="col-md-3">

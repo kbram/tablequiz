@@ -21,7 +21,8 @@ class QuizRoundController extends Controller
 
 
     public function show(){
-        return view('quiz.add_round');
+
+        return view('quiz.add_round', compact('categories'));
     }
 
    
@@ -177,11 +178,7 @@ class QuizRoundController extends Controller
     return view('quiz.add_round',compact('id'));
 }
 
-    public function getRound($id)
-{
-    $id+=1;
-    return view('quiz.add_round',compact('id'));
-}
+ 
 
    
 }

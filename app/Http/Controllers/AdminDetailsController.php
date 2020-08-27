@@ -50,12 +50,12 @@ class AdminDetailsController extends Controller
     {   
         $cusers=User::count();
         $cquzzes=Quiz::count();
-        $quizzes = Quiz::all();
-        
+        $quizzes =Quiz::all();
         foreach($quizzes as $quiz){
         $result[$quiz->id] = $quiz->user()->first()->email;
+        $users[$quiz->id]=$quiz->user()->first()->first_name;
         }
-        return view('admin.home',compact('quizzes','result'));
+        return view('admin.home',compact('quizzes','result','cusers','cquzzes','users'));
     }
 
     public function categories()
@@ -68,10 +68,10 @@ class AdminDetailsController extends Controller
         return view('admin.financials');
     }
 
-    public function questions()
-    {   
-        return view('admin.questions');
-    }
+    // public function questions()
+    // {   
+    //     return view('admin.questions');
+    // }
 
     public function quizzes()
     {   
@@ -86,7 +86,9 @@ class AdminDetailsController extends Controller
     public function quizView($id){
         $participants=Participant::all();
         $quizzes = Quiz::find($id);
-        return view('quiz.show-setup',compact('quizzes','participants'));
+        $image=$quizzes->icon()->first()->local_path;
+
+        return view('quiz.show-setup',compact('quizzes','participants','image'));
     }
 
     public function block($id){

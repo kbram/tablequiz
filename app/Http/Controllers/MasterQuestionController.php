@@ -135,7 +135,7 @@ class MasterQuestionController extends Controller
 
     }
     public function postQuiz(Request $request){
-
+        $cat = QuizCategory::all();
         Session::forget('quiz');
 
         $validator = Validator::make(
@@ -209,7 +209,7 @@ class MasterQuestionController extends Controller
             $request->session()->put('image', $quizIcon->local_path);
 
          }  
-            return view('quiz.add_round');
+            return view('quiz.add_round',compact('cat'));
 
     }
     public function postRound(Request $request){
@@ -219,7 +219,6 @@ dd(Session::get('image'),Session::get('quiz'));
             Session::forget('round');
             Session::forget('image');
 
-   
             $validator = Validator::make(
                 $request->all(),
                 [

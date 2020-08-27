@@ -70,7 +70,7 @@
 					<div class="dashboard__container flex-grow-0 pt-4 mb-3">
 						<h3>Add new question</h3>
 						
-						<form action="/questions/create" enctype="multipart/form-data" method="post" class="pt-3 add__new__in__admin">
+						<form action="/admin/questions" enctype="multipart/form-data" method="post" class="pt-3 add__new__in__admin">
 							@csrf
 							<div class="form-row">
 								<div class="col-md-4">
@@ -93,23 +93,9 @@
 		</aside>
 		
 		<section class="col-lg-9 dashboard__container">
-						<form action="" method="" class="pt-3 add__new__in__admin">
-							<div class="form-row">
-								<div class="col-md-4">
-									<label for="category_type">Category</label>
+								</select>
 								</div>
-								<div class="col-md-4">
-									<select id="category_type" class="form-control">
-										<option value="category__music">Music</option>
-										<option value="category__sport">Sport</option>
-										<option value="category__Geography">Geography</option>
-										<option value="category__History">History</option>
-										<option value="category__Politics">Politics</option>
-										<option value="category__popular_culture">Popular Culture</option>
-
-									</select>
-								</div>
-							</div>
+								</div> 
 							<div class="form-row">
 								<div class="col-md-4">
 									<label for="question__type">Question type</label>
@@ -326,14 +312,15 @@
 								</div>
 							</div>
 							
-						</form>
 						
 						<hr>
 						<div class="row justify-content-center">
 							<div class="col-4">
-								<a href="#" class="d-block btn btn-primary">Save</a>
+							<button class="d-block btn btn-primary" type="submit">Save</button>
 							</div>
 						</div>
+						</form>
+
 					</div>
 					<div class="dashboard__container flex-grow-1">
 						<table class="table table-striped table-borderless m-0 h-100 my__quizzes">
@@ -372,29 +359,7 @@
 							
 								 
 							</tbody>
-								<tr>
-									<td>{{$question->question}}</td>
-									<td>{{$question->category}}</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column">
-											<i class="fas fa-pencil-alt"></i>
-											<span>Edit</span>
-										</div>									
-										
-										
-										<div class="p-0">
-										
-											<form method="POST" action="/admin/questions/{{$question->id}}" class="p-0">
-												{{ csrf_field() }}
-												<div class="d-flex flex-column">
-											<i class="fas fa-times-circle "></i><span class="delete" >Delete</span>
-											</div>
-											</form>
-										</div>
-									</td>
-								</tr>
-								@endforeach
-								</tbody>
+								
 							<tbody id="questions_table"></tbody>
 							@if(config('usersmanagement.enableSearchUsers'))
 								<tbody id="search_results"></tbody>
@@ -420,7 +385,7 @@
 
 @section('footer_scripts')
 	@if(config('usersmanagement.enableSearchUsers'))
-        @include('scripts.search-questions')
+    @include('scripts.search-questions')
     @endif
 @include('scripts.delete-model')	
 @endsection

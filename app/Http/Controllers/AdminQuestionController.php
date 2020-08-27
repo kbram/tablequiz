@@ -40,7 +40,6 @@ class AdminQuestionController extends Controller
      */
     public function store(Request $request)
     {
-                
      $validator = Validator::make( $request->all(),
      [   
         'category__type'    => 'required',
@@ -226,8 +225,7 @@ class AdminQuestionController extends Controller
              
             }
                 
-                
-             
+                 
            
             
             else if($question->question_type == 'numeric__question'){
@@ -501,7 +499,36 @@ class AdminQuestionController extends Controller
 
           return redirect()->action( 'AdminQuestionController@create');    
        } 
- 
+       public function search(Request $request)
+       {
+           $searchTerm = $request->input('question_search_box');
+           $searchRules = [
+               'question_search_box' => 'required|string|max:255',
+           ];
+           $searchMessages = [
+               'question_search_box.required' => 'Search term is required',
+               'question_search_box.string'   => 'Search term has invalid characters',
+               'question_search_box.max'      => 'Search term has too many characters - 255 allowed',
+           ];
+   
+           $validator = Validator::make($request->all(), $searchRules, $searchMessages);
+   
+           if ($validator->fails()) {
+               return response()->json([
+                   json_encode($validator),
+               ], Response::HTTP_UNPROCESSABLE_ENTITY);
+           }
+   
+           $results = Question::where('id', 'like', $searchTerm.'%')
+                               ->orWhere('category', 'like', $searchTerm.'%')
+                               ->orWhere('question', 'like', $searchTerm.'%')->get();
+   
+   
+           return response()->json([
+               json_encode($results),
+           ], Response::HTTP_OK);
+           
+       }
  
  
   
