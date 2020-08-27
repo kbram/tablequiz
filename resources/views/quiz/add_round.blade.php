@@ -380,102 +380,7 @@
 				</div>
 
 			</div>
-<<<<<<< HEAD
-
-			<div class="form-row justify-content-center pt-3">
-				<div class="col-md-1">
-					<input class="justify-content-center" type="submit" value="Save">
-				</div>
-			</div>
-			</div>
-
-		</article>
-
-		<div class="button__holder w-100 pt-0 mt-5 justify-content-center d-md-flex" id="add-new-question">
-
-			<div class="col-md-4 p-0">
-				<a class="btn btn-white d-block" id="addQuestion" href="#add-new-question">Add Question</a>
-			</div>
-
-		</div>
-
-
-		<!-- Suggested Question modal -->
-		<div class="modal" id="suggestedQuestion" tabindex="-1" role="dialog" aria-labelledby="suggestedQuestion" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content pb-4">
-
-					<div class="modal-header justify-content-center border-0">
-						<h1 class="modal-title" id="suggestedQuestionsHeading">Suggested Questions</h1>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body categories d-flex w-100 pb-4">
-						<div class="row suggested__categories px-3 w-100 no-gutters">
-							<div class="suggested_category__icon col-6 col-sm-4 text-center p-2">
-								<div class="d-flex flex-column h-100 participants__choice justify-content-center align-items-center p-4">
-									<div class="icon pb-2">
-										<i class="far fa-futbol"></i>
-									</div>
-									<p class="">Sport</p>
-								</div>
-							</div>
-							<div class="suggested_category__icon col-6 col-sm-4 text-center p-2">
-								<div class="d-flex flex-column h-100 participants__choice justify-content-center align-items-center p-4">
-									<div class="icon pb-2">
-										<i class="fas fa-headphones-alt"></i>
-									</div>
-									<p class="">Music</p>
-								</div>
-							</div>
-							<div class="suggested_category__icon col-6 col-sm-4 text-center p-2">
-								<div class="d-flex flex-column h-100 participants__choice justify-content-center align-items-center p-4">
-									<div class="icon pb-2">
-										<i class="fas fa-award"></i>
-									</div>
-									<p class="">Politics</p>
-								</div>
-							</div>
-							<div class="suggested_category__icon col-6 col-sm-4 text-center p-2">
-								<div class="d-flex flex-column h-100 participants__choice justify-content-center align-items-center p-4">
-									<div class="icon pb-2">
-										<i class="far fa-grin-hearts"></i>
-									</div>
-									<p class="">Pop culture</p>
-								</div>
-							</div>
-							<div class="suggested_category__icon col-6 col-sm-4 text-center p-2">
-								<div class="d-flex flex-column h-100 participants__choice justify-content-center align-items-center p-4">
-									<div class="icon pb-2">
-										<i class="fas fa-globe-africa"></i>
-									</div>
-									<p class="">Geography</p>
-								</div>
-							</div>
-							<div class="suggested_category__icon col-6 col-sm-4 text-center p-2">
-								<div class="d-flex flex-column h-100 participants__choice justify-content-center align-items-center p-4">
-									<div class="icon pb-2">
-										<i class="fas fa-landmark"></i>
-									</div>
-									<p class="">History</p>
-								</div>
-							</div>
-
-						</div>
-					</div>
-					<div class="modal-body question_types d-none">
-						<div class="row suggested__categories px-3 w-100">
-							<div class="suggested_category__icon col-6 text-center p-2">
-								<div class="d-flex flex-column h-100 participants__choice justify-content-center align-items-center p-4">
-									<div class="icon pb-2">
-										<i class="fas fa-list-ul"></i>
-									</div>
-									<p class="">Standard Q&amp;A</p>
-								</div>
-=======
 					
->>>>>>> c87b0109778691c39d5d28d5b6aea29c1400da72
 			 
 			<!-- <div class="form-row justify-content-center pt-3">
 				<div class="col-md-1">	
@@ -505,7 +410,7 @@
               <div class="modal-body categories d-flex w-100 pb-4">
                 <div class="row suggested__categories px-3 w-100 no-gutters">
 
-					@foreach($categories as $category)
+					@foreach($cat as $category)
 						<div class="suggested_category__icon col-6 col-sm-4 text-center p-2">
 							<div class="d-flex flex-column h-100 participants__choice justify-content-center align-items-center p-4">
 								<div class="icon pb-2">
@@ -513,7 +418,7 @@
 								</div>
 								<p class="">
 									
-									{{$category->category_name}}
+									{{$category->category_name ?? ''}}
 									
 								</p>
 							</div>

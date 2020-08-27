@@ -6,6 +6,8 @@ use App\Models\UserPayment;
 use App\Models\Participant;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Models\QuizCategory;
+
 use Validator;
 use Auth;
 
@@ -116,8 +118,9 @@ class QuizController extends Controller
 
            }
        
-       return view('quiz.add_round');
-    
+           $cat = QuizCategory::all();
+
+           return view('quiz.add_round',compact('cat'));    
     }
     public function search(Request $request)
     {

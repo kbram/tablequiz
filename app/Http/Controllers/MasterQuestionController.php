@@ -209,7 +209,10 @@ class MasterQuestionController extends Controller
             $request->session()->put('image', $quizIcon->local_path);
 
          }  
-            return view('quiz.add_round');
+
+         $cat = QuizCategory::all();
+
+            return view('quiz.add_round',compact('cat'));
 
     }
     public function postRound(Request $request){

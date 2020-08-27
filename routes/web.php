@@ -226,7 +226,7 @@ Route::get('admin/categories/edit/{id}', 'QuizCategoriesController@edit');
 Route::post('admin/categories/update/{id}', 'QuizCategoriesController@update');
 
 //quizmaster question routes
-Route::post('/quiz','MasterQuestionController@postQuiz');
+Route::post('/quiz','QuizController@store');
 Route::post('/round','MasterQuestionController@postRound');
 Route::post('/question','MasterQuestionController@postQuestion');
 Route::post('/quizsetup','MasterQuestionController@store');
