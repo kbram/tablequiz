@@ -147,7 +147,7 @@
 				<div class="col-md-8">
 					<div class="row align-items-center">
 						<div class="col-lg-6">
-							<select id="question__type" class="form-control" name="question__type">
+							<select id="question__type"  class="form-control question__type" name="question__type">
 								<option value="standard__question">Standard</option>
 								<option value="multiple__choice__question">Multiple choice</option>
 								<option value="numeric__question">Numeric</option>
@@ -311,7 +311,7 @@
  								  </div>
  								</div>
 			</div>
-			<div class="form-row d-flex" id="standard__answer">
+			<div class="form-row d-flex standard__answer" id="standard__answer" >
 				<div class="col-md-4">
 					<label for="standard__question__answer">Answer</label>
 				</div>
@@ -319,7 +319,7 @@
 					<input class="form-control" name="standard__question__answer" type="text">
 				</div>
 			</div>
-			<div class="form-row d-none" id="numeric__answer">
+			<div class="form-row d-none numeric__answer" id="numeric__answer">
 				<div class="col-md-4">
 					<label for="numeric__question__answer">Answer</label>
 				</div>
@@ -327,12 +327,12 @@
 					<input class="form-control" name="numeric__question__answer" type="number">
 				</div>
 			</div>
-			<div class="form-row d-none mb-n4 mb-md-4" style="min-height:0;" id="multiple__choice__legend">
+			<div class="form-row d-none mb-n4 mb-md-4 multiple__choice__legend" style="min-height:0;" id="multiple__choice__legend">
 				<div class="offset-9 offset-md-10 col-3 col-md-2">
 					<small class="d-block text-center pl-4">Correct answer</small>
 				</div>
 			</div>
-			<div class="form-row d-none" id="multiple__choice__answer">
+			<div class="form-row d-none multiple__choice__answer" id="multiple__choice__answer">
 				<div class="col-md-4 align-self-start">
 					<label for="multiple__choice__answer">Answer</label>
 				</div>
