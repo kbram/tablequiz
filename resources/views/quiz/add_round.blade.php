@@ -134,7 +134,8 @@
 <form class="is_container row" id="add_round" action="/question" method="post" enctype="multipart/form-data" role="main">
 @csrf	
 
-		<article class="col-12">
+		<article class="col-12 ">
+<div class="article_question">
 			<div class="article__heading">
 				<h1>Question <span id="number"> 1</span></h1>
 				
@@ -311,6 +312,7 @@
  								  </div>
  								</div>
 			</div>
+
 			<div class="form-row d-flex standard__answer" id="standard__answer" >
 				<div class="col-md-4">
 					<label for="standard__question__answer">Answer</label>
@@ -356,7 +358,6 @@
 				</div>
 
 			</div>
-
 			<div class="form-row">
 				<div class="col-md-4">
 					<label for="time__limit">Time limit</label>
@@ -389,7 +390,8 @@
 			</div> -->
 			</div>
 			
-			
+	</div>		
+		
 		</article>
 
 
