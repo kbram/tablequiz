@@ -22,13 +22,13 @@
 						</a>
 					</li>
 					<li>
-						<a href="../admin/users">
+						<a href="{{route('admin-users')}}">
 							<span><i class="fas fa-users"></i></span>
 							Users
 						</a>
 					</li>
 					<li>
-						<a href="../admin/financials">
+						<a href="{{route('admin-financials')}}">
 							<span><i class="fas fa-coins"></i></span>
 							Financials
 						</a>
@@ -40,7 +40,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="../admin/categories">
+						<a href="{{route('admin-questions')}}">
 							<span><i class="fas fa-question-circle"></i></span>
 							Questions
 						</a>
@@ -99,7 +99,7 @@
 									</td>
 								</tr>
 								@endforeach
-								
+								 
 								
 							</tbody>
 							<tfoot>

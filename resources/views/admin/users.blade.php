@@ -86,8 +86,11 @@
 									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
 										<div class="d-flex flex-column pl-0">
 											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>									<div class="d-flex flex-column">
+											<span><a href="{{route('userquizzes',$user->id)}}" data-toggle="tooltip" title="View Qs">
+											         View Qs
+                                                </a></span>
+										</div>							
+							    		<div class="d-flex flex-column">
 											<i class="fas fa-times-circle"></i>
 											<span>Block</span>
 										</div>

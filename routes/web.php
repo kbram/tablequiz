@@ -142,11 +142,12 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
 
     //admin routes here
     Route::get('admin/home', 'AdminDetailsController@home');
-    Route::get('admin/categories', 'AdminDetailsController@categories');
-    Route::get('admin/financials', 'AdminDetailsController@financials');
-    Route::get('admin/questions', 'AdminDetailsController@questions');
-    Route::get('admin/quizzes', 'AdminDetailsController@quizzes');
-    Route::get('admin/users', 'AdminDetailsController@users');
+    Route::get('admin/categories', 'AdminDetailsController@categories')->name('admin-categories');
+    Route::get('admin/financials', 'AdminDetailsController@financials')->name('admin-financials');
+    Route::get('admin/questions', 'AdminDetailsController@questions')->name('admin-questions');
+    Route::get('admin/quizzes', 'AdminDetailsController@quizzes')->name('admin-quizzes');
+    Route::get('admin/users', 'AdminDetailsController@users')->name('admin-users');
+    Route::get('admin/{id}/userquizzes', 'AdminDetailsController@userquizzes')->name('userquizzes');
 
 
 });
@@ -199,8 +200,8 @@ Route::get('setup/create', 'QuizController@create');
 
 
 
-Route::get('admin/questions', 'AdminQuestionController@create');
-Route::post('admin/questions', 'AdminQuestionController@store');
+Route::get('admin/questions', 'AdminQuestionController@create')->name('admin-questions');
+Route::post('admin/questions', 'AdminQuestionController@store')->name('admin-questions');
 Route::get('questions/{id}/edit', 'AdminQuestionController@edit');
 Route::post('questions/{id}/update', 'AdminQuestionController@update');
 

@@ -68,7 +68,7 @@ class AdminDetailsController extends Controller
     public function quizzes()
     {   
          $quizzes = Quiz::all();
-        
+          
          foreach($quizzes as $quiz){
            $user[$quiz->id]   = User::where('id', $quiz->user_id)->value('name'); 
            $roundCount[$quiz->id]=$quiz->rounds()->count();
@@ -88,5 +88,18 @@ class AdminDetailsController extends Controller
              $questioncount[$user->id] =$user->questions()->count();
        }
         return view('admin.users',compact('users','quizcount','questioncount'));
+    }
+    public function userquizzes($id)
+    {   
+      
+         $user    = User::find($id);
+         $quizzes = Quiz::where('user_id',$user->id)->get();
+         foreach($quizzes as $quiz){
+           $user[$quiz->id]   = User::where('id', $quiz->user_id)->value('name'); 
+           $roundCount[$quiz->id]=$quiz->rounds()->count();
+           $questionCounts[$quiz->id]=$quiz->questions()->count();
+        }
+        
+        return view('admin.quizzes',compact('quizzes','user','roundCount','questionCounts'));
     }
 }
