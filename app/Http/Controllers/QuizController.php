@@ -41,7 +41,6 @@ class QuizController extends Controller
      */
     public function store(Request $request)
         {
-        $cat = QuizCategory::all();
 
         $validator = Validator::make($request->all(),
         [

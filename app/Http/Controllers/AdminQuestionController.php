@@ -46,30 +46,40 @@ class AdminQuestionController extends Controller
         'question__type'    => 'required',
         'question'          => 'required', 
         'time__limit'       => 'required',                         
+    
      ]);
-     if($request->input('question__type') == 'standard__question'){
-         
-          $validator = Validator::make($request->all(),
-          [
-            'standard__question__answer'   => 'required',
-          ]);
-        }
-     elseif($request->input('question__type') == 'multiple__choice__question'){
 
+     if($request->input('question__type') == 'standard__question'){
           $validator = Validator::make($request->all(),
           [
-             'multiple__choice__answer__1'   => 'required',
+            
+            'standard__question__answer'   => 'required',
+
           ]);
-        }
+          }
+
+
+    //  elseif($request->input('question__type') == 'multiple__choice__question'){
+
+    //       $validator = Validator::make($request->all(),
+    //       [
+    //          'multiple__choice__answer__1'   => 'required',
+    //       ]);
+    //     }
     elseif($request->input('question__type') == 'numeric__question'){
           $validator = Validator::make($request->all(),
           [
+
              'numeric__question__answer'   => 'required',
           ]);
         }
+
+
      if ($validator->fails()) {
+
           return back()->withErrors($validator)->withInput();
         }
+
             
          // Creating new global question 
         $question = new GlobalQuestion;
@@ -535,7 +545,7 @@ class AdminQuestionController extends Controller
     public function destroy($id)
   {
     
-    $question = Question::find($id);
+    $question = GlobalQuestion::find($id);
 
     if ($question->id) {
       $question->delete();

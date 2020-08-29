@@ -47,7 +47,7 @@
 					</li>
 					
 				</ul>
-				<a href="/quiz/setup" class="btn btn-primary hasPlus d-block">New Quiz</a>
+				<!-- <a href="/quiz/setup" class="btn btn-primary hasPlus d-block">New Quiz</a> -->
 			</div>
 		</aside>
 		
@@ -88,12 +88,19 @@
 					</li>
 					
 				</ul>
-				<a href="../quiz/setup" class="btn btn-primary hasPlus d-block">New Quiz</a>
+				<!-- <a href="../quiz/setup" class="btn btn-primary hasPlus d-block">New Quiz</a> -->
 			</div>
 		</aside>
 		
 		<section class="col-lg-9 dashboard__container">
 								</select>
+
+								@if ($errors->has('category__type'))
+                                    <span class="help-block">
+                                            <p>{{ $errors->first('category__type') }}</p>
+                                    </span>
+                        		@endif	
+
 								</div>
 								</div> 
 							<div class="form-row">
@@ -102,11 +109,18 @@
 								</div>
 								<div class="col-md-4">
 								
-									<select id="question__type" name="question__type" class="form-control" >
+									<select id="question__type" name="question__type" class="form-control">
 									    <option value="standard__question">Standard</option>
 										<option value="multiple__choice__question">Multiple choice</option>
 										<option value="numeric__question">Numeric</option>
 									</select>
+
+									@if($errors->has('question__type'))
+                                    <span class="help-block">
+                                            <p>{{ $errors->first('question__type') }}</p>
+                                    </span>
+                        			@endif
+
 								</div>
 							</div>
 							<div class="form-row">
@@ -114,7 +128,12 @@
 									<label for="question">Question</label>
 								</div>
 								<div class="col-md-8">
-									<input name="question" type="text" class="form-control" >
+									<input name="question" type="text" class="form-control" id="question">
+									@if($errors->has('question'))
+                                    <span class="help-block">
+                                            <p>{{ $errors->first('question') }}</p>
+                                    </span>
+                        			@endif
 									
 								</div>
 							</div>
@@ -257,6 +276,11 @@
 								</div>
 								<div class="col-md-8">
 									<input class="form-control" name="standard__question__answer" type="text" >
+									@if($errors->has('standard__question__answer'))
+                                    <span class="help-block">
+                                            <p>{{ $errors->first('standard__question__answer') }}</p>
+                                    </span>
+                        			@endif
 								</div>
 							</div>
 							<div class="form-row d-none" id="numeric__answer" name="numeric__answer">
@@ -265,6 +289,12 @@
 								</div>
 								<div class="col-md-8">
 									<input class="form-control" name="numeric__question__answer" type="number" >
+
+									@if($errors->has('numeric__question__answer'))
+                                    <span class="help-block">
+                                            <p>{{ $errors->first('numeric__question__answer') }}</p>
+                                    </span>
+                        			@endif
 								</div>
 							</div>
 							<div class="form-row d-none" style="min-height:0;" id="multiple__choice__legend">
@@ -306,6 +336,11 @@
 								</div>
 								<div class="col-md-4">
 									<input class="form-control" type="number" name="time__limit" >
+									@if($errors->has('time__limit'))
+                                    <span class="help-block">
+                                            <p>{{ $errors->first('time__limit') }}</p>
+                                    </span>
+                        			@endif
 								</div>
 								<div class="col">
 									<small class="form-text text-muted">Seconds</small>
@@ -346,14 +381,14 @@
 									<span><a href="{{ URL::to('questions/'. $question->id .'/edit') }}" data-toggle="tooltip" title="edit">
                                                    Edit
                                                 </a></span>
-								</div>									
-								<div class="d-flex flex-column">
-									<i class="fas fa-times-circle"></i>
-									<span> <a  data-id="{{$question->question}}" data-model="GlobalQuestion"  data-toggle="tooltip" title="delete" >
-                                               Delete
-                                                </a></span>
 								</div>
-							    </td>
+								<form method="POST" action="/admin/questions/{{$question->id}}" class="p-0">
+												{{ csrf_field() }}	
+												<div class="d-flex flex-column">
+												<i class="fas fa-times-circle" ></i><span class="delete">Delete</span>
+												</div>
+								</form>
+								</td>
 							</tr>
 							 @endforeach
 							
@@ -387,5 +422,6 @@
 	@if(config('usersmanagement.enableSearchUsers'))
     @include('scripts.search-questions')
     @endif
-@include('scripts.delete-model')	
+@include('scripts.delete-model')
+
 @endsection
