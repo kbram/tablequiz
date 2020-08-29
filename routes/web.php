@@ -299,3 +299,13 @@ Route::post('playquiz/answer', 'PlayController@answer');
 Route::get('test','MasterQuestionController@index');
 
 Route::post('playquiz/{id}', 'PlayController@play');
+
+
+Route::get('/addroundtest' , function(){
+    return view('quiz.add_round'); 
+});
+
+
+Route::get('temptest',function(){
+    return view('test');
+});

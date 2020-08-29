@@ -217,6 +217,8 @@ class MasterQuestionController extends Controller
     }
     public function postRound(Request $request){
 
+        dd($request);
+
 dd(Session::get('image'),Session::get('quiz'));
 
             Session::forget('round');

@@ -31,8 +31,10 @@
 
 
 <section class="container page__inner">
-	<form class="is_container row" id="add_round" action="/round" method="post" enctype="multipart/form-data" role="main">
+<form id="add_round" action="/round" method="post" enctype="multipart/form-data" role="main">
 		 @csrf
+<div class="is_container row" >
+
 		<article class="col-12">
 			<div class="article__heading">
 				<h1>Round {{$id ?? '1'}} Setup</h1>
@@ -126,13 +128,14 @@
 				</div>
 			</div> -->
 			</div>
+</div>
 		</article>
-	</form>
+	<!-- </form> -->
 <!-- QUESTION -->	
 <div id="sections">
   <div class="section">
-<form class="is_container row" id="add_round" action="/question" method="post" enctype="multipart/form-data" role="main">
-@csrf	
+<!-- <form class="is_container row" id="add_round" action="/question" method="post" enctype="multipart/form-data" role="main">
+@csrf	 -->
 
 		<article class="col-12 ">
 <div class="article_question">
@@ -148,7 +151,7 @@
 				<div class="col-md-8">
 					<div class="row align-items-center">
 						<div class="col-lg-6">
-							<select id="question__type"  class="form-control question__type" name="question__type">
+							<select id="question__type"  class="form-control question__type" name="question__type[]">
 								<option value="standard__question">Standard</option>
 								<option value="multiple__choice__question">Multiple choice</option>
 								<option value="numeric__question">Numeric</option>
@@ -170,7 +173,7 @@
 					<label for="question">Question</label>
 				</div>
 				<div class="col-md-8">
-					<input name="question" type="text" class="form-control">
+					<input name="question[]" type="text" class="form-control">
 				</div>
 				@if ($errors->has('question'))
                         <span class="help-block">
@@ -208,10 +211,10 @@
  										<p class="text-center py-2">Add <span id="add__image__media__text"></span> to reference in your question</p>
  										<div class="form-row">
  											<div class="col-md-4">
- 												<label>Add link</label>
+ 												<label>Add link image</label>
  											</div>
  											<div class="col-md-8">
- 												<input type="url" name="add_link_to_image__media" class="form-control" id="add__image__media__text">
+ 												<input type="url" name="add_link_to_image__media[]" class="form-control" id="add__image__media__text">
  											</div>
  										</div>
  										<div class="text-center w-100">
@@ -220,7 +223,7 @@
  										<div class="form-row justify-content-center pt-3">
  											<div class="col-md-3">	
  											   <label class="d-block" for="upload__image__media__file">Upload
- 													<input type="file" class="form-control-file" id="upload__image__media__file" value="Upload" name="image_media">
+ 													<input type="file" class="form-control-file" id="upload__image__media__file" value="Upload" name="image_media[]">
  												</label>
  											</div>
  										</div>
@@ -251,7 +254,7 @@
  												<label>Add link</label>
  											</div>
  											<div class="col-md-8">
-												<input type="url" name="add_link_to_audio__media" class="form-control" id="add__audio__media__text">
+												<input type="url" name="add_link_to_audio__media[]" class="form-control" id="add__audio__media__text">
  											</div>
  										</div>
  										<div class="text-center w-100">
@@ -260,7 +263,7 @@
  										<div class="form-row justify-content-center pt-3">
  											<div class="col-md-3">	
  											   <label class="d-block" for="upload__audio__media__file">Upload
- 													<input type="file" class="form-control-file" id="upload__audio__media__file" value="Upload" name="audio_media">
+ 													<input type="file" class="form-control-file" id="upload__audio__media__file" value="Upload" name="audio_media[]">
  												</label>
  											</div>
  										</div>
@@ -286,10 +289,10 @@
  										<p class="text-center py-2">Add <span id="add__video__media__text"></span>to reference in your question</p>
  										<div class="form-row">
  											<div class="col-md-4">
- 												<label>Add link</label>
+ 												<label>Add link video</label>
  											</div>
  											<div class="col-md-8">
-											<input type="url" name="add_link_to_video__media" class="form-control" id="add__video__media__text">
+											<input type="url" name="add_link_to_video__media[]" class="form-control" id="add__video__media__text">
  											</div>
  										</div>
  										<div class="text-center w-100">
@@ -298,7 +301,7 @@
  										<div class="form-row justify-content-center pt-3">
  											<div class="col-md-3">	
  											   <label class="d-block" for="upload__video__media__file">Upload
- 													<input type="file" class="form-control-file" id="upload__video__media__file" value="Upload" name="video_media">
+ 													<input type="file" class="form-control-file" id="upload__video__media__file" value="Upload" name="video_media[]">
  												</label>
  											</div>
  										</div>
@@ -318,7 +321,7 @@
 					<label for="standard__question__answer">Answer</label>
 				</div>
 				<div class="col-md-8">
-					<input class="form-control" name="standard__question__answer" type="text">
+					<input class="form-control" name="standard__question__answer[]" type="text">
 				</div>
 			</div>
 			<div class="form-row d-none numeric__answer" id="numeric__answer">
@@ -326,7 +329,7 @@
 					<label for="numeric__question__answer">Answer</label>
 				</div>
 				<div class="col-md-8">
-					<input class="form-control" name="numeric__question__answer" type="number">
+					<input class="form-control" name="numeric__question__answer[]" type="number">
 				</div>
 			</div>
 			<div class="form-row d-none mb-n4 mb-md-4 multiple__choice__legend" style="min-height:0;" id="multiple__choice__legend">
@@ -342,7 +345,7 @@
 
 					<div class="row multiple__choice__row pb-3 align-items-center">
 						<div class="col-7 ">
-							<input name="multiple__choice__answer__1" class="form-control" type="text">
+							<input name="multiple__choice__answer__0[]" class="form-control" type="text">
 						</div>
 						<div class="col-1 justify-content-center p-0 d-flex">
 							&nbsp;
@@ -351,7 +354,7 @@
 							<span class="plus">+</span>
 						</div>
 						<div class="col-3 col-md-3 text-center form-check px-0 px-md-4">
-							<input type="radio" class="" name="multiple__choice__correct__answer">
+							<input type="radio" class="" name="multiple__choice__correct__answer[]">
 						</div>
 					</div>
 
@@ -365,7 +368,7 @@
 				<div class="col-md-8">
 					<div class="row">
 						<div class="col-md-4 pr-md-0">
-							<input class="form-control" type="number" name="time__limit">
+							<input class="form-control" type="number" name="time__limit[]">
 						</div>
 						@if ($errors->has('time__limit'))
                         <span class="help-block">
@@ -391,11 +394,14 @@
 			</div>
 			
 	</div>		
+
+
 		
-		</article>
+</article>
 
 
-		       
+</form>
+	       
         
         <!-- Suggested Question modal -->
         <div class="modal" id="suggestedQuestion" tabindex="-1" role="dialog" aria-labelledby="suggestedQuestion" aria-hidden="true">
@@ -412,7 +418,6 @@
               <div class="modal-body categories d-flex w-100 pb-4">
                 <div class="row suggested__categories px-3 w-100 no-gutters">
 
-					@foreach($cat as $category)
 						<div class="suggested_category__icon col-6 col-sm-4 text-center p-2">
 							<div class="d-flex flex-column h-100 participants__choice justify-content-center align-items-center p-4">
 								<div class="icon pb-2">
@@ -425,7 +430,6 @@
 								</p>
 							</div>
 						</div>
-					@endforeach
                 </div>
               </div>
 			  
@@ -581,49 +585,49 @@
 										<div class="col-9 the_answer">
 											<div class="form-row multiple__choice__row__in_modal pb-0 mb-2 align-items-center">
 												<div class="col input-group">
-													<input name="multiple__choice__answer__1" class="form-control readonly" type="text" readonly value="Chisinau">
+													<!-- <input name="multiple__choice__answe" class="form-control readonly" type="text" readonly value="Chisinau"> -->
 													<div class="input-group-prepend">
 														<span class="input-group-text text-white border-danger bg-danger rounded-right d-none" id="basic-addon1"><i class="far fa-trash-alt"></i></span>
 													</div>
 
 												</div>
 												<div class="col-2 text-center form-check d-none">
-													<input readonly type="radio" class="readonly" name="multiple__choice__correct__answer">
+													<input readonly type="radio" class="readonly" name="multiple__choice__correct__answer[]">
 												</div>
 											</div>
 											<div class="form-row multiple__choice__row__in_modal pb-0 mb-2 align-items-center">
 												<div class="col input-group">
-													<input name="multiple__choice__answer__1" class="form-control readonly" type="text" readonly value="Kiev">
+													<!-- <input name="multiple__choice__answer" class="form-control readonly" type="text" readonly value="Kiev"> -->
 													<div class="input-group-prepend">
 														<span class="input-group-text text-white border-danger bg-danger rounded-right d-none" id="basic-addon1"><i class="far fa-trash-alt"></i></span>
 													</div>
 												</div>
 												<div class="col-2 text-center form-check d-none">
-													<input readonly type="radio" class="readonly" name="multiple__choice__correct__answer">
+													<!-- <input readonly type="radio" class="readonly" name="multiple__choice__correct__answer[]"> -->
 												</div>
 											</div>
 											<div class="form-row multiple__choice__row__in_modal pb-0 mb-2 align-items-center">
 												<div class="col input-group">
-													<input name="multiple__choice__answer__1" class="readonly form-control" type="text" readonly value="Moscow">
-													<div class="input-group-prepend">
-														<span class="input-group-text text-white border-danger bg-danger rounded-right d-none" id="basic-addon1"><i class="far fa-trash-alt"></i></span>
-													</div>
-
-												</div>
-												<div class="col-2 text-center form-check d-none">
-													<input readonly type="radio" checked class="readonly" name="multiple__choice__correct__answer">
-												</div>
-											</div>
-											<div class="form-row multiple__choice__row__in_modal pb-0 mb-2 align-items-center">
-												<div class="col input-group">
-													<input name="multiple__choice__answer__1" class="form-control readonly" type="text" readonly value="Bucharest">
+													<!-- <input name="multiple__choice__answer" class="readonly form-control" type="text" readonly value="Moscow"> -->
 													<div class="input-group-prepend">
 														<span class="input-group-text text-white border-danger bg-danger rounded-right d-none" id="basic-addon1"><i class="far fa-trash-alt"></i></span>
 													</div>
 
 												</div>
 												<div class="col-2 text-center form-check d-none">
-													<input readonly type="radio" class="readonly" name="multiple__choice__correct__answer">
+													<input readonly type="radio" checked class="readonly" name="multiple__choice__correct__answer[]">
+												</div>
+											</div>
+											<div class="form-row multiple__choice__row__in_modal pb-0 mb-2 align-items-center">
+												<div class="col input-group">
+													<!-- <input name="multiple__choice__answer" class="form-control readonly" type="text" readonly value="Bucharest"> -->
+													<div class="input-group-prepend">
+														<span class="input-group-text text-white border-danger bg-danger rounded-right d-none" id="basic-addon1"><i class="far fa-trash-alt"></i></span>
+													</div>
+
+												</div>
+												<div class="col-2 text-center form-check d-none">
+													<input readonly type="radio" class="readonly" name="multiple__choice__correct__answer[]">
 												</div>
 											</div>
 											<div class=" align-items-center form-row">
@@ -719,18 +723,18 @@
 											</div>
 											<div class="form-row multiple__choice__row__in_modal pb-0 mb-2 align-items-center">
 												<div class="col input-group">
-													<input name="multiple__choice__answer__1" class="form-control readonly" type="text" readonly value="Mozambique">
+													<!-- <input name="multiple__choice__answer__1" class="form-control readonly" type="text" readonly value="Mozambique"> -->
 													<div class="input-group-prepend">
 														<span class="input-group-text text-white border-danger bg-danger rounded-right d-none" id="basic-addon1"><i class="far fa-trash-alt"></i></span>
 													</div>
 												</div>
 												<div class="col-2 text-center form-check d-none">
-													<input readonly type="radio" class="readonly" name="multiple__choice__correct__answer">
+													<input readonly type="radio" class="readonly" name="multiple__choice__correct__answer[]">
 												</div>
 											</div>
 											<div class="form-row multiple__choice__row__in_modal pb-0 mb-2 align-items-center">
 												<div class="col input-group">
-													<input name="multiple__choice__answer__1" class="readonly form-control" type="text" readonly value="Chad">
+													<!-- <input name="multiple__choice__answer__1" class="readonly form-control" type="text" readonly value="Chad"> -->
 													<div class="input-group-prepend">
 														<span class="input-group-text text-white border-danger bg-danger rounded-right d-none" id="basic-addon1"><i class="far fa-trash-alt"></i></span>
 													</div>
@@ -742,14 +746,14 @@
 											</div>
 											<div class="form-row multiple__choice__row__in_modal pb-0 mb-2 align-items-center">
 												<div class="col input-group">
-													<input name="multiple__choice__answer__1" class="form-control readonly" type="text" readonly value="South Sudan">
+													<!-- <input name="multiple__choice__answer__1" class="form-control readonly" type="text" readonly value="South Sudan"> -->
 													<div class="input-group-prepend">
 														<span class="input-group-text text-white border-danger bg-danger rounded-right d-none" id="basic-addon1"><i class="far fa-trash-alt"></i></span>
 													</div>
 
 												</div>
 												<div class="col-2 text-center form-check d-none">
-													<input readonly type="radio" class="readonly" name="multiple__choice__correct__answer">
+													<input readonly type="radio" class="readonly" name="multiple__choice__correct__answer[]">
 												</div>
 											</div>
 											<div class=" align-items-center form-row">
@@ -784,7 +788,6 @@
         </div>
 	
 		
-	</form>
 	</div>
 	</div>
 	<div class="button__holder w-100 pt-0 mt-5 justify-content-center d-md-flex" id="add-new-question">
@@ -796,12 +799,13 @@
 	</div>
 	<section class="row round__page__buttons justify-content-center align-items-center pt-5 mt-5 border-top">
 		<div class="col-md-4 mb-3 mb-md-0 px-0 px-md-4" id="add-new-round">
-			<a href="/addround/{{$id  ?? '1'}}" class="btn btn-secondary d-block" id="nextRound"><span class="pr-3"><i class="fa fa-plus"></i></span>Next round</a>
+			<button type="submit" form="add_round" class="btn btn-secondary d-block" id="nextRound"><span class="pr-3"><i class="fa fa-plus"></i></span>Next round</a>
 		</div>
 		<div class="col-md-4 px-0 px-md-4">
 			<a href="#" data-toggle="modal" data-target="#publishQuizModal" class="btn btn-primary d-block">Publish Quiz</a>
 		</div>
 	</section>
+
 </section>
 
 @endsection
