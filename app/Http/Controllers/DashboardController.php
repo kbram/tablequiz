@@ -35,7 +35,6 @@ class DashboardController extends Controller
             
         foreach($quizzes as $quiz)
         { 
-        // dd($quizzes);
 
             $roundCount[$quiz->id]=$quiz->rounds()->count();
 

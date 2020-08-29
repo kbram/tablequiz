@@ -157,7 +157,7 @@
 
 									<td class="d-none" id="quizLink{{$quiz->id}}">{{$quiz ->quiz_link}}</td>
 									<td class="quiz_actions d-flex flex-row justify-content-lg-end">
-										<a href="quizzes/{{$quiz->id}}/edit">			
+										<a href="{{ URL::to('quizzes/'. $quiz->id .'/edit') }}">			
 										<div class="d-flex flex-column pl-0 pl-md-4">
 											<i class="fas fa-edit"></i>
 											<span>Edit</span>
@@ -202,5 +202,7 @@
 @endsection
 @section('footer_scripts')
 @include('scripts.share-quiz')
+@include('scripts.quiz-icon-preview')
+
 @endsection
 

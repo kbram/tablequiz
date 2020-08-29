@@ -83,7 +83,7 @@
 									<input type="file" class="orange_text form-control-file" id="upload__category__image" name="upload__category__image" value="Upload"></label>
 								</div>
 							
-								</div>
+							</div>
 							<hr>
 							<div class="row justify-content-center">
 								<div class="col-4">

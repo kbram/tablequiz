@@ -501,6 +501,7 @@ class AdminQuestionController extends Controller
        } 
        public function search(Request $request)
        {
+         
            $searchTerm = $request->input('question_search_box');
            $searchRules = [
                'question_search_box' => 'required|string|max:255',
@@ -519,9 +520,8 @@ class AdminQuestionController extends Controller
                ], Response::HTTP_UNPROCESSABLE_ENTITY);
            }
    
-           $results = Question::where('id', 'like', $searchTerm.'%')
-                               ->orWhere('category', 'like', $searchTerm.'%')
-                               ->orWhere('question', 'like', $searchTerm.'%')->get();
+           $results = GlobalQuestion::where('id', 'like', $searchTerm.'%')
+                            ->orWhere('question', 'like', $searchTerm.'%')->get();
    
    
            return response()->json([

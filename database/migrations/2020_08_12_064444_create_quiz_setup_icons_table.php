@@ -19,7 +19,6 @@ class CreateQuizSetupIconsTable extends Migration
             $table->foreign('quiz_id')->references('id')->on('quizzes')->onDelete('cascade');
             $table->string('public_path');
             $table->string('local_path');
-            $table->string('thumb_path');
             $table->timestamps();
 
 

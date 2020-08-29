@@ -331,7 +331,7 @@
 									<th class="text-center">Actions</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="questions_table">
 							
 							@foreach($questions as $question)
 							

@@ -1,7 +1,7 @@
 <script type="text/javascript">
   $(document).ready(function() {
     
-    $(".block").click(function(e) {
+    $(".blockuser").click(function(e) {
         e.preventDefault();
         var id=e.target.id;
         var text=$('#'+id).text();
@@ -9,7 +9,7 @@
         if(text=='block'){
           swal({
                     title: "Are you sure?",
-                    text: "Once un-blocked, you can able to block this Quiz!",
+                    text: "Once un-blocked, you can able to block this User!",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
@@ -33,7 +33,7 @@
                        else if(text=='un-block'){
                        swal({
                     title: "Are you sure?",
-                    text: "Once blocked, you can able to un-block this Quiz!",
+                    text: "Once blocked, you can able to un-block this User!",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
@@ -58,4 +58,6 @@
     });
   });
 </script>
+
+
 
