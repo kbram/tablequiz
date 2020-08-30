@@ -103,9 +103,8 @@ $("#standard-q").click(function(e){
       st+=technology;
       st+=politics;
       st+=popular_culture;
-     
-    
-      if(st==1 || st==2 || st==3 || st==4 ||st==5 || st==6 || st==7 )
+   
+      if(st>=1 && st<=7)
       {
 
     $.ajax({
@@ -191,8 +190,9 @@ $("#image-based-q").click(function(e){
       img+=technology;
       img+=politics;
       img+=popular_culture;
-  if(img==1 || img==2 || img==3 || img==4 ||img==5 || img==6 || img==7 ){
-            console.log('music image-based hi');
+
+  if(img>=1 && img<=7){
+         
             $.ajax({
         type: "POST",
         url: "/ajax/image/"+img,
@@ -269,7 +269,8 @@ $("#audio-based-q").click(function(e){
       aud+=technology;
       aud+=politics;
       aud+=popular_culture;
-  if(aud==1 || aud==2 || aud==3 || aud==4 ||aud==5 || aud==6 || aud==7 ){
+
+  if(aud>=1 && aud<=7){
             $.ajax({
         type: "POST",
         url: "/ajax/audio/"+aud,
@@ -344,7 +345,8 @@ $("#video-based-q").click(function(e){
       vid+=technology;
       vid+=politics;
       vid+=popular_culture;
-  if(vid==1 || vid==2 || vid==3 || vid==4 ||vid==5 || vid==6 || vid==7 ){
+
+  if(vid>=1 && vid<=7){
             
             $.ajax({
         type: "POST",
@@ -413,7 +415,6 @@ $("#video-based-q").click(function(e){
 // add question 
 
 $("body").on('click','.suggested_q_link',function(){
-     console.log('use suggested question');
      get_question=$(this).closest('.article').find('.question');
      get_time_limit=$(this).closest('.article').find('.time-limit');
      get_answer=$(this).closest('.article').find('.answer');
@@ -425,26 +426,21 @@ $("body").on('click','.suggested_q_link',function(){
      standard__answer=$(this).closest('.article').find('.standard__answer');
      numeric__answer=$(this).closest('.article').find('.numeric__answer');
 
-
   });
 
 $('body').on('click','button.add-question',function(e){   
-      
-
+    
       var id=e.target.id;
       var question=$("div #question"+id).val();
       var time_limit=$("small #time-limit"+id).val();
       var answer=$("#answer"+id).val();
       var question_type=$('#suggested__question__type'+id).val();
-     
-  
 
      get_question.val(question);
      get_time_limit.val(time_limit);
      get_answer.val(answer);
      get_question_type.val(question_type);
-    // $('#question2').val(question); 
-     //$('#time-limit2').val(time_limit); 
+
       
      /**finding input field of answer**/
      var values = [];
@@ -474,17 +470,24 @@ $('body').on('click','button.add-question',function(e){
          /// button.closest('.multiple__choice__row__in_modal').after(newRow);
 
    });
-
    
-   $("#suggestedQuestion").on("hidden.bs.modal", function () {
-      console.log('i am closed');
-      
-     // var template = $(this).html();
-     // $('.single__suggested__question').remove();
-      //$(".all_suggested_questions").html("");
-	});
+   
+   // $("#suggestedQuestion").on("hidden.bs.modal", function () {
+   //    console.log('i am closed');
+   //    $(this).find(".all_suggested_questions").empty();
+   //  $(this).removeData('bs.modal');
+     
+	// });
+  
+//    $(document).on('hidden.bs.modal', '.modal', function (e) {
+//     $(this).find(".all_suggested_questions").empty();
+//     $(this).removeData('bs.modal');
+// });
+  
 
 
-  });
+
+
+});
 
 </script>

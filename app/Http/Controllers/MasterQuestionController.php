@@ -64,7 +64,7 @@ class MasterQuestionController extends Controller
     public function standard(Request $request,$id)
     {   
     
-         if($id==1 || $id==2 || $id==3 || $id==4 || $id==5 || $id==6 || $id==7){
+         if($id>=1 && $id<=7){
             $ans=[];
             $medias=[];
             $ques=GlobalQuestion::where('category_id',$id)->where('question_type','standard')->get();
@@ -95,7 +95,7 @@ class MasterQuestionController extends Controller
     public function image(Request $request,$id)
     {   
        
-         if($id==1 || $id==2 || $id==3 || $id==4 || $id==5 || $id==6 || $id==7){
+         if($id>=1 && $id<=7){
             $ans=[];
             $medias=[];
         
@@ -127,7 +127,7 @@ class MasterQuestionController extends Controller
     public function audio(Request $request,$id)
     {   
      
-        if($id==1 || $id==2 || $id==3 || $id==4 || $id==5 || $id==6 || $id==7){
+        if($id>=1 && $id<=7){
             $ans=[];
             $medias=[];
             $ques=GlobalQuestion::where('category_id',$id)->get();
@@ -151,7 +151,7 @@ class MasterQuestionController extends Controller
 
     public function video(Request $request,$id)
     {  
-        if($id==1 || $id==2 || $id==3 || $id==4 || $id==5 || $id==6 || $id==7){
+        if($id>=1 && $id<=7){
             $medias=[];
             $ans=[];
             $ques=GlobalQuestion::where('category_id',$id)->get();
