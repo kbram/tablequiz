@@ -37,7 +37,7 @@
 
 		<article class="col-12">
 			<div class="article__heading">
-				<h1>Round {{$id ?? '1'}} Setup</h1>
+				<h1>Round {{$round_count ?? '1'}} Setup</h1>
 				<?php /*if($quizName) echo "<h2>".$quizName."</h2>";*/?>
 
 
@@ -56,6 +56,9 @@
 				</div>
 				<div class="col-md-8">
 					<input autocomplete="nothanks" type="text" name="round_name" class="form-control">
+					<input hidden autocomplete="nothanks" type="text" name="round_count" class="form-control" value="{{$round_count ?? '1'}}">
+					<input hidden autocomplete="nothanks" type="text" name="quiz" class="form-control" value="{{$quiz}}">
+
 				</div>
 			</div>
 			<div class="form-row">
@@ -321,7 +324,7 @@
 					<label for="standard__question__answer">Answer</label>
 				</div>
 				<div class="col-md-8">
-					<input class="form-control" name="standard__question__answer[]" type="text">
+					<input class="form-control" name="standard__question__answer__0" type="text">
 				</div>
 			</div>
 			<div class="form-row d-none numeric__answer" id="numeric__answer">
@@ -329,7 +332,7 @@
 					<label for="numeric__question__answer">Answer</label>
 				</div>
 				<div class="col-md-8">
-					<input class="form-control" name="numeric__question__answer[]" type="number">
+					<input class="form-control" name="numeric__question__answer__0" type="number">
 				</div>
 			</div>
 			<div class="form-row d-none mb-n4 mb-md-4 multiple__choice__legend" style="min-height:0;" id="multiple__choice__legend">
@@ -345,7 +348,7 @@
 
 					<div class="row multiple__choice__row pb-3 align-items-center">
 						<div class="col-7 ">
-							<input name="multiple__choice__answer__0[]" class="form-control" type="text">
+							<input name="multiple__choice__answer__0[]" class="multiple-choice-answer form-control" type="text">
 						</div>
 						<div class="col-1 justify-content-center p-0 d-flex">
 							&nbsp;
@@ -400,7 +403,7 @@
 </article>
 
 
-</form>
+
 	       
         
         <!-- Suggested Question modal -->
@@ -711,7 +714,7 @@
 										<div class="col-9 the_answer">
 											<div class="form-row multiple__choice__row__in_modal pb-0 mb-2 align-items-center">
 												<div class="col input-group">
-													<input name="multiple__choice__answer__1" class="form-control readonly" type="text" readonly value="Madagascar">
+													<!-- <input name="multiple__choice__answer__1" class="form-control readonly" type="text" readonly value="Madagascar"> -->
 													<div class="input-group-prepend">
 														<span class="input-group-text text-white border-danger bg-danger rounded-right d-none" id="basic-addon1"><i class="far fa-trash-alt"></i></span>
 													</div>
@@ -799,13 +802,13 @@
 	</div>
 	<section class="row round__page__buttons justify-content-center align-items-center pt-5 mt-5 border-top">
 		<div class="col-md-4 mb-3 mb-md-0 px-0 px-md-4" id="add-new-round">
-			<button type="submit" form="add_round" class="btn btn-secondary d-block" id="nextRound"><span class="pr-3"><i class="fa fa-plus"></i></span>Next round</a>
+			<button type="submit"  class="btn btn-secondary d-block" id="nextRound"><span class="pr-3"><i class="fa fa-plus"></i></span>Next round</a>
 		</div>
 		<div class="col-md-4 px-0 px-md-4">
 			<a href="#" data-toggle="modal" data-target="#publishQuizModal" class="btn btn-primary d-block">Publish Quiz</a>
 		</div>
 	</section>
-
+    </form>
 </section>
 
 @endsection

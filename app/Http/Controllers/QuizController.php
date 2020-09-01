@@ -7,6 +7,7 @@ use App\Models\Participant;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\QuizCategory;
+use Session;
 
 use Validator;
 use Auth;
@@ -37,6 +38,8 @@ class QuizController extends Controller
      */
     public function store(Request $request)
         {
+
+
         $validator = Validator::make($request->all(),
         [
           'quiz__name'                => 'required|unique:quizzes',
@@ -49,79 +52,137 @@ class QuizController extends Controller
             
             return back()->withErrors($validator)->withInput();
         }
+
+        $link = $request->input('quiz__link');
+
+        if ($request->hasFile('upload__quiz__icon')) {
+            // dd($request->hasFile('upload__quiz__icon'));
+
+          $quiz_icon = $request->file('upload__quiz__icon');
+
+          $filename = 'quiz_icon.'.$quiz_icon->getClientOriginalExtension();  
+          $save_path1 = '/storage/quizicon/'.$link.'/quiz_icon/';
+
+          $save_path = storage_path('app/public'). '/quizicon/'.$link.'/quiz_icon/';
+          $save_path_thumb = storage_path('app/public').'/quizicon/'.$link.'/quiz_icon/'.'/thumb/';
+
+          // $path = $save_path . $filename;
+          // $path_thumb    = $save_path_thumb . $filename;
+
+          $public_path = storage_path('app/public'). '/quizicon/'.$link.'/quiz_icon/'.$filename;
+          $public_path_thumb= storage_path('app/public'). '/quizicon/'.$link.'/quiz_icon/'.'/thumb/'.$filename;
+
+          //resize the image            
+
+          // Make the user a folder and set permissions
+          File::makeDirectory($save_path, $mode = 0755, true, true);
+          File::makeDirectory($save_path_thumb, $mode = 0755, true, true);
+
+          Image::make($quiz_icon)->resize(250,250)->save($save_path_thumb.$filename);
+
+          $quiz_icon->move($save_path, $filename);            
+  
+
+         } 
+         else{
+          $filename = 'homepage__logo.png'; 
+          $save_path1 = '/storage'; 
+          $save_path = storage_path('app/public');
+          $public_path = storage_path('app/public');
+          $public_path_thumb= storage_path('app/public').'/thumb';
+
+
+
+         }
+     
+        if(Auth::user()){
         
         $quiz =new Quiz;
-            $quiz -> quiz__name              = $request->input('quiz__name');
-            $quiz -> quiz_password          = $request->input('quiz__password');
-            $quiz -> quiz_link              = $request->input('quiz__link');
-            $quiz-> no_of_participants     = $request->input('quiz__participants');
-            $quiz-> user_id = auth()->id();
+            $quiz->quiz__name              = $request->input('quiz__name');
+            $quiz->quiz_password          = $request->input('quiz__password');
+            $quiz->quiz_link              = $request->input('quiz__link');
+            $quiz->no_of_participants     = $request->input('quiz__participants');
+            $quiz->user_id = auth()->id();
+            
+            $quiz->save();
+            Session::put('quiz_id_round',$quiz->id);
+
+
+        $quizIcon = new QuizSetupIcon;
+
+            $quizIcon->public_path       = $public_path;
+            $quizIcon->local_path        = $save_path1 . '/' . $filename;
+            $quizIcon->quiz_id           =$quiz->id;
+            $quizIcon->thumb_path        = $public_path_thumb;
+  
+            $quizIcon->save();
+
+           $cat = QuizCategory::all();
+           $quiz = $quiz->quiz_link;
+
+
+           return view('quiz.add_round',compact('cat','quiz')); 
+           
+        }
+
+        else{
+            
+            Session::put('quiz',$request->except('upload__quiz__icon'));
+            Session::push('quiz_image',$public_path);
+            Session::push('quiz_image',$public_path_thumb);
+            Session::push('quiz_image',$save_path1);
+            Session::push('quiz_image',$filename);
+
+            $cat = QuizCategory::all();
+
+            $quiz = $request->input('quiz__link');
+
+            return view('quiz.add_round',compact('cat','quiz'));            
+
+
+
+        }
+    }
+
+    public function AfterLogin(){
+
+        if(Session::get('quiz')){
+
+            $session_quiz = Session::get('quiz');
+            $quiz =new Quiz;
+            $quiz->quiz__name              = $session_quiz['quiz__name'];
+            $quiz->quiz_password          = $session_quiz['quiz__password'];
+            $quiz->quiz_link              = $session_quiz['quiz__link'];
+            $quiz->no_of_participants     = $session_quiz['quiz__participants'];
+            $quiz->user_id = auth()->id();
             
             $quiz->save();
 
+            $session_quiz_image = Session::get('quiz_image');
 
-           $quiz_id=Quiz::where('quiz__name',$quiz -> quiz__name)->first()->id;
-
-
-           if ($request->hasFile('upload__quiz__icon')) {
-              // dd($request->hasFile('upload__quiz__icon'));
- 
-            $quiz_icon = $request->file('upload__quiz__icon');
-
-            $filename = 'quiz_icon.'.$quiz_icon->getClientOriginalExtension();  
-            $save_path1 = '/storage/quizicon/'.$quiz_id.'/quiz_icon/';
-
-            $save_path = storage_path('app/public'). '/quizicon/'.$quiz_id.'/quiz_icon/';
-            $save_path_thumb = storage_path('app/public').'/quizicon/'.$quiz_id.'/quiz_icon/'.'/thumb/';
-
-            // $path = $save_path . $filename;
-            // $path_thumb    = $save_path_thumb . $filename;
-
-            $public_path = storage_path('app/public'). '/quizicon/'.$quiz_id.'/quiz_icon/'.$filename;
-            $public_path_thumb= storage_path('app/public'). '/quizicon/'.$quiz_id.'/quiz_icon/'.'/thumb/'.$filename;
-
-            //resize the image            
-
-            // Make the user a folder and set permissions
-            File::makeDirectory($save_path, $mode = 0755, true, true);
-            File::makeDirectory($save_path_thumb, $mode = 0755, true, true);
-
-            Image::make($quiz_icon)->resize(250,250)->save($save_path_thumb.$filename);
-
-            $quiz_icon->move($save_path, $filename);            
-    
-           $quizIcon = new QuizSetupIcon;
-
-            $quizIcon->public_path       = $public_path;
-            $quizIcon->local_path        = $save_path1 . '/' . $filename;
-            $quizIcon->quiz_id           =$quiz_id;
-            $quizIcon->thumb_path        = $public_path_thumb;
-
-           $quizIcon->save();
-
-           } 
-           else{
-            $filename = 'homepage__logo.png'; 
-            $save_path1 = '/storage'; 
-            $save_path = storage_path('app/public');
-            $public_path = storage_path('app/public');
-            $public_path_thumb= storage_path('app/public').'/thumb';
 
             $quizIcon = new QuizSetupIcon;
 
-            $quizIcon->public_path       = $public_path;
-            $quizIcon->local_path        = $save_path1 . '/' . $filename;
-            $quizIcon->quiz_id           =$quiz_id;
-            $quizIcon->thumb_path        = $public_path_thumb;
-
+            $quizIcon->public_path       = $session_quiz_image[0];
+            $quizIcon->local_path        = $session_quiz_image[2].'/'.$session_quiz_image[3];
+            $quizIcon->quiz_id           =$quiz->id;
+            $quizIcon->thumb_path        = $session_quiz_image[1];
+  
             $quizIcon->save();
 
-           }
-       
-           $cat = QuizCategory::all();
+            return view('home2');
 
-           return view('quiz.add_round',compact('cat'));    
+
+        }
+        else{
+
+        return view('home2');
+        }
+
     }
+
+
+
     public function search(Request $request)
     {
         $searchTerm = $request->input('quiz_search_box');
@@ -260,4 +321,6 @@ class QuizController extends Controller
         $participants=Participant::all();
         return view('quiz.setup',compact('participants'));
     }
+
+    
 }

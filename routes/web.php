@@ -65,9 +65,7 @@ Route::group(['middleware' => ['auth', 'activated', 'activity', 'twostep', 'chec
         'as'   => '{username}',
         'uses' => 'ProfilesController@show',
     ]);
-    Route::get('home', function () {
-         return view('home2');
-     });
+    Route::get('home', 'QuizController@AfterLogin');
 
 
 });
@@ -227,7 +225,7 @@ Route::post('admin/categories/update/{id}', 'QuizCategoriesController@update');
 
 //quizmaster question routes
 Route::post('/quiz','QuizController@store');
-Route::post('/round','MasterQuestionController@postRound');
+Route::post('/round','MasterQuestionController@add_round_question');
 Route::post('/question','MasterQuestionController@postQuestion');
 Route::post('/quizsetup','MasterQuestionController@store');
 Route::get('/addround/{id}','QuizRoundController@getRound');
@@ -309,3 +307,5 @@ Route::get('/addroundtest' , function(){
 Route::get('temptest',function(){
     return view('test');
 });
+
+Route::get('hometest', 'QuizController@AfterLogin');
