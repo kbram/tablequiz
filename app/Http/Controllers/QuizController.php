@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 use App\Models\UserPayment;
 use App\Models\Participant;
+use App\Models\PriceBand;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\User;
@@ -28,9 +29,11 @@ class QuizController extends Controller
         
         return view('admin.quizzes',compact('quizzes'));
     }
+
+    
     public function create()
-    {    $participants=Participant::all();
-        return view('quiz.setup',compact('participants'));
+    {    $bands=PriceBand::all();
+        return view('quiz.setup',compact('bands'));
     }
 
     /**
@@ -267,6 +270,7 @@ class QuizController extends Controller
     public function setup()
     {    
         $participants=Participant::all();
-        return view('quiz.setup',compact('participants'));
+        $bands=PriceBand::all();
+        return view('quiz.setup',compact('participants', 'bands'));
     }
 }

@@ -117,12 +117,16 @@
 					<div class="col-md-4">
 						<select id="quiz__participants" class="form-control" name="quiz__participants">
 							<option disabled selected>{{(old('quiz__participants') != '' ? old('quiz__participants') : 'Please Choose...')}}</option>
-							<option value="1-5">1-5</option>
-							<option value="5-9">5-9</option>
-							<option value="10-19">10-19</option>
-							<option value="20-29">20-29</option>
-							<option value="30-49">30-49</option>
-							<option value="50+">50+</option>
+							@foreach($bands as $band)
+								@if(($band->band_type)== "participants costs")
+									@if(($band->to)== null)
+										<option>{{$band->from}}+</option>
+									@else
+										<option>{{$band->from}}-{{$band->to}}</option>
+									@endif
+								@endif
+							@endforeach
+
 						</select>
 						@if ($errors->has('quiz__participants'))
                                     <span class="help-block">
@@ -133,39 +137,41 @@
 					</div>
 					<div class="modal" id="select_participants__modal" tabindex="-1" role="dialog" aria-labelledby="select_participants__modal" aria-hidden="true">
 					  <div class="modal-dialog modal-dialog-centered" role="document">
-						<div class="modal-content">
-						  <div class="modal-header justify-content-center">
-							  <h1>No. of participants</h1>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							  <span aria-hidden="true">&times;</span>
-							</button>
-						  </div>
-						  <div class="modal-body row no-gutters participants">
-						  @foreach($participants as $participant)
-						  <div class="col-6 col-sm-4 participants__number p-1">
-									<div class="participants__choice p-3">
-										 @if(($participant->from) && ($participant->to)== null)
-										    <p>{{$participant->from}}+</p>
-										 @else
-										    <p>{{$participant->from}}-{{$participant->to}}</p>
-										 @endif
-
-
-										@if(($participant->cost)!= 0)
-										   <p>{{$participant->cost}}</p>
-										@else
-										   <p>Free</p>
-										@endif
-									</div>
+							<div class="modal-content">
+								<div class="modal-header justify-content-center">
+									<h1>No. of participants</h1>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
 								</div>
-						  @endforeach
+						  	<div class="modal-body row no-gutters participants">
+								@foreach($bands as $band)
+									@if(($band->band_type)== "participants costs")
+										<div class="col-6 col-sm-4 participants__number p-1">
+											<div class="participants__choice p-3">
+												@if(($band->from) && ($band->to)== null)
+													<p>{{$band->from}}+</p>
+												@else
+													<p>{{$band->from}}-{{$band->to}}</p>
+												@endif
+
+
+												@if(($band->cost)!= 0)
+												<p>{{$band->cost}}</p>
+												@else
+												<p>Free</p>
+												@endif
+											</div>
+										</div>
+									@endif
+								@endforeach
 								
-						  </div>
-						  <div class="modal-footer justify-content-center row no-gutters">
-							<div class="col-md-3">
-								<button type="button" class="d-block btn btn-primary"data-dismiss="modal">Save</button>
+						  	</div>
+							<div class="modal-footer justify-content-center row no-gutters">
+								<div class="col-md-3">
+									<button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
+								</div>
 							</div>
-						  </div>
 						</div>
 					  </div>
 					</div>
