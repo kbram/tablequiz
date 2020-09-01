@@ -24,7 +24,7 @@ class QuizRound extends Model
     }
      public function questions()
      {
-         return $this->hasMany('App\Models\GlobalQuestion');
+         return $this->hasMany('App\Models\Question');
      }
    
      public function getImage()
