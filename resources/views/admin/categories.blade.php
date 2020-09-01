@@ -10,44 +10,44 @@
 				
 				<ul class="list-unstyled m-0 p-0 text-sm-center text-lg-left">
 					<li>
-						<a href="../admin/home">
+						<a href="/admin/home">
 							<span><i class="fas fa-home"></i></span>
 							Overview
 						</a>
 					</li>
 					<li>
-						<a href="../admin/quizzes">
+						<a href="/admin/quizzes">
 							<span><i class="fas fa-briefcase"></i></span>
 							Quizzes
 						</a>
 					</li>
 					<li>
-						<a href="../admin/users">
+						<a href="/admin/users">
 							<span><i class="fas fa-users"></i></span>
 							Users
 						</a>
 					</li>
 					<li>
-						<a href="../admin/financials">
+						<a href="/admin/financials">
 							<span><i class="fas fa-coins"></i></span>
 							Financials
 						</a>
 					</li>
 					<li class="active">
-						<a href="../admin/categories">
+						<a href="#">
 							<span><i class="fas fa-th-large"></i></span>
 							Categories
 						</a>
 					</li>
 					<li>
-						<a href="../admin/questions">
+						<a href="/admin/questions">
 							<span><i class="fas fa-question-circle"></i></span>
 							Questions
 						</a>
 					</li>
 					
 				</ul>
-				<a href="../quiz/setup" class="btn btn-primary hasPlus d-block">New Quiz</a>
+				<a href="/quiz/setup" class="btn btn-primary hasPlus d-block">New Quiz</a>
 			</div>
 		</aside>
 		
@@ -83,7 +83,7 @@
 									<input type="file" class="orange_text form-control-file" id="upload__category__image" name="upload__category__image" value="Upload"></label>
 								</div>
 							
-								</div>
+							</div>
 							<hr>
 							<div class="row justify-content-center">
 								<div class="col-4">
@@ -111,16 +111,21 @@
 							  	@foreach($categories as $category)
                                         <tr>
                                             <td>{{$category->category_name}}</td>
-											<td>{{$category->created_at}}</td>
+											<td>{{date('d/m/Y', strtotime($category->created_at))}}</td>
+
                                             <td class="quiz_actions d-flex flex-row justify-content-lg-center">
 												<div class="d-flex flex-column">
 													<i class="fas fa-pencil-alt"></i>
-													<span>Edit</span>
+													<a href="{{ URL::to('admin/categories/edit/'.$category->id)}}"><span>Edit</span></a>
 												</div>									
+												
+												<form method="POST" action="/admin/categories/{{$category->id}}" class="p-0">
+												{{ csrf_field() }}	
 												<div class="d-flex flex-column">
-													<i class="fas fa-times-circle"></i>
-													<span>Delete</span>
+												<i class="fas fa-times-circle" ></i><span class="delete">Delete</span>
 												</div>
+											</form>
+												
 											</td>
                                             
                                         </tr>
@@ -146,5 +151,5 @@
 @endsection
 
 @section('footer_scripts')
-
+@include('scripts.delete-model')
 @endsection

@@ -6,16 +6,14 @@ use App\Models\GlobalQuestion;
 use App\Models\QuizCategory;
 use App\Models\GlobalQuestionMedia;
 use App\Models\GlobalAnswer;
-use Validator;
-use Illuminate\Support\Facades\DB;
-
-use File;
-
+use Illuminate\Http\Request;
+use App\Models\Question;
 use Illuminate\Http\Response;
+use DB;
+use Validator;
+use File;
 use Illuminate\Database\Eloquent\Model;
 
-
-use Illuminate\Http\Request;
 
 class AdminQuestionController extends Controller
 {
@@ -42,37 +40,46 @@ class AdminQuestionController extends Controller
      */
     public function store(Request $request)
     {
-                
      $validator = Validator::make( $request->all(),
      [   
         'category__type'    => 'required',
         'question__type'    => 'required',
         'question'          => 'required', 
         'time__limit'       => 'required',                         
+    
      ]);
-     if($request->input('question__type') == 'standard__question'){
-         
-          $validator = Validator::make($request->all(),
-          [
-            'standard__question__answer'   => 'required',
-          ]);
-        }
-     elseif($request->input('question__type') == 'multiple__choice__question'){
 
+     if($request->input('question__type') == 'standard__question'){
           $validator = Validator::make($request->all(),
           [
-             'multiple__choice__answer__1'   => 'required',
+            
+            'standard__question__answer'   => 'required',
+
           ]);
-        }
+          }
+
+
+    //  elseif($request->input('question__type') == 'multiple__choice__question'){
+
+    //       $validator = Validator::make($request->all(),
+    //       [
+    //          'multiple__choice__answer__1'   => 'required',
+    //       ]);
+    //     }
     elseif($request->input('question__type') == 'numeric__question'){
           $validator = Validator::make($request->all(),
           [
+
              'numeric__question__answer'   => 'required',
           ]);
         }
+
+
      if ($validator->fails()) {
+
           return back()->withErrors($validator)->withInput();
         }
+
             
          // Creating new global question 
         $question = new GlobalQuestion;
@@ -204,19 +211,32 @@ class AdminQuestionController extends Controller
                 $answer->answer_stat         = true;
             }
 
-            else if($question->question_type == 'multiple__choice__question'){
+            else if($request->question__type == 'multiple__choice__question'){
               
-                $global_answer= $request->input('multiple__choice__answer__1');
-                //               for($i = 0 ; $i < 5 ; $i++)
-                {                
-                     $answer_get= $global_answer;
+                $arr=$request->multiple__choice__answer__1;
+                $ca=$request->multiple__choice__correct__answer;
+            
+                
+                for($i = 0 ; $i < count($arr) ; $i++)
+                {     
+                    $answer = new GlobalAnswer;
+                      if($ca==$i){
+                        $answer->answer_stat= true;
+                       
+                      }
+                            
+                     $answer->answer= $arr[$i];
+                     $answer->question_id=$question_id;
+                     $answer->save();
+                   
+                 
                 }
-
-                $answer    = new GlobalAnswer;
-                $answer->answer              = $answer_get;
-                $answer->answer_stat         = true;
                
-             }
+             
+            }
+                
+                 
+           
             
             else if($question->question_type == 'numeric__question'){
                     
@@ -489,4 +509,50 @@ class AdminQuestionController extends Controller
 
           return redirect()->action( 'AdminQuestionController@create');    
        } 
- }
+       public function search(Request $request)
+       {
+         
+           $searchTerm = $request->input('question_search_box');
+           $searchRules = [
+               'question_search_box' => 'required|string|max:255',
+           ];
+           $searchMessages = [
+               'question_search_box.required' => 'Search term is required',
+               'question_search_box.string'   => 'Search term has invalid characters',
+               'question_search_box.max'      => 'Search term has too many characters - 255 allowed',
+           ];
+   
+           $validator = Validator::make($request->all(), $searchRules, $searchMessages);
+   
+           if ($validator->fails()) {
+               return response()->json([
+                   json_encode($validator),
+               ], Response::HTTP_UNPROCESSABLE_ENTITY);
+           }
+   
+           $results = GlobalQuestion::where('id', 'like', $searchTerm.'%')
+                            ->orWhere('question', 'like', $searchTerm.'%')->get();
+   
+   
+           return response()->json([
+               json_encode($results),
+           ], Response::HTTP_OK);
+           
+       }
+ 
+ 
+  
+    public function destroy($id)
+  {
+    
+    $question = GlobalQuestion::find($id);
+
+    if ($question->id) {
+      $question->delete();
+
+      return redirect('/admin/questions')->with('success','Delete successfully');
+    }
+
+    return back()->with('error', 'Question is not deleted');
+  }
+}

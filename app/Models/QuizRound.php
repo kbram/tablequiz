@@ -16,6 +16,7 @@ class QuizRound extends Model
         'quiz_id',
         'round_name',
         'round_slug',
+
     ];
 
     public function quizzes()
@@ -25,12 +26,14 @@ class QuizRound extends Model
      public function questions()
      {
          return $this->hasMany('App\Models\Question');
+         return $this->hasMany('App\Models\MasterQuestion');
      }
    
      public function getImage()
     {
         return $this->hasOne('App\Models\QuizRoundImage');
     } 
+
 
 }
 

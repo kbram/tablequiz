@@ -1,6 +1,7 @@
 @extends('layouts.tablequizapp')
 
 @section('content')
+
 <style>
 .abouthead{
     color:#7544C1;
@@ -74,6 +75,7 @@ display:none;
 		</article>
 	</div>
 	</div>	
+
 </section>
 @endsection
 

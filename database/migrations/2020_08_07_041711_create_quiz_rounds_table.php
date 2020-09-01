@@ -18,7 +18,7 @@ class CreateQuizRoundsTable extends Migration
             $table->bigInteger('quiz_id')->unsigned();
             $table->foreign('quiz_id')->references('id')->on('quizzes')->onDelete('cascade');
             $table->string('round_name');
-            $table->string('round_slug');
+            $table->text('round_slug');
             $table->timestamps();
         });
         

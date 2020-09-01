@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Quiz;
 use App\Models\QuizRound;
 use App\Models\GlobalQuestion;
@@ -29,26 +30,31 @@ class DashboardController extends Controller
     }
 
     public function index(){
-        $quizzes=Auth::user()->quizzes()->get();
        
+        $quizzes=Auth::user()->quizzes()->get();
+            
         foreach($quizzes as $quiz)
         { 
-           // dd($quizzes);
 
             $roundCount[$quiz->id]=$quiz->rounds()->count();
 
             $questionCounts[$quiz->id]=$quiz->questions()->count();
         }
-        
+
         return view('dashboard.home',compact('quizzes','roundCount','questionCounts'));
     }
 
-       public function setting(){
-           
-        return view('dashboard.settings');
+    public function myQuiz(){
+        return view('dashboard.my-quizzes');
+    }
+
+    public function setting(){
+
+        $user = auth()->user();
+        
+        return view('dashboard.settings',compact('user'));
     }
 
 
     
  }
-

@@ -17,7 +17,7 @@
 						<label for="quiz__name">Quiz name</label>
 					</div>
 					<div class="col-md-8">
-						<input autocomplete="nothanks" type="text" name="quiz__name" class="form-control" value="{{ ($quiz->quiz_name != '' ? $quiz->quiz_name : '') }}">
+						<input autocomplete="nothanks" type="text" name="quiz__name" class="form-control" value="{{ ($quiz->quiz__name != '' ? $quiz->quiz__name : '') }}">
 					</div>
 				</div>
 <!-- QUIZ PASSWORD -->
@@ -70,12 +70,15 @@
 						  <div class="modal-body">
 							<div class="modal__edit__image">
 								<div class="modal__edit__image__mask"></div>
-								<img class="modal__edit__image__image" src="{{ $image }}" id="image_preview_container" name="image_preview_container">
+								<div class="modal__edit__size" id="img-wrapper">
+								<img class="modal__edit__image__image imagePreview" src="{{ $image }}" id="image_preview_container" name="image_preview_container" style="display:block;margin-left:auto;margin-right:auto;">
+								</div>
+
 							</div>
 							<div class="modal__edit__image__range">
 								<div class="form-group">
-									<label for="formControlRange">Edit size</label>
-									<input type="range" class="form-control-range" id="formControlRange">
+									<label for="formControlRangesize">Edit size</label>
+									<input type="range" class="form-control-range formControlRange "  id="formControlRange" name="formControlRange" min="1" max="100">
 									<div id="demo" class="d-none"></div>
 								  </div>
 							</div>
@@ -83,7 +86,7 @@
 						  <div class="modal-footer justify-content-center row no-gutters">
 							 <div class="col-md-3"> 
 								 <label class="d-block" for="upload__quiz__icon">Upload 
-									<input type="file" class="form-control-file" name="upload__quiz__icon"  id="upload__quiz__icon"  value="Upload">
+									<input type="file" class="form-control-file imagePreviewInput" name="upload__quiz__icon"  id="upload__quiz__icon"  value="Upload">
 								</label>
 							</div>
 							<div class="col-md-3">

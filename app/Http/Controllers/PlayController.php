@@ -51,8 +51,9 @@ class PlayController extends Controller
 
 
     //check team already registed
-     if(QuizTeam::where('team_name', $request->input('quiz__team'))->first())
-     {
+    if(QuizTeam::where('team_name', $request->input('quiz__team'))->where('quiz_id',$id)->first())
+    {
+
         Session::put('failteam','team already join for this quiz');
 
         return redirect('startquiz-team/'.$quiz->id);
@@ -74,6 +75,7 @@ class PlayController extends Controller
     return view('play.play-quiz',compact('quiz','roundCount'));    
  }   
 }
+
 
 else{
     Session::put('fail','password incorrect');
@@ -125,8 +127,7 @@ else{
     public function errorpassword($id)
     {   
         $quiz=Quiz::where('id',$id)->first();
-        $image=QuizSetupIcon::where('id',$quiz->id)->first()->local_path;
-
+        $image=QuizSetupIcon::where('quiz_id',$quiz->id)->first()->local_path;
             $roundCount=$quiz->rounds()->count();
             $questionCounts=$quiz->questions()->count();
         return view('play.start-quiz',compact('quiz','roundCount','questionCounts','image'));
@@ -135,7 +136,7 @@ else{
     public function errorteam($id)
     {   
         $quiz=Quiz::where('id',$id)->first();
-        $image=QuizSetupIcon::where('id',$quiz->id)->first()->local_path;
+        $image=QuizSetupIcon::where('quiz_id',$quiz->id)->first()->local_path;
 
             $roundCount=$quiz->rounds()->count();
             $questionCounts=$quiz->questions()->count();
@@ -146,7 +147,7 @@ else{
     public function selecturl($quiz_name){
 
         $quiz=Quiz::where('quiz_link',$quiz_name)->first();
-        $image=QuizSetupIcon::where('id',$quiz->id)->first()->local_path;
+        $image=QuizSetupIcon::where('quiz_id',$quiz->id)->first()->local_path;
 
 
         $roundCount=$quiz->rounds()->count();
@@ -214,5 +215,3 @@ public function answer(Request $request){
 }
 
 }
-
-

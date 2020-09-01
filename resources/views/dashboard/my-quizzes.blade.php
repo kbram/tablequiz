@@ -43,7 +43,8 @@
 									<th>Quiz name</th>
 									<th>Rounds</th>
 									<th>Questions</th>
-									<th class="text-right">Actions</th>
+									<th class="d-none">Quiz Link</th>
+									<th class="text-center">Actions</th>
 								</tr>
 							</thead>
 							<tbody id="users">
@@ -51,20 +52,20 @@
 
 							<tr>
                                     
-									 <td>{{$quiz->quiz_name}}</td>
+									 <td>{{$quiz->quiz__name}}</td>
 									 <td>{{$roundCount[$quiz->id]}}</td>
  									 <td>{{$questionCounts[$quiz->id]}}</td>
-
+									  <td class="d-none" id="quizLink{{$quiz->id}}">{{$quiz ->quiz_link}}</td>
  
-									<td class="quiz_actions d-flex flex-row justify-content-lg-end">
-										<a href="quizzes/{{$quiz->id}}/edit">			
+									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
+										<a href="{{ URL::to('quizzes/'. $quiz->id .'/edit') }}">			
 										<div class="d-flex flex-column pl-0 pl-md-4">
 											<i class="fas fa-edit"></i>
 											<span>Edit</span>
 										</div></a>
 										<div class="d-flex flex-column">
 											<i class="fas fa-share-alt"></i>
-											<span>Share</span>
+											<span class="share" id="{{$quiz->id}}">Share</span>
 										</div>
 										<a href="/quiz/start_quiz">
 											<div class="d-flex flex-column">
@@ -91,5 +92,7 @@
 </style>
 @endsection
 @section('footer_scripts')
+@include('scripts.quiz-icon-preview')
+@include('scripts.share-quiz')
 @endsection
 

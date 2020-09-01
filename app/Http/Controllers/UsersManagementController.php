@@ -36,10 +36,17 @@ class UsersManagementController extends Controller
             $users = User::paginate(config('usersmanagement.paginateListSize'));
         } else {
             $users = User::all();
+            foreach($users as $user){
+                $quizcount[$user->id] =$user->quizzes()->count();
+                $questioncount[$user->id] =$user->questions()->count();
+           
+                
+             }
         }
         $roles = Role::all();
 
-        return View('usersmanagement.show-users', compact('users', 'roles'));
+        return View('usersmanagement.show-users', compact('users', 'roles','quizcount','questioncount'));
+       
     }
 
     /**
@@ -267,21 +274,41 @@ class UsersManagementController extends Controller
                 json_encode($validator),
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
+        $users = User::all();
+        foreach($users as $user){
+            $quizcount[$user->id] =$user->quizzes()->count();
+            $questioncount[$user->id] =$user->questions()->count();
+       
+            
+         }
 
-        $results = User::where('id', 'like', $searchTerm.'%')
+        $users = User::where('id', 'like', $searchTerm.'%')
                             ->orWhere('name', 'like', $searchTerm.'%')
                             ->orWhere('email', 'like', $searchTerm.'%')->get();
+        
+        
+        
+                            foreach($users as $user){
+                                $quizcount =$user->quizzes()->count();
+                                $questioncount =$user->questions()->count();
+                           $user['quizcount'] = $quizcount;
+                           $user['questioncount'] =  $questioncount;
 
-        // Attach roles to results
-        foreach ($results as $result) {
-            $roles = [
-                'roles' => $result->roles,
-            ];
-            $result->push($roles);
-        }
+                                
+                             }
+        
+        
+                            // Attach roles to results
+        // foreach ($results as $result) {
+        //     $roles = [
+        //         'roles' => $result->roles,
+        //     ];
+        //     $result->push($roles);
+        // }
 
         return response()->json([
-            json_encode($results),
+            json_encode($users),
         ], Response::HTTP_OK);
     }
+
 }

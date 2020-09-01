@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 use App\Models\Quiz;
+use App\Models\QuizCategory;
+use Illuminate\Support\Facades\Storage;
+
+
 use App\Models\UserPayment;
-
-
+use App\Models\Participant;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use App\Models\User;
+
 use Validator;
 use Auth;
 
@@ -17,9 +23,14 @@ use App\Models\QuizSetupIcon;
 
 class QuizController extends Controller
 {
+    public function index(){
+        $quizzes = Quiz::all();
+        
+        return view('admin.quizzes',compact('quizzes'));
+    }
     public function create()
-    {
-        return view('quiz.setup');
+    {    $participants=Participant::all();
+        return view('quiz.setup',compact('participants'));
     }
 
     /**
@@ -30,6 +41,7 @@ class QuizController extends Controller
      */
     public function store(Request $request)
         {
+
         $validator = Validator::make($request->all(),
         [
           'quiz__name'                => 'required|unique:quizzes',
@@ -65,21 +77,18 @@ class QuizController extends Controller
             $save_path1 = '/storage/quizicon/'.$quiz_id.'/quiz_icon/';
 
             $save_path = storage_path('app/public'). '/quizicon/'.$quiz_id.'/quiz_icon/';
-            $save_path_thumb = storage_path('app/public').'/quizicon/'.$quiz_id.'/quiz_icon/'.'/thumb/';
 
             // $path = $save_path . $filename;
             // $path_thumb    = $save_path_thumb . $filename;
 
             $public_path = storage_path('app/public'). '/quizicon/'.$quiz_id.'/quiz_icon/'.$filename;
-            $public_path_thumb= storage_path('app/public'). '/quizicon/'.$quiz_id.'/quiz_icon/'.'/thumb/'.$filename;
 
             //resize the image            
 
             // Make the user a folder and set permissions
             File::makeDirectory($save_path, $mode = 0755, true, true);
-            File::makeDirectory($save_path_thumb, $mode = 0755, true, true);
 
-            Image::make($quiz_icon)->resize(250,250)->save($save_path_thumb.$filename);
+            // Image::make($quiz_icon)->resize(250,250)->save($save_path_thumb.$filename);
 
             $quiz_icon->move($save_path, $filename);            
     
@@ -88,7 +97,6 @@ class QuizController extends Controller
             $quizIcon->public_path       = $public_path;
             $quizIcon->local_path        = $save_path1 . '/' . $filename;
             $quizIcon->quiz_id           =$quiz_id;
-            $quizIcon->thumb_path        = $public_path_thumb;
 
            $quizIcon->save();
 
@@ -98,30 +106,67 @@ class QuizController extends Controller
             $save_path1 = '/storage'; 
             $save_path = storage_path('app/public');
             $public_path = storage_path('app/public');
-            $public_path_thumb= storage_path('app/public').'/thumb';
 
             $quizIcon = new QuizSetupIcon;
 
             $quizIcon->public_path       = $public_path;
             $quizIcon->local_path        = $save_path1 . '/' . $filename;
             $quizIcon->quiz_id           =$quiz_id;
-            $quizIcon->thumb_path        = $public_path_thumb;
 
             $quizIcon->save();
 
            }
        
-       return view('quiz.add_round');
-    
-    }
+           $cat = QuizCategory::all();
 
+           return view('quiz.add_round',compact('cat'));    
+    }
+    public function search(Request $request)
+    {
+        $searchTerm = $request->input('quiz_search_box');
+    
+        $searchRules = [
+            'quiz_search_box' => 'required|string|max:255',
+        ];
+        $searchMessages = [
+            'quiz_search_box.required' => 'Search term is required',
+            'quiz_search_box.string'   => 'Search term has invalid characters',
+            'quiz_search_box.max'      => 'Search term has too many characters - 255 allowed',
+        ];
+
+        $validator = Validator::make($request->all(), $searchRules, $searchMessages);
+
+        if ($validator->fails()) {
+            return response()->json([
+                json_encode($validator),
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        $quizzes = Quiz::where('id', 'like', $searchTerm.'%')
+                            ->orWhere('quiz__name', 'like', $searchTerm.'%')->get();
+                            
+                            foreach($quizzes as $quiz){
+                                $user= User::where('id', $quiz->user_id)->value('name'); 
+                                $roundCount=$quiz->rounds()->count();
+                                $questionCounts=$quiz->questions()->count();
+                                $quiz['username'] = $user;
+                                $quiz['roundcount'] = $roundCount;
+                                $quiz['questioncount'] =  $questionCounts;
+
+
+                            }
+
+        return response()->json([
+            json_encode($quizzes),
+        ], Response::HTTP_OK);
+        
+    }
 
     public function editQuiz($id){
 
         $quiz = Quiz::find($id);    
 
         $image=$quiz->icon()->first()->local_path;
-        // dd($image);
         return view('quiz.edit-setup',compact('quiz','image'));
         
     }
@@ -140,9 +185,11 @@ class QuizController extends Controller
             return back()->withErrors($validator)->withInput();
         }
 
-   
+        $quiz = Quiz::find($id);    
+
             $quiz -> quiz__name              = $request->input('quiz__name');
             $quiz -> quiz_password          = $request->input('quiz__password');
+            $quiz -> quiz__name              = $request->input('quiz__name');
             $quiz -> quiz_link              = $request->input('quiz__link');
             $quiz-> no_of_participants     =  $request->input('quiz__participants');
             $quiz-> user_id = auth()->id();
@@ -151,6 +198,8 @@ class QuizController extends Controller
             $quiz_id=Quiz::where('quiz__name',$quiz -> quiz__name)->first()->id;
 
             if ($request->hasFile('upload__quiz__icon')) {
+                
+
  
                 $quiz_icon = $request->file('upload__quiz__icon');
     
@@ -158,7 +207,6 @@ class QuizController extends Controller
                 $save_path1 = '/storage/quizicon/'.$quiz_id.'/quiz_icon/';
     
                 $save_path = storage_path('app/public'). '/quizicon/'.$quiz_id.'/quiz_icon/';
-                $save_path_thumb = storage_path('app/public').'/quizicon/'.$quiz_id.'/quiz_icon/'.'/thumb/';
 
 
     
@@ -166,26 +214,25 @@ class QuizController extends Controller
                 // $path_thumb    = $save_path_thumb . $filename;
     
                 $public_path = storage_path('app/public'). '/quizicon/'.$quiz_id.'/quiz_icon/'.$filename;
-                $public_path_thumb= storage_path('app/public'). '/quizicon/'.$quiz_id.'/quiz_icon/'.'/thumb/'.$filename;
                 
     
                 //resize the image            
     
                 // Make the user a folder and set permissions
                 File::makeDirectory($save_path, $mode = 0755, true, true);
-                File::makeDirectory($save_path_thumb, $mode = 0755, true, true);
     
-                Image::make($quiz_icon)->resize(250,250)->save($save_path_thumb.$filename);
+                // Image::make($quiz_icon)->resize(250,250)->save($save_path_thumb.$filename);
     
                 $quiz_icon->move($save_path, $filename);       
                 
-           
+                if(Storage::exists($public_path)) {
+                    unlink($public_path); 
+                 }
                 $quizIcon = QuizSetupIcon::findorfail($id);    
 
                 $quizIcon->public_path       = $public_path;
                 $quizIcon->local_path        = $save_path1 . '/' . $filename;
                 $quizIcon->quiz_id           =$quiz_id;
-                $quizIcon->thumb_path        = $public_path_thumb;
                $quizIcon->save();
                } 
 
@@ -203,13 +250,14 @@ class QuizController extends Controller
         return view('quiz.slider');
     }
 
-    public function add_round()
+   /* public function add_round()
     {
         $pub_key = Config::get('stripe.stripe_key');
 
         $payment_deatils = UserPayment::where('user_id', Auth::id())->first();
         return view('quiz.add_round', compact('pub_key','payment_deatils'));
     }
+    */
 
     public function add_round_2()
     {
@@ -217,7 +265,8 @@ class QuizController extends Controller
     }
 
     public function setup()
-    {
-        return view('quiz.setup');
+    {    
+        $participants=Participant::all();
+        return view('quiz.setup',compact('participants'));
     }
 }

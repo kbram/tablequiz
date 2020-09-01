@@ -10,37 +10,37 @@
 				
 				<ul class="list-unstyled m-0 p-0 text-sm-center text-lg-left">
 					<li>
-						<a href="../admin/home">
+						<a href="/admin/home">
 							<span><i class="fas fa-home"></i></span>
 							Overview
 						</a>
 					</li>
 					<li>
-						<a href="../admin/quizzes">
+						<a href="/admin/quizzes">
 							<span><i class="fas fa-briefcase"></i></span>
 							Quizzes
 						</a>
 					</li>
 					<li class="active">
-						<a href="../admin/users">
+						<a href="">
 							<span><i class="fas fa-users"></i></span>
 							Users
 						</a>
 					</li>
 					<li>
-						<a href="../admin/financials">
+						<a href="/admin/financials">
 							<span><i class="fas fa-coins"></i></span>
 							Financials
 						</a>
 					</li>
 					<li>
-						<a href="../admin/categories">
+						<a href="/admin/categories">
 							<span><i class="fas fa-th-large"></i></span>
 							Categories
 						</a>
 					</li>
 					<li>
-						<a href="../admin/questions">
+						<a href="/admin/questions">
 							<span><i class="fas fa-question-circle"></i></span>
 							Questions
 						</a>
@@ -59,9 +59,9 @@
 							<h2>Users</h2>
 						</div>
 						<div class="col-lg-3">
-							<form action="" method="" class="p-0">
-								<input type="text" list="quizzes" name="quiz" placeholder="Search..." class="form-control mb-2 mt-n2">	
-							</form>
+						@if(config('usersmanagement.enableSearchUsers'))
+								@include('partials.search-user-form')
+							@endif
 						</div>
 					</div>
 					
@@ -76,35 +76,77 @@
 									<th class="text-center">Actions</th>
 								</tr>
 							</thead>
-							<tbody>
-								
-					               @foreach($users as $user)
+							<tbody id="users_table">
+
+								   @foreach($users as $user)
+								   @if ($user->is_blocked)
 								<tr>
 									<td>{{$user->name}}</td>
 									<td>{{$quizcount[$user->id]}}</td>
 									<td>{{$questioncount[$user->id]}}</td>
+
+
 									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column pl-0">
+
+										<div class="d-flex flex-column pl-0"  style=" pointer-events: none;opacity: 0.4;">
+
 											<i class="far fa-eye"></i>
+	
+											
 											<span><a href="{{route('userquizzes',$user->id)}}" data-toggle="tooltip" title="View Qs">
-											         View Qs
-                                                </a></span>
-										</div>							
-							    		<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
+										         View Qs</a></span>
 										</div>
 
-										<!-- <div class="d-flex flex-column">
-											<i class="fas fa-envelope"></i>
-											<span>Message</span>
-										</div> -->
 
-									</td>
+										<form method="POST" action="/admin/home/un-blockuser/{{$user->id}}" class="p-0">
+										      @csrf
+											<div class="d-flex flex-column" >
+												<i class="fas fa-times-circle"></i>
+												<span class="blockuser" id="block{{$user->id}}">un-block</span>
+											</div>
+										</form>
+
+										</td>
 								</tr>
+
+								@else
+								<tr>
+									<td>{{$user->name}}</td>
+									<td>{{$quizcount[$user->id]}}</td>
+									<td>{{$questioncount[$user->id]}}</td>
+
+
+									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
+
+										<div class="d-flex flex-column pl-0">
+
+											<i class="far fa-eye"></i>
+	
+											
+											<span><a href="{{route('userquizzes',$user->id)}}" data-toggle="tooltip" title="View Qs">
+										         View Qs</a></span>
+										</div>
+
+
+										<form method="POST" action="/admin/home/blockuser/{{$user->id}}" class="p-0">
+										             @csrf
+											<div class="d-flex flex-column">
+												<i class="fas fa-times-circle"></i>
+												<span class="blockuser" id="block{{$user->id}}">block</span>
+											</div>
+										</form>
+
+										</td>
+								</tr>
+
+
+                                @endif  
 								@endforeach
-								
-						      </tbody>
+							</tbody>
+							<tbody id="users_table"></tbody>
+							@if(config('usersmanagement.enableSearchUsers'))
+								<tbody id="search_results"></tbody>
+							@endif
 							<tfoot>
 								<tr>
 									
@@ -123,5 +165,9 @@
 @endsection
 
 @section('footer_scripts')
-
+@include('scripts.message')
+@include('scripts.block-user')
+@if(config('usersmanagement.enableSearchUsers'))
+        @include('scripts.search-user')
+@endif
 @endsection
