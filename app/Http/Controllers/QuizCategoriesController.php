@@ -138,7 +138,7 @@ class QuizCategoriesController extends Controller
         
                 }
                
-               return redirect()->back();
+               return redirect('admin/categories');
   }
   public function destroy($id)
   {
