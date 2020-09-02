@@ -40,50 +40,66 @@ class AdminQuestionController extends Controller
      */
     public function store(Request $request)
     {
+
+    //  dd($request);
+
+
      $validator = Validator::make( $request->all(),
      [   
         'category__type'    => 'required',
         'question__type'    => 'required',
-        'question'          => 'required', 
-        'time__limit'       => 'required',                         
-    
+         
      ]);
+      if ($validator->fails()) {
+         return back()->withErrors($validator)->withInput();
+       }
 
      if($request->input('question__type') == 'standard__question'){
+      // dd($request);
           $validator = Validator::make($request->all(),
           [
-            
+            'category__type'               => 'required',
             'standard__question__answer'   => 'required',
-
+            'question'                     => 'required', 
           ]);
+          if ($validator->fails()) {
+                 return back()->withErrors($validator)->withInput();
+        }
           }
+       elseif($request->input('question__type') == 'multiple__choice__question'){
 
-
-    //  elseif($request->input('question__type') == 'multiple__choice__question'){
-
-    //       $validator = Validator::make($request->all(),
-    //       [
-    //          'multiple__choice__answer__1'   => 'required',
-    //       ]);
-    //     }
+            $validator = Validator::make($request->all(),
+            [   
+              'category__type'                 => 'required',
+               'multiple__choice__answer__1'   => 'required',
+               'question'                      => 'required', 
+            ]);
+            if ($validator->fails()) {
+              return back()->withErrors($validator)->withInput();
+          }
+      }
     elseif($request->input('question__type') == 'numeric__question'){
+      
           $validator = Validator::make($request->all(),
-          [
-
-             'numeric__question__answer'   => 'required',
-          ]);
-        }
-
-
-     if ($validator->fails()) {
-
-          return back()->withErrors($validator)->withInput();
-        }
-
+          [ 
             
+            'category__type'               => 'required',
+            'numeric__question__answer'    => 'required',
+            'question'                     => 'required', 
+          ]);
+          if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+          }
+        }
+
+
+           
+
          // Creating new global question 
+        $cat_id = QuizCategory::where('category_name',$request->category__type)->first()->id; 
+       
         $question = new GlobalQuestion;
-        $question->category_id         = $request->input('category__type');
+        $question->category_id         = $cat_id;
         $question->question_type       = $request->input('question__type');
         $question->question            = $request->input('question');
         $question->time_limit          = $request->input('time__limit'); 
@@ -228,17 +244,10 @@ class AdminQuestionController extends Controller
                      $answer->answer= $arr[$i];
                      $answer->question_id=$question_id;
                      $answer->save();
-                   
-                 
-                }
-               
-             
-            }
+                   }
+               }
                 
-                 
-           
-            
-            else if($question->question_type == 'numeric__question'){
+                else if($question->question_type == 'numeric__question'){
                     
                     $answer     = new GlobalAnswer;
                     $answer->answer         = $request->input('numeric__question__answer');

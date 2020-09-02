@@ -79,10 +79,10 @@
 								<div class="col-md-4">
 
 								<select name="category__type" id="category__type" class="form-control" >
-                                                @foreach($categories as $category)
-                                                    <option value="{{$category->id }}" value="show" >{{ $category->category_name }}</option>
-													
-                                                @endforeach
+							    <option value="{{(old('category__type') ?? '')}}" selected >{{(old('category__type') != '' ? old('category__type') : 'Please Choose...')}}</option>
+                                @foreach($categories as $category)
+						           <option value="{{$category->category_name }}" value="show">{{ $category->category_name }}</option>
+								@endforeach
                                    	<li class="active">
 						
 					</li>
@@ -110,6 +110,7 @@
 								<div class="col-md-4">
 								
 									<select id="question__type" name="question__type" class="form-control">
+									<option value="{{(old('question__type') ?? '')}}" selected >{{(old('question__type') != '' ? old('question__type') : 'Please Choose...')}}</option>
 									    <option value="standard__question">Standard</option>
 										<option value="multiple__choice__question">Multiple choice</option>
 										<option value="numeric__question">Numeric</option>
@@ -128,7 +129,7 @@
 									<label for="question">Question</label>
 								</div>
 								<div class="col-md-8">
-									<input name="question" type="text" class="form-control" id="question">
+									<input name="question" type="text" class="form-control" id="question" value="{{old('question')}}">
 									@if($errors->has('question'))
                                     <span class="help-block">
                                             <p>{{ $errors->first('question') }}</p>
@@ -289,8 +290,7 @@
 								</div>
 								<div class="col-md-8">
 									<input class="form-control" name="numeric__question__answer" type="number" >
-
-									@if($errors->has('numeric__question__answer'))
+                                      @if($errors->has('numeric__question__answer'))
                                     <span class="help-block">
                                             <p>{{ $errors->first('numeric__question__answer') }}</p>
                                     </span>
