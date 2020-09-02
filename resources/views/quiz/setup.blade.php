@@ -116,13 +116,13 @@
 					</div>
 					<div class="col-md-4">
 						<select id="quiz__participants" class="form-control" name="quiz__participants">
-							<option disabled selected>{{(old('quiz__participants') != '' ? old('quiz__participants') : 'Please Choose...')}}</option>
+							<option disabled selected >{{(old('quiz__participants') != '' ? old('quiz__participants') : 'Please Choose...')}}</option>
 							@foreach($bands as $band)
 								@if(($band->band_type)== "participants costs")
 									@if(($band->to)== null)
-										<option>{{$band->from}}+</option>
+										<option class="{{$band->from}}" value="{{$band->from}}">{{$band->from}}+</option>
 									@else
-										<option>{{$band->from}}-{{$band->to}}</option>
+										<option class="{{$band->from}}-{{$band->to}}" value="{{$band->from}}-{{$band->to}}" >{{$band->from}}-{{$band->to}}</option>
 									@endif
 								@endif
 							@endforeach
@@ -148,11 +148,11 @@
 								@foreach($bands as $band)
 									@if(($band->band_type)== "participants costs")
 										<div class="col-6 col-sm-4 participants__number p-1">
-											<div class="participants__choice p-3">
-												@if(($band->from) && ($band->to)== null)
-													<p>{{$band->from}}+</p>
+											<div class="participants__choice p-3" >
+												@if(($band->to)== null)
+													<input type="text" hidden class="participant" value="{{$band->from}}+" >{{$band->from}}+</input>
 												@else
-													<p>{{$band->from}}-{{$band->to}}</p>
+													<input type="text" hidden class="participant" value="{{$band->from}}-{{$band->to}}" >{{$band->from}}-{{$band->to}}</input>
 												@endif
 
 
@@ -166,12 +166,12 @@
 									@endif
 								@endforeach
 								
-						  	</div>
-							<div class="modal-footer justify-content-center row no-gutters">
-								<div class="col-md-3">
-									<button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
-								</div>
+						  </div>
+						  <div class="modal-footer justify-content-center row no-gutters">
+							<div class="col-md-3">
+								<button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
 							</div>
+						  </div>
 						</div>
 					  </div>
 					</div>
@@ -189,10 +189,26 @@
 		</article>
 	</div>
 	</section>
+
+	
 	
 @endsection
 
 @section('footer_scripts')
+<script>    
+
+$('.participants__choice').click(function() {
+
+var val =$(this).find('.participant').val();
+
+$('#quiz__participants option[value='+val+']').attr("selected",true).change();
+
+
+});
+
+		
+</script>
 @include('scripts.quiz-icon-preview')
+
 
 @endsection
