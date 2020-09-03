@@ -168,9 +168,10 @@ class QuizController extends Controller
     public function editQuiz($id){
 
         $quiz = Quiz::find($id);    
+        $bands=PriceBand::all();
 
         $image=$quiz->icon()->first()->local_path;
-        return view('quiz.edit-setup',compact('quiz','image'));
+        return view('quiz.edit-setup',compact('quiz','image', 'bands'));
         
     }
     public function update(Request $request,$id)
