@@ -23,11 +23,11 @@ use App\Models\QuizSetupIcon;
 
 class QuizController extends Controller
 {
-    public function index(){
-        $quizzes = Quiz::all();
+    // public function index(){
+    //     $quizzes = Quiz::all();
         
-        return view('admin.quizzes',compact('quizzes'));
-    }
+    //     return view('admin.quizzes',compact('quizzes'));
+    // }
     public function create()
     {    $participants=Participant::all();
         return view('quiz.setup',compact('participants'));

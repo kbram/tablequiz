@@ -198,7 +198,9 @@ Route::get('about_us',function(){
 Route::get('contact_us',function(){
     return view('contact_us');
 });
-Route::post('admin/financials', 'PriceBandsController@update')->name('update');
+Route::post('admin/financials/update', 'PriceBandsController@update')->name('update');
+Route::post('admin/financials/delete','PriceBandsController@destroy')->name('delete');
+
 Route::post('dashboard/user-update', 'UsersManagementController@user_update');
 
 
