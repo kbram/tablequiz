@@ -52,13 +52,35 @@ jQuery(document).ready(function($){
 		$('#modal__signup, #modal__payment').addClass('d-none');
 	})
 	
-	$('.to__checkout').click(function(e){
-		e.preventDefault();
-		$('#modal__login').addClass('d-none');
-		$('#modal__signup').addClass('d-none');
-		$('#modal__payment').removeClass('d-none');
-	})
+	// $('.to__checkout').click(function(e){
+	// 	e.preventDefault();
+		
+	// 	$('#modal__login').addClass('d-none');
+	// 	$('#modal__signup').addClass('d-none');
+	// 	$('#modal__payment').removeClass('d-none');
+	// })
 	
+/**kopi ajax login  */
+
+$('#login-btn').click(function(e) { 
+	e.preventDefault();
+    $.ajax({ 
+        data: $(this).closest('.popupLogIn').serialize(), 
+        type: 'post', 
+        url: $(this).closest('.popupLogIn').attr('action'), 
+        success: function(response) { 
+			$('#modal__login').addClass('d-none');
+			$('#modal__signup').addClass('d-none');
+			$('#modal__payment').removeClass('d-none');
+		},
+		error: function(result,error) {
+			alert('error');
+		   console.log('err'+error);
+		   },
+    });
+    return false;
+});
+
 	// Forms - add another multiple choice Q //
 	$('.multiple__choice__row').each(function(){
 		

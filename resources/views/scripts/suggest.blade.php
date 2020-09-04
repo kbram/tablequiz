@@ -1,12 +1,6 @@
 <script type="text/javascript">
 /**categories */
-var music=0;
-var geography=0;
-var sport=0;
-var histpry=0;
-var technology=0;
-var popular_culture=0;
-var politics=0;
+var category;
 
 /**question types */
 var standard=0;
@@ -37,6 +31,7 @@ var numeric__answer
        
 });
 
+   /****************standard question */
 
 $('body').on('click','.multiple__choice__row__in_modal span',function(){
  $(this).closest('.multiple__choice__row__in_modal').remove();
@@ -47,64 +42,20 @@ $('body').on('click','.suggested_category__icon',function(event){
 });
 
 /************  category start ***************/
-$("#cat1").click(function(e) {
-  e.preventDefault();
-         music+=1;
-      
-
-});
-
-$("#cat2").click(function(e) {
-  e.preventDefault();
-   sport+=2;
- 
-});
-
-$("#cat3").click(function(e) {
-    e.preventDefault();
-    geography+=3;
-    
+$(".suggested__category").click(function(e) {
+          e.preventDefault();
+          category=$(this).attr("id");
     });
 
-    $("#cat4").click(function(e) {
-      e.preventDefault();
-         technology+=4;
-      
-});
 
-$("#cat5").click(function(e) {
-   e.preventDefault();
-         histpry+=5;
-  
-});
-
-$("#cat6").click(function(e) {
-   e.preventDefault();
-         popular_culture+=6;
-            
-});
-
-$("#cat7").click(function(e) {
-         politics+=7;
-             console.log('politics'+politics);
-             
-});
 
    /****************standard question */
 
 $("#standard-q").click(function(e){
       e.preventDefault();
-      //var music_standard;
-      var st=0;
-      st +=music;
-      st+=sport;
-      st+=geography;
-      st+=histpry;
-      st+=technology;
-      st+=politics;
-      st+=popular_culture;
-   
-      if(st>=1 && st<=7)
+      var st=category;
+
+      if(st)
       {
 
     $.ajax({
@@ -115,9 +66,9 @@ $("#standard-q").click(function(e){
         },
         success: function(results) {
            
-           $('#msg'+id).text('updated sucessfully');
+           
            setTimeout(function() {
-        $("#msg"+id).text('')
+       
     }, 1000);
         },
         error: function(result,error) {
@@ -148,7 +99,7 @@ $("#standard-q").click(function(e){
                }
                
 
-            $(".all_suggested_questions").append('<li class="single__suggested__question text-body p-3 border rounded mb-4"><div class="single__suggested__question__image position-relative"><img src='+baseUrl+img_url+' class="w-100"><div class="change__image position-absolute px-4 invisible"><label class="d-block m-0 border-0" for="upload__quiz__icon"><i class="fas fa-edit"></i> Change<input type="file" class="form-control-file" id="upload__quiz__icon" value="Upload"> </label></div></div><div class="single__suggested__question__attributes row pt-3"><div class="col-md-3 text-center d-flex align-items-center justify-content-center"><span class="pr-2"><i class="fa fa-clock"></i></span></div><div class="col-md-9 d-flex align-items-center" style="height:48px"><p class="m-0"><span class="pr-2"><small><input id="time-limit'+get_id+'" class="form-control readonly edit__time__limit" readonly type="text" value="'+time_limit+'">s</small></span>Time-limited</p></div><div class="col-2 col-md-3 text-center d-flex align-items-center justify-content-center pt-2"><span class="pr-2"><i class="fas fa-list-ul"></i></span></div><div class="col-10 col-md-9 d-flex align-items-center"><p class="w-50 pr-0 m-0 pt-2"><select class="pr-5 disabled form-control" disabled id="suggested__question__type'+get_id+'"></select></p></div><div class="col-2 col-md-3 text-center d-flex align-items-center justify-content-center pt-2"><span class="pr-2"><i class="far fa-image"></i></span></div><div class="col-10 col-md-9 d-flex align-items-center"><p class="pr-0 w-50 m-0 pt-2"><select class="disabled form-control pr-5" disabled><option>Image based</option><option>Audio based</option><option>Video based</option><option>Standard Q&amp;A</option></select></p></div> </div><div class="single__suggested__question__question pt-4 row"><p class="col-3"><span class="d-inline-block w-25">Question: </span></p> <p class="col-9 the_question"><input type="text" id="question'+get_id+'" class="form-control readonly get-question" readonly value="'+get_que+'"></p></div><div class="single__suggested__question__answer row pb-3"><div class="offset-3 col-9"><div class="form-row" style="min-height:0"><div class="offset-10 col"><small class="form-text text-center d-none correct_answer_heading">Correct:</small></div></div></div><p class="col-3"><span class="d-inline-block w-25 answers__label">Answers: </span></p><div  class="col-9 the_answer"><div  id="ans'+get_id+'" class=" add-answer align-items-center form-row"><div class="col-10 d-none"><a href="#" class="btn btn-primary d-block">Add answer</a></div></div></div></div><div class="single__suggested__question__footer border-top pt-3 d-flex justify-content-center align-items-center"><button id="'+get_id+'" class="btn btn-primary mr-1 add-question" data-dismiss="modal">Add question</button><button id="edit-kopi" class="btn btn-secondary ml-1 edit__question">Edit question</button></div></li>');
+            $(".all_suggested_questions").append('<li class="single__suggested__question text-body p-3 border rounded mb-4"><div class="single__suggested__question__image position-relative"><img src='+baseUrl+img_url+' id="image'+get_id+'" class="w-100"><div class="change__image position-absolute px-4 invisible"><label class="d-block m-0 border-0" for="upload__quiz__icon"><i class="fas fa-edit"></i> Change<input type="file" class="form-control-file" id="upload__quiz__icon" value="Upload"> </label></div></div><div class="single__suggested__question__attributes row pt-3"><div class="col-md-3 text-center d-flex align-items-center justify-content-center"><span class="pr-2"><i class="fa fa-clock"></i></span></div><div class="col-md-9 d-flex align-items-center" style="height:48px"><p class="m-0"><span class="pr-2"><small><input id="time-limit'+get_id+'" class="form-control readonly edit__time__limit" readonly type="text" value="'+time_limit+'">s</small></span>Time-limited</p></div><div class="col-2 col-md-3 text-center d-flex align-items-center justify-content-center pt-2"><span class="pr-2"><i class="fas fa-list-ul"></i></span></div><div class="col-10 col-md-9 d-flex align-items-center"><p class="w-50 pr-0 m-0 pt-2"><select class="pr-5 disabled form-control" disabled id="suggested__question__type'+get_id+'"></select></p></div><div class="col-2 col-md-3 text-center d-flex align-items-center justify-content-center pt-2"><span class="pr-2"><i class="far fa-image"></i></span></div><div class="col-10 col-md-9 d-flex align-items-center"><p class="pr-0 w-50 m-0 pt-2"><select class="disabled form-control pr-5" disabled><option>Image based</option><option>Audio based</option><option>Video based</option><option>Standard Q&amp;A</option></select></p></div> </div><div class="single__suggested__question__question pt-4 row"><p class="col-3"><span class="d-inline-block w-25">Question: </span></p> <p class="col-9 the_question"><input type="text" id="question'+get_id+'" class="form-control readonly get-question" readonly value="'+get_que+'"></p></div><div class="single__suggested__question__answer row pb-3"><div class="offset-3 col-9"><div class="form-row" style="min-height:0"><div class="offset-10 col"><small class="form-text text-center d-none correct_answer_heading">Correct:</small></div></div></div><p class="col-3"><span class="d-inline-block w-25 answers__label">Answers: </span></p><div  class="col-9 the_answer"><div  id="ans'+get_id+'" class=" add-answer align-items-center form-row"><div class="col-10 d-none"><a href="#" class="btn btn-primary d-block">Add answer</a></div></div></div></div><div class="single__suggested__question__footer border-top pt-3 d-flex justify-content-center align-items-center"><button id="'+get_id+'" class="btn btn-primary mr-1 add-question" data-dismiss="modal">Add question</button><button id="edit-kopi" class="btn btn-secondary ml-1 edit__question">Edit question</button></div></li>');
               
             if(question_type == 'standard'){
             $("#suggested__question__type"+get_id).append('<option value="text">Text</option><option value="multiple" >Multiple choice</option><option value="numeric">Numeric</option>')
@@ -182,16 +133,10 @@ $("#standard-q").click(function(e){
   
 
 $("#image-based-q").click(function(e){
-  var img=0;
-      img+=music;
-      img+=sport;
-      img+=geography;
-      img+=histpry;
-      img+=technology;
-      img+=politics;
-      img+=popular_culture;
+  var img=category;
+     
 
-  if(img>=1 && img<=7){
+  if(img){
          
             $.ajax({
         type: "POST",
@@ -201,9 +146,9 @@ $("#image-based-q").click(function(e){
         },
         success: function(results) {
            
-           $('#msg'+id).text('updated sucessfully');
+          
            setTimeout(function() {
-        $("#msg"+id).text('')
+       
     }, 1000);
         },
         error: function(result,error) {
@@ -229,7 +174,7 @@ $("#image-based-q").click(function(e){
           var img_url=img[i][0].public_path;
           var baseUrl = "{{ asset('/') }}";
         
-            $(".all_suggested_questions").append('<li class="single__suggested__question text-body p-3 border rounded mb-4"><div class="single__suggested__question__image position-relative"><img src='+baseUrl+img_url+' class="w-100"><div class="change__image position-absolute px-4 invisible"><label class="d-block m-0 border-0" for="upload__quiz__icon"><i class="fas fa-edit"></i> Change<input type="file" class="form-control-file" id="upload__quiz__icon" value="Upload"> </label></div></div><div class="single__suggested__question__attributes row pt-3"><div class="col-md-3 text-center d-flex align-items-center justify-content-center"><span class="pr-2"><i class="fa fa-clock"></i></span></div><div class="col-md-9 d-flex align-items-center" style="height:48px"><p class="m-0"><span class="pr-2"><small><input id="time-limit'+get_id+'" class="form-control readonly edit__time__limit" readonly type="text" value="'+time_limit+'">s</small></span>Time-limited</p></div><div class="col-2 col-md-3 text-center d-flex align-items-center justify-content-center pt-2"><span class="pr-2"><i class="fas fa-list-ul"></i></span></div><div class="col-10 col-md-9 d-flex align-items-center"><p class="w-50 pr-0 m-0 pt-2"><select class="pr-5 disabled form-control" disabled id="suggested__question__type'+get_id+'"></select></p></div><div class="col-2 col-md-3 text-center d-flex align-items-center justify-content-center pt-2"><span class="pr-2"><i class="far fa-image"></i></span></div><div class="col-10 col-md-9 d-flex align-items-center"><p class="pr-0 w-50 m-0 pt-2"><select class="disabled form-control pr-5" disabled><option>Image based</option><option>Audio based</option><option>Video based</option><option>Standard Q&amp;A</option></select></p></div> </div><div class="single__suggested__question__question pt-4 row"><p class="col-3"><span class="d-inline-block w-25">Question: </span></p> <p class="col-9 the_question"><input type="text" id="question'+get_id+'" class="form-control readonly" readonly value="'+get_que+'"></p></div><div class="single__suggested__question__answer row pb-3"><div class="offset-3 col-9"><div class="form-row" style="min-height:0"><div class="offset-10 col"><small class="form-text text-center d-none correct_answer_heading">Correct:</small></div></div></div><p class="col-3"><span class="d-inline-block w-25 answers__label">Answers: </span></p><div  class="col-9 the_answer"><div  id="ans'+get_id+'" class=" add-answer align-items-center form-row"><div class="col-10 d-none"><a href="#" class="btn btn-primary d-block">Add answer</a></div></div></div></div><div class="single__suggested__question__footer border-top pt-3 d-flex justify-content-center align-items-center"><button id="'+get_id+'" class="btn btn-primary mr-1 add-question" data-dismiss="modal">Add question</button><button  class="btn btn-secondary ml-1 edit__question">Edit question</button></div></li>');
+            $(".all_suggested_questions").append('<li class="single__suggested__question text-body p-3 border rounded mb-4"><div class="single__suggested__question__image position-relative"><img src='+baseUrl+img_url+' id="image'+get_id+'" class="w-100"><div class="change__image position-absolute px-4 invisible"><label class="d-block m-0 border-0" for="upload__quiz__icon"><i class="fas fa-edit"></i> Change<input type="file" class="form-control-file" id="upload__quiz__icon" value="Upload"> </label></div></div><div class="single__suggested__question__attributes row pt-3"><div class="col-md-3 text-center d-flex align-items-center justify-content-center"><span class="pr-2"><i class="fa fa-clock"></i></span></div><div class="col-md-9 d-flex align-items-center" style="height:48px"><p class="m-0"><span class="pr-2"><small><input id="time-limit'+get_id+'" class="form-control readonly edit__time__limit" readonly type="text" value="'+time_limit+'">s</small></span>Time-limited</p></div><div class="col-2 col-md-3 text-center d-flex align-items-center justify-content-center pt-2"><span class="pr-2"><i class="fas fa-list-ul"></i></span></div><div class="col-10 col-md-9 d-flex align-items-center"><p class="w-50 pr-0 m-0 pt-2"><select class="pr-5 disabled form-control" disabled id="suggested__question__type'+get_id+'"></select></p></div><div class="col-2 col-md-3 text-center d-flex align-items-center justify-content-center pt-2"><span class="pr-2"><i class="far fa-image"></i></span></div><div class="col-10 col-md-9 d-flex align-items-center"><p class="pr-0 w-50 m-0 pt-2"><select class="disabled form-control pr-5" disabled><option>Image based</option><option>Audio based</option><option>Video based</option><option>Standard Q&amp;A</option></select></p></div> </div><div class="single__suggested__question__question pt-4 row"><p class="col-3"><span class="d-inline-block w-25">Question: </span></p> <p class="col-9 the_question"><input type="text" id="question'+get_id+'" class="form-control readonly" readonly value="'+get_que+'"></p></div><div class="single__suggested__question__answer row pb-3"><div class="offset-3 col-9"><div class="form-row" style="min-height:0"><div class="offset-10 col"><small class="form-text text-center d-none correct_answer_heading">Correct:</small></div></div></div><p class="col-3"><span class="d-inline-block w-25 answers__label">Answers: </span></p><div  class="col-9 the_answer"><div  id="ans'+get_id+'" class=" add-answer align-items-center form-row"><div class="col-10 d-none"><a href="#" class="btn btn-primary d-block">Add answer</a></div></div></div></div><div class="single__suggested__question__footer border-top pt-3 d-flex justify-content-center align-items-center"><button id="'+get_id+'" class="btn btn-primary mr-1 add-question" data-dismiss="modal">Add question</button><button  class="btn btn-secondary ml-1 edit__question">Edit question</button></div></li>');
             if(question_type == 'standard'){
             $("#suggested__question__type"+get_id).append('<option value="text">Text</option><option value="multiple" >Multiple choice</option><option value="numeric">Numeric</option>')
                }
@@ -261,16 +206,10 @@ $("#image-based-q").click(function(e){
 });
 
 $("#audio-based-q").click(function(e){
-  var aud=0;
-      aud+=music;
-      aud+=sport;
-      aud+=geography;
-      aud+=histpry;
-      aud+=technology;
-      aud+=politics;
-      aud+=popular_culture;
+  var aud=category;
+   
 
-  if(aud>=1 && aud<=7){
+  if(aud){
             $.ajax({
         type: "POST",
         url: "/ajax/audio/"+aud,
@@ -279,9 +218,9 @@ $("#audio-based-q").click(function(e){
         },
         success: function(results) {
            
-           $('#msg'+id).text('updated sucessfully');
+         
            setTimeout(function() {
-        $("#msg"+id).text('')
+       
     }, 1000);
         },
         error: function(result,error) {
@@ -306,7 +245,7 @@ $("#audio-based-q").click(function(e){
           var img_url=img[i][0].public_path;
           var baseUrl = "{{ asset('/') }}";
 
-            $(".all_suggested_questions").append('<li class="single__suggested__question text-body p-3 border rounded mb-4"><div class="single__suggested__question__image position-relative"><img src='+baseUrl+img_url+' class="w-100"><div class="change__image position-absolute px-4 invisible"><label class="d-block m-0 border-0" for="upload__quiz__icon"><i class="fas fa-edit"></i> Change<input type="file" class="form-control-file" id="upload__quiz__icon" value="Upload"> </label></div></div><div class="single__suggested__question__attributes row pt-3"><div class="col-md-3 text-center d-flex align-items-center justify-content-center"><span class="pr-2"><i class="fa fa-clock"></i></span></div><div class="col-md-9 d-flex align-items-center" style="height:48px"><p class="m-0"><span class="pr-2"><small><input id="time-limit'+get_id+'" class="form-control readonly edit__time__limit" readonly type="text" value="'+time_limit+'">s</small></span>Time-limited</p></div><div class="col-2 col-md-3 text-center d-flex align-items-center justify-content-center pt-2"><span class="pr-2"><i class="fas fa-list-ul"></i></span></div><div class="col-10 col-md-9 d-flex align-items-center"><p class="w-50 pr-0 m-0 pt-2"><select class="pr-5 disabled form-control" disabled id="suggested__question__type'+get_id+'"></select></p></div><div class="col-2 col-md-3 text-center d-flex align-items-center justify-content-center pt-2"><span class="pr-2"><i class="far fa-image"></i></span></div><div class="col-10 col-md-9 d-flex align-items-center"><p class="pr-0 w-50 m-0 pt-2"><select class="disabled form-control pr-5" disabled><option>Image based</option><option>Audio based</option><option>Video based</option><option>Standard Q&amp;A</option></select></p></div> </div><div class="single__suggested__question__question pt-4 row"><p class="col-3"><span class="d-inline-block w-25">Question: </span></p> <p class="col-9 the_question"><input type="text" id="question'+get_id+'" class="form-control readonly" readonly value="'+get_que+'"></p></div><div class="single__suggested__question__answer row pb-3"><div class="offset-3 col-9"><div class="form-row" style="min-height:0"><div class="offset-10 col"><small class="form-text text-center d-none correct_answer_heading">Correct:</small></div></div></div><p class="col-3"><span class="d-inline-block w-25 answers__label">Answers: </span></p><div  class="col-9 the_answer"><div  id="ans'+get_id+'" class=" add-answer align-items-center form-row"><div class="col-10 d-none"><a href="#" class="btn btn-primary d-block">Add answer</a></div></div></div></div><div class="single__suggested__question__footer border-top pt-3 d-flex justify-content-center align-items-center"><button id="'+get_id+'" class="btn btn-primary mr-1 add-question" data-dismiss="modal">Add question</button><button class="btn btn-secondary ml-1 edit__question">Edit question</button></div></li>');
+            $(".all_suggested_questions").append('<li class="single__suggested__question text-body p-3 border rounded mb-4"><div class="single__suggested__question__image position-relative"><img id="image'+get_id+'" src='+baseUrl+img_url+' class="w-100"><div class="change__image position-absolute px-4 invisible"><label class="d-block m-0 border-0" for="upload__quiz__icon"><i class="fas fa-edit"></i> Change<input type="file" class="form-control-file" id="upload__quiz__icon" value="Upload"> </label></div></div><div class="single__suggested__question__attributes row pt-3"><div class="col-md-3 text-center d-flex align-items-center justify-content-center"><span class="pr-2"><i class="fa fa-clock"></i></span></div><div class="col-md-9 d-flex align-items-center" style="height:48px"><p class="m-0"><span class="pr-2"><small><input id="time-limit'+get_id+'" class="form-control readonly edit__time__limit" readonly type="text" value="'+time_limit+'">s</small></span>Time-limited</p></div><div class="col-2 col-md-3 text-center d-flex align-items-center justify-content-center pt-2"><span class="pr-2"><i class="fas fa-list-ul"></i></span></div><div class="col-10 col-md-9 d-flex align-items-center"><p class="w-50 pr-0 m-0 pt-2"><select class="pr-5 disabled form-control" disabled id="suggested__question__type'+get_id+'"></select></p></div><div class="col-2 col-md-3 text-center d-flex align-items-center justify-content-center pt-2"><span class="pr-2"><i class="far fa-image"></i></span></div><div class="col-10 col-md-9 d-flex align-items-center"><p class="pr-0 w-50 m-0 pt-2"><select class="disabled form-control pr-5" disabled><option>Image based</option><option>Audio based</option><option>Video based</option><option>Standard Q&amp;A</option></select></p></div> </div><div class="single__suggested__question__question pt-4 row"><p class="col-3"><span class="d-inline-block w-25">Question: </span></p> <p class="col-9 the_question"><input type="text" id="question'+get_id+'" class="form-control readonly" readonly value="'+get_que+'"></p></div><div class="single__suggested__question__answer row pb-3"><div class="offset-3 col-9"><div class="form-row" style="min-height:0"><div class="offset-10 col"><small class="form-text text-center d-none correct_answer_heading">Correct:</small></div></div></div><p class="col-3"><span class="d-inline-block w-25 answers__label">Answers: </span></p><div  class="col-9 the_answer"><div  id="ans'+get_id+'" class=" add-answer align-items-center form-row"><div class="col-10 d-none"><a href="#" class="btn btn-primary d-block">Add answer</a></div></div></div></div><div class="single__suggested__question__footer border-top pt-3 d-flex justify-content-center align-items-center"><button id="'+get_id+'" class="btn btn-primary mr-1 add-question" data-dismiss="modal">Add question</button><button class="btn btn-secondary ml-1 edit__question">Edit question</button></div></li>');
             if(question_type == 'standard'){
             $("#suggested__question__type"+get_id).append('<option value="text">Text</option><option value="multiple" >Multiple choice</option><option value="numeric">Numeric</option>')
                }
@@ -337,16 +276,10 @@ $("#audio-based-q").click(function(e){
 });
 
 $("#video-based-q").click(function(e){
-  var vid=0;
-      vid+=music;
-      vid+=sport;
-      vid+=geography;
-      vid+=histpry;
-      vid+=technology;
-      vid+=politics;
-      vid+=popular_culture;
+  var vid=category;
+  
 
-  if(vid>=1 && vid<=7){
+  if(vid){
             
             $.ajax({
         type: "POST",
@@ -356,9 +289,9 @@ $("#video-based-q").click(function(e){
         },
         success: function(results) {
            
-           $('#msg'+id).text('updated sucessfully');
+           
            setTimeout(function() {
-        $("#msg"+id).text('')
+        
     }, 1000);
         },
         error: function(result,error) {
@@ -383,7 +316,7 @@ $("#video-based-q").click(function(e){
           var img_url=img[i][0].public_path;
           var baseUrl = "{{ asset('/') }}";
          
-            $(".all_suggested_questions").append('<li class="single__suggested__question text-body p-3 border rounded mb-4"><div class="single__suggested__question__image position-relative"><img src='+baseUrl+img_url+' class="w-100"><div class="change__image position-absolute px-4 invisible"><label class="d-block m-0 border-0" for="upload__quiz__icon"><i class="fas fa-edit"></i> Change<input type="file" class="form-control-file" id="upload__quiz__icon" value="Upload"> </label></div></div><div class="single__suggested__question__attributes row pt-3"><div class="col-md-3 text-center d-flex align-items-center justify-content-center"><span class="pr-2"><i class="fa fa-clock"></i></span></div><div class="col-md-9 d-flex align-items-center" style="height:48px"><p class="m-0"><span class="pr-2"><small><input id="time-limit'+get_id+'" class="form-control readonly edit__time__limit" readonly type="text" value="'+time_limit+'">s</small></span>Time-limited</p></div><div class="col-2 col-md-3 text-center d-flex align-items-center justify-content-center pt-2"><span class="pr-2"><i class="fas fa-list-ul"></i></span></div><div class="col-10 col-md-9 d-flex align-items-center"><p class="w-50 pr-0 m-0 pt-2"><select class="pr-5 disabled form-control" disabled id="suggested__question__type'+get_id+'"></select></p></div><div class="col-2 col-md-3 text-center d-flex align-items-center justify-content-center pt-2"><span class="pr-2"><i class="far fa-image"></i></span></div><div class="col-10 col-md-9 d-flex align-items-center"><p class="pr-0 w-50 m-0 pt-2"><select class="disabled form-control pr-5" disabled><option>Image based</option><option>Audio based</option><option>Video based</option><option>Standard Q&amp;A</option></select></p></div> </div><div class="single__suggested__question__question pt-4 row"><p class="col-3"><span class="d-inline-block w-25">Question: </span></p> <p class="col-9 the_question"><input type="text" id="question'+get_id+'" class="form-control readonly" readonly value="'+get_que+'"></p></div><div class="single__suggested__question__answer row pb-3"><div class="offset-3 col-9"><div class="form-row" style="min-height:0"><div class="offset-10 col"><small class="form-text text-center d-none correct_answer_heading">Correct:</small></div></div></div><p class="col-3"><span class="d-inline-block w-25 answers__label">Answers: </span></p><div  class="col-9 the_answer"><div  id="ans'+get_id+'" class=" add-answer align-items-center form-row"><div class="col-10 d-none"><a href="#" class="btn btn-primary d-block">Add answer</a></div></div></div></div><div class="single__suggested__question__footer border-top pt-3 d-flex justify-content-center align-items-center"><button id="'+get_id+'" class="btn btn-primary mr-1 add-question" data-dismiss="modal">Add question</button><button class="btn btn-secondary ml-1 edit__question">Edit question</button></div></li>');
+            $(".all_suggested_questions").append('<li class="single__suggested__question text-body p-3 border rounded mb-4"><div class="single__suggested__question__image position-relative"><img src='+baseUrl+img_url+' id="image'+get_id+'" class="w-100"><div class="change__image position-absolute px-4 invisible"><label class="d-block m-0 border-0" for="upload__quiz__icon"><i class="fas fa-edit"></i> Change<input type="file" class="form-control-file" id="upload__quiz__icon" value="Upload"> </label></div></div><div class="single__suggested__question__attributes row pt-3"><div class="col-md-3 text-center d-flex align-items-center justify-content-center"><span class="pr-2"><i class="fa fa-clock"></i></span></div><div class="col-md-9 d-flex align-items-center" style="height:48px"><p class="m-0"><span class="pr-2"><small><input id="time-limit'+get_id+'" class="form-control readonly edit__time__limit" readonly type="text" value="'+time_limit+'">s</small></span>Time-limited</p></div><div class="col-2 col-md-3 text-center d-flex align-items-center justify-content-center pt-2"><span class="pr-2"><i class="fas fa-list-ul"></i></span></div><div class="col-10 col-md-9 d-flex align-items-center"><p class="w-50 pr-0 m-0 pt-2"><select class="pr-5 disabled form-control" disabled id="suggested__question__type'+get_id+'"></select></p></div><div class="col-2 col-md-3 text-center d-flex align-items-center justify-content-center pt-2"><span class="pr-2"><i class="far fa-image"></i></span></div><div class="col-10 col-md-9 d-flex align-items-center"><p class="pr-0 w-50 m-0 pt-2"><select class="disabled form-control pr-5" disabled><option>Image based</option><option>Audio based</option><option>Video based</option><option>Standard Q&amp;A</option></select></p></div> </div><div class="single__suggested__question__question pt-4 row"><p class="col-3"><span class="d-inline-block w-25">Question: </span></p> <p class="col-9 the_question"><input type="text" id="question'+get_id+'" class="form-control readonly" readonly value="'+get_que+'"></p></div><div class="single__suggested__question__answer row pb-3"><div class="offset-3 col-9"><div class="form-row" style="min-height:0"><div class="offset-10 col"><small class="form-text text-center d-none correct_answer_heading">Correct:</small></div></div></div><p class="col-3"><span class="d-inline-block w-25 answers__label">Answers: </span></p><div  class="col-9 the_answer"><div  id="ans'+get_id+'" class=" add-answer align-items-center form-row"><div class="col-10 d-none"><a href="#" class="btn btn-primary d-block">Add answer</a></div></div></div></div><div class="single__suggested__question__footer border-top pt-3 d-flex justify-content-center align-items-center"><button id="'+get_id+'" class="btn btn-primary mr-1 add-question" data-dismiss="modal">Add question</button><button class="btn btn-secondary ml-1 edit__question">Edit question</button></div></li>');
             if(question_type == 'standard'){
             $("#suggested__question__type"+get_id).append('<option value="text">Text</option><option value="multiple" >Multiple choice</option><option value="numeric">Numeric</option>')
                }
@@ -414,6 +347,8 @@ $("#video-based-q").click(function(e){
 
 // add question 
 
+//when click suggested link button ,store current question blade details 
+
 $("body").on('click','.suggested_q_link',function(){
      get_question=$(this).closest('.article').find('.question');
      get_time_limit=$(this).closest('.article').find('.time-limit');
@@ -425,9 +360,9 @@ $("body").on('click','.suggested_q_link',function(){
      multiple__choice__answer=$(this).closest('.article').find('.multiple__choice__answer');
      standard__answer=$(this).closest('.article').find('.standard__answer');
      numeric__answer=$(this).closest('.article').find('.numeric__answer');
-
+     hidden_media_image=$(this).closest('.article').find('.hidden-media-image');
   });
-
+ // when click add-question button get all data from specific suggested question
 $('body').on('click','button.add-question',function(e){   
     
       var id=e.target.id;
@@ -435,6 +370,15 @@ $('body').on('click','button.add-question',function(e){
       var time_limit=$("small #time-limit"+id).val();
       var answer=$("#answer"+id).val();
       var question_type=$('#suggested__question__type'+id).val();
+
+      /**get image name */
+      var get_image_src=$("#image"+id).attr("src");
+      // var reverse_image_file=get_image_src.split("").reverse().join("")
+      // var split_image=reverse_image_file.split("/",1);
+      // var convert_string_image=""+split_image+"";
+      // var get_image_name=convert_string_image.split("").reverse().join("");
+      console.log('hidden value '+ hidden_media_image.val());
+
 
      get_question.val(question);
      get_time_limit.val(time_limit);
@@ -484,7 +428,11 @@ $('body').on('click','button.add-question',function(e){
 //     $(this).removeData('bs.modal');
 // });
   
-
+$("#img-save").click(function(){
+   //var save=$("#upload__media__file").attributes.value.textContent;
+   var save= document.getElementById("upload__media__file").value.split("\\");
+   console.log("input-value"+ save);
+});
 
 
 
