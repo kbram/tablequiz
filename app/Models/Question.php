@@ -18,8 +18,7 @@ protected $guarded = [
 * @var array
 */
 protected $fillable = [
-'category_id',
-'category',
+    
 'user_id',
 'question_type',
 'question',

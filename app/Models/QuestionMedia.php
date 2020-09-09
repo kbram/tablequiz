@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MasterQuestionMedia extends Model
+class QuestionMedia extends Model
 {
     protected $table = 'question_media';
 

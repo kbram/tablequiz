@@ -64,7 +64,7 @@
 							</span>
 						</div>
 						<div class="col-lg-7 d-flex flex-column admin_home__details justify-content-center justify-content-md-start">
-							<p class="number mb-0 mb-lg-3 d-flex justify-content-center justify-content-lg-start"><strong>{{$cquzzes}}</strong></p>
+							<p class="number mb-0 mb-lg-3 d-flex justify-content-center justify-content-lg-start"><strong>{{$cquzzes ?? ''}}</strong></p>
 							<p class="d-flex justify-content-center justify-content-lg-start text-center text-lg-left">Quizzes created</p>
 						</div>
 					</div>

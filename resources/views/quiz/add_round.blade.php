@@ -31,7 +31,7 @@
 
 
 <section class="container page__inner">
-<form id="add_round" action="/round" method="post" enctype="multipart/form-data" role="main">
+<form id="add_round" action="/round" method="post" enctype="multipart/form-data" role="main" novalidate>
 		 @csrf
 <div class="is_container row" >
 
@@ -200,7 +200,8 @@
 							<a href="#" class="px-4 btn btn-outline-secondary grey d-flex align-items-center justify-content-center" data-toggle="modal" data-target="#add__video__media" data-title="Video" data-add-text="any video file"><span class="pr-2 icon_"><i class="fas fa-video"></i></span>Video </a></a>
 						</div>
 					</div>
-				
+					</div>
+
 				<div class="modal" id="add__image__media" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
  								  <div class="modal-dialog" role="document">
  									<div class="modal-content">
@@ -217,7 +218,7 @@
  												<label>Add link image</label>
  											</div>
  											<div class="col-md-8">
- 												<input type="url" name="add_link_to_image__media[]" class="form-control" id="add__image__media__text">
+ 												<input type="url" name="add_link_to_image__media__0" class="form-control" id="add__image__media__text">
  											</div>
  										</div>
  										<div class="text-center w-100">
@@ -226,7 +227,7 @@
  										<div class="form-row justify-content-center pt-3">
  											<div class="col-md-3">	
  											   <label class="d-block" for="upload__image__media__file">Upload
- 													<input type="file" class="form-control-file" id="upload__image__media__file" value="Upload" name="image_media[]">
+ 													<input type="file" class="form-control-file" id="upload__image__media__file" value="Upload" name="image_media_0">
  												</label>
  											</div>
  										</div>
@@ -239,7 +240,6 @@
  									</div>
  								  </div>
  								</div>
-								 </div>
 
                              	<div class="modal" id="add__audio__media" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
  								  <div class="modal-dialog" role="document">
@@ -257,7 +257,7 @@
  												<label>Add link</label>
  											</div>
  											<div class="col-md-8">
-												<input type="url" name="add_link_to_audio__media[]" class="form-control" id="add__audio__media__text">
+												<input type="url" name="add_link_to_audio__media__0" class="form-control" id="add__audio__media__text">
  											</div>
  										</div>
  										<div class="text-center w-100">
@@ -266,7 +266,7 @@
  										<div class="form-row justify-content-center pt-3">
  											<div class="col-md-3">	
  											   <label class="d-block" for="upload__audio__media__file">Upload
- 													<input type="file" class="form-control-file" id="upload__audio__media__file" value="Upload" name="audio_media[]">
+ 													<input type="file" class="form-control-file" id="upload__audio__media__file" value="Upload" name="audio_media_0">
  												</label>
  											</div>
  										</div>
@@ -295,7 +295,7 @@
  												<label>Add link video</label>
  											</div>
  											<div class="col-md-8">
-											<input type="url" name="add_link_to_video__media[]" class="form-control" id="add__video__media__text">
+											<input type="url" name="add_link_to_video__media__0" class="form-control" id="add__video__media__text">
  											</div>
  										</div>
  										<div class="text-center w-100">
@@ -304,7 +304,7 @@
  										<div class="form-row justify-content-center pt-3">
  											<div class="col-md-3">	
  											   <label class="d-block" for="upload__video__media__file">Upload
- 													<input type="file" class="form-control-file" id="upload__video__media__file" value="Upload" name="video_media[]">
+ 													<input type="file" class="form-control-file" id="upload__video__media__file" value="Upload" name="video_media_0">
  												</label>
  											</div>
  										</div>
@@ -346,8 +346,8 @@
 				</div>
 				<div class="col-md-8">
 
-					<div class="row multiple__choice__row pb-3 align-items-center">
-						<div class="col-7 ">
+					<div class="row multiple__choice__row   pb-3 align-items-center">
+						<div class="col-7 multi ">
 							<input name="multiple__choice__answer__0[]" class="multiple-choice-answer form-control" type="text">
 						</div>
 						<div class="col-1 justify-content-center p-0 d-flex">
@@ -357,7 +357,7 @@
 							<span class="plus">+</span>
 						</div>
 						<div class="col-3 col-md-3 text-center form-check px-0 px-md-4">
-							<input type="radio" class="" name="multiple__choice__correct__answer[]">
+							<input type="radio" value="0" class="multiple-choice-correct-answer" name="multiple__choice__correct__answer__0">
 						</div>
 					</div>
 

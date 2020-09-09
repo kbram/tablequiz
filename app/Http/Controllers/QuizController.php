@@ -7,7 +7,13 @@ use App\Models\Participant;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\QuizCategory;
+use App\Models\QuizRound;
+use App\Models\Question;
+use App\Models\Answer;
+use App\Models\QuizRoundImage;
+
 use Session;
+use App\Http\Controllers\MasterQuestionController;
 
 use Validator;
 use Auth;
@@ -146,7 +152,7 @@ class QuizController extends Controller
 
     public function AfterLogin(){
 
-        if(Session::get('quiz')){
+    if(Session::get('quiz')){
 
             $session_quiz = Session::get('quiz');
             $quiz =new Quiz;
@@ -170,16 +176,187 @@ class QuizController extends Controller
   
             $quizIcon->save();
 
-            return view('home2');
 
+
+
+
+//round save.........................................................
+//round image 
+$round_bg_public =  Session::get('round_bg_public_path');
+$round_bg_path_thumb = Session::get('round_bg_public_path_thumb');
+$round_bg_save = Session::get('round_bg_save_path1');
+$round_bg_file =  Session::get('round_bg_filename');
+
+    
+$round_session = Session::get('round_question');
+for($k=0; $k<count($round_session); $k++){
+
+            $round = new QuizRound;
+            $round->round_name              = $round_session[$k]['round_name'];
+            $round->round_slug          = $round_session[$k]['round_count'];
+            $round->quiz_id          = $quiz->id;
+            $round->save();
+
+
+//round image save
+$round_image = new QuizRoundImage;
+$round_image->name              = $round_bg_file[$k] ;
+$round_image->public_path       = $round_bg_public[$k] ;
+$round_image->local_path        = $round_bg_save[$k] . '/' . $round_bg_file[$k] ;
+$round_image->round_id          =$round->id ;
+$round_image->thumb_path        = $round_bg_path_thumb[$k] ;
+
+$round_image->save();
+
+
+            //save question part..................................................
+                        $question_types = $round_session[$k]['question__type'];
+
+                        for($i=0; $i<count($question_types); $i++){
+                            $questinon_save = new Question;
+
+                            $questinon_save->user_id = auth()->id();
+                            $questinon_save->round_id = $round->id;
+                            $questinon_save->time_limit = $round_session[$k]['time__limit'][$i];;
+                            $questinon_save->question_type = $round_session[$k]['question__type'][$i];
+                            $questinon_save->question = $round_session[$k]['question'][$i];
+
+                            $questinon_save ->save();
+
+
+                            //media link save
+            
+
+                            if(Session::has('question_image_link_'.$i)){
+                                $question_media = new QuestionMedia ; 
+                                $question_media->question_id = $questinon_save->id;
+
+                                $question_media ->media_link = Session::get('question_image_link_'.$i);
+                                $question_media ->media_type = "image";
+                                $question_media->save();
+
+                            }
+
+                            if(Session::has('question_audio_link_'.$i)){
+                                $question_media = new QuestionMedia ; 
+                                $question_media->question_id = $questinon_save->id;
+
+                                $question_media ->media_link = Session::get('question_audio_link_'.$i);
+                                $question_media ->media_type = "audio";
+                                $question_media->save();
+
+
+                            }
+                            if(Session::has('question_video_link_'.$i)){
+                                $question_media = new QuestionMedia ; 
+                                $question_media->question_id = $questinon_save->id;
+
+                                $question_media ->media_link = Session::get('question_video_link_'.$i);
+                                $question_media ->media_type = "video";
+                                $question_media->save();
+
+
+                            }
+                            //media link save end here   
+
+                            //media upload start here
+
+                            if(Session::has('question_image_'.$i)){
+                                $question_media = new QuestionMedia ; 
+                                $question_media->question_id = $questinon_save->id;
+
+                                $question_media ->public_path = Session::get('question_image_'.$i);
+                                $question_media ->media_type = "image";
+                                $question_media->save();
+                            }
+                            if(Session::has('question_audio_'.$i)){
+                                $question_media = new QuestionMedia ; 
+                                $question_media->question_id = $questinon_save->id;
+
+                                $question_media ->public_path = Session::get('question_image_'.$i);
+                                $question_media ->media_type = "audio";
+                                $question_media->save();
+                            }
+                            if(Session::has('question_video_'.$i)){
+                                $question_media = new QuestionMedia ; 
+                                $question_media->question_id = $questinon_save->id;
+
+                                $question_media ->public_path = Session::get('question_image_'.$i);
+                                $question_media ->media_type = "video";
+                                $question_media->save();
+                            }
+
+                            //media upload end
+
+
+
+
+
+                            //answer save
+
+                            $standard='standard__question__answer__';
+                            $numeic='numeric__question__answer__';      
+                            $multiple='multiple__choice__answer__';
+                        
+                            $multi_con=$multiple.$i;
+                            $standard_con=$standard.$i;
+                            $numeric_con=$numeic.$i;
+                            
+                            if(count($round_session[$k][$multi_con])>1){
+                                $correct = $round_session[$k]['multiple__choice__correct__answer__'.$i];
+                                        
+                                for($j=0; $j<count($round_session[$k][$multi_con]); $j++){
+                                    $answer_save = new Answer;
+                                    $answer_save->answer = $round_session[$k][$multi_con][$j];
+                                                
+                                    $answer_save->question_id = $questinon_save->id;
+
+                                    if($correct == $round_session[$k][$multi_con][$j]){
+                        
+                                                $answer_save->status = 1;
+                                        }
+
+                                    else{
+                                        $answer_save->status =0;
+                                    }
+                                                    
+                                                $answer_save ->save();
+
+                                    }
+                            
+                            }
+
+                            
+                            elseif($round_session[$k][$standard_con]){
+                            $answer_save = new Answer;
+                                $answer_save->answer = $round_session[$k][$standard_con];
+                                $answer_save->status = 1;
+                                $answer_save->question_id = $questinon_save->id;
+                                $answer_save ->save();
+                            
+                            }
+
+                        
+                            elseif($round_session[$k][$numeric_con]){
+                            $answer_save = new Answer;
+                                $answer_save->answer = $round_session[$k][$numeric_con];
+                                $answer_save->status = 1;
+                                $answer_save->question_id = $questinon_save->id;
+                                $answer_save ->save();
+                                    }
 
         }
-        else{
+                
+    }
+    return view('home2');
 
+}
+   
+        else{
         return view('home2');
         }
 
-    }
+}
 
 
 
