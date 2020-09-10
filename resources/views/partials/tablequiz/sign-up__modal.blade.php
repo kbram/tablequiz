@@ -222,30 +222,30 @@
 				  </tr>
 			  </thead>
 			  <tbody>
-				<tr>
+				<tr class=no-participants>
 					<td>No. participants</td>
-					<td>20 - 29</td>
-					<td>€9.99</td>
+					<td></td>
+					<td></td>
 					<td><span class="checkout__remove">-</span></td>
 				</tr>
 				 
-				<tr>
+				<tr class="suggested-questions">
 					<td>Suggested questions</td>
-					<td>&times; 25</td>
-					<td>€9.99</td>
+					<td></td>
+					<td></td>
 					<td><span class="checkout__remove">-</span></td>
 				</tr>
 				 
-				<tr>
+				<tr class="customised-backgrounds">
 					<td>Customised backgrounds</td>
-					<td>&times; 2</td>
-					<td>€9.99</td>
+					<td></td>
+					<td></td>
 					<td><span class="checkout__remove">-</span></td>
 				</tr>
 				  
 			  </tbody>
 			  <tfoot>
-				<tr>  
+				<tr class="total-cost">  
 				  <td colspan="2"><strong>Total:</strong></td>
 				  <td><strong>€29.97</strong></td>
 				<td></td>
