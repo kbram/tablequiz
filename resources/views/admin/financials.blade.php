@@ -60,24 +60,30 @@
 					</div>
 					<div class="row">
 						<div class="dashboard__container col">
-							<h3>Set price band for questions</h3>
-							
+						<div class="d-flex">
+						   <h3 class="col-8">Set price band for questions</h3>
+								<i class="fa fa-plus-circle col-4 price-band-questions" id="addQuestionPrice"></i>
+						</div>							
+											
+
 							@foreach($questionCosts as $questionCost)
-							<span id="msg{{$questionCost->id}}" class="text-success" ></span>
-							<form class="form-row pt-4 align-items-center mb-0" action="" method="" id="price__band__questions">
+							<span id="msg{{$questionCost->id ?? ''}}" class="text-success" ></span>
+							
+							<form class="form-row pt-4 align-items-center mb-0 price-band-financials" action="" method="" >
+
 								<div class="col-4 col-md-1">
 								
 									<span>From</span>
 								</div>
 								<div class="col-8 col-md-4 d-flex flex-row align-items-center justify-content-md-center">
-									<input id="from{{$questionCost->id}}" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" 
-										   placeholder="{{$questionCost->from}}">
+									<input id="from{{$questionCost->id}}" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="{{$questionCost->from}}"> 
+										   
 									<span>to</span>
-									<input id="to{{$questionCost->id}}" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" 
-										   placeholder="{{$questionCost->to}}">
+									<input id="to{{$questionCost->id}}" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="{{$questionCost->to}}"> 
+									<input id="type{{$questionCost->id}}" hidden name="type" type="text" value="questions costs" >   
 								</div>
 								<div class="col-4 col-md-3 pt-2 pt-md-0">
-								<span style="line-height: 1.1" class="d-block  ">{{$questionCost->band_type}}</span>
+								<span style="line-height: 1.1" class="d-block">Question Cost</span>
 								</div>
 								<div class="col-8 col-md-4 pt-2 pt-md-0">
 									<div class="input-group">
@@ -85,32 +91,45 @@
 											<span class="input-group-text">&euro;</span>
 										</div>
 										
-										<input id="cost{{$questionCost->id}}" maxlength="3" class="form-control" placeholder="{{$questionCost->cost}}">
+										<input id="cost{{$questionCost->id}}" maxlength="3" class="form-control" placeholder="{{$questionCost->cost}}" >
 										
-										<button id="{{$questionCost->id}}"  maxlength="3" class=" form-control ml-1" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
-									
+										<button type="submit" id="{{ $questionCost->id }}" maxlength="3" class=" form-control ml-1 SavePriceband" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
+										<button  maxlength="3" class=" form-control ml-1 removePriceband" value="" ><i class="fa fa-trash" style="color:red"></i></button>
+								
+																		
 									</div>
 								</div>
+									
+									
+									
 							</form>
+							
 							@endforeach
+							<div class="financial-append"></div>
+
 						</div>
 					</div>
 					<div class="row mt-3">
 						<div class="dashboard__container col">
-							<h3>Set price band for no. backgrounds</h3>
+						<div class="d-flex">
+						<h3 class="col-8" >Set price band for no. backgrounds</h3>
+								<i class="fa fa-plus-circle col-4" id="addBackgroundPrice"></i>
+						</div>
 							@foreach($backgroundCosts as $backgroundCost)
 							<span id="msg{{$backgroundCost->id}}" class="text-success"></span>
-							<form class="form-row pt-4 align-items-center mb-0" action="" method="" id="price__band__questions">
+							<form class="form-row pt-4 align-items-center mb-0 price-band-financials" action="" method="" id="price__band__backgrounds">
 								<div class="col-4 col-md-1">
 									<span>From</span>
 								</div>
 								<div class="col-8 col-md-4 d-flex flex-row align-items-center justify-content-md-center">
-									<input id="from{{$backgroundCost->id}}" maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1"  placeholder="{{$backgroundCost->from}}">
+									<input id="from{{$backgroundCost->id}}" maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1" placeholder="{{$backgroundCost->from}}">
 									<span>to</span>
 									<input id="to{{$backgroundCost->id}}"  maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="{{$backgroundCost->to}}">
+									<input id="type{{$backgroundCost->id}}" hidden name="type" type="text" value="backgroundCosts costs" >   
+
 								</div>
 								<div class="col-4 col-md-3 pt-2 pt-md-0">
-								<span style="line-height: 1.1" class="d-block  ">{{$backgroundCost->band_type}}</span>
+								<span style="line-height: 1.1" class="d-block">Background Cost</span>
 								</div>
 								<div class="col-8 col-md-4 pt-2 pt-md-0">
 									<div class="input-group">
@@ -118,30 +137,38 @@
 											<span class="input-group-text">&euro;</span>
 										</div>
 										<input name="band__costs" maxlength="3" class="form-control" placeholder="{{$backgroundCost->cost}}">
-										<button id="{{$backgroundCost->id}}" maxlength="3" class=" form-control ml-1" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
+										<button type="submit" id="{{$backgroundCost->id}}" maxlength="3" class=" form-control ml-1 SavePriceband" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
+										<button maxlength="3" class=" form-control ml-1 removePriceband" value="" ><i class="fa fa-trash" style="color:red"></i></button>
+
 										
 									</div>
 								</div>
 							</form>
 							@endforeach
+							<div class="financial-append"></div>
 						</div>
 					</div>
 					<div class="row mt-3">
 						<div class="dashboard__container col">
-							<h3>Set price band for no. participants</h3>
+						<div class="d-flex">
+							<h3 class="col-8">Set price band for no. participants</h3>
+								<i class="fa fa-plus-circle col-4" id="addParticipantPrice"></i>
+						</div>
 							@foreach($participantCosts as $participantCost)
 							<span id="msg{{$participantCost->id}}" class="text-success"></span>
-							<form class="form-row pt-4 align-items-center mb-0" action="" method="" id="price__band__questions">
+							<form class="form-row pt-4 align-items-center mb-0 price-band-financials" action="" method=""">
 								<div class="col-4 col-md-1">
 									<span>From</span>
 								</div>
 								<div class="col-8 col-md-4 d-flex flex-row align-items-center justify-content-md-center">
-									<input id="from{{$participantCost->id}}" maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1"  placeholder="{{$participantCost->from}}">
+									<input id="from{{$participantCost->id}}" maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1" placeholder="{{$participantCost->from}}" >
 									<span>to</span>
 									<input id="to{{$participantCost->id}}" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="{{$participantCost->to}}">
+									<input id="type{{$participantCost->id}}" hidden name="type" type="text" value="participants costs" >   
+
 								</div>
 								<div class="col-4 col-md-3 pt-2 pt-md-0">
-								<span style="line-height: 1.1" class="d-block  ">{{$participantCost->band_type}}</span>
+								<span style="line-height: 1.1" class="d-block">Participant Cost</span>
 								</div>
 								<div class="col-8 col-md-4 pt-2 pt-md-0">
 									<div class="input-group">
@@ -149,11 +176,16 @@
 											<span class="input-group-text">&euro;</span>
 										</div>
 										<input id="cost{{$participantCost->id}}" maxlength="3" class="form-control" placeholder="{{$participantCost->cost}}">
-										<button id="{{$participantCost->id}}"  maxlength="3" class=" form-control ml-1" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
+										<button id="{{$participantCost->id}}"  maxlength="3" class=" form-control ml-1 SavePriceband" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
+										<button   maxlength="3" class=" form-control ml-1 removePriceband" value="" ><i class="fa fa-trash" style="color:red"></i></button>
+
+											
 									</div>
 								</div>
 							</form>
 							@endforeach
+							<div class="financial-append"></div>
+
 						</div>
 					</div>
 					
