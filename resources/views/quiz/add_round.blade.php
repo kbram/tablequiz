@@ -28,8 +28,7 @@
 </style>
 @endsection
 @section('content')
-<!-- kopi
-<script src='jquery-3.2.1.min.js'></script> -->
+<script src='jquery-3.2.1.min.js'></script> 
 
 <section class="container page__inner">
 <form id="add_round" action="/round" method="post" enctype="multipart/form-data" role="main" novalidate>
@@ -143,7 +142,7 @@
 <!-- <form class="is_container row" id="add_round" action="/question" method="post" enctype="multipart/form-data" role="main">
 @csrf	 -->
 
-		<article class="col-12 ">
+		<article class="col-12 article">
 <div class="article_question">
 			<div class="article__heading">
 				<h1>Question <span id="number"> 1</span></h1>
@@ -179,7 +178,7 @@
 					<label for="question">Question</label>
 				</div>
 				<div class="col-md-8">
-					<input name="question[]" type="text" class="form-control">
+					<input name="question[]" type="text" class="form-control question">
 				</div>
 				@if ($errors->has('question'))
                         <span class="help-block">
@@ -221,7 +220,7 @@
  												<label>Add link image</label>
  											</div>
  											<div class="col-md-8">
- 												<input type="url" name="add_link_to_image__media__0" class="form-control" id="add__image__media__text">
+ 												<input type="url" name="add_link_to_image__media__0" class="form-control add-image-media-link" id="add__image__media__text">
  											</div>
  										</div>
  										<div class="text-center w-100">
@@ -260,7 +259,7 @@
  												<label>Add link</label>
  											</div>
  											<div class="col-md-8">
-												<input type="url" name="add_link_to_audio__media__0" class="form-control" id="add__audio__media__text">
+												<input type="url" name="add_link_to_audio__media__0" class="form-control add-audio-media-link" id="add__audio__media__text">
  											</div>
  										</div>
  										<div class="text-center w-100">
@@ -298,7 +297,7 @@
  												<label>Add link video</label>
  											</div>
  											<div class="col-md-8">
-											<input type="url" name="add_link_to_video__media__0" class="form-control" id="add__video__media__text">
+											<input type="url" name="add_link_to_video__media__0" class="form-control add-video-media-link" id="add__video__media__text">
  											</div>
  										</div>
  										<div class="text-center w-100">
@@ -327,7 +326,7 @@
 					<label for="standard__question__answer">Answer</label>
 				</div>
 				<div class="col-md-8">
-					<input class="form-control" name="standard__question__answer__0" type="text">
+					<input class="form-control answer" name="standard__question__answer__0" type="text">
 				</div>
 			</div>
 			<div class="form-row d-none numeric__answer" id="numeric__answer">
@@ -374,7 +373,7 @@
 				<div class="col-md-8">
 					<div class="row">
 						<div class="col-md-4 pr-md-0">
-							<input class="form-control" type="number" name="time__limit[]">
+							<input class="form-control time-limit" type="number" name="time__limit[]">
 						</div>
 						@if ($errors->has('time__limit'))
                         <span class="help-block">

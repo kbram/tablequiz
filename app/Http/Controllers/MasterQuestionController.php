@@ -75,7 +75,7 @@ class MasterQuestionController extends Controller
     public function standard(Request $request,$id)
     {   
     
-         if($id>=1 && $id<=7){
+         if($id){
             $ans=[];
             $medias=[];
             $ques=GlobalQuestion::where('category_id',$id)->where('question_type','standard')->get();
@@ -104,7 +104,7 @@ class MasterQuestionController extends Controller
     public function image(Request $request,$id)
     {   
        
-         if($id>=1 && $id<=7){
+         if($id){
             $ans=[];
             $medias=[];
         
@@ -130,7 +130,7 @@ class MasterQuestionController extends Controller
     public function audio(Request $request,$id)
     {   
      
-        if($id>=1 && $id<=7){
+        if($id){
             $ans=[];
             $medias=[];
             $ques=GlobalQuestion::where('category_id',$id)->get();
@@ -152,7 +152,7 @@ class MasterQuestionController extends Controller
 
     public function video(Request $request,$id)
     {  
-        if($id>=1 && $id<=7){
+        if($id){
             $medias=[];
             $ans=[];
             $ques=GlobalQuestion::where('category_id',$id)->get();
@@ -251,7 +251,14 @@ public function postRound(Request $request){
             
 public function add_round_question(Request $request)
     {
-    $cat = QuizCategory::all();
+
+        $categories = QuizCategory::all();
+        $questions = GlobalQuestion::all();
+        $answers = GlobalAnswer::all();
+        $medias = GlobalQuestionMedia::all();
+        $question = GlobalQuestion::where('id',1)->get();
+
+
     $round_count = $request->input('round_count') + 1 ;
     $quiz = $request->input('quiz');
 
@@ -605,8 +612,8 @@ if(Session::has('question_video_'.$i)){
                      }
 
         }
+        return View('quiz.add_round', compact('categories','answers','medias','round_count','quiz'));
 
-            return view('quiz.add_round',compact('cat','round_count','quiz'));           
         }
 
 
@@ -620,7 +627,7 @@ if(Session::has('question_video_'.$i)){
 
             
 
-            return view('quiz.add_round',compact('cat','round_count','quiz'));
+            return View('quiz.add_round', compact('categories','answers','medias','round_count','quiz'));
 
 
         }

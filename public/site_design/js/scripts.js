@@ -1,5 +1,5 @@
 jQuery(document).ready(function($) {
-
+console.log("working");
     $('.quiz__slider').slick({
         prevArrow: '<button type="button" class="slick-btns slick-prev"><i class="fa fa-angle-left"</button>',
         nextArrow: '<button type="button" class="slick-btns slick-next"><i class="fa fa-angle-right"</button>',
@@ -13,7 +13,7 @@ jQuery(document).ready(function($) {
     $('#menu__btn').click(function() {
 
         $('nav.main__navigation').toggleClass('menuOpen');
-    })
+    });
 
 
 
@@ -141,7 +141,7 @@ var i =0;
 	// 	$('#modal__login').addClass('d-none');
 	// 	$('#modal__signup').addClass('d-none');
 	// 	$('#modal__payment').removeClass('d-none');
-	// })
+	})
 	
 /**kopi ajax login  */
 
@@ -251,6 +251,7 @@ $('#login-btn').click(function(e) {
 	// Click to Copy //
 	
 	$('.copy__icon.quiz__link').click(function(){
+        console.log("copy");
 		$('input#full__uri').select();
 		
 		document.execCommand('copy');
@@ -282,6 +283,7 @@ $('#login-btn').click(function(e) {
 	}
 	
 	$('input[name="quiz__name"]').keyup(function(){
+        console.log("hi");
 		generate_quiz_name();
 	})
 	$('input[name="quiz__link"]').on('focusout',function(){
@@ -438,7 +440,3 @@ $('.single__answer')
 
 
     })
-
-})
-  
-   

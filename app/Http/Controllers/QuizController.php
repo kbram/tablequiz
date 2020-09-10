@@ -12,6 +12,8 @@ use App\Models\Question;
 use App\Models\Answer;
 use App\Models\QuizRoundImage;
 
+
+
 use Session;
 use App\Http\Controllers\MasterQuestionController;
 
@@ -23,6 +25,12 @@ use File;
 use Image;
 use View;
 use App\Models\QuizSetupIcon;
+
+
+use App\Models\QuestionMedia;
+use App\Models\GlobalQuestionMedia;
+use App\Models\GlobalQuestion;
+use App\Models\GlobalAnswer;
 
 class QuizController extends Controller
 {
@@ -45,6 +53,11 @@ class QuizController extends Controller
     public function store(Request $request)
         {
 
+        $categories = QuizCategory::all();
+        $questions = GlobalQuestion::all();
+        $answers = GlobalAnswer::all();
+        $medias = GlobalQuestionMedia::all();
+        $question = GlobalQuestion::where('id',1)->get();
 
         $validator = Validator::make($request->all(),
         [
@@ -127,7 +140,8 @@ class QuizController extends Controller
            $quiz = $quiz->quiz_link;
 
 
-           return view('quiz.add_round',compact('cat','quiz')); 
+           return View('quiz.add_round', compact('categories','answers','medias','quiz'));
+
            
         }
 
@@ -143,7 +157,7 @@ class QuizController extends Controller
 
             $quiz = $request->input('quiz__link');
 
-            return view('quiz.add_round',compact('cat','quiz'));            
+            return View('quiz.add_round', compact('categories','answers','medias','quiz'));
 
 
 
