@@ -46,8 +46,12 @@
 			</div>
 			<div class="form-row d-flex justify-content-center mt-5">
 				<div class="col-10 col-md-4">
+				@if (session()->has('quiz'))
+					<input class="d-block btn btn-primary " id="login-btn" type="submit" value="Log In">
+					@else
 					<input class="d-block btn  btn-primary" type="submit" value="Log In">
 					<!-- for check out view -> to__checkout -->
+					@endif
 				</div>
 				<div class="col-10 col-md-4 mt-3">
 
@@ -199,7 +203,7 @@
 
 	<!-- thusha dev -->
 @guest
-	<div class="modal-content d-none " id="modal__payment">
+	<div class="modal-content d-none" id="modal__payment">
 		@endguest
 @auth
 <div class="modal-content  " id="modal__payment">
@@ -360,4 +364,4 @@
 
 
 				  @include('scripts.stripe') 
-
+                 
