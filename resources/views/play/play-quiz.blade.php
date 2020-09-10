@@ -28,10 +28,10 @@
 		<article class="col-12 pb-5">
 
 		<div class="col-12 d-flex justify-content-between">
-<!-- 
+
 		<p ><a href="#" class="text-white"><small class="small">previous quiz</small></a></p>
 		<p><a href="#" class="text-white"><small class="small">next quiz</small></a></p>
--->
+
 		</div> 
 
 
@@ -59,11 +59,12 @@
 			</div>
 
 
+@if($question->question_type == 'standard__question')
 			<div id="all-answer" class="row answer__options pt-4 justify-content-center flex-wrap">
 
-			
-				@foreach($answers as $answer)
-			<form action="/playquiz/answer" method="post" name="form" id="{{$answer->id}}" class="col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers ">
+			@foreach($answers as $answer)
+
+			 <form action="/playquiz/answer" method="post" name="form" id="disable" class="col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers ">
 
 				@csrf
 				<input type="text" name="answer" hidden value="{{$answer->id}}"/>
@@ -71,18 +72,67 @@
 				<input type="text" name="round" hidden value="{{$round->id}}"/>
 				<input type="text" name="quiz" hidden value="{{$quiz->id}}"/>
 
-				<p onclick="document.getElementById('{{$answer->id}}').submit()">{{$answer->answer}}</p> 
-				</form>
+				<p>{{$answer->answer}}</p> 
 
+				</form>
 				@endforeach
+
 				
 			</div>
+@endif
 
+
+
+	
+@if($question->question_type == 'standard__question')
+			<div id="all-answer" class="row answer__options pt-4 justify-content-center flex-wrap">
+
+			
+			<form action="/playquiz/answer" method="post" name="form" id="answer" class="col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers ">
+
+				@csrf
+				<input type="text" name="question" hidden value="{{$question->id}}"/>
+				<input type="text" name="round" hidden value="{{$round->id}}"/>
+				<input type="text" name="quiz" hidden value="{{$quiz->id}}"/>
+
+				<input class="form-control form-control-lg" type="text" name="answer" placeholder="Enter Answer"  value=""/>
+
+				</form>
+
+				
+			</div>
+@endif
+
+@if($question->question_type == 'standard__question')
+			<div id="all-answer" class="row answer__options pt-4 justify-content-center flex-wrap">
+
+			
+			<form action="/playquiz/answer" method="post" name="form" id="answer" class="col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers ">
+
+				@csrf
+				<input type="text" name="question" hidden value="{{$question->id}}"/>
+				<input type="text" name="round" hidden value="{{$round->id}}"/>
+				<input type="text" name="quiz" hidden value="{{$quiz->id}}"/>
+
+				<input class="form-control form-control-lg" type="number" name="answer" placeholder="Enter Answer"  value=""/>
+
+				</form>
+
+				
+			</div>
+@endif
+<br>
+<div class="justify-content-center row">
+<div class="col-5">
+<a   class="btn btn-primary d-block d-lg-inline-block card__from__modal" onclick="document.getElementById('answer').submit()">Submit Answer</a>
+</div> 
+</div>
+	
 		</article>
 		
 	</div>
 <!-- </section> -->
-
+<!-- 
 <script>
 
 	var correct = {!! json_encode(Session::get("$quiz->id-$round->id-$question->id") ) !!};
@@ -114,7 +164,18 @@
 	console.log(worng);
 	}
 
-</script>
+</script> -->
+<!-- 
+<script>
+
+
+$(function() {
+    $('.single__answer').click(function() {
+		$(this).attr('id', 'answer');
+		console.log("change");
+    });
+});
+</script> -->
 
 @include('scripts.playquiz')
 

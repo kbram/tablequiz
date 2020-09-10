@@ -20,14 +20,11 @@ class PlayController extends Controller
 {
 
     public function testplay($quiz_id,$round_id,$question_id){
-
         $quiz = Quiz::find($quiz_id);
         $roundCount=$quiz->rounds()->count();
-
-        $round = QuizRound::find($round_id);
-        $question = Question::find($question_id);
-
-        $answers = Answer::where('question_id',$question_id)->get();
+        $round = QuizRound::where('round_slug',$round_id)->first();
+        $question = Question::where('round_id', $round->id)->first();
+        $answers = Answer::where('question_id',$question->id)->get();
 
 
     return view('play.play-quiz',compact('quiz','roundCount','round','question','answers'));    

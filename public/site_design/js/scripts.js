@@ -318,6 +318,36 @@ console.log($(this).text());
 
     })
 
+//answer multible
+var $box=null;
+
+$('.single__answer')
+	.click(function() {
+		if ($box == null) {
+			$box = $(this);
+            $box.css("box-shadow","3px 3px 15px #7343C1, -1px -1px 5px rgba(0, 0, 0, 0.045)");
+            $box.attr('id', 'answer');
+
+        } 
+        else  {
+            $box.css("box-shadow","");
+            $box.attr('id', 'disable');
+
+            if($box != $(this))
+            {
+                			$box = $(this);
+                            $box.css("box-shadow","3px 3px 15px #7343C1, -1px -1px 5px rgba(0, 0, 0, 0.045)");
+                            $box.attr('id', 'answer');
+
+            }
+            else
+		        $box = null;
+		}
+	}
+);
+
+
+
 
     // When the user clicks "Edit Question" while viewing the Suggested Questions...
     $('.single__suggested__question').each(function() {
