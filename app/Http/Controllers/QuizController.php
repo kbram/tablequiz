@@ -469,8 +469,12 @@ $round_image->save();
 
     }    
     
-    public function start_quiz()
+    public function start_quiz($id)
     {
+        $quizzes=Auth::user()->quizzes()->get();
+       $quiz = $quizzes->find($id);
+$questions= $quiz->questions();
+dd($questions);
         return view('quiz.start_quiz');
     }
 

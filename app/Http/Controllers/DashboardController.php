@@ -30,7 +30,6 @@ class DashboardController extends Controller
     }
 
     public function index(){
-       
         $quizzes=Auth::user()->quizzes()->get();
             
         foreach($quizzes as $quiz)
