@@ -19,7 +19,7 @@ class PriceBandsController extends Controller
     
   public function update(Request $request)
   {   
-      dd($request);
+    
     $validator = Validator::make(
         $request->all(),
         [
@@ -40,7 +40,6 @@ class PriceBandsController extends Controller
         $priceBand->from = $request->get_from;
         $priceBand->to = $request->get_to;
         $priceBand->cost = $request->get_cost;
-        
         
         $priceBand->save();
         

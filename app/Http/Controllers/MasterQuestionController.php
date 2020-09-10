@@ -180,7 +180,6 @@ public function postRound(Request $request){
             Session::forget('round');
             Session::forget('image');
 
-   
             $validator = Validator::make(
                 $request->all(),
                 [

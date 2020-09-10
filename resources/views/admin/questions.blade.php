@@ -47,7 +47,7 @@
 					</li>
 					
 				</ul>
-				<a href="/quiz/setup" class="btn btn-primary hasPlus d-block">New Quiz</a>
+				<!-- <a href="/quiz/setup" class="btn btn-primary hasPlus d-block">New Quiz</a> -->
 			</div>
 		</aside>
 		
@@ -70,7 +70,7 @@
 					<div class="dashboard__container flex-grow-0 pt-4 mb-3">
 						<h3>Add new question</h3>
 						
-						<form action="/questions/create" enctype="multipart/form-data" method="post" class="pt-3 add__new__in__admin">
+						<form action="/admin/questions" enctype="multipart/form-data" method="post" class="pt-3 add__new__in__admin">
 							@csrf
 							<div class="form-row">
 								<div class="col-md-4">
@@ -79,48 +79,49 @@
 								<div class="col-md-4">
 
 								<select name="category__type" id="category__type" class="form-control" >
-                                                @foreach($categories as $category)
-                                                    <option value="{{$category->id }}" value="show" >{{ $category->category_name }}</option>
-													
-                                                @endforeach
+							    <option value="{{(old('category__type') ?? '')}}" selected >{{(old('category__type') != '' ? old('category__type') : 'Please Choose...')}}</option>
+                                @foreach($categories as $category)
+						           <option value="{{$category->category_name }}" value="show">{{ $category->category_name }}</option>
+								@endforeach
                                    	<li class="active">
 						
 					</li>
 					
 				</ul>
-				<a href="../quiz/setup" class="btn btn-primary hasPlus d-block">New Quiz</a>
+				<!-- <a href="../quiz/setup" class="btn btn-primary hasPlus d-block">New Quiz</a> -->
 			</div>
 		</aside>
 		
 		<section class="col-lg-9 dashboard__container">
-						<form action="" method="" class="pt-3 add__new__in__admin">
-							<div class="form-row">
-								<div class="col-md-4">
-									<label for="category_type">Category</label>
-								</div>
-								<div class="col-md-4">
-									<select id="category_type" class="form-control">
-										<option value="category__music">Music</option>
-										<option value="category__sport">Sport</option>
-										<option value="category__Geography">Geography</option>
-										<option value="category__History">History</option>
-										<option value="category__Politics">Politics</option>
-										<option value="category__popular_culture">Popular Culture</option>
+								</select>
 
-									</select>
+								@if ($errors->has('category__type'))
+                                    <span class="help-block">
+                                            <p>{{ $errors->first('category__type') }}</p>
+                                    </span>
+                        		@endif	
+
 								</div>
-							</div>
+								</div> 
 							<div class="form-row">
 								<div class="col-md-4">
 									<label for="question__type">Question type</label>
 								</div>
 								<div class="col-md-4">
 								
-									<select id="question__type" name="question__type" class="form-control" >
+									<select id="question__type" name="question__type" class="form-control">
+									<option value="{{(old('question__type') ?? '')}}" selected >{{(old('question__type') != '' ? old('question__type') : 'Please Choose...')}}</option>
 									    <option value="standard__question">Standard</option>
 										<option value="multiple__choice__question">Multiple choice</option>
 										<option value="numeric__question">Numeric</option>
 									</select>
+
+									@if($errors->has('question__type'))
+                                    <span class="help-block">
+                                            <p>{{ $errors->first('question__type') }}</p>
+                                    </span>
+                        			@endif
+
 								</div>
 							</div>
 							<div class="form-row">
@@ -128,7 +129,12 @@
 									<label for="question">Question</label>
 								</div>
 								<div class="col-md-8">
-									<input name="question" type="text" class="form-control" >
+									<input name="question" type="text" class="form-control" id="question" value="{{old('question')}}">
+									@if($errors->has('question'))
+                                    <span class="help-block">
+                                            <p>{{ $errors->first('question') }}</p>
+                                    </span>
+                        			@endif
 									
 								</div>
 							</div>
@@ -271,6 +277,11 @@
 								</div>
 								<div class="col-md-8">
 									<input class="form-control" name="standard__question__answer" type="text" >
+									@if($errors->has('standard__question__answer'))
+                                    <span class="help-block">
+                                            <p>{{ $errors->first('standard__question__answer') }}</p>
+                                    </span>
+                        			@endif
 								</div>
 							</div>
 							<div class="form-row d-none" id="numeric__answer" name="numeric__answer">
@@ -279,6 +290,11 @@
 								</div>
 								<div class="col-md-8">
 									<input class="form-control" name="numeric__question__answer" type="number" >
+                                      @if($errors->has('numeric__question__answer'))
+                                    <span class="help-block">
+                                            <p>{{ $errors->first('numeric__question__answer') }}</p>
+                                    </span>
+                        			@endif
 								</div>
 							</div>
 							<div class="form-row d-none" style="min-height:0;" id="multiple__choice__legend">
@@ -320,20 +336,26 @@
 								</div>
 								<div class="col-md-4">
 									<input class="form-control" type="number" name="time__limit" >
+									@if($errors->has('time__limit'))
+                                    <span class="help-block">
+                                            <p>{{ $errors->first('time__limit') }}</p>
+                                    </span>
+                        			@endif
 								</div>
 								<div class="col">
 									<small class="form-text text-muted">Seconds</small>
 								</div>
 							</div>
 							
-						</form>
 						
 						<hr>
 						<div class="row justify-content-center">
 							<div class="col-4">
-								<a href="#" class="d-block btn btn-primary">Save</a>
+							<button class="d-block btn btn-primary" type="submit">Save</button>
 							</div>
 						</div>
+						</form>
+
 					</div>
 					<div class="dashboard__container flex-grow-1">
 						<table class="table table-striped table-borderless m-0 h-100 my__quizzes">
@@ -344,7 +366,7 @@
 									<th class="text-center">Actions</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="questions_table">
 							
 							@foreach($questions as $question)
 							
@@ -359,42 +381,20 @@
 									<span><a href="{{ URL::to('questions/'. $question->id .'/edit') }}" data-toggle="tooltip" title="edit">
                                                    Edit
                                                 </a></span>
-								</div>									
-								<div class="d-flex flex-column">
-									<i class="fas fa-times-circle"></i>
-									<span> <a  data-id="{{$question->question}}" data-model="GlobalQuestion"  data-toggle="tooltip" title="delete" >
-                                               Delete
-                                                </a></span>
 								</div>
-							    </td>
+								<form method="POST" action="/admin/questions/{{$question->id}}" class="p-0">
+												{{ csrf_field() }}	
+												<div class="d-flex flex-column">
+												<i class="fas fa-times-circle" ></i><span class="delete">Delete</span>
+												</div>
+								</form>
+								</td>
 							</tr>
 							 @endforeach
 							
 								 
 							</tbody>
-								<tr>
-									<td>{{$question->question}}</td>
-									<td>{{$question->category}}</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column">
-											<i class="fas fa-pencil-alt"></i>
-											<span>Edit</span>
-										</div>									
-										
-										
-										<div class="p-0">
-										
-											<form method="POST" action="/admin/questions/{{$question->id}}" class="p-0">
-												{{ csrf_field() }}
-												<div class="d-flex flex-column">
-											<i class="fas fa-times-circle "></i><span class="delete" >Delete</span>
-											</div>
-											</form>
-										</div>
-									</td>
-								</tr>
-								@endforeach
-								</tbody>
+								
 							<tbody id="questions_table"></tbody>
 							@if(config('usersmanagement.enableSearchUsers'))
 								<tbody id="search_results"></tbody>
@@ -420,7 +420,8 @@
 
 @section('footer_scripts')
 	@if(config('usersmanagement.enableSearchUsers'))
-        @include('scripts.search-questions')
+    @include('scripts.search-questions')
     @endif
-@include('scripts.delete-model')	
+@include('scripts.delete-model')
+
 @endsection

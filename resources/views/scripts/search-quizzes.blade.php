@@ -24,11 +24,13 @@
                 url: "{{ route('search-quizzes') }}",
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 data: searchform.serialize(),
-                success: function (results) {
-                    let jsonData = JSON.parse(results);
+                success: function (quizzes) {
+                    let jsonData = JSON.parse(quizzes);
                     if (jsonData.length != 0) {
                         quizTable.hide();
                         $.each(jsonData, function(index, val) {
+
+                            console.log(val);
                             let viewCellHtml = '<div class=" d-flex flex-column"><i class="far fa-eye"></i><span>Edit</span></div>';
                             let shareCellHtml =  '<div class="d-flex flex-column"><i class="fas fa-share-alt"></i><span>Share</span></div>';
                             let blockCellHtml =  '<div class="d-flex flex-column"><i class="fas fa-times-circle"></i><span>Block</span></div>';
@@ -37,8 +39,10 @@
                             
                             resultsContainer.append('<tr>' +
                                 '<td>' + val.quiz__name + '</td>' +
-                                '<td>' + val.quiz_link + '</td>' +
-                                '<td>'+val.no_of_participants+'</td>'+
+                                '<td class="d-none">' + val.quiz_link + '</td>' +
+                                '<td>'+val.username+'</td>'+
+                                '<td class="text-lg-center">'+val.roundcount+'</td>'+
+                                '<td class="text-lg-center">'+val.questioncount+'</td>'+
                                 '<td class="quiz_actions d-flex flex-row justify-content-lg-center">' + viewCellHtml + shareCellHtml +blockCellHtml +  '</td>' +
 
                             '</tr>');

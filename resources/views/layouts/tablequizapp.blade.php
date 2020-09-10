@@ -79,7 +79,8 @@
 
         <script src="https://use.fontawesome.com/releases/v5.3.0/js/all.js"></script>
 
-        
+        <script src="https://use.fontawesome.com/releases/v5.3.0/js/all.js"></script>
+
         {{-- Scripts --}}
         @yield('footer_scripts')
 

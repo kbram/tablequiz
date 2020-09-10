@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 use App\Models\Quiz;
+use App\Models\QuizCategory;
+use Illuminate\Support\Facades\Storage;
+
+
 use App\Models\UserPayment;
 use App\Models\Participant;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Models\QuizCategory;
 use App\Models\QuizRound;
 use App\Models\Question;
 use App\Models\Answer;
@@ -158,7 +161,6 @@ class QuizController extends Controller
             $quiz = $request->input('quiz__link');
 
             return View('quiz.add_round', compact('categories','answers','medias','quiz'));
-
 
 
         }
@@ -395,13 +397,22 @@ $round_image->save();
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        $results = Quiz::where('id', 'like', $searchTerm.'%')
+        $quizzes = Quiz::where('id', 'like', $searchTerm.'%')
                             ->orWhere('quiz__name', 'like', $searchTerm.'%')->get();
                             
+                            foreach($quizzes as $quiz){
+                                $user= User::where('id', $quiz->user_id)->value('name'); 
+                                $roundCount=$quiz->rounds()->count();
+                                $questionCounts=$quiz->questions()->count();
+                                $quiz['username'] = $user;
+                                $quiz['roundcount'] = $roundCount;
+                                $quiz['questioncount'] =  $questionCounts;
 
+
+                            }
 
         return response()->json([
-            json_encode($results),
+            json_encode($quizzes),
         ], Response::HTTP_OK);
         
     }
@@ -411,7 +422,6 @@ $round_image->save();
         $quiz = Quiz::find($id);    
 
         $image=$quiz->icon()->first()->local_path;
-        // dd($image);
         return view('quiz.edit-setup',compact('quiz','image'));
         
     }
@@ -430,9 +440,11 @@ $round_image->save();
             return back()->withErrors($validator)->withInput();
         }
 
-   
+        $quiz = Quiz::find($id);    
+
             $quiz -> quiz__name              = $request->input('quiz__name');
             $quiz -> quiz_password          = $request->input('quiz__password');
+            $quiz -> quiz__name              = $request->input('quiz__name');
             $quiz -> quiz_link              = $request->input('quiz__link');
             $quiz-> no_of_participants     =  $request->input('quiz__participants');
             $quiz-> user_id = auth()->id();
@@ -441,6 +453,8 @@ $round_image->save();
             $quiz_id=Quiz::where('quiz__name',$quiz -> quiz__name)->first()->id;
 
             if ($request->hasFile('upload__quiz__icon')) {
+                
+
  
                 $quiz_icon = $request->file('upload__quiz__icon');
     
@@ -448,7 +462,6 @@ $round_image->save();
                 $save_path1 = '/storage/quizicon/'.$quiz_id.'/quiz_icon/';
     
                 $save_path = storage_path('app/public'). '/quizicon/'.$quiz_id.'/quiz_icon/';
-                $save_path_thumb = storage_path('app/public').'/quizicon/'.$quiz_id.'/quiz_icon/'.'/thumb/';
 
 
     
@@ -456,26 +469,25 @@ $round_image->save();
                 // $path_thumb    = $save_path_thumb . $filename;
     
                 $public_path = storage_path('app/public'). '/quizicon/'.$quiz_id.'/quiz_icon/'.$filename;
-                $public_path_thumb= storage_path('app/public'). '/quizicon/'.$quiz_id.'/quiz_icon/'.'/thumb/'.$filename;
                 
     
                 //resize the image            
     
                 // Make the user a folder and set permissions
                 File::makeDirectory($save_path, $mode = 0755, true, true);
-                File::makeDirectory($save_path_thumb, $mode = 0755, true, true);
     
-                Image::make($quiz_icon)->resize(250,250)->save($save_path_thumb.$filename);
+                // Image::make($quiz_icon)->resize(250,250)->save($save_path_thumb.$filename);
     
                 $quiz_icon->move($save_path, $filename);       
                 
-           
+                if(Storage::exists($public_path)) {
+                    unlink($public_path); 
+                 }
                 $quizIcon = QuizSetupIcon::findorfail($id);    
 
                 $quizIcon->public_path       = $public_path;
                 $quizIcon->local_path        = $save_path1 . '/' . $filename;
                 $quizIcon->quiz_id           =$quiz_id;
-                $quizIcon->thumb_path        = $public_path_thumb;
                $quizIcon->save();
                } 
 

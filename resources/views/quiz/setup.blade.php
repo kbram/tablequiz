@@ -82,13 +82,13 @@
 							<div class="modal__edit__image">
 								<div class="modal__edit__image__mask"></div>
 								<div class="modal__edit__size" id="img-wrapper">
-								<img class="modal__edit__image__image" src="" id="image_preview_container">
+								<img class="modal__edit__image__image imagePreview" src="" id="image_preview_container" style="display:block;margin-left:auto;margin-right:auto;">
 								</div>
 							</div>
 							<div class="modal__edit__image__range">
 								<div class="form-group">
 									<label for="formControlRange">Edit size</label>
-									<input type="range" class="form-control-range" id="formControlRange" class="slider" >
+									<input type="range" class="form-control-range formControlRange" id="formControlRange" class="slider" min="1" max="100">
 									<div id="demo" class="d-none"></div>
 								  </div>
 							</div>
@@ -96,7 +96,7 @@
 						  <div class="modal-footer justify-content-center row no-gutters">
 							 <div class="col-md-3"> 
 								 <label class="d-block" for="upload__quiz__icon">Upload
-									<input type="file"  class="form-control-file" id="upload__quiz__icon" name="upload__quiz__icon" value="Upload">
+									<input type="file"  class="form-control-file imagePreviewInput" id="upload__quiz__icon" name="upload__quiz__icon" value="Upload">
 								</label>
 							</div>
 							<div class="col-md-3">
@@ -159,42 +159,7 @@
 									</div>
 								</div>
 						  @endforeach
-								<!-- <div class="col-6 col-sm-4 participants__number p-1">
-									<div class="participants__choice p-3">
-										<p>1-5</p>
-										<p>Free</p>
-									</div>
-								</div>
-								<div class="col-6 col-sm-4 participants__number p-1">
-									<div class="participants__choice p-3">
-										<p>5-9</p>
-										<p>Free</p>
-									</div>
-								</div>
-								<div class="col-6 col-sm-4 participants__number p-1">
-									<div class="participants__choice p-3">
-										<p>10-19</p>
-										<p>€4.99</p>
-									</div>
-								</div>
-								<div class="col-6 col-sm-4 participants__number p-1">
-									<div class="participants__choice p-3">
-										<p>20-29</p>
-										<p>€9.99</p>
-									</div>
-								</div>
-								<div class="col-6 col-sm-4 participants__number p-1">
-									<div class="participants__choice p-3">
-										<p>30-49</p>
-										<p>€19.99</p>
-									</div>
-								</div>
-								<div class="col-6 col-sm-4 participants__number p-1">
-									<div class="participants__choice p-3">
-										<p>50+</p>
-										<p>€29.99</p>
-									</div>
-								</div> -->
+								
 						  </div>
 						  <div class="modal-footer justify-content-center row no-gutters">
 							<div class="col-md-3">
