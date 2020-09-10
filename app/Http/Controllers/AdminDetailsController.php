@@ -91,9 +91,7 @@ class AdminDetailsController extends Controller
         foreach($users as $user){
             $quizcount[$user->id] =$user->quizzes()->count();
             $questioncount[$user->id] =$user->questions()->count();
-       
-            
-         }
+    }
            return view('admin.users',compact('users','quizcount','questioncount','quiz'));
     }
     public function quizView($id){

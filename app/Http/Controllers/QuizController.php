@@ -14,6 +14,7 @@ use App\Models\QuizRound;
 use App\Models\Question;
 use App\Models\Answer;
 use App\Models\QuizRoundImage;
+use App\Models\PriceBand;
 
 
 
@@ -43,9 +44,9 @@ class QuizController extends Controller
         return view('admin.quizzes',compact('quizzes'));
     }
     public function create()
-    {   
-         $participants=Participant::all();
-        return view('quiz.setup',compact('participants'));
+    {    $participants=Participant::all();
+        $bands=PriceBand::all();
+        return view('quiz.setup',compact('participants', 'bands'));    
     }
 
     /**
@@ -421,9 +422,12 @@ $round_image->save();
     public function editQuiz($id){
 
         $quiz = Quiz::find($id);    
+        $bands=PriceBand::all();
 
         $image=$quiz->icon()->first()->local_path;
-        return view('quiz.edit-setup',compact('quiz','image'));
+        return view('quiz.edit-setup',compact('quiz','image', 'bands'));
+
+        
         
     }
     public function update(Request $request,$id)
@@ -527,8 +531,8 @@ dd($questions);
     public function setup()
     {    
         $participants=Participant::all();
-        return view('quiz.setup',compact('participants'));
-    }
+        $bands=PriceBand::all();
+        return view('quiz.setup',compact('participants', 'bands'));    }
 
     
 }

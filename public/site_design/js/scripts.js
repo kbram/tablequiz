@@ -1,5 +1,6 @@
 jQuery(document).ready(function($) {
 console.log("working");
+
     $('.quiz__slider').slick({
         prevArrow: '<button type="button" class="slick-btns slick-prev"><i class="fa fa-angle-left"</button>',
         nextArrow: '<button type="button" class="slick-btns slick-next"><i class="fa fa-angle-right"</button>',
@@ -65,7 +66,7 @@ var i =0;
 
     });
 
-
+  
 //kopi 
     // Forms - add another multiple choice Q //
 	// $('.multiple__choice__row').each(function(){
@@ -83,9 +84,12 @@ var i =0;
 	// 		$(this).parents('.multiple__choice__row').after(newRow);
 	// 	}).on('click','span.minus',function(){
 	// 		$(this).parents('.multiple__choice__row').detach();
-	// 	})
-		
-	 });
+    // 	})
+    
+    
+     
+     
+     
 
     $("body").delegate('input:radio.multiple-choice-correct-answer', 'click', function() {
 
@@ -99,7 +103,7 @@ var i =0;
         console.log("click different");
 	
 	
-	
+       
 	
 	/// Forms - Hide & Show ////
 	
@@ -237,6 +241,8 @@ $('#login-btn').click(function(e) {
 
             })
         })
+
+        
     });
 
 
@@ -244,9 +250,10 @@ $('#login-btn').click(function(e) {
     //Bring up modal when number of participants is changed //
     
 	$('select#quiz__participants').on('change',function(){
-		$('#select_participants__modal').modal();
-	})
-	
+        console.log("hi modal");
+        $('#select_participants__modal').modal();
+    })
+		
 	
 	// Click to Copy //
 	
@@ -440,3 +447,4 @@ $('.single__answer')
 
 
     })
+});

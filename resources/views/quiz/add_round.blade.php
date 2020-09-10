@@ -56,7 +56,7 @@
 					<label for="round__name">Round name</label>
 				</div>
 				<div class="col-md-8">
-					<input autocomplete="nothanks" type="text" name="round_name" class="form-control">
+					<input autocomplete="nothanks" type="text" name="round_name"  class="form-control" required>
 					<input hidden autocomplete="nothanks" type="text" name="round_count" class="form-control" value="{{$round_count ?? '1'}}">
 					<input hidden autocomplete="nothanks" type="text" name="quiz" class="form-control" value="{{$quiz}}">
 

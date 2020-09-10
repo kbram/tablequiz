@@ -135,7 +135,7 @@
                         @endif
 						
 					</div>
-					<div class="modal" id="select_participants__modal" tabindex="-1" role="dialog" aria-labelledby="select_participants__modal" aria-hidden="true">
+					<div class="modal show" id="select_participants__modal" tabindex="-1" role="dialog" aria-labelledby="select_participants__modal" aria-hidden="true">
 					  <div class="modal-dialog modal-dialog-centered" role="document">
 							<div class="modal-content">
 								<div class="modal-header justify-content-center">
@@ -196,6 +196,7 @@
 
 @section('footer_scripts')
 <script>    
+
 
 $('.participants__choice').click(function() {
 
