@@ -421,6 +421,26 @@ $("#img-save").click(function(){
    var save= document.getElementById("upload__media__file").value.split("\\");
    console.log("input-value"+ save);
 });
+  
+/**edit question change from main script to suggested script */
+$("body").delegate('.edit__question','click',function(e){console.log('edit question');
+         e.preventDefault();
+         var parent=$(this).closest('.single__suggested__question');
+         $('.readonly',parent).removeAttr('readonly');
+            $('.disabled',parent).removeAttr('disabled');
+            $('p.the_question input',parent).focus();
+            $('.d-none', parent).addClass('hidd').removeClass('d-none');
+            $('.invisible', parent).addClass('tempVis').removeClass('invisible');
+            if($(this).text() == "Done editing"){
+                $(this).text("Edit question");
+                $('.readonly', parent).attr('readonly','readonly');
+                $('.disabled',parent).attr('disabled','disabled');
+                $('.hidd').addClass('d-none').removeClass('hidd');
+                $('.tempVis').addClass('invisible').removeClass('tempVis');
+            } else {
+                $(this).text("Done editing");
+            }
+});
 
 
 
