@@ -1,4 +1,4 @@
-<?php
+<?php                                                                                                                                                             
 
 namespace App\Http\Controllers;
 
@@ -22,8 +22,8 @@ class MasterQuestionController extends Controller
 
 
     public function postRound(Request $request){
-       
-
+        session(['quiz' => 'quiz']);
+             // dd($request);
         for($i=0; $i<count($request->question); $i++){
             echo $request->question[$i];
             $standard='standard__question__answer__';
@@ -64,7 +64,7 @@ class MasterQuestionController extends Controller
     public function standard(Request $request,$id)
     {   
     
-         if($id>=1 && $id<=7){
+         if($id){
             $ans=[];
             $medias=[];
             $ques=GlobalQuestion::where('category_id',$id)->where('question_type','standard')->get();
@@ -95,7 +95,7 @@ class MasterQuestionController extends Controller
     public function image(Request $request,$id)
     {   
        
-         if($id>=1 && $id<=7){
+         if($id){
             $ans=[];
             $medias=[];
         
@@ -127,7 +127,7 @@ class MasterQuestionController extends Controller
     public function audio(Request $request,$id)
     {   
      
-        if($id>=1 && $id<=7){
+        if($id){
             $ans=[];
             $medias=[];
             $ques=GlobalQuestion::where('category_id',$id)->get();
@@ -151,7 +151,7 @@ class MasterQuestionController extends Controller
 
     public function video(Request $request,$id)
     {  
-        if($id>=1 && $id<=7){
+        if($id){
             $medias=[];
             $ans=[];
             $ques=GlobalQuestion::where('category_id',$id)->get();
