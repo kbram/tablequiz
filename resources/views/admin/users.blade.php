@@ -47,7 +47,6 @@
 					</li>
 					
 				</ul>
-				<a href="../quiz/setup" class="btn btn-primary hasPlus d-block">New Quiz</a>
 			</div>
 		</aside>
 		

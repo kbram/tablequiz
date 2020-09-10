@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 use App\Models\UserPayment;
 use App\Models\Participant;
+use App\Models\PriceBand;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\QuizRound;
@@ -42,9 +43,11 @@ class QuizController extends Controller
         
         return view('admin.quizzes',compact('quizzes'));
     }
+
+    
     public function create()
-    {    $participants=Participant::all();
-        return view('quiz.setup',compact('participants'));
+    {    $bands=PriceBand::all();
+        return view('quiz.setup',compact('bands'));
     }
 
     /**
@@ -420,9 +423,10 @@ $round_image->save();
     public function editQuiz($id){
 
         $quiz = Quiz::find($id);    
+        $bands=PriceBand::all();
 
         $image=$quiz->icon()->first()->local_path;
-        return view('quiz.edit-setup',compact('quiz','image'));
+        return view('quiz.edit-setup',compact('quiz','image', 'bands'));
         
     }
     public function update(Request $request,$id)
@@ -526,7 +530,8 @@ dd($questions);
     public function setup()
     {    
         $participants=Participant::all();
-        return view('quiz.setup',compact('participants'));
+        $bands=PriceBand::all();
+        return view('quiz.setup',compact('participants', 'bands'));
     }
 
     

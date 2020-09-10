@@ -151,15 +151,16 @@
 			  		<label for="signup__pass">Password</label>
 				</div>
 			  	<div class="col-md-7">
-					<input id="password" type="password" class="form-control" name="password"> 
+					<input id="password_signup" type="password" class="form-control" name="password"><i class="far fa-eye" id="eyeclass" style= "float: right; margin-top: -30px; margin-right: 15px;"></i></input>
 				</div>
+				
 			</div>
 			<div class="form-row">
 				<div class="col-md-5">
 			  		<label for="signup__pass">Confirm Password</label>
 				</div>
 			  	<div class="col-md-7">
-					<input id="password-confirm" type="password" class="form-control" name="password_confirmation"> 
+					<input id="password_signup_confirm" type="password" class="form-control a" name="password_confirmation"></input>
 				</div>
 			</div>
 			<div class="form-row d-flex justify-content-center mt-5">
@@ -364,4 +365,23 @@
 
 
 				  @include('scripts.stripe') 
-                 
+				  <script>
+						$("body").on('click', '#eyeclass', function() {
+						$(this).toggleClass("fa-eye fa-eye-slash");
+						var input = $("#password_signup");
+						if (input.attr("type") === "password") {
+							input.attr("type", "text");
+						} else {
+							input.attr("type", "password");
+						}
+
+						var inputc = $("#password_signup_confirm");
+						if (inputc.attr("type") === "password") {
+							inputc.attr("type", "text");
+						} else {
+							inputc.attr("type", "password");
+						}
+
+						})
+				  </script>
+

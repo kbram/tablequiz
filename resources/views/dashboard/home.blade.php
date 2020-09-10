@@ -170,7 +170,7 @@
 											<i class="fas fa-share-alt"></i>
 											<span class="share" id="{{$quiz->id}}">Share</span>
 										</div>
-										<a href="../quiz/start-quiz.php">
+										<a href="/quiz/start_quiz">
 											<div class="d-flex flex-column">
 												<i class="fas fa-play"></i>
 												<span>Start</span>
