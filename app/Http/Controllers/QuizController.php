@@ -502,10 +502,23 @@ $round_image->save();
     
     public function start_quiz($id)
     {
-        $quizzes=Auth::user()->quizzes()->get();
-       $quiz = $quizzes->find($id);
-    $questions= $quiz->questions();
-        return view('quiz.start_quiz');
+       $questions=[];
+       $answers=[];
+       $rounds =QuizRound::where('quiz_id',$id)->get();
+       foreach($rounds as $round){
+        $questions[$round->id]=Question::where('round_id',$round->id)->get();
+          
+       }
+        
+       foreach($questions as $question){
+           foreach($question as $questio){
+                 $answers[$questio->id]=Answer::where('question_id',$questio->id)->get();
+        }
+      }        
+            
+							
+      
+        return view('quiz.start_quiz',compact('questions','answers','rounds'));
     }
 
     public function slider()
