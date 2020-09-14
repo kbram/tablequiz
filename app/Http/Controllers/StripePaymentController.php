@@ -130,7 +130,7 @@ $payment->save();
        $participant_range=$participants['no_of_participants'];
        $sp=explode('-',$participant_range);
        $get_no=$sp[1];
-       $participants_cost=Participant::where('to',$get_no)->get('cost');
+       $participants_cost=PriceBand::where('band_type','participants costs')->where('to',$get_no)->get('cost');
        $question_cost=PriceBand::where('band_type','questions costs')->where('from','<=',$request->count)->where('to','>=',$request->count)->get('cost')->first();
        
        $image=0;

@@ -514,7 +514,7 @@
 			<button type="submit"  class="btn btn-secondary d-block" id="nextRound"><span class="pr-3"><i class="fa fa-plus"></i></span>Next round</a>
 		</div>
 		<div class="col-md-4 px-0 px-md-4">
-			<a href="#" data-toggle="modal" data-target="#publishQuizModal" class="btn btn-primary d-block">Publish Quiz</a>
+			<a href="#" data-toggle="modal" id="publish-quiz" data-target="#publishQuizModal" class="btn btn-primary d-block publish-quiz">Publish Quiz</a>
 		</div>
 	</section>
 	</form>
@@ -525,5 +525,7 @@
 @section('footer_scripts')
 @include('scripts.suggest')
 @include('scripts.bg-image');
+@include('scripts.payment');
+
 
 @endsection

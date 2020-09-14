@@ -255,7 +255,7 @@
 			  <tfoot>
 				<tr class="total-cost">  
 				  <td colspan="2"><strong>Total:</strong></td>
-				  <td><strong>€29.97</strong></td>
+				  <td><strong></strong></td>
 				<td></td>
 				</tr>
 			  </tfoot>
@@ -362,7 +362,7 @@
 				 </div>
 
 				 
-
+</form>
 
 				  @include('scripts.stripe') 
 				  <script>

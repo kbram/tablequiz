@@ -92,7 +92,7 @@ class AdminDetailsController extends Controller
             $quizcount[$user->id] =$user->quizzes()->count();
             $questioncount[$user->id] =$user->questions()->count();
     }
-           return view('admin.users',compact('users','quizcount','questioncount','quiz'));
+           return view('admin.users',compact('users','quizcount','questioncount'));
     }
     public function quizView($id){
         $participants=Participant::all();

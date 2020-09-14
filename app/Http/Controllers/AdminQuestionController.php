@@ -21,13 +21,13 @@ class AdminQuestionController extends Controller
 
     public function create()
     { 
+      
       $categories = QuizCategory::all();
       $questions = DB::table('global_questions')->paginate(10);
        foreach($questions as $question){
             $cat_name[$question->id] = QuizCategory::where('id', $question->category_id)->value('category_name'); 
        }
     
-        $categories = QuizCategory::all();
        
       return view('admin.questions',compact('categories','questions','cat_name'));
     }
