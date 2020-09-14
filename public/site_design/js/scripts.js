@@ -151,12 +151,6 @@ var i =0;
 		$('#modal__signup, #modal__payment').addClass('d-none');
 	});
 	
-	// $('.to__checkout').click(function(e){
-	// 	e.preventDefault();
-		
-	// 	$('#modal__login').addClass('d-none');
-	// 	$('#modal__signup').addClass('d-none');
-	// 	$('#modal__payment').removeClass('d-none');
 	
 	
 /**kopi ajax login  */
