@@ -318,3 +318,6 @@ Route::post('ajax/standard/{id}','MasterQuestionController@standard');
 Route::post('ajax/image/{id}', 'MasterQuestionController@image');
 Route::post('ajax/audio/{id}', 'MasterQuestionController@audio');
 Route::post('ajax/video/{id}', 'MasterQuestionController@video');
+
+
+Route::post('payment', 'StripePaymentController@payment_detail');

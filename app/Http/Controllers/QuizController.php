@@ -44,7 +44,7 @@ class QuizController extends Controller
         return view('admin.quizzes',compact('quizzes'));
     }
     public function create()
-    {    $participants=Participant::all();
+    {   $participants=Participant::all();
         $bands=PriceBand::all();
         return view('quiz.setup',compact('participants', 'bands'));    
     }

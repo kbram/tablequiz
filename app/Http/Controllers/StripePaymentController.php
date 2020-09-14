@@ -9,7 +9,13 @@ use Config;
 use Validator;
 use Auth;
 use App\Models\UserPayment;
+use App\Models\Quiz;
+use App\Models\Participant;
+use App\Models\PriceBand; 
+use App\Models\QuizRound;
+use App\Models\QuizRoundImage;
 use Exception;
+
 
 class StripePaymentController extends Controller
 
@@ -115,5 +121,34 @@ $payment->save();
 
           
       
+    }
+
+    public function payment_detail(Request $request){
+       $user = auth()->user();
+       $participants=Quiz::where('user_id',$user->id)->get('no_of_participants')->last();
+
+       $participant_range=$participants['no_of_participants'];
+       $sp=explode('-',$participant_range);
+       $get_no=$sp[1];
+       $participants_cost=Participant::where('to',$get_no)->get('cost');
+       $question_cost=PriceBand::where('band_type','questions costs')->where('from','<=',$request->count)->where('to','>=',$request->count)->get('cost')->first();
+       
+       $image=0;
+       $quiz_id=Quiz::where('user_id',$user->id)->get('id')->first();
+        $rounds=QuizRound::where('quiz_id',$quiz_id->id)->get();
+         
+        foreach($rounds as $round){
+             $image +=QuizRoundImage::where('round_id',$round->id)->count();
+        }
+    $backgroun_cost=PriceBand::where('band_type','backgrounds costs')->where('from','<=',$image)->where('to','>=',$image)->get('cost')->first();
+
+       $response = array(
+              'participants' =>  $participants,
+              'participants_cost' => $participants_cost,
+              'question_cost' => $question_cost,
+               'bg_image' => $image, 
+               'bg_image_cost' => $backgroun_cost
+        );
+        return response()->json($response);
     }
 }

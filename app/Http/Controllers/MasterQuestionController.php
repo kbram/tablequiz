@@ -1,4 +1,4 @@
-<?php
+<?php                                                                                                                                                             
 
 namespace App\Http\Controllers;
 use App\Models\Question;
@@ -32,43 +32,43 @@ class MasterQuestionController extends Controller
     }
 
 
-    public function postRound1(Request $request){
-       
-
-        for($i=0; $i<count($request->question); $i++){
-            echo $request->question[$i];
-            $standard='standard__question__answer__';
-            $numeic='numeric__question__answer__';      
-            $str='multiple__choice__answer__';
+    // public function postRound(Request $request){
+    //     session(['quiz' => 'quiz']);
+    //          // dd($request);
+    //     for($i=0; $i<count($request->question); $i++){
+    //         echo $request->question[$i];
+    //         $standard='standard__question__answer__';
+    //         $numeic='numeric__question__answer__';      
+    //         $str='multiple__choice__answer__';
            
-            $con=$str.$i;
-            $standard_con=$standard.$i;
-            $numeric_con=$numeic.$i;
+    //         $con=$str.$i;
+    //         $standard_con=$standard.$i;
+    //         $numeric_con=$numeic.$i;
              
-        if(count($request->$con)>1){
-            for($j=0; $j<count($request->$con); $j++){echo "<br>";
-                   echo (".........".$request->$con[$j]." ");
+    //     if(count($request->$con)>1){
+    //         for($j=0; $j<count($request->$con); $j++){echo "<br>";
+    //                echo (".........".$request->$con[$j]." ");
                   
-                }
+    //             }
             
-            }
+    //         }
 
             
-        elseif($request->$standard_con){
-            echo (".........".$request->$standard_con." ");
-            }
+    //     elseif($request->$standard_con){
+    //         echo (".........".$request->$standard_con." ");
+    //         }
 
         
-        elseif($request->$numeric_con){
-            echo (".........".$request->$numeric_con." ");
-            }
+    //     elseif($request->$numeric_con){
+    //         echo (".........".$request->$numeric_con." ");
+    //         }
 
-            echo "<br>";echo "<br>";
-        }
+    //         echo "<br>";echo "<br>";
+    //     }
 
        
         
-    }
+    // }
     
 
 
