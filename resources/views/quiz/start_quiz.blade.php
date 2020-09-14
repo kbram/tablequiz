@@ -31,7 +31,19 @@
 					<p class="countdown__time">22</p>
 					<div class="countdown__buttons row">
 						<div class="col-4">
-							<i class="fa fa-play"></i>
+						<form action="/quiz/run_quiz" method="post" class="col-4" >
+								<input type="hidden" name="questionno" value="q1" >
+								<input type="hidden" name="question" value="What is your name ?" >
+								<input type="hidden" name="answer" value="bavaram\kopi\thusaparan\rahul" >
+								<input type="hidden" name="media" value="photo.jpg" >
+								<input type="hidden" name="answerId" value="12" >
+								<input type="hidden" name="questionId" value="1" >
+								<input type="hidden" name="roundId" value="24" >
+								<input type="hidden" name="quizId" value="12" >
+								<input type="hidden" name="type" value="12" >
+								<button type="submit" style="border:none;"><i class="fa fa-play"></i></button>
+								{{csrf_field()}}
+							</form>
 						</div>
 						<div class="col-4">
 							<i class="fa fa-pause"></i>
