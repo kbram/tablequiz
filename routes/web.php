@@ -286,7 +286,7 @@ Route::post('stripe', 'StripePaymentController@stripePost')->name('stripe.post')
 //play quiz url
 
 
-Route::get('test/{quiz_name}','PlayController@selecturl');
+Route::get('play/{quiz_name}','PlayController@selecturl');
 
 
 //TEST

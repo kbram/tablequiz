@@ -101,7 +101,7 @@ var i =0;
 
     $('body').on('click', '.multiple__choice__row__in_modal span', function() {
         console.log("click different");
-	
+	});
 	
        
 	
@@ -128,16 +128,28 @@ var i =0;
 	
 	
 	$('.sign_up__from__modal').click(function(){
-		
+		console.log("hi");
 		$('#modal__login').addClass('d-none');
 		$('#modal__signup').removeClass('d-none')
 		
-	})
+    });
+    
+    $('.login__from__modal').click(function(){
+		console.log("hi");
+		$('#modal__login').removeClass('d-none');
+		$('#modal__signup, #modal__payment').addClass('d-none');
+		
+    });
+    
+
+
+
+
 	$('a.back_to__login').click(function(e){
 		e.preventDefault();
 		$('#modal__login').removeClass('d-none');
 		$('#modal__signup, #modal__payment').addClass('d-none');
-	})
+	});
 	
 	// $('.to__checkout').click(function(e){
 	// 	e.preventDefault();
@@ -145,7 +157,7 @@ var i =0;
 	// 	$('#modal__login').addClass('d-none');
 	// 	$('#modal__signup').addClass('d-none');
 	// 	$('#modal__payment').removeClass('d-none');
-	})
+	
 	
 /**kopi ajax login  */
 

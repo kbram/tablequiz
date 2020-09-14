@@ -109,7 +109,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-		  <a class="back_to__login" href="#"><i class="fa fa-angle-left"></i><span>Back</span></a>
+		  <a class="back_to__login" href="#"><i class="fa fa-angle-left"></i><span>Login</span></a>
       </div>
       <div class="modal-body">
         <form class="popupLogIn text-body px-4" method="POST" action="{{ route('register') }}">
