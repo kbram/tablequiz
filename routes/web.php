@@ -321,3 +321,7 @@ Route::post('ajax/video/{id}', 'MasterQuestionController@video');
 
 
 Route::post('payment', 'StripePaymentController@payment_detail');
+
+
+//card
+Route::get('card', 'StripePaymentController@card');

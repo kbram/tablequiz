@@ -34,6 +34,8 @@ $(document).ready(function() {
   
     $('#modal__payment').find('.total-cost td:nth-child(2)>strong').text(Number(participants_cost)+Number(questions_cost)+Number(data.bg_image_cost.cost));
 
+    var total_card = Number(participants_cost)+Number(questions_cost)+Number(data.bg_image_cost.cost ); 
+    $('#card_total').val(total_card);
         },
         error: function(result,error) {
             
@@ -42,6 +44,22 @@ $(document).ready(function() {
         },
 
       });
+
+
+
+      //card fill
+
+      $.getJSON('/card',function (data){
+        $('#modal__payment').find('#card-holder-name').val(data.name);
+        $('#modal__payment').find('#cardholder_street').val(data.street);
+        $('#modal__payment').find('#cardholder_city').val(data.city);
+        $('#modal__payment').find('#cardholder_country').val(data.country);
+        $('#modal__payment').find('#cardholder_number').val(data.card_number);
+        $('#modal__payment').find('#cardholder_expiry_month').val(data.exp_month);
+        $('#modal__payment').find('#cardholder_expiry_year').val(data.exp_year);
+        $('#modal__payment').find('#card-cvc').val(data.cvv);
+
+});
 
 
 
