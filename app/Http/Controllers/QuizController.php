@@ -504,8 +504,7 @@ $round_image->save();
     {
         $quizzes=Auth::user()->quizzes()->get();
        $quiz = $quizzes->find($id);
-$questions= $quiz->questions();
-dd($questions);
+    $questions= $quiz->questions();
         return view('quiz.start_quiz');
     }
 
