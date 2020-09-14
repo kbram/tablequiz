@@ -17,7 +17,7 @@ class CreateQuizzesTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('quiz_name')->unique();
+            $table->string('quiz__name')->unique();
             $table->string('quiz_password')->nullable();
             $table->string('quiz_link');
             $table->string('no_of_participants');

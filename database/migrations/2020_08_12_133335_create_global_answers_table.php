@@ -18,7 +18,7 @@ class CreateGlobalAnswersTable extends Migration
             $table->string('answer');
             $table->boolean('answer_stat')->default(false);
             $table->bigInteger('question_id')->unsigned();
-            $table->foreign('question_id')->references('id')->on('global_questions');
+            $table->foreign('question_id')->references('id')->on('global_questions')->onDelete('cascade');;
             
             $table->timestamps();
         });

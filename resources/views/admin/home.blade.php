@@ -47,7 +47,6 @@
 					</li>
 
 				</ul>
-				<a href="../quiz/setup.php" class="btn btn-primary hasPlus d-block">New Quiz</a>
 			</div>
 		</aside>
 
@@ -64,7 +63,7 @@
 							</span>
 						</div>
 						<div class="col-lg-7 d-flex flex-column admin_home__details justify-content-center justify-content-md-start">
-							<p class="number mb-0 mb-lg-3 d-flex justify-content-center justify-content-lg-start"><strong>{{$cquzzes}}</strong></p>
+							<p class="number mb-0 mb-lg-3 d-flex justify-content-center justify-content-lg-start"><strong>{{$cquzzes ?? ''}}</strong></p>
 							<p class="d-flex justify-content-center justify-content-lg-start text-center text-lg-left">Quizzes created</p>
 						</div>
 					</div>
@@ -105,7 +104,8 @@
 							<thead>
 								<tr>
 									<th>Quiz name</th>
-									<th>Quiz link</th>
+									<th>Created by</th>
+									<th class="d-none">Quiz link</th>
 									<th class="text-center">Actions</th>
 								</tr>
 							</thead>
@@ -115,14 +115,16 @@
 
 								@if ($quiz->is_blocked)
 								<tr>
-									<td>{{$quiz -> quiz_name}}</td>
-									<td id="quizLink{{$quiz -> id}}">{{$quiz -> quiz_link}}</td>
+									<td>{{$quiz -> quiz__name}}</td>
+									<td>{{ $users[$quiz->id]}}</td>
+									<td class="d-none" id="quizLink{{$quiz -> id}}">{{$quiz-> quiz_link}}</td>
+									<td class="d-none" id="emailLink{{$quiz->id}}">{{$result[$quiz->id]}}</td>
 									<td class="quiz_actions db d-flex flex-row justify-content-lg-center">
 										<div class="d-flex flex-column"  style=" pointer-events: none;opacity: 0.4;">
 											<i class="far fa-eye"></i>
 											<a href="/admin/home/view/{{$quiz->id}}"><span class="view-qz" id="view-qz{{$quiz->id}}">View Qs</span></a>
 										</div>
-										<div class="d-flex flex-column "  style=" pointer-events: none;opacity: 0.4;">
+										<div class="d-flex flex-column"  style=" pointer-events: none;opacity: 0.4;">
 											<i class="fas fa-share-alt"></i><span class="share" id="{{$quiz->id}}">Share</span>
 
 										</div>
@@ -143,8 +145,11 @@
 								</tr>
 								@else
 								<tr>
-									<td>{{$quiz->quiz_name}}</td>
-									<td id="quizLink{{$quiz -> id}}">{{$quiz -> quiz_link}}</td>
+									<td>{{$quiz->quiz__name}}</td>
+									<td>{{ $users[$quiz->id]}}</td>
+
+									<td class="d-none" id="quizLink{{$quiz -> id}}">{{$quiz -> quiz_link}}</td>
+									<td class="d-none" id="emailLink{{$quiz->id}}">{{$result[$quiz->id]}}</td>
 									<td class="quiz_actions db d-flex flex-row justify-content-lg-center">
 										<div class="d-flex flex-column">
 											<i class="far fa-eye"></i>
@@ -164,158 +169,20 @@
 										</form>
 									
 										<div class="d-flex flex-column">
-											<i class="fas fa-envelope"></i><span>Message</span>
-
+											<i class="fas fa-envelope"></i><span class="message" id="{{$quiz->id}}">Message</span>
+											
 										</div>
 									</td>
 								</tr>
 								@endif
 								@endforeach
-								<!-- <tr>
-									<td>Mad Dog's Geography Quiz</td>
-									<td>SenanCronin2020</td>
-									<td class="quiz_actions db d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-share-alt"></i>
-											<span>Share</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-envelope"></i>
-											<span>Message</span>
-										</div>
-									</td>
-								</tr>
 								
-								<tr>
-									<td>Mad Dog's Geography Quiz</td>
-									<td>SenanCronin2020</td>
-									<td class="quiz_actions db d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-share-alt"></i>
-											<span>Share</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-envelope"></i>
-											<span>Message</span>
-										</div>
-									</td>
-								</tr>
-								
-								<tr>
-									<td>Mad Dog's Geography Quiz</td>
-									<td>SenanCronin2020</td>
-									<td class="quiz_actions db d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-share-alt"></i>
-											<span>Share</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-envelope"></i>
-											<span>Message</span>
-										</div>
-									</td>
-								</tr>
-								
-								<tr>
-									<td>Mad Dog's Geography Quiz</td>
-									<td>SenanCronin2020</td>
-									<td class="quiz_actions db d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-share-alt"></i>
-											<span>Share</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-envelope"></i>
-											<span>Message</span>
-										</div>
-									</td>
-								</tr>
-								
-								<tr>
-									<td>Mad Dog's Geography Quiz</td>
-									<td>SenanCronin2020</td>
-									<td class="quiz_actions db d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-share-alt"></i>
-											<span>Share</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-envelope"></i>
-											<span>Message</span>
-										</div>
-									</td>
-								</tr>
-								
-								<tr>
-									<td>Mad Dog's Geography Quiz</td>
-									<td>SenanCronin2020</td>
-									<td class="quiz_actions db d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column">
-											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-share-alt"></i>
-											<span>Share</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-envelope"></i>
-											<span>Message</span>
-										</div>
-									</td>
-								</tr> -->
-
-
 
 							</tbody>
 							<tfoot>
 								<tr>
 									<td colspan="4" class="text-right text-muted">
-										<a href="../dashboard/my-quizzes.php"><small>View all</small></a>
+										<a href="../admin/quizzes"><small>View all</small></a>
 									</td>
 								</tr>
 							</tfoot>

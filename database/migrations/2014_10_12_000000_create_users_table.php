@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('last_name')->nullable();
             $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->unique()->nullable();
             $table->rememberToken();
             $table->boolean('activated')->default(false);
             $table->string('token');
@@ -29,7 +29,10 @@ class CreateUsersTable extends Migration
             $table->ipAddress('signup_sm_ip_address')->nullable();
             $table->ipAddress('admin_ip_address')->nullable();
             $table->ipAddress('updated_ip_address')->nullable();
-            $table->ipAddress('deleted_ip_address')->nullable();
+            $table->ipAddress('deleted_ip_address')->nullable(); 
+            $table->boolean('is_blocked')->default(false);
+
+
             $table->timestamps();
             $table->softDeletes();
         });

@@ -8,7 +8,7 @@
 				<h1 class="landing__page pb-3"><span>The easy-to-use</span> customisable<br>quizzing tool!</h1>	
 				<div class="row pt-4 pr-lg-5">
 					<div class="col-lg-6 mb-3 mb-lg-0">
-						<a href="/quiz/setup.php" class="btn btn-primary d-block">Create a quiz</a>
+						<a href="setup/create/" class="btn btn-primary d-block">Create a quiz</a>
 					</div>
 					<div class="col-lg-6">
 						<a href="/play/start-quiz.php" class="btn btn-secondary d-block" data-toggle="modal" data-target="#join_a_quiz">Join a quiz</a>
@@ -40,7 +40,7 @@
 						<li class="py-3">Run and play quizzes across any device</li>
 					</ol>
 
-					<a href="/quiz/setup.php" class="d-block d-sm-inline btn btn-primary hasArrow mt-5">Get started</a>
+					<a href="/setup/create/" class="d-block d-sm-inline btn btn-primary hasArrow mt-5">Get started</a>
 				</div>
 			</div>
 		</div>
@@ -56,17 +56,20 @@
 			  <span aria-hidden="true">&times;</span>
 			</button>
 		  </div>
+		  <form action="/startquiz" method="post">
+		  @csrf
 		  <div class="modal-body pt-4 pb-3">
 			<div class="form-group row">
 				<div class="col-4 d-flex align-items-center pr-3"><label class="d-block text-right m-0 text-body">TableQuiz.app/</label></div>
-				<div class="col-8 d-flex align-items-center pr-5 pl-0"><input type="text" class="form-control"></div>
+				<div class="col-8 d-flex align-items-center pr-5 pl-0"><input type="text" class="form-control" name="quiz_name"></div>
 			</div>
 		  </div>
 		  <div class="modal-footer border-0 d-flex justify-content-center">
 			  <div class="col-5">
-				  <a href="/play/play-quiz.php" class="btn btn-primary d-block">Join now</a>
+				  <input type="submit" class="btn btn-primary d-block">Join now</input>
 			  </div>
 		  </div>
+		  </form>
 		</div>
 	  </div>
 	</div>

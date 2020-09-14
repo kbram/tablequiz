@@ -19,11 +19,6 @@ class QuizRound extends Model
 
     ];
 
-    public function image()
-    {
-        return $this->hasMany('App\Models\QuizRoundImage');
-    }
-
     public function quizzes()
     {
         return $this->belongsTo('App\Models\Quiz','quiz_id');

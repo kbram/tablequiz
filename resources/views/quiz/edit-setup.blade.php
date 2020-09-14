@@ -9,15 +9,15 @@
 			<div class="article__heading">
 				<h1>Quiz Setup</h1>
 			</div>		
-			<form id="quiz__setup" action="/setup/update/{id}" class="pt-2 pt-lg-4">
-				
+			<form id="quiz__setup" action="/setup/update/{{$quiz->id}}"  enctype="multipart/form-data" method="post" class="pt-2 pt-lg-4">
+				@csrf
 <!-- QUIZ NAME -->
 				<div class="form-row">
 					<div class="col-md-4">
 						<label for="quiz__name">Quiz name</label>
 					</div>
 					<div class="col-md-8">
-						<input autocomplete="nothanks" type="text" name="quiz__name" class="form-control" value="{{ ($quiz->quiz_name != '' ? $quiz->quiz_name : '') }}">
+						<input autocomplete="nothanks" type="text" name="quiz__name" class="form-control" value="{{ ($quiz->quiz__name != '' ? $quiz->quiz__name : '') }}">
 					</div>
 				</div>
 <!-- QUIZ PASSWORD -->
@@ -70,20 +70,23 @@
 						  <div class="modal-body">
 							<div class="modal__edit__image">
 								<div class="modal__edit__image__mask"></div>
-								<img class="modal__edit__image__image" src="{{ $image }}">
+								<div class="modal__edit__size" id="img-wrapper">
+								<img class="modal__edit__image__image imagePreview" src="{{ $image }}" id="image_preview_container" name="image_preview_container" style="display:block;margin-left:auto;margin-right:auto;">
+								</div>
+
 							</div>
 							<div class="modal__edit__image__range">
 								<div class="form-group">
-									<label for="formControlRange">Edit size</label>
-									<input type="range" class="form-control-range" id="formControlRange">
+									<label for="formControlRangesize">Edit size</label>
+									<input type="range" class="form-control-range formControlRange "  id="formControlRange" name="formControlRange" min="1" max="100">
 									<div id="demo" class="d-none"></div>
 								  </div>
 							</div>
 						  </div>
 						  <div class="modal-footer justify-content-center row no-gutters">
 							 <div class="col-md-3"> 
-								 <label class="d-block" for="upload__quiz__icon">Upload
-									<input type="file" class="form-control-file" id="upload__quiz__icon" value="Upload">
+								 <label class="d-block" for="upload__quiz__icon">Upload 
+									<input type="file" class="form-control-file imagePreviewInput" name="upload__quiz__icon"  id="upload__quiz__icon"  value="Upload">
 								</label>
 							</div>
 							<div class="col-md-3">
@@ -94,127 +97,77 @@
 					  </div>
 					</div>
 				</div>
-<!-- QUIZ CHARGE ?-->
-				<div class="form-row">
-					<div class="col-md-4">
-						<label>Charge for entry?</label>
-						<span class="helper__text" data-placement="left"
-							  data-toggle="tooltip" title="TableQuiz.app allows users to charge entry. Set custom amounts to easily collect for a charity or for prize money."><i class="fa fa-info-circle"></i></span>
-					</div>
-					<div class="col">
-						<div class="form-check form-check-inline">
-						  <input class="form-check-input" type="radio" name="quiz__charge_entry" id="quiz_charge__yes" value="yes">
-						  <label class="form-check-label" for="quiz_charge__yes">Yes</label>
-						</div>
-						<div class="form-check form-check-inline">
-						  <input class="form-check-input" type="radio" name="quiz__charge_entry" id="quiz_charge__no" value="no" checked>
-						  <label class="form-check-label" for="quiz_charge__no">No</label>
-						</div>
-					</div>
-					
-				</div>
-<!-- ENTRY FEE -->
-				<div class="form-row d-none entry__fee">
-					<div class="col-md-4">
-						<label for="quiz__entry_fee">Entry fee</label>
-					</div>
-					<div class="col-md-4">
-						<div class="input-group">
-							<div class="input-group-prepend">
-							  <div class="input-group-text">€</div>
-							</div>
-							<input type="text" class="form-control" id="quiz__entry_fee">
-						</div>
-					</div>
-					
-				</div>
-				
-<!-- ENTRY FEE MESSAGE-->
-				
-				<div class="form-row d-none entry__fee">
-					<div class="col-md-4">
-						<label for="quiz__entry_fee__message">Message</label>
-						<span class="helper__text" data-placement="left"
-							  data-toggle="tooltip" title="This message will be displayed before your quiz with a fee request."><i class="fa fa-info-circle"></i></span>
-					</div>
-					<div class="col-md-7">
-						<textarea width="100%" id="quiz__entry_fee__message" class="form-control"></textarea>
-					</div>
-					
-				</div>
+
+			
 <!-- QUIZ PARTICIPANTS -->
+
 				<div class="form-row">
 					<div class="col-md-4">
-						<label for="quiz__participants">No. of participants</label>
+						<label for="quiz__participants">No.of participants</label>
 					</div>
 					<div class="col-md-4">
-						<select id="quiz__participants" class="form-control">
-                            <option selected>{{($quiz->no_of_participants != '' ? $quiz->no_of_participants : 'Please Choose...')}}</option>
-							<option value="1-5">1-5</option>
-							<option value="5-9">5-9</option>
-							<option value="10-19">10-19</option>
-							<option value="20-29">20-29</option>
-							<option value="30-49">30-49</option>
-							<option value="50+">50+</option>
+						<select id="quiz__participants" class="form-control" name="quiz__participants">
+						<option selected>{{($quiz->no_of_participants != '' ? $quiz->no_of_participants : 'Please Choose...')}}</option>
+							@foreach($bands as $band)
+								@if(($band->band_type)== "participants costs")
+									@if(($band->to)== null)
+										<option class="{{$band->from}}" value="{{$band->from}}">{{$band->from}}+</option>
+									@else
+										<option class="{{$band->from}}-{{$band->to}}" value="{{$band->from}}-{{$band->to}}" >{{$band->from}}-{{$band->to}}</option>
+									@endif
+								@endif
+							@endforeach
 
 						</select>
+						@if ($errors->has('quiz__participants'))
+                                    <span class="help-block">
+                                            <p>{{ $errors->first('quiz__participants') }}</p>
+                                    </span>
+                        @endif
+						
 					</div>
 					<div class="modal" id="select_participants__modal" tabindex="-1" role="dialog" aria-labelledby="select_participants__modal" aria-hidden="true">
 					  <div class="modal-dialog modal-dialog-centered" role="document">
-						<div class="modal-content">
-						  <div class="modal-header justify-content-center">
-							  <h1>No. of participants</h1>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							  <span aria-hidden="true">&times;</span>
-							</button>
-						  </div>
-						  <div class="modal-body row no-gutters participants">
-								<div class="col-6 col-sm-4 participants__number p-1">
-									<div class="participants__choice p-3">
-										<p>1-5</p>
-										<p>Free</p>
-									</div>
+							<div class="modal-content">
+								<div class="modal-header justify-content-center">
+									<h1>No. of participants</h1>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
 								</div>
-								<div class="col-6 col-sm-4 participants__number p-1">
-									<div class="participants__choice p-3">
-										<p>5-9</p>
-										<p>Free</p>
-									</div>
-								</div>
-								<div class="col-6 col-sm-4 participants__number p-1">
-									<div class="participants__choice p-3">
-										<p>10-19</p>
-										<p>€4.99</p>
-									</div>
-								</div>
-								<div class="col-6 col-sm-4 participants__number p-1">
-									<div class="participants__choice p-3">
-										<p>20-29</p>
-										<p>€9.99</p>
-									</div>
-								</div>
-								<div class="col-6 col-sm-4 participants__number p-1">
-									<div class="participants__choice p-3">
-										<p>30-49</p>
-										<p>€19.99</p>
-									</div>
-								</div>
-								<div class="col-6 col-sm-4 participants__number p-1">
-									<div class="participants__choice p-3">
-										<p>50+</p>
-										<p>€29.99</p>
-									</div>
-								</div>
+						  	<div class="modal-body row no-gutters participants">
+								@foreach($bands as $band)
+									@if(($band->band_type)== "participants costs")
+										<div class="col-6 col-sm-4 participants__number p-1">
+											<div class="participants__choice p-3" >
+												@if(($band->to)== null)
+													<input type="text" hidden class="participant" value="{{$band->from}}+" >{{$band->from}}+</input>
+												@else
+													<input type="text" hidden class="participant" value="{{$band->from}}-{{$band->to}}" >{{$band->from}}-{{$band->to}}</input>
+												@endif
+
+
+												@if(($band->cost)!= 0)
+												<p>{{$band->cost}}</p>
+												@else
+												<p>Free</p>
+												@endif
+											</div>
+										</div>
+									@endif
+								@endforeach
+								
 						  </div>
 						  <div class="modal-footer justify-content-center row no-gutters">
 							<div class="col-md-3">
-								<button type="button" class="d-block btn btn-primary"data-dismiss="modal">Save</button>
+								<button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
 							</div>
 						  </div>
 						</div>
 					  </div>
 					</div>
 				</div>
+				
 				
 				
 <!-- END -->				
@@ -231,7 +184,22 @@
 	</section>
 	
 @endsection
+@include('scripts.quiz-icon-preview')
 
 @section('footer_scripts')
+
+<script>    
+
+$('.participants__choice').click(function() {
+
+var val =$(this).find('.participant').val();
+
+$('#quiz__participants option[value='+val+']').attr("selected",true).change();
+
+
+});
+
+		
+</script>y
 
 @endsection

@@ -47,7 +47,6 @@
 					</li>
 					
 				</ul>
-				<a href="/quiz/setup" class="btn btn-primary hasPlus d-block">New Quiz</a>
 			</div>
 		</aside>
 		
@@ -58,7 +57,8 @@
 						<div class="col-lg-9">
 							<h2>Latest Quizzes</h2>
 						</div>
-						<div class="col-lg-3 d-flex">
+						<div class="col-lg-3">
+
 							@if(config('usersmanagement.enableSearchUsers'))
 								@include('partials.search-quizzes-form')
 							@endif
@@ -69,37 +69,72 @@
 						<table class="table table-striped table-borderless m-0 h-100 my__quizzes">
 							<thead>
 								<tr>
-									<th>Quiz name <span><small><i class="fa fa-angle-down"></i></small></span</th>
-									<th>Quiz Link <span><small><i class="fa fa-angle-down"></i></small></span</th>
-									<th class="text-center">No Of Participants<span><small><i class="fa fa-angle-down"></i></small></span</th>
+								<th>Quiz name <span><small><i class="fa fa-angle-down"></i></small></span</th>
+									<th>Created by <span><small><i class="fa fa-angle-down"></i></small></span</th>
+									<th>Rounds <span><small><i class="fa fa-angle-down"></i></small></span</th>
+									<th class="text-center">Questions <span><small><i class="fa fa-angle-down"></i></small></span</th>
 									<th class="text-center">Actions</th>
 								</tr>
 							</thead>
 							<tbody id="quizzes_table">
 								
-							@foreach($quizzes as $quiz)
+							@foreach($quizzes as $quiz)	
+							@if ($quiz->is_blocked)					
 								<tr>
-								
-								<span id="msg{{$quiz->id}}" class="text-success" ></span>
-									<td>{{$quiz -> quiz_name}}</td>
-									<td id="quizLink{{$quiz->id}}">{{$quiz -> quiz_link}}</td>
-									<td class="text-lg-center">{{$quiz->no_of_participants}}</td>
+									<td>{{ $quiz->quiz__name }}</td>
+									<td>{{ $user[$quiz->id]}}</td>
+									<td class="text-lg-center">{{$roundCount[$quiz->id]}}</td>
+									<td class="text-lg-center">{{$questionCounts[$quiz->id]}}</td>
 									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column">
+										<div class="d-flex flex-column pl-0" style="pointer-events: none;opacity: 0.4;">
 											<i class="far fa-eye"></i>
 											<span>View Qs</span>
 										</div>
-										<div class="d-flex flex-column">
-									    <i class="fas fa-share-alt"></i>
-										<span class="share" id="{{$quiz->id}}">Share</span>
+										<div class="d-flex flex-column" style="pointer-events: none;opacity: 0.4;">
+											<i class="fas fa-share-alt"></i>
+											<span>Share</span>
 										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
+										
+
+										<form method="POST" action="/admin/home/un-block/{{$quiz->id}}" class="p-0">
+										      @csrf
+											<div class="d-flex flex-column" >
+												<i class="fas fa-times-circle"></i>
+												<span class="block" id="block{{$quiz->id}}">un-block</span>
+											</div>
+										</form>
+
 									</td>
-									
 								</tr>
+								@else
+								<tr>
+									<td>{{ $quiz->quiz__name }}</td>
+									<td>{{ $user[$quiz->id]}}</td>
+									<td class="text-lg-center">{{$roundCount[$quiz->id]}}</td>
+									<td class="text-lg-center">{{$questionCounts[$quiz->id]}}</td>
+									<td class="d-none" id="quizLink{{$quiz -> id}}">{{$quiz-> quiz_link}}</td>
+
+									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
+										<div class="d-flex flex-column pl-0">
+											<i class="far fa-eye"></i>
+											<a href="/admin/home/view/{{$quiz->id}}"><span class="view-qz" id="view-qz{{$quiz->id}}">View Qs</span></a>
+										</div>
+										<div class="d-flex flex-column">
+										<i class="fas fa-share-alt"></i><span class="share" id="{{$quiz->id}}">Share</span>
+										</div>
+										
+
+										<form method="POST" action="/admin/home/block/{{$quiz->id}}" class="p-0">
+										             @csrf
+											<div class="d-flex flex-column">
+												<i class="fas fa-times-circle"></i>
+												<span class="block" id="block{{$quiz->id}}">block</span>
+											</div>
+										</form>
+									</td>
+								</tr>
+
+								@endif
 								@endforeach
 								
 								
@@ -132,4 +167,6 @@
         @include('scripts.search-quizzes')
 @endif
 @include('scripts.share-quiz')
+@include('scripts.block-quiz')
+
 @endsection

@@ -1,7 +1,7 @@
 <header>
 		<div class="navigation__logo">
 			<a href="/">
-				<img src="site_design/images/tablequizapp_logo.png"
+				<img src="/site_design/images/tablequizapp_logo.png"
 					 alt="TableQuiz.app logo"
 					 class="main__logo">
 			</a>
@@ -39,6 +39,11 @@
 					<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
+				</li>
+
+				<li>
+				<a data-toggle="modal" data-target="#publishQuizModal" class="btn btn-primary d-block d-lg-inline-block card__from__modal publish-quiz" href="#">view card</a>
+
 				</li>
 				
 				<!-- This is the avatar to be used when logged in

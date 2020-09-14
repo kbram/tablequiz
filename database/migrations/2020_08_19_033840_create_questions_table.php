@@ -15,13 +15,12 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('category');
-            //$table->foreign('category_id')->references('id')->on('quiz_categories');
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->bigInteger('round_id')->unsigned();
+            $table->foreign('round_id')->references('id')->on('quiz_rounds')->onDelete('cascade');
             $table->string('question_type');
             $table->text('question');
-            $table->text('answer');
             $table->integer('time_limit');
             $table->timestamps();
         });

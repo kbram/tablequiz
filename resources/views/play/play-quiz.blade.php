@@ -1,6 +1,16 @@
 @extends('layouts.tablequizapp')
 
+@section('template_linked_css')
+
+<style>
+.small{
+	color:#5A37BA;
+}
+</style>
+
+@endsection
 @section('content')
+
 
 <!-- <section class="container page__inner"> -->
 <!--
@@ -12,14 +22,23 @@
 -->
 	<div class="row">
 		<div class="col-12 d-flex justify-content-between">
-			<p class="text-white">MadDog's Geography Quiz</p>
+			<p class="text-white" style="min-width:13vw !important;">{{$quiz->quiz__name}}</p>
 			<p><a href="#" class="text-white"><small>Exit quiz</small></a></p>
 		</div>
 		<article class="col-12 pb-5">
+
+		<div class="col-12 d-flex justify-content-between">
+
+		<p ><a href="#" class="text-white"><small class="small">previous quiz</small></a></p>
+		<p><a href="#" class="text-white"><small class="small">next quiz</small></a></p>
+
+		</div> 
+
+
 			<div class="row border-bottom pb-2 mb-5">
 				<div class="col-12 d-flex justify-content-center flex-column">
-					<p class="mb-0 text-center"><strong>Round 2 of 10</strong></p>
-					<p class="bernhard round__name my-2 text-center">The multifarious waterways of Ireland</p>
+					<p class="mb-0 text-center"><strong>Round {{$round->id}} of {{$roundCount}}</strong></p>
+					<p class="bernhard round__name my-2 text-center">{{$round->round_name}}</p>
 				</div>
 				<div class="col-12">
 					<div>
@@ -32,28 +51,137 @@
 					<img src="../images/suir.jpg" >
 				</div>
 				<div class="col-12 text-center">
-					<h4 class="bernhard">Question 4</h4>
+					<h4 class="bernhard">Question {{$question->id}}</h4>
 				</div>
 				<div class="col-12 the__question text-center mB-2">
-					<h4 class="">What river, pictured, runs through Waterford city?</h4>
+					<h4 class="" style="min-width:38vw !important;"> {{$question->question}} </h4>
 				</div>
 			</div>
-			<div class="row answer__options pt-4 justify-content-center flex-wrap">
-				<div class="col-md-3 single__answer bg-white mb-2 mb-md-0 px-3 py-4 text-center mx-2">
-					<p class="m-0">Liffey</p>
-				</div>
-				<div class="col-md-3 single__answer bg-white mb-2 mb-md-0 px-3 py-4 text-center mx-2">
-					<p class="m-0">Suir</p>
-				</div>
-				<div class="col-md-3 single__answer bg-white mb-2 mb-md-0 px-3 py-4 text-center mx-2">
-					<p class="m-0">Corrib</p>
-				</div>
+
+
+@if($question->question_type == 'standard__question')
+			<div id="all-answer" class="row answer__options pt-4 justify-content-center flex-wrap">
+
+			@foreach($answers as $answer)
+
+			 <form action="/playquiz/answer" method="post" name="form" id="disable" class="col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers ">
+
+				@csrf
+				<input type="text" name="answer" hidden value="{{$answer->id}}"/>
+				<input type="text" name="question" hidden value="{{$question->id}}"/>
+				<input type="text" name="round" hidden value="{{$round->id}}"/>
+				<input type="text" name="quiz" hidden value="{{$quiz->id}}"/>
+
+				<p>{{$answer->answer}}</p> 
+
+				</form>
+				@endforeach
+
 				
 			</div>
+@endif
+
+
+
+	
+@if($question->question_type == 'standard__question')
+			<div id="all-answer" class="row answer__options pt-4 justify-content-center flex-wrap">
+
+			
+			<form action="/playquiz/answer" method="post" name="form" id="answer" class="col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers ">
+
+				@csrf
+				<input type="text" name="question" hidden value="{{$question->id}}"/>
+				<input type="text" name="round" hidden value="{{$round->id}}"/>
+				<input type="text" name="quiz" hidden value="{{$quiz->id}}"/>
+
+				<input class="form-control form-control-lg" type="text" name="answer" placeholder="Enter Answer"  value=""/>
+
+				</form>
+
+				
+			</div>
+@endif
+
+@if($question->question_type == 'standard__question')
+			<div id="all-answer" class="row answer__options pt-4 justify-content-center flex-wrap">
+
+			
+			<form action="/playquiz/answer" method="post" name="form" id="answer" class="col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers ">
+
+				@csrf
+				<input type="text" name="question" hidden value="{{$question->id}}"/>
+				<input type="text" name="round" hidden value="{{$round->id}}"/>
+				<input type="text" name="quiz" hidden value="{{$quiz->id}}"/>
+
+				<input class="form-control form-control-lg" type="number" name="answer" placeholder="Enter Answer"  value=""/>
+
+				</form>
+
+				
+			</div>
+@endif
+<br>
+<div class="justify-content-center row">
+<div class="col-5">
+<a   class="btn btn-primary d-block d-lg-inline-block card__from__modal" onclick="document.getElementById('answer').submit()">Submit Answer</a>
+</div> 
+</div>
+	
 		</article>
 		
 	</div>
 <!-- </section> -->
+<!-- 
+<script>
+
+	var correct = {!! json_encode(Session::get("$quiz->id-$round->id-$question->id") ) !!};
+
+    var wrong = {!! json_encode(Session::get("$quiz->id-$question->id") ) !!};
+	var allele =  document.getElementsByClassName("answers");
+	var all = document.getElementById("all-answer");
+
+
+	if (correct ){
+	var ele = document.getElementById(correct);
+
+	ele.classList.remove("single__answer");
+    ele.classList.add("single__answer_correct");
+	all.classList.add("cursor_not");
+
+
+	console.log(correct);
+
+    }
+
+	if (wrong){
+	var ele = document.getElementById(wrong);
+	ele.classList.remove("single__answer");
+    ele.classList.add("single__answer_wrong");
+	all.classList.add("cursor_not");
+
+
+	console.log(worng);
+	}
+
+</script> -->
+<!-- 
+<script>
+
+
+$(function() {
+    $('.single__answer').click(function() {
+		$(this).attr('id', 'answer');
+		console.log("change");
+    });
+});
+</script> -->
+
+@include('scripts.playquiz')
+
 @endsection
 @section('footer_scripts')
 @endsection
+
+
+

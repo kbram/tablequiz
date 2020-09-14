@@ -24,7 +24,7 @@
 	  </div>
 	  
 
-      <div class="modal-body ">
+     <div class="modal-body ">
 
         <form class="popupLogIn text-body px-4 pt-4" method="POST" action="{{ route('login') }}">
 		@csrf
@@ -52,6 +52,13 @@
 					<input class="d-block btn  btn-primary" type="submit" value="Log In">
 					<!-- for check out view -> to__checkout -->
 					@endif
+				</div>
+				<div class="col-10 col-md-4 mt-3">
+
+				 <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    {{ __('auth.forgot') }}
+                </a>
+					<!-- for check out view -> to__checkout -->
 				</div>
 			</div>
 		</form>
@@ -102,7 +109,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-		  <a class="back_to__login" href="#"><i class="fa fa-angle-left"></i><span>Back</span></a>
+		  <a class="back_to__login" href="#"><i class="fa fa-angle-left"></i><span>Login</span></a>
       </div>
       <div class="modal-body">
         <form class="popupLogIn text-body px-4" method="POST" action="{{ route('register') }}">
@@ -144,15 +151,16 @@
 			  		<label for="signup__pass">Password</label>
 				</div>
 			  	<div class="col-md-7">
-					<input id="password" type="password" class="form-control" name="password"> 
+					<input id="password_signup" type="password" class="form-control" name="password"><i class="far fa-eye" id="eyeclass" style= "float: right; margin-top: -30px; margin-right: 15px;"></i></input>
 				</div>
+				
 			</div>
 			<div class="form-row">
 				<div class="col-md-5">
 			  		<label for="signup__pass">Confirm Password</label>
 				</div>
 			  	<div class="col-md-7">
-					<input id="password-confirm" type="password" class="form-control" name="password_confirmation"> 
+					<input id="password_signup_confirm" type="password" class="form-control a" name="password_confirmation"></input>
 				</div>
 			</div>
 			<div class="form-row d-flex justify-content-center mt-5">
@@ -247,7 +255,7 @@
 			  <tfoot>
 				<tr class="total-cost">  
 				  <td colspan="2"><strong>Total:</strong></td>
-				  <td><strong>€29.97</strong></td>
+				  <td><strong></strong></td>
 				<td></td>
 				</tr>
 			  </tfoot>
@@ -353,6 +361,27 @@
 					 </div>
 				 </div>
 
+				 
+</form>
 
 				  @include('scripts.stripe') 
-                 
+				  <script>
+						$("body").on('click', '#eyeclass', function() {
+						$(this).toggleClass("fa-eye fa-eye-slash");
+						var input = $("#password_signup");
+						if (input.attr("type") === "password") {
+							input.attr("type", "text");
+						} else {
+							input.attr("type", "password");
+						}
+
+						var inputc = $("#password_signup_confirm");
+						if (inputc.attr("type") === "password") {
+							inputc.attr("type", "text");
+						} else {
+							inputc.attr("type", "password");
+						}
+
+						})
+				  </script>
+

@@ -1,6 +1,6 @@
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#publish-quiz').click(function(e){
+    $('.publish-quiz').click(function(e){
         e.preventDefault();
 
         $.ajax({
