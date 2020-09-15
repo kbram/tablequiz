@@ -15,7 +15,7 @@ use App\Models\Question;
 use App\Models\Answer;
 use App\Models\QuizRoundImage;
 use App\Models\PriceBand;
-
+use App\Events\FormSubmitted;
 
 
 use Session;
@@ -501,7 +501,8 @@ $round_image->save();
     }    
     
     public function start_quiz($id)
-    {
+    {  
+        $quiz_id=$id;
        $questions=[];
        $answers=[];
        $rounds =QuizRound::where('quiz_id',$id)->get();
@@ -509,7 +510,7 @@ $round_image->save();
         $questions[$round->id]=Question::where('round_id',$round->id)->get();
           
        }
-        
+      //  dd(count($rounds));
        foreach($questions as $question){
            foreach($question as $questio){
                  $answers[$questio->id]=Answer::where('question_id',$questio->id)->get();
@@ -518,7 +519,24 @@ $round_image->save();
             
 							
       
-        return view('quiz.start_quiz',compact('questions','answers','rounds'));
+        return view('quiz.start_quiz',compact('questions','answers','rounds','quiz_id'));
+    }
+
+    public function run_quiz()
+    {  
+      $questionno=request()->questionno;
+      $question=request()->question;
+      $answer=request()->answer;
+      $media=request()->media;
+      $answerId=request()->answerId;
+      $questionId=request()->questionId;
+      $roundId=request()->roundId;
+      $quizId=request()->quizId;
+      $type=request()->type;
+      $time=request()->time;
+      $text=$questionno."#^".$question."#^".$answer."#^".$media."#^".$answerId."#^".$questionId."#^".$roundId."#^".$quizId."#^".$type."#^".$time;
+      event(new FormSubmitted($text));
+      return redirect()->back();
     }
 
     public function slider()
