@@ -14,7 +14,7 @@
 
 	var channel = pusher.subscribe('my-channel0');
 	channel.bind('form-submitted0', function(data) {
-		alert(JSON.stringify(data));	
+		//alert(JSON.stringify(data));	
 		var message =JSON.stringify(data);	
 		var m0 = message.replace('{"text":"','');
 		var m0 = m0.replace('"}','');
@@ -24,7 +24,60 @@
 		$(text).appendTo($("#all-answer"));
 		//$('#all-answer tbody').append(text);
 	});
+	//var x=1;
+	var y= "";
+	$(document).ready(function(){
+		y=document.getElementById("timer").textContent;
+		
+	});	
 	
+	function play() {
+		var sec= y,
+		countDiv    = document.getElementById("timer"),
+		secpass,
+		countDown   = setInterval(function () {
+			'use strict';
+			secpass();
+		}, 1000);
+
+		function secpass() {
+			'use strict';
+			
+			var min     = Math.floor(sec / 60),
+				remSec  = sec % 60;
+			
+			if (remSec < 10) {
+				
+				remSec = '0' + remSec;
+			
+			}
+			if (min < 10) {
+				
+				min = '0' + min;
+			
+			}
+			
+			$("#timer").html(min + ":" + remSec);
+			
+			if (sec > 0) {
+				
+				sec = sec - 1;
+				
+			} else {
+				
+				clearInterval(countDown);
+
+				$("#timer").html("Finshed");
+				//$("#resub").css("display", "none");
+				//tyle="opacity: 0.4;
+				//
+
+				///$('#resub').css('cursor','not-allowed');
+				//$("#resub").css("pointer-events", "none");
+				//$('#resub').css('opacity','0.4');
+			}
+		}
+	}
 </script>
 <section class="container page__inner dashboard">
 	<div class="dashboard__wrapper">
@@ -59,7 +112,7 @@
 			<aside class="col-lg-3 dashboard__sidebar d-flex flex-column order-1 order-md-0">
 				<div class="dashboard__container d-flex flex-column align-items-center mb-3">
 					<h5>Countdown timer</h5>
-					<p class="countdown__time">22</p>
+					<p id="timer">11</p>
 					<div class="countdown__buttons row">
 						<div class="col-4">
 							<form action="/quiz/run_quiz" id="push-submit-form" method="post" class="col-4">
@@ -80,10 +133,18 @@
 							</form>
 						</div>
 						<div class="col-4">
-							<i class="fa fa-pause"></i>
+							<form action="/quiz/pause_quiz" method="post" class="col-4">
+								<input type="hidden" name="quizId" value="2">
+								<button type="submit" style="border:none;"><i class="fa fa-pause"></i></button>
+								{{csrf_field()}}
+							</form>
 						</div>
 						<div class="col-4">
-							<i class="fa fa-stop"></i>
+							<form action="/quiz/stop_quiz" method="post" class="col-4">
+								<input type="hidden" name="quizId" value="2">
+								<button type="submit" style="border:none;"><i class="fa fa-stop"></i></button>
+								{{csrf_field()}}
+							</form>
 						</div>
 					</div>
 				</div>
