@@ -10,7 +10,6 @@
   flex-basis: 100%;
   height: 0;
 }
-
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
@@ -40,17 +39,18 @@
 		$('h4.notification').text(m[1]);
 		//$('h4.ans').text(m[2]);
 		var med = m[8];
-		$('div.med').text(med);
+		//$('div.med').text(med);
 
 		var answer=m[2].split("\\\\");
 		var answerId=m[4];
-		var questionId=m[5];
+		var questionId="12";
 		var roundId=m[6];
 		var quizId=m[7];
 		var type=m[8];
 		var text0="<div class='justify-content-center row'>";
 		for (var i = 0; i < answer.length; i++) {
-			text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId+"' class='single__answer col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+			text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+			"<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
 			"<input type='text' name='answer' hidden value='"+answerId+"'/>"+
 			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
 			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
@@ -130,7 +130,7 @@
 		<p id="demo"></p>
 	</div>
 <!-- </section> -->
-<!-- 
+
 <script>
 
 	var correct = {!! json_encode(Session::get("$quiz->id-$round->id-$question->id") ) !!};
@@ -162,7 +162,7 @@
 	console.log(worng);
 	}
 
-</script> -->
+</script>
 
 @include('scripts.playquiz')
 

@@ -2164,11 +2164,6 @@ pre code {
   opacity: 1;
 }
 
-.form-control::-ms-input-placeholder {
-  color: #6c757d;
-  opacity: 1;
-}
-
 .form-control::placeholder {
   color: #6c757d;
   opacity: 1;
@@ -11085,8 +11080,7 @@ a.text-dark:focus {
 :root .fa-rotate-270,
 :root .fa-flip-horizontal,
 :root .fa-flip-vertical {
-  -webkit-filter: none;
-          filter: none;
+  filter: none;
 }
 
 .fa-stack {
@@ -14253,7 +14247,6 @@ a.text-dark:focus {
 
 .dropzone .dz-preview:hover .dz-image img {
   transform: scale(1.05, 1.05);
-  -webkit-filter: blur(8px);
   filter: blur(8px);
 }
 
