@@ -9,7 +9,7 @@
         if(text=='block'){
           swal({
                     title: "Are you sure?",
-                    text: "You are blocking this User! You can block it at any time!",
+                    text: "You are blocking this User! You can unblock it at any time!",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,

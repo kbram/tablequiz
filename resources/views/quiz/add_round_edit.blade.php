@@ -26,7 +26,7 @@
 				<div class="col-md-4">
 					<label for="round__background">Round background</label>
 					<span class="helper__text" data-placement="left"
-							  data-toggle="tooltip" title="Some text about the round background to go here."><i class="fa fa-info-circle"></i></span>
+							  data-toggle="tooltip" title="You can add background images to each round you create by uploading the image here."><i class="fa fa-info-circle"></i></span>
 				</div>
 				<div class=" col-md-4">
 					<a href="#" class="d-block btn btn-outline-secondary" data-toggle="modal" data-target="#edit__round__bg__modal">Upload</a>

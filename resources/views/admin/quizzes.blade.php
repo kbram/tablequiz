@@ -147,7 +147,7 @@
 							<tfoot>
 								<tr>
 									<td colspan="6" class="text-center text-muted">
-										<a href="/dashboard/my-quizzes"><small>View all</small></a>
+										<!-- <a href="/dashboard/my-quizzes"><small>View all</small></a> -->
 									</td>
 								</tr>
 							</tfoot>

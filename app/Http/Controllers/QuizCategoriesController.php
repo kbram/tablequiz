@@ -8,7 +8,7 @@ use Image;
 use Illuminate\Http\Request;
 use App\Models\QuizCategory;
 use App\Models\QuizCategoryImage;
-
+use DB;
 use Illuminate\Support\Str;
 
 use File;
@@ -19,8 +19,8 @@ class QuizCategoriesController extends Controller
 
     public function create()
     {
-        $categories=QuizCategory::all();
-        //dd($categories);
+        $categories = DB::table('quiz_categories')->paginate(2);
+
         return view('admin.categories', compact('categories'));
         
     }
@@ -31,7 +31,7 @@ class QuizCategoriesController extends Controller
         $validator = Validator::make($request->all(),
         [
             'category_name'  => 'required',
-            //'upload__category__image'  => 'required',            
+            'upload__category__image'  => '',            
         ]
         );
 

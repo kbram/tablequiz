@@ -218,7 +218,7 @@ public function postRound(Request $request){
                 [
                     'question__type' => 'required', 
                     'question' => 'required', 
-                    'time__limit' => 'required', 
+                    'time__limit' => '', 
                ]
               
             ); 

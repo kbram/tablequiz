@@ -56,7 +56,7 @@
 					<label for="round__name">Round name</label>
 				</div>
 				<div class="col-md-8">
-					<input autocomplete="nothanks" type="text" name="round_name"  class="form-control" required>
+					<input autocomplete="nothanks" type="text" name="round_name"  class="form-control">
 					<input hidden autocomplete="nothanks" type="text" name="round_count" class="form-control" value="{{$round_count ?? '1'}}">
 					<input hidden autocomplete="nothanks" type="text" name="quiz" class="form-control" value="{{$quiz}}">
 
@@ -65,7 +65,7 @@
 			<div class="form-row">
 				<div class="col-md-4">
 					<label for="round__background">Round background</label>
-					<span class="helper__text" data-placement="left" data-toggle="tooltip" title="Some text about the round background to go here."><i class="fa fa-info-circle"></i></span>
+					<span class="helper__text" data-placement="left" data-toggle="tooltip" title="You can add background images to each round you create by uploading the image here."><i class="fa fa-info-circle"></i></span>
 				</div>
 				<div class=" col-md-4">
 					<a href="#" class="d-block btn btn-outline-secondary" data-toggle="modal" data-target="#edit__round__bg__modal">Upload</a>
