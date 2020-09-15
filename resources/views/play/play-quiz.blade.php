@@ -6,10 +6,14 @@
 .small{
 	color:#5A37BA;
 }
-</style>
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
 
-@endsection
-@section('content')
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 <script>
 
 	// Enable pusher logging - don't include this in production
@@ -46,7 +50,7 @@
 		var type=m[8];
 		var text0="<div class='justify-content-center row'>";
 		for (var i = 0; i < answer.length; i++) {
-			text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+			text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId+"' class='single__answer col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
 			"<input type='text' name='answer' hidden value='"+answerId+"'/>"+
 			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
 			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
@@ -57,7 +61,7 @@
 		text0 += "</div> <div class='break'></div>"+
 		"<div class='justify-content-center row'>"+
 			"<div class=''>"+
-				"<br><a class='btn btn-primary d-block d-lg-inline-block card__from__modal' onclick='document.getElementById('"+answerId+"').submit()'>Submit Answer</a>"+
+				"<br><a class='btn btn-primary d-block d-lg-inline-block card__from__modal' onclick='document.getElementById("+answerId+").submit()'>Submit Answer</a>"+
 			"</div>"+
 		"</div>";
 		$('#all-answer').empty();
@@ -66,6 +70,8 @@
 	});
 	
 </script>
+@endsection
+@section('content')
 
 <!-- <section class="container page__inner"> -->
 <!--
@@ -87,7 +93,7 @@
 		<p ><a href="#" class="text-white"><small class="small">previous quiz</small></a></p>
 		<p><a href="#" class="text-white"><small class="small">next quiz</small></a></p>
 
-		</div> 
+		</div>   
 
 
 			<div class="row border-bottom pb-2 mb-5">
@@ -97,7 +103,7 @@
 				</div>
 				<div class="col-12">
 					<div>
-						<p class=" justify-content-center d-flex align-items-center m-0">Time remaining: <strong class="pl-2">28</strong></p>
+						<p cl`ass=" justify-content-center d-flex align-items-center m-0">Time remaining: <strong class="pl-2">28</strong></p>
 					</div>
 				</div>
 			</div>
@@ -106,35 +112,22 @@
 					<img src="../images/suir.jpg" >
 				</div>
 				<div class="col-12 text-center">
-					<h4 class="bernhard">Question {{$question->id}}</h4>
+					
+					<h4 class="bernhard notification">Not submitted</h4>
 				</div>
 				<div class="col-12 the__question text-center mB-2">
-					<h4 class="" style="min-width:38vw !important;"> {{$question->question}} </h4>
+					<h4 class="questionno" style="min-width:38vw !important;">  </h4>
 				</div>
 			</div>
-
-
-			@if($question->question_type == 'standard__question')
+			<div class="med"></div>
+@if($question->question_type == 'standard__question')
 			<div id="all-answer" class="row answer__options pt-4 justify-content-center flex-wrap">
 			
 			</div>
-            @endif
+@endif
 
-
-
-	
-
-
-
-<br>
-<div class="justify-content-center row">
-<div class="col-5">
-<a   class="btn btn-primary d-block d-lg-inline-block card__from__modal" onclick="document.getElementById('answer').submit()">Submit Answer</a>
-</div> 
-</div>
-	
 		</article>
-		
+		<p id="demo"></p>
 	</div>
 <!-- </section> -->
 <!-- 
@@ -169,17 +162,6 @@
 	console.log(worng);
 	}
 
-</script> -->
-<!-- 
-<script>
-
-
-$(function() {
-    $('.single__answer').click(function() {
-		$(this).attr('id', 'answer');
-		console.log("change");
-    });
-});
 </script> -->
 
 @include('scripts.playquiz')
