@@ -14,6 +14,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 <script>
+	$(document).ready(function(){
+		$(".timer").html("Wait.....");
+		
+	});	
 
 	// Enable pusher logging - don't include this in production
 	Pusher.logToConsole = true;
@@ -28,6 +32,7 @@
 		var message = JSON.stringify(data);
 		var m0 = message.replace('{"text":"','');
 		var m0 = m0.replace('"}','');
+		var m0 = m0+"#^10";
 		var m=m0.split("#^");
 		var questionno=m[0];
 		var issueq=sessionStorage.getItem("issuequestion");
@@ -47,7 +52,7 @@
 		var roundId=m[6];
 		var quizId=m[7];
 		var type=m[8];
-		var text0="<div class='justify-content-center row'>";
+		var text0="<div id='resub2' class='justify-content-center row'>";
 		for (var i = 0; i < answer.length; i++) {
 			text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
 			"<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
@@ -59,15 +64,93 @@
 			"</form>";	
 		} 
 		text0 += "</div> <div class='break'></div>"+
-		"<div class='justify-content-center row'>"+
-			"<div class=''>"+
-				"<br><a class='btn btn-primary d-block d-lg-inline-block card__from__modal' onclick='document.getElementById("+answerId+").submit()'>Submit Answer</a>"+
+		"<div  id='resub1' class='justify-content-center row'>"+
+			"<div class='' id='resub' >"+
+				"<br><a  class='btn btn-primary d-block d-lg-inline-block card__from__modal' onclick='document.getElementById("+answerId+").submit()'>Submit Answer</a>"+
 			"</div>"+
 		"</div>";
 		$('#all-answer').empty();
 		$('#all-answer').append(text0);
 		document.getElementById("demo").innerHTML=issueq;
+
+
+		//var x=1;
+		var y=10;
+		var sec= y,
+		countDiv    = document.getElementById("timer"),
+		secpass,
+		countDown   = setInterval(function () {
+			'use strict';
+			secpass();
+		}, 1000);
+
+		function secpass() {
+			'use strict';
+			
+			var min     = Math.floor(sec / 60),
+				remSec  = sec % 60;
+			
+			if (remSec < 10) {
+				
+				remSec = '0' + remSec;
+			
+			}
+			if (min < 10) {
+				
+				min = '0' + min;
+			
+			}
+			
+			$(".timer").html(min + ":" + remSec);
+			
+			if (sec > 0) {
+				
+				sec = sec - 1;
+				
+			} else {
+				
+				clearInterval(countDown);
+				$(".timer").html("Time Out");
+				//$("#resub").css("display", "none");
+				//tyle="opacity: 0.4;
+				//
+
+				$('#resub').css('cursor','not-allowed');
+				$("#resub").css("pointer-events", "none");
+				$('#resub').css('opacity','0.4');
+			}
+		}
+		
+		var channel1 = pusher.subscribe('my-channel1');
+		channel1.bind('form-submitted1', function(data) {
+			alert("Teacher Stoped your Submition");
+			$('#resub').css('cursor','not-allowed');
+			$("#resub").css("pointer-events", "none");
+			$('#resub').css('opacity','0.4');
+			$(".timer").html("Teacher Stoped");
+			clearInterval(countDown);
+		});
+		var channel1 = pusher.subscribe('my-channel2');
+		channel1.bind('form-submitted2', function(data) {
+			alert("Teacher Paused");
+			$('#resub').css('cursor','not-allowed');
+			$("#resub").css("pointer-events", "none");
+			$('#resub').css('opacity','0.4');
+			$(".timer").html("Teacher Stoped");
+
+			$("#resub").css('display','none');
+			$("#resub2").css('display','none');
+			$("#resub3").css('display','none');
+
+			//$('#all-answer').empty();
+			var text11="<h1>Quiz is Paused ,Please Wait!!!</h1>";
+			$('#resub1').empty();
+			$('#resub1').append(text11);
+			clearInterval(countDown);
+		});
 	});
+
+	
 	
 </script>
 @endsection
@@ -103,19 +186,19 @@
 				</div>
 				<div class="col-12">
 					<div>
-						<p class=" justify-content-center d-flex align-items-center m-0">Time remaining: <strong class="pl-2">28</strong></p>
+						<p class=" justify-content-center d-flex align-items-center m-0">Time remaining: <strong class="timer"></strong></p>
 					</div>
 				</div>
 			</div>
-			<div class="row question__container">
+			<div id='resub3' class="row question__container">
 				<div class="col-12 media__container p-0 mb-5">
 					<img src="../images/suir.jpg" >
 				</div>
-				<div class="col-12 text-center">
+				<div class="col-12 text-center" >
 					
 					<h4 class="bernhard notification">Not submitted</h4>
 				</div>
-				<div class="col-12 the__question text-center mB-2">
+				<div  class="col-12 the__question text-center mB-2">
 					<h4 class="questionno" style="min-width:38vw !important;">  </h4>
 				</div>
 			</div>
@@ -162,6 +245,8 @@
 	console.log(worng);
 	}
 
+
+	
 </script>
 
 @include('scripts.playquiz')

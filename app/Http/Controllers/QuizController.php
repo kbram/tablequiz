@@ -16,7 +16,8 @@ use App\Models\Answer;
 use App\Models\QuizRoundImage;
 use App\Models\PriceBand;
 
-
+use App\Events\FormSubmittedStop;
+use App\Events\FormSubmittedPause;
 
 use Session;
 use App\Http\Controllers\MasterQuestionController;
@@ -520,7 +521,22 @@ $round_image->save();
       
         return view('quiz.start_quiz',compact('questions','answers','rounds'));
     }
+    public function stop_quiz()
+    {
+        $quizId=request()->quizId;
+        $text="stop";
+        event(new FormSubmittedStop($text));
+        return redirect("quiz/start_quiz/{$quizId}");
 
+    }
+    public function pause_quiz()
+    {
+        $quizId=request()->quizId;
+        $text="pause";
+        event(new FormSubmittedPause($text));
+        return redirect("quiz/start_quiz/{$quizId}");
+
+    }
     public function slider()
     {
         return view('quiz.slider');

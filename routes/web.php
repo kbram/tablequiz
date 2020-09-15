@@ -326,6 +326,8 @@ Route::post('payment', 'StripePaymentController@payment_detail');
 
 //card
 Route::get('card', 'StripePaymentController@card');
+//bavaram
+
 Route::post('/quiz/run_quiz', function(){
     $questionno=request()->questionno;
     $question=request()->question;
@@ -341,3 +343,6 @@ Route::post('/quiz/run_quiz', function(){
     return redirect("quiz/start_quiz/{$quizId}");
     
 });
+//
+Route::post('/quiz/stop_quiz', 'QuizController@stop_quiz');
+Route::post('/quiz/pause_quiz', 'QuizController@pause_quiz');
