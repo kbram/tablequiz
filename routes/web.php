@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -327,22 +326,23 @@ Route::post('payment', 'StripePaymentController@payment_detail');
 //card
 Route::get('card', 'StripePaymentController@card');
 //bavaram
+Route::post('/quiz/run_quiz','QuizController@run_quiz');
 
-Route::post('/quiz/run_quiz', function(){
-    $questionno=request()->questionno;
-    $question=request()->question;
-    $answer=request()->answer;
-    $media=request()->media;
-    $answerId=request()->answerId;
-    $questionId=request()->questionId;
-    $roundId=request()->roundId;
-    $quizId=request()->quizId;
-    $type=request()->type;
-    $text=$questionno."#^".$question."#^".$answer."#^".$media."#^".$answerId."#^".$questionId."#^".$roundId."#^".$quizId."#^".$type;
-    event(new FormSubmitted($text));
-    return redirect("quiz/start_quiz/{$quizId}");
+// Route::post('/quiz/run_quiz', function(){
+//     $questionno=request()->questionno;
+//     $question=request()->question;
+//     $answer=request()->answer;
+//     $media=request()->media;
+//     $answerId=request()->answerId;
+//     $questionId=request()->questionId;
+//     $roundId=request()->roundId;
+//     $quizId=request()->quizId;
+//     $type=request()->type;
+//     $text=$questionno."#^".$question."#^".$answer."#^".$media."#^".$answerId."#^".$questionId."#^".$roundId."#^".$quizId."#^".$type;
+//     event(new FormSubmitted($text));
+//     return redirect("quiz/start_quiz/{$quizId}");
     
-});
+// });
 //
 Route::post('/quiz/stop_quiz', 'QuizController@stop_quiz');
 Route::post('/quiz/pause_quiz', 'QuizController@pause_quiz');

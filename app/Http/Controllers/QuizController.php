@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Quiz;
 use App\Models\QuizCategory;
 use Illuminate\Support\Facades\Storage;
+use App\Events\FormSubmitted;
 
 
 use App\Models\UserPayment;
