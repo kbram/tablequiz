@@ -287,7 +287,7 @@ class AdminQuestionController extends Controller
                'category__type'    => 'required',
                'question__type'    => 'required',
                'question'          => 'required', 
-               'time__limit'       => 'required',                         
+               'time__limit'       => '',                         
             ]);
             if($request->input('question__type') == 'standard__question'){
                  $validator = Validator::make($request->all(),

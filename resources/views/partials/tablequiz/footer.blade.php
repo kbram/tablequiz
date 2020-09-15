@@ -3,8 +3,8 @@
 		<div class="row">
 			<div class="col">
 				<ul class="list-unstyled d-flex flex-column flex-md-row justify-content-center align-items-center">
-					<li><a href="about">About</a></li>
-					<li><a href="contact">Contact</a></li>
+					<li><a href="../about">About</a></li>
+					<li><a href="../contact">Contact</a></li>
 					
 				</ul>
 			</div>
