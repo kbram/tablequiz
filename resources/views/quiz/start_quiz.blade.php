@@ -63,15 +63,17 @@
 					<div class="countdown__buttons row">
 						<div class="col-4">
 							<form action="/quiz/run_quiz" id="push-submit-form" method="post" class="col-4">
-								<input type="hidden" name="questionno">
 								<input type="hidden" id="push-submit-form-question" name="question">
 								<input type="hidden" id="push-submit-form-answer" name="answer">
-								<input type="hidden" name="media">
-								<input type="hidden" name="answerId">
-								<input type="hidden" name="questionId">
-								<input type="hidden" name="roundId" >
-								<input type="hidden" name="quizId" >
-								<input type="hidden" name="type">
+								<input type="hidden" id="push-submit-form-media" name="media">
+								<input type="hidden" id="push-submit-form-media_link" name="media_link">
+								<input type="hidden" id="push-submit-form-media_path" name="media_path">
+
+								<input type="hidden" id="push-submit-form-answerId" name="answerId">
+								<input type="hidden" id="push-submit-form-questionId" name="questionId">
+								<input type="hidden" id="push-submit-form-roundId" name="roundId" >
+								<input type="hidden" id="push-submit-form-quizId" name="quizId" >
+								<input type="hidden" id="push-submit-form-type" name="type">
 								<input type="hidden" id="push-submit-form-time" name="time">
 								<button type="submit" id="push-submit" style="border:none;"><i class="fa fa-play"></i></button>
 								{{csrf_field()}}
@@ -115,8 +117,23 @@
 								
 									<p class="question"><span>Question:</span><span>{{$question->question}}</span></p>
 									<input type="hidden" class="question-timer" value="{{$question->time_limit}}">
+									<input type="hidden" class="question-type" value="{{$question->question_type}}">
+									<input type="hidden" class="question-round" value="{{$question->round_id}}">
+									<input type="hidden" class="question-user" value="{{$question->user_id}}">
+									<input type="hidden" class="question-id" value="{{$question->id}}">
+
+
+									@foreach($medias[$question->id] as $media)
+									<input type="hidden" class="question-media-type" value="{{$media->media_type}}">
+									<input type="hidden" class="question-media-path" value="{{$media->public_path}}">
+									<input type="hidden" class="question-media-ink" value="{{$media->media_link}}">
+
+									@endforeach
+
 									@foreach($answers[$question->id] as $answer)
 									<p class="answer"><span>Answer:</span><span>{{$answer->answer}}</span></p>
+									<input type="hidden" class="answer-id" value="{{$answer->id}}">
+
 									@endforeach
 								</div>
 							</div>

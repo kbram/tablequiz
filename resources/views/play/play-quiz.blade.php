@@ -29,6 +29,7 @@
 		var m0 = message.replace('{"text":"','');
 		var m0 = m0.replace('"}','');
 		var m=m0.split("#^");
+		console.log(m);
 		var questionno=m[0];
 		var issueq=sessionStorage.getItem("issuequestion");
 		issueq=issueq+"@*"+m0;
@@ -36,20 +37,23 @@
 		
 		
 		$('h4.questionno').text(questionno);
-		$('h4.notification').text(m[1]);
+		$('h4.notification').text('');
 		//$('h4.ans').text(m[2]);
 		var med = m[8];
 		//$('div.med').text(med);
-
-		var answer=m[2].split("\\\\");
-		var answerId=m[4];
-		var questionId="12";
-		var roundId=m[6];
+		m[1] = m[1].slice(0, -1);
+		var answer=m[1].split("/");
+		m[3] = m[3].slice(0, -1);
+		var answerId=m[3].split("/");
+        console.log(answerId);
+		var questionId=m[4];
+		var roundId=m[5];
 		var quizId=m[7];
-		var type=m[8];
+		m[1] = m[1].slice(0, -1);
+         var type=m[2].split("/");
 		var text0="<div class='justify-content-center row'>";
 		for (var i = 0; i < answer.length; i++) {
-			text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+			text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
 			"<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
 			"<input type='text' name='answer' hidden value='"+answerId+"'/>"+
 			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
@@ -61,7 +65,7 @@
 		text0 += "</div> <div class='break'></div>"+
 		"<div class='justify-content-center row'>"+
 			"<div class=''>"+
-				"<br><a class='btn btn-primary d-block d-lg-inline-block card__from__modal' onclick='document.getElementById("+answerId+").submit()'>Submit Answer</a>"+
+				"<br><a class='btn btn-primary d-block d-lg-inline-block card__from__modal' onclick='document.getElementById("+answerId[i]+").submit()'>Submit Answer</a>"+
 			"</div>"+
 		"</div>";
 		$('#all-answer').empty();

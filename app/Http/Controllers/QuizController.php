@@ -502,29 +502,30 @@ $round_image->save();
     
     public function start_quiz($id)
     {  
-        $quiz_id=$id;
+       $quiz_id=$id;
        $questions=[];
        $answers=[];
+       $medias=[];
        $rounds =QuizRound::where('quiz_id',$id)->get();
        foreach($rounds as $round){
         $questions[$round->id]=Question::where('round_id',$round->id)->get();
-          
-       }
+          }
       //  dd(count($rounds));
        foreach($questions as $question){
            foreach($question as $questio){
                  $answers[$questio->id]=Answer::where('question_id',$questio->id)->get();
         }
-      }        
-            
-							
+        foreach($question as $questio){
+            $medias[$questio->id]=QuestionMedia::where('question_id',$questio->id)->get();
+   }  
+    
+    }  
       
-        return view('quiz.start_quiz',compact('questions','answers','rounds','quiz_id'));
+        return view('quiz.start_quiz',compact('questions','answers','rounds','quiz_id','medias'));
     }
 
     public function run_quiz()
     {  
-      $questionno=request()->questionno;
       $question=request()->question;
       $answer=request()->answer;
       $media=request()->media;
@@ -534,7 +535,7 @@ $round_image->save();
       $quizId=request()->quizId;
       $type=request()->type;
       $time=request()->time;
-      $text=$questionno."#^".$question."#^".$answer."#^".$media."#^".$answerId."#^".$questionId."#^".$roundId."#^".$quizId."#^".$type."#^".$time;
+      $text=$question."#^".$answer."#^".$media."#^".$answerId."#^".$questionId."#^".$roundId."#^".$quizId."#^".$type."#^".$time;
       event(new FormSubmitted($text));
       return redirect()->back();
     }
