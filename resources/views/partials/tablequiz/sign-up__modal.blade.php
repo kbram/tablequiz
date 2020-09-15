@@ -109,7 +109,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-		  <a class="back_to__login" href="#"><i class="fa fa-angle-left"></i><span>Back</span></a>
+		  <a class="back_to__login" href="#"><i class="fa fa-angle-left"></i><span>Login</span></a>
       </div>
       <div class="modal-body">
         <form class="popupLogIn text-body px-4" method="POST" action="{{ route('register') }}">
@@ -280,6 +280,10 @@
 					  <label for="cardholder_name">Cardholder name:</label>
 					 </div>
 				  <div class="col-md-7">
+<!-- amount -->
+                      <input hidden sclass="form-control" id="card_total" type="text" name="total_card" >
+
+
 					  <input class="form-control" id="card-holder-name" type="text" name="cardholder_name" value='{{ $payment_deatils->name ?? ""}}'>
 				  </div>
 			 </div>
@@ -289,7 +293,7 @@
 					  <label for="cardholder_street">Street:</label>
 					 </div>
 				  <div class="col-md-7">
-					  <input class="form-control" type="text" name="cardholder_street" value='{{ $payment_deatils->street ?? ""}}'>
+					  <input class="form-control" type="text" name="cardholder_street" id="cardholder_street" value='{{ $payment_deatils->street ?? ""}}'>
 				  </div>
 			 </div>
 			 <div class="form-row">
@@ -297,7 +301,7 @@
 					  <label for="cardholder_city">City/County:</label>
 					 </div>
 				  <div class="col-md-7">
-					  <input class="form-control" type="text" name="cardholder_city" value='{{ $payment_deatils->city ?? ""}}'>
+					  <input class="form-control" type="text" name="cardholder_city" id="cardholder_city" value='{{ $payment_deatils->city ?? ""}}'>
 				 </div>
 			</div>
 			 <div class="form-row">
@@ -305,7 +309,7 @@
 					  <label for="cardholder_country">Country:</label>
 					 </div>
 				  <div class="col-md-7">
-					  <input class="form-control" type="text" name="cardholder_country" value='{{ $payment_deatils->country ?? ""}}'>
+					  <input class="form-control" type="text" name="cardholder_country" id="cardholder_country" value='{{ $payment_deatils->country ?? ""}}'>
 				  </div>
               </div>
 			
@@ -314,7 +318,7 @@
 					  <label for="cardholder_number">Card number:</label>
 					 </div>
 				  <div class="col-md-7">
-					  <input   class="form-control card-number"  type="number" name="cardholder_number" value='{{ $payment_deatils->card_number ?? ""}}'>
+					  <input   class="form-control card-number"  type="number" name="cardholder_number" id="cardholder_number" value='{{ $payment_deatils->card_number ?? ""}}'>
 				  </div>
 			 </div>
 
@@ -324,7 +328,7 @@
 					  <label for="cardholder_expiry">Card expiry Month:</label>
 					 </div>
 				  <div class="col-md-7">
-					  <input class="form-control card-expiry-month" size='2' type="number" name="cardholder_expiry_month" value='{{ $payment_deatils->exp_month ?? ""}}'>
+					  <input class="form-control card-expiry-month" size='2' type="number" name="cardholder_expiry_month" id="cardholder_expiry_month" value='{{ $payment_deatils->exp_month ?? ""}}'>
 				  </div>
 			 </div>
 
@@ -334,7 +338,7 @@
 					  <label for="cardholder_expiry">Card expiry Year:</label>
 					 </div>
 				  <div class="col-md-7">
-					  <input class="form-control card-expiry-year"  size='4' type="number" name="cardholder_expiry_year" value='{{ $payment_deatils->exp_year ?? ""}}'>
+					  <input class="form-control card-expiry-year"  size='4' type="number" name="cardholder_expiry_year" id="cardholder_expiry_year" value='{{ $payment_deatils->exp_year ?? ""}}'>
 				  </div>
 			 </div>
 
@@ -343,7 +347,7 @@
 					  <label for="cardholder_cvv">CVV:</label>
 					 </div>
 				  <div class="col-md-7">
-					  <input  class="form-control w-25 card-cvc" maxlength="4	" type="text" name="card-cvc" value='{{ $payment_deatils->cvv ?? ""}}' size='4' 
+					  <input  class="form-control w-25 card-cvc" maxlength="4	" type="text" name="card-cvc" id="card-cvc" value='{{ $payment_deatils->cvv ?? ""}}' size='4' 
                                     >
 				  </div>
 			 </div>

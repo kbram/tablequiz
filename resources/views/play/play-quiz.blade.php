@@ -10,7 +10,62 @@
 
 @endsection
 @section('content')
+<script>
 
+	// Enable pusher logging - don't include this in production
+	Pusher.logToConsole = true;
+
+	var pusher = new Pusher('87436df86baf66b2192a', {
+	cluster: 'ap2'
+	});
+
+	var channel = pusher.subscribe('my-channel');
+	channel.bind('form-submitted', function(data) {
+		//alert(JSON.stringify(data));
+		var message = JSON.stringify(data);
+		var m0 = message.replace('{"text":"','');
+		var m0 = m0.replace('"}','');
+		var m=m0.split("#^");
+		var questionno=m[0];
+		var issueq=sessionStorage.getItem("issuequestion");
+		issueq=issueq+"@*"+m0;
+		sessionStorage.setItem("issuequestion", issueq);
+		
+		
+		$('h4.questionno').text(questionno);
+		$('h4.notification').text(m[1]);
+		//$('h4.ans').text(m[2]);
+		var med = m[8];
+		$('div.med').text(med);
+
+		var answer=m[2].split("\\\\");
+		var answerId=m[4];
+		var questionId=m[5];
+		var roundId=m[6];
+		var quizId=m[7];
+		var type=m[8];
+		var text0="<div class='justify-content-center row'>";
+		for (var i = 0; i < answer.length; i++) {
+			text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+			"<input type='text' name='answer' hidden value='"+answerId+"'/>"+
+			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
+			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
+			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+			"<p>"+answer[i]+"</p>"+ 
+			"</form>";	
+		} 
+		text0 += "</div> <div class='break'></div>"+
+		"<div class='justify-content-center row'>"+
+			"<div class=''>"+
+				"<br><a class='btn btn-primary d-block d-lg-inline-block card__from__modal' onclick='document.getElementById('"+answerId+"').submit()'>Submit Answer</a>"+
+			"</div>"+
+		"</div>";
+		$('#all-answer').empty();
+		$('#all-answer').append(text0);
+		document.getElementById("demo").innerHTML=issueq;
+	});
+	
+</script>
 
 <!-- <section class="container page__inner"> -->
 <!--
@@ -59,68 +114,18 @@
 			</div>
 
 
-@if($question->question_type == 'standard__question')
+			@if($question->question_type == 'standard__question')
 			<div id="all-answer" class="row answer__options pt-4 justify-content-center flex-wrap">
-
-			@foreach($answers as $answer)
-
-			 <form action="/playquiz/answer" method="post" name="form" id="disable" class="col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers ">
-
-				@csrf
-				<input type="text" name="answer" hidden value="{{$answer->id}}"/>
-				<input type="text" name="question" hidden value="{{$question->id}}"/>
-				<input type="text" name="round" hidden value="{{$round->id}}"/>
-				<input type="text" name="quiz" hidden value="{{$quiz->id}}"/>
-
-				<p>{{$answer->answer}}</p> 
-
-				</form>
-				@endforeach
-
-				
+			
 			</div>
-@endif
+            @endif
 
 
 
 	
-@if($question->question_type == 'standard__question')
-			<div id="all-answer" class="row answer__options pt-4 justify-content-center flex-wrap">
 
-			
-			<form action="/playquiz/answer" method="post" name="form" id="answer" class="col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers ">
 
-				@csrf
-				<input type="text" name="question" hidden value="{{$question->id}}"/>
-				<input type="text" name="round" hidden value="{{$round->id}}"/>
-				<input type="text" name="quiz" hidden value="{{$quiz->id}}"/>
 
-				<input class="form-control form-control-lg" type="text" name="answer" placeholder="Enter Answer"  value=""/>
-
-				</form>
-
-				
-			</div>
-@endif
-
-@if($question->question_type == 'standard__question')
-			<div id="all-answer" class="row answer__options pt-4 justify-content-center flex-wrap">
-
-			
-			<form action="/playquiz/answer" method="post" name="form" id="answer" class="col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers ">
-
-				@csrf
-				<input type="text" name="question" hidden value="{{$question->id}}"/>
-				<input type="text" name="round" hidden value="{{$round->id}}"/>
-				<input type="text" name="quiz" hidden value="{{$quiz->id}}"/>
-
-				<input class="form-control form-control-lg" type="number" name="answer" placeholder="Enter Answer"  value=""/>
-
-				</form>
-
-				
-			</div>
-@endif
 <br>
 <div class="justify-content-center row">
 <div class="col-5">

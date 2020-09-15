@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Events\FormSubmitted;
 
 /*
 |--------------------------------------------------------------------------
@@ -286,7 +287,7 @@ Route::post('stripe', 'StripePaymentController@stripePost')->name('stripe.post')
 //play quiz url
 
 
-Route::get('test/{quiz_name}','PlayController@selecturl');
+Route::get('play/{quiz_name}','PlayController@selecturl');
 
 
 //TEST
@@ -321,3 +322,21 @@ Route::post('ajax/video/{id}', 'MasterQuestionController@video');
 
 
 Route::post('payment', 'StripePaymentController@payment_detail');
+
+
+//card
+Route::get('card', 'StripePaymentController@card');
+Route::post('/quiz/run_quiz', function(){
+    $questionno=request()->questionno;
+    $question=request()->question;
+    $answer=request()->answer;
+    $media=request()->media;
+    $answerId=request()->answerId;
+    $questionId=request()->questionId;
+    $roundId=request()->roundId;
+    $quizId=request()->quizId;
+    $type=request()->type;
+    $text=$questionno."#^".$question."#^".$answer."#^".$media."#^".$answerId."#^".$questionId."#^".$roundId."#^".$quizId."#^".$type;
+    event(new FormSubmitted($text));
+    return view("quiz.start_quiz");
+});
