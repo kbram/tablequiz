@@ -338,5 +338,6 @@ Route::post('/quiz/run_quiz', function(){
     $type=request()->type;
     $text=$questionno."#^".$question."#^".$answer."#^".$media."#^".$answerId."#^".$questionId."#^".$roundId."#^".$quizId."#^".$type;
     event(new FormSubmitted($text));
-    return view("quiz.start_quiz");
+    return redirect("quiz/start_quiz/{$quizId}");
+    
 });

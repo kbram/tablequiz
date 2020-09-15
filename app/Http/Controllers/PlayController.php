@@ -12,7 +12,7 @@ use Image;
 use App\Models\QuizTeam;
 use App\Models\TeamAnswer;
 use App\Models\QuizSetupIcon;
-
+use App\Events\FormSubmittedStu;
 
 use Session;
 
@@ -158,6 +158,11 @@ public function answer(Request $request){
         $round_id = $request->input('round');
         $question_id = $request->input('question');
         $user_answer = $request->input('answer');
+        $user=Session::get('teamname');
+        $text=$user."#^".$user_answer;
+        event(new FormSubmittedStu($text));
+        
+
         $correct_answer = Answer::where('question_id',$question_id)->where('status',1)->first()->id;
         $quiz = Quiz::find($quiz_id);
         $roundCount=$quiz->rounds()->count();
