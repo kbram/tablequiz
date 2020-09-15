@@ -35,11 +35,13 @@
 				<div class="progress position-relative">
 					<div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
 					<div class="rounds position-absolute d-flex justify-content-between">
-					@for($i=0; count($questions)>$i; $i++)
+						
+					@for($i=0; count($rounds)>$i; $i++)
 						<div class="progress_round_label round_{{$i+1}}">
 							<span>Round {{$i+1}}</span>
 						</div>
 					@endfor
+					
 						<!-- <div class="progress_round_label round_1">
 							<span>Round 1</span>
 						</div>
@@ -60,17 +62,18 @@
 					<p class="countdown__time">22</p>
 					<div class="countdown__buttons row">
 						<div class="col-4">
-							<form action="/quiz/run_quiz" method="post" class="col-4">
-								<input type="hidden" name="questionno" value="q1">
-								<input type="hidden" name="question" value="What is your name ?">
-								<input type="hidden" name="answer" value="bavaram\kopi\thusaparan\rahul">
-								<input type="hidden" name="media" value="photo.jpg">
-								<input type="hidden" name="answerId" value="12">
-								<input type="hidden" name="questionId" value="1">
-								<input type="hidden" name="roundId" value="24">
-								<input type="hidden" name="quizId" value="2">
-								<input type="hidden" name="type" value="standard">
-								<button type="submit" style="border:none;"><i class="fa fa-play"></i></button>
+							<form action="/quiz/run_quiz" id="push-submit-form" method="post" class="col-4">
+								<input type="hidden" name="questionno">
+								<input type="hidden" id="push-submit-form-question" name="question">
+								<input type="hidden" id="push-submit-form-answer" name="answer">
+								<input type="hidden" name="media">
+								<input type="hidden" name="answerId">
+								<input type="hidden" name="questionId">
+								<input type="hidden" name="roundId" >
+								<input type="hidden" name="quizId" >
+								<input type="hidden" name="type">
+								<input type="hidden" id="push-submit-form-time" name="time">
+								<button type="submit" id="push-submit" style="border:none;"><i class="fa fa-play"></i></button>
 								{{csrf_field()}}
 							</form>
 						</div>
@@ -99,6 +102,7 @@
 
 
 						<div class="quiz__slider">
+						
 							@foreach($rounds as $round)
 							 @foreach($questions[$round->id] as $question)
 							<div class="quiz__single_question__container d-flex flex-column align-items-center">
@@ -109,16 +113,16 @@
 								<div class="quiz__single_question__qa text-center w-100">
 
 								
-									<p class="question"><span>Question:</span>{{$question->question}}</p>
-								
+									<p class="question"><span>Question:</span><span>{{$question->question}}</span></p>
+									<input type="hidden" class="question-timer" value="{{$question->time_limit}}">
 									@foreach($answers[$question->id] as $answer)
-									<p class="answer"><span>Answer:</span>{{$answer->answer}}</p>
+									<p class="answer"><span>Answer:</span><span>{{$answer->answer}}</span></p>
 									@endforeach
 								</div>
 							</div>
 							@endforeach
 							@endforeach
-
+                          
 						</div>
 
 					</div>
@@ -210,5 +214,5 @@
 @endsection
 
 @section('footer_scripts')
-
+@include('scripts.push-submit')
 @endsection
