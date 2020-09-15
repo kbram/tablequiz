@@ -1,6 +1,31 @@
 @extends('layouts.tablequizapp')
 
 @section('content')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+<script>
+
+	// Enable pusher logging - don't include this in production
+	Pusher.logToConsole = true;
+
+	var pusher = new Pusher('87436df86baf66b2192a', {
+	cluster: 'ap2'
+	});
+
+	var channel = pusher.subscribe('my-channel0');
+	channel.bind('form-submitted0', function(data) {
+		alert(JSON.stringify(data));	
+		var message =JSON.stringify(data);	
+		var m0 = message.replace('{"text":"','');
+		var m0 = m0.replace('"}','');
+		var m=m0.split("#^");
+
+		var text="<tr><td>"+m[0]+"</td><td>"+m[1]+"</td><td><input type='radio' name='correct_answer_1' value='correct'></td><td><input type='radio' name='correct_answer_1' value='incorrect'></td></tr>";
+		$(text).appendTo($("#all-answer"));
+		//$('#all-answer tbody').append(text);
+	});
+	
+</script>
 <section class="container page__inner dashboard">
 	<div class="dashboard__wrapper">
 
@@ -119,7 +144,7 @@
 								<th>Pts</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody >
 							<tr>
 								<td>SenanCronin2020</td>
 								<td>100</td>
@@ -165,53 +190,8 @@
 									</th>
 								</tr>
 							</thead>
-							<tbody>
-
-
-								<tr>
-									<td>Senancronin2020</td>
-									<td>Madagascar</td>
-									<td>
-										<input type="radio" name="correct_answer_1" value="correct">
-									</td>
-									<td>
-										<input type="radio" name="correct_answer_1" value="incorrect">
-									</td>
-								</tr>
-
-								<tr>
-									<td>ToppoCoolo88</td>
-									<td>Zambia</td>
-									<td>
-										<input type="radio" name="correct_answer_2" value="correct">
-									</td>
-									<td>
-										<input type="radio" name="correct_answer_2" value="incorrect">
-									</td>
-								</tr>
-
-
-								<tr>
-									<td>FlameBoy2000</td>
-									<td>Mozambique</td>
-									<td>
-										<input type="radio" name="correct_answer_3" value="correct">
-									</td>
-									<td>
-										<input type="radio" name="correct_answer_3" value="incorrect">
-									</td>
-								</tr>
-								<tr>
-									<td>NoFearBriarHill</td>
-									<td>Spain</td>
-									<td>
-										<input type="radio" name="correct_answer_5" value="correct">
-									</td>
-									<td>
-										<input type="radio" name="correct_answer_5" value="incorrect">
-									</td>
-								</tr>
-
+							<tbody id="all-answer">
+								
 							</tbody>
 
 						</table>

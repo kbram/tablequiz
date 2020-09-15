@@ -49,7 +49,12 @@
                         </div>
                     @endif
 
-					
+					@if (Session::has('fail'))
+                        <div class="alert alert-danger text-center">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                            <p>{{ Session::get('fail') }}</p>
+                        </div>
+                    @endif
 
 
 					<div class="dashboard__container flex-grow-1 p-0">
@@ -147,7 +152,7 @@
 							</thead>
 						
 							<tbody id="users">
-							@foreach($quizzes as $quiz)
+							@foreach($quizzes ?? '' as $quiz)
 
 							<tr>
                                     

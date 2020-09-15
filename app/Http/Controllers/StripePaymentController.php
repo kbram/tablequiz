@@ -29,6 +29,11 @@ class StripePaymentController extends Controller
     {
         return view('stripe');
     }
+
+    public function card(){
+        $card = UserPayment::where('user_id',Auth::id())->first();
+        return response()->json($card);
+    }
   
     /**
      * success response method.
@@ -37,18 +42,19 @@ class StripePaymentController extends Controller
      */
     public function stripePost(Request $request)
     {
+        $quizzes=Auth::user()->quizzes()->get();
 
         $payment_deatils = UserPayment::where('user_id', Auth::id())->first();
-
         $validator = Validator::make($request->all(),
         [
+            'total_card' => 'required',
             'cardholder_number'               => 'required',
             'cardholder_expiry_month'         => 'required',
             'cardholder_expiry_year'          => 'required',
             'card-cvc'                        => 'required',
         ]
         );
-        
+
 
         if ($validator->fails()) {
 
@@ -56,18 +62,24 @@ class StripePaymentController extends Controller
         }
 
 try{
+
         \Stripe\Stripe::setApiKey(Config::get('stripe.secret_key'));
+
         \Stripe\Charge::create ([
-                "amount" => 100 * 100,
+                "amount" => $request->total_card,
                 "currency" => "usd",
                 "source" => $request->stripeToken,
-                "description" => "Test payment" 
+                "description" => "Test payment" ,
+
         ]);
 
 
 //card deatils saved
 if(!$payment_deatils){
-    $payment=new UserPayment;
+    $payment=new UserPayment;}
+    else{
+    $payment= UserPayment::where('user_id', Auth::id()); 
+        }
     $payment -> name        =  $request->input('cardholder_name');
     $payment -> street      =  $request->input('cardholder_street');
     $payment -> city        =  $request->input('cardholder_city');
@@ -80,31 +92,14 @@ if(!$payment_deatils){
     
     $payment->save();    
 
-}
 
-else{
-   
 
-$payment= UserPayment::where('user_id', Auth::id())->first();
-$payment -> name        =  $request->input('cardholder_name');
-$payment -> street      =  $request->input('cardholder_street');
-$payment -> city        =  $request->input('cardholder_city');
-$payment -> country     =  $request->input('cardholder_country');
-$payment -> card_number =  $request->input('cardholder_number');
-$payment -> exp_month   =  $request->input('cardholder_expiry_month');
-$payment -> exp_year    =  $request->input('cardholder_expiry_year');
-$payment -> cvv         =  $request->input('card-cvc');
-$payment -> user_id     =  Auth::id();
-
-$payment->save();
-
-}
 //here
 
 
 
         Session::flash('success', 'Payment successful! Quiz added ');
-        return view('dashboard.home');
+        return redirect('dashboard/home');
 
         
     }
@@ -113,7 +108,7 @@ $payment->save();
         // Code to do something with the $e exception object when an error occurs
         
         Session::flash('fail', $e->getMessage());
-        return back();
+        return redirect('dashboard/home');
     }
       
       
