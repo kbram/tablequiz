@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGlobalAnswersTable extends Migration
+class CreateQuestionMediaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateGlobalAnswersTable extends Migration
      */
     public function up()
     {
-        Schema::create('global_answers', function (Blueprint $table) {
+        Schema::create('question_media', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('answer');
-            $table->boolean('answer_stat')->default(false);
+            $table->string('media_link')->nullable();
+            $table->string('media_type'); 
+            $table->string('local_path')->nullable();
+            $table->string('public_path')->nullable();
             $table->bigInteger('question_id')->unsigned();
-            $table->foreign('question_id')->references('id')->on('global_questions')->onDelete('cascade');;
-            
+            $table->foreign('question_id')->references('id')->on('questions');
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ class CreateGlobalAnswersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('global_answers');
+        Schema::dropIfExists('question_media');
     }
 }

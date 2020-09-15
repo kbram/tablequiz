@@ -7,7 +7,7 @@
         
                 swal({
                     title: "Are you sure?",
-                    text: "Once it's delete you want get back",
+                    text: "Once you delete, you can't get it back",
                     buttons: true,
                     dangerMode: true,
                     })

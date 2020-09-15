@@ -10,7 +10,62 @@
 
 @endsection
 @section('content')
+<script>
 
+	// Enable pusher logging - don't include this in production
+	Pusher.logToConsole = true;
+
+	var pusher = new Pusher('87436df86baf66b2192a', {
+	cluster: 'ap2'
+	});
+
+	var channel = pusher.subscribe('my-channel');
+	channel.bind('form-submitted', function(data) {
+		//alert(JSON.stringify(data));
+		var message = JSON.stringify(data);
+		var m0 = message.replace('{"text":"','');
+		var m0 = m0.replace('"}','');
+		var m=m0.split("#^");
+		var questionno=m[0];
+		var issueq=sessionStorage.getItem("issuequestion");
+		issueq=issueq+"@*"+m0;
+		sessionStorage.setItem("issuequestion", issueq);
+		
+		
+		$('h4.questionno').text(questionno);
+		$('h4.notification').text(m[1]);
+		//$('h4.ans').text(m[2]);
+		var med = m[8];
+		$('div.med').text(med);
+
+		var answer=m[2].split("\\\\");
+		var answerId=m[4];
+		var questionId=m[5];
+		var roundId=m[6];
+		var quizId=m[7];
+		var type=m[8];
+		var text0="<div class='justify-content-center row'>";
+		for (var i = 0; i < answer.length; i++) {
+			text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+			"<input type='text' name='answer' hidden value='"+answerId+"'/>"+
+			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
+			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
+			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+			"<p>"+answer[i]+"</p>"+ 
+			"</form>";	
+		} 
+		text0 += "</div> <div class='break'></div>"+
+		"<div class='justify-content-center row'>"+
+			"<div class=''>"+
+				"<br><a class='btn btn-primary d-block d-lg-inline-block card__from__modal' onclick='document.getElementById('"+answerId+"').submit()'>Submit Answer</a>"+
+			"</div>"+
+		"</div>";
+		$('#all-answer').empty();
+		$('#all-answer').append(text0);
+		document.getElementById("demo").innerHTML=issueq;
+	});
+	
+</script>
 
 <!-- <section class="container page__inner"> -->
 <!--
@@ -28,11 +83,11 @@
 		<article class="col-12 pb-5">
 
 		<div class="col-12 d-flex justify-content-between">
-<!-- 
+
 		<p ><a href="#" class="text-white"><small class="small">previous quiz</small></a></p>
 		<p><a href="#" class="text-white"><small class="small">next quiz</small></a></p>
 
-		</div> -->
+		</div> 
 
 
 			<div class="row border-bottom pb-2 mb-5">
@@ -59,30 +114,30 @@
 			</div>
 
 
+			@if($question->question_type == 'standard__question')
 			<div id="all-answer" class="row answer__options pt-4 justify-content-center flex-wrap">
-
 			
-				@foreach($answers as $answer)
-			<form action="/playquiz/answer" method="post" name="form" id="{{$answer->id}}" class="col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers ">
-
-				@csrf
-				<input type="text" name="answer" hidden value="{{$answer->id}}"/>
-				<input type="text" name="question" hidden value="{{$question->id}}"/>
-				<input type="text" name="round" hidden value="{{$round->id}}"/>
-				<input type="text" name="quiz" hidden value="{{$quiz->id}}"/>
-
-				<p onclick="document.getElementById('{{$answer->id}}').submit()">{{$answer->answer}}</p> 
-				</form>
-
-				@endforeach
-				
 			</div>
+            @endif
 
+
+
+	
+
+
+
+<br>
+<div class="justify-content-center row">
+<div class="col-5">
+<a   class="btn btn-primary d-block d-lg-inline-block card__from__modal" onclick="document.getElementById('answer').submit()">Submit Answer</a>
+</div> 
+</div>
+	
 		</article>
 		
 	</div>
 <!-- </section> -->
-
+<!-- 
 <script>
 
 	var correct = {!! json_encode(Session::get("$quiz->id-$round->id-$question->id") ) !!};
@@ -114,7 +169,18 @@
 	console.log(worng);
 	}
 
-</script>
+</script> -->
+<!-- 
+<script>
+
+
+$(function() {
+    $('.single__answer').click(function() {
+		$(this).attr('id', 'answer');
+		console.log("change");
+    });
+});
+</script> -->
 
 @include('scripts.playquiz')
 

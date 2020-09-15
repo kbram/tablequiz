@@ -153,10 +153,10 @@
 							</div>
 							<div class="col-sm-6">
 								<div class="input-group">
-									<input type="password" class="form-control pwd" value="4104554345029981" name="card_number_">
+									<input type="password" class="form-control pwd no" value="4104554345029981" name="card_number_">
 									<div class="input-group-append">
 										<span class="input-group-text">
-											<button class="btn btn-default reveal" type="button"><i class="fas fa-eye"></i></button>
+											<button class="btn btn-default reveal" id="eye_no" type="button"><i class="fas fa-eye"></i></button>
 										</span>
 									</div>          
 								</div>
@@ -169,10 +169,10 @@
 							</div>
 							<div class="col-sm-2">
 								<div class="input-group">
-									<input type="password" class="form-control pwd" value="332" maxlength="4" name="card_cvv_">
+									<input type="password" class="form-control pwd cvv" value="332" maxlength="4" name="card_cvv_">
 									<div class="input-group-append">
 										<span class="input-group-text">
-											<button class="btn btn-default reveal" type="button"><i class="fas fa-eye"></i></button>
+											<button class="btn btn-default reveal" id="eye_cvv"type="button"><i class="fas fa-eye"></i></button>
 										</span>
 									</div>          
 								</div>
@@ -191,4 +191,27 @@
 </section>
 @endsection
 @section('footer_scripts')
+
+<script>
+	$("body").on('click', '#eye_no', function() {
+	$(this).toggleClass("fa-eye fa-eye-slash");
+	var input = $(".no");
+	if (input.attr("type") === "password") {
+		input.attr("type", "text");
+	} else {
+		input.attr("type", "password");
+	}
+	})
+
+	$("body").on('click', '#eye_cvv', function() {
+	$(this).toggleClass("fa-eye fa-eye-slash");
+	var input = $(".cvv");
+	if (input.attr("type") === "password") {
+		input.attr("type", "text");
+	} else {
+		input.attr("type", "password");
+	}
+
+	})
+</script>
 @endsection

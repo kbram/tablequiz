@@ -8,6 +8,7 @@ use Image;
 use Illuminate\Http\Request;
 use App\Models\QuizCategory;
 use App\Models\QuizCategoryImage;
+
 use Illuminate\Support\Str;
 
 use File;
@@ -53,9 +54,9 @@ class QuizCategoriesController extends Controller
 
             $category_image = $request->file('upload__category__image');
             $filename = 'category_image.'.$category_image->getClientOriginalExtension();
-            $save_path = storage_path().'categories/'.$category_id.'/category_images/';
+            $save_path = storage_path('app/public'). '/categories/'.$category_id.'/category_images/';
             $path = $save_path.$filename;
-            $public_path = '/images/category_image/'.$category_id.'/category_image/'.$filename;
+            $public_path = storage_path('app/public'). '/categories/'.$category_id.'/category_image/'.$filename;
 
             // Make the user a folder and set permissions
             File::makeDirectory($save_path, $mode = 0755, true, true);
@@ -79,20 +80,16 @@ class QuizCategoriesController extends Controller
        
        return redirect()->back();
     }
-    public function destroy($id)
-    {
+   
+
+  public function edit($id){
+    $categories=QuizCategory::all();
+    $category=QuizCategory::find($id);
+
+    return view('admin.categories_edit', compact('categories','category'));
     
-        $category = QuizCategory::find($id);
-        
-        if ($category->id) {
-        $category->delete();
-
-        return redirect('/admin/categories')->with('success','Delete successfully');
-        }
-
-        return back()->with('error', 'Question is not deleted');
-    }
-
+    
+  }
 
 
     public function update(Request $request,$id)
@@ -117,8 +114,8 @@ class QuizCategoriesController extends Controller
         $categories->save();
     
         $category_id=QuizCategory::where('category_name',$categories -> category_name)->first()->id;
-                if ($request->hasFile('category_image')) {
-                    $category_image = $request->file('category_image');
+                if ($request->hasFile('upload__category__image')) {
+                    $category_image = $request->file('upload__category__image');
                     $filename = 'category_image.'.$category_image->getClientOriginalExtension();
                     $save_path = storage_path().'categories/'.$category_id.'/category_images/';
                     $path = $save_path.$filename;
@@ -131,7 +128,7 @@ class QuizCategoriesController extends Controller
                     //Image::make($category_image)->save($save_path.$filename);
                     $category_image->move($save_path, $filename);
         
-                    $categoryImage = new QuizCategoryImage;
+                    $categoryImage = QuizCategoryImage::findorfail($id);    
         
                     $categoryImage->public_path       = $public_path;
                     $categoryImage->local_path        = $save_path . '/' . $filename;
@@ -141,17 +138,22 @@ class QuizCategoriesController extends Controller
         
                 }
                
-               return redirect()->back();
+               return redirect('admin/categories');
+  }
+  public function destroy($id)
+  {
+  
+      $category = QuizCategory::find($id);
+      if ($category->id) {
+
+      $category->delete();
+     
+      return redirect('admin/categories')->with('success','Delete successfully');
+      }
+
+      return back()->with('error', 'Question is not deleted');
   }
 
-  public function edit($id){
-    $categories=QuizCategory::all();
-    $category=QuizCategory::find($id);
-
-    return view('admin.categories_edit', compact('categories','category'));
-    
-    
-  }
 
 
 }

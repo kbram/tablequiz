@@ -47,7 +47,6 @@
 					</li>
 					
 				</ul>
-				<a href="../quiz/setup" class="btn btn-primary hasPlus d-block">New Quiz</a>
 			</div>
 		</aside>
 		
@@ -77,29 +76,70 @@
 								</tr>
 							</thead>
 							<tbody id="users_table">
-								@foreach($users as $user)
+
+								   @foreach($users as $user)
+								   @if ($user->is_blocked)
 								<tr>
-									<td>{{$user -> name}}</td>
-									<td>15</td>
-									<td>322</td>
-									<td class="d-none" id="emailLink{{$user -> id}}">{{$user -> email}}</td>
+									<td>{{$user->name}}</td>
+									<td>{{$quizcount[$user->id]}}</td>
+									<td>{{$questioncount[$user->id]}}</td>
+
+
 									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column pl-0">
+
+										<div class="d-flex flex-column pl-0"  style=" pointer-events: none;opacity: 0.4;">
+
 											<i class="far fa-eye"></i>
-											<span>View Qs</span>
-										</div>
-										<div class="d-flex flex-column">
-											<i class="fas fa-times-circle"></i>
-											<span>Block</span>
-										</div>
-
-										<div class="d-flex flex-column">
-											<i class="fas fa-envelope"></i>
-											<span class="message" id="{{$user->id}}">Message</span>
+	
+											
+											<span><a href="{{route('userquizzes',$user->id)}}" data-toggle="tooltip" title="View Qs">
+										         View Qs</a></span>
 										</div>
 
-									</td>
+
+										<form method="POST" action="/admin/home/un-blockuser/{{$user->id}}" class="p-0">
+										      @csrf
+											<div class="d-flex flex-column" >
+												<i class="fas fa-times-circle"></i>
+												<span class="blockuser" id="block{{$user->id}}">un-block</span>
+											</div>
+										</form>
+
+										</td>
 								</tr>
+
+								@else
+								<tr>
+									<td>{{$user->name}}</td>
+									<td>{{$quizcount[$user->id]}}</td>
+									<td>{{$questioncount[$user->id]}}</td>
+
+
+									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
+
+										<div class="d-flex flex-column pl-0">
+
+											<i class="far fa-eye"></i>
+	
+											
+											<span><a href="{{route('userquizzes',$user->id)}}" data-toggle="tooltip" title="View Qs">
+										         View Qs</a></span>
+										</div>
+
+
+										<form method="POST" action="/admin/home/blockuser/{{$user->id}}" class="p-0">
+										             @csrf
+											<div class="d-flex flex-column">
+												<i class="fas fa-times-circle"></i>
+												<span class="blockuser" id="block{{$user->id}}">block</span>
+											</div>
+										</form>
+
+										</td>
+								</tr>
+
+
+                                @endif  
 								@endforeach
 							</tbody>
 							<tbody id="users_table"></tbody>
@@ -125,6 +165,7 @@
 
 @section('footer_scripts')
 @include('scripts.message')
+@include('scripts.block-user')
 @if(config('usersmanagement.enableSearchUsers'))
         @include('scripts.search-user')
 @endif

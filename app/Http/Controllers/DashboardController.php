@@ -30,12 +30,10 @@ class DashboardController extends Controller
     }
 
     public function index(){
-       
         $quizzes=Auth::user()->quizzes()->get();
             
         foreach($quizzes as $quiz)
         { 
-        // dd($quizzes);
 
             $roundCount[$quiz->id]=$quiz->rounds()->count();
 

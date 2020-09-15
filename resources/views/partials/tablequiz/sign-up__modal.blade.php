@@ -46,8 +46,12 @@
 			</div>
 			<div class="form-row d-flex justify-content-center mt-5">
 				<div class="col-10 col-md-4">
+				@if (session()->has('quiz'))
+					<input class="d-block btn btn-primary " id="login-btn" type="submit" value="Log In">
+					@else
 					<input class="d-block btn  btn-primary" type="submit" value="Log In">
 					<!-- for check out view -> to__checkout -->
+					@endif
 				</div>
 				<div class="col-10 col-md-4 mt-3">
 
@@ -105,7 +109,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-		  <a class="back_to__login" href="#"><i class="fa fa-angle-left"></i><span>Back</span></a>
+		  <a class="back_to__login" href="#"><i class="fa fa-angle-left"></i><span>Login</span></a>
       </div>
       <div class="modal-body">
         <form class="popupLogIn text-body px-4" method="POST" action="{{ route('register') }}">
@@ -147,15 +151,16 @@
 			  		<label for="signup__pass">Password</label>
 				</div>
 			  	<div class="col-md-7">
-					<input id="password" type="password" class="form-control" name="password"> 
+					<input id="password_signup" type="password" class="form-control" name="password"><i class="far fa-eye" id="eyeclass" style= "float: right; margin-top: -30px; margin-right: 15px;"></i></input>
 				</div>
+				
 			</div>
 			<div class="form-row">
 				<div class="col-md-5">
 			  		<label for="signup__pass">Confirm Password</label>
 				</div>
 			  	<div class="col-md-7">
-					<input id="password-confirm" type="password" class="form-control" name="password_confirmation"> 
+					<input id="password_signup_confirm" type="password" class="form-control a" name="password_confirmation"></input>
 				</div>
 			</div>
 			<div class="form-row d-flex justify-content-center mt-5">
@@ -199,7 +204,7 @@
 
 	<!-- thusha dev -->
 @guest
-	<div class="modal-content d-none " id="modal__payment">
+	<div class="modal-content d-none" id="modal__payment">
 		@endguest
 @auth
 <div class="modal-content  " id="modal__payment">
@@ -225,32 +230,32 @@
 				  </tr>
 			  </thead>
 			  <tbody>
-				<tr>
+				<tr class=no-participants>
 					<td>No. participants</td>
-					<td>20 - 29</td>
-					<td>€9.99</td>
+					<td></td>
+					<td></td>
 					<td><span class="checkout__remove">-</span></td>
 				</tr>
 				 
-				<tr>
+				<tr class="suggested-questions">
 					<td>Suggested questions</td>
-					<td>&times; 25</td>
-					<td>€9.99</td>
+					<td></td>
+					<td></td>
 					<td><span class="checkout__remove">-</span></td>
 				</tr>
 				 
-				<tr>
+				<tr class="customised-backgrounds">
 					<td>Customised backgrounds</td>
-					<td>&times; 2</td>
-					<td>€9.99</td>
+					<td></td>
+					<td></td>
 					<td><span class="checkout__remove">-</span></td>
 				</tr>
 				  
 			  </tbody>
 			  <tfoot>
-				<tr>  
+				<tr class="total-cost">  
 				  <td colspan="2"><strong>Total:</strong></td>
-				  <td><strong>€29.97</strong></td>
+				  <td><strong></strong></td>
 				<td></td>
 				</tr>
 			  </tfoot>
@@ -275,6 +280,10 @@
 					  <label for="cardholder_name">Cardholder name:</label>
 					 </div>
 				  <div class="col-md-7">
+<!-- amount -->
+                      <input hidden sclass="form-control" id="card_total" type="text" name="total_card" >
+
+
 					  <input class="form-control" id="card-holder-name" type="text" name="cardholder_name" value='{{ $payment_deatils->name ?? ""}}'>
 				  </div>
 			 </div>
@@ -284,7 +293,7 @@
 					  <label for="cardholder_street">Street:</label>
 					 </div>
 				  <div class="col-md-7">
-					  <input class="form-control" type="text" name="cardholder_street" value='{{ $payment_deatils->street ?? ""}}'>
+					  <input class="form-control" type="text" name="cardholder_street" id="cardholder_street" value='{{ $payment_deatils->street ?? ""}}'>
 				  </div>
 			 </div>
 			 <div class="form-row">
@@ -292,7 +301,7 @@
 					  <label for="cardholder_city">City/County:</label>
 					 </div>
 				  <div class="col-md-7">
-					  <input class="form-control" type="text" name="cardholder_city" value='{{ $payment_deatils->city ?? ""}}'>
+					  <input class="form-control" type="text" name="cardholder_city" id="cardholder_city" value='{{ $payment_deatils->city ?? ""}}'>
 				 </div>
 			</div>
 			 <div class="form-row">
@@ -300,7 +309,7 @@
 					  <label for="cardholder_country">Country:</label>
 					 </div>
 				  <div class="col-md-7">
-					  <input class="form-control" type="text" name="cardholder_country" value='{{ $payment_deatils->country ?? ""}}'>
+					  <input class="form-control" type="text" name="cardholder_country" id="cardholder_country" value='{{ $payment_deatils->country ?? ""}}'>
 				  </div>
               </div>
 			
@@ -309,7 +318,7 @@
 					  <label for="cardholder_number">Card number:</label>
 					 </div>
 				  <div class="col-md-7">
-					  <input   class="form-control card-number"  type="number" name="cardholder_number" value='{{ $payment_deatils->card_number ?? ""}}'>
+					  <input   class="form-control card-number"  type="number" name="cardholder_number" id="cardholder_number" value='{{ $payment_deatils->card_number ?? ""}}'>
 				  </div>
 			 </div>
 
@@ -319,7 +328,7 @@
 					  <label for="cardholder_expiry">Card expiry Month:</label>
 					 </div>
 				  <div class="col-md-7">
-					  <input class="form-control card-expiry-month" size='2' type="number" name="cardholder_expiry_month" value='{{ $payment_deatils->exp_month ?? ""}}'>
+					  <input class="form-control card-expiry-month" size='2' type="number" name="cardholder_expiry_month" id="cardholder_expiry_month" value='{{ $payment_deatils->exp_month ?? ""}}'>
 				  </div>
 			 </div>
 
@@ -329,7 +338,7 @@
 					  <label for="cardholder_expiry">Card expiry Year:</label>
 					 </div>
 				  <div class="col-md-7">
-					  <input class="form-control card-expiry-year"  size='4' type="number" name="cardholder_expiry_year" value='{{ $payment_deatils->exp_year ?? ""}}'>
+					  <input class="form-control card-expiry-year"  size='4' type="number" name="cardholder_expiry_year" id="cardholder_expiry_year" value='{{ $payment_deatils->exp_year ?? ""}}'>
 				  </div>
 			 </div>
 
@@ -338,7 +347,7 @@
 					  <label for="cardholder_cvv">CVV:</label>
 					 </div>
 				  <div class="col-md-7">
-					  <input  class="form-control w-25 card-cvc" maxlength="4	" type="text" name="card-cvc" value='{{ $payment_deatils->cvv ?? ""}}' size='4' 
+					  <input  class="form-control w-25 card-cvc" maxlength="4	" type="text" name="card-cvc" id="card-cvc" value='{{ $payment_deatils->cvv ?? ""}}' size='4' 
                                     >
 				  </div>
 			 </div>
@@ -357,7 +366,26 @@
 				 </div>
 
 				 
-
+</form>
 
 				  @include('scripts.stripe') 
+				  <script>
+						$("body").on('click', '#eyeclass', function() {
+						$(this).toggleClass("fa-eye fa-eye-slash");
+						var input = $("#password_signup");
+						if (input.attr("type") === "password") {
+							input.attr("type", "text");
+						} else {
+							input.attr("type", "password");
+						}
+
+						var inputc = $("#password_signup_confirm");
+						if (inputc.attr("type") === "password") {
+							inputc.attr("type", "text");
+						} else {
+							inputc.attr("type", "password");
+						}
+
+						})
+				  </script>
 

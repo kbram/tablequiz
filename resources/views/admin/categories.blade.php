@@ -28,7 +28,11 @@
 						</a>
 					</li>
 					<li>
+						<a href="/admin/financials">
 							<span><i class="fas fa-coins"></i></span>
+							Financials
+						</a>
+					</li>
 					<li class="active">
 						<a href="#">
 							<span><i class="fas fa-th-large"></i></span>
@@ -43,7 +47,6 @@
 					</li>
 					
 				</ul>
-				<a href="/quiz/setup" class="btn btn-primary hasPlus d-block">New Quiz</a>
 			</div>
 		</aside>
 		
@@ -79,7 +82,7 @@
 									<input type="file" class="orange_text form-control-file" id="upload__category__image" name="upload__category__image" value="Upload"></label>
 								</div>
 							
-								</div>
+							</div>
 							<hr>
 							<div class="row justify-content-center">
 								<div class="col-4">
@@ -107,7 +110,8 @@
 							  	@foreach($categories as $category)
                                         <tr>
                                             <td>{{$category->category_name}}</td>
-											<td>{{$category->created_at}}</td>
+											<td>{{date('d/m/Y', strtotime($category->created_at))}}</td>
+
                                             <td class="quiz_actions d-flex flex-row justify-content-lg-center">
 												<div class="d-flex flex-column">
 													<i class="fas fa-pencil-alt"></i>
@@ -117,7 +121,7 @@
 												<form method="POST" action="/admin/categories/{{$category->id}}" class="p-0">
 												{{ csrf_field() }}	
 												<div class="d-flex flex-column">
-												<i class="fas fa-times-circle" ></i><span class="delete"  >Delete</span>
+												<i class="fas fa-times-circle" ></i><span class="delete">Delete</span>
 												</div>
 											</form>
 												

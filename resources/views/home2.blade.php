@@ -40,7 +40,7 @@
 						<li class="py-3">Run and play quizzes across any device</li>
 					</ol>
 
-					<a href="/quiz/setup.php" class="d-block d-sm-inline btn btn-primary hasArrow mt-5">Get started</a>
+					<a href="/setup/create/" class="d-block d-sm-inline btn btn-primary hasArrow mt-5">Get started</a>
 				</div>
 			</div>
 		</div>
