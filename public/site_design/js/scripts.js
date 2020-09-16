@@ -174,7 +174,26 @@ $('#login-btn').click(function(e) {
     return false;
 });
 
-	
+    /**kopi ajax sign Up */
+    $('#signup-btn').click(function(e) { 
+        e.preventDefault();
+        $.ajax({ 
+            data: $(this).closest('.popupLogIn').serialize(), 
+            type: 'post', 
+            url: $(this).closest('.popupLogIn').attr('action'), 
+            success: function(response) { 
+                $('#modal__login').addClass('d-none');
+                $('#modal__signup').addClass('d-none');
+                $('#modal__payment').removeClass('d-none');
+            },
+            error: function(result,error) {
+                alert('error');
+                console.log(result);
+               },
+        });
+        return false;
+    });
+    
     
     $('body').on('click','.multiple__choice__row__in_modal span',function(){
 		 
