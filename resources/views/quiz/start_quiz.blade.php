@@ -116,18 +116,6 @@
 					<div class="countdown__buttons row">
 						<div class="col-4">
 							<form action="/quiz/run_quiz" id="push-submit-form" method="post" class="col-4">
-								<input type="hidden" id="push-submit-form-question" name="question">
-								<input type="hidden" id="push-submit-form-answer" name="answer">
-								<input type="hidden" id="push-submit-form-media" name="media">
-								<input type="hidden" id="push-submit-form-media_link" name="media_link">
-								<input type="hidden" id="push-submit-form-media_path" name="media_path">
-
-								<input type="hidden" id="push-submit-form-answerId" name="answerId">
-								<input type="hidden" id="push-submit-form-questionId" name="questionId">
-								<input type="hidden" id="push-submit-form-roundId" name="roundId" >
-								<input type="hidden" id="push-submit-form-quizId" name="quizId" >
-								<input type="hidden" id="push-submit-form-type" name="type">
-								<input type="hidden" id="push-submit-form-time" name="time">
 								<button type="submit" id="push-submit" style="border:none;"><i class="fa fa-play"></i></button>
 								{{csrf_field()}}
 							</form>
@@ -182,7 +170,7 @@
 									<input type="hidden" class="question-round" value="{{$question->round_id}}">
 									<input type="hidden" class="question-user" value="{{$question->user_id}}">
 									<input type="hidden" class="question-id" value="{{$question->id}}">
-
+									<input type="hidden" class="quiz-id" value="{{$quiz_id}}">
 
 									@foreach($medias[$question->id] as $media)
 									<input type="hidden" class="question-media-type" value="{{$media->media_type}}">

@@ -53,7 +53,8 @@
         console.log(answerId);
 		var questionId=m[4];
 		var roundId=m[5];
-		var quizId=m[7];
+		var quizId=m[6];
+		console.log(quizId);
 		m[1] = m[1].slice(0, -1);
          var type=m[2].split("/");
 		var text0="<div id='resub2' class='justify-content-center row'>";
@@ -66,13 +67,13 @@
 			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
 			"<p>"+answer[i]+"</p>"+ 
 			"</form>";	
-		} 
+		 
 		text0 += "</div> <div class='break'></div>"+
 		"<div id='resub1' class='justify-content-center row'>"+
 			"<div id='resub' class=''>"+
 				"<br><a class='btn btn-primary d-block d-lg-inline-block card__from__modal' onclick='document.getElementById("+answerId[i]+").submit()'>Submit Answer</a>"+
 			"</div>"+
-		"</div>";
+		"</div>";}
 		$('#all-answer').empty();
 		$('#all-answer').append(text0);
 		document.getElementById("demo").innerHTML=issueq;

@@ -22,8 +22,7 @@ $(document).ready(function() {
             var type =current.find('.question-type').val();
             var user =current.find('.question-user').val();
             var id =current.find('.question-id').val();
-
-
+            var quiz_id =current.find('.quiz-id').val();
             var time =current.find('.question-timer').val();
 
              current.find('.answer > span:nth-child(2)').each(function(){
@@ -76,7 +75,8 @@ $(document).ready(function() {
            answerId:answer_id,
            questionId:id,
            roundId:round,
-           quizId:id,
+           quizId:quiz_id,
+           
            time:time,
 
         },
