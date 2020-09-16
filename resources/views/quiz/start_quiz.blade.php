@@ -167,7 +167,7 @@
 						</div>
 						<div class="col-4">
 							<form action="/quiz/stop_quiz" method="post" class="col-4 push-submit-stop-form">
-								<input type="hidden" name="quizId" value=5{{$quiz_id}}>
+								<input type="hidden" name="quizId" value={{$quiz_id}}>
 								<button type="submit" id="push-submit-stop" style="border:none;" onclick="stop()"><i class="fa fa-stop"></i></button>
 								{{csrf_field()}}
 							</form>
