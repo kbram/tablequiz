@@ -56,7 +56,7 @@
 		var quizId=m[7];
 		m[1] = m[1].slice(0, -1);
          var type=m[2].split("/");
-		var text0="<div class='justify-content-center row'>";
+		var text0="<div id='resub2' class='justify-content-center row'>";
 		for (var i = 0; i < answer.length; i++) {
 			text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
 			"<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
@@ -68,8 +68,8 @@
 			"</form>";	
 		} 
 		text0 += "</div> <div class='break'></div>"+
-		"<div class='justify-content-center row'>"+
-			"<div class=''>"+
+		"<div id='resub1' class='justify-content-center row'>"+
+			"<div id='resub' class=''>"+
 				"<br><a class='btn btn-primary d-block d-lg-inline-block card__from__modal' onclick='document.getElementById("+answerId[i]+").submit()'>Submit Answer</a>"+
 			"</div>"+
 		"</div>";
