@@ -122,12 +122,36 @@ $(document).ready(function() {
 
 $('#push-submit-pause').click(function(e){
        e.preventDefault();  
+      
+       $.ajax({
+        type: "POST",
+        url: "/quiz/run_quiz",
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        data: $(this).closest('.push-submit-pause-form').serialize(),
+        
+        success: function(data) {
+         
+         },
 
+         });
 });
+
 $('#push-submit-stop').click(function(e){
        e.preventDefault();  
+    
+       $.ajax({
+        type: "POST",
+        url: "/quiz/run_quiz",
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        data: $(this).closest('.push-submit-stop-form').serialize(),
+        
+        success: function(data) {
+         
+         },
 
+         });
 });
+
 });
 
 

@@ -159,15 +159,15 @@
 							</form>
 						</div>
 						<div class="col-4">
-							<form action="/quiz/pause_quiz" method="post" class="col-4">
-								<input type="hidden" name="quizId" value="2">
+							<form action="/quiz/pause_quiz" method="post" class="col-4 push-submit-pause-form">
+								<input type="hidden" name="quizId" value={{$quiz_id}}>
 								<button type="submit" id="push-submit-pause" style="border:none;" onclick="pause()"><i class="fa fa-pause"></i></button>
 								{{csrf_field()}}
 							</form>
 						</div>
 						<div class="col-4">
-							<form action="/quiz/stop_quiz" method="post" class="col-4">
-								<input type="hidden" name="quizId" value="2">
+							<form action="/quiz/stop_quiz" method="post" class="col-4 push-submit-stop-form">
+								<input type="hidden" name="quizId" value=5{{$quiz_id}}>
 								<button type="submit" id="push-submit-stop" style="border:none;" onclick="stop()"><i class="fa fa-stop"></i></button>
 								{{csrf_field()}}
 							</form>
