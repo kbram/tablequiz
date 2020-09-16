@@ -157,8 +157,9 @@
 							<tr>
                                     
 									 <td>{{$quiz->quiz__name}}</td>
+									 <td>{{$questionCounts[$quiz->id]}}</td>
 									 <td>{{$roundCount[$quiz->id]}}</td>
- 									 <td>{{$questionCounts[$quiz->id]}}</td>
+ 									
 
 									<td class="d-none" id="quizLink{{$quiz->id}}">{{$quiz ->quiz_link}}</td>
 									<td class="quiz_actions d-flex flex-row justify-content-lg-end">

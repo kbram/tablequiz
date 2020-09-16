@@ -3,11 +3,9 @@ $(document).ready(function() {
 
    $('#push-submit').click(function(e){
        e.preventDefault();
-       
-      
       $('.quiz__slider .quiz__single_question__container').each(function(){
       
-       var answer="";
+         var answer="";
           var current=$(this);
          var hidden=current.attr('aria-hidden');
          if(hidden=="false"){
@@ -17,20 +15,65 @@ $(document).ready(function() {
                 answer+=$(this).text()+"/";
            
              });
-            $('#push-submit-form-question').val(question);
-            $('#push-submit-form-answer').val( answer);
-            $('#push-submit-form-time').val(time);
-
            
-            console.log(time);
+            $.ajax({
+        type: "POST",
+        url: "/quiz/run_quiz",
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        data:{
+           questionno:'',
+           question:question,
+           answer:answer,
+           media:'',
+           answerId:'',
+           questionId:'',
+           roundId:'',
+           quizId:'',
+           type:'',
+           time:time,
+
+        },
+        success: function(data) {
+         
+        },
+        error: function(result,error) {
+      
+        },
+
+      });
             
          }
        
       
       });
      
-       $('#push-submit-form').submit();
    });
+
+
+   $('.quiz__slider .quiz__single_question__container').each(function(){
+      var current=$(this);
+         var hidden=current.attr('aria-hidden');
+         if(hidden=="false"){
+            var time =current.find('.question-timer').val();
+            $('.countdown__time').text(time);
+         }
+
+   });
+
+   $('.slick-btns').click(function(){
+   $('.quiz__slider .quiz__single_question__container').each(function(){
+      var current=$(this);
+         var hidden=current.attr('aria-hidden');
+         if(hidden=="false"){
+            var time =current.find('.question-timer').val();
+            $('.countdown__time').text(time);
+         }
+
+   });
+});
+
+   
+
 });
 
 </script>
