@@ -1,5 +1,5 @@
 jQuery(document).ready(function($) {
-console.log("working");
+
 
     $('.quiz__slider').slick({
         prevArrow: '<button type="button" class="slick-btns slick-prev"><i class="fa fa-angle-left"</button>',
