@@ -112,7 +112,7 @@
 			<aside class="col-lg-3 dashboard__sidebar d-flex flex-column order-1 order-md-0">
 				<div class="dashboard__container d-flex flex-column align-items-center mb-3">
 					<h5>Countdown timer</h5>
-					<p id="timer">11</p>
+					<p class="countdown__time" id="timer">11</p>
 					<div class="countdown__buttons row">
 						<div class="col-4">
 							<form action="/quiz/run_quiz" id="push-submit-form" method="post" class="col-4">
@@ -269,9 +269,7 @@
 								</tr>
 							</thead>
 							<tbody id="all-answer">
-									
-
-
+								
 							</tbody>
 
 						</table>
