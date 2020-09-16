@@ -43,39 +43,40 @@ $(document).ready(function() {
 
            current.find('.question-media-ink').each(function(){
                 media_link+=$(this).val()+"**";
-           });
-console.log('hi'+question);
-            $('#push-submit-form-question').val(question);
-            $('#push-submit-form-answer').val( answer);
-            $('#push-submit-form-time').val(time);
-            $('#push-submit-form-media').val(media_type);
-            $('#push-submit-form-media_link').val(media_link);
-            $('#push-submit-form-media_path').val(media_path);
+            });
+// console.log('hi'+question);
+//             $('#push-submit-form-question').val(question);
+//             $('#push-submit-form-answer').val( answer);
+//             $('#push-submit-form-time').val(time);
+//             $('#push-submit-form-media').val(media_type);
+//             $('#push-submit-form-media_link').val(media_link);
+//             $('#push-submit-form-media_path').val(media_path);
 
-            $('#push-submit-form-answerId').val(answer_id);
-            $('#push-submit-form-questionId').val(id);
-            $('#push-submit-form-roundId').val(round);
-            $('#push-submit-form-quizId').val(time);
+//             $('#push-submit-form-answerId').val(answer_id);
+//             $('#push-submit-form-questionId').val(id);
+//             $('#push-submit-form-roundId').val(round);
+//             $('#push-submit-form-quizId').val(time);
 
-            $('#push-submit-form-type').val(time);
+//             $('#push-submit-form-type').val(time);
            
            
-             });
+             
            
             $.ajax({
         type: "POST",
         url: "/quiz/run_quiz",
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
         data:{
-           questionno:'',
            question:question,
            answer:answer,
-           media:'',
-           answerId:'',
-           questionId:'',
-           roundId:'',
-           quizId:'',
-           type:'',
+           media_type:media_type,
+           media_link:media_link,
+           media_path:media_path,
+
+           answerId:answer_id,
+           questionId:id,
+           roundId:round,
+           quizId:id,
            time:time,
 
         },
@@ -87,13 +88,16 @@ console.log('hi'+question);
         },
 
       });
-            
          }
+         
+         
+            
+         });
        
       
       });
      
-   });
+   
 
 
    $('.quiz__slider .quiz__single_question__container').each(function(){
@@ -121,5 +125,7 @@ console.log('hi'+question);
    
 
 });
+
+
 
 </script>
