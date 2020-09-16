@@ -141,7 +141,7 @@
 			$('#resub').css('cursor','not-allowed');
 			$("#resub").css("pointer-events", "none");
 			$('#resub').css('opacity','0.4');
-			$(".timer").html("Teacher Stoped");
+			$(".timer").html("Teacher Paused");
 
 			$("#resub").css('display','none');
 			$("#resub2").css('display','none');

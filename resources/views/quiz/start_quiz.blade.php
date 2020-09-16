@@ -25,16 +25,47 @@
 		//$('#all-answer tbody').append(text);
 	});
 	//var x=1;
-	var y= "";
+	var pl= true;
+	var countDown;
 	$(document).ready(function(){
-		y=document.getElementById("timer").textContent;
-		
+		$("#push-submit-pause").css("pointer-events", "none");
+		$('#push-submit-pause').css('opacity','0.4');
+		$("#push-submit-stop").css("pointer-events", "none");
+		$('#push-submit-stop').css('opacity','0.4');
 	});	
-	
+	function pause() {
+		clearInterval(countDown);
+		$("#push-submit").css("pointer-events", "auto");
+		$('#push-submit').css('opacity','1');
+		$("#push-submit-pause").css("pointer-events", "none");
+		$('#push-submit-pause').css('opacity','0.4');
+		pl=true;
+	}
+
+	function stop() {
+		clearInterval(countDown);
+		$("#push-submit").css("pointer-events", "auto");
+		$('#push-submit').css('opacity','1');
+		$("#push-submit-pause").css("pointer-events", "none");
+		$('#push-submit-pause').css('opacity','0.4');
+		$("#push-submit-stop").css("pointer-events", "none");
+		$('#push-submit-stop').css('opacity','0.4');
+		$("#timer").html("Finshed");
+	}
 	function play() {
+		if(pl==true){
+			
+			$("#push-submit").css("pointer-events", "none");
+			$('#push-submit').css('opacity','0.4');
+			pl=false;
+		}
+		y=document.getElementById("timer").textContent;
+		var splity=y.split(":");
+		y=parseInt(splity[0])*60+parseInt(splity[1]);
+
 		var sec= y,
 		countDiv    = document.getElementById("timer"),
-		secpass,
+		secpass;
 		countDown   = setInterval(function () {
 			'use strict';
 			secpass();
@@ -75,6 +106,10 @@
 				///$('#resub').css('cursor','not-allowed');
 				//$("#resub").css("pointer-events", "none");
 				//$('#resub').css('opacity','0.4');
+				
+				$("#push-submit").css("pointer-events", "auto");
+				$('#push-submit').css('opacity','1');
+				pl=true;
 			}
 		}
 	}
@@ -112,25 +147,25 @@
 			<aside class="col-lg-3 dashboard__sidebar d-flex flex-column order-1 order-md-0">
 				<div class="dashboard__container d-flex flex-column align-items-center mb-3">
 					<h5>Countdown timer</h5>
-					<p class="countdown__time" id="timer">11</p>
+					<p class="countdown__time" id="timer"></p>
 					<div class="countdown__buttons row">
 						<div class="col-4">
 							<form action="/quiz/run_quiz" id="push-submit-form" method="post" class="col-4">
-								<button type="submit" id="push-submit" style="border:none;"><i class="fa fa-play"></i></button>
+								<button type="submit" id="push-submit" style="border:none;" onclick="play()"><i class="fa fa-play"></i></button>
 								{{csrf_field()}}
 							</form>
 						</div>
 						<div class="col-4">
 							<form action="/quiz/pause_quiz" method="post" class="col-4">
 								<input type="hidden" name="quizId" value="2">
-								<button type="submit" style="border:none;"><i class="fa fa-pause"></i></button>
+								<button type="submit" id="push-submit-pause" style="border:none;" onclick="pause()"><i class="fa fa-pause"></i></button>
 								{{csrf_field()}}
 							</form>
 						</div>
 						<div class="col-4">
 							<form action="/quiz/stop_quiz" method="post" class="col-4">
 								<input type="hidden" name="quizId" value="2">
-								<button type="submit" style="border:none;"><i class="fa fa-stop"></i></button>
+								<button type="submit" id="push-submit-stop" style="border:none;" onclick="stop()"><i class="fa fa-stop"></i></button>
 								{{csrf_field()}}
 							</form>
 						</div>
