@@ -43,7 +43,7 @@ class RegisterController extends Controller
      * @return void
      */
     public function __construct()
-    {
+    {   
         $this->middleware('guest', [
             'except' => 'logout',
         ]);
@@ -57,7 +57,7 @@ class RegisterController extends Controller
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
-    {
+    { 
         $data['captcha'] = $this->captchaCheck();
 
         if (! config('settings.reCaptchStatus')) {
@@ -73,8 +73,8 @@ class RegisterController extends Controller
                 'email'                 => 'required|email|max:255|unique:users',
                 'password'              => 'required|min:6|max:30|confirmed',
                 'password_confirmation' => 'required|same:password',
-                'g-recaptcha-response'  => '',
-                'captcha'               => 'required|min:1',
+               // 'g-recaptcha-response'  => '',
+               // 'captcha'               => 'required|min:1',
             ],
             [
                 'name.unique'                   => trans('auth.userNameTaken'),
@@ -100,7 +100,7 @@ class RegisterController extends Controller
      * @return User
      */
     protected function create(array $data)
-    {
+    {     
         $ipAddress = new CaptureIpTrait();
 
         if (config('settings.activation')) {
