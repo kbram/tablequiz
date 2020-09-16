@@ -54,7 +54,10 @@
 	}
 	function play() {
 		if(pl==true){
-			
+			$("#push-submit-pause").css("pointer-events", "auto");
+			$('#push-submit-pause').css('opacity','1');
+			$("#push-submit-stop").css("pointer-events", "auto");
+			$('#push-submit-stop').css('opacity','1');
 			$("#push-submit").css("pointer-events", "none");
 			$('#push-submit').css('opacity','0.4');
 			pl=false;
