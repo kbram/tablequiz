@@ -84,12 +84,28 @@ $(document).ready(function() {
      
    
 
-
+      var progress=0;
+      var round_count=-1;
+      var progress_divide=100;
+      $('.progress_round_label').each(function(){
+          round_count++;
+      });
+     
+      progress_divide/=round_count;
+        
+    
    $('.quiz__slider .quiz__single_question__container').each(function(){
+      
       var current=$(this);
          var hidden=current.attr('aria-hidden');
          if(hidden=="false"){
+            var round_val=current.find('.question-round').val();
+            progress=Number(round_val);
+            $('.progress_round_label').removeClass('round_2');
+             $('#round'+round_val).addClass('round_2');
+
             var time =current.find('.question-timer').val();
+            
             sec=time;
             var min     = Math.floor(sec / 60),
 				remSec  = sec % 60;
@@ -109,12 +125,28 @@ $(document).ready(function() {
          }
 
    });
-
-   $('.slick-btns').click(function(){
+   
+    
+   $('.slick-btns').click(function(){ 
    $('.quiz__slider .quiz__single_question__container').each(function(){
       var current=$(this);
+      
          var hidden=current.attr('aria-hidden');
          if(hidden=="false"){
+            
+            var round_val=current.find('.question-round').val();
+            $('.progress_round_label').removeClass('round_2');
+             $('#round'+round_val).addClass('round_2');
+           
+                 if(progress!=Number(round_val)){
+                    $('#round-progress').css("width",progress_divide+'%');
+                     progress_divide+=progress_divide;
+                     progress=Number(round_val);
+                  }
+                 else{
+                    
+                 }
+
             var time =current.find('.question-timer').val();
             sec=time;
             var min     = Math.floor(sec / 60),
@@ -150,7 +182,12 @@ $(document).ready(function() {
          }
 
    });
+
+  
+
 });
+
+
 
 $('#push-submit-pause').click(function(e){
        e.preventDefault();  
