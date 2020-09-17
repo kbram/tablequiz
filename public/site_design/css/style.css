@@ -2287,10 +2287,8 @@ select {
 }
 
 .cursor_not{
-
     cursor: not-allowed;
-    pointer-events:none;
-
+    
 }
 
 .single__suggested__question__attributes p {

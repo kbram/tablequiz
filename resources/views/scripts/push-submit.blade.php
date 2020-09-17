@@ -157,7 +157,7 @@ $('#push-submit-pause').click(function(e){
       
        $.ajax({
         type: "POST",
-        url: "/quiz/run_quiz",
+        url: "/quiz/pause_quiz",
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
         data: $(this).closest('.push-submit-pause-form').serialize(),
         
@@ -173,7 +173,7 @@ $('#push-submit-stop').click(function(e){
     
        $.ajax({
         type: "POST",
-        url: "/quiz/run_quiz",
+        url: "/quiz/stop_squiz",
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
         data: $(this).closest('.push-submit-stop-form').serialize(),
         

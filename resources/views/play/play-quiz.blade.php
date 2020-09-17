@@ -52,7 +52,16 @@
 
 			<div id="ques" class='row question__container'>
 
-             </div>
+			
+
+			<div class='col-12 text-center'>
+			<h4 class='bernhard notification'>Not submitted</h4>
+			</div>
+			<div  class='col-12 the__question text-center mB-2'>
+			<h4 class='questionno' style='min-width:50vw !important;'> Please wait for question ! </h4>
+</div>
+		</div>         
+
 
 			<div id="all-answer" class="row answer__options pt-4 justify-content-center flex-wrap">
 			
@@ -100,6 +109,8 @@
 
 	
 </script> -->
+
+
 
 @include('scripts.playquiz')
 

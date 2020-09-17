@@ -4,6 +4,9 @@
 $(document).ready(function() { 
     $(".timer").html("Wait.....");
 
+
+    //with session refresh
+    
     var issueq=JSON.parse(sessionStorage.getItem("issuequestion"));
     var time=JSON.parse(sessionStorage.getItem("nowtimeon"));
     var timeon=0;
@@ -11,7 +14,9 @@ $(document).ready(function() {
         var splity=time.split(":");
 	    timeon=parseInt(splity[0])*60+parseInt(splity[1]);
     }
-   
+    var all = $(".single__answer");
+
+
     //alert(timeon);
     var countDown;
     var quseee=1;
@@ -22,9 +27,7 @@ $(document).ready(function() {
         quseee=issueq.length-1;
 
         var an=issueq[quseee][1];
-		$('h4.questionno').text(issueq[quseee][0]);
-        $('h4.notification').text('');
-        
+	    
 		an=an.slice(0, -1);
 		var answer=an.split("/");
 		var answerId=issueq[quseee][3].split("/");
@@ -33,8 +36,18 @@ $(document).ready(function() {
         var quizId=issueq[quseee][6];
         
         var type=issueq[quseee][7];
-		var text0="<div id='resub2' class='justify-content-center row'>";
-		for (var i = 0; i < answer.length; i++) {
+        var text0 ='';
+        var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
+			"<img class='q-img' src='{{asset('site_design/images/homepage__logo.png')}}' height='170px'>"+
+			"</div>"+
+			"<div class='col-12 text-center'>"+
+			"<h4 class='bernhard notification'>Not submitted</h4>" +
+			"</div>"+
+			"<div  class='col-12 the__question text-center mB-2'>"+
+			"<h4 class='questionno' style='min-width:50vw !important;'>  </h4>"+
+            "</div>";
+            
+            for (var i = 0; i < answer.length; i++) {
 			text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
 			"<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
 			"<input type='text' name='answer' hidden value='"+answerId+"'/>"+
@@ -43,7 +56,8 @@ $(document).ready(function() {
 			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
 			"<p>"+answer[i]+"</p>"+ 
 			"</form>";	
-		} 
+        } 
+        console.log(answer);
         text0 += "</div> <div class='break'></div>";
         if(time!=null && quseee==qustno){
             text0 += "<div id='resub1' class='justify-content-center row'>"+
@@ -51,9 +65,23 @@ $(document).ready(function() {
                     "<br><a class='btn btn-primary d-block d-lg-inline-block card__from__modal' onclick='document.getElementById("+answerId[i]+").submit()'>Submit Answer</a>"+
                 "</div>"+
             "</div>";
+
+            
+
+            
         }
+        
+        
 		$('#all-answer').empty();
         $('#all-answer').append(text0);
+
+
+        $('#ques').empty();
+        $('#ques').append(textq);
+
+        $('h4.questionno').text(issueq[quseee][0]);
+        $('h4.notification').text('');
+    
 
         var y=timeon;
 		var sec= y,
@@ -110,9 +138,7 @@ $(document).ready(function() {
         time=JSON.parse(sessionStorage.getItem("nowtimeon"));
         quseee=quseee-1;
         var an=issueq[quseee][1];
-		$('h4.questionno').text(issueq[quseee][0]);
-        $('h4.notification').text('');
-        
+		
 		an=an.slice(0, -1);
 		var answer=an.split("/");
 		var answerId=issueq[quseee][3].split("/");
@@ -121,8 +147,18 @@ $(document).ready(function() {
 		var quizId=issueq[quseee][6];
 		//alert("dfsdfsdfsdfsdfsddddddddddddd");
         var type=issueq[quseee][7];
-		var text0="<div id='resub2' class='justify-content-center row'>";
-		for (var i = 0; i < answer.length; i++) {
+        var text0='';
+        var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
+			"<img class='q-img' src='{{asset('site_design/images/homepage__logo.png')}}' height='170px'>"+
+			"</div>"+
+			"<div class='col-12 text-center'>"+
+			"<h4 class='bernhard notification'>Not submitted</h4>" +
+			"</div>"+
+			"<div  class='col-12 the__question text-center mB-2'>"+
+			"<h4 class='questionno' style='min-width:50vw !important;'>  </h4>"+
+            "</div>";
+            
+            for (var i = 0; i < answer.length; i++) {
 			text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
 			"<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
 			"<input type='text' name='answer' hidden value='"+answerId+"'/>"+
@@ -138,18 +174,30 @@ $(document).ready(function() {
                 "<div class='' id='resub' >"+
                     "<br><a class='btn btn-primary d-block d-lg-inline-block card__from__modal' onclick='document.getElementById("+answerId[i]+").submit()'>Submit Answer</a>"+
                 "</div>"+
-            "</div>";
+            "</div>"+
+            "</div>"+
+        "</div>";
+        
+
         }
+        
+        
+        
 		$('#all-answer').empty();
-		$('#all-answer').append(text0);
+        $('#all-answer').append(text0);
+        
+        $('#ques').empty();
+        $('#ques').append(textq);
+        
+        $('h4.questionno').text(issueq[quseee][0]);
+        $('h4.notification').text('');
+        
 	});
     $("#next").click(function(){
         time=JSON.parse(sessionStorage.getItem("nowtimeon"));
         quseee=quseee+1;
         var an=issueq[quseee][1];
-		$('h4.questionno').text(issueq[quseee][0]);
-        $('h4.notification').text('');
-        
+		
 		an=an.slice(0, -1);
 		var answer=an.split("/");
 		var answerId=issueq[quseee][3].split("/");
@@ -158,8 +206,18 @@ $(document).ready(function() {
 		var quizId=issueq[quseee][6];
 		//alert("dfsdfsdfsdfsdfsddddddddddddd");
         var type=issueq[quseee][7];
-		var text0="<div id='resub2' class='justify-content-center row'>";
-		for (var i = 0; i < answer.length; i++) {
+        var text0 = '';
+        var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
+			"<img class='q-img' src='{{asset('site_design/images/homepage__logo.png')}}' height='170px'>"+
+			"</div>"+
+			"<div class='col-12 text-center'>"+
+			"<h4 class='bernhard notification'>Not submitted</h4>" +
+			"</div>"+
+			"<div  class='col-12 the__question text-center mB-2'>"+
+			"<h4 class='questionno' style='min-width:50vw !important;'>  </h4>"+
+            "</div>";
+            
+            for (var i = 0; i < answer.length; i++) {
 			text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
 			"<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
 			"<input type='text' name='answer' hidden value='"+answerId+"'/>"+
@@ -175,10 +233,24 @@ $(document).ready(function() {
                 "<div class='' id='resub' >"+
                     "<br><a class='btn btn-primary d-block d-lg-inline-block card__from__modal' onclick='document.getElementById("+answerId[i]+").submit()'>Submit Answer</a>"+
                 "</div>"+
-            "</div>";
+            "</div>"+
+            "</div>"+
+        "</div>";
+        
+
         }
+        
+        
+        
 		$('#all-answer').empty();
-		$('#all-answer').append(text0);
+        $('#all-answer').append(text0);
+        
+        $('#ques').empty();
+        $('#ques').append(textq);
+        
+        $('h4.questionno').text(issueq[quseee][0]);
+        $('h4.notification').text('');
+        
 	});
 
 	Pusher.logToConsole = true;
@@ -203,9 +275,7 @@ $(document).ready(function() {
 		issueq.push(message.text);
 		sessionStorage.setItem("issuequestion", JSON.stringify(issueq));
 
-		$('h4.questionno').text(message.text[0]);
-		$('h4.notification').text('');
-
+		
 		var an=message.text[1];
 		
 		an=an.slice(0, -1);
@@ -219,26 +289,49 @@ $(document).ready(function() {
         //alert("quizid:"+quizId);
         //alert("qid:"+qid);
         //if(parseInt(quizId)==parseInt(qid)){
+
                 
-            var text0="<div id='resub2' class='justify-content-center row'>";
+            var text0 ='';
+        var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
+			"<img class='q-img' src='{{asset('site_design/images/homepage__logo.png')}}' height='170px'>"+
+			"</div>"+
+			"<div class='col-12 text-center'>"+
+			"<h4 class='bernhard notification'>Not submitted</h4>" +
+			"</div>"+
+			"<div  class='col-12 the__question text-center mB-2'>"+
+			"<h4 class='questionno' style='min-width:50vw !important;'>  </h4>"+
+            "</div>";
+            
             for (var i = 0; i < answer.length; i++) {
-                text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
-                "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
-                "<input type='text' name='answer' hidden value='"+answerId+"'/>"+
-                "<input type='text' name='question' hidden value='"+questionId+"'/>"+
-                "<input type='text' name='round' hidden value='"+roundId+"'/>"+
-                "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
-                "<p>"+answer[i]+"</p>"+ 
-                "</form>";	
-            } 
+			text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+			"<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+			"<input type='text' name='answer' hidden value='"+answerId+"'/>"+
+			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
+			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
+			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+			"<p>"+answer[i]+"</p>"+ 
+			"</form>";	
+        } 
             text0 += "</div> <div class='break'></div>"+
             "<div id='resub1' class='justify-content-center row'>"+
                 "<div class='' id='resub' >"+
                     "<br><a class='btn btn-primary d-block d-lg-inline-block card__from__modal' onclick='document.getElementById("+answerId[i]+").submit()'>Submit Answer</a>"+
                 "</div>"+
-            "</div>";
-            $('#all-answer').empty();
-            $('#all-answer').append(text0);
+            "</div>"+
+            "</div>"+
+        "</div>";
+        
+        
+
+        $('#all-answer').empty();
+        $('#all-answer').append(text0);
+        
+        $('#ques').empty();
+        $('#ques').append(textq);
+        
+        $('h4.questionno').text(message.text[0]);
+		$('h4.notification').text('');
+
             //document.getElementById("demo").innerHTML=JSON.parse(sessionStorage.getItem("issuequestion"));
 
 
@@ -317,8 +410,47 @@ $(document).ready(function() {
                 $('#resub1').append(text11);
                 clearInterval(countDown);
             });
+
+
+
+
+            var $box=null;
+
+//answer select
+$('.single__answer')
+.click(function() {
+console.log("click on single answer");
+if ($box == null) {
+    $box = $(this);
+    $box.css("box-shadow","3px 3px 15px #7343C1, -1px -1px 5px rgba(0, 0, 0, 0.045)");
+    $box.attr('id', 'answer');
+
+} 
+else  {
+    $box.css("box-shadow","");
+    $box.attr('id', 'disable');
+
+    if($box != $(this))
+    {
+                    $box = $(this);
+                    $box.css("box-shadow","3px 3px 15px #7343C1, -1px -1px 5px rgba(0, 0, 0, 0.045)");
+                    $box.attr('id', 'answer');
+
+    }
+    else
+        $box = null;
+}
+}
+);
         //}
-	});
+    });
+    
+
+
+
+
+
+
 });
 
 
