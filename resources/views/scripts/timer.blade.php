@@ -47,7 +47,8 @@ $(document).ready(function() {
 			"<div  class='col-12 the__question text-center mB-2'>"+
 			"<h4 class='questionno' style='min-width:50vw !important;'>  </h4>"+
             "</div>";
-            
+
+            if(type == "multiple__choice__question"){
             for (var i = 0; i < answer.length; i++) {
 			text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
 			"<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
@@ -58,6 +59,32 @@ $(document).ready(function() {
 			"<p>"+answer[i]+"</p>"+ 
 			"</form>";	
         } 
+    }
+          
+    else if(type == "standard__question"){
+        text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+            "<div class='form-group'>"+
+            "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
+			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
+			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+            "<input type='text' class='form-control' name='question' placeholder='Enter answer'/>"+
+            "</div>"+
+			"</form>";	
+    }
+         
+    else if(type == "numeric__question"){
+        text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+            "<div class='form-group'>"+
+            "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
+			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
+			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+			"<input type='number' class='form-control' name='question' placeholder='Enter answer'/>"+
+            "</div>"+
+            "</form>";	
+    }
+
         console.log(answer);
         text0 += "</div> <div class='break'></div>";
         if(time!=null && quseee==qustno){
@@ -159,6 +186,7 @@ $(document).ready(function() {
 			"<h4 class='questionno' style='min-width:50vw !important;'>  </h4>"+
             "</div>";
             
+            if(type == "multiple__choice__question"){
             for (var i = 0; i < answer.length; i++) {
 			text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
 			"<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
@@ -168,7 +196,33 @@ $(document).ready(function() {
 			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
 			"<p>"+answer[i]+"</p>"+ 
 			"</form>";	
-		} 
+        } 
+    }
+
+    else if(type == "standard__question"){
+        text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+            "<div class='form-group'>"+
+            "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
+			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
+			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+            "<input type='text' class='form-control' name='question' placeholder='Enter answer'/>"+
+            "</div>"+
+			"</form>";	
+    }
+         
+    else if(type == "numeric__question"){
+        text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+            "<div class='form-group'>"+
+            "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
+			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
+			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+			"<input type='number' class='form-control' name='question' placeholder='Enter answer'/>"+
+            "</div>"+
+            "</form>";	
+    }
+
         text0 += "</div> <div class='break'></div>";
         if(time!=null && quseee==qustno){
             text0 += "<div id='resub1' class='justify-content-center row'>"+
@@ -218,6 +272,8 @@ $(document).ready(function() {
 			"<h4 class='questionno' style='min-width:50vw !important;'>  </h4>"+
             "</div>";
             
+            if(type == "multiple__choice__question"){
+
             for (var i = 0; i < answer.length; i++) {
 			text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
 			"<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
@@ -227,7 +283,33 @@ $(document).ready(function() {
 			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
 			"<p>"+answer[i]+"</p>"+ 
 			"</form>";	
-		} 
+        } 
+    }
+
+    else if(type == "standard__question"){
+        text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+            "<div class='form-group'>"+
+            "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
+			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
+			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+            "<input type='text' class='form-control' name='question' placeholder='Enter answer'/>"+
+            "</div>"+
+			"</form>";	
+    }
+         
+    else if(type == "numeric__question"){
+        text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+            "<div class='form-group'>"+
+            "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
+			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
+			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+			"<input type='number' class='form-control' name='question' placeholder='Enter answer'/>"+
+            "</div>"+
+            "</form>";	
+    }
+    
         text0 += "</div> <div class='break'></div>";
         if(time!=null && quseee==qustno){
             text0 += "<div id='resub1' class='justify-content-center row'>"+
@@ -336,6 +418,7 @@ $(document).ready(function() {
 			"<div  class='col-12 the__question text-center mB-2'>"+
 			"<h4 class='questionno' style='min-width:50vw !important;'>  </h4>"+
             "</div>";
+
             if(type == "multiple__choice__question"){
             for (var i = 0; i < answer.length; i++) {
 			text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
@@ -350,16 +433,26 @@ $(document).ready(function() {
     }
     else if(type == "standard__question"){
         text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
-			"<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
-			"<input type='text' name='question'/>"+
+            "<div class='form-group'>"+
+            "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
+			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
+			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+            "<input type='text' class='form-control' name='question' placeholder='Enter answer'/>"+
+            "</div>"+
 			"</form>";	
     }
          
-    else if(type == "typenumeric__question"){
+    else if(type == "numeric__question"){
         text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
-			"<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
-			"<input type='number' name='question'/>"+
-			"</form>";	
+            "<div class='form-group'>"+
+            "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
+			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
+			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+			"<input type='number' class='form-control' name='question' placeholder='Enter answer'/>"+
+            "</div>"+
+            "</form>";	
     }
 
 
