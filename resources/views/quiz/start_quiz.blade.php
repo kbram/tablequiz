@@ -7,7 +7,14 @@
 	var time=JSON.parse(sessionStorage.getItem("nowtimeon"));
 	
     var timeon=0;
+	var p=JSON.parse(sessionStorage.getItem("play"))
 	var pl= true;
+	if(p==null){
+		var pl= true;
+	}else{
+		pl=p;
+	}
+	
 	var countDown;
 	$(document).ready(function(){
 		
@@ -103,7 +110,7 @@
 	
 	function pause() {
 		clearInterval(countDown);
-
+		sessionStorage.setItem("play", true);
 		$("#push-submit").css("pointer-events", "auto");
 		$('#push-submit').css('opacity','1');
 		$("#push-submit-pause").css("pointer-events", "none");
@@ -113,6 +120,7 @@
 
 	function stop() {
 		clearInterval(countDown);
+		sessionStorage.setItem("play", true);
 		sessionStorage.setItem("nowtimeon", null);
 		$("#push-submit").css("pointer-events", "auto");
 		$('#push-submit').css('opacity','1');
@@ -121,6 +129,7 @@
 		$("#push-submit-stop").css("pointer-events", "none");
 		$('#push-submit-stop').css('opacity','0.4');
 		$("#timer").html("Finshed");
+		pl=true;
 	}
 	function play() {
 		if(pl==true){
@@ -130,6 +139,7 @@
 			$('#push-submit-stop').css('opacity','1');
 			$("#push-submit").css("pointer-events", "none");
 			$('#push-submit').css('opacity','0.4');
+			sessionStorage.setItem("play", false);
 			pl=false;
 		}
 		y=document.getElementById("timer").textContent;
@@ -189,6 +199,7 @@
 					$("#push-submit").css("pointer-events", "auto");
 					$('#push-submit').css('opacity','1');
 					pl=true;
+					sessionStorage.setItem("play", true);
 				}
 			}
 		
