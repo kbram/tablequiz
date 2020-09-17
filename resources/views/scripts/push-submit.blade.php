@@ -1,7 +1,9 @@
 <script type="text/javascript">
 $(document).ready(function() { 
+   //var time=JSON.parse(sessionStorage.getItem("nowstarttimeon"));
+   
    $('#push-submit').click(function(e){
-       e.preventDefault();
+      e.preventDefault();
       $('.quiz__slider .quiz__single_question__container').each(function(){
       
 
@@ -114,7 +116,37 @@ $(document).ready(function() {
          var hidden=current.attr('aria-hidden');
          if(hidden=="false"){
             var time =current.find('.question-timer').val();
-            $('.countdown__time').text(time);
+            sec=time;
+            var min     = Math.floor(sec / 60),
+				remSec  = sec % 60;
+			
+            if (remSec < 10) {
+               
+               remSec = '0' + remSec;
+            
+            }
+            if (min < 10) {
+               
+               min = '0' + min;
+            
+            }
+            $('.countdown__time').text(min + ":" + remSec);
+            /*
+            var text=$("#timer").text();
+            sessionStorage.setItem("nowstarttimeon", true);
+            
+
+            if(text=="Finshed"){
+               $('.countdown__time').text(min + ":" + remSec);
+               $("#push-submit").css("pointer-events", "auto");
+				   $('#push-submit').css('opacity','1');
+            }else{
+               $("#push-submit").css("pointer-events", "none");
+			      $('#push-submit').css('opacity','0.4');
+            }*/
+            
+
+            //$('.countdown__time').text(time);
          }
 
    });
@@ -122,12 +154,36 @@ $(document).ready(function() {
 
 $('#push-submit-pause').click(function(e){
        e.preventDefault();  
+      
+       $.ajax({
+        type: "POST",
+        url: "/quiz/pause_quiz",
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        data: $(this).closest('.push-submit-pause-form').serialize(),
+        
+        success: function(data) {
+         
+         },
 
+         });
 });
+
 $('#push-submit-stop').click(function(e){
        e.preventDefault();  
+    
+       $.ajax({
+        type: "POST",
+        url: "/quiz/stop_squiz",
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        data: $(this).closest('.push-submit-stop-form').serialize(),
+        
+        success: function(data) {
+         
+         },
 
+         });
 });
+
 });
 
 

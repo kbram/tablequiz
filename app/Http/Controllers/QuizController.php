@@ -537,9 +537,9 @@ $round_image->save();
       $quizId=request()->quizId;
       $type=request()->type;
       $time=request()->time;
-      //$t = [$question,$answer,$media,$answerId,$questionId,$roundId,$quizId,$type,$time];
-      $text=$question."#^".$answer."#^".$media."#^".$answerId."#^".$questionId."#^".$roundId."#^".$quizId."#^".$type."#^".$time;
-      event(new FormSubmitted($text));
+      $t = [$question,$answer,$media,$answerId,$questionId,$roundId,$quizId,$type,$time];
+      //$text=$question."#^".$answer."#^".$media."#^".$answerId."#^".$questionId."#^".$roundId."#^".$quizId."#^".$type."#^".$time;
+      event(new FormSubmitted($t));
       return redirect()->back();
     }
     public function stop_quiz()
