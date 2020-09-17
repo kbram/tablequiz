@@ -69,6 +69,7 @@ $(document).ready(function() {
         text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
             "<div class='form-group'>"+
             "<input type='text' name='type' hidden value=2 />"+
+            "<input type='text' name='answer_id' hidden value='"+answerId[0]+"'/>"+
 
             "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
 			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
@@ -83,6 +84,7 @@ $(document).ready(function() {
         text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
             "<div class='form-group'>"+
             "<input type='text' name='type' hidden value=3 />"+
+            "<input type='text' name='answer_id' hidden value='"+answerId[0]+"'/>"+
 
             "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
 			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
@@ -266,6 +268,7 @@ $(document).ready(function() {
             "<div class='form-group'>"+
             "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
             "<input type='text' name='type' hidden value=2 />"+
+            "<input type='text' name='answer_id' hidden value='"+answerId[0]+"'/>"+
 
 			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
 			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
@@ -280,6 +283,7 @@ $(document).ready(function() {
             "<div class='form-group'>"+
             "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
             "<input type='text' name='type' hidden value=3 />"+
+            "<input type='text' name='answer_id' hidden value='"+answerId[0]+"'/>"+
 
 			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
 			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
@@ -357,6 +361,7 @@ $(document).ready(function() {
         text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
             "<div class='form-group'>"+
             "<input type='text' name='type' hidden value=2 />"+
+            "<input type='text' name='answer_id' hidden value='"+answerId[0]+"'/>"+
 
             "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
 			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
@@ -371,6 +376,7 @@ $(document).ready(function() {
         text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
             "<div class='form-group'>"+
             "<input type='text' name='type' hidden value=3 />"+
+            "<input type='text' name='answer_id' hidden value='"+answerId[0]+"'/>"+
 
             "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
 			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
@@ -527,6 +533,8 @@ $(document).ready(function() {
         text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
             "<div class='form-group'>"+
             "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+            "<input type='text' name='answer_id' hidden value='"+answerId[0]+"'/>"+
+
             "<input type='text' name='type' hidden value=3 />"+
 
 			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
@@ -691,28 +699,19 @@ $(document).ready(function() {
             data: $('#answer').serialize(),
             
             success: function(data) {
-                swal(data.status);
+                swal("Answer Submited!",'wait for the next ...', "success")
+
+                ;
             },
 
             });
         }
 
-                alert('please select answer');
-            }
-            else{
-            $.ajax({
-                type: "POST",
-                url: "/playquiz/answer",
-                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                data: $('#answer').serialize(),
                 
-                success: function(data) {
-                    swal("Here's a message!");
-                },
 
                 });
-            }
-        });
+            
+        
      // }
     });
     

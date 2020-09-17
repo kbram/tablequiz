@@ -100,9 +100,30 @@
 		var m0 = message.replace('{"text":"','');
 		var m0 = m0.replace('"}','');
 		var m=m0.split("#^");
+var status = m[2];
+console.log(status);
+ 
 
-		var text="<tr><td>"+m[0]+"</td><td>"+m[1]+"</td><td><input type='radio' name='correct_answer_1' value='correct'></td><td><input type='radio' name='correct_answer_1' value='incorrect'></td></tr>";
+var id_correct = m[0]+"1";
+var id_wrong = m[0]+"0";
+
+console.log(status);
+
+		var text="<tr><td>"+m[0]+"</td><td>"+m[1]+"</td><td><input type='radio' id="+id_correct+" name='correct_answer_1' value='correct'></td><td><input type='radio' name='correct_answer_1' id="+id_wrong+" value='incorrect'></td></tr>";
 		$(text).appendTo($("#all-answer"));
+
+if(status){
+		if(Number(status) == 1){
+$('#'+id_correct).prop("checked", true);
+			console.log("correct");
+		}
+		else if(Number(status) == 0){
+			$('#'+id_wrong).prop("checked", true);
+
+			console.log("not correct");
+		}
+	}
+		
 		//$('#all-answer tbody').append(text);
 	});
 	//var x=1;
