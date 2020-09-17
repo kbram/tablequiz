@@ -6,7 +6,7 @@ $(document).ready(function() {
 
 
     //with session refresh
-    
+
     var issueq=JSON.parse(sessionStorage.getItem("issuequestion"));
     var time=JSON.parse(sessionStorage.getItem("nowtimeon"));
     var timeon=0;
@@ -369,13 +369,16 @@ $(document).ready(function() {
                     sec = sec - 1;
                     
                 } else {
-                    
+                    all.addClass('cursor_not');
                     clearInterval(countDown);
                     $(".timer").html("Time Out");
                     sessionStorage.setItem("nowtimeon", null);
                     //$("#resub").css("display", "none");
                     //tyle="opacity: 0.4;
                     //
+                    $('.single__answer').css('cursor','not-allowed');
+                    $('.single__answer').css('pointer-events','none');
+
 
                     $('#resub').css('cursor','not-allowed');
                     $("#resub").css("pointer-events", "none");
