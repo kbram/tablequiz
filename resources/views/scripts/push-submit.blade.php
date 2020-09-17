@@ -9,7 +9,7 @@ $(document).ready(function() {
 
        var answer="";
        var answer_id="";
-
+       var type="";
        var media_type="";
        var media_path="";
        var media_link="";
@@ -27,7 +27,7 @@ $(document).ready(function() {
             var id =current.find('.question-id').val();
             var quiz_id =current.find('.quiz-id').val();
             var time =current.find('.question-timer').val();
-
+                console.log('type'+type);
              current.find('.answer > span:nth-child(2)').each(function(){
                 answer+=$(this).text()+"/";
            });
@@ -64,7 +64,7 @@ $(document).ready(function() {
            questionId:id,
            roundId:round,
            quizId:quiz_id,
-           
+           type:type,
            time:time,
 
         },
