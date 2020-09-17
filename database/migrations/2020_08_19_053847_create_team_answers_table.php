@@ -17,6 +17,8 @@ class CreateTeamAnswersTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('team_name');
+            $table->string('answer');
+            $table->string('status')->nullable();
             $table->bigInteger('answer_id')->unsigned();
             $table->foreign('answer_id')->references('id')->on('answers')->onDelete('cascade');
             $table->bigInteger('quiz_id')->unsigned();
