@@ -4,8 +4,82 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 <script>
+	var time=JSON.parse(sessionStorage.getItem("nowtimeon"));
+	
+    var timeon=0;
+	var pl= true;
+	var countDown;
+	$(document).ready(function(){
+		
+		if(time!=null){
+			
+			$("#push-submit-pause").css("pointer-events", "auto");
+			$('#push-submit-pause').css('opacity','1');
+			$("#push-submit-stop").css("pointer-events", "auto");
+			$('#push-submit-stop').css('opacity','1');
+			$("#push-submit").css("pointer-events", "none");
+			$('#push-submit').css('opacity','0.4');
+			pl=false;
+			var splity=time.split(":");
+			timeon=parseInt(splity[0])*60+parseInt(splity[1]);
+			//alert(timeon);
+			var y=timeon;
+			var sec= y,
+			countDiv    = document.getElementById("b"),
+			secpass;
+			countDown   = setInterval(function () {
+				'use strict';
+				secpass1();
+			}, 1000);
 
+			function secpass1() {
+				'use strict';
+				
+				var min     = Math.floor(sec / 60),
+					remSec  = sec % 60;
+				
+				if (remSec < 10) {
+					
+					remSec = '0' + remSec;
+				
+				}
+				if (min < 10) {
+					
+					min = '0' + min;
+				
+				}
+				
+				$("#timer").html(min + ":" + remSec);
+				sessionStorage.setItem("nowtimeon", JSON.stringify(min + ":" + remSec));
+				
+				if (sec > 0) {
+					
+					sec = sec - 1;
+					
+				} else {
+					
+					clearInterval(countDown);
+					$("#timer").html("Finished");
+					sessionStorage.setItem("nowtimeon", null);
+					//$("#resub").css("display", "none");
+					//tyle="opacity: 0.4;
+					//
+
+					$('#resub').css('cursor','not-allowed');
+					$("#resub").css("pointer-events", "none");
+					$('#resub').css('opacity','0.4');
+				}
+			}
+		}else{
+				$("#push-submit-pause").css("pointer-events", "none");
+				$('#push-submit-pause').css('opacity','0.4');
+				$("#push-submit-stop").css("pointer-events", "none");
+				$('#push-submit-stop').css('opacity','0.4');
+			
+		}
+	});	
 	// Enable pusher logging - don't include this in production
+	
 	Pusher.logToConsole = true;
 
 	var pusher = new Pusher('87436df86baf66b2192a', {
@@ -25,16 +99,11 @@
 		//$('#all-answer tbody').append(text);
 	});
 	//var x=1;
-	var pl= true;
-	var countDown;
-	$(document).ready(function(){
-		$("#push-submit-pause").css("pointer-events", "none");
-		$('#push-submit-pause').css('opacity','0.4');
-		$("#push-submit-stop").css("pointer-events", "none");
-		$('#push-submit-stop').css('opacity','0.4');
-	});	
+	
+	
 	function pause() {
 		clearInterval(countDown);
+
 		$("#push-submit").css("pointer-events", "auto");
 		$('#push-submit').css('opacity','1');
 		$("#push-submit-pause").css("pointer-events", "none");
@@ -44,6 +113,7 @@
 
 	function stop() {
 		clearInterval(countDown);
+		sessionStorage.setItem("nowtimeon", null);
 		$("#push-submit").css("pointer-events", "auto");
 		$('#push-submit').css('opacity','1');
 		$("#push-submit-pause").css("pointer-events", "none");
@@ -63,58 +133,65 @@
 			pl=false;
 		}
 		y=document.getElementById("timer").textContent;
-		var splity=y.split(":");
-		y=parseInt(splity[0])*60+parseInt(splity[1]);
-
-		var sec= y,
-		countDiv    = document.getElementById("timer"),
-		secpass;
-		countDown   = setInterval(function () {
-			'use strict';
-			secpass();
-		}, 1000);
-
-		function secpass() {
-			'use strict';
-			
-			var min     = Math.floor(sec / 60),
-				remSec  = sec % 60;
-			
-			if (remSec < 10) {
-				
-				remSec = '0' + remSec;
-			
-			}
-			if (min < 10) {
-				
-				min = '0' + min;
-			
-			}
-			
-			$("#timer").html(min + ":" + remSec);
-			
-			if (sec > 0) {
-				
-				sec = sec - 1;
-				
-			} else {
-				
-				clearInterval(countDown);
-
-				$("#timer").html("Finshed");
-				//$("#resub").css("display", "none");
-				//tyle="opacity: 0.4;
-				//
-
-				///$('#resub').css('cursor','not-allowed');
-				//$("#resub").css("pointer-events", "none");
-				//$('#resub').css('opacity','0.4');
-				
-				$("#push-submit").css("pointer-events", "auto");
-				$('#push-submit').css('opacity','1');
-				pl=true;
-			}
+		//alert(y);
+		if(y=="Finished"){
+			y=sessionStorage.getItem("Ltimeon");
+		}else{
+		sessionStorage.setItem("Ltimeon", y);
 		}
+			var splity=y.split(":");
+			y=parseInt(splity[0])*60+parseInt(splity[1]);
+
+			var sec= y,
+			countDiv    = document.getElementById("timer"),
+			secpass;
+			countDown   = setInterval(function () {
+				'use strict';
+				secpass();
+			}, 1000);
+
+			function secpass() {
+				'use strict';
+				
+				var min     = Math.floor(sec / 60),
+					remSec  = sec % 60;
+				
+				if (remSec < 10) {
+					
+					remSec = '0' + remSec;
+				
+				}
+				if (min < 10) {
+					
+					min = '0' + min;
+				
+				}
+				
+				$("#timer").html(min + ":" + remSec);
+				sessionStorage.setItem("nowtimeon", JSON.stringify(min + ":" + remSec));
+				if (sec > 0) {
+					
+					sec = sec - 1;
+					
+				} else {
+					
+					clearInterval(countDown);
+					sessionStorage.setItem("nowtimeon", null);
+					$("#timer").html("Finshed");
+					//$("#resub").css("display", "none");
+					//tyle="opacity: 0.4;
+					//
+
+					///$('#resub').css('cursor','not-allowed');
+					//$("#resub").css("pointer-events", "none");
+					//$('#resub').css('opacity','0.4');
+					
+					$("#push-submit").css("pointer-events", "auto");
+					$('#push-submit').css('opacity','1');
+					pl=true;
+				}
+			}
+		
 	}
 </script>
 <section class="container page__inner dashboard">
