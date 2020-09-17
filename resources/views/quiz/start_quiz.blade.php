@@ -128,8 +128,8 @@
 					<div class="rounds position-absolute d-flex justify-content-between">
 						
 					@for($i=0; count($rounds)>$i; $i++)
-						<div class="progress_round_label round_{{$i+1}}">
-							<span>Round {{$i+1}}</span>
+						<div id="round{{$rounds[$i]->id}}" class="progress_round_label">
+							<span>Round {{$i+1}} </span>
 						</div>
 					@endfor
 					
