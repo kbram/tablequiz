@@ -41,8 +41,6 @@
 		sessionStorage.setItem("issuequestion", issueq);
 		
 		
-		$('h4.questionno').text(questionno);
-		$('h4.notification').text('');
 		//$('h4.ans').text(m[2]);
 		var med = m[8];
 		//$('div.med').text(med);
@@ -56,27 +54,48 @@
 		var quizId=m[6];
 		console.log(quizId);
 		m[1] = m[1].slice(0, -1);
-         var type=m[2].split("/");
-		var text0="<div id='resub2' class='justify-content-center row'>";
+		 var type=m[2].split("/");
+		 var text0='';
+
+		// var text0="<div id='resub2' class='justify-content-center row'>";
+		var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
+			"<img class='q-img' src='{{asset('site_design/images/homepage__logo.png')}}' height='170px'>"+
+			"</div>"+
+			"<div class='col-12 text-center'>"+
+			"<h4 class='bernhard notification'>Not submitted</h4>" +
+			"</div>"+
+			"<div  class='col-12 the__question text-center mB-2'>"+
+			"<h4 class='questionno' style='min-width:38vw !important;'>  </h4>"+
+			"</div>";
 		for (var i = 0; i < answer.length; i++) {
-			text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+		text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
 			"<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
-			"<input type='text' name='answer' hidden value='"+answerId+"'/>"+
+			"<input type='text' name='answer' hidden value='"+answerId[i]+"'/>"+
 			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
 			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
 			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
 			"<p>"+answer[i]+"</p>"+ 
-			"</form>";	
-		 
-		text0 += "</div> <div class='break'></div>"+
+			"</form>";
+				
+		}
+		text0 += "</div>" +
+		"<div class='break'></div>"+
 		"<div id='resub1' class='justify-content-center row'>"+
 			"<div id='resub' class=''>"+
 				"<br><a class='btn btn-primary d-block d-lg-inline-block card__from__modal' onclick='document.getElementById("+answerId[i]+").submit()'>Submit Answer</a>"+
 			"</div>"+
-		"</div>";}
+		"</div>"+
+		"</div>"+
+		"</div>";
 		$('#all-answer').empty();
 		$('#all-answer').append(text0);
+		$('#ques').empty();
+		$('#ques').append(textq);
 		document.getElementById("demo").innerHTML=issueq;
+
+		$('h4.questionno').text(questionno);
+		$('h4.notification').text('');
+
 
 
 		//var x=1;
@@ -153,6 +172,40 @@
 			$('#resub1').append(text11);
 			clearInterval(countDown);
 		});
+
+
+
+//answer multible
+var $box=null;
+
+		//answer select
+		$('.single__answer')
+	.click(function() {
+		console.log("click on single answer");
+		if ($box == null) {
+			$box = $(this);
+            $box.css("box-shadow","3px 3px 15px #7343C1, -1px -1px 5px rgba(0, 0, 0, 0.045)");
+            $box.attr('id', 'answer');
+
+        } 
+        else  {
+            $box.css("box-shadow","");
+            $box.attr('id', 'disable');
+
+            if($box != $(this))
+            {
+                			$box = $(this);
+                            $box.css("box-shadow","3px 3px 15px #7343C1, -1px -1px 5px rgba(0, 0, 0, 0.045)");
+                            $box.attr('id', 'answer');
+
+            }
+            else
+		        $box = null;
+		}
+	}
+);
+
+
 	});
 
 	
@@ -162,25 +215,18 @@
 @section('content')
 
 <!-- <section class="container page__inner"> -->
-<!--
-	<div class="row mb-3">
-		<div class="col">
-			<h2 class="text-white text-center bernhard">MadDog's Geography Quiz</h2>
-		</div>
-	</div>
--->
+
 	<div class="row">
+
 		<div class="col-12 d-flex justify-content-between">
-			<p class="text-white" style="min-width:13vw !important;">{{$quiz->quiz__name}}</p>
+			<p class="text-white" style="min-width:50vw !important;">{{$quiz->quiz__name}}</p>
 			<p><a href="#" class="text-white"><small>Exit quiz</small></a></p>
 		</div>
 		<article class="col-12 pb-5">
 
 		<div class="col-12 d-flex justify-content-between">
-
-		<p ><a href="#" class="text-white"><small class="small">previous quiz</small></a></p>
-		<p><a href="#" class="text-white"><small class="small">next quiz</small></a></p>
-
+		      <p ><a href="#" class="text-white"><small class="small">previous quiz</small></a></p>
+		      <p><a href="#" class="text-white"><small class="small">next quiz</small></a></p>
 		</div>   
 
 
@@ -195,31 +241,26 @@
 					</div>
 				</div>
 			</div>
-			<div id='resub3' class="row question__container">
-				<div class="col-12 media__container p-0 mb-5">
-					<img src="../images/suir.jpg" >
-				</div>
-				<div class="col-12 text-center" >
-					
-					<h4 class="bernhard notification">Not submitted</h4>
-				</div>
-				<div  class="col-12 the__question text-center mB-2">
-					<h4 class="questionno" style="min-width:38vw !important;">  </h4>
-				</div>
-			</div>
-			<div class="med"></div>
-@if($question->question_type == 'standard__question')
+			
+			<!-- question part apand -->
+
+			<div id="ques" class='row question__container'>
+
+             </div>
+
 			<div id="all-answer" class="row answer__options pt-4 justify-content-center flex-wrap">
 			
+
+
+
 			</div>
-@endif
 
 		</article>
 		<p id="demo"></p>
 	</div>
 <!-- </section> -->
 
-<script>
+<!-- <script>
 
 	var correct = {!! json_encode(Session::get("$quiz->id-$round->id-$question->id") ) !!};
 
@@ -252,7 +293,7 @@
 
 
 	
-</script>
+</script> -->
 
 @include('scripts.playquiz')
 
