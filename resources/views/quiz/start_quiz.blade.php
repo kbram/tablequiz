@@ -124,7 +124,7 @@
 
 			<div class="offset-lg-3 col-lg-9 px-5">
 				<div class="progress position-relative">
-					<div id="round-progress" class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+					<div id="round-progress" class="progress-bar" role="progressbar" style="" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
 					<div class="rounds position-absolute d-flex justify-content-between">
 						
 					@for($i=0; count($rounds)>$i; $i++)

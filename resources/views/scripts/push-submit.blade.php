@@ -95,7 +95,7 @@ $(document).ready(function() {
         
     
    $('.quiz__slider .quiz__single_question__container').each(function(){
-      $('#round-progress').css("width",'0%');
+      
       var current=$(this);
          var hidden=current.attr('aria-hidden');
          if(hidden=="false"){
