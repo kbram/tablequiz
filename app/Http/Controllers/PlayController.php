@@ -154,6 +154,7 @@ else{
     }
 //answer
 public function answer(Request $request){
+
         $quiz_id = $request->input('quiz');
         $round_id = $request->input('round');
         $question_id = $request->input('question');
@@ -176,13 +177,13 @@ public function answer(Request $request){
 
         //restric anothorise 
 
-        if(TeamAnswer::where('quiz_id',$quiz_id)
-                       ->where('question_id',$question_id)
-                       ->where('team_name',Session::get('teamname'))->first()){
-                        return view('play.play-quiz',compact('quiz','roundCount','round','question','answers'));    
+    //     if(TeamAnswer::where('quiz_id',$quiz_id)
+    //                    ->where('question_id',$question_id)
+    //                    ->where('team_name',Session::get('teamname'))->first()){
+    //                     return view('play.play-quiz',compact('quiz','roundCount','round','question','answers'));    
 
-                       }                       
-     else{
+    //                    }                       
+    //  else{
 
         $team_answer = new TeamAnswer ;
         
@@ -200,20 +201,28 @@ public function answer(Request $request){
     Session::forget($session_key_wrong);
 
 
-    return view('play.play-quiz',compact('quiz','roundCount','round','question','answers'));    
-
+    $response = array(
+        'status' => 'Answe submitted for correction !',
+        'correct' => $correct_answer,
+        'mark' => 'correct',
+       
+    );
+    return response()->json($response);
+   
      }
      
      else{
-        Session::forget($session_key);
-        Session::put($session_key_wrong,$user_answer); 
-
-
-      return view('play.play-quiz',compact('quiz','roundCount','round','question','answers'));    
+        $response = array(
+            'status' => 'Answe submitted for correction !',
+            'correct' => $correct_answer,
+            'mark' => 'wrong',
+           
+        );
+        return response()->json($response);
     }
 
 
-    }
+    // }
 }
 
 }

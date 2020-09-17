@@ -253,6 +253,9 @@ $(document).ready(function() {
         
 	});
 
+
+//when pusher run
+
 	Pusher.logToConsole = true;
 
 	var pusher = new Pusher('87436df86baf66b2192a', {
@@ -288,7 +291,8 @@ $(document).ready(function() {
         timeon=message.text[8];
         //alert("quizid:"+quizId);
         //alert("qid:"+qid);
-        //if(parseInt(quizId)==parseInt(qid)){
+
+        // if(parseInt(quizId)==parseInt(qid)){
 
                 
             var text0 ='';
@@ -305,7 +309,7 @@ $(document).ready(function() {
             for (var i = 0; i < answer.length; i++) {
 			text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
 			"<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
-			"<input type='text' name='answer' hidden value='"+answerId+"'/>"+
+			"<input type='text' name='answer' hidden value='"+answerId[i]+"'/>"+
 			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
 			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
 			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
@@ -315,7 +319,7 @@ $(document).ready(function() {
             text0 += "</div> <div class='break'></div>"+
             "<div id='resub1' class='justify-content-center row'>"+
                 "<div class='' id='resub' >"+
-                    "<br><a class='btn btn-primary d-block d-lg-inline-block card__from__modal' onclick='document.getElementById("+answerId[i]+").submit()'>Submit Answer</a>"+
+                    "<br><a class='answer_submit btn btn-primary d-block d-lg-inline-block card__from__modal'>Submit Answer</a>"+
                 "</div>"+
             "</div>"+
             "</div>"+
@@ -417,7 +421,7 @@ $(document).ready(function() {
 
 
 
-            var $box=null;
+var $box=null;
 
 //answer select
 $('.single__answer')
@@ -443,10 +447,37 @@ else  {
     else
         $box = null;
 }
-}
-);
-        //}
-    });
+});
+
+//send answer
+
+$('.answer_submit').on('click',function(e){
+    e.preventDefault();  
+    
+    var answer = $('#answer');
+    console.log(answer.length);
+    if(answer.length == 0){
+
+        alert('please select answer');
+    }
+        else{
+        $.ajax({
+            type: "POST",
+            url: "/playquiz/answer",
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            data: $('#answer').serialize(),
+            
+            success: function(data) {
+                swal("Here's a message!");
+            },
+
+            });
+        }
+
+
+        });
+    // }
+});
     
 
 
