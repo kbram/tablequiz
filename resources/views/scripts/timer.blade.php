@@ -51,36 +51,47 @@ $(document).ready(function() {
 
         if(type == "multiple__choice__question"){
             for (var i = 0; i < answer.length; i++) {
-                text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
-                "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
-                "<input type='text' name='answer' hidden value='"+answerId+"'/>"+
-                "<input type='text' name='question' hidden value='"+questionId+"'/>"+
-                "<input type='text' name='round' hidden value='"+roundId+"'/>"+
-                "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
-                "<p>"+answer[i]+"</p>"+ 
-                "</form>";	
-            } 
-        }else if(type == "standard__question"){
-            text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
-                "<div class='form-group'>"+
-                "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
-                "<input type='text' name='question' hidden value='"+questionId+"'/>"+
-                "<input type='text' name='round' hidden value='"+roundId+"'/>"+
-                "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
-                "<input type='text' class='form-control' name='question' placeholder='Enter answer'/>"+
-                "</div>"+
-                "</form>";	
-        }else if(type == "numeric__question"){
-            text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
-                "<div class='form-group'>"+
-                "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
-                "<input type='text' name='question' hidden value='"+questionId+"'/>"+
-                "<input type='text' name='round' hidden value='"+roundId+"'/>"+
-                "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
-                "<input type='number' class='form-control' name='question' placeholder='Enter answer'/>"+
-                "</div>"+
-                "</form>";	
-        }
+			text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+            "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+            "<input type='text' name='type' hidden value=1 />"+
+
+            "<input type='text' name='answer' hidden value='"+answer[i]+"'/>"+
+            "<input type='text' name='answer_id' hidden value='"+answerId[i]+"'/>"+
+            "<input type='text' name='question' hidden value='"+questionId+"'/>"+
+			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
+			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+			"<p>"+answer[i]+"</p>"+ 
+			"</form>";	
+        } 
+    }
+          
+    else if(type == "standard__question"){
+        text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+            "<div class='form-group'>"+
+            "<input type='text' name='type' hidden value=2 />"+
+
+            "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
+			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
+			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+            "<input type='text' class='form-control' name='answer' placeholder='Enter answer'/>"+
+            "</div>"+
+			"</form>";	
+    }
+         
+    else if(type == "numeric__question"){
+        text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+            "<div class='form-group'>"+
+            "<input type='text' name='type' hidden value=3 />"+
+
+            "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
+			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
+			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+			"<input type='number' class='form-control' name='answer' placeholder='Enter answer'/>"+
+            "</div>"+
+            "</form>";	
+    }
 
         //console.log(answer);
         text0 += "</div> <div class='break'></div>";
@@ -235,37 +246,48 @@ $(document).ready(function() {
             "</div>";
             
             if(type == "multiple__choice__question"){
-                for (var i = 0; i < answer.length; i++) {
-                    text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
-                    "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
-                    "<input type='text' name='answer' hidden value='"+answerId+"'/>"+
-                    "<input type='text' name='question' hidden value='"+questionId+"'/>"+
-                    "<input type='text' name='round' hidden value='"+roundId+"'/>"+
-                    "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
-                    "<p>"+answer[i]+"</p>"+ 
-                    "</form>";	
-                } 
-            }else if(type == "standard__question"){
-                text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
-                    "<div class='form-group'>"+
-                    "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
-                    "<input type='text' name='question' hidden value='"+questionId+"'/>"+
-                    "<input type='text' name='round' hidden value='"+roundId+"'/>"+
-                    "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
-                    "<input type='text' class='form-control' name='question' placeholder='Enter answer'/>"+
-                    "</div>"+
-                    "</form>";	
-            }else if(type == "numeric__question"){
-                text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
-                    "<div class='form-group'>"+
-                    "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
-                    "<input type='text' name='question' hidden value='"+questionId+"'/>"+
-                    "<input type='text' name='round' hidden value='"+roundId+"'/>"+
-                    "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
-                    "<input type='number' class='form-control' name='question' placeholder='Enter answer'/>"+
-                    "</div>"+
-                    "</form>";	
-            }
+            for (var i = 0; i < answer.length; i++) {
+			text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+            "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+            "<input type='text' name='type' hidden value=1 />"+
+
+            "<input type='text' name='answer' hidden value='"+answer[i]+"'/>"+
+            "<input type='text' name='answer_id' hidden value='"+answerId[i]+"'/>"+
+            "<input type='text' name='question' hidden value='"+questionId+"'/>"+
+			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
+			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+			"<p>"+answer[i]+"</p>"+ 
+			"</form>";	
+        } 
+    }
+
+    else if(type == "standard__question"){
+        text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+            "<div class='form-group'>"+
+            "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+            "<input type='text' name='type' hidden value=2 />"+
+
+			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
+			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
+			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+            "<input type='text' class='form-control' name='answer' placeholder='Enter answer'/>"+
+            "</div>"+
+			"</form>";	
+    }
+         
+    else if(type == "numeric__question"){
+        text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+            "<div class='form-group'>"+
+            "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+            "<input type='text' name='type' hidden value=3 />"+
+
+			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
+			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
+			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+			"<input type='number' class='form-control' name='answer' placeholder='Enter answer'/>"+
+            "</div>"+
+            "</form>";	
+    }
 
             text0 += "</div> <div class='break'></div>";
             if(time!=null && quseee==qustno){
@@ -315,39 +337,49 @@ $(document).ready(function() {
             "</div>";
             
             if(type == "multiple__choice__question"){
-                for (var i = 0; i < answer.length; i++) {
-                    text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
-                    "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
-                    "<input type='text' name='answer' hidden value='"+answerId+"'/>"+
-                    "<input type='text' name='question' hidden value='"+questionId+"'/>"+
-                    "<input type='text' name='round' hidden value='"+roundId+"'/>"+
-                    "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
-                    "<p>"+answer[i]+"</p>"+ 
-                    "</form>";	
-                } 
-            }else if(type == "standard__question"){
-                text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
-                    "<div class='form-group'>"+
-                    "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
-                    "<input type='text' name='question' hidden value='"+questionId+"'/>"+
-                    "<input type='text' name='round' hidden value='"+roundId+"'/>"+
-                    "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
-                    "<input type='text' class='form-control' name='question' placeholder='Enter answer'/>"+
-                    "</div>"+
-                    "</form>";	
-            }
+
+            for (var i = 0; i < answer.length; i++) {
+			text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+            "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+            "<input type='text' name='type' hidden value=1 />"+
+
+            "<input type='text' name='answer' hidden value='"+answer[i]+"'/>"+
+            "<input type='text' name='answer_id' hidden value='"+answerId[i]+"'/>"+
+        	"<input type='text' name='question' hidden value='"+questionId+"'/>"+
+			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
+			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+			"<p>"+answer[i]+"</p>"+ 
+			"</form>";	
+        } 
+    }
+
+    else if(type == "standard__question"){
+        text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+            "<div class='form-group'>"+
+            "<input type='text' name='type' hidden value=2 />"+
+
+            "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
+			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
+			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+            "<input type='text' class='form-control' name='answer' placeholder='Enter answer'/>"+
+            "</div>"+
+			"</form>";	
+    }
          
-            else if(type == "numeric__question"){
-                text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
-                    "<div class='form-group'>"+
-                    "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
-                    "<input type='text' name='question' hidden value='"+questionId+"'/>"+
-                    "<input type='text' name='round' hidden value='"+roundId+"'/>"+
-                    "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
-                    "<input type='number' class='form-control' name='question' placeholder='Enter answer'/>"+
-                    "</div>"+
-                    "</form>";	
-            }
+    else if(type == "numeric__question"){
+        text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+            "<div class='form-group'>"+
+            "<input type='text' name='type' hidden value=3 />"+
+
+            "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
+			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
+			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+			"<input type='number' class='form-control' name='answer' placeholder='Enter answer'/>"+
+            "</div>"+
+            "</form>";	
+    }
     
             text0 += "</div> <div class='break'></div>";
             if(time!=null && quseee==qustno){
@@ -460,46 +492,56 @@ $(document).ready(function() {
             "</div>";
 
             if(type == "multiple__choice__question"){
-                for (var i = 0; i < answer.length; i++) {
-                text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
-                "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
-                "<input type='text' name='answer' hidden value='"+answerId[i]+"'/>"+
-                "<input type='text' name='question' hidden value='"+questionId+"'/>"+
-                "<input type='text' name='round' hidden value='"+roundId+"'/>"+
-                "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
-                "<p>"+answer[i]+"</p>"+ 
-                "</form>";	
-                } 
-            }
-            else if(type == "standard__question"){
-                text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
-                    "<div class='form-group'>"+
-                    "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
-                    "<input type='text' name='question' hidden value='"+questionId+"'/>"+
-                    "<input type='text' name='round' hidden value='"+roundId+"'/>"+
-                    "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
-                    "<input type='text' class='form-control' name='question' placeholder='Enter answer'/>"+
-                    "</div>"+
-                    "</form>";	
-            }else if(type == "numeric__question"){
-                text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
-                    "<div class='form-group'>"+
-                    "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
-                    "<input type='text' name='question' hidden value='"+questionId+"'/>"+
-                    "<input type='text' name='round' hidden value='"+roundId+"'/>"+
-                    "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
-                    "<input type='number' class='form-control' name='question' placeholder='Enter answer'/>"+
-                    "</div>"+
-                    "</form>";	
-             }
+            for (var i = 0; i < answer.length; i++) {
+			text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+            "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+            "<input type='text' name='type' hidden value=1 />"+
+
+            "<input type='text' name='answer' hidden value='"+answer[i]+"'/>"+
+            "<input type='text' name='answer_id' hidden value='"+answerId[i]+"'/>"+
+
+			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
+			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
+			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+			"<p>"+answer[i]+"</p>"+ 
+			"</form>";	
+        } 
+    }
+    else if(type == "standard__question"){
+        text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+            "<div class='form-group'>"+
+            "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+            "<input type='text' name='answer_id' hidden value='"+answerId[0]+"'/>"+
+            "<input type='text' name='type' hidden value=2 />"+
 
 
-                text0 += "</div> <div class='break'></div>"+
-                "<div id='resub1' class='justify-content-center row'>"+
-                    "<div class='' id='resub' >"+
-                        "<br><a class='answer_submit btn btn-primary d-block d-lg-inline-block card__from__modal'>Submit Answer</a>"+
-                    "</div>"+
-                "</div>"+
+			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
+			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
+			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+            "<input type='text' class='form-control' name='answer' placeholder='Enter answer'/>"+
+            "</div>"+
+			"</form>";	
+    }
+         
+    else if(type == "numeric__question"){
+        text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+            "<div class='form-group'>"+
+            "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+            "<input type='text' name='type' hidden value=3 />"+
+
+			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
+			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
+			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+			"<input type='number' class='form-control' name='answer' placeholder='Enter answer'/>"+
+            "</div>"+
+            "</form>";	
+    }
+
+
+            text0 += "</div> <div class='break'></div>"+
+            "<div id='resub1' class='justify-content-center row'>"+
+                "<div class='' id='resub' >"+
+                    "<br><a class='answer_submit btn btn-primary d-block d-lg-inline-block card__from__modal'>Submit Answer</a>"+
                 "</div>"+
             "</div>";
         
@@ -635,9 +677,25 @@ $(document).ready(function() {
         $('.answer_submit').on('click',function(e){
             e.preventDefault();  
     
-            var answer = $('#answer');
-            console.log(answer.length);
-            if(answer.length == 0){
+    var answer = $('#answer');
+    console.log(answer.length);
+    if(answer.length == 0){
+
+        alert('please select answer');
+    }
+        else{
+        $.ajax({
+            type: "POST",
+            url: "/playquiz/answer",
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            data: $('#answer').serialize(),
+            
+            success: function(data) {
+                swal(data.status);
+            },
+
+            });
+        }
 
                 alert('please select answer');
             }

@@ -154,14 +154,14 @@ else{
     }
 //answer
 public function answer(Request $request){
-
         $quiz_id = $request->input('quiz');
         $round_id = $request->input('round');
         $question_id = $request->input('question');
+        $user_answer_id = $request->input('answer_id');
         $user_answer = $request->input('answer');
+
         $user=Session::get('teamname');
-        $text=$user."#^".$user_answer;
-        event(new FormSubmittedStu($text));
+        
         
 
         $correct_answer = Answer::where('question_id',$question_id)->where('status',1)->first()->id;
@@ -170,6 +170,18 @@ public function answer(Request $request){
         $round = QuizRound::find($round_id);
         $question = Question::find($question_id);
         $answers = Answer::where('question_id',$question_id)->get();
+
+        if($correct_answer == $user_answer_id){
+            $status =  1;
+        }
+        else{
+            $status =  0;
+
+        }
+
+        $text=$user."#^".$user_answer."#^".$status;
+        event(new FormSubmittedStu($text));
+
 
         $session_key = $quiz_id."-".$round_id."-".$question_id;
         $session_key_wrong = $quiz_id."-".$question_id;
@@ -188,38 +200,25 @@ public function answer(Request $request){
         $team_answer = new TeamAnswer ;
         
         $team_answer -> team_name = Session::get('teamname');
-        $team_answer -> answer_id = $user_answer ;
+        $team_answer -> answer_id = $user_answer_id ;
+        $team_answer -> answer = $user_answer;
+        $team_answer -> status = $status;
+
         $team_answer -> question_id = $question_id ;
         $team_answer -> quiz_id = $quiz_id ;
         $team_answer -> round_id = $round_id;
  
         $team_answer -> save();
 
-   if($correct_answer == $user_answer){
-   
-    Session::put($session_key,$correct_answer);
-    Session::forget($session_key_wrong);
-
-
     $response = array(
-        'status' => 'Answe submitted for correction !',
-        'correct' => $correct_answer,
-        'mark' => 'correct',
+        'status' => 'Answer submitted for correction !'
+        
        
     );
     return response()->json($response);
    
-     }
      
-     else{
-        $response = array(
-            'status' => 'Answe submitted for correction !',
-            'correct' => $correct_answer,
-            'mark' => 'wrong',
-           
-        );
-        return response()->json($response);
-    }
+    
 
 
     // }
