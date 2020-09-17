@@ -428,6 +428,7 @@ $(document).ready(function() {
         $("#resub").css("pointer-events", "none");
         $('#resub').css('opacity','0.4');
         $(".timer").html("Teacher Stoped");
+        sessionStorage.setItem("nowtimeon", null);
         clearInterval(countDown);
     });
     var channel1 = pusher.subscribe('my-channel2');

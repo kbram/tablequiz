@@ -65,7 +65,7 @@ class QuizController extends Controller
         $answers = GlobalAnswer::all();
         $medias = GlobalQuestionMedia::all();
         $question = GlobalQuestion::where('id',1)->get();
-
+        
         $validator = Validator::make($request->all(),
         [
           'quiz__name'                => 'required|unique:quizzes',

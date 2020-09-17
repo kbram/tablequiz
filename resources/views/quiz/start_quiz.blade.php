@@ -10,10 +10,11 @@
 	var p=JSON.parse(sessionStorage.getItem("play"))
 	var pl= true;
 	if(p==null){
-		var pl= true;
+		pl= true;
 	}else{
 		pl=p;
 	}
+	
 	
 	var countDown;
 	$(document).ready(function(){
@@ -26,7 +27,7 @@
 			$('#push-submit-stop').css('opacity','1');
 			$("#push-submit").css("pointer-events", "none");
 			$('#push-submit').css('opacity','0.4');
-			pl=false;
+			//pl=false;
 			var splity=time.split(":");
 			timeon=parseInt(splity[0])*60+parseInt(splity[1]);
 			//alert(timeon);
@@ -41,7 +42,14 @@
 
 			function secpass1() {
 				'use strict';
-				
+				if(p==false){
+					clearInterval(countDown);
+					$("#push-submit-pause").css("pointer-events", "none");
+					$('#push-submit-pause').css('opacity','0.4');
+					
+					$("#push-submit").css("pointer-events", "auto");
+					$('#push-submit').css('opacity','1');
+				}
 				var min     = Math.floor(sec / 60),
 					remSec  = sec % 60;
 				
@@ -68,6 +76,8 @@
 					clearInterval(countDown);
 					$("#timer").html("Finished");
 					sessionStorage.setItem("nowtimeon", null);
+					sessionStorage.setItem("play", true);
+					
 					//$("#resub").css("display", "none");
 					//tyle="opacity: 0.4;
 					//
@@ -75,6 +85,7 @@
 					$('#resub').css('cursor','not-allowed');
 					$("#resub").css("pointer-events", "none");
 					$('#resub').css('opacity','0.4');
+					
 				}
 			}
 		}else{
@@ -136,33 +147,39 @@ $('#'+id_correct).prop("checked", true);
 		$('#push-submit').css('opacity','1');
 		$("#push-submit-pause").css("pointer-events", "none");
 		$('#push-submit-pause').css('opacity','0.4');
-		pl=true;
+		//pl=true;
 	}
 
 	function stop() {
 		clearInterval(countDown);
 		sessionStorage.setItem("play", true);
-		sessionStorage.setItem("nowtimeon", null);
+		
+		//sessionStorage.setItem("nowtimeon", null));
+		
 		$("#push-submit").css("pointer-events", "auto");
 		$('#push-submit').css('opacity','1');
 		$("#push-submit-pause").css("pointer-events", "none");
 		$('#push-submit-pause').css('opacity','0.4');
 		$("#push-submit-stop").css("pointer-events", "none");
 		$('#push-submit-stop').css('opacity','0.4');
-		$("#timer").html("Finshed");
-		pl=true;
+		//$("#timer").html(sessionStorage.getItem("nowtimeon"));
+		var x=sessionStorage.getItem("nowtimeon");
+		x=x.slice(1,-1);
+		$("#timer").html(x);
+		alert("Stoped");
+		//pl=true;
 	}
 	function play() {
-		if(pl==true){
-			$("#push-submit-pause").css("pointer-events", "auto");
-			$('#push-submit-pause').css('opacity','1');
-			$("#push-submit-stop").css("pointer-events", "auto");
-			$('#push-submit-stop').css('opacity','1');
-			$("#push-submit").css("pointer-events", "none");
-			$('#push-submit').css('opacity','0.4');
-			sessionStorage.setItem("play", false);
-			pl=false;
-		}
+		
+		$("#push-submit-pause").css("pointer-events", "auto");
+		$('#push-submit-pause').css('opacity','1');
+		$("#push-submit-stop").css("pointer-events", "auto");
+		$('#push-submit-stop').css('opacity','1');
+		$("#push-submit").css("pointer-events", "none");
+		$('#push-submit').css('opacity','0.4');
+		//sessionStorage.setItem("play", false);
+		//pl=false;
+		
 		y=document.getElementById("timer").textContent;
 		//alert(y);
 		if(y=="Finished"){
@@ -208,7 +225,9 @@ $('#'+id_correct).prop("checked", true);
 					
 					clearInterval(countDown);
 					sessionStorage.setItem("nowtimeon", null);
-					$("#timer").html("Finshed");
+					sessionStorage.setItem("play", true);
+					$("#timer").html(sessionStorage.getItem("Ltimeon"));
+					alert("Finished");
 					//$("#resub").css("display", "none");
 					//tyle="opacity: 0.4;
 					//
