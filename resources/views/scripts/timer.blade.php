@@ -1,9 +1,10 @@
 
 <script type="text/javascript">
 //bavaram
+
 $(document).ready(function() { 
     $(".timer").html("Wait.....");
-
+    
 
     //with session refresh
 
@@ -261,7 +262,36 @@ $(document).ready(function() {
 	var pusher = new Pusher('87436df86baf66b2192a', {
 		cluster: 'ap2'
 	});
+    var channel1 = pusher.subscribe('my-channel1');
+    channel1.bind('form-submitted1', function(data) {
+        alert("Teacher Stoped your Submition");
+        $('#resub').css('cursor','not-allowed');
+        $("#resub").css("pointer-events", "none");
+        $('#resub').css('opacity','0.4');
+        $(".timer").html("Teacher Stoped");
+        clearInterval(countDown);
+    });
+    var channel1 = pusher.subscribe('my-channel2');
+    channel1.bind('form-submitted2', function(data) {
+        alert("Teacher Paused");
+        /*$('#resub').css('cursor','not-allowed');
+        $("#resub").css("pointer-events", "none");
+        $('#resub').css('opacity','0.4');
+        $(".timer").html("Teacher Paused");
 
+        $("#resub").css('display','none');
+        $("#resub2").css('display','none');
+        $("#resub3").css('display','none');*/
+
+        
+
+        $(".timer").html("Teacher Paused");
+        sessionStorage.setItem("nowtimeon", null);
+        //var text11="<h1>Quiz Time is Paused !!!</h1>";
+        //$('#resub1').empty();
+        //$('#resub1').append(text11);
+        clearInterval(countDown);
+    });
 	var channel = pusher.subscribe('my-channel');
 	channel.bind('form-submitted', function(data) {
         var qid=$('#quizid').text();
@@ -414,24 +444,27 @@ $(document).ready(function() {
                 $("#resub").css("pointer-events", "none");
                 $('#resub').css('opacity','0.4');
                 $(".timer").html("Teacher Stoped");
+                sessionStorage.setItem("nowtimeon", null);
                 clearInterval(countDown);
             });
             var channel1 = pusher.subscribe('my-channel2');
             channel1.bind('form-submitted2', function(data) {
                 alert("Teacher Paused");
-                $('#resub').css('cursor','not-allowed');
-                $("#resub").css("pointer-events", "none");
-                $('#resub').css('opacity','0.4');
-                $(".timer").html("Teacher Paused");
+               // $('#resub').css('cursor','not-allowed');
+                //$("#resub").css("pointer-events", "none");
+                //$('#resub').css('opacity','0.4');
+                
 
-                $("#resub").css('display','none');
-                $("#resub2").css('display','none');
-                $("#resub3").css('display','none');
+                //$("#resub").css('display','none');
+               // $("#resub2").css('display','none');
+                //$("#resub3").css('display','none');
 
                 //$('#all-answer').empty();
-                var text11="<h1>Quiz is Paused ,Please Wait!!!</h1>";
-                $('#resub1').empty();
-                $('#resub1').append(text11);
+                $(".timer").html("Teacher Paused");
+                sessionStorage.setItem("nowtimeon", null);
+                //var text11="<h1>Quiz Time is Paused !!!</h1>";
+                //$('#resub1').empty();
+                //$('#resub1').append(text11);
                 clearInterval(countDown);
             });
 
@@ -440,25 +473,25 @@ $(document).ready(function() {
 
 var $box=null;
 
-//answer select
-$('.single__answer')
-.click(function() {
-console.log("click on single answer");
-if ($box == null) {
-    $box = $(this);
-    $box.css("box-shadow","3px 3px 15px #7343C1, -1px -1px 5px rgba(0, 0, 0, 0.045)");
-    $box.attr('id', 'answer');
+            //answer select
+            $('.single__answer')
+            .click(function() {
+            console.log("click on single answer");
+            if ($box == null) {
+                $box = $(this);
+                $box.css("box-shadow","3px 3px 15px #7343C1, -1px -1px 5px rgba(0, 0, 0, 0.045)");
+                $box.attr('id', 'answer');
 
-} 
-else  {
-    $box.css("box-shadow","");
-    $box.attr('id', 'disable');
+            } 
+            else  {
+                $box.css("box-shadow","");
+                $box.attr('id', 'disable');
 
-    if($box != $(this))
-    {
-                    $box = $(this);
-                    $box.css("box-shadow","3px 3px 15px #7343C1, -1px -1px 5px rgba(0, 0, 0, 0.045)");
-                    $box.attr('id', 'answer');
+                if($box != $(this))
+                {
+                                $box = $(this);
+                                $box.css("box-shadow","3px 3px 15px #7343C1, -1px -1px 5px rgba(0, 0, 0, 0.045)");
+                                $box.attr('id', 'answer');
 
     }
     else
