@@ -120,7 +120,7 @@ var id_wrong = m[0]+"0";
 
 console.log(status);
 
-		var text="<tr><td>"+m[0]+"</td><td>"+m[1]+"</td><td><input type='radio' id="+id_correct+" name='correct_answer_1' value='correct'></td><td><input type='radio' name='correct_answer_1' id="+id_wrong+" value='incorrect'></td></tr>";
+		var text="<form>"+"<tr><td>"+m[0]+"</td><td>"+m[1]+"</td><td><input type='radio' id="+id_correct+" name='correct_answer_1' value='correct'></td><td><input type='radio' name='correct_answer_1' id="+id_wrong+" value='incorrect'></td></tr>"+"</form>";
 		$(text).appendTo($("#all-answer"));
 
 if(status){
