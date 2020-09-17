@@ -1,12 +1,28 @@
 <script type="text/javascript">
 $(document).ready(function() { 
    //var time=JSON.parse(sessionStorage.getItem("nowstarttimeon"));
+   var pl=true;
+   var time=JSON.parse(sessionStorage.getItem("nowtimeon"));
+   var p=JSON.parse(sessionStorage.getItem("play"));
+   var timeon=0;
    
    $('#push-submit').click(function(e){
       e.preventDefault();
       $('.quiz__slider .quiz__single_question__container').each(function(){
+      time=JSON.parse(sessionStorage.getItem("nowtimeon"));
+      timeon=0;
+      if(time!=null){
+         var splity=time.split(":");
+         timeon=parseInt(splity[0])*60+parseInt(splity[1]);
+      }
+      p=JSON.parse(sessionStorage.getItem("play"));
       
-
+      if(p==null){
+         pl= true;
+      }else{
+         pl=p;
+      }
+	
        var answer="";
        var answer_id="";
        var type="";
@@ -15,9 +31,9 @@ $(document).ready(function() {
        var media_link="";
        var time=0;
 
-       var current=$(this);
-         var hidden=current.attr('aria-hidden');
-         if(hidden=="false"){
+      var current=$(this);
+      var hidden=current.attr('aria-hidden');
+      if(hidden=="false"){
             var question =current.find('.question > span:nth-child(2)').text();
             
             time =current.find('.question-timer').val();
@@ -26,9 +42,14 @@ $(document).ready(function() {
             var user =current.find('.question-user').val();
             var id =current.find('.question-id').val();
             var quiz_id =current.find('.quiz-id').val();
-            var time =current.find('.question-timer').val();
-                console.log('type'+type);
-             current.find('.answer > span:nth-child(2)').each(function(){
+            if(pl==true){
+               var time =current.find('.question-timer').val();
+            }else{
+               var time=timeon;
+            }
+            sessionStorage.setItem("play", false);
+            //console.log('type'+type);
+            current.find('.answer > span:nth-child(2)').each(function(){
                 answer+=$(this).text()+"/";
            });
            current.find('.answer-id').each(function(){
@@ -154,7 +175,7 @@ $(document).ready(function() {
 
 $('#push-submit-pause').click(function(e){
        e.preventDefault();  
-      
+       sessionStorage.setItem("play", false);
        $.ajax({
         type: "POST",
         url: "/quiz/pause_quiz",
@@ -170,7 +191,7 @@ $('#push-submit-pause').click(function(e){
 
 $('#push-submit-stop').click(function(e){
        e.preventDefault();  
-    
+      sessionStorage.setItem("play", false);
        $.ajax({
         type: "POST",
         url: "/quiz/stop_quiz",
