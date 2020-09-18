@@ -235,28 +235,28 @@ $('#login-btn').click(function(e) {
 			$('#numeric__answer').removeClass('d-flex').addClass('d-none');
 		}
 	})
-    // $("body").delegate('select.question__type', 'change', function() {
+    $("body").delegate('select.question__type', 'change', function() {
 
-    //     if ($(this).val() == "numeric__question") {
-    //         $(this).parents(".article_question").children(".standard__answer").removeClass('d-flex').addClass('d-none');
-    //         $(this).parents(".article_question").children(".multiple__choice__legend").removeClass('d-flex').addClass('d-none');
-    //         $(this).parents(".article_question").children(".multiple__choice__answer").removeClass('d-flex').addClass('d-none');
-    //         $(this).parents(".article_question").children(".numeric__answer").addClass('d-flex').removeClass('d-none');
-    //     }
-    //     if ($(this).val() == "standard__question") {
-    //         $(this).parents(".article_question").children(".standard__answer").removeClass('d-none');
-    //         $(this).parents(".article_question").children(".multiple__choice__legend").removeClass('d-flex').addClass('d-none');
-    //         $(this).parents(".article_question").children(".multiple__choice__answer").removeClass('d-flex').addClass('d-none');
-    //         $(this).parents(".article_question").children(".numeric__answer").removeClass('d-flex').addClass('d-none');
-    //     }
-    //     if ($(this).val() == "multiple__choice__question") {
-    //         console.log("multi select");
-    //         $(this).parents(".article_question").children(".standard__answer").removeClass('d-flex').addClass('d-none');
-    //         $(this).parents(".article_question").children(".multiple__choice__legend").addClass('d-flex').removeClass('d-none');
-    //         $(this).parents(".article_question").children(".multiple__choice__answer").addClass('d-flex').removeClass('d-none');
-    //         $(this).parents(".article_question").children(".numeric__answer").removeClass('d-flex').addClass('d-none');
-    //     }
-    // })
+        if ($(this).val() == "numeric__question") {
+            $(this).parents(".article_question").children(".standard__answer").removeClass('d-flex').addClass('d-none');
+            $(this).parents(".article_question").children(".multiple__choice__legend").removeClass('d-flex').addClass('d-none');
+            $(this).parents(".article_question").children(".multiple__choice__answer").removeClass('d-flex').addClass('d-none');
+            $(this).parents(".article_question").children(".numeric__answer").addClass('d-flex').removeClass('d-none');
+        }
+        if ($(this).val() == "standard__question") {
+            $(this).parents(".article_question").children(".standard__answer").removeClass('d-none');
+            $(this).parents(".article_question").children(".multiple__choice__legend").removeClass('d-flex').addClass('d-none');
+            $(this).parents(".article_question").children(".multiple__choice__answer").removeClass('d-flex').addClass('d-none');
+            $(this).parents(".article_question").children(".numeric__answer").removeClass('d-flex').addClass('d-none');
+        }
+        if ($(this).val() == "multiple__choice__question") {
+            console.log("multi select");
+            $(this).parents(".article_question").children(".standard__answer").removeClass('d-flex').addClass('d-none');
+            $(this).parents(".article_question").children(".multiple__choice__legend").addClass('d-flex').removeClass('d-none');
+            $(this).parents(".article_question").children(".multiple__choice__answer").addClass('d-flex').removeClass('d-none');
+            $(this).parents(".article_question").children(".numeric__answer").removeClass('d-flex').addClass('d-none');
+        }
+    })
 
     
 
