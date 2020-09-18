@@ -182,13 +182,13 @@ public function answer(Request $request){
 
         }
         $team_answer -> status = $status;
-        $text=$user."#^".$user_answer."#^".$status."#^".$type;
+        $text=$user."#^".$user_answer."#^".$status."#^".$type."#^".$quiz_id."#^".$question_id."#^".$round_id;
         event(new FormSubmittedStu($text));
 
 
     }
     else{
-        $text=$user."#^".$user_answer."#^".''."#^".$type;
+        $text=$user."#^".$user_answer."#^".''."#^".$type."#^".$quiz_id."#^".$question_id."#^".$round_id;
         event(new FormSubmittedStu($text));
 
     }
@@ -232,6 +232,23 @@ public function answer(Request $request){
 
 
     // }
+}
+
+public function saveanswer(Request $request){
+$teams = $request->team;
+foreach($teams as $team){
+$quiz = $request->input('quiz/'.$team);
+$round = $request->input('round/'.$team);
+$question = $request->input('question/'.$team);
+$answer_status = $request->input('status/'.$team);
+
+$saveanswer = TeamAnswer::where('quiz_id',$quiz)->where('round_id',$round)->where('question_id',$question)->where('team_name',$team)->first();
+
+$saveanswer -> status = $answer_status ;
+
+$saveanswer -> save();
+
+}
 }
 
 }

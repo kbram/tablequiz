@@ -111,6 +111,7 @@
 		var m0 = message.replace('{"text":"','');
 		var m0 = m0.replace('"}','');
 		var m=m0.split("#^");
+
 var status = m[2];
 console.log(status);
  
@@ -120,8 +121,11 @@ var id_wrong = m[0]+"0";
 
 console.log(status);
 
-		var text="<form>"+"<tr><td>"+m[0]+"</td><td>"+m[1]+"</td><td><input type='radio' id="+id_correct+" name='correct_answer_1' value='correct'></td><td><input type='radio' name='correct_answer_1' id="+id_wrong+" value='incorrect'></td></tr>"+"</form>";
-		$(text).appendTo($("#all-answer"));
+		// var text="<tr><td>"+m[0]+"</td><td>"+m[1]+"</td><td><form><input type='radio' id="+id_correct+" name='correct_answer_1' value='correct'><input type='radio' name='correct_answer_1' id="+id_wrong+" value='incorrect'></form></td><td></td></form></tr>";
+		
+		var text = "<hr> <div class='row container h-25 align-items-center justify-content-center'> <p class='col-md-4 pb-0 text-center'>"+m[0]+"</p> <input  type='text' name='team[]' hidden class='col-md-4 pb-0 text-center' value="+m[0]+"><input  type='text' name='quiz/"+m[0]+"' hidden class='col-md-4 pb-0 text-center' value="+m[4]+"><input  type='text' name='round/"+m[0]+"' hidden class='col-md-4 pb-0 text-center' value="+m[6]+"><input  type='text' name='question/"+m[0]+"' hidden class='col-md-4 pb-0 text-center' value="+m[5]+"> <p class='col-md-4 pb-0 text-center'>"+m[1]+"</p> <div class='col-md-4 pb-0 text-center '> <div class='row d-flex'> <input type='radio' id="+id_correct+" name='status/"+m[0]+"' value=1 class='col-md-6 py-0 text-muted text-center'> <input type='radio' name='status/"+m[0]+"' id="+id_wrong+" value=0 class='col-md-6 py-0 text-muted text-center'> </div> </div> </div>"
+		$(text).appendTo($("#all-answer_submit"));
+		console.log(text);
 
 if(status){
 		if(Number(status) == 1){
@@ -325,7 +329,7 @@ $('#'+id_correct).prop("checked", true);
 							<div class="quiz__single_question__container d-flex flex-column align-items-center">
 								<h4>Question</h4>
 								<div class="quiz__single_question__image">
-									<img src="../images/mozambique__flag.png">
+									<img src="{{asset('site_design/images/homepage__logo.png')}}" height='170px'>
 								</div>
 								<div class="quiz__single_question__qa text-center w-100">
 
@@ -404,8 +408,8 @@ $('#'+id_correct).prop("checked", true);
 
 				<div class="row quiz__answers mt-2 no-gutters">
 					<div class="col dashboard__container">
-						<table class="table table-borderless table-striped quiz__answers__table">
-							<thead>
+						<div class="table table-borderless table-striped quiz__answers__table">
+							<!-- <thead>
 								<tr>
 									<th class="pb-0">User</th>
 									<th class="pb-0">Answers</th>
@@ -421,17 +425,40 @@ $('#'+id_correct).prop("checked", true);
 										<small>Incorrect</small>
 									</th>
 								</tr>
-							</thead>
-							<tbody id="all-answer">
-								
-							</tbody>
+							</thead> -->
 
-						</table>
+							<div class="row container align-items-center justify-content-center">
+								<div class="col-md-4 pb-0 text-center"><strong>User</strong></div>
+								<div class="col-md-4 pb-0 text-center"><strong>Answers</strong></div>
+
+								<div class="col-md-4 pb-0 text-center pt-3"><strong>Marking</strong>
+
+									<div class="row d-flex">
+											<div class="col-md-6 py-0 text-muted text-center"><small>Correct</small></div>
+											<div class="col-md-6 py-0 text-muted text-center"><small>Incorrect</small></div>
+								    </div>
+
+								</div>
+							</div>
+							<form id="answer_submit_form"  class="pt-0">
+
+
+						<div id="all-answer_submit">
+
+								
+
+							
+
+						</div>
+
+<br>
 						<div class="row align-items-center text-white justify-content-center">
 							<div class="col-9 col-md-4">
-								<a class="d-block btn btn-primary">Save answers</a>
+								<a id="save_answer_button" class="d-block btn btn-primary">Save answers</a>
 							</div>
 						</div>
+						</form>
+
 					</div>
 				</div>
 			</section>
@@ -441,8 +468,11 @@ $('#'+id_correct).prop("checked", true);
 </section>
 
 
+
+
 @endsection
 
 @section('footer_scripts')
 @include('scripts.push-submit')
+@include('scripts.answer-save')
 @endsection
