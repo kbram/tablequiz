@@ -81,10 +81,17 @@
 					//$("#resub").css("display", "none");
 					//tyle="opacity: 0.4;
 					//
+					$("#push-submit").css("pointer-events", "auto");
+					$('#push-submit').css('opacity','1');
 
 					$('#resub').css('cursor','not-allowed');
 					$("#resub").css("pointer-events", "none");
 					$('#resub').css('opacity','0.4');
+
+					$("#push-submit-pause").css("pointer-events", "none");
+					$('#push-submit-pause').css('opacity','0.4');
+					$("#push-submit-stop").css("pointer-events", "none");
+					$('#push-submit-stop').css('opacity','0.4');
 					
 				}
 			}
@@ -103,8 +110,9 @@
 	var pusher = new Pusher('87436df86baf66b2192a', {
 	cluster: 'ap2'
 	});
-
+	
 	var channel = pusher.subscribe('my-channel0');
+	
 	channel.bind('form-submitted0', function(data) {
 		//alert(JSON.stringify(data));	
 		var message =JSON.stringify(data);	
@@ -161,11 +169,7 @@
 		
 		y=document.getElementById("timer").textContent;
 		//alert(y);
-		if(y=="Finished"){
-			y=sessionStorage.getItem("Ltimeon");
-		}else{
-		sessionStorage.setItem("Ltimeon", y);
-		}
+		
 			var splity=y.split(":");
 			y=parseInt(splity[0])*60+parseInt(splity[1]);
 
@@ -205,7 +209,8 @@
 					clearInterval(countDown);
 					sessionStorage.setItem("nowtimeon", null);
 					sessionStorage.setItem("play", true);
-					$("#timer").html(sessionStorage.getItem("Ltimeon"));
+					//var t =current.find('.question-timer').val();
+					$("#timer").html("Finished");
 					alert("Finished");
 					//$("#resub").css("display", "none");
 					//tyle="opacity: 0.4;
@@ -217,6 +222,10 @@
 					
 					$("#push-submit").css("pointer-events", "auto");
 					$('#push-submit').css('opacity','1');
+					$("#push-submit-pause").css("pointer-events", "none");
+					$('#push-submit-pause').css('opacity','0.4');
+					$("#push-submit-stop").css("pointer-events", "none");
+					$('#push-submit-stop').css('opacity','0.4');
 					pl=true;
 					sessionStorage.setItem("play", true);
 				}
