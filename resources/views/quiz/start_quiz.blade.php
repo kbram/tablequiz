@@ -44,7 +44,7 @@
 
 			function secpass1() {
 				'use strict';
-				if(p==false){
+				if(pl==false){
 					clearInterval(countDown);
 					$("#push-submit-pause").css("pointer-events", "none");
 					$('#push-submit-pause').css('opacity','0.4');
