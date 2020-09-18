@@ -310,23 +310,23 @@ $('#'+id_correct).prop("checked", true);
 			<aside class="col-lg-3 dashboard__sidebar d-flex flex-column order-1 order-md-0">
 				<div class="dashboard__container d-flex flex-column align-items-center mb-3">
 					<h5>Countdown timer</h5>
-					<p class="countdown__time" id="timer"></p>
+					<p class="countdown__time " id="timer" style="font-size:300%;"></p>
 					<div class="countdown__buttons row">
 						<div class="col-4">
-							<form action="/quiz/run_quiz" id="push-submit-form" method="post" class="col-4">
+							<form action="/quiz/run_quiz" id="push-submit-form" method="post" class="col-4 pt-2">
 								<button type="submit" id="push-submit" style="border:none;" onclick="play()"><i class="fa fa-play"></i></button>
 								{{csrf_field()}}
 							</form>
 						</div>
 						<div class="col-4">
-							<form action="/quiz/pause_quiz" method="post" class="col-4 push-submit-pause-form">
+							<form action="/quiz/pause_quiz" method="post" class="col-4 push-submit-pause-form pt-2">
 								<input type="hidden" name="quizId" value={{$quiz_id}}>
 								<button type="submit" id="push-submit-pause" style="border:none;" onclick="pause()"><i class="fa fa-pause"></i></button>
 								{{csrf_field()}}
 							</form>
 						</div>
 						<div class="col-4">
-							<form action="/quiz/stop_quiz" method="post" class="col-4 push-submit-stop-form">
+							<form action="/quiz/stop_quiz" method="post" class="col-4 push-submit-stop-form pt-2">
 								<input type="hidden" name="quizId" value={{$quiz_id}}>
 								<button type="submit" id="push-submit-stop" style="border:none;" onclick="stop()"><i class="fa fa-stop"></i></button>
 								{{csrf_field()}}
