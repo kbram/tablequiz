@@ -480,13 +480,13 @@ $(document).ready(function() {
 		var quizId=message.text[6];
         var type=message.text[7];
         timeon=message.text[8];
-        //alert("quizid:"+quizId);
-        //alert("qid:"+qid);
+        //alert("quizid:"+parseInt(quizId));
+        //alert("qid:"+parseInt(qid));
 
-        // if(parseInt(quizId)==parseInt(qid)){
-
-                
-            var text0 ='';
+    if(parseInt(quizId)===parseInt(qid)){
+         //alert("Hi");   
+        
+        var text0 ='';
              
         var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
 			"<img class='q-img' src='{{asset('site_design/images/homepage__logo.png')}}' height='170px'>"+
@@ -556,104 +556,60 @@ $(document).ready(function() {
         
         
 
-            $('#all-answer').empty();
-            $('#all-answer').append(text0);
+        $('#all-answer').empty();
+        $('#all-answer').append(text0);
+        
+        $('#ques').empty();
+        $('#ques').append(textq);
+        
+        $('h4.questionno').text(message.text[0]);
+        $('h4.notification').text('');
+
+            //document.getElementById("demo").innerHTML=JSON.parse(sessionStorage.getItem("issuequestion"));
+        //var x=1;
+        var y=timeon;
+        var sec= y,
+        countDiv    = document.getElementById("timer"),
+        secpass;
+        countDown   = setInterval(function () {
+            'use strict';
+            secpass();
+        }, 1000);
+        var channel1 = pusher.subscribe('my-channel1');
+        channel1.bind('form-submitted1', function(data) {
+            alert("Teacher Stoped your Submition");
+            $('#resub').css('cursor','not-allowed');
+            $("#resub").css("pointer-events", "none");
+            $('#resub').css('opacity','0.4');
+            $(".timer").html("Teacher Stoped");
+            sessionStorage.setItem("nowtimeon", null);
+            clearInterval(countDown);
+        });
+        var channel1 = pusher.subscribe('my-channel2');
+        channel1.bind('form-submitted2', function(data) {
+            alert("Teacher Paused");
+        // $('#resub').css('cursor','not-allowed');
+            //$("#resub").css("pointer-events", "none");
+            //$('#resub').css('opacity','0.4');
             
-            $('#ques').empty();
-            $('#ques').append(textq);
-            
-            $('h4.questionno').text(message.text[0]);
-            $('h4.notification').text('');
 
-                //document.getElementById("demo").innerHTML=JSON.parse(sessionStorage.getItem("issuequestion"));
+            //$("#resub").css('display','none');
+        // $("#resub2").css('display','none');
+            //$("#resub3").css('display','none');
 
-
-            //var x=1;
-            var y=timeon;
-            var sec= y,
-            countDiv    = document.getElementById("timer"),
-            secpass;
-            countDown   = setInterval(function () {
-                'use strict';
-                secpass();
-            }, 1000);
-
-            function secpass() {
-                'use strict';
-                
-                var min     = Math.floor(sec / 60),
-                    remSec  = sec % 60;
-                
-                if (remSec < 10) {
-                    
-                    remSec = '0' + remSec;
-                
-                }
-                if (min < 10) {
-                    
-                    min = '0' + min;
-                
-                }
-                
-                $(".timer").html(min + ":" + remSec);
-                sessionStorage.setItem("nowtimeon", JSON.stringify(min + ":" + remSec));
-                if (sec > 0) {
-                    
-                    sec = sec - 1;
-                    
-                } else {
-                    all.addClass('cursor_not');
-                    clearInterval(countDown);
-                    $(".timer").html("Time Out");
-                    sessionStorage.setItem("nowtimeon", null);
-                    //$("#resub").css("display", "none");
-                    //tyle="opacity: 0.4;
-                    //
-                    $('.single__answer').css('cursor','not-allowed');
-                    $('.single__answer').css('pointer-events','none');
-
-
-                    $('#resub').css('cursor','not-allowed');
-                    $("#resub").css("pointer-events", "none");
-                    $('#resub').css('opacity','0.4');
-                }
-            }
-            
-            var channel1 = pusher.subscribe('my-channel1');
-            channel1.bind('form-submitted1', function(data) {
-                alert("Teacher Stoped your Submition");
-                $('#resub').css('cursor','not-allowed');
-                $("#resub").css("pointer-events", "none");
-                $('#resub').css('opacity','0.4');
-                $(".timer").html("Teacher Stoped");
-                sessionStorage.setItem("nowtimeon", null);
-                clearInterval(countDown);
-            });
-            var channel1 = pusher.subscribe('my-channel2');
-            channel1.bind('form-submitted2', function(data) {
-                alert("Teacher Paused");
-               // $('#resub').css('cursor','not-allowed');
-                //$("#resub").css("pointer-events", "none");
-                //$('#resub').css('opacity','0.4');
-                
-
-                //$("#resub").css('display','none');
-               // $("#resub2").css('display','none');
-                //$("#resub3").css('display','none');
-
-                //$('#all-answer').empty();
-                $(".timer").html("Teacher Paused");
-                sessionStorage.setItem("nowtimeon", null);
-                //var text11="<h1>Quiz Time is Paused !!!</h1>";
-                //$('#resub1').empty();
-                //$('#resub1').append(text11);
-                clearInterval(countDown);
-            });
-
+            //$('#all-answer').empty();
+            $(".timer").html("Teacher Paused");
+            sessionStorage.setItem("nowtimeon", null);
+            //var text11="<h1>Quiz Time is Paused !!!</h1>";
+            //$('#resub1').empty();
+            //$('#resub1').append(text11);
+            clearInterval(countDown);
+        });
+    
 
             //answer select
 
-
+        
         var $box=null;
 
         $('.single__answer')
@@ -711,17 +667,55 @@ $(document).ready(function() {
                 
 
                 });
-            
-        
-     // }
-    });
+            }
+        });
     
+    }
+            
+
+    function secpass() {
+        'use strict';
+        
+        var min     = Math.floor(sec / 60),
+            remSec  = sec % 60;
+        
+        if (remSec < 10) {
+            
+            remSec = '0' + remSec;
+        
+        }
+        if (min < 10) {
+            
+            min = '0' + min;
+        
+        }
+        
+        $(".timer").html(min + ":" + remSec);
+        sessionStorage.setItem("nowtimeon", JSON.stringify(min + ":" + remSec));
+        if (sec > 0) {
+            
+            sec = sec - 1;
+            
+        } else {
+            all.addClass('cursor_not');
+            clearInterval(countDown);
+            $(".timer").html("Time Out");
+            sessionStorage.setItem("nowtimeon", null);
+            //$("#resub").css("display", "none");
+            //tyle="opacity: 0.4;
+            //
+            $('.single__answer').css('cursor','not-allowed');
+            $('.single__answer').css('pointer-events','none');
 
 
-
-
-
-
+            $('#resub').css('cursor','not-allowed');
+            $("#resub").css("pointer-events", "none");
+            $('#resub').css('opacity','0.4');
+        
+        }
+    }
+  
+    });
 });
 
 
