@@ -480,8 +480,8 @@ $(document).ready(function() {
 		var quizId=message.text[6];
         var type=message.text[7];
         timeon=message.text[8];
-        //alert("quizid:"+parseInt(quizId));
-        //alert("qid:"+parseInt(qid));
+        // alert("quizid:"+parseInt(quizId));
+        // alert("qid:"+parseInt(qid));
 
     if(parseInt(quizId)===parseInt(qid)){
          //alert("Hi");   
@@ -666,8 +666,8 @@ $(document).ready(function() {
 
                 
 
-                });
-            }
+                
+            
         });
     
     }
