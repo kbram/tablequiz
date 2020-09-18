@@ -20,8 +20,13 @@ class QuizCategoriesController extends Controller
     public function create()
     {
         $categories = DB::table('quiz_categories')->paginate(2);
+        if($categories->isEmpty()){
+          return view('admin.categories')->with('message','No categories to show');
+        }
+        else{
+           return view('admin.categories', compact('categories'));
 
-        return view('admin.categories', compact('categories'));
+        }
         
     }
 

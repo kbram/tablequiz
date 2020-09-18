@@ -61,11 +61,11 @@
 					<div class="row">
 						<div class="dashboard__container col">
 						<div class="d-flex">
-						   <h3 class="col-8">Set price band for questions</h3>
+						   <h3 class="col-8">Set price band for no. questions</h3>
 								<i class="fa fa-plus-circle col-4 price-band-questions" id="addQuestionPrice"></i>
 						</div>							
 											
-
+							@if(@isset($questionCosts))
 							@foreach($questionCosts as $questionCost)
 							<span id="msg{{$questionCost->id ?? ''}}" class="text-success" ></span>
 							
@@ -105,6 +105,9 @@
 							</form>
 							
 							@endforeach
+							@else
+							<p>No Questions Cost created yet!</p>
+							@endif
 							<div class="financial-append"></div>
 
 						</div>
@@ -115,6 +118,7 @@
 						<h3 class="col-8" >Set price band for no. backgrounds</h3>
 								<i class="fa fa-plus-circle col-4" id="addBackgroundPrice"></i>
 						</div>
+						@if(@isset($backgroundCosts))
 							@foreach($backgroundCosts as $backgroundCost)
 							<span id="msg{{$backgroundCost->id}}" class="text-success"></span>
 							<form class="form-row pt-4 align-items-center mb-0 price-band-financials" action="" method="" id="price__band__backgrounds">
@@ -145,6 +149,9 @@
 								</div>
 							</form>
 							@endforeach
+							@else
+							<p>No Background Cost created yet!</p>
+						@endif
 							<div class="financial-append"></div>
 						</div>
 					</div>
@@ -154,6 +161,8 @@
 							<h3 class="col-8">Set price band for no. participants</h3>
 								<i class="fa fa-plus-circle col-4" id="addParticipantPrice"></i>
 						</div>
+					    	@if(@isset($participantCosts))
+
 							@foreach($participantCosts as $participantCost)
 							<span id="msg{{$participantCost->id}}" class="text-success"></span>
 							<form class="form-row pt-4 align-items-center mb-0 price-band-financials" action="" method=""">
@@ -182,8 +191,13 @@
 											
 									</div>
 								</div>
-							</form>
+							</form>				
+							
 							@endforeach
+							@else
+							<p>No price</p>
+							@endif
+							
 							<div class="financial-append"></div>
 
 						</div>

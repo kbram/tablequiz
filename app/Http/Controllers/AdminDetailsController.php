@@ -51,12 +51,17 @@ class AdminDetailsController extends Controller
         $cusers=User::count();
         $cquzzes=Quiz::count();
         $quizzes =Quiz::all();
+        if($quizzes->isEmpty()){
+            return view('admin.home',compact('cusers','cquzzes'));
+        }
+        else{ 
         foreach($quizzes as $quiz){
         $result[$quiz->id] = $quiz->user()->first()->email;
         $users[$quiz->id]=$quiz->user()->first()->name;
         }
         return view('admin.home',compact('quizzes','result','cusers','cquzzes','users'));
-    }
+        }
+}
 
     public function categories()
     {   
@@ -73,7 +78,10 @@ class AdminDetailsController extends Controller
     public function quizzes()
     {   
          $quizzes = Quiz::all();
-          
+         if($quizzes->isEmpty()){
+          return view('admin.quizzes')->with('message','No quizzes to show');
+         }
+         else{          
          foreach($quizzes as $quiz){
            $user[$quiz->id]   = User::where('id', $quiz->user_id)->value('name'); 
            $roundCount[$quiz->id]=$quiz->rounds()->count();
@@ -82,11 +90,15 @@ class AdminDetailsController extends Controller
         
         return view('admin.quizzes',compact('quizzes','user','roundCount','questionCounts'));
     }
+    }
 
     public function users()
     {  
         $users = User::all();
-        
+        if($users->isEmpty()){
+            return view('admin.users')->with('message','No quizzes to show');
+           }
+        else{ 
        
         foreach($users as $user){
             $quizcount[$user->id] =$user->quizzes()->count();
@@ -94,6 +106,7 @@ class AdminDetailsController extends Controller
     }
            return view('admin.users',compact('users','quizcount','questioncount'));
     }
+}
     public function quizView($id){
         $participants=Participant::all();
         $quizzes = Quiz::find($id);

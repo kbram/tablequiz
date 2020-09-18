@@ -107,6 +107,7 @@
 
 							
 							<tbody>
+							@if(!empty($categories))
 							  	@foreach($categories as $category)
                                         <tr>
                                             <td>{{$category->category_name}}</td>
@@ -130,7 +131,9 @@
                                         </tr>
                                             
                              	@endforeach
-								
+								@else
+								<p>No categories created yet!</p>
+								@endif
 							</tbody>
 							<tfoot>
 								<tr>
