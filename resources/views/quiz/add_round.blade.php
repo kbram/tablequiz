@@ -31,7 +31,7 @@
 <script src='jquery-3.2.1.min.js'></script> 
 
 <section class="container page__inner">
-<form id="add_round" action="/round" method="post" enctype="multipart/form-data" role="main" novalidate>
+<form id="add_round" action="/round" method="post" enctype="multipart/form-data" role="main">
 		 @csrf
 <div class="is_container row" >
 
@@ -57,11 +57,6 @@
 				</div>
 				<div class="col-md-8">
 					<input autocomplete="nothanks" type="text" name="round_name"  class="form-control" required>
-					@if ($errors->has('round_name'))
-						<span class="help-block">
-							<p class="alert alert-danger text-center">{{ $errors->first('round_name') }}</p>
-						</span>
-					@endif
 					<input hidden autocomplete="nothanks" type="text" name="round_count" class="form-control" value="{{$round_count ?? '1'}}">
 					<input hidden autocomplete="nothanks" type="text" name="quiz" class="form-control" value="{{$quiz}}">
 
@@ -183,7 +178,7 @@
 					<label for="question">Question</label>
 				</div>
 				<div class="col-md-8">
-					<input name="question[]" type="text" class="form-control question">
+					<input name="question[]" type="text" class="form-control question" required > 
 				</div>
 				@if ($errors->has('question'))
                         <span class="help-block">
