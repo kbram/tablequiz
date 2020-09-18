@@ -27,8 +27,7 @@ class AdminQuestionController extends Controller
             $cat_name[$question->id] = QuizCategory::where('id', $question->category_id)->value('category_name'); 
        }
     
-        $categories = QuizCategory::all();
-       
+        
       return view('admin.questions',compact('categories','questions','cat_name'));
     }
 
@@ -520,6 +519,7 @@ class AdminQuestionController extends Controller
        } 
        public function search(Request $request)
        {
+         //dd($request);
          
            $searchTerm = $request->input('question_search_box');
            $searchRules = [
@@ -537,14 +537,40 @@ class AdminQuestionController extends Controller
                return response()->json([
                    json_encode($validator),
                ], Response::HTTP_UNPROCESSABLE_ENTITY);
-           }
+           
+             }
    
-           $results = GlobalQuestion::where('id', 'like', $searchTerm.'%')
-                            ->orWhere('question', 'like', $searchTerm.'%')->get();
-   
+
+
+             $searchValues = preg_split('/\s+/', $searchTerm, -1, PREG_SPLIT_NO_EMPTY); 
+             
+             $questions = GlobalQuestion::where(function ($q) use ($searchValues){
+               
+              foreach ($searchValues as $value) {
+                $q->orWhere('question', 'like', "%{$value}%");
+                $q->orWhere('category_name', 'like', "%{$value}%");
+                
+                }
+            })->get();
+             
+            $category = QuizCategory::where('id','like', $searchTerm.'%')
+                            ->orWhere('category_name', 'like', $searchTerm.'%')->get();
+
+            foreach($questions as $question){
+                   $question['category']=QuizCategory::where('id', $question->category_id)->value('category_name'); 
+              }
+          
+        
+              $response = array(
+                'status' => 'success',
+                'msg' => $ques,
+                'ans' => $ans,
+                'img' => $medias,
+            );
+            return response()->json($response);
    
            return response()->json([
-               json_encode($results),
+               json_encode($response),
            ], Response::HTTP_OK);
            
        }
