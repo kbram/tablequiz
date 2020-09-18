@@ -152,7 +152,8 @@
 							</thead>
 						
 							<tbody id="users">
-							@foreach($quizzes ?? '' as $quiz)
+							@if(!empty($quizzes))
+							@foreach($quizzes as $quiz)
 
 							<tr>
                                     
@@ -185,7 +186,9 @@
 									</td>
 								</tr>
 								@endforeach
-								
+								@else
+								<p>No quizzes to show</p>
+							@endif	
 									
 								
 								

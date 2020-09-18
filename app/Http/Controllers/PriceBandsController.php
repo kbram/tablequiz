@@ -12,8 +12,12 @@ class PriceBandsController extends Controller
          $questionCosts = PriceBand::where('band_type','=','questions costs')->get();
          $backgroundCosts = PriceBand::where('band_type','=','backgrounds costs')->get();
          $participantCosts = PriceBand::where('band_type','=','participants costs')->get();
-
-         return view('admin.financials',compact('questionCosts','backgroundCosts','participantCosts'));
+         if(($questionCosts->isEmpty())||($backgroundCosts->isEmpty())||($participantCosts->isEmpty())){
+          return view('admin.financials',compact('questionCosts','backgroundCosts','participantCosts'));
+        }
+       else{
+        return view('admin.financials',compact('questionCosts','backgroundCosts','participantCosts'));
+       }
     }
 
     

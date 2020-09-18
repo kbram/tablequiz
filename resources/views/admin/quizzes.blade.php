@@ -77,7 +77,7 @@
 								</tr>
 							</thead>
 							<tbody id="quizzes_table">
-								
+							@if(!empty($quizzes))	
 							@foreach($quizzes as $quiz)	
 							@if ($quiz->is_blocked)					
 								<tr>
@@ -133,9 +133,15 @@
 										</form>
 									</td>
 								</tr>
-
-								@endif
+							@endif						
+								
 								@endforeach
+								@else
+								<tr>
+								<p>No quizzes to show</p>
+								</tr>
+								
+								@endif
 								
 								
 								
