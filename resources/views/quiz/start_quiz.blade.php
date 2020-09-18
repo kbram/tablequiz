@@ -166,7 +166,9 @@ $('#'+id_correct).prop("checked", true);
 			$('#push-submit-pause').css('opacity','0.4');
 			//pl=true;
 		}else{
-			alert("Check your connection...");
+			//alert("Check your connection...");
+			swal("Check your connection...!",'Please check your internet connection', "danger")
+
 		}
 	}
 
@@ -187,11 +189,11 @@ $('#'+id_correct).prop("checked", true);
 			var x=sessionStorage.getItem("nowtimeon");
 			x=x.slice(1,-1);
 			$("#timer").html(x);
-			alert("Stoped");
+			swal("Question stoped!",'articipants can not submit..', "warning")
 			//pl=true;
 		}
 		else{
-			alert("Check your connection...");
+			swal("Check your connection...!",'Please check your internet connection', "danger")
 		}
 	}
 
@@ -223,7 +225,7 @@ $('#'+id_correct).prop("checked", true);
 			}, 1000);
 		}
 		else{
-			alert("Check your connection...");
+			swal("Check your connection...!",'Please check your internet connection', "danger")
 		}
 			function secpass() {
 				'use strict';
@@ -255,7 +257,9 @@ $('#'+id_correct).prop("checked", true);
 					sessionStorage.setItem("play", true);
 					//var t =current.find('.question-timer').val();
 					$("#timer").html("Finished");
-					alert("Finished");
+					//alert("Finished");
+					swal("Time finished!",'time of the question finished', "warning")
+
 					//$("#resub").css("display", "none");
 					//tyle="opacity: 0.4;
 					//

@@ -17,6 +17,8 @@ use App\Models\Answer;
 use App\Models\QuizRoundImage;
 use App\Models\PriceBand;
 
+use App\Models\TeamAnswer;
+
 use App\Events\FormSubmittedStop;
 use App\Events\FormSubmittedPause;
 
@@ -497,6 +499,9 @@ $round_image->save();
     
     public function start_quiz($id)
     {  
+
+        // $teams = TeamAnswer::get('team_name');
+        // dd($teams);
        $quiz_id=$id;
        $questions=[];
        $answers=[];

@@ -423,7 +423,9 @@ $(document).ready(function() {
 	});
     var channel1 = pusher.subscribe('my-channel1');
     channel1.bind('form-submitted1', function(data) {
-        alert("Teacher Stoped your Submition");
+        // alert("Teacher Stoped your Submition");
+        swal("Teacher Stoped your Submition !",'you can not submit answer...', "danger")
+
         $('#resub').css('cursor','not-allowed');
         $("#resub").css("pointer-events", "none");
         $('#resub').css('opacity','0.4');
@@ -433,7 +435,9 @@ $(document).ready(function() {
     });
     var channel1 = pusher.subscribe('my-channel2');
     channel1.bind('form-submitted2', function(data) {
-        alert("Teacher Paused");
+        //alert("Teacher Paused");
+        swal("Teacher Paused Timer !",'you will get more seconds...', "info")
+
         /*$('#resub').css('cursor','not-allowed');
         $("#resub").css("pointer-events", "none");
         $('#resub').css('opacity','0.4');
@@ -479,7 +483,7 @@ $(document).ready(function() {
 		var roundId=message.text[5];
 		var quizId=message.text[6];
         var type=message.text[7];
-        
+
         if(message.text[9]){
 		var media_type=message.text[9].split("/");}
         if(message.text[10]){
@@ -622,7 +626,7 @@ $(document).ready(function() {
         }, 1000);
         var channel1 = pusher.subscribe('my-channel1');
         channel1.bind('form-submitted1', function(data) {
-            alert("Teacher Stoped your Submition");
+            swal("Teacher Stoped your Submition !",'you can not submit answer...', "danger")
             $('#resub').css('cursor','not-allowed');
             $("#resub").css("pointer-events", "none");
             $('#resub').css('opacity','0.4');
@@ -632,7 +636,7 @@ $(document).ready(function() {
         });
         var channel1 = pusher.subscribe('my-channel2');
         channel1.bind('form-submitted2', function(data) {
-            alert("Teacher Paused");
+            swal("Teacher Paused Timer !",'you will get more seconds...', "info")
         // $('#resub').css('cursor','not-allowed');
             //$("#resub").css("pointer-events", "none");
             //$('#resub').css('opacity','0.4');
@@ -691,7 +695,7 @@ $(document).ready(function() {
     console.log(answer.length);
     if(answer.length == 0){
 
-        alert('please select answer');
+        swal("Please select answer !",'select or submit answer', "danger")
     }
         else{
         $.ajax({
