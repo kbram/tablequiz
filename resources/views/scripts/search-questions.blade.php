@@ -23,8 +23,8 @@
                 url: "{{ route('search-questions') }}",
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 data: searchform.serialize(),
-                success: function (results) {
-                    let jsonData = JSON.parse(results);
+                success: function (questions) {
+                    let jsonData = JSON.parse(questions);
                     if (jsonData.length != 0) {
                         questionsTable.hide();
                         $.each(jsonData, function(index, val) {
