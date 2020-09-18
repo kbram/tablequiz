@@ -18,7 +18,9 @@
 	
 	var countDown;
 	$(document).ready(function(){
-		
+		$('#issue').click(function(e){
+			play();
+		});
 		if(time!=null){
 			
 			$("#push-submit-pause").css("pointer-events", "auto");
@@ -81,8 +83,8 @@
 					//$("#resub").css("display", "none");
 					//tyle="opacity: 0.4;
 					//
-					$("#push-submit").css("pointer-events", "auto");
-					$('#push-submit').css('opacity','1');
+					$("#push-submit").css("pointer-events", "none");
+					$('#push-submit').css('opacity','0.4');
 
 					$('#resub').css('cursor','not-allowed');
 					$("#resub").css("pointer-events", "none");
@@ -96,6 +98,8 @@
 				}
 			}
 		}else{
+				$("#push-submit").css("pointer-events", "none");
+				$('#push-submit').css('opacity','0.4');
 				$("#push-submit-pause").css("pointer-events", "none");
 				$('#push-submit-pause').css('opacity','0.4');
 				$("#push-submit-stop").css("pointer-events", "none");
@@ -128,48 +132,60 @@
 	
 	
 	function pause() {
-		clearInterval(countDown);
-		sessionStorage.setItem("play", true);
-		$("#push-submit").css("pointer-events", "auto");
-		$('#push-submit').css('opacity','1');
-		$("#push-submit-pause").css("pointer-events", "none");
-		$('#push-submit-pause').css('opacity','0.4');
-		//pl=true;
+		if(pusher.connection.state=="connected"){
+			clearInterval(countDown);
+			sessionStorage.setItem("play", true);
+			$("#push-submit").css("pointer-events", "auto");
+			$('#push-submit').css('opacity','1');
+			$("#push-submit-pause").css("pointer-events", "none");
+			$('#push-submit-pause').css('opacity','0.4');
+			//pl=true;
+		}else{
+			alert("Check your connection...");
+		}
 	}
 
 	function stop() {
-		clearInterval(countDown);
-		sessionStorage.setItem("play", true);
-		
-		//sessionStorage.setItem("nowtimeon", null));
-		
-		$("#push-submit").css("pointer-events", "auto");
-		$('#push-submit').css('opacity','1');
-		$("#push-submit-pause").css("pointer-events", "none");
-		$('#push-submit-pause').css('opacity','0.4');
-		$("#push-submit-stop").css("pointer-events", "none");
-		$('#push-submit-stop').css('opacity','0.4');
-		//$("#timer").html(sessionStorage.getItem("nowtimeon"));
-		var x=sessionStorage.getItem("nowtimeon");
-		x=x.slice(1,-1);
-		$("#timer").html(x);
-		alert("Stoped");
-		//pl=true;
+		if(pusher.connection.state=="connected"){
+			clearInterval(countDown);
+			sessionStorage.setItem("play", true);
+			
+			//sessionStorage.setItem("nowtimeon", null));
+			
+			$("#push-submit").css("pointer-events", "auto");
+			$('#push-submit').css('opacity','1');
+			$("#push-submit-pause").css("pointer-events", "none");
+			$('#push-submit-pause').css('opacity','0.4');
+			$("#push-submit-stop").css("pointer-events", "none");
+			$('#push-submit-stop').css('opacity','0.4');
+			//$("#timer").html(sessionStorage.getItem("nowtimeon"));
+			var x=sessionStorage.getItem("nowtimeon");
+			x=x.slice(1,-1);
+			$("#timer").html(x);
+			alert("Stoped");
+			//pl=true;
+		}
+		else{
+			alert("Check your connection...");
+		}
 	}
+
+	
 	function play() {
-		
-		$("#push-submit-pause").css("pointer-events", "auto");
-		$('#push-submit-pause').css('opacity','1');
-		$("#push-submit-stop").css("pointer-events", "auto");
-		$('#push-submit-stop').css('opacity','1');
-		$("#push-submit").css("pointer-events", "none");
-		$('#push-submit').css('opacity','0.4');
-		//sessionStorage.setItem("play", false);
-		//pl=false;
-		
-		y=document.getElementById("timer").textContent;
-		//alert(y);
-		
+		if(pusher.connection.state=="connected"){
+			
+			$("#push-submit-pause").css("pointer-events", "auto");
+			$('#push-submit-pause').css('opacity','1');
+			$("#push-submit-stop").css("pointer-events", "auto");
+			$('#push-submit-stop').css('opacity','1');
+			$("#push-submit").css("pointer-events", "none");
+			$('#push-submit').css('opacity','0.4');
+			//sessionStorage.setItem("play", false);
+			//pl=false;
+			
+			y=document.getElementById("timer").textContent;
+			//alert(y);
+			
 			var splity=y.split(":");
 			y=parseInt(splity[0])*60+parseInt(splity[1]);
 
@@ -180,7 +196,10 @@
 				'use strict';
 				secpass();
 			}, 1000);
-
+		}
+		else{
+			alert("Check your connection...");
+		}
 			function secpass() {
 				'use strict';
 				
@@ -220,8 +239,8 @@
 					//$("#resub").css("pointer-events", "none");
 					//$('#resub').css('opacity','0.4');
 					
-					$("#push-submit").css("pointer-events", "auto");
-					$('#push-submit').css('opacity','1');
+					$("#push-submit").css("pointer-events", "none");
+					$('#push-submit').css('opacity','0.4');
 					$("#push-submit-pause").css("pointer-events", "none");
 					$('#push-submit-pause').css('opacity','0.4');
 					$("#push-submit-stop").css("pointer-events", "none");
@@ -294,7 +313,7 @@
 				<div class="dashboard__container mb-3 d-flex flex-grow-1 align-items-center flex-column">
 					<h5>Actions</h5>
 					<ul class="list-unstyled m-0 d-flex flex-column align-items-center">
-						<li><a href="#">Issue Question</a></li>
+						<li><a href="#" id="issue">Issue Question</a></li>
 						<li><a href="#">Edit Question</a></li>
 						<li><a href="#">Share Answer</a></li>
 						<li class="p-0"><a href="#">Next Question</a></li>
