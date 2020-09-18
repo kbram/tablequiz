@@ -34,6 +34,7 @@
 			timeon=parseInt(splity[0])*60+parseInt(splity[1]);
 			//alert(timeon);
 			var y=timeon;
+
 			var sec= y,
 			countDiv    = document.getElementById("b"),
 			secpass;
@@ -188,7 +189,11 @@ $('#'+id_correct).prop("checked", true);
 			//$("#timer").html(sessionStorage.getItem("nowtimeon"));
 			var x=sessionStorage.getItem("nowtimeon");
 			x=x.slice(1,-1);
-			$("#timer").html(x);
+			if(x=="ul"){
+				$("#timer").html("00:00");
+			}else{
+				$("#timer").html(x);
+			}
 			swal("Question stoped!",'articipants can not submit..', "warning")
 			//pl=true;
 		}
@@ -212,17 +217,22 @@ $('#'+id_correct).prop("checked", true);
 			
 			y=document.getElementById("timer").textContent;
 			//alert(y);
-			
-			var splity=y.split(":");
-			y=parseInt(splity[0])*60+parseInt(splity[1]);
+			if(y!="00:00"){
 
-			var sec= y,
-			countDiv    = document.getElementById("timer"),
-			secpass;
-			countDown   = setInterval(function () {
-				'use strict';
-				secpass();
-			}, 1000);
+				
+				var splity=y.split(":");
+				y=parseInt(splity[0])*60+parseInt(splity[1]);
+
+				var sec= y,
+				countDiv    = document.getElementById("timer"),
+				secpass;
+				countDown   = setInterval(function () {
+					'use strict';
+					secpass();
+				}, 1000);
+			}else{
+				$(".timer").html("Not set");
+			}
 		}
 		else{
 			swal("Check your connection...!",'Please check your internet connection', "danger")

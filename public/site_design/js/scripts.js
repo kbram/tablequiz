@@ -366,7 +366,10 @@ $('#login-btn').click(function(e) {
 		})
 	});
     
-	var clicked = 0;
+    var clicked = 0;
+    $('#cll').click(function(){  
+        clicked = 0;
+    });
     $('#category__chosen__next, .suggested_category__icon').click(function(){  
 		setTimeout(function(){ 
 			clicked += 1;
