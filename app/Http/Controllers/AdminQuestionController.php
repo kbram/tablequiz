@@ -21,7 +21,7 @@ class AdminQuestionController extends Controller
 
     public function create()
     { 
-      
+      $cat_name=[];
       $categories = QuizCategory::all();
       $questions = DB::table('global_questions')->paginate(10);
       if($questions->isEmpty()){

@@ -39,7 +39,7 @@ $(document).ready(function() {
         },
         error: function(result,error) {
             
-         alert('error');
+       
         
         },
 

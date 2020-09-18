@@ -65,7 +65,7 @@ class QuizController extends Controller
         $answers = GlobalAnswer::all();
         $medias = GlobalQuestionMedia::all();
         $question = GlobalQuestion::where('id',1)->get();
-
+        
         $validator = Validator::make($request->all(),
         [
           'quiz__name'                => 'required|unique:quizzes',
@@ -537,8 +537,9 @@ $round_image->save();
       $quizId=request()->quizId;
       $type=request()->type;
       $time=request()->time;
-      $text=$question."#^".$answer."#^".$media."#^".$answerId."#^".$questionId."#^".$roundId."#^".$quizId."#^".$type."#^".$time;
-      event(new FormSubmitted($text));
+      $t = [$question,$answer,$media,$answerId,$questionId,$roundId,$quizId,$type,$time];
+      //$text=$question."#^".$answer."#^".$media."#^".$answerId."#^".$questionId."#^".$roundId."#^".$quizId."#^".$type."#^".$time;
+      event(new FormSubmitted($t));
       return redirect()->back();
     }
     public function stop_quiz()

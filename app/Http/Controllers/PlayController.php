@@ -157,63 +157,81 @@ public function answer(Request $request){
         $quiz_id = $request->input('quiz');
         $round_id = $request->input('round');
         $question_id = $request->input('question');
+        $user_answer_id = $request->input('answer_id');
         $user_answer = $request->input('answer');
+        $type = $request->input('type');
+
         $user=Session::get('teamname');
-        $text=$user."#^".$user_answer;
-        event(new FormSubmittedStu($text));
+        
         
 
-        $correct_answer = Answer::where('question_id',$question_id)->where('status',1)->first()->id;
         $quiz = Quiz::find($quiz_id);
         $roundCount=$quiz->rounds()->count();
         $round = QuizRound::find($round_id);
         $question = Question::find($question_id);
         $answers = Answer::where('question_id',$question_id)->get();
 
-        $session_key = $quiz_id."-".$round_id."-".$question_id;
-        $session_key_wrong = $quiz_id."-".$question_id;
+        $team_answer = new TeamAnswer ;
+    if($type == 1){
+        $correct_answer = Answer::where('question_id',$question_id)->where('status',1)->first()->id;
+        if($correct_answer == $user_answer_id){
+            $status =  1;
+        }
+        else{
+            $status =  0;
+
+        }
+        $team_answer -> status = $status;
+        $text=$user."#^".$user_answer."#^".$status."#^".$type;
+        event(new FormSubmittedStu($text));
+
+
+    }
+    else{
+        $text=$user."#^".$user_answer."#^".''."#^".$type;
+        event(new FormSubmittedStu($text));
+
+    }
+        
+
+        // $session_key = $quiz_id."-".$round_id."-".$question_id;
+        // $session_key_wrong = $quiz_id."-".$question_id;
 
 
         //restric anothorise 
 
-        if(TeamAnswer::where('quiz_id',$quiz_id)
-                       ->where('question_id',$question_id)
-                       ->where('team_name',Session::get('teamname'))->first()){
-                        return view('play.play-quiz',compact('quiz','roundCount','round','question','answers'));    
+    //     if(TeamAnswer::where('quiz_id',$quiz_id)
+    //                    ->where('question_id',$question_id)
+    //                    ->where('team_name',Session::get('teamname'))->first()){
+    //                     return view('play.play-quiz',compact('quiz','roundCount','round','question','answers'));    
 
-                       }                       
-     else{
+    //                    }                       
+    //  else{
 
-        $team_answer = new TeamAnswer ;
+        
         
         $team_answer -> team_name = Session::get('teamname');
-        $team_answer -> answer_id = $user_answer ;
+        $team_answer -> answer_id = $user_answer_id ;
+        $team_answer -> answer = $user_answer;
+
         $team_answer -> question_id = $question_id ;
         $team_answer -> quiz_id = $quiz_id ;
         $team_answer -> round_id = $round_id;
  
         $team_answer -> save();
 
-   if($correct_answer == $user_answer){
+    $response = array(
+        'status' => 'Answer submitted for correction !'
+        
+       
+    );
+    return response()->json($response);
    
-    Session::put($session_key,$correct_answer);
-    Session::forget($session_key_wrong);
-
-
-    return view('play.play-quiz',compact('quiz','roundCount','round','question','answers'));    
-
-     }
      
-     else{
-        Session::forget($session_key);
-        Session::put($session_key_wrong,$user_answer); 
+    
 
 
-      return view('play.play-quiz',compact('quiz','roundCount','round','question','answers'));    
-    }
-
-
-    }
+    // }
 }
 
 }
