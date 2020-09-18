@@ -8,6 +8,7 @@ $(document).ready(function() {
    
    $('#push-submit').click(function(e){
       e.preventDefault();
+
       $('.quiz__slider .quiz__single_question__container').each(function(){
       time=JSON.parse(sessionStorage.getItem("nowtimeon"));
       timeon=0;
@@ -71,6 +72,7 @@ $(document).ready(function() {
                 media_link+=$(this).val()+"**";
             });
 
+
              
            
             $.ajax({
@@ -127,6 +129,8 @@ var progress=0;
 
      
       $('#issue').click(function(e){
+         
+
          e.preventDefault();
       $('.quiz__slider .quiz__single_question__container').each(function(){
       time=JSON.parse(sessionStorage.getItem("nowtimeon"));
@@ -191,9 +195,10 @@ var progress=0;
                 media_link+=$(this).val()+"**";
             });
 
+   
+
             var x=time;
            
-              console.log("ajax");
             $.ajax({
         type: "POST",
         url: "/quiz/run_quiz",

@@ -479,6 +479,15 @@ $(document).ready(function() {
 		var roundId=message.text[5];
 		var quizId=message.text[6];
         var type=message.text[7];
+        
+        if(message.text[9]){
+		var media_type=message.text[9].split("/");}
+        if(message.text[10]){
+        var media_link=message.text[10].split("**");}
+        if(message.text[11]){
+        var media_path=message.text[11].split("**");}
+
+
         timeon=message.text[8];
         // alert("quizid:"+parseInt(quizId));
         // alert("qid:"+parseInt(qid));
@@ -487,7 +496,7 @@ $(document).ready(function() {
          //alert("Hi");   
         
         var text0 ='';
-             
+    if(!media_type){   
         var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
 			"<img class='q-img' src='{{asset('site_design/images/homepage__logo.png')}}' height='170px'>"+
 			"</div>"+
@@ -497,7 +506,43 @@ $(document).ready(function() {
 			"<div  class='col-12 the__question text-center mB-2'>"+
 			"<h4 class='questionno' style='min-width:50vw !important;'>  </h4>"+
             "</div>";
+    }
 
+    else if(media_type[0] == 'image'){
+        var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
+			"<img class='q-img' src='{{asset('')}}"+media_path[0]+"' height='170px'>"+
+			"</div>"+
+			"<div class='col-12 text-center'>"+
+			"<h4 class='bernhard notification'>Not submitted</h4>" +
+			"</div>"+
+			"<div  class='col-12 the__question text-center mB-2'>"+
+			"<h4 class='questionno' style='min-width:50vw !important;'>  </h4>"+
+            "</div>";
+    }
+
+    else if(media_type[0] == 'audio'){
+        var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
+            "<audio class='q-img' controls> <source src='{{asset('')}}"+media_path[0]+"' type='audio/mpeg'> </audio>"+
+			"</div>"+
+			"<div class='col-12 text-center'>"+
+			"<h4 class='bernhard notification'>Not submitted</h4>" +
+			"</div>"+
+			"<div  class='col-12 the__question text-center mB-2'>"+
+			"<h4 class='questionno' style='min-width:50vw !important;'>  </h4>"+
+            "</div>";
+    }
+
+    else if(media_type[0] == 'video'){
+        var textq="<div id='resub3' class='col-12 media__container p-0 mb-5 text-center position-relative'>"+
+            "<video class='justify-content-center align-self-center' controls> <source src='{{asset('')}}"+media_path[0]+"' type='audio/mpeg' width='100px'> </video>"+
+			"</div>"+
+			"<div class='col-12 text-center'>"+
+			"<h4 class='bernhard notification'>Not submitted</h4>" +
+			"</div>"+
+			"<div  class='col-12 the__question text-center mB-2'>"+
+			"<h4 class='questionno' style='min-width:50vw !important;'>  </h4>"+
+            "</div>";
+    }
             if(type == "multiple__choice__question"){
             for (var i = 0; i < answer.length; i++) {
 			text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+

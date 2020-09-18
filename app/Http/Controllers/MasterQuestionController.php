@@ -270,7 +270,6 @@ public function add_round_question(Request $request)
     if ($request->hasFile('bg_image')) {
 
       $round_background = $request->file('bg_image');
-
       $filename = 'round_bg.'.$round_background->getClientOriginalExtension();  
       $save_path1 = '/storage/round_bg/'.$quiz_link.'/round_bg/';
 
@@ -297,7 +296,7 @@ public function add_round_question(Request $request)
 
      else{
 
-        $filename = 'homepage__logo.png'; 
+        $filename = 'round_back.jpg'; 
         $save_path1 = '/storage'; 
         $save_path = storage_path('app/public');
         $public_path = storage_path('app/public');
@@ -348,7 +347,7 @@ for($m=0; $m<count($question_types); $m++){
           // $path = $save_path . $filename;
           // $path_thumb    = $save_path_thumb . $filename;
     
-          $public_path = storage_path('app/public'). '/question/'.$question_image.'/question/'.$filename;
+          $public_path = '/storage/question/'.$question_image.'/question/'.$filename;
     
           //resize the image            
     
@@ -377,7 +376,7 @@ if ($request->hasFile($aud)) {
     // $path = $save_path . $filename;
     // $path_thumb    = $save_path_thumb . $filename;
 
-    $public_path = storage_path('app/public'). '/question/'.$question_image.'/question/'.$filename;
+    $public_path = '/storage/question/'.$question_image.'/question/'.$filename;
 
     //resize the image            
 
@@ -407,7 +406,7 @@ if ($request->hasFile($vid)) {
     // $path = $save_path . $filename;
     // $path_thumb    = $save_path_thumb . $filename;
 
-    $public_path = storage_path('app/public'). '/question/'.$question_image.'/question/'.$filename;
+    $public_path = '/storage/question/'.$question_image.'/question/'.$filename;
 
     //resize the image            
 
@@ -544,8 +543,10 @@ if(Session::has('question_video_link_'.$i)){
 if(Session::has('question_image_'.$i)){
     $question_media = new QuestionMedia ; 
     $question_media->question_id = $questinon_save->id;
+    
 
     $question_media ->public_path = Session::get('question_image_'.$i);
+
     $question_media ->media_type = "image";
     $question_media->save();
 }
@@ -553,7 +554,7 @@ if(Session::has('question_audio_'.$i)){
     $question_media = new QuestionMedia ; 
     $question_media->question_id = $questinon_save->id;
 
-    $question_media ->public_path = Session::get('question_image_'.$i);
+    $question_media ->public_path = Session::get('question_audio_'.$i);
     $question_media ->media_type = "audio";
     $question_media->save();
 }
@@ -561,7 +562,7 @@ if(Session::has('question_video_'.$i)){
     $question_media = new QuestionMedia ; 
     $question_media->question_id = $questinon_save->id;
 
-    $question_media ->public_path = Session::get('question_image_'.$i);
+    $question_media ->public_path = Session::get('question_video_'.$i);
     $question_media ->media_type = "video";
     $question_media->save();
 }

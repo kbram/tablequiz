@@ -350,15 +350,43 @@ $('#'+id_correct).prop("checked", true);
 					<div class="col">
 
 
-						<div class="quiz__slider">
+						<div class="quiz__slider ">
 						
 							@foreach($rounds as $round)
 							 @foreach($questions[$round->id] as $question)
 							<div class="quiz__single_question__container d-flex flex-column align-items-center">
 								<h4>Question</h4>
+
+						@if (count($medias[$question->id])>0) 
+
 								<div class="quiz__single_question__image">
-									<img src="{{asset('site_design/images/homepage__logo.png')}}" height='170px'>
+							
+								@foreach($medias[$question->id] as $media)
+								@if($media->media_type == 'image')
+
+									<img src="{{asset($media->public_path)}}" height='250px'>
+								@endif
+								@if($media->media_type == 'audio')
+								<audio controls>
+									<source src="{{asset($media->public_path)}}" type="audio/mpeg">
+								</audio>
+								@endif
+								@if($media->media_type == 'video')
+
+								<video controls>
+									<source src="{{asset($media->public_path)}}" type="video/mp4">
+								</video>
+								@endif
+								@endforeach
+
 								</div>
+
+						@else
+						<div class="quiz__single_question__image">
+						<img src="{{asset('site_design/images/homepage__logo.png')}}" height='180px'>						
+						</div>
+						@endif
+
 								<div class="quiz__single_question__qa text-center w-100">
 
 								

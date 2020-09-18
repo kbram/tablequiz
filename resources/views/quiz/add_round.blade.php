@@ -31,7 +31,7 @@
 <script src='jquery-3.2.1.min.js'></script> 
 
 <section class="container page__inner">
-<form id="add_round" action="/round" method="post" enctype="multipart/form-data" role="main">
+<form id="add_round" action="/round" method="post" enctype="multipart/form-data" role="main" >
 		 @csrf
 <div class="is_container row" >
 

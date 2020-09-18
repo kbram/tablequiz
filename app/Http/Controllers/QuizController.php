@@ -82,7 +82,6 @@ class QuizController extends Controller
         $link = $request->input('quiz__link');
 
         if ($request->hasFile('upload__quiz__icon')) {
-            // dd($request->hasFile('upload__quiz__icon'));
 
           $quiz_icon = $request->file('upload__quiz__icon');
 
@@ -92,13 +91,8 @@ class QuizController extends Controller
           $save_path = storage_path('app/public'). '/quizicon/'.$link.'/quiz_icon/';
           $save_path_thumb = storage_path('app/public').'/quizicon/'.$link.'/quiz_icon/'.'/thumb/';
 
-          // $path = $save_path . $filename;
-          // $path_thumb    = $save_path_thumb . $filename;
-
           $public_path = storage_path('app/public'). '/quizicon/'.$link.'/quiz_icon/'.$filename;
           $public_path_thumb= storage_path('app/public'). '/quizicon/'.$link.'/quiz_icon/'.'/thumb/'.$filename;
-
-          //resize the image            
 
           // Make the user a folder and set permissions
           File::makeDirectory($save_path, $mode = 0755, true, true);
@@ -111,13 +105,12 @@ class QuizController extends Controller
 
          } 
          else{
+
           $filename = 'homepage__logo.png'; 
           $save_path1 = '/storage'; 
           $save_path = storage_path('app/public');
           $public_path = storage_path('app/public');
           $public_path_thumb= storage_path('app/public').'/thumb';
-
-
 
          }
      
@@ -143,8 +136,8 @@ class QuizController extends Controller
   
             $quizIcon->save();
 
-           $cat = QuizCategory::all();
-           $quiz = $quiz->quiz_link;
+            $cat = QuizCategory::all();
+            $quiz = $quiz->quiz_link;
 
 
            return View('quiz.add_round', compact('categories','answers','medias','quiz'));
@@ -537,7 +530,11 @@ $round_image->save();
       $quizId=request()->quizId;
       $type=request()->type;
       $time=request()->time;
-      $t = [$question,$answer,$media,$answerId,$questionId,$roundId,$quizId,$type,$time];
+      $media_type = request()->media_type;
+      $media_link = request()->media_link;
+      $media_path = request()->media_path;
+
+      $t = [$question,$answer,$media,$answerId,$questionId,$roundId,$quizId,$type,$time,$media_type,$media_link,$media_path];
       //$text=$question."#^".$answer."#^".$media."#^".$answerId."#^".$questionId."#^".$roundId."#^".$quizId."#^".$type."#^".$time;
       event(new FormSubmitted($t));
       return redirect()->back();
