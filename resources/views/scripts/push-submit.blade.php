@@ -94,6 +94,7 @@ $(document).ready(function() {
          },
 
          });
+
          }
          
          
@@ -111,9 +112,12 @@ $(document).ready(function() {
       $('.progress_round_label').each(function(){
           round_count++;
       });
-     
       progress_divide/=round_count;
-        
+      progress_add= progress_divide;
+
+        console.log('progrss'+progress_divide);
+        console.log('progrss'+progress_add);
+    
     
    $('.quiz__slider .quiz__single_question__container').each(function(){
       
@@ -160,12 +164,13 @@ $(document).ready(function() {
              $('#round'+round_val).addClass('round_2');
            
                  if(progress!=Number(round_val)){
-                    $('#round-progress').css("width",progress_divide+'%');
-                     progress_divide+=progress_divide;
+                    $('#round-progress').css("width",progress_add+'%');
+                     progress_add+=progress_divide;
                      progress=Number(round_val);
+                     console.log('progrss if'+progress_add);
                   }
                  else{
-                    
+                  console.log('progrss else'+progress_add);
                  }
 
             var time =current.find('.question-timer').val();
