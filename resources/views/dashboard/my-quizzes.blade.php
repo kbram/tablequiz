@@ -48,6 +48,7 @@
 								</tr>
 							</thead>
 							<tbody id="users">
+							@if(!empty($quizzes))
 							@foreach($quizzes as $quiz)
 
 							<tr>
@@ -75,6 +76,9 @@
 										</a>
 										</td>
 										@endforeach
+										@else
+										<p>No quizzes created yet!</p>
+										@endif
 								</tr>
 								
 						</table>

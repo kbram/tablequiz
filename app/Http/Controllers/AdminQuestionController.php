@@ -24,14 +24,19 @@ class AdminQuestionController extends Controller
       
       $categories = QuizCategory::all();
       $questions = DB::table('global_questions')->paginate(10);
+      if($questions->isEmpty()){
+        
+        return view('admin.questions',compact('categories','questions'));
+       }
+       else{
+
        foreach($questions as $question){
             $cat_name[$question->id] = QuizCategory::where('id', $question->category_id)->value('category_name'); 
-       }
-    
+       }    
        
       return view('admin.questions',compact('categories','questions','cat_name'));
     }
-
+  }
     /**
      * Store a newly created resource in storage.
      *

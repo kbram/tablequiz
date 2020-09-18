@@ -16,6 +16,10 @@ class DashboardController extends Controller
   
     public function showMyQuizzes(){
        $quizzes=Auth::user()->quizzes()->get();
+       if($quizzes->isEmpty()){
+        return view('dashboard.my-quizzes');
+       }
+    else{
        
 
         foreach($quizzes as $quiz)
@@ -27,11 +31,14 @@ class DashboardController extends Controller
         }
         
         return view('dashboard.my-quizzes',compact('quizzes','roundCount','questionCounts'));
-    }
+    }}
 
     public function index(){
         $quizzes=Auth::user()->quizzes()->get();
-            
+        if($quizzes->isEmpty()){
+            return view('dashboard.home');
+           }
+        else{   
         foreach($quizzes as $quiz)
         { 
 
@@ -41,7 +48,7 @@ class DashboardController extends Controller
         }
 
         return view('dashboard.home',compact('quizzes','roundCount','questionCounts'));
-    }
+    }}
 
     public function myQuiz(){
         return view('dashboard.my-quizzes');

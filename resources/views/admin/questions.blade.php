@@ -79,6 +79,7 @@
 
 								<select name="category__type" id="category__type" class="form-control" >
 							    <option value="{{(old('category__type') ?? '')}}" selected >{{(old('category__type') != '' ? old('category__type') : 'Please Choose...')}}</option>
+
                                 @foreach($categories as $category)
 						           <option value="{{$category->category_name }}" value="show">{{ $category->category_name }}</option>
 								@endforeach
@@ -365,9 +366,8 @@
 								</tr>
 							</thead>
 							<tbody id="questions_table">
-							
-							@foreach($questions as $question)
-							
+							@if(!empty($questions))
+							@foreach($questions as $question)						
 
 							<tr>	
 								<td>{{$question->question}}</td>  
@@ -388,12 +388,14 @@
 								</form>
 								</td>
 							</tr>
-							 @endforeach
-							
-								 
+							@endforeach
+							@else
+							<tr><p>No questions to show </p></tr>
+						    @endif	
+	 
 							</tbody>
 								
-							<tbody id="questions_table"></tbody>
+							<!-- <tbody id="questions_table"></tbody> -->
 							@if(config('usersmanagement.enableSearchUsers'))
 								<tbody id="search_results"></tbody>
 							@endif

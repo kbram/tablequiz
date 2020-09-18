@@ -76,7 +76,7 @@
 								</tr>
 							</thead>
 							<tbody id="users_table">
-
+						        	@if(!empty($users))
 								   @foreach($users as $user)
 								   @if ($user->is_blocked)
 								<tr>
@@ -139,8 +139,13 @@
 								</tr>
 
 
-                                @endif  
+                                @endif 								 
 								@endforeach
+								@else
+								<tr>
+								<p>No users to show</p>
+								</tr>
+								@endif
 							</tbody>
 							<tbody id="users_table"></tbody>
 							@if(config('usersmanagement.enableSearchUsers'))
