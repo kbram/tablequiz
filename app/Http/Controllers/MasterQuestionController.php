@@ -78,7 +78,7 @@ class MasterQuestionController extends Controller
          if($id){
             $ans=[];
             $medias=[];
-            $ques=GlobalQuestion::where('category_id',$id)->where('question_type','standard')->get();
+            $ques=GlobalQuestion::where('category_id',$id)->where('question_type','standard__question')->get();
             foreach($ques as $que){
                
                  $ans[]=GlobalAnswer::where('question_id',$que->id)->get();
@@ -111,7 +111,7 @@ class MasterQuestionController extends Controller
             $ques=GlobalQuestion::where('category_id',$id)->get();
              foreach($ques as $que){
                  $ans[]=GlobalAnswer::where('question_id',$que->id)->get();
-                 $medias[]=GlobalQuestionMedia::where('question_id',$que->id)->where('media_type','image-based')->get(); 
+                 $medias[]=GlobalQuestionMedia::where('question_id',$que->id)->where('media_type','Image')->get(); 
                 
              }
            
@@ -136,7 +136,7 @@ class MasterQuestionController extends Controller
             $ques=GlobalQuestion::where('category_id',$id)->get();
              foreach($ques as $que){
                  $ans[]=GlobalAnswer::where('question_id',$que->id)->get();
-                 $medias[]=GlobalQuestionMedia::where('question_id',$que->id)->where('media_type','image-based')->get(); 
+                 $medias[]=GlobalQuestionMedia::where('question_id',$que->id)->where('media_type','Audio')->get(); 
 
              }
             $response = array(
@@ -158,7 +158,7 @@ class MasterQuestionController extends Controller
             $ques=GlobalQuestion::where('category_id',$id)->get();
              foreach($ques as $que){
                  $ans[]=GlobalAnswer::where('question_id',$que->id)->get();
-                 $medias[]=GlobalQuestionMedia::where('question_id',$que->id)->where('media_type','image-based')->get(); 
+                 $medias[]=GlobalQuestionMedia::where('question_id',$que->id)->where('media_type','Video')->get(); 
              }
              
             $response = array(
