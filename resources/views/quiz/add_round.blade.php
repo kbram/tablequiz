@@ -56,7 +56,12 @@
 					<label for="round__name">Round name</label>
 				</div>
 				<div class="col-md-8">
-					<input autocomplete="nothanks" type="text" name="round_name"  class="form-control">
+					<input autocomplete="nothanks" type="text" name="round_name"  class="form-control" required>
+					@if ($errors->has('round_name'))
+						<span class="help-block">
+							<p class="alert alert-danger text-center">{{ $errors->first('round_name') }}</p>
+						</span>
+					@endif
 					<input hidden autocomplete="nothanks" type="text" name="round_count" class="form-control" value="{{$round_count ?? '1'}}">
 					<input hidden autocomplete="nothanks" type="text" name="quiz" class="form-control" value="{{$quiz}}">
 
