@@ -215,7 +215,6 @@ $('#login-btn').click(function(e) {
     })
     $('select#question__type').on('change',function(){
 		if($(this).val() == "numeric__question"){
-            console.log("manchu");
 			$('#standard__answer').removeClass('d-flex').addClass('d-none');
 			$('#multiple__choice__legend').removeClass('d-flex').addClass('d-none');
 			$('#multiple__choice__answer').removeClass('d-flex').addClass('d-none');

@@ -14,6 +14,13 @@ class TeamAnswer extends Model
 
     protected $fillable = [
         'team_name',
+        'status',
+        'status',
+        'answer',
+        'answer_id',
+        'round_id',
+
+
         'quiz_id',
         'question_id'
         

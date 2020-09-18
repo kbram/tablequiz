@@ -4,8 +4,100 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 <script>
+	var time=JSON.parse(sessionStorage.getItem("nowtimeon"));
+	
+    var timeon=0;
+	var p=JSON.parse(sessionStorage.getItem("play"))
+	var pl= true;
+	if(p==null){
+		pl= true;
+	}else{
+		pl=p;
+	}
+	
+	
+	var countDown;
+	$(document).ready(function(){
+		
+		if(time!=null){
+			
+			$("#push-submit-pause").css("pointer-events", "auto");
+			$('#push-submit-pause').css('opacity','1');
+			$("#push-submit-stop").css("pointer-events", "auto");
+			$('#push-submit-stop').css('opacity','1');
+			$("#push-submit").css("pointer-events", "none");
+			$('#push-submit').css('opacity','0.4');
+			//pl=false;
+			var splity=time.split(":");
+			timeon=parseInt(splity[0])*60+parseInt(splity[1]);
+			//alert(timeon);
+			var y=timeon;
+			var sec= y,
+			countDiv    = document.getElementById("b"),
+			secpass;
+			countDown   = setInterval(function () {
+				'use strict';
+				secpass1();
+			}, 1000);
 
+			function secpass1() {
+				'use strict';
+				if(p==false){
+					clearInterval(countDown);
+					$("#push-submit-pause").css("pointer-events", "none");
+					$('#push-submit-pause').css('opacity','0.4');
+					
+					$("#push-submit").css("pointer-events", "auto");
+					$('#push-submit').css('opacity','1');
+				}
+				var min     = Math.floor(sec / 60),
+					remSec  = sec % 60;
+				
+				if (remSec < 10) {
+					
+					remSec = '0' + remSec;
+				
+				}
+				if (min < 10) {
+					
+					min = '0' + min;
+				
+				}
+				
+				$("#timer").html(min + ":" + remSec);
+				sessionStorage.setItem("nowtimeon", JSON.stringify(min + ":" + remSec));
+				
+				if (sec > 0) {
+					
+					sec = sec - 1;
+					
+				} else {
+					
+					clearInterval(countDown);
+					$("#timer").html("Finished");
+					sessionStorage.setItem("nowtimeon", null);
+					sessionStorage.setItem("play", true);
+					
+					//$("#resub").css("display", "none");
+					//tyle="opacity: 0.4;
+					//
+
+					$('#resub').css('cursor','not-allowed');
+					$("#resub").css("pointer-events", "none");
+					$('#resub').css('opacity','0.4');
+					
+				}
+			}
+		}else{
+				$("#push-submit-pause").css("pointer-events", "none");
+				$('#push-submit-pause').css('opacity','0.4');
+				$("#push-submit-stop").css("pointer-events", "none");
+				$('#push-submit-stop').css('opacity','0.4');
+			
+		}
+	});	
 	// Enable pusher logging - don't include this in production
+	
 	Pusher.logToConsole = true;
 
 	var pusher = new Pusher('87436df86baf66b2192a', {
@@ -19,102 +111,138 @@
 		var m0 = message.replace('{"text":"','');
 		var m0 = m0.replace('"}','');
 		var m=m0.split("#^");
+var status = m[2];
+console.log(status);
+ 
 
-		var text="<tr><td>"+m[0]+"</td><td>"+m[1]+"</td><td><input type='radio' name='correct_answer_1' value='correct'></td><td><input type='radio' name='correct_answer_1' value='incorrect'></td></tr>";
+var id_correct = m[0]+"1";
+var id_wrong = m[0]+"0";
+
+console.log(status);
+
+		var text="<form>"+"<tr><td>"+m[0]+"</td><td>"+m[1]+"</td><td><input type='radio' id="+id_correct+" name='correct_answer_1' value='correct'></td><td><input type='radio' name='correct_answer_1' id="+id_wrong+" value='incorrect'></td></tr>"+"</form>";
 		$(text).appendTo($("#all-answer"));
+
+if(status){
+		if(Number(status) == 1){
+$('#'+id_correct).prop("checked", true);
+			console.log("correct");
+		}
+		else if(Number(status) == 0){
+			$('#'+id_wrong).prop("checked", true);
+
+			console.log("not correct");
+		}
+	}
+		
 		//$('#all-answer tbody').append(text);
 	});
 	//var x=1;
-	var pl= true;
-	var countDown;
-	$(document).ready(function(){
-		$("#push-submit-pause").css("pointer-events", "none");
-		$('#push-submit-pause').css('opacity','0.4');
-		$("#push-submit-stop").css("pointer-events", "none");
-		$('#push-submit-stop').css('opacity','0.4');
-	});	
+	
+	
 	function pause() {
 		clearInterval(countDown);
+		sessionStorage.setItem("play", true);
 		$("#push-submit").css("pointer-events", "auto");
 		$('#push-submit').css('opacity','1');
 		$("#push-submit-pause").css("pointer-events", "none");
 		$('#push-submit-pause').css('opacity','0.4');
-		pl=true;
+		//pl=true;
 	}
 
 	function stop() {
 		clearInterval(countDown);
+		sessionStorage.setItem("play", true);
+		
+		//sessionStorage.setItem("nowtimeon", null));
+		
 		$("#push-submit").css("pointer-events", "auto");
 		$('#push-submit').css('opacity','1');
 		$("#push-submit-pause").css("pointer-events", "none");
 		$('#push-submit-pause').css('opacity','0.4');
 		$("#push-submit-stop").css("pointer-events", "none");
 		$('#push-submit-stop').css('opacity','0.4');
-		$("#timer").html("Finshed");
+		//$("#timer").html(sessionStorage.getItem("nowtimeon"));
+		var x=sessionStorage.getItem("nowtimeon");
+		x=x.slice(1,-1);
+		$("#timer").html(x);
+		alert("Stoped");
+		//pl=true;
 	}
 	function play() {
-		if(pl==true){
-			$("#push-submit-pause").css("pointer-events", "auto");
-			$('#push-submit-pause').css('opacity','1');
-			$("#push-submit-stop").css("pointer-events", "auto");
-			$('#push-submit-stop').css('opacity','1');
-			$("#push-submit").css("pointer-events", "none");
-			$('#push-submit').css('opacity','0.4');
-			pl=false;
-		}
+		
+		$("#push-submit-pause").css("pointer-events", "auto");
+		$('#push-submit-pause').css('opacity','1');
+		$("#push-submit-stop").css("pointer-events", "auto");
+		$('#push-submit-stop').css('opacity','1');
+		$("#push-submit").css("pointer-events", "none");
+		$('#push-submit').css('opacity','0.4');
+		//sessionStorage.setItem("play", false);
+		//pl=false;
+		
 		y=document.getElementById("timer").textContent;
-		var splity=y.split(":");
-		y=parseInt(splity[0])*60+parseInt(splity[1]);
-
-		var sec= y,
-		countDiv    = document.getElementById("timer"),
-		secpass;
-		countDown   = setInterval(function () {
-			'use strict';
-			secpass();
-		}, 1000);
-
-		function secpass() {
-			'use strict';
-			
-			var min     = Math.floor(sec / 60),
-				remSec  = sec % 60;
-			
-			if (remSec < 10) {
-				
-				remSec = '0' + remSec;
-			
-			}
-			if (min < 10) {
-				
-				min = '0' + min;
-			
-			}
-			
-			$("#timer").html(min + ":" + remSec);
-			
-			if (sec > 0) {
-				
-				sec = sec - 1;
-				
-			} else {
-				
-				clearInterval(countDown);
-
-				$("#timer").html("Finshed");
-				//$("#resub").css("display", "none");
-				//tyle="opacity: 0.4;
-				//
-
-				///$('#resub').css('cursor','not-allowed');
-				//$("#resub").css("pointer-events", "none");
-				//$('#resub').css('opacity','0.4');
-				
-				$("#push-submit").css("pointer-events", "auto");
-				$('#push-submit').css('opacity','1');
-				pl=true;
-			}
+		//alert(y);
+		if(y=="Finished"){
+			y=sessionStorage.getItem("Ltimeon");
+		}else{
+		sessionStorage.setItem("Ltimeon", y);
 		}
+			var splity=y.split(":");
+			y=parseInt(splity[0])*60+parseInt(splity[1]);
+
+			var sec= y,
+			countDiv    = document.getElementById("timer"),
+			secpass;
+			countDown   = setInterval(function () {
+				'use strict';
+				secpass();
+			}, 1000);
+
+			function secpass() {
+				'use strict';
+				
+				var min     = Math.floor(sec / 60),
+					remSec  = sec % 60;
+				
+				if (remSec < 10) {
+					
+					remSec = '0' + remSec;
+				
+				}
+				if (min < 10) {
+					
+					min = '0' + min;
+				
+				}
+				
+				$("#timer").html(min + ":" + remSec);
+				sessionStorage.setItem("nowtimeon", JSON.stringify(min + ":" + remSec));
+				if (sec > 0) {
+					
+					sec = sec - 1;
+					
+				} else {
+					
+					clearInterval(countDown);
+					sessionStorage.setItem("nowtimeon", null);
+					sessionStorage.setItem("play", true);
+					$("#timer").html(sessionStorage.getItem("Ltimeon"));
+					alert("Finished");
+					//$("#resub").css("display", "none");
+					//tyle="opacity: 0.4;
+					//
+
+					///$('#resub').css('cursor','not-allowed');
+					//$("#resub").css("pointer-events", "none");
+					//$('#resub').css('opacity','0.4');
+					
+					$("#push-submit").css("pointer-events", "auto");
+					$('#push-submit').css('opacity','1');
+					pl=true;
+					sessionStorage.setItem("play", true);
+				}
+			}
+		
 	}
 </script>
 <section class="container page__inner dashboard">
@@ -124,12 +252,12 @@
 
 			<div class="offset-lg-3 col-lg-9 px-5">
 				<div class="progress position-relative">
-					<div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+					<div id="round-progress" class="progress-bar" role="progressbar" style="" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
 					<div class="rounds position-absolute d-flex justify-content-between">
 						
 					@for($i=0; count($rounds)>$i; $i++)
-						<div class="progress_round_label round_{{$i+1}}">
-							<span>Round {{$i+1}}</span>
+						<div id="round{{$rounds[$i]->id}}" class="progress_round_label">
+							<span>Round {{$i+1}} </span>
 						</div>
 					@endfor
 					
