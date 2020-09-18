@@ -413,11 +413,18 @@
 				<div class="modal-dialog" role="document">
 					<div class="modal-content pb-4">
 
-						<div class="modal-header justify-content-center border-0">
-							<h1 class="modal-title" id="suggestedQuestionsHeading">Suggested Questions</h1>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
+						<div class="modal-header  border-0 row">
+							<div class="col-sm-2">
+								<button type="button" id="suggested__modal__back" class="p-2" style="background-color: transparent;float:left;padding: 0;border: 0;">
+									<i class="fas fa-angle-left"></i>
+								</button>
+							</div>
+							<div class="col-sm-8"><h1 class="modal-title " align="center" id="suggestedQuestionsHeading">Suggested Questions</h1></div>
+							<div class="col-sm-2">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
 						</div>
 						<div class="modal-body categories d-flex w-100 pb-4">
 							<div class="row suggested__categories px-3 w-100 no-gutters">
