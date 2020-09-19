@@ -137,7 +137,11 @@ console.log(status);
 		// var text="<tr><td>"+m[0]+"</td><td>"+m[1]+"</td><td><form><input type='radio' id="+id_correct+" name='correct_answer_1' value='correct'><input type='radio' name='correct_answer_1' id="+id_wrong+" value='incorrect'></form></td><td></td></form></tr>";
 		
 		var text = "<hr> <div class='row container h-25 align-items-center justify-content-center'> <p class='col-md-4 pb-0 text-center'>"+m[0]+"</p> <input  type='text' name='team[]' hidden class='col-md-4 pb-0 text-center' value="+m[0]+"><input  type='text' name='quiz/"+m[0]+"' hidden class='col-md-4 pb-0 text-center' value="+m[4]+"><input  type='text' name='round/"+m[0]+"' hidden class='col-md-4 pb-0 text-center' value="+m[6]+"><input  type='text' name='question/"+m[0]+"' hidden class='col-md-4 pb-0 text-center' value="+m[5]+"> <p class='col-md-4 pb-0 text-center'>"+m[1]+"</p> <div class='col-md-4 pb-0 text-center '> <div class='row d-flex'> <input type='radio' id="+id_correct+" name='status/"+m[0]+"' value=1 class='col-md-6 py-0 text-muted text-center'> <input type='radio' name='status/"+m[0]+"' id="+id_wrong+" value=0 class='col-md-6 py-0 text-muted text-center'> </div> </div> </div>"
+		var id =current.find('.question-id').val();
+		alert(id);
+		alert(m0[4]);
 		$(text).appendTo($("#all-answer_submit"));
+
 		console.log(text);
 
 if(status){
