@@ -170,14 +170,17 @@
 				
 				
 				
-<!-- END -->				
+<!-- END -->			
 				<div class="form-row form-footer">
 					<div class="text-center offset-md-4 col-md-4">
-						<input class="d-block btn btn-primary hasArrow" type="submit" value="Next">
+						<input class="d-block btn btn-success hasArrow" type="submit" value="Save">
 					</div>
 				</div>
 			</form>
-			
+
+	      <div class="text-center offset-md-4 col-md-4">
+						<a href="/round/edit/{{$quiz->id}}" class="btn btn-primary d-block">Edit Round</a>
+				</div>
 		</article>
 	</div>
 	
