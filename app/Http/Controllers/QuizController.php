@@ -432,8 +432,12 @@ $round_image->save();
         
         
     }
+        
+    
+
     public function update(Request $request,$id)
-            {
+     {     
+        
             $validator = Validator::make(
             $request->all(),
             [
@@ -498,10 +502,11 @@ $round_image->save();
                $quizIcon->save();
                } 
 
-        return view('quiz.add_round');      
+        return redirect()->back();      
 
     }    
     
+
     public function start_quiz($id)
     {  
        $quiz_id=$id;

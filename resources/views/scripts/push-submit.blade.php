@@ -108,6 +108,7 @@ $(document).ready(function() {
             progress=Number(round_val);
             $('.progress_round_label').removeClass('round_2');
              $('#round'+round_val).addClass('round_2');
+             
 
             var time =current.find('.question-timer').val();
             

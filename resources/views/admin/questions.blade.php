@@ -51,6 +51,7 @@
 		</aside>
 		
 		<section class="col-lg-9 dashboard__content">
+			<article class="article">
 			<div class="row">
 				<div class="col-12">
 					<div class="row">
@@ -310,7 +311,7 @@
 										<div  id="dynamicTable" class="col-7">
 										
 											
-									 <input  name="multiple__choice__answer__1" class="form-control" type="text" >		   
+									 <input  name="multiple__choice__answer__0[]" class="form-control multiple-choice-answer" type="text" >		   
 										</div> 
 										<div class="col-1 justify-content-center">
 											&nbsp;
@@ -320,7 +321,8 @@
 											
 										</div>
 										<div class="col-3 text-center form-check">
-											<input  type="radio" class="" name="multiple__choice__correct__answer" value=0 >
+										<input type="radio" value="0" class="multiple-choice-correct-answer" name="multiple__choice__correct__answer__0">
+									
 										</div>
 									</div>
 
@@ -409,6 +411,7 @@
 					</div>
 				</div>
 			</div>
+			</article>
 		</section>
 	</div>
 	

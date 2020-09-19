@@ -190,6 +190,14 @@ Route::post('round/store', 'QuizRoundController@store');
 Route::get('round/edit', 'QuizRoundController@edit');
 Route::get('round/show', 'QuizRoundController@show');
 Route::post('round/upload', 'QuizRoundController@upload');
+
+Route::get('round/edit/{id}', 'QuizRoundController@new_edit');
+Route::get('round_ques_list/edit/{name}/{id}', 'QuizRoundController@round_ques_list_edit');
+Route::get('round_question/edit/{id}', 'MasterQuestionController@edit');
+Route::post('question/upload/{id}', 'MasterQuestionController@upload');
+Route::post('round/upload/{id}', 'QuizRoundController@round_upload');
+
+
 Route::get('about_us',function(){
     return view('about_us');
 });

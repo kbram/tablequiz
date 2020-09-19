@@ -10,6 +10,7 @@ use App\Models\Quiz;
 use File;
 use Image;
 use Auth;
+use DB;
 use App\Models\QuizSetupIcon;
 use App\Models\QuizRoundImage;
 use App\Models\QuestionMedia;
@@ -18,6 +19,7 @@ use App\Models\QuizCategory;
 use App\Models\GlobalQuestionMedia;
 use App\Models\GlobalQuestion;
 use App\Models\GlobalAnswer;
+
 
 class MasterQuestionController extends Controller
 {
@@ -29,6 +31,110 @@ class MasterQuestionController extends Controller
         $medias = GlobalQuestionMedia::all();
         $question = GlobalQuestion::where('id',1)->get();
         return View('quiz.add_round', compact('categories','answers','medias'));
+    }
+  
+
+     /**kopi question edit */
+    public function edit(Request $request,$id){
+        
+        $cat_name=[];
+      $categories = QuizCategory::all();
+       $question=Question::where('id',$id)->first();
+       $answers=Answer::where('question_id',$question->id)->get();
+       $question_type=$question->question_type;
+        
+      return view('quiz.edit_question',compact('categories','question','cat_name','answers','question_type'));
+        
+    }
+    /**kopi question edit uploade */
+    public function upload(Request $request,$id){
+       
+        $question = Question::findorfail($id); 
+         if($request->question){
+            $question->question = $request->question; 
+           
+         }
+         
+         if($request->question__type){
+            $question->question_type = $request->question__type;
+            
+         }
+        if($request->time__limit){
+            $question->time_limit = $request->time__limit; 
+            
+         }
+         $question->save();
+
+         if($request->numeric__question__answer){
+            $answer=Answer::findorfail($request->numeric__question__answer_id);
+            $answer->answer=$request->numeric__question__answer;
+            $answer->save();
+         }
+         if($request->standard__question__answer){
+            $answer=Answer::findorfail($request->standard__question__answer_id);
+            $answer->answer=$request->standard__question__answer;
+            $answer->save();
+         }
+         if($request->multiple__choice__answer){
+          
+           $i=0;
+            foreach($request->multiple__question__answer_id as $ans_id){
+                
+                $answer=Answer::findorfail($ans_id);
+                $answer->answer=$request->multiple__choice__answer[$i];
+                $i++;
+                $answer->save();
+            }
+         }
+         if($request->multiple__choice__correct__answer){
+            $answer=Answer::findorfail($request->multiple__choice__correct__answer);
+            $answer->status=1;
+            $answer->save();
+         }
+        
+             // Image Media 
+        if($request->hasFile('image_media')) {
+            if(GlobalQuestionMedia::where('question_id',$id)->where('media_type','Image')->first()){
+            
+                 $image_media = $request->file('image_media'); 
+                 $file_name = 'image_media.'.$image_media->getClientOriginalExtension();
+                 $save_path = storage_path('app/public'). '/global_questions/'.$id.'/image_media/';
+                 $path = $save_path.$file_name;
+                 $public_path = '/global_questions/image_media/'.$id.'/image_media/'.$file_name;
+              
+                 File::makeDirectory($save_path, $mode = 0755, true, true);
+                  $image_media->move($save_path, $file_name);      
+                
+                 $media_image =  GlobalQuestionMedia::where('question_id',$id)->where('media_type','Image')->first();
+               
+                 $media_image->media_type        = "Image";
+                 $media_image->public_path       = $public_path;
+                 $media_image->local_path        = $save_path . '/' . $file_name;
+                 $media_image->question_id       = $id;
+                
+                $media_image->save();
+            }
+         
+              else {
+                  $image_media = $request->file('image_media'); 
+                  $file_name = 'image_media.'.$image_media->getClientOriginalExtension();
+                  $save_path = storage_path('app/public'). '/global_questions/'.$id.'/image_media/';
+                  $path = $save_path.$file_name;
+                  $public_path = '/global_questions/image_media/'.$id.'/image_media/'.$file_name;
+               
+                  File::makeDirectory($save_path, $mode = 0755, true, true);
+                  $image_media->move($save_path, $file_name);      
+               
+                  $media_image = new GlobalQuestionMedia;
+                  $media_image->media_type        = "Image";
+                  $media_image->public_path       = $public_path;
+                  $media_image->local_path        = $save_path . '/' . $file_name;
+                  $media_image->question_id       = $id;
+                  $media_image->save();
+           }
+      }
+           
+           return redirect()->back();
     }
 
 
@@ -74,7 +180,6 @@ class MasterQuestionController extends Controller
 
     public function standard(Request $request,$id)
     {   
-    
          if($id){
             $ans=[];
             $medias=[];
