@@ -2142,7 +2142,7 @@ label[for="upload__category__image"].orange_text:hover {
 }
 
 input[name="quiz"] {
-    background-image: url("../images/search.png");
+    background-image: url("/site_design/images/search.png");
     background-position: calc(100% - 5px) center;
     background-size: 24px;
     background-repeat: no-repeat;
@@ -2223,7 +2223,7 @@ input[name="quiz"] {
 
 select {
     -webkit-appearance: none;
-    background-image: url(../images/down__arrow.png);
+    background-image: url(/site_design/images/down__arrow.png);
     background-size: 15px;
     background-repeat: no-repeat;
     background-position: 95%;
