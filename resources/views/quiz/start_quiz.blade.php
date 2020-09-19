@@ -451,23 +451,12 @@ $('#'+id_correct).prop("checked", true);
 							</tr>
 						</thead>
 						<tbody >
+						@foreach($teams as $team)
 							<tr>
-								<td>SenanCronin2020</td>
-								<td>100</td>
+								<td>{{$team}}</td>
+								<td>{{$points[$team]}}</td>
 							</tr>
-							<tr>
-								<td>SenanCronin2020</td>
-								<td>100</td>
-							</tr>
-							<tr>
-								<td>SenanCronin2020</td>
-								<td>100</td>
-							</tr>
-							<tr>
-								<td>SenanCronin2020</td>
-								<td>100</td>
-							</tr>
-
+						@endforeach
 						</tbody>
 
 					</table>

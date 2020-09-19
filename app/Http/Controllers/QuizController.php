@@ -499,9 +499,13 @@ $round_image->save();
     
     public function start_quiz($id)
     {  
+$points = [];
+        $teams = TeamAnswer::groupBy('team_name')->pluck('team_name');
+        foreach($teams as $team){
+            $points[$team]=TeamAnswer::where('team_name',$team)->where('status',1)->count();
+            
+              }
 
-        // $teams = TeamAnswer::get('team_name');
-        // dd($teams);
        $quiz_id=$id;
        $questions=[];
        $answers=[];
@@ -521,7 +525,7 @@ $round_image->save();
     
     }  
       
-        return view('quiz.start_quiz',compact('questions','answers','rounds','quiz_id','medias'));
+        return view('quiz.start_quiz',compact('questions','answers','rounds','quiz_id','medias','teams','points'));
     }
 
     public function run_quiz()
