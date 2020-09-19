@@ -9,14 +9,14 @@ $(document).ready(function() {
          var hidden=current.attr('aria-hidden');
          if(hidden=="false"){
             question_id=current.find('.question-id').val();
-            
+            round_id=current.find('.question-round').val();
          }
 
    });
 console.log('id'+question_id);
         $.ajax({
         type: "POST",
-        url: "/ajax/team_result/"+question_id,
+        url: "/ajax/team_result/"+round_id,
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
         data:{
             
@@ -24,7 +24,10 @@ console.log('id'+question_id);
         success: function(data) {
         //        var que=data.msg;
         //   var ans=data.ans;
+        console.log('round'+data.count);
+         var cn=data.count;
         $("#all-answer_submit").html('');
+        for( var i=0; i<cn; i++){
         var text ='<hr>'
                    +'<div class="row container h-25 align-items-center justify-content-center">'+
            '<p class="col-md-4 pb-0 text-center">"User"</p> '+
@@ -38,7 +41,7 @@ console.log('id'+question_id);
          '<input type="radio" name="status/"+m[0]+" id="+id_wrong+" value=0 class="col-md-6 py-0 text-muted text-center"> '+
          '</div> </div> </div>';
 		$(text).appendTo($("#all-answer_submit"));
-
+        }
 
         console.log('pk'+data.msg);
         },
