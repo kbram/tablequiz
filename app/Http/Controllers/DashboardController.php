@@ -6,13 +6,13 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Quiz;
 use App\Models\QuizRound;
 use App\Models\GlobalQuestion;
-use App\User;
-
+use App\User; 
+use App\Models\TeamAnswer;
 use Auth;
 
 
 class DashboardController extends Controller
-{
+{   
   
     public function showMyQuizzes(){
        $quizzes=Auth::user()->quizzes()->get();
@@ -61,6 +61,22 @@ class DashboardController extends Controller
         return view('dashboard.settings',compact('user'));
     }
 
+    public function team_result($id){
+       
+      
+        //$team_result=TeamAnswer::where('question_id',$id)->get();
+        dd('ajax');
+      
+         
+            $response = array(
+               
+                'msg'=>'success',
+            );
+             return response()->json($response);
+              }
 
+           
+        
+    
     
  }
