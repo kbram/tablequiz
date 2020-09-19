@@ -62,15 +62,13 @@ class DashboardController extends Controller
     }
 
     public function team_result($id){
-       
-      
-        //$team_result=TeamAnswer::where('question_id',$id)->get();
-        dd('ajax');
-      
-         
+        $team_result=TeamAnswer::where('question_id',$id)->get();
+         $count = count($team_result);
             $response = array(
-               
-                'msg'=>'success',
+
+                'ct' => $count,
+
+                'team_result'=>$team_result,
             );
              return response()->json($response);
               }
