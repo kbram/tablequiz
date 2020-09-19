@@ -553,4 +553,5 @@ $('#'+id_correct).prop("checked", true);
 @section('footer_scripts')
 @include('scripts.push-submit')
 @include('scripts.answer-save')
+@include('scripts.result')
 @endsection
