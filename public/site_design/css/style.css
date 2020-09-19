@@ -2371,7 +2371,7 @@ select {
     top: 0;
     width: 45px;
     height: 100%;
-    background-image: url(/images/social__icons.png);
+    background-image: url(/site_design/images/social__icons.png);
     background-size: 90px;
     background-repeat: no-repeat;
     border-right: 1px solid;
