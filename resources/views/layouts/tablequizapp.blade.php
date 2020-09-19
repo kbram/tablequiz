@@ -15,7 +15,7 @@
         <!-- Replace this with 3D slider -->
         <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
         <!-- end -->
-        <link rel="stylesheet" href="{{asset('site_design/css/style.css?v=0.5')}}">
+        <link rel="stylesheet" href="{{asset('site_design/css/style.css?v=1.0')}}">
         
         {{-- CSRF Token --}}
         <meta name="csrf-token" content="{{ csrf_token() }}">

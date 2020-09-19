@@ -1255,7 +1255,7 @@ input[type='radio']:checked:after {
 
 body {
     color: white;
-    background-image: var(--purpleGradient), url("/images/pattern.jpg");
+    background-image: var(--purpleGradient), url("/site_design/images/pattern.jpg");
     background-size: 125%;
     background-repeat: repeat;
     background-blend-mode: multiply;
