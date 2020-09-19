@@ -269,7 +269,6 @@ var progress=0;
    $('.slick-btns').click(function(){ 
    $('.quiz__slider .quiz__single_question__container').each(function(){
       var current=$(this);
-      
          var hidden=current.attr('aria-hidden');
          if(hidden=="false"){
             

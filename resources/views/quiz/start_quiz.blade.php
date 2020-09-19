@@ -3,301 +3,7 @@
 @section('content')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-<script>
-	var time=JSON.parse(sessionStorage.getItem("nowtimeon"));
-	
-    var timeon=0;
-	var p=JSON.parse(sessionStorage.getItem("play"))
-	var pl= true;
-	if(p==null){
-		pl= true;
-	}else{
-		pl=p;
-	}
-	
-	
-	var countDown;
-	$(document).ready(function(){
-		$('#issue').click(function(e){
-			play();
-		});
-		if(time!=null){
-			
-			$("#push-submit-pause").css("pointer-events", "auto");
-			$('#push-submit-pause').css('opacity','1');
-			$("#push-submit-stop").css("pointer-events", "auto");
-			$('#push-submit-stop').css('opacity','1');
-			$("#push-submit").css("pointer-events", "none");
-			$('#push-submit').css('opacity','0.4');
-			//pl=false;
-			var splity=time.split(":");
-			timeon=parseInt(splity[0])*60+parseInt(splity[1]);
-			//alert(timeon);
-			var y=timeon;
-			
-			var sec= y,
-			countDiv    = document.getElementById("b"),
-			secpass;
-			countDown   = setInterval(function () {
-				'use strict';
-				secpass1();
-			}, 1000);
 
-			function secpass1() {
-				'use strict';
-				if(pl==false){
-					clearInterval(countDown);
-					$("#push-submit-pause").css("pointer-events", "none");
-					$('#push-submit-pause').css('opacity','0.4');
-					
-					$("#push-submit").css("pointer-events", "auto");
-					$('#push-submit').css('opacity','1');
-				}
-				var min     = Math.floor(sec / 60),
-					remSec  = sec % 60;
-				
-				if (remSec < 10) {
-					
-					remSec = '0' + remSec;
-				
-				}
-				if (min < 10) {
-					
-					min = '0' + min;
-				
-				}
-				
-				$("#timer").html(min + ":" + remSec);
-				sessionStorage.setItem("nowtimeon", JSON.stringify(min + ":" + remSec));
-				
-				if (sec > 0) {
-					
-					sec = sec - 1;
-					
-				} else {
-					
-					clearInterval(countDown);
-					$("#timer").html("Finished");
-					sessionStorage.setItem("nowtimeon", null);
-					sessionStorage.setItem("play", true);
-					
-					//$("#resub").css("display", "none");
-					//tyle="opacity: 0.4;
-					//
-					$("#push-submit").css("pointer-events", "none");
-					$('#push-submit').css('opacity','0.4');
-
-					$('#resub').css('cursor','not-allowed');
-					$("#resub").css("pointer-events", "none");
-					$('#resub').css('opacity','0.4');
-
-					$("#push-submit-pause").css("pointer-events", "none");
-					$('#push-submit-pause').css('opacity','0.4');
-					$("#push-submit-stop").css("pointer-events", "none");
-					$('#push-submit-stop').css('opacity','0.4');
-					
-				}
-			}
-		}else{
-				$("#push-submit").css("pointer-events", "none");
-				$('#push-submit').css('opacity','0.4');
-				$("#push-submit-pause").css("pointer-events", "none");
-				$('#push-submit-pause').css('opacity','0.4');
-				$("#push-submit-stop").css("pointer-events", "none");
-				$('#push-submit-stop').css('opacity','0.4');
-			
-		}
-	});	
-	// Enable pusher logging - don't include this in production
-	
-	Pusher.logToConsole = true;
-
-	var pusher = new Pusher('87436df86baf66b2192a', {
-	cluster: 'ap2'
-	});
-	
-	var channel = pusher.subscribe('my-channel0');
-	
-	channel.bind('form-submitted0', function(data) {
-		//alert(JSON.stringify(data));	
-		var message =JSON.stringify(data);	
-		var m0 = message.replace('{"text":"','');
-		var m0 = m0.replace('"}','');
-		var m=m0.split("#^");
-
-var status = m[2];
-console.log(status);
- 
-
-var id_correct = m[0]+"1";
-var id_wrong = m[0]+"0";
-
-console.log(status);
-
-		// var text="<tr><td>"+m[0]+"</td><td>"+m[1]+"</td><td><form><input type='radio' id="+id_correct+" name='correct_answer_1' value='correct'><input type='radio' name='correct_answer_1' id="+id_wrong+" value='incorrect'></form></td><td></td></form></tr>";
-		
-		var text = "<hr> <div class='row container h-25 align-items-center justify-content-center'> <p class='col-md-4 pb-0 text-center'>"+m[0]+"</p> <input  type='text' name='team[]' hidden class='col-md-4 pb-0 text-center' value="+m[0]+"><input  type='text' name='quiz/"+m[0]+"' hidden class='col-md-4 pb-0 text-center' value="+m[4]+"><input  type='text' name='round/"+m[0]+"' hidden class='col-md-4 pb-0 text-center' value="+m[6]+"><input  type='text' name='question/"+m[0]+"' hidden class='col-md-4 pb-0 text-center' value="+m[5]+"> <p class='col-md-4 pb-0 text-center'>"+m[1]+"</p> <div class='col-md-4 pb-0 text-center '> <div class='row d-flex'> <input type='radio' id="+id_correct+" name='status/"+m[0]+"' value=1 class='col-md-6 py-0 text-muted text-center'> <input type='radio' name='status/"+m[0]+"' id="+id_wrong+" value=0 class='col-md-6 py-0 text-muted text-center'> </div> </div> </div>"
-		var id =current.find('.question-id').val();
-		alert(id);
-		alert(m0[4]);
-		$(text).appendTo($("#all-answer_submit"));
-
-		console.log(text);
-
-if(status){
-		if(Number(status) == 1){
-$('#'+id_correct).prop("checked", true);
-			console.log("correct");
-		}
-		else if(Number(status) == 0){
-			$('#'+id_wrong).prop("checked", true);
-
-			console.log("not correct");
-		}
-	}
-		
-		//$('#all-answer tbody').append(text);
-	});
-	//var x=1;
-	
-	
-	function pause() {
-		if(pusher.connection.state=="connected"){
-			clearInterval(countDown);
-			sessionStorage.setItem("play", true);
-			$("#push-submit").css("pointer-events", "auto");
-			$('#push-submit').css('opacity','1');
-			$("#push-submit-pause").css("pointer-events", "none");
-			$('#push-submit-pause').css('opacity','0.4');
-			//pl=true;
-		}else{
-			swal("Check your connection...!",'Please check your internet connection', "danger")
-		}
-	}
-
-	function stop() {
-		if(pusher.connection.state=="connected"){
-			clearInterval(countDown);
-			sessionStorage.setItem("play", true);
-			
-			//sessionStorage.setItem("nowtimeon", null));
-			
-			$("#push-submit").css("pointer-events", "auto");
-			$('#push-submit').css('opacity','1');
-			$("#push-submit-pause").css("pointer-events", "none");
-			$('#push-submit-pause').css('opacity','0.4');
-			$("#push-submit-stop").css("pointer-events", "none");
-			$('#push-submit-stop').css('opacity','0.4');
-			//$("#timer").html(sessionStorage.getItem("nowtimeon"));
-			var x=sessionStorage.getItem("nowtimeon");
-			x=x.slice(1,-1);
-			if(x=="ul"){
-				x="00:00";
-			}
-			$("#timer").html(x);
-			swal("Question stoped!",'articipants can not submit..', "warning")
-			//pl=true;
-		}
-		else{
-			swal("Check your connection...!",'Please check your internet connection', "danger")
-		}
-	}
-
-	
-	function play() {
-		if(pusher.connection.state=="connected"){
-			
-			$("#push-submit-pause").css("pointer-events", "auto");
-			$('#push-submit-pause').css('opacity','1');
-			$("#push-submit-stop").css("pointer-events", "auto");
-			$('#push-submit-stop').css('opacity','1');
-			$("#push-submit").css("pointer-events", "none");
-			$('#push-submit').css('opacity','0.4');
-			//sessionStorage.setItem("play", false);
-			//pl=false;
-			
-			y=document.getElementById("timer").textContent;
-			//alert(y);
-			var x=document.getElementById("timer").textContent;
-			var splity=y.split(":");
-			y=parseInt(splity[0])*60+parseInt(splity[1]);
-
-			var sec= y,
-			countDiv    = document.getElementById("timer"),
-			secpass;
-			countDown   = setInterval(function () {
-				'use strict';
-				secpass();
-			}, 1000);
-		}
-		else{
-			swal("Check your connection...!",'Please check your internet connection', "danger")
-		}
-			function secpass() {
-				'use strict';
-				
-				var min     = Math.floor(sec / 60),
-					remSec  = sec % 60;
-				
-				if (remSec < 10) {
-					
-					remSec = '0' + remSec;
-				
-				}
-				if (min < 10) {
-					
-					min = '0' + min;
-				
-				}
-				
-				$("#timer").html(min + ":" + remSec);
-				sessionStorage.setItem("nowtimeon", JSON.stringify(min + ":" + remSec));
-				if (sec > 0) {
-					
-					sec = sec - 1;
-					
-				} else {
-					
-					clearInterval(countDown);
-					sessionStorage.setItem("nowtimeon", null);
-					sessionStorage.setItem("play", true);
-					//var t =current.find('.question-timer').val();
-					if(x!="00:00"){
-						
-						$("#timer").html("Finished");
-						swal("Time finished!",'time of the question finished', "warning")
-						$("#push-submit").css("pointer-events", "none");
-						$('#push-submit').css('opacity','0.4');
-						$("#push-submit-pause").css("pointer-events", "none");
-						$('#push-submit-pause').css('opacity','0.4');
-						$("#push-submit-stop").css("pointer-events", "none");
-						$('#push-submit-stop').css('opacity','0.4');
-					}else{
-						$("#timer").html("Not set");
-						$("#push-submit").css("pointer-events", "none");
-						$('#push-submit').css('opacity','0.4');
-						$("#push-submit-pause").css("pointer-events", "auto");
-						$('#push-submit-pause').css('opacity','1');
-						$("#push-submit-stop").css("pointer-events", "auto");
-						$('#push-submit-stop').css('opacity','1');
-					}
-					
-					//$("#resub").css("display", "none");
-					//tyle="opacity: 0.4;
-					//
-
-					///$('#resub').css('cursor','not-allowed');
-					//$("#resub").css("pointer-events", "none");
-					//$('#resub').css('opacity','0.4');
-					
-					
-					pl=true;
-					sessionStorage.setItem("play", true);
-				}
-			}
-		
-	}
-</script>
 <section class="container page__inner dashboard">
 	<div class="dashboard__wrapper">
 
@@ -534,6 +240,310 @@ $('#'+id_correct).prop("checked", true);
 
 	</div>
 </section>
+
+<script>
+	var time=JSON.parse(sessionStorage.getItem("nowtimeon"));
+	
+    var timeon=0;
+	var p=JSON.parse(sessionStorage.getItem("play"))
+	var pl= true;
+	if(p==null){
+		pl= true;
+	}else{
+		pl=p;
+	}
+	
+	
+	var countDown;
+	$(document).ready(function(){
+		$('#issue').click(function(e){
+			play();
+		});
+		if(time!=null){
+			
+			$("#push-submit-pause").css("pointer-events", "auto");
+			$('#push-submit-pause').css('opacity','1');
+			$("#push-submit-stop").css("pointer-events", "auto");
+			$('#push-submit-stop').css('opacity','1');
+			$("#push-submit").css("pointer-events", "none");
+			$('#push-submit').css('opacity','0.4');
+			//pl=false;
+			var splity=time.split(":");
+			timeon=parseInt(splity[0])*60+parseInt(splity[1]);
+			//alert(timeon);
+			var y=timeon;
+			
+			var sec= y,
+			countDiv    = document.getElementById("b"),
+			secpass;
+			countDown   = setInterval(function () {
+				'use strict';
+				secpass1();
+			}, 1000);
+
+			function secpass1() {
+				'use strict';
+				if(pl==false){
+					clearInterval(countDown);
+					$("#push-submit-pause").css("pointer-events", "none");
+					$('#push-submit-pause').css('opacity','0.4');
+					
+					$("#push-submit").css("pointer-events", "auto");
+					$('#push-submit').css('opacity','1');
+				}
+				var min     = Math.floor(sec / 60),
+					remSec  = sec % 60;
+				
+				if (remSec < 10) {
+					
+					remSec = '0' + remSec;
+				
+				}
+				if (min < 10) {
+					
+					min = '0' + min;
+				
+				}
+				
+				$("#timer").html(min + ":" + remSec);
+				sessionStorage.setItem("nowtimeon", JSON.stringify(min + ":" + remSec));
+				
+				if (sec > 0) {
+					
+					sec = sec - 1;
+					
+				} else {
+					
+					clearInterval(countDown);
+					$("#timer").html("Finished");
+					sessionStorage.setItem("nowtimeon", null);
+					sessionStorage.setItem("play", true);
+					
+					//$("#resub").css("display", "none");
+					//tyle="opacity: 0.4;
+					//
+					$("#push-submit").css("pointer-events", "none");
+					$('#push-submit').css('opacity','0.4');
+
+					$('#resub').css('cursor','not-allowed');
+					$("#resub").css("pointer-events", "none");
+					$('#resub').css('opacity','0.4');
+
+					$("#push-submit-pause").css("pointer-events", "none");
+					$('#push-submit-pause').css('opacity','0.4');
+					$("#push-submit-stop").css("pointer-events", "none");
+					$('#push-submit-stop').css('opacity','0.4');
+					
+				}
+			}
+		}else{
+				$("#push-submit").css("pointer-events", "none");
+				$('#push-submit').css('opacity','0.4');
+				$("#push-submit-pause").css("pointer-events", "none");
+				$('#push-submit-pause').css('opacity','0.4');
+				$("#push-submit-stop").css("pointer-events", "none");
+				$('#push-submit-stop').css('opacity','0.4');
+			
+		}
+	});	
+	// Enable pusher logging - don't include this in production
+	
+	Pusher.logToConsole = true;
+
+	var pusher = new Pusher('87436df86baf66b2192a', {
+	cluster: 'ap2'
+	});
+	
+	var channel = pusher.subscribe('my-channel0');
+	
+	channel.bind('form-submitted0', function(data) {
+		//alert(JSON.stringify(data));	
+		var message =JSON.stringify(data);	
+		var m0 = message.replace('{"text":"','');
+		var m0 = m0.replace('"}','');
+		var m=m0.split("#^");
+console.log(m);
+var status = m[2];
+console.log(status);
+ 
+
+var id_correct = m[0]+"1";
+var id_wrong = m[0]+"0";
+
+console.log(status);
+
+		// var text="<tr><td>"+m[0]+"</td><td>"+m[1]+"</td><td><form><input type='radio' id="+id_correct+" name='correct_answer_1' value='correct'><input type='radio' name='correct_answer_1' id="+id_wrong+" value='incorrect'></form></td><td></td></form></tr>";
+		
+		var text = "<hr> <div class='row container h-25 align-items-center justify-content-center'> <p class='col-md-4 pb-0 text-center'>"+m[0]+"</p> <input  type='text' name='team[]' hidden class='col-md-4 pb-0 text-center' value="+m[0]+"><input  type='text' name='quiz/"+m[0]+"' hidden class='col-md-4 pb-0 text-center' value="+m[4]+"><input  type='text' name='round/"+m[0]+"' hidden class='col-md-4 pb-0 text-center' value="+m[6]+"><input  type='text' name='question/"+m[0]+"' hidden class='col-md-4 pb-0 text-center' value="+m[5]+"> <p class='col-md-4 pb-0 text-center'>"+m[1]+"</p> <div class='col-md-4 pb-0 text-center '> <div class='row d-flex'> <input type='radio' id="+id_correct+" name='status/"+m[0]+"' value=1 class='col-md-6 py-0 text-muted text-center'> <input type='radio' name='status/"+m[0]+"' id="+id_wrong+" value=0 class='col-md-6 py-0 text-muted text-center'> </div> </div> </div>"
+		// var id =$('.question-id').val();
+		var id;
+$('.quiz__slider .quiz__single_question__container').each(function(){
+			var current=$(this);
+		var hidden=current.attr('aria-hidden');
+         if(hidden=="false"){
+			id =current.find('.question-id').val(); 
+		 }
+		 
+
+});
+if(id == m[5]){
+		$(text).appendTo($("#all-answer_submit"));
+	}
+
+if(status){
+		if(Number(status) == 1){
+$('#'+id_correct).prop("checked", true);
+			console.log("correct");
+		}
+		else if(Number(status) == 0){
+			$('#'+id_wrong).prop("checked", true);
+
+			console.log("not correct");
+		}
+	}
+		
+		//$('#all-answer tbody').append(text);
+	});
+	//var x=1;
+	
+	
+	function pause() {
+		if(pusher.connection.state=="connected"){
+			clearInterval(countDown);
+			sessionStorage.setItem("play", true);
+			$("#push-submit").css("pointer-events", "auto");
+			$('#push-submit').css('opacity','1');
+			$("#push-submit-pause").css("pointer-events", "none");
+			$('#push-submit-pause').css('opacity','0.4');
+			//pl=true;
+		}else{
+			alert("Check your connection...!",'Please check your internet connection')
+		}
+	}
+
+	function stop() {
+		if(pusher.connection.state=="connected"){
+			clearInterval(countDown);
+			sessionStorage.setItem("play", true);
+			
+			//sessionStorage.setItem("nowtimeon", null));
+			
+			$("#push-submit").css("pointer-events", "auto");
+			$('#push-submit').css('opacity','1');
+			$("#push-submit-pause").css("pointer-events", "none");
+			$('#push-submit-pause').css('opacity','0.4');
+			$("#push-submit-stop").css("pointer-events", "none");
+			$('#push-submit-stop').css('opacity','0.4');
+			//$("#timer").html(sessionStorage.getItem("nowtimeon"));
+			var x=sessionStorage.getItem("nowtimeon");
+			x=x.slice(1,-1);
+			if(x=="ul"){
+				x="00:00";
+			}
+			$("#timer").html(x);
+			swal("Question stoped!",'articipants can not submit..', "warning")
+			//pl=true;
+		}
+		else{
+			alert("Check your connection...!",'Please check your internet connection')
+		}
+	}
+
+	
+	function play() {
+		if(pusher.connection.state=="connected"){
+			
+			$("#push-submit-pause").css("pointer-events", "auto");
+			$('#push-submit-pause').css('opacity','1');
+			$("#push-submit-stop").css("pointer-events", "auto");
+			$('#push-submit-stop').css('opacity','1');
+			$("#push-submit").css("pointer-events", "none");
+			$('#push-submit').css('opacity','0.4');
+			//sessionStorage.setItem("play", false);
+			//pl=false;
+			
+			y=document.getElementById("timer").textContent;
+			//alert(y);
+			var x=document.getElementById("timer").textContent;
+			var splity=y.split(":");
+			y=parseInt(splity[0])*60+parseInt(splity[1]);
+
+			var sec= y,
+			countDiv    = document.getElementById("timer"),
+			secpass;
+			countDown   = setInterval(function () {
+				'use strict';
+				secpass();
+			}, 1000);
+		}
+		else{
+			alert("Check your connection...!",'Please check your internet connection')
+		}
+			function secpass() {
+				'use strict';
+				
+				var min     = Math.floor(sec / 60),
+					remSec  = sec % 60;
+				
+				if (remSec < 10) {
+					
+					remSec = '0' + remSec;
+				
+				}
+				if (min < 10) {
+					
+					min = '0' + min;
+				
+				}
+				
+				$("#timer").html(min + ":" + remSec);
+				sessionStorage.setItem("nowtimeon", JSON.stringify(min + ":" + remSec));
+				if (sec > 0) {
+					
+					sec = sec - 1;
+					
+				} else {
+					
+					clearInterval(countDown);
+					sessionStorage.setItem("nowtimeon", null);
+					sessionStorage.setItem("play", true);
+					//var t =current.find('.question-timer').val();
+					if(x!="00:00"){
+						
+						$("#timer").html("Finished");
+						swal("Time finished!",'time of the question finished', "warning")
+						$("#push-submit").css("pointer-events", "none");
+						$('#push-submit').css('opacity','0.4');
+						$("#push-submit-pause").css("pointer-events", "none");
+						$('#push-submit-pause').css('opacity','0.4');
+						$("#push-submit-stop").css("pointer-events", "none");
+						$('#push-submit-stop').css('opacity','0.4');
+					}else{
+						$("#timer").html("Not set");
+						$("#push-submit").css("pointer-events", "none");
+						$('#push-submit').css('opacity','0.4');
+						$("#push-submit-pause").css("pointer-events", "auto");
+						$('#push-submit-pause').css('opacity','1');
+						$("#push-submit-stop").css("pointer-events", "auto");
+						$('#push-submit-stop').css('opacity','1');
+					}
+					
+					//$("#resub").css("display", "none");
+					//tyle="opacity: 0.4;
+					//
+
+					///$('#resub').css('cursor','not-allowed');
+					//$("#resub").css("pointer-events", "none");
+					//$('#resub').css('opacity','0.4');
+					
+					
+					pl=true;
+					sessionStorage.setItem("play", true);
+				}
+			}
+		
+	}
+</script>
 
 
 
