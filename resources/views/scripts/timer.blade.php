@@ -37,6 +37,7 @@ $(document).ready(function() {
         var quizId=issueq[quseee][6];
         
         var type=issueq[quseee][7];
+        var ti=issueq[quseee][8];
 
         var text0 ='';
         var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
@@ -97,7 +98,8 @@ $(document).ready(function() {
 
         //console.log(answer);
         text0 += "</div> <div class='break'></div>";
-        if(time!=null && quseee==qustno){
+        
+        if((time!=null || ti==0 || ti==null) && quseee==qustno){
             text0 += "<div id='resub1' class='justify-content-center row'>"+
                 "<div class='' id='resub' >"+
                     "<br><a class='btn btn-primary d-block d-lg-inline-block card__from__modal' onclick='document.getElementById("+answerId[i]+").submit()'>Submit Answer</a>"+
@@ -150,6 +152,11 @@ $(document).ready(function() {
                     alert('please select answer');
                 }
                 else{
+                    $('#resub').css('cursor','not-allowed');
+                    $("#resub").css("pointer-events", "none");
+                    $('#resub').css('opacity','0.4');
+                    $('.single__answer').css('cursor','not-allowed');
+                    $('.single__answer').css('pointer-events','none');
                 $.ajax({
                     type: "POST",
                     url: "/playquiz/answer",
@@ -168,17 +175,18 @@ $(document).ready(function() {
         
         
        
-        
-
-        var y=timeon;
-        var sec= y,
-        countDiv    = document.getElementById("timer"),
-        secpass;
-        countDown   = setInterval(function () {
-            'use strict';
-            secpass0();
-        }, 1000);
-
+        if(ti==0 || ti==null){
+            $(".timer").html("Not set");
+        }else{
+            var y=timeon;
+            var sec= y,
+            countDiv    = document.getElementById("timer"),
+            secpass;
+            countDown   = setInterval(function () {
+                'use strict';
+                secpass0();
+            }, 1000);
+        }
         function secpass0() {
             'use strict';
                 
@@ -294,7 +302,7 @@ $(document).ready(function() {
     }
 
             text0 += "</div> <div class='break'></div>";
-            if(time!=null && quseee==qustno){
+            if((time!=null || ti==0 || ti==null)&& quseee==qustno){
                 text0 += "<div id='resub1' class='justify-content-center row'>"+
                     "<div class='' id='resub' >"+
                         "<br><a class='btn btn-primary d-block d-lg-inline-block card__from__modal' onclick='document.getElementById("+answerId[i]+").submit()'>Submit Answer</a>"+
@@ -616,14 +624,21 @@ $(document).ready(function() {
 
             //document.getElementById("demo").innerHTML=JSON.parse(sessionStorage.getItem("issuequestion"));
         //var x=1;
-        var y=timeon;
-        var sec= y,
-        countDiv    = document.getElementById("timer"),
-        secpass;
-        countDown   = setInterval(function () {
-            'use strict';
-            secpass();
-        }, 1000);
+        if(timeon==0 || timeon==null){
+            $(".timer").html("Not set");
+        }else{
+            
+           // alert(timeon)
+            var y=timeon;
+            var sec= y,
+            countDiv    = document.getElementById("timer"),
+            secpass;
+            countDown   = setInterval(function () {
+                'use strict';
+                secpass();
+            }, 1000);
+        }
+
         var channel1 = pusher.subscribe('my-channel1');
         channel1.bind('form-submitted1', function(data) {
             swal("Teacher Stoped your Submition !",'you can not submit answer...', "danger")
@@ -690,7 +705,7 @@ $(document).ready(function() {
 
         $('.answer_submit').on('click',function(e){
             e.preventDefault();  
-    
+            
     var answer = $('#answer');
     console.log(answer.length);
     if(answer.length == 0){
@@ -698,6 +713,11 @@ $(document).ready(function() {
         swal("Please select answer !",'select or submit answer', "danger")
     }
         else{
+            $('#resub').css('cursor','not-allowed');
+            $("#resub").css("pointer-events", "none");
+            $('#resub').css('opacity','0.4');
+            $('.single__answer').css('cursor','not-allowed');
+            $('.single__answer').css('pointer-events','none');
         $.ajax({
             type: "POST",
             url: "/playquiz/answer",
@@ -724,7 +744,7 @@ $(document).ready(function() {
 
     function secpass() {
         'use strict';
-        
+       
         var min     = Math.floor(sec / 60),
             remSec  = sec % 60;
         

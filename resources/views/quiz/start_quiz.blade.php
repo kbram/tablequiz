@@ -34,7 +34,7 @@
 			timeon=parseInt(splity[0])*60+parseInt(splity[1]);
 			//alert(timeon);
 			var y=timeon;
-
+			
 			var sec= y,
 			countDiv    = document.getElementById("b"),
 			secpass;
@@ -167,9 +167,7 @@ $('#'+id_correct).prop("checked", true);
 			$('#push-submit-pause').css('opacity','0.4');
 			//pl=true;
 		}else{
-			//alert("Check your connection...");
 			swal("Check your connection...!",'Please check your internet connection', "danger")
-
 		}
 	}
 
@@ -190,10 +188,9 @@ $('#'+id_correct).prop("checked", true);
 			var x=sessionStorage.getItem("nowtimeon");
 			x=x.slice(1,-1);
 			if(x=="ul"){
-				$("#timer").html("00:00");
-			}else{
-				$("#timer").html(x);
+				x="00:00";
 			}
+			$("#timer").html(x);
 			swal("Question stoped!",'articipants can not submit..', "warning")
 			//pl=true;
 		}
@@ -217,22 +214,17 @@ $('#'+id_correct).prop("checked", true);
 			
 			y=document.getElementById("timer").textContent;
 			//alert(y);
-			if(y!="00:00"){
+			var x=document.getElementById("timer").textContent;
+			var splity=y.split(":");
+			y=parseInt(splity[0])*60+parseInt(splity[1]);
 
-				
-				var splity=y.split(":");
-				y=parseInt(splity[0])*60+parseInt(splity[1]);
-
-				var sec= y,
-				countDiv    = document.getElementById("timer"),
-				secpass;
-				countDown   = setInterval(function () {
-					'use strict';
-					secpass();
-				}, 1000);
-			}else{
-				$(".timer").html("Not set");
-			}
+			var sec= y,
+			countDiv    = document.getElementById("timer"),
+			secpass;
+			countDown   = setInterval(function () {
+				'use strict';
+				secpass();
+			}, 1000);
 		}
 		else{
 			swal("Check your connection...!",'Please check your internet connection', "danger")
@@ -266,10 +258,26 @@ $('#'+id_correct).prop("checked", true);
 					sessionStorage.setItem("nowtimeon", null);
 					sessionStorage.setItem("play", true);
 					//var t =current.find('.question-timer').val();
-					$("#timer").html("Finished");
-					//alert("Finished");
-					swal("Time finished!",'time of the question finished', "warning")
-
+					if(x!="00:00"){
+						
+						$("#timer").html("Finished");
+						swal("Time finished!",'time of the question finished', "warning")
+						$("#push-submit").css("pointer-events", "none");
+						$('#push-submit').css('opacity','0.4');
+						$("#push-submit-pause").css("pointer-events", "none");
+						$('#push-submit-pause').css('opacity','0.4');
+						$("#push-submit-stop").css("pointer-events", "none");
+						$('#push-submit-stop').css('opacity','0.4');
+					}else{
+						$("#timer").html("Not set");
+						$("#push-submit").css("pointer-events", "none");
+						$('#push-submit').css('opacity','0.4');
+						$("#push-submit-pause").css("pointer-events", "auto");
+						$('#push-submit-pause').css('opacity','1');
+						$("#push-submit-stop").css("pointer-events", "auto");
+						$('#push-submit-stop').css('opacity','1');
+					}
+					
 					//$("#resub").css("display", "none");
 					//tyle="opacity: 0.4;
 					//
@@ -278,12 +286,7 @@ $('#'+id_correct).prop("checked", true);
 					//$("#resub").css("pointer-events", "none");
 					//$('#resub').css('opacity','0.4');
 					
-					$("#push-submit").css("pointer-events", "none");
-					$('#push-submit').css('opacity','0.4');
-					$("#push-submit-pause").css("pointer-events", "none");
-					$('#push-submit-pause').css('opacity','0.4');
-					$("#push-submit-stop").css("pointer-events", "none");
-					$('#push-submit-stop').css('opacity','0.4');
+					
 					pl=true;
 					sessionStorage.setItem("play", true);
 				}
@@ -364,45 +367,47 @@ $('#'+id_correct).prop("checked", true);
 					<div class="col">
 
 
-						<div class="quiz__slider ">
+						<div class="quiz__slider">
 						
 							@foreach($rounds as $round)
 							 @foreach($questions[$round->id] as $question)
 							<div class="quiz__single_question__container d-flex flex-column align-items-center">
 								<h4>Question</h4>
+								<p style="text-align:right;float:right; margin-right:0px;" align="right" >Time  :  {{isset($question->time_limit)? $question->time_limit.' sec' : 'Not set' }}</p>	
+								@if (count($medias[$question->id])>0) 
 
-						@if (count($medias[$question->id])>0) 
+<div class="quiz__single_question__image">
 
-								<div class="quiz__single_question__image">
+@foreach($medias[$question->id] as $media)
+@if($media->media_type == 'image')
+
+	<img src="{{asset($media->public_path)}}" height='250px'>
+@endif
+@if($media->media_type == 'audio')
+<audio controls>
+	<source src="{{asset($media->public_path)}}" type="audio/mpeg">
+</audio>
+@endif
+@if($media->media_type == 'video')
+
+<video controls>
+	<source src="{{asset($media->public_path)}}" type="video/mp4">
+</video>
+@endif
+@endforeach
+
+</div>
+
+@else
+
 							
-								@foreach($medias[$question->id] as $media)
-								@if($media->media_type == 'image')
-
-									<img src="{{asset($media->public_path)}}" height='250px'>
-								@endif
-								@if($media->media_type == 'audio')
-								<audio controls>
-									<source src="{{asset($media->public_path)}}" type="audio/mpeg">
-								</audio>
-								@endif
-								@if($media->media_type == 'video')
-
-								<video controls>
-									<source src="{{asset($media->public_path)}}" type="video/mp4">
-								</video>
-								@endif
-								@endforeach
-
+								<div class="quiz__single_question__image">
+									<img src="{{asset('site_design/images/homepage__logo.png')}}" height='170px'>
 								</div>
 
-						@else
-						<div class="quiz__single_question__image">
-						<img src="{{asset('site_design/images/homepage__logo.png')}}" height='180px'>						
-						</div>
-						@endif
-
+								@endif
 								<div class="quiz__single_question__qa text-center w-100">
-
+												
 								
 									<p class="question"><span>Question:</span><span>{{$question->question}}</span></p>
 									<input type="hidden" class="question-timer" value="{{$question->time_limit}}">

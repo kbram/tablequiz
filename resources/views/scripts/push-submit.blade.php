@@ -195,7 +195,6 @@ var progress=0;
                 media_link+=$(this).val()+"**";
             });
 
-   
 
             var x=time;
            
@@ -288,6 +287,7 @@ var progress=0;
                  }
 
             var time =current.find('.question-timer').val();
+           
             sec=time;
             var min     = Math.floor(sec / 60),
 				remSec  = sec % 60;
