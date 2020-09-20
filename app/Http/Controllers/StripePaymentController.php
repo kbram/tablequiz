@@ -66,7 +66,7 @@ try{
         \Stripe\Stripe::setApiKey(Config::get('stripe.secret_key'));
 
         \Stripe\Charge::create ([
-                "amount" => $request->total_card,
+                "amount" => $request->total_card*100,
                 "currency" => "usd",
                 "source" => $request->stripeToken,
                 "description" => "Test payment" ,
