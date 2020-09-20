@@ -116,8 +116,10 @@
                                             <td class="quiz_actions d-flex flex-row justify-content-lg-center">
 												<div class="d-flex flex-column">
 													<i class="fas fa-pencil-alt"></i>
-													<a href="{{ URL::to('admin/categories/edit/'.$category->id)}}"><span>Edit</span></a>
-												</div>									
+													<span><a href="{{ URL::to('admin/categories/edit/'.$category->id)}}">Edit</a></span>
+												</div>
+												
+																	
 												
 												<form method="POST" action="/admin/categories/{{$category->id}}" class="p-0">
 												{{ csrf_field() }}	
