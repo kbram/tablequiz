@@ -51,24 +51,28 @@
 		</aside>
 		
 		<section class="col-lg-9 dashboard__content">
-			<!-- <article class="article"> -->
-			<div class="row">
-				<div class="col-12">
-					<div class="row">
-						<div class="col-lg-9">
-							<h2>Questions</h2>
-						</div>
-						<div class="col-lg-3 ">
+	<div class="row">
+			<div class="col-lg-9 col-sm-6 ">
+				<h2>Add new question</h2>
+			</div>
+		<div class="col-lg-3 col-sm-6 ">
 							@if(config('usersmanagement.enableSearchUsers'))
 								@include('partials.search-questions-form')
 							@endif
 							
-						</div>
-					</div>
+		</div>
+	</div>
+
+			<article class="article">
+				
+			<div class="row">
+				<div class="col-12">
+						
+						
+					
 					
 					
 					<div class="dashboard__container flex-grow-0 pt-4 mb-3">
-						<h3>Add new question</h3>
 						
 						<form action="/admin/questions" enctype="multipart/form-data" method="post" class="pt-3 add__new__in__admin">
 							@csrf
@@ -351,9 +355,9 @@
 							</div>
 						</div>
 						</form>
+</article>
 
-					</div>
-					<div class="dashboard__container flex-grow-1">
+<div class="dashboard__container flex-grow-1">
 						<table class="table table-striped table-borderless m-0 h-100 my__quizzes">
 							<thead>
 								<tr>
@@ -406,9 +410,12 @@
 						</table>
 						{{ $questions->links() }}
 					</div>
+					</div>
+					
 				</div>
 			</div>
-			</article>
+			
+</div>
 		</section>
 	</div>
 	

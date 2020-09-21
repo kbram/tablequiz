@@ -73,14 +73,16 @@ class AdminQuestionController extends Controller
         }
           }
        elseif($request->input('question__type') == 'multiple__choice__question'){
+        // dd($request);
 
             $validator = Validator::make($request->all(),
             [   
               'category__type'                 => 'required',
-               'multiple__choice__answer__1'   => 'required',
+               'multiple__choice__answer__0'   => 'required',
                'question'                      => 'required', 
             ]);
             if ($validator->fails()) {
+
               return back()->withErrors($validator)->withInput();
           }
       }
@@ -235,8 +237,8 @@ class AdminQuestionController extends Controller
 
             else if($request->question__type == 'multiple__choice__question'){
               
-                $arr=$request->multiple__choice__answer__1;
-                $ca=$request->multiple__choice__correct__answer;
+                $arr=$request->multiple__choice__answer__0;
+                $ca=$request->multiple__choice__correct__answer__0;
             
                 
                 for($i = 0 ; $i < count($arr) ; $i++)
@@ -304,7 +306,7 @@ class AdminQuestionController extends Controller
             elseif($request->input('question__type') == 'multiple__choice__question'){
                  $validator = Validator::make($request->all(),
                  [
-                    'multiple__choice__answer__1'   => 'required',
+                    'multiple__choice__answer__0'   => 'required',
                  ]);
                }
            elseif($request->input('question__type') == 'numeric__question'){
@@ -505,7 +507,7 @@ class AdminQuestionController extends Controller
             }
 
             elseif($request->input('question__type') == 'multiple__choice__question'){
-              
+              dd($request);
                 $answer                      = GlobalAnswer::where('question_id',$id)->first();
                 $answer->answer              = $answer_get;
                 $answer->answer_stat         = true;
