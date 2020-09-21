@@ -66,7 +66,7 @@
 					<h5>Actions</h5>
 					<ul class="list-unstyled m-0 d-flex flex-column align-items-center">
 						<li><a href="#" id="issue">Issue Question</a></li>
-						<li><a href="#">Edit Question</a></li>
+						<li><a href="#" id="edit_question">Edit Question</a></li>
 						<li><a href="#">Share Answer</a></li>
 						<li class="p-0"><a href="#">Next Question</a></li>
 					</ul>
