@@ -238,6 +238,8 @@ var progress=0;
          var hidden=current.attr('aria-hidden');
          if(hidden=="false"){
             var round_val=current.find('.question-round').val();
+            var question_id=current.find('.question-id').val();
+             $('#edit_question').attr('href','/round_question/edit/'+question_id);
             progress=Number(round_val);
             $('.progress_round_label').removeClass('round_2');
              $('#round'+round_val).addClass('round_2');
@@ -275,7 +277,9 @@ var progress=0;
             var round_val=current.find('.question-round').val();
             $('.progress_round_label').removeClass('round_2');
              $('#round'+round_val).addClass('round_2');
-           
+             var question_id=current.find('.question-id').val();
+             $('#edit_question').attr('href','/round_question/edit/'+question_id);
+            
                  if(progress!=Number(round_val)){
                     $('#round-progress').css("width",progress_add+'%');
                      progress_add+=progress_divide;
