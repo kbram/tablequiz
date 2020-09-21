@@ -7,21 +7,26 @@
 	var time=JSON.parse(sessionStorage.getItem("nowtimeon"));
 	
     var timeon=0;
-	var p=JSON.parse(sessionStorage.getItem("play"))
+	var p=JSON.parse(sessionStorage.getItem("play"));
+	
 	var pl= true;
 	if(p==null){
-		pl= true;
+		pl= false;
 	}else{
 		pl=p;
 	}
 	
 	
-	var countDown;
+	var bavarcount;
 	$(document).ready(function(){
 		$('#issue').click(function(e){
+			$("#issue").css("pointer-events", "none");
+			$('#issue').css('opacity','0.4');
+			$('#timer').removeClass("countdown__time");
 			play();
 		});
 		if(time!=null){
+			
 			
 			$("#push-submit-pause").css("pointer-events", "auto");
 			$('#push-submit-pause').css('opacity','1');
@@ -29,30 +34,37 @@
 			$('#push-submit-stop').css('opacity','1');
 			$("#push-submit").css("pointer-events", "none");
 			$('#push-submit').css('opacity','0.4');
+			
 			//pl=false;
 			var splity=time.split(":");
 			timeon=parseInt(splity[0])*60+parseInt(splity[1]);
 			//alert(timeon);
 			var y=timeon;
 			
+			if(pl==true){
+				clearInterval(bavarcount);
+				$('#timer').removeClass("countdown__time");
+				$('#timer').html(time);
+				//alert(time);
+				$("#push-submit-pause").css("pointer-events", "none");
+				$('#push-submit-pause').css('opacity','0.4');
+				
+				$("#push-submit").css("pointer-events", "auto");
+				$('#push-submit').css('opacity','1');
+				
+			}else{
+				
 			var sec= y,
 			countDiv    = document.getElementById("b"),
 			secpass;
-			countDown   = setInterval(function () {
+			bavarcount   = setInterval(function () {
 				'use strict';
 				secpass1();
 			}, 1000);
 
 			function secpass1() {
 				'use strict';
-				if(pl==false){
-					clearInterval(countDown);
-					$("#push-submit-pause").css("pointer-events", "none");
-					$('#push-submit-pause').css('opacity','0.4');
-					
-					$("#push-submit").css("pointer-events", "auto");
-					$('#push-submit').css('opacity','1');
-				}
+				
 				var min     = Math.floor(sec / 60),
 					remSec  = sec % 60;
 				
@@ -76,7 +88,7 @@
 					
 				} else {
 					
-					clearInterval(countDown);
+					clearInterval(bavarcount);
 					$("#timer").html("Finished");
 					sessionStorage.setItem("nowtimeon", null);
 					sessionStorage.setItem("play", true);
@@ -95,10 +107,14 @@
 					$('#push-submit-pause').css('opacity','0.4');
 					$("#push-submit-stop").css("pointer-events", "none");
 					$('#push-submit-stop').css('opacity','0.4');
-					
+					$("#issue").css("pointer-events", "auto");
+					$('#issue').css('opacity','1');
+					$('#timer').addClass("countdown__time");
 				}
 			}
+			}
 		}else{
+				
 				$("#push-submit").css("pointer-events", "none");
 				$('#push-submit').css('opacity','0.4');
 				$("#push-submit-pause").css("pointer-events", "none");
@@ -138,8 +154,8 @@ console.log(status);
 		
 		var text = "<hr> <div class='row container h-25 align-items-center justify-content-center'> <p class='col-md-4 pb-0 text-center'>"+m[0]+"</p> <input  type='text' name='team[]' hidden class='col-md-4 pb-0 text-center' value="+m[0]+"><input  type='text' name='quiz/"+m[0]+"' hidden class='col-md-4 pb-0 text-center' value="+m[4]+"><input  type='text' name='round/"+m[0]+"' hidden class='col-md-4 pb-0 text-center' value="+m[6]+"><input  type='text' name='question/"+m[0]+"' hidden class='col-md-4 pb-0 text-center' value="+m[5]+"> <p class='col-md-4 pb-0 text-center'>"+m[1]+"</p> <div class='col-md-4 pb-0 text-center '> <div class='row d-flex'> <input type='radio' id="+id_correct+" name='status/"+m[0]+"' value=1 class='col-md-6 py-0 text-muted text-center'> <input type='radio' name='status/"+m[0]+"' id="+id_wrong+" value=0 class='col-md-6 py-0 text-muted text-center'> </div> </div> </div>"
 		var id =current.find('.question-id').val();
-		alert(id);
-		alert(m0[4]);
+		//alert(id);
+		//alert(m0[4]);
 		$(text).appendTo($("#all-answer_submit"));
 
 		console.log(text);
@@ -163,8 +179,8 @@ $('#'+id_correct).prop("checked", true);
 	
 	function pause() {
 		if(pusher.connection.state=="connected"){
-			clearInterval(countDown);
-			sessionStorage.setItem("play", true);
+			clearInterval(bavarcount);
+			//sessionStorage.setItem("play", true);
 			$("#push-submit").css("pointer-events", "auto");
 			$('#push-submit').css('opacity','1');
 			$("#push-submit-pause").css("pointer-events", "none");
@@ -177,24 +193,23 @@ $('#'+id_correct).prop("checked", true);
 
 	function stop() {
 		if(pusher.connection.state=="connected"){
-			clearInterval(countDown);
-			sessionStorage.setItem("play", true);
+			clearInterval(bavarcount);
+			//sessionStorage.setItem("play", true);
 			
 			//sessionStorage.setItem("nowtimeon", null));
-			
-			$("#push-submit").css("pointer-events", "auto");
-			$('#push-submit').css('opacity','1');
+			$('#timer').addClass("countdown__time");
+			$("#push-submit").css("pointer-events", "none");
+			$('#push-submit').css('opacity','0.4');
 			$("#push-submit-pause").css("pointer-events", "none");
 			$('#push-submit-pause').css('opacity','0.4');
 			$("#push-submit-stop").css("pointer-events", "none");
 			$('#push-submit-stop').css('opacity','0.4');
+			$("#issue").css("pointer-events", "auto");
+			$('#issue').css('opacity','1');
 			//$("#timer").html(sessionStorage.getItem("nowtimeon"));
-			var x=sessionStorage.getItem("nowtimeon");
-			x=x.slice(1,-1);
-			if(x=="ul"){
-				x="00:00";
-			}
-			$("#timer").html(x);
+			sessionStorage.setItem("nowtimeon", null);
+			
+			$("#timer").html("Stoped");
 			swal("Question stoped!",'articipants can not submit..', "warning")
 			//pl=true;
 		}
@@ -213,7 +228,7 @@ $('#'+id_correct).prop("checked", true);
 			$('#push-submit-stop').css('opacity','1');
 			$("#push-submit").css("pointer-events", "none");
 			$('#push-submit').css('opacity','0.4');
-			//sessionStorage.setItem("play", false);
+			sessionStorage.setItem("play", false);
 			//pl=false;
 			
 			y=document.getElementById("timer").textContent;
@@ -225,7 +240,7 @@ $('#'+id_correct).prop("checked", true);
 			var sec= y,
 			countDiv    = document.getElementById("timer"),
 			secpass;
-			countDown   = setInterval(function () {
+			bavarcount   = setInterval(function () {
 				'use strict';
 				secpass();
 			}, 1000);
@@ -258,10 +273,12 @@ $('#'+id_correct).prop("checked", true);
 					
 				} else {
 					
-					clearInterval(countDown);
+					clearInterval(bavarcount);
 					sessionStorage.setItem("nowtimeon", null);
 					sessionStorage.setItem("play", true);
 					//var t =current.find('.question-timer').val();
+					$("#issue").css("pointer-events", "auto");
+					$('#issue').css('opacity','1');
 					if(x!="00:00"){
 						
 						$("#timer").html("Finished");
@@ -272,14 +289,18 @@ $('#'+id_correct).prop("checked", true);
 						$('#push-submit-pause').css('opacity','0.4');
 						$("#push-submit-stop").css("pointer-events", "none");
 						$('#push-submit-stop').css('opacity','0.4');
+						$('#timer').addClass("countdown__time");
 					}else{
+						$('#timer').removeClass("countdown__time");
 						$("#timer").html("Not set");
 						$("#push-submit").css("pointer-events", "none");
 						$('#push-submit').css('opacity','0.4');
-						$("#push-submit-pause").css("pointer-events", "auto");
-						$('#push-submit-pause').css('opacity','1');
+						$("#push-submit-pause").css("pointer-events", "none");
+						$('#push-submit-pause').css('opacity','0.4');
 						$("#push-submit-stop").css("pointer-events", "auto");
 						$('#push-submit-stop').css('opacity','1');
+						$("#issue").css("pointer-events", "none");
+						$('#issue').css('opacity','0.4');
 					}
 					
 					//$("#resub").css("display", "none");
@@ -291,8 +312,7 @@ $('#'+id_correct).prop("checked", true);
 					//$('#resub').css('opacity','0.4');
 					
 					
-					pl=true;
-					sessionStorage.setItem("play", true);
+					
 				}
 			}
 		
