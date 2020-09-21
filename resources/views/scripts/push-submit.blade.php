@@ -23,7 +23,7 @@ $(document).ready(function() {
       }else{
          pl=p;
       }
-	
+
        var answer="";
        var answer_id="";
        var type="";
@@ -51,7 +51,7 @@ $(document).ready(function() {
             }else{
                var time=timeon;
             }
-            sessionStorage.setItem("play", false);
+            //sessionStorage.setItem("play", false);
             //console.log('type'+type);
             current.find('.answer > span:nth-child(2)').each(function(){
                 answer+=$(this).text()+"/";
@@ -146,7 +146,7 @@ var progress=0;
       }else{
          pl=p;
       }
-	
+      
        var answer="";
        var answer_id="";
        var type="";
@@ -169,12 +169,12 @@ var progress=0;
             var user =current.find('.question-user').val();
             var id =current.find('.question-id').val();
             var quiz_id =current.find('.quiz-id').val();
-            if(pl==true){
+            if(pl==false){
                var time =current.find('.question-timer').val();
             }else{
                var time=timeon;
             }
-            sessionStorage.setItem("play", false);
+            //sessionStorage.setItem("play", false);
             //console.log('type'+type);
             current.find('.answer > span:nth-child(2)').each(function(){
                 answer+=$(this).text()+"/";
@@ -335,7 +335,7 @@ var progress=0;
 
 $('#push-submit-pause').click(function(e){
        e.preventDefault();  
-       sessionStorage.setItem("play", false);
+       sessionStorage.setItem("play", true);
        $.ajax({
         type: "POST",
         url: "/quiz/pause_quiz",
@@ -351,7 +351,7 @@ $('#push-submit-pause').click(function(e){
 
 $('#push-submit-stop').click(function(e){
        e.preventDefault();  
-      sessionStorage.setItem("play", false);
+      sessionStorage.setItem("play", true);
        $.ajax({
         type: "POST",
         url: "/quiz/stop_quiz",
