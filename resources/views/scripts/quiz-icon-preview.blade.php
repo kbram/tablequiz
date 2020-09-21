@@ -50,4 +50,3 @@ $(document).on('input change', '.formControlRange', function() {
 // }
 </script>
 	
-	

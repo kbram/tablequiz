@@ -1,4 +1,18 @@
 @extends('layouts.tablequizapp')
+@section('template_linked_css')
+<style>
+#myProgress {
+  width: 100%;
+  background-color: #ddd;
+}
+
+#myBar {
+  width: 1%;
+  height: 30px;
+  background-color: #ff8243;
+}
+</style>
+@endsection
 @section('content')
 
 <section class="container page__inner">
@@ -89,18 +103,21 @@
 								<div class="form-group">
 									<label for="formControlRange">Edit size</label>
 									<input type="range" class="form-control-range formControlRange" id="formControlRange" class="slider" min="1" max="100">
-									<div id="demo" class="d-none"></div>
+									<div id="demo" style="display:none;" class="d-none"></div>
+									<div id="myProgress">
+									<div id="myBar"></div>
+									</div>
 								  </div>
 							</div>
 						  </div>
 						  <div class="modal-footer justify-content-center row no-gutters">
-							 <div class="col-md-3"> 
+							 <div class="col-md-3">
 								 <label class="d-block" for="upload__quiz__icon">Upload
 									<input type="file"  class="form-control-file imagePreviewInput" id="upload__quiz__icon" name="upload__quiz__icon" value="Upload">
 								</label>
 							</div>
 							<div class="col-md-3">
-								<button type="button" class="d-block btn btn-primary"data-dismiss="modal">Save</button>
+								<button id="pro" type="button" class="d-block btn btn-primary" data-dismiss="" > Save</button>
 							</div>
 						  </div>
 						</div>
@@ -197,6 +214,39 @@
 @section('footer_scripts')
 <script>    
 
+
+$("#pro").click(function(){
+	var s=$('#image_preview_container').attr('src');
+	//$("#demo").show();
+	
+	
+	if(s!=""){
+		sessionStorage.setItem("im", s);
+		var i = 0;
+		if (i == 0) {
+			i = 1;
+			var elem = document.getElementById("myBar");
+			var width = 1;
+			var id = setInterval(frame, 10);
+			function frame() {
+			if (width >= 100) {
+				
+				$("#pro").attr("data-dismiss","modal");
+				$("#pro").text("Close");
+				$("#pro").removeClass("btn-primary");
+				$("#pro").addClass("btn-danger");
+				//$('#image_preview_container').attr('src','');
+				//$("#demo").hide();
+				clearInterval(id);
+				i = 0;
+			} else {
+				width++;
+				elem.style.width = width + "%";
+			}
+			}
+		}		
+	}
+});
 
 $('.participants__choice').click(function() {
 
