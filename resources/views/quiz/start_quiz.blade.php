@@ -36,6 +36,7 @@
 		<div class="row">
 			<aside class="col-lg-3 dashboard__sidebar d-flex flex-column order-1 order-md-0">
 				<div class="dashboard__container d-flex flex-column align-items-center mb-3">
+				<h5>Que No:<span id="question_number2"></span></h5>
 					<h5>Countdown timer</h5>
 					<p class="countdown__time " id="timer" style="font-size:300%;"></p>
 					<div class="countdown__buttons row">
@@ -78,11 +79,14 @@
 
 
 						<div class="quiz__slider">
-						
+						@php
+						$i=1
+						@endphp
+
 							@foreach($rounds as $round)
 							 @foreach($questions[$round->id] as $question)
 							<div class="quiz__single_question__container d-flex flex-column align-items-center">
-								<h4>Question</h4>
+								<h4>Question No: <span class="question_number">{{$i++}}</span></h4>
 								<p style="text-align:right;float:right; margin-right:0px;" align="right" >Time  :  {{isset($question->time_limit)? $question->time_limit.' sec' : 'Not set' }}</p>	
 								@if (count($medias[$question->id])>0) 
 
