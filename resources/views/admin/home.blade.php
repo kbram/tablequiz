@@ -40,7 +40,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="/admin/categories">
+						<a href="/admin/questions">
 							<span><i class="fas fa-question-circle"></i></span>
 							Questions
 						</a>

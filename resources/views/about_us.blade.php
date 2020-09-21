@@ -91,12 +91,14 @@ Quizzes can be setup and ran free of charge and ran using a simple link, no inst
 <br>
 <br>
 <hr>
-
+<br>
+<br>
 
 <div class="raw d-flex">
 
 <div class=" ">
 <div class="easycontant ">
+
 			<h2>Easy to Play </h2>
 			<br>
 <ul class="how-it-works__homepage mb-5 mt-3 ">

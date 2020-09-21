@@ -91,10 +91,10 @@
 											<span class="input-group-text">&euro;</span>
 										</div>
 										
-										<input id="cost{{$questionCost->id}}" maxlength="3" class="form-control" placeholder="{{$questionCost->cost}}" >
+										<input id="cost{{$questionCost->id}}" maxlength="10" class="form-control" placeholder="{{$questionCost->cost}}" >
 										
-										<button type="submit" id="{{ $questionCost->id }}" maxlength="3" class=" form-control ml-1 SavePriceband" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
-										<button  maxlength="3" class=" form-control ml-1 removePriceband" value="" ><i class="fa fa-trash" style="color:red"></i></button>
+										<button type="submit" id="{{ $questionCost->id }}" maxlength="3" class=" form-control ml-1 SavePriceband" value="" ><i class="fa fa-check-circle" style="color:blue"></i></button>
+										<button  maxlength="3" class=" form-control ml-1 removePriceband" value="" ><i class="fa fa-trash" style="color:grey"></i></button>
 								
 																		
 									</div>
@@ -140,9 +140,9 @@
 										<div class="input-group-prepend">
 											<span class="input-group-text">&euro;</span>
 										</div>
-										<input name="band__costs" maxlength="3" class="form-control" placeholder="{{$backgroundCost->cost}}">
-										<button type="submit" id="{{$backgroundCost->id}}" maxlength="3" class=" form-control ml-1 SavePriceband" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
-										<button maxlength="3" class=" form-control ml-1 removePriceband" value="" ><i class="fa fa-trash" style="color:red"></i></button>
+										<input name="band__costs" maxlength="10" class="form-control" placeholder="{{$backgroundCost->cost}}">
+										<button type="submit" id="{{$backgroundCost->id}}" maxlength="3" class=" form-control ml-1 SavePriceband" value="" ><i class="fa fa-check-circle" style="color:blue"></i></button>
+										<button maxlength="3" class=" form-control ml-1 removePriceband" value="" ><i class="fa fa-trash" style="color:grey"></i></button>
 
 										
 									</div>
@@ -184,9 +184,9 @@
 										<div class="input-group-prepend">
 											<span class="input-group-text">&euro;</span>
 										</div>
-										<input id="cost{{$participantCost->id}}" maxlength="3" class="form-control" placeholder="{{$participantCost->cost}}">
-										<button id="{{$participantCost->id}}"  maxlength="3" class=" form-control ml-1 SavePriceband" value="" ><i class="fa fa-check-circle" style="color:purple"></i></button>
-										<button   maxlength="3" class=" form-control ml-1 removePriceband" value="" ><i class="fa fa-trash" style="color:red"></i></button>
+										<input id="cost{{$participantCost->id}}" maxlength="10" class="form-control" placeholder="{{$participantCost->cost}}">
+										<button id="{{$participantCost->id}}"  maxlength="3" class=" form-control ml-1 SavePriceband" value="" ><i class="fa fa-check-circle" style="color:blue"></i></button>
+										<button   maxlength="3" class=" form-control ml-1 removePriceband" value="" ><i class="fa fa-trash" style="color:grey"></i></button>
 
 											
 									</div>

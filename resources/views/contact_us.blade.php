@@ -59,14 +59,14 @@ display:none;
 
   <div class="form-group d-flex">
     <label class="text-secondary" for="">Message&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-    <textarea name="message" type="password" class="form-control ml-5" id="exampleInputPassword1" placeholder=""></textarea>
+    <textarea rows="5" name="message" type="password" class="form-control ml-5" id="exampleInputPassword1" placeholder=""></textarea>
   </div>
   
   <button type="submit" class="btn btn-primary float-right">Submit</button>
 </div>
 
 <div class="conimg col-md-4 ">
-<img src="site_design/images/contact1.png" class="homepage__logo" alt="TableQuiz.app logo" width="50" height="200px" >
+<img src="site_design/images/contact1.png" class="homepage__logo" alt="TableQuiz.app logo" width="50" height="280px" >
 </div>
 
 </div>
