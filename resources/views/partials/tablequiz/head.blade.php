@@ -1,7 +1,7 @@
 <header>
 		<div class="navigation__logo">
 			<a href="/">
-				<img src="/site_design/images/tablequizapp_logo.png"
+				<img src="{{asset('/site_design/images/tablequizapp_logo.png')}}"
 					 alt="TableQuiz.app logo"
 					 class="main__logo">
 			</a>

@@ -51,7 +51,7 @@
 		</aside>
 		
 		<section class="col-lg-9 dashboard__content">
-			<article class="article">
+			<!-- <article class="article"> -->
 			<div class="row">
 				<div class="col-12">
 					<div class="row">
@@ -158,14 +158,13 @@
 								<div class="modal" id="add__image__media" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
 								  <div class="modal-dialog" role="document">
 									<div class="modal-content">
-									  <div class="modal-header justify-content-center">
 										<h1 class="modal-title" id="add__image__media__modal__heading"></h1>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										  <span aria-hidden="true">&times;</span>
-										</button>
-									  </div>
+										
 									  <div class="modal-body">
-										<p class="text-center py-2">Add <span id="add__image__media__text"></span> to reference in your question</p>
+										<p class="text-center py-2 justify-content-center">Add <span id="add__image__media__text"></span> to reference in your question<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										  <span aria-hidden="true">&times;</span>
+										</button></p>
+										
 										<div class="form-row">
 											<div class="col-md-4">
 												<label>Add link</label>
@@ -196,14 +195,12 @@
                             	<div class="modal" id="add__audio__media" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
 								  <div class="modal-dialog" role="document">
 									<div class="modal-content">
-									  <div class="modal-header justify-content-center">
 										<h1 class="modal-title" id="add__audio__media__modal__heading"></h1>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										  <span aria-hidden="true">&times;</span>
-										</button>
-									  </div>
+										
 									  <div class="modal-body">
-										<p class="text-center py-2">Add <span id="add__audio__media__text"></span> to reference in your question</p>
+										<p class="text-center py-2 justify-content-center">Add <span id="add__audio__media__text"></span> to reference in your question <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										  <span aria-hidden="true">&times;</span>
+										</button></p>
 										<div class="form-row">
 											<div class="col-md-4">
 												<label>Add link</label>
@@ -234,14 +231,12 @@
 								<div class="modal" id="add__video__media" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
 								  <div class="modal-dialog" role="document">
 									<div class="modal-content">
-									  <div class="modal-header justify-content-center">
 										<h1 class="modal-title" id="add__video__media__modal__heading"></h1>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										  <span aria-hidden="true">&times;</span>
-										</button>
-									  </div>
+										
 									  <div class="modal-body">
-										<p class="text-center py-2">Add <span id="add__video__media__text"></span> to reference in your question</p>
+										<p class="text-center py-2 justify-content-center">Add <span id="add__video__media__text"></span> to reference in your question<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										  <span aria-hidden="true">&times;</span>
+										</button></p>
 										<div class="form-row">
 											<div class="col-md-4">
 												<label>Add link</label>
