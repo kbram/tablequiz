@@ -1,5 +1,6 @@
 <script type="text/javascript">
 $(document).ready(function() { 
+   //git check
    //var time=JSON.parse(sessionStorage.getItem("nowstarttimeon"));
    var pl=true;
    var time=JSON.parse(sessionStorage.getItem("nowtimeon"));
