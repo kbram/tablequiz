@@ -19,15 +19,15 @@ color:white;}
 
 @media only screen and (max-width: 425px) {
 	.img-1st {
-display:none;  }
+display:none;  
+	
 
-
-}
+}}
 </style>
 <section class="container page__inner">
 	<div class="row">
 		<article class="col-12">
-			<h1 class="mb-4 abouthead " align="center"><strong>About TableQuiz.App</strong></h1>
+			<h1 class="mb-4 abouthead" text-align="center"><strong>About TableQuiz.App</strong></h1>
 			<p class="pl-5 pr-5 text-center ">TableQuiz.app is a web quizzing tool built for the education sector.
 Quizzes can be setup and ran free of charge and ran using a simple link, no installations neccessary to setup, no registrations needed to play!
 			</p>
@@ -121,7 +121,7 @@ Quizzes can be setup and ran free of charge and ran using a simple link, no inst
 <div class="raw d-flex">
 	<div class="col-4"></div>
 <div class="col-4 col-centered">
-<a href="/setup/create/" class="btn btn-primary d-block" width="50px">Get started ></a>
+<a href="/setup/create/" class="btn btn-primary d-block">Get started ></a>
 <div class="col-4"></div>
 
 </div>
