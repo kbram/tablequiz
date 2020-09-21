@@ -1,6 +1,16 @@
 @extends('layouts.tablequizapp')
 @section('template_linked_css')
 <style>
+	#myProgress {
+	width: 100%;
+	background-color: #ddd;
+	}
+
+	#myBar {
+	width: 1%;
+	height: 30px;
+	background-color: #ff8243;
+	}
 	#blah {
 		transform-origin: top left;
 		-webkit-transform-origin: top left;
@@ -105,6 +115,9 @@
 										</div>
 										<div class="col-9">
 											<input type="range" min="1" max="100" class="form-control-range" id="formControlRange">
+											<div id="demo" style="display:none;" class="d-none"></div>
+											<div id="myProgress">
+											<div id="myBar"></div>
 										</div>
 									</div>
 								</div>
@@ -116,7 +129,7 @@
 									</label>
 								</div>
 								<div class="col-md-3 ml-0 ml-lg-1 d-flex">
-									<button type="submit" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
+									<button id="pro" type="submit" class="d-block btn btn-primary" data-dismiss="">Save</button>
 
 								</div>
 							</div>
@@ -142,7 +155,7 @@
 <!-- <form class="is_container row" id="add_round" action="/question" method="post" enctype="multipart/form-data" role="main">
 @csrf	 -->
 
-		<article class="col-12 article">
+		<article class="col-12 ">
 <div class="article_question">
 			<div class="article__heading">
 				<h1>Question <span id="number"> 1</span></h1>
@@ -207,7 +220,7 @@
 				<div class="modal" id="add__image__media" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
  								  <div class="modal-dialog" role="document">
  									<div class="modal-content">
- 									  <div class="modal-header justify-content-center">
+ 									  <div class="modal-header">
  										<h1 class="modal-title" id="add__image__media__modal__heading"></h1>
  										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
  										  <span aria-hidden="true">&times;</span>
@@ -246,7 +259,7 @@
                              	<div class="modal" id="add__audio__media" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
  								  <div class="modal-dialog" role="document">
  									<div class="modal-content">
- 									  <div class="modal-header justify-content-center">
+ 									  <div class="modal-header ">
  										<h1 class="modal-title" id="add__audio__media__modal__heading"></h1>
  										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
  										  <span aria-hidden="true">&times;</span>
@@ -284,7 +297,7 @@
  								<div class="modal" id="add__video__media" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
  								  <div class="modal-dialog" role="document">
  									<div class="modal-content">
- 									  <div class="modal-header justify-content-center">
+ 									  <div class="modal-header ">
  										<h1 class="modal-title" id="add__video__media__modal__heading"></h1>
  										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
  										  <span aria-hidden="true">&times;</span>
@@ -530,6 +543,42 @@
 @endsection
 
 @section('footer_scripts')
+<script>    
+
+
+$("#pro").click(function(){
+	var s=$('#image_preview_container').attr('src');
+	//$("#demo").show();
+	
+	
+	if(s!=""){
+		sessionStorage.setItem("im", s);
+		var i = 0;
+		if (i == 0) {
+			i = 1;
+			var elem = document.getElementById("myBar");
+			var width = 1;
+			var id = setInterval(frame, 10);
+			function frame() {
+			if (width >= 100) {
+				
+				$("#pro").attr("data-dismiss","modal");
+				$("#pro").text("Close");
+				$("#pro").removeClass("btn-primary");
+				$("#pro").addClass("btn-danger");
+				//$('#image_preview_container').attr('src','');
+				//$("#demo").hide();
+				clearInterval(id);
+				i = 0;
+			} else {
+				width++;
+				elem.style.width = width + "%";
+			}
+			}
+		}		
+	}
+});
+</script>
 @include('scripts.suggest')
 @include('scripts.bg-image');
 @include('scripts.payment');
