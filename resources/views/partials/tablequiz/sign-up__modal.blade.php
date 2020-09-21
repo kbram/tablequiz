@@ -44,22 +44,20 @@
 					<input id="password" name="password" type="password" class="form-control" name="login__pass"> 
 				</div>
 			</div>
-			<div class="form-row d-flex justify-content-center mt-5">
-				<div class="col-10 col-md-4">
+			<div class="form-row  text-center justify-content-center mt-5">
+				<div class="col-lg-4 col-md-4 ">
 				@if (session()->has('quiz'))
-					<input class="d-block btn btn-primary " id="login-btn" type="submit" value="Log In">
+					<input class="d-block btn btn-primary pb-3 " id="login-btn" type="submit" value="Log In">
+					
 					@else
-					<input class="d-block btn  btn-primary" type="submit" value="Log In">
+					<input class="d-block btn  btn-primary pb-3" type="submit" value="Log In">
 					<!-- for check out view -> to__checkout -->
 					@endif
-				</div>
-				<div class="col-10 col-md-4 mt-3">
-
-				 <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('auth.forgot') }}
+					<a class="text-dark " href="{{ route('password.request') }}">
+                           <p>     Forgot your password ? </p>
                 </a>
-					<!-- for check out view -> to__checkout -->
 				</div>
+				
 			</div>
 		</form>
 
