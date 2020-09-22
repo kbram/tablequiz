@@ -13,6 +13,12 @@ use Auth;
 
 class DashboardController extends Controller
 {   
+
+
+  public function __construct()
+  {
+      $this->middleware('auth');
+  }
   
     public function showMyQuizzes(){
        $quizzes=Auth::user()->quizzes()->get();
