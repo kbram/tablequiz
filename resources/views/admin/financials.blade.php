@@ -62,11 +62,18 @@
 						<div class="dashboard__container col">
 						<div class="d-flex">
 						   <h3 class="col-8">Set price band for no. questions</h3>
-								<i class="fa fa-plus-circle col-4 price-band-questions" id="addQuestionPrice"></i>
+								
 						</div>							
 											
 							@if(@isset($questionCosts))
+							@php
+								$c = 0; 
+								$count = $questionCosts->count();
+							@endphp
 							@foreach($questionCosts as $questionCost)
+							@php
+								$c += 1;
+							@endphp
 							<span id="msg{{$questionCost->id ?? ''}}" class="text-success" ></span>
 							
 							<form class="form-row pt-4 align-items-center mb-0 price-band-financials" action="" method="" >
@@ -95,7 +102,13 @@
 										
 										<button type="submit" id="{{ $questionCost->id }}" maxlength="3" class=" form-control ml-1 SavePriceband" value="" ><i class="fa fa-check-circle" style="color:blue"></i></button>
 										<button  maxlength="3" class=" form-control ml-1 removePriceband" value="" ><i class="fa fa-trash" style="color:grey"></i></button>
-								
+										@if($c==$count)
+											<i class="fa fa-plus-circle col-4 price-band-questions" id="addQuestionPrice1"></i>
+											<i class="col-4 "style="display:none;" id="addQuestionPricesp1"></i>
+										@else
+											<i class="col-4 " ></i>
+										@endif
+										
 																		
 									</div>
 								</div>
@@ -116,10 +129,17 @@
 						<div class="dashboard__container col">
 						<div class="d-flex">
 						<h3 class="col-8" >Set price band for no. backgrounds</h3>
-								<i class="fa fa-plus-circle col-4" id="addBackgroundPrice"></i>
+								
 						</div>
 						@if(@isset($backgroundCosts))
+							@php
+								$c = 0; 
+								$count = $backgroundCosts->count();
+							@endphp
 							@foreach($backgroundCosts as $backgroundCost)
+							@php
+								$c += 1;
+							@endphp
 							<span id="msg{{$backgroundCost->id}}" class="text-success"></span>
 							<form class="form-row pt-4 align-items-center mb-0 price-band-financials" action="" method="" id="price__band__backgrounds">
 								<div class="col-4 col-md-1">
@@ -143,7 +163,13 @@
 										<input name="band__costs" maxlength="10" class="form-control" placeholder="{{$backgroundCost->cost}}">
 										<button type="submit" id="{{$backgroundCost->id}}" maxlength="3" class=" form-control ml-1 SavePriceband" value="" ><i class="fa fa-check-circle" style="color:blue"></i></button>
 										<button maxlength="3" class=" form-control ml-1 removePriceband" value="" ><i class="fa fa-trash" style="color:grey"></i></button>
-
+										@if($c==$count)
+											<i class="fa fa-plus-circle col-4 addBackgroundPrice" id="addBackgroundPrice1"></i>
+											<i class="col-4 "style="display:none;" id="addBackgroundPricesp1"></i>
+										@else
+											<i class="col-4 " ></i>
+										@endif
+										
 										
 									</div>
 								</div>
@@ -159,11 +185,17 @@
 						<div class="dashboard__container col">
 						<div class="d-flex">
 							<h3 class="col-8">Set price band for no. participants</h3>
-								<i class="fa fa-plus-circle col-4" id="addParticipantPrice"></i>
+							
 						</div>
 					    	@if(@isset($participantCosts))
-
+							@php
+								$c = 0; 
+								$count = $participantCosts->count();
+							@endphp
 							@foreach($participantCosts as $participantCost)
+							@php
+								$c += 1;
+							@endphp
 							<span id="msg{{$participantCost->id}}" class="text-success"></span>
 							<form class="form-row pt-4 align-items-center mb-0 price-band-financials" action="" method=""">
 								<div class="col-4 col-md-1">
@@ -187,8 +219,12 @@
 										<input id="cost{{$participantCost->id}}" maxlength="10" class="form-control" placeholder="{{$participantCost->cost}}">
 										<button id="{{$participantCost->id}}"  maxlength="3" class=" form-control ml-1 SavePriceband" value="" ><i class="fa fa-check-circle" style="color:blue"></i></button>
 										<button   maxlength="3" class=" form-control ml-1 removePriceband" value="" ><i class="fa fa-trash" style="color:grey"></i></button>
-
-											
+										@if($c==$count)
+											<i class="fa fa-plus-circle col-4 addParticipantPrice" id="addParticipantPrice1"></i>
+											<i class="col-4 "style="display:none;" id="addParticipantPricesp1"></i>
+										@else
+											<i class="col-4 " ></i>
+										@endif
 									</div>
 								</div>
 							</form>				
