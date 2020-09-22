@@ -67,6 +67,7 @@
             $('#msg'+id).text('Deleted sucessfully');
             setTimeout(function() {
          $("#msg"+id).text('');
+         
 
      }, 1000);
 

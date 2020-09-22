@@ -8,6 +8,7 @@ use App\Models\GlobalQuestionMedia;
 use App\Models\GlobalAnswer;
 use Illuminate\Http\Request;
 use App\Models\Question;
+
 use Illuminate\Http\Response;
 use DB;
 use Validator;
@@ -285,13 +286,20 @@ class AdminQuestionController extends Controller
             $audio_media_edit               = GlobalQuestionMedia::where('question_id',$questions->id)->where('media_type','=','Audio')->get();
             $video_media_edit               = GlobalQuestionMedia::where('question_id',$questions->id)->where('media_type','=','Video')->get();
             
-            return view('admin.questions-edit',compact('cat_name','categories','questions','standard_answer','multiple_answer','numeric_answer','image_media_edit','audio_media_edit','video_media_edit'));
+       $categories = QuizCategory::all();
+       $question=GlobalQuestion::where('id',$id)->first();
+       $answers=GlobalAnswer::where('question_id',$id)->get();
+       $question_type=$question->question_type;
+      
+
+            return view('admin.questions-edit',compact('question_type','answers','question','categories','cat_name','categories','questions','standard_answer','multiple_answer','numeric_answer','image_media_edit','audio_media_edit','video_media_edit'));
         
         }
 
 
         public function update(Request $request,$id)
         {
+          dd($request);
     
             $validator = Validator::make( $request->all(),
             [   

@@ -683,7 +683,7 @@ if(Session::has('question_video_'.$i)){
                     $answer_save->question_id = $questinon_save->id;
 
                     if($correct == $request->$multi_con[$j]){
-         
+                        
                                 $answer_save->status = 1;
                          }
 
