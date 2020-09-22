@@ -76,20 +76,34 @@ class MasterQuestionController extends Controller
             $answer->save();
          }
          if($request->multiple__choice__answer){
-          
-           $i=0;
-            foreach($request->multiple__question__answer_id as $ans_id){
-                
-                $answer=Answer::findorfail($ans_id);
-                $answer->answer=$request->multiple__choice__answer[$i];
-                $i++;
-                $answer->save();
-            }
-         }
-         if($request->multiple__choice__correct__answer){
-            $answer=Answer::findorfail($request->multiple__choice__correct__answer);
-            $answer->status=1;
-            $answer->save();
+              Answer::where('question_id',$id)->delete();
+              $correct = $request->input('multiple__choice__correct__answer');
+              $arr = $request->multiple__choice__answer;
+                        
+            for($i = 0 ; $i < count($arr) ; $i++)
+                {     
+                    $answer = new GlobalAnswer;
+                    $answer->answer= $arr[$i];
+                    $answer->question_id = $id;
+                      if($correct==$arr[$i]){
+                        $answer->status= true;
+                       
+                      }
+                      else{
+                        $answer->status= false;
+                       
+                      }
+                     $answer->question_id=$id;
+                     $answer->save();
+                }
+        //    $i=0;
+        //     foreach($request->multiple__question__answer_id as $ans_id){
+                 
+        //         $answer=Answer::findorfail($ans_id);
+        //         $answer->answer=$request->multiple__choice__answer[$i];
+        //         $i++;
+        //         $answer->save();
+        //     }
          }
         
              // Image Media 

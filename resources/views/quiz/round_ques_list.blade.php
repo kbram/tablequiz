@@ -1,7 +1,7 @@
 @extends('layouts.tablequizapp')
 @section('template_linked_css')
 <style>
-    #blah {
+    #round_image{
         transform-origin: top left;
         -webkit-transform-origin: top left;
         -ms-transform-origin: top left;
@@ -85,8 +85,8 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="modal__edit__image position-relative">
+                                        <img class="modal__edit__image__image position-absolute" id="round_image" style="display:block;margin-left:auto;margin-right:auto;" src="#">
                                         <div class="modal__edit__image__mask"></div>
-                                        <img class="modal__edit__image__image" id="blah" style="display:block;margin-left:auto;margin-right:auto;" src="#">
                                     </div>
                                     <div class="modal__edit__image__range">
                                         <div class="form-row align-items-center">
@@ -135,13 +135,13 @@
         </div>
         </div>
         <div class="button__holder w-100 pt-0 mt-1 justify-content-center d-md-flex" id="add-new-question">
-             <div class="col-md-4 p-0">
+            <div class="col-md-4 p-0">
                 <button type="submit" class="btn btn-white d-block" id="addQuestions">Save Round</button>
             </div>
-         </div>
+        </div>
         </article>
 
-        
+
     </form>
 
     <section class="col-lg-12 dashboard__content">
@@ -158,7 +158,7 @@
                             </tr>
                         </thead>
                         <tbody id="users">
-                              
+
                             @foreach($questions as $question)
 
                             <tr>

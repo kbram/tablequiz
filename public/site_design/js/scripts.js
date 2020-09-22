@@ -38,7 +38,8 @@ jQuery(document).ready(function($) {
     // })
 
     // Forms - add another multiple choice Q //
-$('.multiple__choice__row').each(function() {
+
+//$('.multiple__choice__row').each(function() {
 var i =0;
         //var newRow ='<div class="row multiple__choice__row pb-3 align-items-center"><div class="col-7"><input name="multiple__choice__answer__1[]" class="form-control" type="text"></div><div class="col-1 justify-content-center p-0 d-flex"><span class="minus">-</span></div><div class="col-1 justify-content-center"><span class="plus">+</span></div><div class="col-3 text-center form-check"><input type="radio" id="rdd" name="multiple__choice__correct__answer" value="'+i+'"></div></div>';
 
@@ -63,8 +64,8 @@ var i =0;
         }).on('click', 'span.minus', function() {
             $(this).parents('.multiple__choice__row').detach();
         })
-
-    });
+/**each function */
+   // });
 
   
 //kopi 
@@ -90,26 +91,16 @@ var i =0;
      
      
      
+// two function for appending multiple choice locating a one class
 
     $("body").delegate('input:radio.multiple-choice-correct-answer', 'click', function() {
           
         var gtname_correct_val=$(this).closest('.multiple__choice__row').find('.multiple-choice-answer').val();
         $(this).val(gtname_correct_val);
+        console.log('radio value'+gtname_correct_val);
           
     });
-    
-    $("body").delegate('input:radio.multiple-choice-correct-answer', 'click', function() {
-          
-        var gtname_correct_val=$(this).closest('.align-items-center').find('.get_correct_answer').val();
-        $(this).val(gtname_correct_val);
-           
-    });
-
-    $('body').on('click', '.multiple__choice__row__in_modal span', function() {
-        console.log("click different");
-	});
-	
-       
+      
 	
 	/// Forms - Hide & Show ////
 	
