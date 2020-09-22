@@ -68,9 +68,7 @@ function dragElement(elmnt) {
   function dragMouseDown(e) {
     e = e || window.event;
     e.preventDefault();
-    if(pos1<0){
-        elmnt.style.top = 50+"px";
-      }
+ 
     // get the mouse cursor position at startup:
     pos3 = e.clientX;
     pos4 = e.clientY;
@@ -90,9 +88,7 @@ function dragElement(elmnt) {
     // set the element's new position:
     
      // elmnt.style.left = 0 + "px";
-      if(pos1<0){
-        elmnt.style.top = 50+"px";
-      }
+     
  
     elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
     elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
@@ -100,9 +96,7 @@ function dragElement(elmnt) {
 
   function closeDragElement() {
     /* stop moving when mouse button is released:*/
-    if(pos1<0){
-        elmnt.style.top = 50+"px";
-      }
+   
     document.onmouseup = null;
     document.onmousemove = null;
   }
