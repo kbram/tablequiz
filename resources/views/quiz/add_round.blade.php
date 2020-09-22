@@ -348,11 +348,11 @@
 				<div class="col-md-4 align-self-start">
 					<label for="multiple__choice__answer">Answer</label>
 				</div>
-				<div class="col-md-8">
+				<div class="col-md-8 multi-choice">
 
 					<div class="row multiple__choice__row   pb-3 align-items-center">
-						<div class="col-7 multi ">
-							<input name="multiple__choice__answer__0[]" class="multiple-choice-answer form-control" type="text">
+						<div class="col-7">
+							<input name="multiple__choice__answer__0[]" class="multiple-choice-answer form-control first-multi-answer" type="text">
 						</div>
 						<div class="col-1 justify-content-center p-0 d-flex">
 							&nbsp;
