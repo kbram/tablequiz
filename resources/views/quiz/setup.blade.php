@@ -82,7 +82,7 @@
 							<div class="modal__edit__image position-relative">
 								
 								<div class="modal__edit__size " id="img-wrapper">
-								<img class="modal__edit__image__image imagePreview position-absolute" src="" id="image_preview_container" style="display:block;margin-left:auto;margin-right:auto;">
+								<img class="modal__edit__image__image imagePreview position-relative" src="" id="image_preview_container" style="display:block;margin-left:auto;margin-right:auto;">
 								</div>
 								<div class="modal__edit__image__mask"></div>
 							</div>
