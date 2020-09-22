@@ -1,16 +1,7 @@
 @extends('layouts.tablequizapp')
 @section('template_linked_css')
 <style>
-	#myProgress {
-	width: 100%;
-	background-color: #ddd;
-	}
 
-	#myBar {
-	width: 1%;
-	height: 30px;
-	background-color: #ff8243;
-	}
 	#blah {
 		transform-origin: top left;
 		-webkit-transform-origin: top left;
@@ -39,6 +30,8 @@
 @endsection
 @section('content')
 <script src='jquery-3.2.1.min.js'></script> 
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 <section class="container page__inner">
 <form id="add_round" action="/round" method="post" enctype="multipart/form-data" role="main" >
@@ -115,9 +108,7 @@
 										</div>
 										<div class="col-9">
 											<input type="range" min="1" max="100" class="form-control-range" id="formControlRange">
-											<div id="demo" style="display:none;" class="d-none"></div>
-											<div id="myProgress">
-											<div id="myBar"></div>
+											
 										</div>
 									</div>
 								</div>
@@ -129,7 +120,7 @@
 									</label>
 								</div>
 								<div class="col-md-3 ml-0 ml-lg-1 d-flex">
-									<button id="pro" type="submit" class="d-block btn btn-primary" data-dismiss="">Save</button>
+									<button id="pro" type="submit" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
 
 								</div>
 							</div>
@@ -233,7 +224,7 @@
  												<label>Add link image</label>
  											</div>
  											<div class="col-md-8">
- 												<input type="url" name="add_link_to_image__media__0" class="form-control add-image-media-link" id="add__image__media__text">
+ 												<input type="url" name="add_link_to_image__media__0" class="form-control add-image-media-link" value="" id="add__image__media__text">
  											</div>
  										</div>
  										<div class="text-center w-100">
@@ -242,14 +233,15 @@
  										<div class="form-row justify-content-center pt-3">
  											<div class="col-md-3">	
  											   <label class="d-block" for="upload__image__media__file">Upload
- 													<input type="file" class="form-control-file" id="upload__image__media__file" value="Upload" name="image_media_0">
+ 													<input type="file" class="form-control-file " id="upload__image__media__file" value="Upload" name="image_media_0">
  												</label>
  											</div>
  										</div>
  									  </div>
+									 
  									  <div class="modal-footer justify-content-center">
  										  <div class="col-sm-4">
- 											<button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
+ 											<button id="pro1" type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
  										  </div>
  									  </div>
  									</div>
@@ -288,7 +280,7 @@
  									  </div>
  									  <div class="modal-footer justify-content-center">
  										  <div class="col-sm-4">
- 											<button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
+ 											<button id="pro2" type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
  										  </div>
  									  </div>
  									</div>
@@ -326,7 +318,7 @@
  									  </div>
  									  <div class="modal-footer justify-content-center">
  										  <div class="col-sm-4">
- 											<button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
+ 											<button id="pro3" type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
  										  </div>
  									  </div>
  									</div>
@@ -544,43 +536,175 @@
 
 @section('footer_scripts')
 <script>    
-
-
+var size=2000;
+$('#upload__quiz__icon').on('change', function() { 
+	size=this.files[0].size;
+}); 
 $("#pro").click(function(){
-	var s=$('#image_preview_container').attr('src');
-	//$("#demo").show();
-	
-	
-	if(s!=""){
-		sessionStorage.setItem("im", s);
-		var i = 0;
-		if (i == 0) {
-			i = 1;
-			var elem = document.getElementById("myBar");
-			var width = 1;
-			var id = setInterval(frame, 10);
-			function frame() {
-			if (width >= 100) {
-				
-				$("#pro").attr("data-dismiss","modal");
-				$("#pro").text("Close");
-				$("#pro").removeClass("btn-primary");
-				$("#pro").addClass("btn-danger");
-				//$('#image_preview_container').attr('src','');
-				//$("#demo").hide();
-				clearInterval(id);
-				i = 0;
-			} else {
-				width++;
-				elem.style.width = width + "%";
+	var s=$('#upload__quiz__icon').val();
+	s=Math.round(size/100);
+	if(s=="" ){
+
+	}else{
+		let timerInterval
+		Swal.fire({
+		title: 'File Uploading!',
+		html: 'please wait <br><b></b> kb remaining',
+		timer: s,
+		timerProgressBar: true,
+		onBeforeOpen: () => {
+			Swal.showLoading()
+			timerInterval = setInterval(() => {
+			const content = Swal.getContent()
+			if (content) {
+				const b = content.querySelector('b')
+				if (b) {
+				b.textContent = Swal.getTimerLeft()
+				}
 			}
+			}, 100)
+		},
+		onClose: () => {
+			clearInterval(timerInterval)
+		}
+		}).then((result) => {
+		/* Read more about handling dismissals below */
+		if (result.dismiss === Swal.DismissReason.timer) {
+			console.log('I was closed by the timer')
+		}
+		})
+	}
+});
+
+var size1=2000;
+$('#upload__image__media__file').on('change', function() { 
+	size1=this.files[0].size;
+}); 
+
+$("#pro1").click(function(){
+	var s=$('#upload__image__media__file').val();
+	var s1=$('#add__image__media__text').val();
+	s=Math.round(size1/100);
+	if(s=="" && s1==""){
+
+	}else{
+		let timerInterval
+		Swal.fire({
+		title: 'File Uploading!',
+		html: 'please wait <br><b></b> kb remaining',
+		timer: s,
+		timerProgressBar: true,
+		onBeforeOpen: () => {
+			Swal.showLoading()
+			timerInterval = setInterval(() => {
+			const content = Swal.getContent()
+			if (content) {
+				const b = content.querySelector('b')
+				if (b) {
+				b.textContent = Swal.getTimerLeft()
+				}
 			}
-		}		
+			}, 100)
+		},
+		onClose: () => {
+			clearInterval(timerInterval)
+		}
+		}).then((result) => {
+		/* Read more about handling dismissals below */
+		if (result.dismiss === Swal.DismissReason.timer) {
+			console.log('I was closed by the timer')
+		}
+		})
+	}
+});
+
+var size2=2000;
+
+$('#upload__audio__media__file').on('change', function() { 
+	size2=this.files[0].size;
+}); 
+
+$("#pro2").click(function(){
+	var s=$('#upload__audio__media__file').val();
+	var s1=$('#add__audio__media__text').val();
+	s=Math.round(size2/100);
+	if(s=="" && s1==""){
+
+	}else{
+		let timerInterval
+		Swal.fire({
+		title: 'File Uploading!',
+		html: 'please wait <br><b></b> kb remaining',
+		timer: s,
+		timerProgressBar: true,
+		onBeforeOpen: () => {
+			Swal.showLoading()
+			timerInterval = setInterval(() => {
+			const content = Swal.getContent()
+			if (content) {
+				const b = content.querySelector('b')
+				if (b) {
+				b.textContent = Swal.getTimerLeft()
+				}
+			}
+			}, 100)
+		},
+		onClose: () => {
+			clearInterval(timerInterval)
+		}
+		}).then((result) => {
+		/* Read more about handling dismissals below */
+		if (result.dismiss === Swal.DismissReason.timer) {
+			console.log('I was closed by the timer')
+		}
+		})
+	}
+});
+var size3=2000;
+
+$('#upload__video__media__file').on('change', function() { 
+	size3=this.files[0].size;
+}); 
+$("#pro3").click(function(){
+	var s=$('#upload__video__media__file').val();
+	var s1=$('#add__video__media__text').val();
+	s=Math.round(size3/100);
+	if(s=="" && s1==""){
+
+	}else{
+		let timerInterval
+		Swal.fire({
+		title: 'File Uploading!',
+		html: 'please wait <br><b></b> kb remaining',
+		timer: s,
+		timerProgressBar: true,
+		onBeforeOpen: () => {
+			Swal.showLoading()
+			timerInterval = setInterval(() => {
+			const content = Swal.getContent()
+			if (content) {
+				const b = content.querySelector('b')
+				if (b) {
+				b.textContent = Swal.getTimerLeft()
+				}
+			}
+			}, 100)
+		},
+		onClose: () => {
+			clearInterval(timerInterval)
+		}
+		}).then((result) => {
+		/* Read more about handling dismissals below */
+		if (result.dismiss === Swal.DismissReason.timer) {
+			console.log('I was closed by the timer')
+		}
+		})
 	}
 });
 </script>
 @include('scripts.suggest')
 @include('scripts.bg-image');
+@include('scripts.payment');
 @include('scripts.payment');
 
 
