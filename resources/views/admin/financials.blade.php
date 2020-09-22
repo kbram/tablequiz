@@ -104,6 +104,9 @@
 										<button  maxlength="3" class=" form-control ml-1 removePriceband" value="" ><i class="fa fa-trash" style="color:grey"></i></button>
 										@if($c==$count)
 											<i class="fa fa-plus-circle col-4 price-band-questions" id="addQuestionPrice1"></i>
+											<i class="col-4 "style="display:none;" id="addQuestionPricesp1"></i>
+										@else
+											<i class="col-4 " ></i>
 										@endif
 										
 																		
@@ -162,6 +165,9 @@
 										<button maxlength="3" class=" form-control ml-1 removePriceband" value="" ><i class="fa fa-trash" style="color:grey"></i></button>
 										@if($c==$count)
 											<i class="fa fa-plus-circle col-4 addBackgroundPrice" id="addBackgroundPrice1"></i>
+											<i class="col-4 "style="display:none;" id="addBackgroundPricesp1"></i>
+										@else
+											<i class="col-4 " ></i>
 										@endif
 										
 										
@@ -215,6 +221,9 @@
 										<button   maxlength="3" class=" form-control ml-1 removePriceband" value="" ><i class="fa fa-trash" style="color:grey"></i></button>
 										@if($c==$count)
 											<i class="fa fa-plus-circle col-4 addParticipantPrice" id="addParticipantPrice1"></i>
+											<i class="col-4 "style="display:none;" id="addParticipantPricesp1"></i>
+										@else
+											<i class="col-4 " ></i>
 										@endif
 									</div>
 								</div>
