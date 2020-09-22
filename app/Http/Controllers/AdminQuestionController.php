@@ -73,7 +73,6 @@ class AdminQuestionController extends Controller
         }
           }
        elseif($request->input('question__type') == 'multiple__choice__question'){
-        // dd($request);
 
             $validator = Validator::make($request->all(),
             [   
@@ -236,7 +235,6 @@ class AdminQuestionController extends Controller
             }
 
             else if($request->question__type == 'multiple__choice__question'){
-              
                 $arr=$request->multiple__choice__answer__0;
                 $ca=$request->multiple__choice__correct__answer__0;
             
@@ -244,15 +242,20 @@ class AdminQuestionController extends Controller
                 for($i = 0 ; $i < count($arr) ; $i++)
                 {     
                     $answer = new GlobalAnswer;
-                      if($ca==$i){
+                    $answer->answer= $arr[$i];
+
+                      if($ca==$arr[$i]){
                         $answer->answer_stat= true;
                        
                       }
-                            
-                     $answer->answer= $arr[$i];
+                      else{
+                        $answer->answer_stat= false;
+                       
+                      }
                      $answer->question_id=$question_id;
                      $answer->save();
-                   }
+                }
+
                }
                 
                 else if($question->question_type == 'numeric__question'){
