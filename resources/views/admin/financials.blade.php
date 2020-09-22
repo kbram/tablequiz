@@ -62,10 +62,10 @@
 						<div class="dashboard__container col">
 						<div class="d-flex">
 						   <h3 class="col-8">Set price band for no. questions</h3>
-								
 						</div>							
 											
 							@if(@isset($questionCosts))
+							@if( $questionCosts->count() > 0)
 							@php
 								$c = 0; 
 								$count = $questionCosts->count();
@@ -103,10 +103,10 @@
 										<button type="submit" id="{{ $questionCost->id }}" maxlength="3" class=" form-control ml-1 SavePriceband" value="" ><i class="fa fa-check-circle" style="color:blue"></i></button>
 										<button  maxlength="3" class=" form-control ml-1 removePriceband" value="" ><i class="fa fa-trash" style="color:grey"></i></button>
 										@if($c==$count)
-											<i class="fa fa-plus-circle col-4 price-band-questions" id="addQuestionPrice1"></i>
-											<i class="col-4 "style="display:none;" id="addQuestionPricesp1"></i>
+											<i class="fa fa-plus-circle col-2 price-band-questions mt-4" id="addQuestionPrice1"></i>
+											<i class="col-2 "style="display:none;" id="addQuestionPricesp1"></i>
 										@else
-											<i class="col-4 " ></i>
+											<i class="col-2 " ></i>
 										@endif
 										
 																		
@@ -119,8 +119,18 @@
 							
 							@endforeach
 							@else
-							<p>No Questions Cost created yet!</p>
-							@endif
+							<div class="row d-flex">
+							<span class="col-9">
+							<p id="noq"> No Questions Cost created yet! </p>
+							</span>
+							<span class="col-3">
+							<i class="fa fa-plus-circle price-band-questions " id="addQuestionPrice1"></i>
+							<i class=""style="display:none;" id="addQuestionPricesp1"></i>
+							<span>
+							</div>							
+							 				
+								@endif
+											@endif
 							<div class="financial-append"></div>
 
 						</div>
@@ -132,6 +142,8 @@
 								
 						</div>
 						@if(@isset($backgroundCosts))
+						@if( $backgroundCosts->count() > 0)
+
 							@php
 								$c = 0; 
 								$count = $backgroundCosts->count();
@@ -164,10 +176,10 @@
 										<button type="submit" id="{{$backgroundCost->id}}" maxlength="3" class=" form-control ml-1 SavePriceband" value="" ><i class="fa fa-check-circle" style="color:blue"></i></button>
 										<button maxlength="3" class=" form-control ml-1 removePriceband" value="" ><i class="fa fa-trash" style="color:grey"></i></button>
 										@if($c==$count)
-											<i class="fa fa-plus-circle col-4 addBackgroundPrice" id="addBackgroundPrice1"></i>
-											<i class="col-4 "style="display:none;" id="addBackgroundPricesp1"></i>
+											<i class="fa fa-plus-circle col-2 addBackgroundPrice mt-4" id="addBackgroundPrice1"></i>
+											<i class="col-2 "style="display:none;" id="addBackgroundPricesp1"></i>
 										@else
-											<i class="col-4 " ></i>
+											<i class="col-2 " ></i>
 										@endif
 										
 										
@@ -176,7 +188,21 @@
 							</form>
 							@endforeach
 							@else
-							<p>No Background Cost created yet!</p>
+
+							<div class="row d-flex">
+							<span class="col-9">
+							<p id="nob"> No Background Cost created yet! </p>
+							</span>
+							<span class="col-3">
+							<i class="fa fa-plus-circle addBackgroundPrice " id="addBackgroundPrice1"></i>
+							<i class=""style="display:none;" id="addBackgroundPricesp1"></i>
+							<span>
+							</div>	
+
+
+							
+						
+						@endif					
 						@endif
 							<div class="financial-append"></div>
 						</div>
@@ -187,7 +213,9 @@
 							<h3 class="col-8">Set price band for no. participants</h3>
 							
 						</div>
-					    	@if(@isset($participantCosts))
+							@if(@isset($participantCosts))
+							@if( $participantCosts->count() > 0)
+
 							@php
 								$c = 0; 
 								$count = $participantCosts->count();
@@ -220,10 +248,10 @@
 										<button id="{{$participantCost->id}}"  maxlength="3" class=" form-control ml-1 SavePriceband" value="" ><i class="fa fa-check-circle" style="color:blue"></i></button>
 										<button   maxlength="3" class=" form-control ml-1 removePriceband" value="" ><i class="fa fa-trash" style="color:grey"></i></button>
 										@if($c==$count)
-											<i class="fa fa-plus-circle col-4 addParticipantPrice" id="addParticipantPrice1"></i>
-											<i class="col-4 "style="display:none;" id="addParticipantPricesp1"></i>
+											<i class="fa fa-plus-circle col-2 addParticipantPrice mt-4" id="addParticipantPrice1"></i>
+											<i class="col-2 "style="display:none;" id="addParticipantPricesp1"></i>
 										@else
-											<i class="col-4 " ></i>
+											<i class="col-2 " ></i>
 										@endif
 									</div>
 								</div>
@@ -231,7 +259,20 @@
 							
 							@endforeach
 							@else
-							<p>No price</p>
+
+							<div class="row d-flex">
+							<span class="col-9">
+							<p id="nop"> No price </p>
+							</span>
+							<span class="col-3">
+							<i class="fa fa-plus-circle addParticipantPrice " id="addParticipantPrice1"></i>
+							<i class=""style="display:none;" id="addParticipantPricesp1"></i>
+							<span>
+							</div>	
+
+							
+											
+							@endif
 							@endif
 							
 							<div class="financial-append"></div>
