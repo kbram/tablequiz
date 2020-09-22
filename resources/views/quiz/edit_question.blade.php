@@ -339,7 +339,9 @@
                     @endif
 
                     @if($question_type == "multiple__choice__question")
-
+                               @php
+                               $m=0;
+                               @endphp
                     <div class="form-row  mb-n4 mb-md-4 multiple__choice__legend" style="min-height:0;" id="multiple__choice__legend">
                         <div class="offset-9 offset-md-10 col-3 col-md-2">
                             <small class="d-block text-center pl-4">Correct answer</small>
@@ -353,28 +355,36 @@
                         </div>
 
                         <div class="col-md-8">
-
-                            <div class=" multiple__choice__row">
-                                @foreach($answers as $answer)
-                                <div class="row pb-3 align-items-center">
+                        @foreach($answers as $answer)
+                               @php
+                               ++$m;
+                               @endphp
+                            <div class="row multiple__choice__row  pb-3 align-items-center">
+                               
                                     <div class="col-7 multi ">
                                         <input name="multiple__choice__answer[]" class="multiple-choice-answer form-control" value="{{$answer->answer}}">
-                                        <input type="hidden" name="multiple__question__answer_id[]" class="get_correct_answer" value="{{$answer->id}}">
+                                        <!-- <input type="hidden" name="multiple__question__answer_id[]" class="get_correct_answer" value="{{$answer->id}}"> -->
                                     </div>
+                                    @if($m==1)
                                     <div class="col-1 justify-content-center p-0 d-flex">
                                         &nbsp;
                                     </div>
+                                    @else
+                                    <div class="col-1 justify-content-center p-0 d-flex">
+                                        <span class="minus">-</span>
+                                    </div>
+                                  @endif
                                     <div class="col-1 justify-content-center">
                                         <span class="plus">+</span>
                                     </div>
                                     <div class="col-3 col-md-3 text-center form-check px-0 px-md-4">
                                         <input type="radio" value="0" class="multiple-choice-correct-answer" name="multiple__choice__correct__answer">
                                     </div>
-                                </div>
-                                @endforeach
+                               
+                               
 
                             </div>
-
+                            @endforeach
 
                         </div>
 

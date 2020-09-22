@@ -1,8 +1,7 @@
 @extends('layouts.tablequizapp')
 @section('template_linked_css')
 <style>
-
-	#blah {
+	#round_image{
 		transform-origin: top left;
 		-webkit-transform-origin: top left;
 		-ms-transform-origin: top left;
@@ -27,6 +26,7 @@
 		-ms-transform: rotate(270deg) translateX(-100%);
 	}
 </style>
+
 @endsection
 @section('content')
 <script src='jquery-3.2.1.min.js'></script> 
@@ -34,6 +34,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 <section class="container page__inner">
+
 <form id="add_round" action="/round" method="post" enctype="multipart/form-data" role="main" >
 		 @csrf
 <div class="is_container row" >
@@ -88,8 +89,8 @@
 							</div>
 							<div class="modal-body">
 								<div class="modal__edit__image position-relative">
+								   <img class="modal__edit__image__image position-absolute" id="round_image" style="display:block;margin-left:auto;margin-right:auto;" src="#">
 									<div class="modal__edit__image__mask"></div>
-									<img class="modal__edit__image__image" id="blah" style="display:block;margin-left:auto;margin-right:auto;" src="#">
 								</div>
 								<div class="modal__edit__image__range">
 									<div class="form-row align-items-center">

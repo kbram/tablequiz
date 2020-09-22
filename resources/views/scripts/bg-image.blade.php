@@ -2,9 +2,9 @@
  //Image zoom size
 var slider = document.getElementById("formControlRange");
 
-slider.oninput = function() {
+slider.oninput = function() { console.log('hihi');
 
-  var image = document.getElementById('blah');
+  var image = document.getElementById('round_image');
       image.style.width = 20*(this.value)+'px';
       image.style.height = 20*(this.value)+'px';
      
@@ -18,7 +18,7 @@ slider.oninput = function() {
 
 //Image Rotate
 var angle = 0,
-  img = document.getElementById('blah');
+  img = document.getElementById('round_image');
 document.getElementById('rotate').onclick = function() {
   angle = (angle + 90) % 360;
   img.className = "rotate" + angle;
@@ -33,7 +33,7 @@ document.getElementById('rotate').onclick = function() {
     var reader = new FileReader();
     
     reader.onload = function(e) {
-      $("#blah").attr('src', e.target.result);
+      $("#round_image").attr('src', e.target.result);
 
     }
     
@@ -50,5 +50,90 @@ $("#upload__quiz__icon").change(function() {
 
 
 
+
+
   });
+
+  
 </script>
+<!-- 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+	$(function() {
+  $(".draggable").draggable();
+});
+</script> -->
+
+
+<script>
+//Make the DIV element draggagle:
+dragElement(document.getElementById("round_image"));
+
+function dragElement(elmnt) {
+  var pos1 =0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "header")) {
+    /* if present, the header is where you move the DIV from:*/
+    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+  } else {
+    /* otherwise, move the DIV from anywhere inside the DIV:*/
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+ 
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    
+     // elmnt.style.left = 0 + "px";
+    
+ 
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    /* stop moving when mouse button is released:*/
+   
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+</script>
+
+
+
+<style>
+	.container {
+  margin-top: 50px;
+  cursor: move;
+
+  
+}
+
+#screen {
+  overflow: hidden;
+  width: 200px;
+  height: 200px;
+  clear: both;
+  border: 1px solid black;
+}
+
+</style>
