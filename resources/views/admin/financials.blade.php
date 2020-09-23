@@ -101,12 +101,21 @@
 										<input id="cost{{$questionCost->id}}" maxlength="10" class="form-control" placeholder="{{$questionCost->cost}}" >
 										
 										<button type="submit" id="{{ $questionCost->id }}" maxlength="3" class=" form-control ml-1 SavePriceband" value="" ><i class="fa fa-check-circle" style="color:blue"></i></button>
-										<button  maxlength="3" class=" form-control ml-1 removePriceband" value="" ><i class="fa fa-trash" style="color:grey"></i></button>
-										@if($c==$count)
+										
+										@if($c==1 && $c==$count)
+											<button  maxlength="3" class=" form-control ml-1 removePriceband" value="" id="question"><i class="fa fa-trash" style="color:grey"></i></button>
 											<i class="fa fa-plus-circle col-2 price-band-questions mt-4" id="addQuestionPrice1"></i>
-											<i class="col-2 "style="display:none;" id="addQuestionPricesp1"></i>
+											<i class="col-2 pl"style="display:none;" id="addQuestionPricesp1"></i>
+										@elseif($c==1)
+											<button  maxlength="3" class=" form-control ml-1 removePriceband" value="" id="question" ><i class="fa fa-trash" style="color:grey"></i></button>
+											<i class="col-2 pl" ></i>
+										@elseif($c==$count)
+											<button  maxlength="3" class=" form-control ml-1 removePriceband" value="" ><i class="fa fa-trash" style="color:grey"></i></button>
+											<i class="fa fa-plus-circle col-2 price-band-questions mt-4" id="addQuestionPrice1"></i>
+											<i class="col-2 pl"style="display:none;" id="addQuestionPricesp1"></i>
 										@else
-											<i class="col-2 " ></i>
+											<button  maxlength="3" class=" form-control ml-1 removePriceband" value="" ><i class="fa fa-trash" style="color:grey"></i></button>
+											<i class="col-2 pl" ></i>
 										@endif
 										
 																		
@@ -125,13 +134,17 @@
 							</span>
 							<span class="col-3">
 							<i class="fa fa-plus-circle price-band-questions " id="addQuestionPrice1"></i>
-							<i class=""style="display:none;" id="addQuestionPricesp1"></i>
+							<i class="pl"style="display:none;" id="addQuestionPricesp1"></i>
 							<span>
 							</div>							
 							 				
 								@endif
 											@endif
-							<div class="financial-append"></div>
+							
+							<i class="fa fa-plus-circle  price-band-questions mt-4 " id="dem1" style="margin-top:-50%;float:right;display:none;" ></i>
+							<div class="financial-append">
+							
+							</div>
 
 						</div>
 					</div>
@@ -174,12 +187,27 @@
 										</div>
 										<input name="band__costs" maxlength="10" class="form-control" placeholder="{{$backgroundCost->cost}}">
 										<button type="submit" id="{{$backgroundCost->id}}" maxlength="3" class=" form-control ml-1 SavePriceband" value="" ><i class="fa fa-check-circle" style="color:blue"></i></button>
-										<button maxlength="3" class=" form-control ml-1 removePriceband" value="" ><i class="fa fa-trash" style="color:grey"></i></button>
-										@if($c==$count)
+										
+										@if($c==1 && $c==$count)
+											<button  maxlength="3" class=" form-control ml-1 removePriceband" value="" id="background"><i class="fa fa-trash" style="color:grey"></i></button>
 											<i class="fa fa-plus-circle col-2 addBackgroundPrice mt-4" id="addBackgroundPrice1"></i>
-											<i class="col-2 "style="display:none;" id="addBackgroundPricesp1"></i>
+											<i class="col-2 pl"style="display:none;" id="addBackgroundPricesp1"></i>
+										@elseif($c==1)
+											<button  maxlength="3" class=" form-control ml-1 removePriceband" value="" id="background" ><i class="fa fa-trash" style="color:grey"></i></button>
+											<i class="col-2 pl" ></i>
+										@elseif($c==$count)
+											<button  maxlength="3" class=" form-control ml-1 removePriceband" value="" ><i class="fa fa-trash" style="color:grey"></i></button>
+											<i class="fa fa-plus-circle col-2 addBackgroundPrice mt-4" id="addBackgroundPrice1"></i>
+											<i class="col-2 pl"style="display:none;" id="addBackgroundPricesp1"></i>
 										@else
-											<i class="col-2 " ></i>
+											<button  maxlength="3" class=" form-control ml-1 removePriceband" value="" ><i class="fa fa-trash" style="color:grey"></i></button>
+											<i class="col-2 pl" ></i>
+										@endif
+										
+										@if($c==$count)
+											
+										@else
+											
 										@endif
 										
 										
@@ -204,6 +232,7 @@
 						
 						@endif					
 						@endif
+						<i class="fa fa-plus-circle addBackgroundPrice  mt-4 dem" id="dem2" style="margin-top:-50%;float:right;display:none;" ></i>
 							<div class="financial-append"></div>
 						</div>
 					</div>
@@ -246,13 +275,25 @@
 										</div>
 										<input id="cost{{$participantCost->id}}" maxlength="10" class="form-control" placeholder="{{$participantCost->cost}}">
 										<button id="{{$participantCost->id}}"  maxlength="3" class=" form-control ml-1 SavePriceband" value="" ><i class="fa fa-check-circle" style="color:blue"></i></button>
-										<button   maxlength="3" class=" form-control ml-1 removePriceband" value="" ><i class="fa fa-trash" style="color:grey"></i></button>
-										@if($c==$count)
+										
+										
+										@if($c==1 && $c==$count)
+											<button  maxlength="3" class=" form-control ml-1 removePriceband" value="" id="participant"><i class="fa fa-trash" style="color:grey"></i></button>
 											<i class="fa fa-plus-circle col-2 addParticipantPrice mt-4" id="addParticipantPrice1"></i>
-											<i class="col-2 "style="display:none;" id="addParticipantPricesp1"></i>
+											<i class="col-2 pl"style="display:none;" id="addParticipantPricesp1"></i>
+										@elseif($c==1)
+											<button  maxlength="3" class=" form-control ml-1 removePriceband" value="" id="participant" ><i class="fa fa-trash" style="color:grey"></i></button>
+											<i class="col-2 pl" ></i>
+										@elseif($c==$count)
+											<button  maxlength="3" class=" form-control ml-1 removePriceband" value="" ><i class="fa fa-trash" style="color:grey"></i></button>
+											<i class="fa fa-plus-circle col-2 addParticipantPrice mt-4" id="addParticipantPrice1"></i>
+											<i class="col-2 pl"style="display:none;" id="addParticipantPricesp1"></i>
 										@else
-											<i class="col-2 " ></i>
+											<button  maxlength="3" class=" form-control ml-1 removePriceband" value="" ><i class="fa fa-trash" style="color:grey"></i></button>
+											<i class="col-2 pl" ></i>
 										@endif
+										
+										
 									</div>
 								</div>
 							</form>				
@@ -274,7 +315,7 @@
 											
 							@endif
 							@endif
-							
+							<i class="fa fa-plus-circle addParticipantPrice mt-4 dem" id="dem3" style="margin-top:-50%;float:right;display:none;" ></i>
 							<div class="financial-append"></div>
 
 						</div>
