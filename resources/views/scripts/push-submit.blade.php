@@ -121,8 +121,8 @@ var progress=0;
       progress_divide/=round_count;
       progress_add= progress_divide;
 
-        console.log('progrss'+progress_divide);
-        console.log('progrss'+progress_add);
+        //console.log('progrss'+progress_divide);
+        //console.log('progrss'+progress_add);
     
 //kopi round end
 
@@ -239,7 +239,7 @@ var progress=0;
          var hidden=current.attr('aria-hidden');
          if(hidden=="false"){
             var que_no=current.find('.question_number').text();
-             $('#question_number2').text(que_no);
+             $('.question_number2').text(que_no);
             var round_val=current.find('.question-round').val();
             var question_id=current.find('.question-id').val();
              $('#edit_question').attr('href','/round_question/edit/'+question_id);
@@ -277,7 +277,7 @@ var progress=0;
          var hidden=current.attr('aria-hidden');
          if(hidden=="false"){
              var que_no=current.find('.question_number').text();
-             $('#question_number2').text(que_no);
+             $('.question_number2').text(que_no);
             var round_val=current.find('.question-round').val();
             $('.progress_round_label').removeClass('round_2');
              $('#round'+round_val).addClass('round_2');
@@ -288,10 +288,10 @@ var progress=0;
                     $('#round-progress').css("width",progress_add+'%');
                      progress_add+=progress_divide;
                      progress=Number(round_val);
-                     console.log('progrss if'+progress_add);
+                    // console.log('progrss if'+progress_add);
                   }
                  else{
-                  console.log('progrss else'+progress_add);
+                  //console.log('progrss else'+progress_add);
                  }
 
             var time =current.find('.question-timer').val();
