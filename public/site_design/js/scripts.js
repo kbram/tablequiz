@@ -164,8 +164,15 @@ $('#login-btn').click(function(e) {
 			$('#modal__payment').removeClass('d-none');
 		},
 		error: function(result,error) {
-			alert('error');
-		   console.log('err'+error);
+            var validate=result.responseJSON.errors;
+            if(validate.email){
+                $('#email').val(validate.email)
+            }
+
+            if(validate.password){
+                $('#password').val(validate.password)
+            }
+		   
 		   },
     });
     return false;
@@ -184,8 +191,40 @@ $('#login-btn').click(function(e) {
                 $('#modal__payment').removeClass('d-none');
             },
             error: function(result,error) {
-                alert('error');
-                console.log(result);
+                var validate=result.responseJSON.errors;
+                
+
+                 if(validate.first_name){
+                    console.log(validate.first_name);
+                    $('#first_name').val(validate.first_name)
+                }
+                if(validate.last_name){
+                    console.log(validate.last_name);
+                    $('#last_name').val(validate.last_name)
+                }
+                
+                if(validate.name){
+                    console.log(validate.name);
+                    $('#name').val(validate.name)
+                }
+                
+                if(validate.email){
+                    console.log('email');
+                    console.log(validate.email);
+                    $('#email').val(validate.email)
+                }
+                
+                if(validate.password){
+                    console.log(validate.password);
+                    $('#password_signup').val(validate.password)
+                }
+
+                if(validate.password_confirmation){
+                    console.log(validate.password_confirmation);
+                    $('#password_signup_confirm').val(validate.password_confirmation)
+                }
+
+               
                },
         });
         return false;
