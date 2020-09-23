@@ -1,6 +1,9 @@
 @extends('layouts.tablequizapp')
 
 @section('content')
+
+
+
 <div class="container-fluid d-flex flex-column p-0 no-gutters">
 	<section class="container page__inner homepage p-0 d-flex align-items-center">
 		<div class="row">
@@ -9,6 +12,24 @@
 				<div class="row pt-4 pr-lg-5">
 					<div class="col-lg-6 mb-3 mb-lg-0">
 						<a href="setup/create/" class="btn btn-primary d-block">Create a quiz</a>
+						@php
+						
+							if(count($errors)==0){
+								
+								
+							}else{
+								
+								if($errors->first('email')=="These credentials do not match our records."){
+									echo "<script>$(document).ready(function($) { $('#publishQuizModal').modal('show');});</script>";
+								}else{
+									echo "<script>$(document).ready(function($) { $('#modal__login').addClass('d-none');$('#modal__signup').removeClass('d-none');$('#publishQuizModal').modal('show');});</script>";
+								}
+								
+								
+							}
+						@endphp
+
+						<div></div>
 					</div>
 					<div class="col-lg-6">
 						<a href="/play/start-quiz.php" class="btn btn-secondary d-block" data-toggle="modal" data-target="#join_a_quiz">Join a quiz</a>

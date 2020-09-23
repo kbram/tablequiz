@@ -382,7 +382,6 @@
 
 				  @include('scripts.stripe') 
 				  <script>
-                      $('.main__navigation').hide();
 						$("body").on('click', '#eyeclass', function() {
 						$(this).toggleClass("fa-eye fa-eye-slash");
 						var input = $("#password_signup");

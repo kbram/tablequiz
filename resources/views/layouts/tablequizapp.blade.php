@@ -50,18 +50,7 @@
     </head>
     <body>
 
-            @include('partials.tablequiz.head')
-
-            <main class="container-fluid page-wrap d-flex">
-
-                @yield('content')
-
-            </main>
-
-            @include('partials.tablequiz.footer')
-        
-
-            @include('partials.tablequiz.sign-up__modal')
+            
                 
         
         <script src="https://use.fontawesome.com/releases/v5.3.0/js/all.js"></script>
@@ -83,6 +72,18 @@
 
         {{-- Scripts --}}
         @yield('footer_scripts')
+        @include('partials.tablequiz.head')
+
+            <main class="container-fluid page-wrap d-flex">
+
+                @yield('content')
+
+            </main>
+
+            @include('partials.tablequiz.footer')
+        
+
+            @include('partials.tablequiz.sign-up__modal')
 
     </body>
 </html>
