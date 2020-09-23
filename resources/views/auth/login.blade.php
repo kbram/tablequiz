@@ -4,7 +4,22 @@
 
 @section('content')
 
-    
+@php
+						
+							if(count($errors)==0){
+								
+								
+							}else{
+								
+								if($errors->first('email')=="These credentials do not match our records."){
+
+								}else{
+									echo "<script>$(document).ready(function($) { $('#modal__login').addClass('d-none');$('#modal__signup').removeClass('d-none');});</script>";
+								}
+								
+								
+							}
+						@endphp
    
 
 <div class="col-12" id="publishQuizModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
@@ -24,9 +39,7 @@
 
       <div class="modal-header justify-content-center d-flex">
         <h1 class="modal-title" id="publishQuizModalLabel">Login</h1>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        
 	  </div>
 	  
 
@@ -120,9 +133,7 @@
 	<div class="modal-content d-none" id="modal__signup">
       <div class="modal-header justify-content-center d-flex">
         <h1 class="modal-title" id="publishQuizModalLabel">Sign Up</h1>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        
 		  <a class="back_to__login" href="#"><i class="fa fa-angle-left"></i><span>Login</span></a>
       </div>
       <div class="modal-body">
