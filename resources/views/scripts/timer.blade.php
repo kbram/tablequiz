@@ -117,7 +117,7 @@ $(document).ready(function() {
             //alert("dfsdfsd")
             $('.single__answer')
                 .click(function() {
-                console.log("click on single answer");
+               // console.log("click on single answer");
                 if ($box == null) {
                     $box = $(this);
                     $box.css("box-shadow","3px 3px 15px #7343C1, -1px -1px 5px rgba(0, 0, 0, 0.045)");
@@ -146,10 +146,10 @@ $(document).ready(function() {
                 e.preventDefault();  
 
                 var answer = $('#answer');
-                console.log(answer.length);
+                //console.log(answer.length);
                 if(answer.length == 0){
 
-                    alert('please select answer');
+                    swal('please select answer');
                 }
                 else{
                     $('#resub').css('cursor','not-allowed');
@@ -424,7 +424,7 @@ $(document).ready(function() {
 
     //when pusher run
 
-	Pusher.logToConsole = true;
+	Pusher.logToConsole = false;
 
 	var pusher = new Pusher('87436df86baf66b2192a', {
 		cluster: 'ap2'
@@ -678,7 +678,7 @@ $(document).ready(function() {
 
         $('.single__answer')
             .click(function() {
-            console.log("click on single answer");
+           // console.log("click on single answer");
             if ($box == null) {
                 $box = $(this);
                 $box.css("box-shadow","3px 3px 15px #7343C1, -1px -1px 5px rgba(0, 0, 0, 0.045)");
@@ -707,7 +707,7 @@ $(document).ready(function() {
             e.preventDefault();  
             
     var answer = $('#answer');
-    console.log(answer.length);
+    //console.log(answer.length);
     if(answer.length == 0){
 
         swal("Please select answer !",'select or submit answer', "danger")

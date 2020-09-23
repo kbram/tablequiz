@@ -371,7 +371,7 @@
 	});	
 	// Enable pusher logging - don't include this in production
 	
-	Pusher.logToConsole = true;
+	Pusher.logToConsole = false;
 
 	var pusher = new Pusher('87436df86baf66b2192a', {
 	cluster: 'ap2'
@@ -385,15 +385,15 @@
 		var m0 = message.replace('{"text":"','');
 		var m0 = m0.replace('"}','');
 		var m=m0.split("#^");
-console.log(m);
+//console.log(m);
 var status = m[2];
-console.log(status);
+//console.log(status);
  
 
 var id_correct = m[0]+"1";
 var id_wrong = m[0]+"0";
 
-console.log(status);
+//console.log(status);
 
 		// var text="<tr><td>"+m[0]+"</td><td>"+m[1]+"</td><td><form><input type='radio' id="+id_correct+" name='correct_answer_1' value='correct'><input type='radio' name='correct_answer_1' id="+id_wrong+" value='incorrect'></form></td><td></td></form></tr>";
 		
@@ -416,12 +416,12 @@ if(id == m[5]){
 if(status){
 		if(Number(status) == 1){
 $('#'+id_correct).prop("checked", true);
-			console.log("correct");
+			//console.log("correct");
 		}
 		else if(Number(status) == 0){
 			$('#'+id_wrong).prop("checked", true);
 
-			console.log("not correct");
+			//console.log("not correct");
 		}
 	}
 		
