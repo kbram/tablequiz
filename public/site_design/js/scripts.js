@@ -170,12 +170,13 @@ $('#login-btn').click(function(e) {
 		},
 		error: function(result,error) {
             var validate=result.responseJSON.errors;
+            $('.text-danger').html('');
             if(validate.email){
-                $('#email').val(validate.email)
+                $('#login_email').after('<span class="text-danger"><strong>'+validate.email+'</strong></span>');
             }
 
             if(validate.password){
-                $('#password').val(validate.password)
+                $('#password').after('<span class="text-danger"><strong>'+validate.password+'</strong></span>');
             }
 		   
 		   },
@@ -198,35 +199,28 @@ $('#login-btn').click(function(e) {
             error: function(result,error) {
                 var validate=result.responseJSON.errors;
                 
-
-                 if(validate.first_name){
-                    console.log(validate.first_name);
-                    $('#first_name').val(validate.first_name)
+                  $('.text-danger').html('');
+                 if(validate.first_name){ 
+                    $('#first_name').after('<span class="text-danger"><strong>'+validate.first_name+'</strong></span>');
                 }
-                if(validate.last_name){
-                    console.log(validate.last_name);
-                    $('#last_name').val(validate.last_name)
+                if(validate.last_name){             
+                    $('#last_name').after('<span class="text-danger"><strong>'+validate.last_name+'</strong></span>');
                 }
                 
                 if(validate.name){
-                    console.log(validate.name);
-                    $('#name').val(validate.name)
+                    $('#name').after('<span class="text-danger"><strong>'+validate.name+'</strong></span>');
                 }
-                
+               
                 if(validate.email){
-                    console.log('email');
-                    console.log(validate.email);
-                    $('#email').val(validate.email)
+                    $('#email').after('<span class="text-danger"><strong>'+validate.email+'</strong></span>');
                 }
                 
                 if(validate.password){
-                    console.log(validate.password);
-                    $('#password_signup').val(validate.password)
+                    $('#password_signup').after('<span class="text-danger"><strong>'+validate.email+'</strong></span>');
                 }
 
                 if(validate.password_confirmation){
-                    console.log(validate.password_confirmation);
-                    $('#password_signup_confirm').val(validate.password_confirmation)
+                    $('#password_signup_confirm').after('<span class="text-danger"><strong>'+validate.password_confirmation+'</strong></span>');
                 }
 
                
