@@ -43,7 +43,7 @@ jQuery(document).ready(function($) {
 var i =0;
         //var newRow ='<div class="row multiple__choice__row pb-3 align-items-center"><div class="col-7"><input name="multiple__choice__answer__1[]" class="form-control" type="text"></div><div class="col-1 justify-content-center p-0 d-flex"><span class="minus">-</span></div><div class="col-1 justify-content-center"><span class="plus">+</span></div><div class="col-3 text-center form-check"><input type="radio" id="rdd" name="multiple__choice__correct__answer" value="'+i+'"></div></div>';
 
-        var parent = $(this);
+        // var parent = $(this);
         $('body').on('click','span.plus',function(){
             i+=1;
 
@@ -57,22 +57,22 @@ var i =0;
           
 
 
-            var newRow ='<div class="row multiple__choice__row  pb-3 align-items-center"><div class="col-7 multi"><input name="'+gtname+'" class="form-control multiple-choice-answer" type="text"></div><div class="col-1 justify-content-center p-0 d-flex"><span class="minus">-</span></div><div class="col-1 justify-content-center"><span class="plus">+</span></div><div class="col-3 text-center form-check"><input class="multiple-choice-correct-answer" type="radio" id="rdd" name="'+gtname_correct+'" value="'+i+'" ></div></div>';
+            var newRow ='<div class="row multiple__choice__row  pb-3 align-items-center"><div class="col-7 multi"><input name="'+gtname+'" class="form-control multiple-choice-answer" type="text"></div><div class="col-1 justify-content-center p-0 d-flex"><span class="minus">-</span></div><div class="col-1 justify-content-center"><span class="plus">+</span></div><div class="col-3 text-center form-check"><input class="multiple-choice-correct-answer" type="radio" id="rdd" name="'+gtname_correct+'"  ></div></div>';
 
 
             $(this).parents('.multiple__choice__row').after(newRow);
         }).on('click', 'span.minus', function() {
             $(this).parents('.multiple__choice__row').detach();
         })
-/**each function */
-   // });
+
+    // });
 
   
 //kopi 
     // Forms - add another multiple choice Q //
 	// $('.multiple__choice__row').each(function(){
 		
-		// var i=0;
+		var i=0;
 		//var newRow ='<div class="row multiple__choice__row pb-3 align-items-center"><div class="col-7"><input name="multiple__choice__answer__1[]" class="form-control" type="text"></div><div class="col-1 justify-content-center p-0 d-flex"><span class="minus">-</span></div><div class="col-1 justify-content-center"><span class="plus">+</span></div><div class="col-3 text-center form-check"><input type="radio" id="rdd" name="multiple__choice__correct__answer" value="'+i+'"></div></div>';
 		
 	// 	var parent = $(this);
@@ -96,11 +96,16 @@ var i =0;
     $("body").delegate('input:radio.multiple-choice-correct-answer', 'click', function() {
           
         var gtname_correct_val=$(this).closest('.multiple__choice__row').find('.multiple-choice-answer').val();
+        // console.log(gtname_correct_val);
+        
         $(this).val(gtname_correct_val);
         console.log('radio value'+gtname_correct_val);
           
     });
-      
+    
+
+	
+       
 	
 	/// Forms - Hide & Show ////
 	

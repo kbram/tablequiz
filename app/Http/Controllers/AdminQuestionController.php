@@ -8,6 +8,7 @@ use App\Models\GlobalQuestionMedia;
 use App\Models\GlobalAnswer;
 use Illuminate\Http\Request;
 use App\Models\Question;
+
 use Illuminate\Http\Response;
 use DB;
 use Validator;
@@ -17,6 +18,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class AdminQuestionController extends Controller
 {
+
+  public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
 
     public function create()
@@ -77,10 +83,11 @@ class AdminQuestionController extends Controller
             $validator = Validator::make($request->all(),
             [   
               'category__type'                 => 'required',
-               'multiple__choice__answer__1'   => 'required',
+               'multiple__choice__answer__0'   => 'required',
                'question'                      => 'required', 
             ]);
             if ($validator->fails()) {
+
               return back()->withErrors($validator)->withInput();
           }
       }
@@ -127,7 +134,7 @@ class AdminQuestionController extends Controller
                 $file_name = 'image_media.'.$image_media->getClientOriginalExtension();
                 $save_path = storage_path('app/public'). '/global_questions/'.$question_id.'/image_media/';
                 $path = $save_path.$file_name;
-                $public_path = '/global_questions/image_media/'.$question_id.'/image_media/'.$file_name;
+                $public_path = 'storage/global_questions/'.$question_id.'/image_media/'.$file_name;
 
                 File::makeDirectory($save_path, $mode = 0755, true, true);
 
@@ -163,7 +170,7 @@ class AdminQuestionController extends Controller
                 $file_name = 'audio_media.'.$audio_media->getClientOriginalExtension();
                 $save_path = storage_path('app/public'). '/global_questions/'.$question_id.'/audio_media/';
                 $path = $save_path.$file_name;
-                $public_path = '/global_questions/audio_media/'.$question_id.'/audio_media/'.$file_name;
+                $public_path = 'storage/global_questions/'.$question_id.'/audio_media/'.$file_name;
 
                 File::makeDirectory($save_path, $mode = 0755, true, true);
 
@@ -198,7 +205,7 @@ class AdminQuestionController extends Controller
                             $file_name = 'video_media.'.$video_media->getClientOriginalExtension();
                             $save_path = storage_path('app/public'). '/global_questions/'.$question_id.'/video_media/';
                             $path = $save_path.$file_name;
-                            $public_path = '/global_questions/video_media/'.$question_id.'/video_media/'.$file_name;
+                            $public_path = 'storage/global_questions/'.$question_id.'/video_media/'.$file_name;
 
                             File::makeDirectory($save_path, $mode = 0755, true, true);
 
@@ -234,23 +241,27 @@ class AdminQuestionController extends Controller
             }
 
             else if($request->question__type == 'multiple__choice__question'){
-              
-                $arr=$request->multiple__choice__answer__1;
-                $ca=$request->multiple__choice__correct__answer;
+                $arr=$request->multiple__choice__answer__0;
+                $ca=$request->multiple__choice__correct__answer__0;
             
                 
                 for($i = 0 ; $i < count($arr) ; $i++)
                 {     
                     $answer = new GlobalAnswer;
-                      if($ca==$i){
+                    $answer->answer= $arr[$i];
+
+                      if($ca==$arr[$i]){
                         $answer->answer_stat= true;
                        
                       }
-                            
-                     $answer->answer= $arr[$i];
+                      else{
+                        $answer->answer_stat= false;
+                       
+                      }
                      $answer->question_id=$question_id;
                      $answer->save();
-                   }
+                }
+
                }
                 
                 else if($question->question_type == 'numeric__question'){
@@ -280,7 +291,13 @@ class AdminQuestionController extends Controller
             $audio_media_edit               = GlobalQuestionMedia::where('question_id',$questions->id)->where('media_type','=','Audio')->get();
             $video_media_edit               = GlobalQuestionMedia::where('question_id',$questions->id)->where('media_type','=','Video')->get();
             
-            return view('admin.questions-edit',compact('cat_name','categories','questions','standard_answer','multiple_answer','numeric_answer','image_media_edit','audio_media_edit','video_media_edit'));
+       $categories = QuizCategory::all();
+       $question=GlobalQuestion::where('id',$id)->first();
+       $answers=GlobalAnswer::where('question_id',$id)->get();
+       $question_type=$question->question_type;
+      
+
+            return view('admin.questions-edit',compact('question_type','answers','question','categories','cat_name','categories','questions','standard_answer','multiple_answer','numeric_answer','image_media_edit','audio_media_edit','video_media_edit'));
         
         }
 
@@ -304,7 +321,7 @@ class AdminQuestionController extends Controller
             elseif($request->input('question__type') == 'multiple__choice__question'){
                  $validator = Validator::make($request->all(),
                  [
-                    'multiple__choice__answer__1'   => 'required',
+                    'multiple__choice__answer__0'   => 'required',
                  ]);
                }
            elseif($request->input('question__type') == 'numeric__question'){
@@ -505,7 +522,7 @@ class AdminQuestionController extends Controller
             }
 
             elseif($request->input('question__type') == 'multiple__choice__question'){
-              
+              dd($request);
                 $answer                      = GlobalAnswer::where('question_id',$id)->first();
                 $answer->answer              = $answer_get;
                 $answer->answer_stat         = true;

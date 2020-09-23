@@ -25,24 +25,25 @@ display:none;
 }}
 </style>
 <section class="container page__inner">
-	<div class="row">
+	<div class="row ">
 		<article class="col-12">
-			<h1 class="mb-4 abouthead" text-align="center"><strong>About TableQuiz.App</strong></h1>
+		<div class="text-center">
+			<h1 class="mb-4 abouthead text-center" text-align="center"><strong>About TableQuiz.App</strong></h1>
 			<p class="pl-5 pr-5 text-center ">TableQuiz.app is a web quizzing tool built for the education sector.
 Quizzes can be setup and ran free of charge and ran using a simple link, no installations neccessary to setup, no registrations needed to play!
 			</p>
+			</div>
 <br>
 <br>
 
 <div class="container">
-<div class="raw d-flex col-md-12">
+<div class="row">
 
-<div class="">
-<div class="easycontant">
+<div class="easycontant col-xl-7 col-lg-7 col-md-12 col-sm-12">
 			<h2 class="">Easy Setup </h2>
 <br>
 
-			<ul class="how-it-works__homepage mb-5 mt-3 ">
+			<ul class="how-it-works__homepage  mt-3 ">
 			<li class="py-3">Quickly create a quiz by entering questions and answers on mobile or web</li>
 
 			<li class="py-3">Customize your questions with images, audio & videos</li>
@@ -52,10 +53,9 @@ Quizzes can be setup and ran free of charge and ran using a simple link, no inst
 			
 			
 </div>
-</div>
 
-<div class="col-6  img-1st">
-<img src="site_design/images/about1.jpeg" class="homepage__logo" alt="TableQuiz.app logo"  >
+<div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 py-5 mt-5">
+<img src="site_design/images/about1.jpg" class="homepage__logo" alt="TableQuiz.app logo"  >
 </div>
 
 </div>	
@@ -65,13 +65,13 @@ Quizzes can be setup and ran free of charge and ran using a simple link, no inst
 
 <br>
 <br>
-<div class="raw d-flex">
+<div class="row ">
 
-<div class="col-6 img-1st">
-<img src="site_design/images/about2.jpeg" class="homepage__logo" alt="TableQuiz.app logo" >
+<div class="col-lg-5  col-md-12 col-sm-12 py-5 mt-5">
+<img src="site_design/images/about2.jpg" class="homepage__logo" alt="TableQuiz.app logo" >
 </div>
 
-<div class=" ">
+<div class="col-lg-7 col-md-12 col-sm-12">
 <div class="easycontant">
 			<h2> Easy to Run </h2>
 			<br>
@@ -91,12 +91,11 @@ Quizzes can be setup and ran free of charge and ran using a simple link, no inst
 <br>
 <br>
 <hr>
-<br>
-<br>
 
-<div class="raw d-flex">
 
-<div class=" ">
+<div class="row ">
+
+<div class="col-lg-7 col-md-12 col-sm-12">
 <div class="easycontant ">
 
 			<h2>Easy to Play </h2>
@@ -111,17 +110,15 @@ Quizzes can be setup and ran free of charge and ran using a simple link, no inst
 </div>
 </div>
 
-<div class="col-4 img-1st">
-<img src="site_design/images/about3.jpeg" class="homepage__logo" alt="TableQuiz.app logo"  >
+<div class="col-lg-5  col-md-12 col-sm-12">
+<img src="site_design/images/about3.jpg" class="homepage__logo" alt="TableQuiz.app logo"  >
 </div>
 </div>
 <br>
-<br>
-<br>
-<div class="raw d-flex">
-	<div class="col-4"></div>
-<div class="col-4 col-centered">
-<a href="/setup/create/" class="btn btn-primary d-block">Get started ></a>
+
+<div class="raw ">
+<div class="col-lg-12 col-md-12 cols-sm-4 col-centered text-center">
+<a href="/setup/create/" class="btn btn-primary ">Get started ></a>
 <div class="col-4"></div>
 
 </div>

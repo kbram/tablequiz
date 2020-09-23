@@ -31,13 +31,15 @@
 @section('content')
 <script src='jquery-3.2.1.min.js'></script> 
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 <section class="container page__inner">
 
 <form id="add_round" action="/round" method="post" enctype="multipart/form-data" role="main" >
 		 @csrf
 <div class="is_container row" >
 
-		<article class="col-12">
+		<article class="col-12 ">
 
 			<div class="article__heading">
 				<h1>Round {{$round_count ?? '1'}} Setup</h1>
@@ -87,7 +89,7 @@
 							</div>
 							<div class="modal-body">
 								<div class="modal__edit__image position-relative">
-								   <img class="modal__edit__image__image position-relative" id="round_image" style="display:block;margin-left:auto;margin-right:auto;" src="#">
+								   <img class="modal__edit__image__image position-absolute" id="round_image" style="display:block;margin-left:auto;margin-right:auto;" src="#">
 									<div class="modal__edit__image__mask"></div>
 								</div>
 								<div class="modal__edit__image__range">
@@ -107,6 +109,7 @@
 										</div>
 										<div class="col-9">
 											<input type="range" min="1" max="100" class="form-control-range" id="formControlRange">
+											
 										</div>
 									</div>
 								</div>
@@ -118,7 +121,7 @@
 									</label>
 								</div>
 								<div class="col-md-3 ml-0 ml-lg-1 d-flex">
-									<button type="submit" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
+									<button id="pro" type="submit" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
 
 								</div>
 							</div>
@@ -144,7 +147,7 @@
 <!-- <form class="is_container row" id="add_round" action="/question" method="post" enctype="multipart/form-data" role="main">
 @csrf	 -->
 
-		<article class="col-12 article">
+		<article class="col-12 article ">
 <div class="article_question">
 			<div class="article__heading">
 				<h1>Question <span id="number"> 1</span></h1>
@@ -209,7 +212,7 @@
 				<div class="modal" id="add__image__media" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
  								  <div class="modal-dialog" role="document">
  									<div class="modal-content">
- 									  <div class="modal-header justify-content-center">
+ 									  <div class="modal-header">
  										<h1 class="modal-title" id="add__image__media__modal__heading"></h1>
  										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
  										  <span aria-hidden="true">&times;</span>
@@ -222,7 +225,7 @@
  												<label>Add link image</label>
  											</div>
  											<div class="col-md-8">
- 												<input type="url" name="add_link_to_image__media__0" class="form-control add-image-media-link" id="add__image__media__text">
+ 												<input type="url" name="add_link_to_image__media__0" class="form-control add-image-media-link" value="" id="add__image__media__text">
  											</div>
  										</div>
  										<div class="text-center w-100">
@@ -231,14 +234,15 @@
  										<div class="form-row justify-content-center pt-3">
  											<div class="col-md-3">	
  											   <label class="d-block" for="upload__image__media__file">Upload
- 													<input type="file" class="form-control-file" id="upload__image__media__file" value="Upload" name="image_media_0">
+ 													<input type="file" class="form-control-file " id="upload__image__media__file" value="Upload" name="image_media_0">
  												</label>
  											</div>
  										</div>
  									  </div>
+									 
  									  <div class="modal-footer justify-content-center">
  										  <div class="col-sm-4">
- 											<button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
+ 											<button id="pro1" type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
  										  </div>
  									  </div>
  									</div>
@@ -248,7 +252,7 @@
                              	<div class="modal" id="add__audio__media" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
  								  <div class="modal-dialog" role="document">
  									<div class="modal-content">
- 									  <div class="modal-header justify-content-center">
+ 									  <div class="modal-header ">
  										<h1 class="modal-title" id="add__audio__media__modal__heading"></h1>
  										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
  										  <span aria-hidden="true">&times;</span>
@@ -277,7 +281,7 @@
  									  </div>
  									  <div class="modal-footer justify-content-center">
  										  <div class="col-sm-4">
- 											<button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
+ 											<button id="pro2" type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
  										  </div>
  									  </div>
  									</div>
@@ -286,7 +290,7 @@
  								<div class="modal" id="add__video__media" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
  								  <div class="modal-dialog" role="document">
  									<div class="modal-content">
- 									  <div class="modal-header justify-content-center">
+ 									  <div class="modal-header ">
  										<h1 class="modal-title" id="add__video__media__modal__heading"></h1>
  										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
  										  <span aria-hidden="true">&times;</span>
@@ -315,7 +319,7 @@
  									  </div>
  									  <div class="modal-footer justify-content-center">
  										  <div class="col-sm-4">
- 											<button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
+ 											<button id="pro3" type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
  										  </div>
  									  </div>
  									</div>
@@ -532,8 +536,176 @@
 @endsection
 
 @section('footer_scripts')
+<script>    
+var size=2000;
+$('#upload__quiz__icon').on('change', function() { 
+	size=this.files[0].size;
+}); 
+$("#pro").click(function(){
+	var s=$('#upload__quiz__icon').val();
+	s=Math.round(size/100);
+	if(s=="" ){
+
+	}else{
+		let timerInterval
+		Swal.fire({
+		title: 'File Uploading!',
+		html: 'please wait <br><b></b> kb remaining',
+		timer: s,
+		timerProgressBar: true,
+		onBeforeOpen: () => {
+			Swal.showLoading()
+			timerInterval = setInterval(() => {
+			const content = Swal.getContent()
+			if (content) {
+				const b = content.querySelector('b')
+				if (b) {
+				b.textContent = Swal.getTimerLeft()
+				}
+			}
+			}, 100)
+		},
+		onClose: () => {
+			clearInterval(timerInterval)
+		}
+		}).then((result) => {
+		/* Read more about handling dismissals below */
+		if (result.dismiss === Swal.DismissReason.timer) {
+			console.log('I was closed by the timer')
+		}
+		})
+	}
+});
+
+var size1=2000;
+$('#upload__image__media__file').on('change', function() { 
+	size1=this.files[0].size;
+}); 
+
+$("#pro1").click(function(){
+	var s=$('#upload__image__media__file').val();
+	var s1=$('#add__image__media__text').val();
+	s=Math.round(size1/100);
+	if(s=="" && s1==""){
+
+	}else{
+		let timerInterval
+		Swal.fire({
+		title: 'File Uploading!',
+		html: 'please wait <br><b></b> kb remaining',
+		timer: s,
+		timerProgressBar: true,
+		onBeforeOpen: () => {
+			Swal.showLoading()
+			timerInterval = setInterval(() => {
+			const content = Swal.getContent()
+			if (content) {
+				const b = content.querySelector('b')
+				if (b) {
+				b.textContent = Swal.getTimerLeft()
+				}
+			}
+			}, 100)
+		},
+		onClose: () => {
+			clearInterval(timerInterval)
+		}
+		}).then((result) => {
+		/* Read more about handling dismissals below */
+		if (result.dismiss === Swal.DismissReason.timer) {
+			console.log('I was closed by the timer')
+		}
+		})
+	}
+});
+
+var size2=2000;
+
+$('#upload__audio__media__file').on('change', function() { 
+	size2=this.files[0].size;
+}); 
+
+$("#pro2").click(function(){
+	var s=$('#upload__audio__media__file').val();
+	var s1=$('#add__audio__media__text').val();
+	s=Math.round(size2/100);
+	if(s=="" && s1==""){
+
+	}else{
+		let timerInterval
+		Swal.fire({
+		title: 'File Uploading!',
+		html: 'please wait <br><b></b> kb remaining',
+		timer: s,
+		timerProgressBar: true,
+		onBeforeOpen: () => {
+			Swal.showLoading()
+			timerInterval = setInterval(() => {
+			const content = Swal.getContent()
+			if (content) {
+				const b = content.querySelector('b')
+				if (b) {
+				b.textContent = Swal.getTimerLeft()
+				}
+			}
+			}, 100)
+		},
+		onClose: () => {
+			clearInterval(timerInterval)
+		}
+		}).then((result) => {
+		/* Read more about handling dismissals below */
+		if (result.dismiss === Swal.DismissReason.timer) {
+			console.log('I was closed by the timer')
+		}
+		})
+	}
+});
+var size3=2000;
+
+$('#upload__video__media__file').on('change', function() { 
+	size3=this.files[0].size;
+}); 
+$("#pro3").click(function(){
+	var s=$('#upload__video__media__file').val();
+	var s1=$('#add__video__media__text').val();
+	s=Math.round(size3/100);
+	if(s=="" && s1==""){
+
+	}else{
+		let timerInterval
+		Swal.fire({
+		title: 'File Uploading!',
+		html: 'please wait <br><b></b> kb remaining',
+		timer: s,
+		timerProgressBar: true,
+		onBeforeOpen: () => {
+			Swal.showLoading()
+			timerInterval = setInterval(() => {
+			const content = Swal.getContent()
+			if (content) {
+				const b = content.querySelector('b')
+				if (b) {
+				b.textContent = Swal.getTimerLeft()
+				}
+			}
+			}, 100)
+		},
+		onClose: () => {
+			clearInterval(timerInterval)
+		}
+		}).then((result) => {
+		/* Read more about handling dismissals below */
+		if (result.dismiss === Swal.DismissReason.timer) {
+			console.log('I was closed by the timer')
+		}
+		})
+	}
+});
+</script>
 @include('scripts.suggest')
 @include('scripts.bg-image');
+@include('scripts.payment');
 @include('scripts.payment');
 
 

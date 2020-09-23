@@ -197,7 +197,7 @@ class MasterQuestionController extends Controller
          if($id){
             $ans=[];
             $medias=[];
-            $ques=GlobalQuestion::where('category_id',$id)->where('question_type','standard__question')->get();
+            $ques=GlobalQuestion::where('category_id',$id)->where('question_type','standard__question')->orWhere('question_type','numeric__question')->get();
             foreach($ques as $que){
                
                  $ans[]=GlobalAnswer::where('question_id',$que->id)->get();
@@ -233,13 +233,13 @@ class MasterQuestionController extends Controller
                  $medias[]=GlobalQuestionMedia::where('question_id',$que->id)->where('media_type','Image')->get(); 
                 
              }
-           
             $response = array(
                 'status' => 'success',
                 'msg' => $ques,
                 'ans' => $ans,
                 'img' => $medias,
             );
+        
           
             return response()->json($response);
     }
@@ -697,7 +697,7 @@ if(Session::has('question_video_'.$i)){
                     $answer_save->question_id = $questinon_save->id;
 
                     if($correct == $request->$multi_con[$j]){
-         
+                        
                                 $answer_save->status = 1;
                          }
 

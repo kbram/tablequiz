@@ -65,7 +65,7 @@ Route::group(['middleware' => ['auth', 'activated', 'activity', 'checkblocked']]
 Route::group(['middleware' => ['auth', 'activated', 'activity', 'twostep', 'checkblocked']], function () {
 
     //  Homepage Route - Redirect based on user role is in controller.
-    Route::get('/homelaravel', ['as' => 'public.home',   'uses' => 'UserController@index']);
+    Route::get('/homelaravel', ['as' => 'public.home',   'uses' => 'DashboardController@showMyQuizzes']);
 
     // Show users profile - viewable by other users.
     Route::get('profile/{username}', [

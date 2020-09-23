@@ -33,7 +33,12 @@
 			  		<label for="login__user">Username/email</label>
 				</div>
 			  	<div class="col-md-7">
-					<input id="email" type="email" name="email"  type="text" class="form-control" name="login__user"> 
+					<input id="email" type="email" name="email"  type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="login__user" value="{{ old('email') }}" required> 
+					@if ($errors->has('email'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('email')}}</strong>
+                                    </span>
+                                @endif
 				</div>
 			</div>
 			<div class="form-row">
@@ -41,25 +46,28 @@
 			  		<label for="login__pass">Password</label>
 				</div>
 			  	<div class="col-md-7">
-					<input id="password" name="password" type="password" class="form-control" name="login__pass"> 
+					<input id="password" name="password" type="password" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" required name="login__pass"> 
+					@if ($errors->has('email'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('email')}}</strong>
+                                    </span>
+                                @endif
 				</div>
 			</div>
-			<div class="form-row d-flex justify-content-center mt-5">
-				<div class="col-10 col-md-4">
+			<div class="form-row  text-center justify-content-center mt-5">
+				<div class="col-lg-4 col-md-4 ">
 				@if (session()->has('quiz'))
-					<input class="d-block btn btn-primary " id="login-btn" type="submit" value="Log In">
+					<input class="d-block btn btn-primary pb-3 " id="login-btn" type="submit" value="Log In">
+					
 					@else
-					<input class="d-block btn  btn-primary" type="submit" value="Log In">
+					<input class="d-block btn  btn-primary pb-3" type="submit" value="Log In">
 					<!-- for check out view -> to__checkout -->
 					@endif
-				</div>
-				<div class="col-10 col-md-4 mt-3">
-
-				 <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('auth.forgot') }}
+					<a class="text-dark " href="{{ route('password.request') }}">
+                           <p>     Forgot your password ? </p>
                 </a>
-					<!-- for check out view -> to__checkout -->
 				</div>
+				
 			</div>
 		</form>
 
@@ -119,7 +127,12 @@
 			  		<label for="signup__user_firstname">First Name</label>
 				</div>
 			  	<div class="col-md-7">
-					<input id="first_name"  type="text" class="form-control" name="first_name"> 
+					<input id="first_name"  type="text" class="form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" value="{{ old('first_name') }}" required autofocus> 
+					@if ($errors->has('first_name'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('first_name') }}</strong>
+                                    </span>
+                                @endif
 				</div>
 			</div>
 			<div class="form-row">
@@ -127,7 +140,12 @@
 			  		<label for="signup__user_lastname">Last Name</label>
 				</div>
 			  	<div class="col-md-7">
-					<input id="last_name" type="text" class="form-control" name="last_name"> 
+					<input id="last_name" type="text" class="form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}" name="last_name" value="{{ old('last_name') }}" required autofocus> 
+					@if ($errors->has('last_name'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('last_name') }}</strong>
+                                    </span>
+                                @endif
 				</div>
 			</div>
 			<div class="form-row">
@@ -135,7 +153,7 @@
 			  		<label for="signup__username">Username</label>
 				</div>
 			  	<div class="col-md-7">
-					<input id="name" name="name" type="text" class="form-control" name="signup__username"> 
+					<input id="name" name="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="signup__username" value="{{ old('name') }}" required autofocus> 
 				</div>
 			</div>
 			<div class="form-row">
@@ -143,7 +161,12 @@
 			  		<label for="signup__email">Email</label>
 				</div>
 			  	<div class="col-md-7">
-					<input id="email" type="email" class="form-control" name="email"> 
+					<input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required> 
+					@if ($errors->has('email'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('email')}}</strong>
+                                    </span>
+                                @endif
 				</div>
 			</div>
 			<div class="form-row">
@@ -151,7 +174,12 @@
 			  		<label for="signup__pass">Password</label>
 				</div>
 			  	<div class="col-md-7">
-					<input id="password_signup" type="password" class="form-control" name="password"><i class="far fa-eye" id="eyeclass" style= "float: right; margin-top: -30px; margin-right: 15px;"></i></input>
+					<input id="password_signup" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required><i class="far fa-eye" id="eyeclass" style= "float: right; margin-top: -30px; margin-right: 15px;"></i></input>
+					@if ($errors->has('password'))
+						<span class="invalid-feedback">
+							<strong>{{ $errors->first('password') }}</strong>
+						</span>
+					@endif
 				</div>
 				
 			</div>
