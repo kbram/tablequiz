@@ -113,6 +113,7 @@ class RegisterController extends Controller
         } else {
             $role = Role::where('slug', '=', 'quizmaster')->first();
             $activated = true;
+
         }
 
         $user = User::create([
@@ -133,7 +134,6 @@ class RegisterController extends Controller
         $profile = new Profile();
         $user->profile()->save($profile);
         $user->save();
-        Session::put('quizmaster','master');
 
         return $user;
     }

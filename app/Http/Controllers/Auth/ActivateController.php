@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use jeremykenedy\LaravelRoles\Models\Role;
+use Session;
 
 class ActivateController extends Controller
 {
@@ -184,7 +185,7 @@ class ActivateController extends Controller
         $user = Auth::user();
         $currentRoute = Route::currentRouteName();
         $ipAddress = new CaptureIpTrait();
-        $role = Role::where('slug', '=', 'user')->first();
+        $role = Role::where('slug', '=', 'quizmaster')->first();
 
         $rCheck = $this->activeRedirect($user, $currentRoute);
         if ($rCheck) {
@@ -208,6 +209,8 @@ class ActivateController extends Controller
         $user->attachRole($role);
         $user->signup_confirmation_ip_address = $ipAddress->getClientIp();
         $user->save();
+        Session::put('quizmaster','master');
+
 
         $allActivations = Activation::where('user_id', $user->id)->get();
         foreach ($allActivations as $anActivation) {
