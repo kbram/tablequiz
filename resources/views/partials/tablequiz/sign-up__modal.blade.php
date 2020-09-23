@@ -33,7 +33,7 @@
 			  		<label for="login__user">Username/email</label>
 				</div>
 			  	<div class="col-md-7">
-					<input id="email" type="email" name="email"  type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="login__user" value="{{ old('email') }}" required> 
+					<input id="login_email" type="email" name="email"  type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="login__user" value="{{ old('email') }}" required> 
 					@if ($errors->has('email'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('email')}}</strong>

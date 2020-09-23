@@ -169,8 +169,16 @@ $('#login-btn').click(function(e) {
 			$('#modal__payment').removeClass('d-none');
 		},
 		error: function(result,error) {
-			alert('error');
-		   console.log('err'+error);
+            var validate=result.responseJSON.errors;
+            $('.text-danger').html('');
+            if(validate.email){
+                $('#login_email').after('<span class="text-danger"><strong>'+validate.email+'</strong></span>');
+            }
+
+            if(validate.password){
+                $('#password').after('<span class="text-danger"><strong>'+validate.password+'</strong></span>');
+            }
+		   
 		   },
     });
     return false;
@@ -189,8 +197,33 @@ $('#login-btn').click(function(e) {
                 $('#modal__payment').removeClass('d-none');
             },
             error: function(result,error) {
-                alert('error');
-                console.log(result);
+                var validate=result.responseJSON.errors;
+                
+                  $('.text-danger').html('');
+                 if(validate.first_name){ 
+                    $('#first_name').after('<span class="text-danger"><strong>'+validate.first_name+'</strong></span>');
+                }
+                if(validate.last_name){             
+                    $('#last_name').after('<span class="text-danger"><strong>'+validate.last_name+'</strong></span>');
+                }
+                
+                if(validate.name){
+                    $('#name').after('<span class="text-danger"><strong>'+validate.name+'</strong></span>');
+                }
+               
+                if(validate.email){
+                    $('#email').after('<span class="text-danger"><strong>'+validate.email+'</strong></span>');
+                }
+                
+                if(validate.password){
+                    $('#password_signup').after('<span class="text-danger"><strong>'+validate.email+'</strong></span>');
+                }
+
+                if(validate.password_confirmation){
+                    $('#password_signup_confirm').after('<span class="text-danger"><strong>'+validate.password_confirmation+'</strong></span>');
+                }
+
+               
                },
         });
         return false;
