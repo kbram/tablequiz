@@ -36,7 +36,7 @@
 		<div class="row">
 			<aside class="col-lg-3 dashboard__sidebar d-flex flex-column order-1 order-md-0">
 				<div class="dashboard__container d-flex flex-column align-items-center mb-3">
-				<h5>Que No:<span id="question_number2"></span></h5>
+				<h5>Que No:<span id="que" class="question_number2"></span></h5> 
 					<h5>Countdown timer</h5>
 					<p class="countdown__time " id="timer" style="font-size:300%;"></p>
 					<div class="countdown__buttons row">
@@ -265,6 +265,7 @@
 			$("#issue").css("pointer-events", "none");
 			$('#issue').css('opacity','0.4');
 			$('#timer').removeClass("countdown__time");
+			$('#que').removeClass("question_number2");
 			play();
 		});
 		if(time!=null){
@@ -286,6 +287,7 @@
 			if(pl==true){
 				clearInterval(bavarcount);
 				$('#timer').removeClass("countdown__time");
+				$('#que').removeClass("question_number2");
 				$('#timer').html(time);
 				//alert(time);
 				$("#push-submit-pause").css("pointer-events", "none");
@@ -352,6 +354,7 @@
 					$("#issue").css("pointer-events", "auto");
 					$('#issue').css('opacity','1');
 					$('#timer').addClass("countdown__time");
+					$('#que').addClass("question_number2");
 				}
 			}
 			}
@@ -448,6 +451,7 @@ $('#'+id_correct).prop("checked", true);
 			
 			//sessionStorage.setItem("nowtimeon", null));
 			$('#timer').addClass("countdown__time");
+			$('#que').addClass("question_number2");
 			$("#push-submit").css("pointer-events", "none");
 			$('#push-submit').css('opacity','0.4');
 			$("#push-submit-pause").css("pointer-events", "none");
@@ -540,8 +544,10 @@ $('#'+id_correct).prop("checked", true);
 						$("#push-submit-stop").css("pointer-events", "none");
 						$('#push-submit-stop').css('opacity','0.4');
 						$('#timer').addClass("countdown__time");
+						$('#que').addClass("question_number2");
 					}else{
 						$('#timer').removeClass("countdown__time");
+						$('#que').removeClass("question_number2");
 						$("#timer").html("Not set");
 						$("#push-submit").css("pointer-events", "none");
 						$('#push-submit').css('opacity','0.4');

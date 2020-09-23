@@ -239,7 +239,7 @@ var progress=0;
          var hidden=current.attr('aria-hidden');
          if(hidden=="false"){
             var que_no=current.find('.question_number').text();
-             $('#question_number2').text(que_no);
+             $('.question_number2').text(que_no);
             var round_val=current.find('.question-round').val();
             var question_id=current.find('.question-id').val();
              $('#edit_question').attr('href','/round_question/edit/'+question_id);
@@ -277,7 +277,7 @@ var progress=0;
          var hidden=current.attr('aria-hidden');
          if(hidden=="false"){
              var que_no=current.find('.question_number').text();
-             $('#question_number2').text(que_no);
+             $('.question_number2').text(que_no);
             var round_val=current.find('.question-round').val();
             $('.progress_round_label').removeClass('round_2');
              $('#round'+round_val).addClass('round_2');
