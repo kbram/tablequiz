@@ -77,6 +77,37 @@ class QuizController extends Controller
         ]);
         
         if ($validator->fails()) {
+            $link = $request->input('quiz__link');
+
+            if ($request->hasFile('upload__quiz__icon')) {
+
+                $quiz_icon = $request->file('upload__quiz__icon');
+      
+                $filename = $link.$quiz_icon->getClientOriginalExtension();  
+                $save_path1 = '/storage/quizicon/'.$link.'/quiz_icon/';
+      
+                $save_path = storage_path('app/public'). '/quizicon/'.$link.'/quiz_icon/';
+                $save_path_thumb = storage_path('app/public').'/quizicon/'.$link.'/quiz_icon/'.'/thumb/';
+      
+                $public_path = storage_path('app/public'). '/quizicon/'.$link.'/quiz_icon/'.$filename;
+                $public_path_thumb= storage_path('app/public'). '/quizicon/'.$link.'/quiz_icon/'.'/thumb/'.$filename;
+      
+                // Make the user a folder and set permissions
+                File::makeDirectory($save_path, $mode = 0755, true, true);
+                File::makeDirectory($save_path_thumb, $mode = 0755, true, true);
+      
+                Image::make($quiz_icon)->resize(250,250)->save($save_path_thumb.$filename);
+      
+                $quiz_icon->move($save_path, $filename); 
+                
+                Session::put('public_path', $public_path);
+                Session::put('public_path_thumb', $public_path_thumb);
+                Session::put('file_name', $filename);
+                Session::put('save_path1', $save_path1);
+                Session::put('save_path', $save_path);
+
+      
+               } 
             
             return back()->withErrors($validator)->withInput();
         }
@@ -105,7 +136,22 @@ class QuizController extends Controller
           $quiz_icon->move($save_path, $filename);            
   
 
+          Session::forget('file_name');
+          Session::forget('save_path1'); 
+          Session::forget('save_path');
+          Session::forget('public_path');
+          Session::forget('public_path_thumb');
          } 
+         elseif(Session::has('public_path'))
+         {
+
+          $filename = Session::get('file_name');
+          $save_path1 = Session::get('save_path1'); 
+          $save_path = Session::get('save_path');
+          $public_path = Session::get('public_path');
+          $public_path_thumb= Session::get('public_path_thumb');
+
+         }
          else{
 
           $filename = 'homepage__logo.png'; 
@@ -137,6 +183,12 @@ class QuizController extends Controller
             $quizIcon->thumb_path        = $public_path_thumb;
   
             $quizIcon->save();
+
+            Session::forget('file_name');
+            Session::forget('save_path1'); 
+            Session::forget('save_path');
+            Session::forget('public_path');
+            Session::forget('public_path_thumb');
 
             $cat = QuizCategory::all();
             $quiz = $quiz->quiz_link;

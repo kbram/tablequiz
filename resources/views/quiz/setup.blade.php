@@ -30,7 +30,7 @@
 						<label for="quiz__name">Quiz name</label>
 					</div>
 					<div class="col-md-8">
-						<input autocomplete="nothanks" type="text" name="quiz__name" class="form-control" value="{{ old('quiz__name') }}">
+						<input autocomplete="nothanks" type="text" name="quiz__name" class="form-control" value="{{ old('quiz__name') }}" required>
 					
 						@if ($errors->has('quiz__name'))
                                     <span class="help-block">
@@ -47,7 +47,7 @@
 						<label for="quiz__password">Quiz password</label>
 					</div>
 					<div class="col-md-8">
-						<input type="text" name="quiz__password" class="form-control" placeholder="(optional)" >
+						<input type="text" name="quiz__password" class="form-control" placeholder="(optional)"  >
 					</div>
 				</div>
 <!-- QUIZ LINK -->
@@ -61,7 +61,7 @@
 						<p class="disabled__text">TableQuiz.app/</p>
 					</div>
 					<div class="col-sm">
-						<input type="text" name="quiz__link" class="form-control" value="{{ old('quiz__link') }}">
+						<input type="text" name="quiz__link" class="form-control" value="{{ old('quiz__link') }} " >
 						@if ($errors->has('quiz__link'))
                                     <span class="help-block">
                                             <p>{{ $errors->first('quiz__link') }}</p>
@@ -114,7 +114,7 @@
 						  <div class="modal-footer justify-content-center row no-gutters">
 							 <div class="col-md-3">
 								 <label class="d-block" for="upload__quiz__icon">Upload
-									<input type="file"  class="form-control-file imagePreviewInput" id="upload__quiz__icon" name="upload__quiz__icon" value="Upload">
+									<input type="file"  class="form-control-file imagePreviewInput" id="upload__quiz__icon" name="upload__quiz__icon" value="Upload" >
 								</label>
 							</div>
 							<div class="col-md-3">
@@ -134,7 +134,7 @@
 					</div>
 					<div class="col-md-4">
 						<select id="quiz__participants" class="form-control" name="quiz__participants">
-							<option disabled selected >{{(old('quiz__participants') != '' ? old('quiz__participants') : 'Please Choose...')}}</option>
+							<option  selected >{{(old('quiz__participants') != '' ? old('quiz__participants') : 'Please Choose...')}}</option>
 							@foreach($bands as $band)
 								@if(($band->band_type)== "participants costs")
 									@if(($band->to)== null)
@@ -168,9 +168,9 @@
 										<div class="col-6 col-sm-4 participants__number p-1">
 											<div class="participants__choice p-3" >
 												@if(($band->to)== null)
-													<input type="text" hidden class="participant" value="{{$band->from}}+" >{{$band->from}}+</input>
+													<input type="text" hidden class="participant" value="{{$band->from}}+" required >{{$band->from}}+</input>
 												@else
-													<input type="text" hidden class="participant" value="{{$band->from}}-{{$band->to}}" >{{$band->from}}-{{$band->to}}</input>
+													<input type="text" hidden class="participant" value="{{$band->from}}-{{$band->to}}" required>{{$band->from}}-{{$band->to}}</input>
 												@endif
 
 
