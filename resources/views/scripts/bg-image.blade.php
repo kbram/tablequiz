@@ -2,7 +2,7 @@
  //Image zoom size
 var slider = document.getElementById("formControlRange");
 
-slider.oninput = function() { console.log('hihi');
+slider.oninput = function() { 
 
   var image = document.getElementById('round_image');
       image.style.width = 20*(this.value)+'px';
@@ -71,12 +71,12 @@ $("#upload__quiz__icon").change(function() {
 dragElement(document.getElementById("round_image"));
 
 function dragElement(elmnt) {
-  var pos1 =0, pos2 = 0, pos3 = 0, pos4 = 0;
-  if (document.getElementById(elmnt.id + "header")) {
+  var pos1 =0, pos2 = 0, pos3 = 0, pos4 = 0 ,get_top=0 , get_left=0;
+  if (false) {
     /* if present, the header is where you move the DIV from:*/
-    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+   // document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
   } else {
-    /* otherwise, move the DIV from anywhere inside the DIV:*/
+
     elmnt.onmousedown = dragMouseDown;
   }
 
@@ -103,7 +103,8 @@ function dragElement(elmnt) {
     // set the element's new position:
     
      // elmnt.style.left = 0 + "px";
-    
+     get_top=elmnt.offsetTop - pos2;
+    get_left =elmnt.offsetLeft - pos1;
  
     elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
     elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
@@ -111,6 +112,16 @@ function dragElement(elmnt) {
 
   function closeDragElement() {
     /* stop moving when mouse button is released:*/
+
+    if(get_top <-273 || get_top >273){
+      $("#round_image").css('top','0px');
+    $("#round_image").css('left','0px');
+    }
+    else if(get_left <-435 || get_left>435){
+    
+      $("#round_image").css('top','0px');
+    $("#round_image").css('left','0px');
+    }
    
     document.onmouseup = null;
     document.onmousemove = null;
