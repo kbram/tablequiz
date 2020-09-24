@@ -1,32 +1,32 @@
-
 <script type="text/javascript">
 //bavaram
 
 $(document).ready(function() { 
     $(".timer").html("Wait.....");
-    
-
-    //with session refresh
+    $("#pre").hide();
+    $("#next").hide();
 
     var issueq=JSON.parse(sessionStorage.getItem("issuequestion"));
+    var putanswer=JSON.parse(sessionStorage.getItem("putanswer"));
     var time=JSON.parse(sessionStorage.getItem("nowtimeon"));
     var timeon=0;
+
     if(time!=null){
         var splity=time.split(":");
 	    timeon=parseInt(splity[0])*60+parseInt(splity[1]);
     }
     var all = $(".single__answer");
-
-
-    //alert(timeon);
     var countDown;
     var quseee=1;
     var qustno=1;
     
     if(issueq!=null){
+        
         qustno=issueq.length-1;
         quseee=issueq.length-1;
-
+        if(quseee>1){
+        $("#pre").show();
+        }
         var an=issueq[quseee][1];
 	    
 		an=an.slice(0, -1);
@@ -47,7 +47,7 @@ $(document).ready(function() {
 			"<h4 class='bernhard notification'>Not submitted</h4>" +
 			"</div>"+
 			"<div  class='col-12 the__question text-center mB-2'>"+
-			"<h4 class='questionno' style='min-width:50vw !important;'>  </h4>"+
+			"<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
             "</div>";
 
         if(type == "multiple__choice__question"){
@@ -107,10 +107,8 @@ $(document).ready(function() {
             "</div>";
             $('#all-answer').empty();
             $('#all-answer').append(text0);
-
             $('#ques').empty();
             $('#ques').append(textq);
-
             $('h4.questionno').text(issueq[quseee][0]);
             $('h4.notification').text('');
             var $box=null;
@@ -173,8 +171,6 @@ $(document).ready(function() {
 
         }
         
-        
-       
         if(ti==0 || ti==null){
             $(".timer").html("Not set");
         }else{
@@ -194,9 +190,7 @@ $(document).ready(function() {
             remSec  = sec % 60;
                 
             if (remSec < 10) {
-                
                 remSec = '0' + remSec;
-            
             }
             if (min < 10) {
                 
@@ -232,17 +226,25 @@ $(document).ready(function() {
     
     
 	$("#pre").click(function(){
+        $("#next").show();
         time=JSON.parse(sessionStorage.getItem("nowtimeon"));
+
+        putanswer=JSON.parse(sessionStorage.getItem("putanswer"));
+        
         quseee=quseee-1;
         var an=issueq[quseee][1];
-		
+        if(quseee==1){
+            $("#pre").hide();
+        }
+		//alert(putanswer[quseee][1]);
+
 		an=an.slice(0, -1);
 		var answer=an.split("/");
 		var answerId=issueq[quseee][3].split("/");
 		var questionId=issueq[quseee][4];
 		var roundId=issueq[quseee][5];
 		var quizId=issueq[quseee][6];
-		//alert("dfsdfsdfsdfsdfsddddddddddddd");
+	
         var type=issueq[quseee][7];
         var text0='';
         var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
@@ -252,53 +254,131 @@ $(document).ready(function() {
 			"<h4 class='bernhard notification'>Not submitted</h4>" +
 			"</div>"+
 			"<div  class='col-12 the__question text-center mB-2'>"+
-			"<h4 class='questionno' style='min-width:50vw !important;'>  </h4>"+
+			"<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
             "</div>";
             
             if(type == "multiple__choice__question"){
-            for (var i = 0; i < answer.length; i++) {
-			text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
-            "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
-            "<input type='text' name='type' hidden value=1 />"+
+                for (var i = 0; i < answer.length; i++) {
+                    var x="bg-white";
+                    if(putanswer[quseee][2]==""){
+                        if(answerId[i]==putanswer[quseee][1]){
+                            x="bg-primary";
+                        }else{
+                            x="bg-white";
+                        }
+                    }else{
+                        if(putanswer[quseee][1]==putanswer[quseee][2]){
+                            if(answerId[i]==putanswer[quseee][1]){
+                                x="bg-success";
+                            }else{
+                                x="bg-white";
+                            }
+                        }else{
+                            if(answerId[i]==putanswer[quseee][1]){
+                                x="bg-danger";
+                            }else if(answerId[i]==putanswer[quseee][2]){
+                                x="bg-success";
+                            }else{
+                                x="bg-white";
+                            }
+                        }
+                    }
+                        text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer "+x+" mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+                        "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+                        "<input type='text' name='type' hidden value=1 />"+
 
-            "<input type='text' name='answer' hidden value='"+answer[i]+"'/>"+
-            "<input type='text' name='answer_id' hidden value='"+answerId[i]+"'/>"+
-            "<input type='text' name='question' hidden value='"+questionId+"'/>"+
-			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
-			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
-			"<p>"+answer[i]+"</p>"+ 
-			"</form>";	
-        } 
-    }
+                        "<input type='text' name='answer' hidden value='"+answer[i]+"'/>"+
+                        "<input type='text' name='answer_id' hidden value='"+answerId[i]+"'/>"+
+                        "<input type='text' name='question' hidden value='"+questionId+"'/>"+
+                        "<input type='text' name='round' hidden value='"+roundId+"'/>"+
+                        "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+                        "<p>"+answer[i]+"</p>"+ 
+                        "</form>";	
+                     
+                        
+                     
+                    
+                } 
+            }
 
     else if(type == "standard__question"){
-        text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
-            "<div class='form-group'>"+
-            "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
-            "<input type='text' name='type' hidden value=2 />"+
-            "<input type='text' name='answer_id' hidden value='"+answerId[0]+"'/>"+
+        var x="bg-white";
+                    if(putanswer[quseee][1]=="0"){
+                        if(answerId[i]==putanswer[quseee][1]){
+                            x="bg-primary";
+                        }else{
+                            x="bg-white";
+                        }
+                    }else{
+                        if(putanswer[quseee][1]==putanswer[quseee][2]){
+                            if(answerId[i]==putanswer[quseee][1]){
+                                x="bg-success";
+                            }else{
+                                x="bg-white";
+                            }
+                        }else{
+                            if(answerId[i]==putanswer[quseee][1]){
+                                x="bg-danger";
+                            }else if(answerId[i]==putanswer[quseee][2]){
+                                x="bg-success";
+                            }else{
+                                x="bg-white";
+                            }
+                        }
+                    }
+            text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer "+x+"  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+                "<div class='form-group'>"+
+                "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+                "<input type='text' name='type' hidden value=2 />"+
+                "<input type='text' name='answer_id' hidden value='"+answerId[0]+"'/>"+
 
-			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
-			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
-			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
-            "<input type='text' class='form-control' name='answer' placeholder='Enter answer'/>"+
-            "</div>"+
-			"</form>";	
+                "<input type='text' name='question' hidden value='"+questionId+"'/>"+
+                "<input type='text' name='round' hidden value='"+roundId+"'/>"+
+                "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+                "<input type='text' class='form-control' name='answer' placeholder='Enter answer'/>"+
+                "</div>"+
+                "</form>";	
+        
     }
          
     else if(type == "numeric__question"){
-        text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
-            "<div class='form-group'>"+
-            "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
-            "<input type='text' name='type' hidden value=3 />"+
-            "<input type='text' name='answer_id' hidden value='"+answerId[0]+"'/>"+
+        var x="bg-white";
+                    if(putanswer[quseee][1]=="0"){
+                        if(answerId[i]==putanswer[quseee][1]){
+                            x="bg-primary";
+                        }else{
+                            x="bg-white";
+                        }
+                    }else{
+                        if(putanswer[quseee][1]==putanswer[quseee][2]){
+                            if(answerId[i]==putanswer[quseee][1]){
+                                x="bg-success";
+                            }else{
+                                x="bg-white";
+                            }
+                        }else{
+                            if(answerId[i]==putanswer[quseee][1]){
+                                x="bg-danger";
+                            }else if(answerId[i]==putanswer[quseee][2]){
+                                x="bg-success";
+                            }else{
+                                x="bg-white";
+                            }
+                        }
+                    }
+            text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer "+x+"  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+                "<div class='form-group'>"+
+                "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+                "<input type='text' name='type' hidden value=3 />"+
+                "<input type='text' name='answer_id' hidden value='"+answerId[0]+"'/>"+
 
-			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
-			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
-			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
-			"<input type='number' class='form-control' name='answer' placeholder='Enter answer'/>"+
-            "</div>"+
-            "</form>";	
+                "<input type='text' name='question' hidden value='"+questionId+"'/>"+
+                "<input type='text' name='round' hidden value='"+roundId+"'/>"+
+                "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+                "<input type='number' class='form-control' name='answer' placeholder='Enter answer'/>"+
+                "</div>"+
+                "</form>";	
+        
     }
 
             text0 += "</div> <div class='break'></div>";
@@ -325,10 +405,15 @@ $(document).ready(function() {
         
 	});
     $("#next").click(function(){
+        $("#pre").show();
         time=JSON.parse(sessionStorage.getItem("nowtimeon"));
+        putanswer=JSON.parse(sessionStorage.getItem("putanswer"));
         quseee=quseee+1;
         var an=issueq[quseee][1];
-		
+		if(quseee==issueq.length-1){
+            $("#next").hide();
+        }
+        //alert(putanswer[quseee][1]);
 		an=an.slice(0, -1);
 		var answer=an.split("/");
 		var answerId=issueq[quseee][3].split("/");
@@ -345,54 +430,128 @@ $(document).ready(function() {
 			"<h4 class='bernhard notification'>Not submitted</h4>" +
 			"</div>"+
 			"<div  class='col-12 the__question text-center mB-2'>"+
-			"<h4 class='questionno' style='min-width:50vw !important;'>  </h4>"+
+			"<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
             "</div>";
             
             if(type == "multiple__choice__question"){
 
             for (var i = 0; i < answer.length; i++) {
-			text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
-            "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
-            "<input type='text' name='type' hidden value=1 />"+
+                    var x="bg-white";
+                    if(putanswer[quseee][2]==""){
+                        if(answerId[i]==putanswer[quseee][1]){
+                            x="bg-primary";
+                        }else{
+                            x="bg-white";
+                        }
+                    }else{
+                        if(putanswer[quseee][1]==putanswer[quseee][2]){
+                            if(answerId[i]==putanswer[quseee][1]){
+                                x="bg-success";
+                            }else{
+                                x="bg-white";
+                            }
+                        }else{
+                            if(answerId[i]==putanswer[quseee][1]){
+                                x="bg-danger";
+                            }else if(answerId[i]==putanswer[quseee][2]){
+                                x="bg-success";
+                            }else{
+                                x="bg-white";
+                            }
+                        }
+                    }
+                    text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer "+x+"  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+                    "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+                    "<input type='text' name='type' hidden value=1 />"+
 
-            "<input type='text' name='answer' hidden value='"+answer[i]+"'/>"+
-            "<input type='text' name='answer_id' hidden value='"+answerId[i]+"'/>"+
-        	"<input type='text' name='question' hidden value='"+questionId+"'/>"+
-			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
-			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
-			"<p>"+answer[i]+"</p>"+ 
-			"</form>";	
+                    "<input type='text' name='answer' hidden value='"+answer[i]+"'/>"+
+                    "<input type='text' name='answer_id' hidden value='"+answerId[i]+"'/>"+
+                    "<input type='text' name='question' hidden value='"+questionId+"'/>"+
+                    "<input type='text' name='round' hidden value='"+roundId+"'/>"+
+                    "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+                    "<p>"+answer[i]+"</p>"+ 
+                    "</form>";	
+                
         } 
     }
 
     else if(type == "standard__question"){
-        text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
-            "<div class='form-group'>"+
-            "<input type='text' name='type' hidden value=2 />"+
-            "<input type='text' name='answer_id' hidden value='"+answerId[0]+"'/>"+
+        var x="bg-white";
+                    if(putanswer[quseee][1]=="0"){
+                        if(answerId[i]==putanswer[quseee][1]){
+                            x="bg-primary";
+                        }else{
+                            x="bg-white";
+                        }
+                    }else{
+                        if(putanswer[quseee][1]==putanswer[quseee][2]){
+                            if(answerId[i]==putanswer[quseee][1]){
+                                x="bg-success";
+                            }else{
+                                x="bg-white";
+                            }
+                        }else{
+                            if(answerId[i]==putanswer[quseee][1]){
+                                x="bg-danger";
+                            }else if(answerId[i]==putanswer[quseee][2]){
+                                x="bg-success";
+                            }else{
+                                x="bg-white";
+                            }
+                        }
+                    }
+            text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer "+x+"  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+                "<div class='form-group'>"+
+                "<input type='text' name='type' hidden value=2 />"+
+                "<input type='text' name='answer_id' hidden value='"+answerId[0]+"'/>"+
 
-            "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
-			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
-			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
-			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
-            "<input type='text' class='form-control' name='answer' placeholder='Enter answer'/>"+
-            "</div>"+
-			"</form>";	
+                "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+                "<input type='text' name='question' hidden value='"+questionId+"'/>"+
+                "<input type='text' name='round' hidden value='"+roundId+"'/>"+
+                "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+                "<input type='text' class='form-control' name='answer' placeholder='Enter answer'/>"+
+                "</div>"+
+                "</form>";	
+        
     }
          
     else if(type == "numeric__question"){
-        text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
-            "<div class='form-group'>"+
-            "<input type='text' name='type' hidden value=3 />"+
-            "<input type='text' name='answer_id' hidden value='"+answerId[0]+"'/>"+
+        var x="bg-white";
+                    if(putanswer[quseee][1]=="0"){
+                        if(answerId[i]==putanswer[quseee][1]){
+                            x="bg-primary";
+                        }else{
+                            x="bg-white";
+                        }
+                    }else{
+                        if(putanswer[quseee][1]==putanswer[quseee][2]){
+                            if(answerId[i]==putanswer[quseee][1]){
+                                x="bg-success";
+                            }else{
+                                x="bg-white";
+                            }
+                        }else{
+                            if(answerId[i]==putanswer[quseee][1]){
+                                x="bg-danger";
+                            }else if(answerId[i]==putanswer[quseee][2]){
+                                x="bg-success";
+                            }else{
+                                x="bg-white";
+                            }
+                        }
+                    }
+            text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer "+x+"  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+                "<div class='form-group'>"+
+                "<input type='text' name='type' hidden value=3 />"+
+                "<input type='text' name='answer_id' hidden value='"+answerId[0]+"'/>"+
 
-            "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
-			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
-			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
-			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
-			"<input type='number' class='form-control' name='answer' placeholder='Enter answer'/>"+
-            "</div>"+
-            "</form>";	
+                "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+                "<input type='text' name='question' hidden value='"+questionId+"'/>"+
+                "<input type='text' name='round' hidden value='"+roundId+"'/>"+
+                "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+                "<input type='number' class='form-control' name='answer' placeholder='Enter answer'/>"+
+                "</div>"+
+                "</form>";	
     }
     
             text0 += "</div> <div class='break'></div>";
@@ -424,7 +583,7 @@ $(document).ready(function() {
 
     //when pusher run
 
-	Pusher.logToConsole = false;
+	Pusher.logToConsole = true;
 
 	var pusher = new Pusher('87436df86baf66b2192a', {
 		cluster: 'ap2'
@@ -465,6 +624,220 @@ $(document).ready(function() {
         clearInterval(countDown);
     });
     
+    var channel1 = pusher.subscribe('my-channel3');
+    channel1.bind('form-submitted3', function(data) {
+        // alert("Teacher Stoped your Submition");
+        $("#pre").show();
+        swal("Teacher share your Answer !",'you can get your results...', "info")
+        var qid=$('#quizid').text();
+        //putanswer=JSON.parse(sessionStorage.getItem("putanswer"));
+        // if(putanswer==null){
+		// 	var x=[[]];
+		// 	putanswer=x;
+		// }
+        
+        // $('#resub').css('cursor','not-allowed');
+        // $("#resub").css("pointer-events", "none");
+        // $('#resub').css('opacity','0.4');
+        // $(".timer").html("Teacher Stoped");
+        //sessionStorage.setItem("nowtimeon", null);
+        //clearInterval(countDown);
+        var message = data;
+        var questionId=message.text[4];
+        
+        //var pan=[questionId,"",""];
+	
+		var an=message.text[1];
+		
+		an=an.slice(0, -1);
+		var answer=an.split("/");
+		var answerId=message.text[3].split("/");
+		
+		var roundId=message.text[5];
+		var quizId=message.text[6];
+        var type=message.text[7];
+
+        if(message.text[9]){
+		var media_type=message.text[9].split("/");}
+        if(message.text[10]){
+        var media_link=message.text[10].split("**");}
+        if(message.text[11]){
+        var media_path=message.text[11].split("**");}
+
+
+        var correctanswer=message.text[8];
+        
+        var pan=[questionId,"",""];
+
+        putanswer=JSON.parse(sessionStorage.getItem("putanswer"));
+        var len=putanswer.length;
+        var x=0;
+        for(var i=0;i<len;i++){
+            if(parseInt(putanswer[i][0])==parseInt(questionId)){
+                putanswer[i][2]=correctanswer;
+            }
+        }
+        
+        sessionStorage.setItem("putanswer", JSON.stringify(putanswer));
+
+    if(parseInt(quizId)===parseInt(qid)){
+        
+        
+        var text0 ='';
+    if(!media_type){   
+        var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
+			"<img class='q-img' src='{{asset('site_design/images/homepage__logo.png')}}' height='170px'>"+
+			"</div>"+
+			"<div class='col-12 text-center'>"+
+			"<h4 class='bernhard notification'>Not submitted</h4>" +
+			"</div>"+
+			"<div  class='col-12 the__question text-center mB-2'>"+
+			"<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
+            "</div>";
+    }
+
+    else if(media_type[0] == 'image'){
+        var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
+			"<img class='q-img' src='{{asset('')}}"+media_path[0]+"' height='170px'>"+
+			"</div>"+
+			"<div class='col-12 text-center'>"+
+			"<h4 class='bernhard notification'>Not submitted</h4>" +
+			"</div>"+
+			"<div  class='col-12 the__question text-center mB-2'>"+
+			"<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
+            "</div>";
+    }
+
+    else if(media_type[0] == 'audio'){
+        var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
+            "<audio class='q-img' controls> <source src='{{asset('')}}"+media_path[0]+"' type='audio/mpeg'> </audio>"+
+			"</div>"+
+			"<div class='col-12 text-center'>"+
+			"<h4 class='bernhard notification'>Not submitted</h4>" +
+			"</div>"+
+			"<div  class='col-12 the__question text-center mB-2'>"+
+			"<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
+            "</div>";
+    }
+
+    else if(media_type[0] == 'video'){
+        var textq="<div id='resub3' class='col-12 media__container p-0 mb-5 text-center position-relative'>"+
+            "<video class='justify-content-center align-self-center' controls> <source src='{{asset('')}}"+media_path[0]+"' type='audio/mpeg' width='100px'> </video>"+
+			"</div>"+
+			"<div class='col-12 text-center'>"+
+			"<h4 class='bernhard notification'>Not submitted</h4>" +
+			"</div>"+
+			"<div  class='col-12 the__question text-center mB-2'>"+
+			"<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
+            "</div>";
+    }
+    if(type == "multiple__choice__question"){
+            for (var i = 0; i < answer.length; i++) {
+                var x="bg-white";
+                if(putanswer[quseee][1]==putanswer[quseee][2]){
+                    if(answerId[i]==putanswer[quseee][1]){
+                        x="bg-success";
+                    }else{
+                        x="bg-white";
+                    }
+                }else{
+                    if(answerId[i]==putanswer[quseee][1]){
+                        x="bg-danger";
+                    }else if(answerId[i]==putanswer[quseee][2]){
+                        x="bg-success";
+                    }else{
+                        x="bg-white";
+                    }
+                }
+                
+			text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer "+x+"  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+            "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+            "<input type='text' name='type' hidden value=1 />"+
+
+            "<input type='text' name='answer' hidden value='"+answer[i]+"'/>"+
+            "<input type='text' name='answer_id' hidden value='"+answerId[i]+"'/>"+
+
+			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
+			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
+			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+			"<p>"+answer[i]+"</p>"+ 
+			"</form>";	
+        } 
+    }
+    else if(type == "standard__question"){
+        var x="bg-white";
+                if(putanswer[quseee][1]==putanswer[quseee][2]){
+                    if(answerId[i]==putanswer[quseee][1]){
+                        x="bg-success";
+                    }else{
+                        x="bg-white";
+                    }
+                }else{
+                    if(answerId[i]==putanswer[quseee][1]){
+                        x="bg-danger";
+                    }else if(answerId[i]==putanswer[quseee][2]){
+                        x="bg-success";
+                    }else{
+                        x="bg-white";
+                    }
+                }
+        text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer "+x+"  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+            "<div class='form-group'>"+
+            "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+            "<input type='text' name='answer_id' hidden value='"+answerId[0]+"'/>"+
+            "<input type='text' name='type' hidden value=2 />"+
+
+
+			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
+			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
+			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+            "<input type='text' class='form-control' name='answer' placeholder='Enter answer'/>"+
+            "</div>"+
+			"</form>";	
+    }
+         
+    else if(type == "numeric__question"){
+        var x="bg-white";
+                if(putanswer[quseee][1]==putanswer[quseee][2]){
+                    if(answerId[i]==putanswer[quseee][1]){
+                        x="bg-success";
+                    }else{
+                        x="bg-white";
+                    }
+                }else{
+                    if(answerId[i]==putanswer[quseee][1]){
+                        x="bg-danger";
+                    }else if(answerId[i]==putanswer[quseee][2]){
+                        x="bg-success";
+                    }else{
+                        x="bg-white";
+                    }
+                }
+        text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer "+x+"  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+            "<div class='form-group'>"+
+            "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+            "<input type='text' name='answer_id' hidden value='"+answerId[0]+"'/>"+
+
+            "<input type='text' name='type' hidden value=3 />"+
+
+			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
+			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
+			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+			"<input type='number' class='form-control' name='answer' placeholder='Enter answer'/>"+
+            "</div>"+
+            "</form>";	
+    }
+        $('#all-answer').empty();
+        $('#all-answer').append(text0);
+        
+        $('#ques').empty();
+        $('#ques').append(textq);
+        
+        $('h4.questionno').text(message.text[0]);
+        $('h4.notification').text('');
+    }
+    });
+
 	var channel = pusher.subscribe('my-channel');
 	channel.bind('form-submitted', function(data) {
         var qid=$('#quizid').text();
@@ -473,13 +846,30 @@ $(document).ready(function() {
 		qustno=qustno+1;
 		quseee=qustno;
 		issueq=JSON.parse(sessionStorage.getItem("issuequestion"));
+		putanswer=JSON.parse(sessionStorage.getItem("putanswer"));
+
 		if(issueq==null){
 			var x=[[]];
 			issueq=x;
 		}
+        else{
+            if(issueq.length>1){
+                $("#pre").show();
+            }
+        }
+        if(putanswer==null){
+			var x=[[]];
+			putanswer=x;
+		}
+        var questionId=message.text[4];
+
+        var pan=[questionId,"",""];
 
 		issueq.push(message.text);
+		putanswer.push(pan);
+
 		sessionStorage.setItem("issuequestion", JSON.stringify(issueq));
+		sessionStorage.setItem("putanswer", JSON.stringify(putanswer));
 
 		
 		var an=message.text[1];
@@ -487,7 +877,7 @@ $(document).ready(function() {
 		an=an.slice(0, -1);
 		var answer=an.split("/");
 		var answerId=message.text[3].split("/");
-		var questionId=message.text[4];
+		
 		var roundId=message.text[5];
 		var quizId=message.text[6];
         var type=message.text[7];
@@ -516,7 +906,7 @@ $(document).ready(function() {
 			"<h4 class='bernhard notification'>Not submitted</h4>" +
 			"</div>"+
 			"<div  class='col-12 the__question text-center mB-2'>"+
-			"<h4 class='questionno' style='min-width:50vw !important;'>  </h4>"+
+			"<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
             "</div>";
     }
 
@@ -528,7 +918,7 @@ $(document).ready(function() {
 			"<h4 class='bernhard notification'>Not submitted</h4>" +
 			"</div>"+
 			"<div  class='col-12 the__question text-center mB-2'>"+
-			"<h4 class='questionno' style='min-width:50vw !important;'>  </h4>"+
+			"<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
             "</div>";
     }
 
@@ -540,7 +930,7 @@ $(document).ready(function() {
 			"<h4 class='bernhard notification'>Not submitted</h4>" +
 			"</div>"+
 			"<div  class='col-12 the__question text-center mB-2'>"+
-			"<h4 class='questionno' style='min-width:50vw !important;'>  </h4>"+
+			"<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
             "</div>";
     }
 
@@ -552,10 +942,10 @@ $(document).ready(function() {
 			"<h4 class='bernhard notification'>Not submitted</h4>" +
 			"</div>"+
 			"<div  class='col-12 the__question text-center mB-2'>"+
-			"<h4 class='questionno' style='min-width:50vw !important;'>  </h4>"+
+			"<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
             "</div>";
     }
-            if(type == "multiple__choice__question"){
+    if(type == "multiple__choice__question"){
             for (var i = 0; i < answer.length; i++) {
 			text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
             "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
@@ -670,8 +1060,210 @@ $(document).ready(function() {
             clearInterval(countDown);
         });
     
+    var channel1 = pusher.subscribe('my-channel3');
+    channel1.bind('form-submitted3', function(data) {
+        // alert("Teacher Stoped your Submition");
+        swal("Teacher share your Answer !",'you can get your results...', "info");
+        $("#pre").show();
+        var qid=$('#quizid').text();
+        //putanswer=JSON.parse(sessionStorage.getItem("putanswer"));
+        // if(putanswer==null){
+		// 	var x=[[]];
+		// 	putanswer=x;
+		// }
+        
+        // $('#resub').css('cursor','not-allowed');
+        // $("#resub").css("pointer-events", "none");
+        // $('#resub').css('opacity','0.4');
+        // $(".timer").html("Teacher Stoped");
+        //sessionStorage.setItem("nowtimeon", null);
+        //clearInterval(countDown);
+        var message = data;
+        var questionId=message.text[4];
+        
+        //var pan=[questionId,"",""];
+            
+		var an=message.text[1];
+		
+		an=an.slice(0, -1);
+		var answer=an.split("/");
+		var answerId=message.text[3].split("/");
+		
+		var roundId=message.text[5];
+		var quizId=message.text[6];
+        var type=message.text[7];
 
-            //answer select
+        if(message.text[9]){
+		var media_type=message.text[9].split("/");}
+        if(message.text[10]){
+        var media_link=message.text[10].split("**");}
+        if(message.text[11]){
+        var media_path=message.text[11].split("**");}
+
+
+        var correctanswer=message.text[8];
+        
+
+    if(parseInt(quizId)===parseInt(qid)){
+        
+        
+        var text0 ='';
+    if(!media_type){   
+        var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
+			"<img class='q-img' src='{{asset('site_design/images/homepage__logo.png')}}' height='170px'>"+
+			"</div>"+
+			"<div class='col-12 text-center'>"+
+			"<h4 class='bernhard notification'>Not submitted</h4>" +
+			"</div>"+
+			"<div  class='col-12 the__question text-center mB-2'>"+
+			"<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
+            "</div>";
+    }
+
+    else if(media_type[0] == 'image'){
+        var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
+			"<img class='q-img' src='{{asset('')}}"+media_path[0]+"' height='170px'>"+
+			"</div>"+
+			"<div class='col-12 text-center'>"+
+			"<h4 class='bernhard notification'>Not submitted</h4>" +
+			"</div>"+
+			"<div  class='col-12 the__question text-center mB-2'>"+
+			"<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
+            "</div>";
+    }
+
+    else if(media_type[0] == 'audio'){
+        var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
+            "<audio class='q-img' controls> <source src='{{asset('')}}"+media_path[0]+"' type='audio/mpeg'> </audio>"+
+			"</div>"+
+			"<div class='col-12 text-center'>"+
+			"<h4 class='bernhard notification'>Not submitted</h4>" +
+			"</div>"+
+			"<div  class='col-12 the__question text-center mB-2'>"+
+			"<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
+            "</div>";
+    }
+
+    else if(media_type[0] == 'video'){
+        var textq="<div id='resub3' class='col-12 media__container p-0 mb-5 text-center position-relative'>"+
+            "<video class='justify-content-center align-self-center' controls> <source src='{{asset('')}}"+media_path[0]+"' type='audio/mpeg' width='100px'> </video>"+
+			"</div>"+
+			"<div class='col-12 text-center'>"+
+			"<h4 class='bernhard notification'>Not submitted</h4>" +
+			"</div>"+
+			"<div  class='col-12 the__question text-center mB-2'>"+
+			"<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
+            "</div>";
+    }
+    if(type == "multiple__choice__question"){
+            for (var i = 0; i < answer.length; i++) {
+                var x="bg-white";
+                if(putanswer[quseee][1]==putanswer[quseee][2]){
+                    if(answerId[i]==putanswer[quseee][1]){
+                        x="bg-success";
+                    }else{
+                        x="bg-white";
+                    }
+                }else{
+                    if(answerId[i]==putanswer[quseee][1]){
+                        x="bg-danger";
+                    }else if(answerId[i]==putanswer[quseee][2]){
+                        x="bg-success";
+                    }else{
+                        x="bg-white";
+                    }
+                }
+                if(answerId[i]==putanswer[quseee][1]){
+                    text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer "+x+"  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+                    "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+                    "<input type='text' name='type' hidden value=1 />"+
+
+                    "<input type='text' name='answer' hidden value='"+answer[i]+"'/>"+
+                    "<input type='text' name='answer_id' hidden value='"+answerId[i]+"'/>"+
+
+                    "<input type='text' name='question' hidden value='"+questionId+"'/>"+
+                    "<input type='text' name='round' hidden value='"+roundId+"'/>"+
+                    "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+                    "<p>"+answer[i]+"</p>"+ 
+                    "</form>";	
+                }
+        } 
+    }
+    else if(type == "standard__question"){
+        var x="bg-white";
+                if(putanswer[quseee][1]==putanswer[quseee][2]){
+                    if(answerId[i]==putanswer[quseee][1]){
+                        x="bg-success";
+                    }else{
+                        x="bg-white";
+                    }
+                }else{
+                    if(answerId[i]==putanswer[quseee][1]){
+                        x="bg-danger";
+                    }else if(answerId[i]==putanswer[quseee][2]){
+                        x="bg-success";
+                    }else{
+                        x="bg-white";
+                    }
+                }
+        text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer "+x+"  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+            "<div class='form-group'>"+
+            "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+            "<input type='text' name='answer_id' hidden value='"+answerId[0]+"'/>"+
+            "<input type='text' name='type' hidden value=2 />"+
+
+
+			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
+			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
+			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+            "<input type='text' class='form-control' name='answer' placeholder='Enter answer'/>"+
+            "</div>"+
+			"</form>";	
+    }
+         
+    else if(type == "numeric__question"){
+        var x="bg-white";
+                if(putanswer[quseee][1]==putanswer[quseee][2]){
+                    if(answerId[i]==putanswer[quseee][1]){
+                        x="bg-success";
+                    }else{
+                        x="bg-white";
+                    }
+                }else{
+                    if(answerId[i]==putanswer[quseee][1]){
+                        x="bg-danger";
+                    }else if(answerId[i]==putanswer[quseee][2]){
+                        x="bg-success";
+                    }else{
+                        x="bg-white";
+                    }
+                }
+        text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer "+x+"  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+            "<div class='form-group'>"+
+            "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
+            "<input type='text' name='answer_id' hidden value='"+answerId[0]+"'/>"+
+
+            "<input type='text' name='type' hidden value=3 />"+
+
+			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
+			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
+			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+			"<input type='number' class='form-control' name='answer' placeholder='Enter answer'/>"+
+            "</div>"+
+            "</form>";	
+    }
+        $('#all-answer').empty();
+        $('#all-answer').append(text0);
+        
+        $('#ques').empty();
+        $('#ques').append(textq);
+        
+        $('h4.questionno').text(message.text[0]);
+        $('h4.notification').text('');
+    }
+
+    });
+            
 
         
         var $box=null;
@@ -707,6 +1299,16 @@ $(document).ready(function() {
             e.preventDefault();  
             
     var answer = $('#answer');
+    var aa=$('#answer').serializeArray();
+    
+            
+
+
+    putanswer=JSON.parse(sessionStorage.getItem("putanswer"));
+    var len=putanswer.length;
+    putanswer[len-1][1]=aa[3].value;
+    sessionStorage.setItem("putanswer", JSON.stringify(putanswer));
+
     //console.log(answer.length);
     if(answer.length == 0){
 
@@ -718,6 +1320,7 @@ $(document).ready(function() {
             $('#resub').css('opacity','0.4');
             $('.single__answer').css('cursor','not-allowed');
             $('.single__answer').css('pointer-events','none');
+
         $.ajax({
             type: "POST",
             url: "/playquiz/answer",
