@@ -368,7 +368,83 @@ $('#push-submit-stop').click(function(e){
 
          });
 });
+$('#share_question').click(function(e){
+         e.preventDefault();
+         $('.quiz__slider .quiz__single_question__container').each(function(){
+            var current=$(this);
+            var hidden=current.attr('aria-hidden');
+            if(hidden=="false"){
+               
+               var answerright =current.find('.answer-right').val();
+               //alert(answerright);
+               if(answerright==null){
+                  
+                  swal("You are not submit answer !",'please update correct answer...', "danger");
+               }else{
+                  var quizId =current.find('.question-id').val();
+                  var question =current.find('.question > span:nth-child(2)').text();
+               
+                  var time =current.find('.question-timer').val();
+                  var round =current.find('.question-round').val();
+                  var type =current.find('.question-type').val();
+                  var user =current.find('.question-user').val();
+                  var id =current.find('.question-id').val();
+                  var quiz_id =current.find('.quiz-id').val();
+                  var answer="";
+                  var answer_id="";
+               
+                  var media_type="";
+                  var media_path="";
+                  var media_link="";
 
+                  current.find('.answer > span:nth-child(2)').each(function(){
+                        answer+=$(this).text()+"/";
+                  });
+                  current.find('.answer-id').each(function(){
+                        answer_id+=$(this).val()+"/";
+                  });
+                  current.find('.question-media-type').each(function(){
+                        media_type+=$(this).val()+"/";
+                  });
+
+                  current.find('.question-media-path').each(function(){
+                        media_path+=$(this).val()+"**";
+                  });
+
+
+                  current.find('.question-media-ink').each(function(){
+                        media_link+=$(this).val()+"**";
+                     });
+
+                  
+
+                  $.ajax({
+                     type: "POST",
+                     url: "/quiz/issue_answer",
+                     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                     data:{
+                        
+                        question:question,
+                        answer:answer,
+                        media_type:media_type,
+                        media_link:media_link,
+                        media_path:media_path,
+
+                        answerId:answer_id,
+                        questionId:id,
+                        roundId:round,
+                        quizId:quizId,
+                        type:type,
+                        correct_ans:answerright,
+                     },
+                     success: function(data) {
+                        
+                     },
+                  });
+               }
+            }
+         });
+      });
 });
 
 

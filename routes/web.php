@@ -362,6 +362,7 @@ Route::post('/quiz/run_quiz','QuizController@run_quiz');
 //
 Route::post('/quiz/stop_quiz', 'QuizController@stop_quiz');
 Route::post('/quiz/pause_quiz', 'QuizController@pause_quiz');
+Route::post('/quiz/issue_answer', 'QuizController@issue_answer');
 
 
 Route::post('/playquiz/save/answer', 'PlayController@saveanswer');

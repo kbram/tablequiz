@@ -68,7 +68,7 @@
 					<ul class="list-unstyled m-0 d-flex flex-column align-items-center">
 						<li><a href="#" id="issue">Issue Question</a></li>
 						<li><a href="#" id="edit_question">Edit Question</a></li>
-						<li><a href="#">Share Answer</a></li>
+						<li><a href="#" id="share_question">Share Answer</a></li>
 						<li class="p-0"><a href="#">Next Question</a></li>
 					</ul>
 				</div>
@@ -141,7 +141,10 @@
 									@foreach($answers[$question->id] as $answer)
 									<p class="answer"><span>Answer:</span><span>{{$answer->answer}}</span></p>
 									<input type="hidden" class="answer-id" value="{{$answer->id}}">
-
+										@if($answer->status==1)
+										<input  type="hidden" class="answer-right" value="{{$answer->id}}">
+										
+										@endif
 									@endforeach
 								</div>
 							</div>
@@ -264,10 +267,15 @@
 		$('#issue').click(function(e){
 			$("#issue").css("pointer-events", "none");
 			$('#issue').css('opacity','0.4');
+			$("#edit_question").css("pointer-events", "none");
+			$('#edit_question').css('opacity','0.4');
+			$("#share_question").css("pointer-events", "none");
+			$('#share_question').css('opacity','0.4');
 			$('#timer').removeClass("countdown__time");
 			$('#que').removeClass("question_number2");
 			play();
 		});
+		
 		if(time!=null){
 			
 			
@@ -353,6 +361,11 @@
 					$('#push-submit-stop').css('opacity','0.4');
 					$("#issue").css("pointer-events", "auto");
 					$('#issue').css('opacity','1');
+					$("#edit_question").css("pointer-events", "auto");
+					$('#edit_question').css('opacity','1');
+					$("#share_question").css("pointer-events", "auto");
+					$('#share_question').css('opacity','1');
+
 					$('#timer').addClass("countdown__time");
 					$('#que').addClass("question_number2");
 				}
@@ -401,10 +414,11 @@ var id_wrong = m[0]+"0";
 		// var id =$('.question-id').val();
 		var id;
 $('.quiz__slider .quiz__single_question__container').each(function(){
-			var current=$(this);
+		var current=$(this);
 		var hidden=current.attr('aria-hidden');
          if(hidden=="false"){
 			id =current.find('.question-id').val(); 
+			//alert(id);
 		 }
 		 
 
@@ -460,6 +474,10 @@ $('#'+id_correct).prop("checked", true);
 			$('#push-submit-stop').css('opacity','0.4');
 			$("#issue").css("pointer-events", "auto");
 			$('#issue').css('opacity','1');
+			$("#edit_question").css("pointer-events", "auto");
+			$('#edit_question').css('opacity','1');
+			$("#share_question").css("pointer-events", "auto");
+			$('#share_question').css('opacity','1');
 			//$("#timer").html(sessionStorage.getItem("nowtimeon"));
 			sessionStorage.setItem("nowtimeon", null);
 			
@@ -533,6 +551,10 @@ $('#'+id_correct).prop("checked", true);
 					//var t =current.find('.question-timer').val();
 					$("#issue").css("pointer-events", "auto");
 					$('#issue').css('opacity','1');
+					$("#edit_question").css("pointer-events", "auto");
+					$('#edit_question').css('opacity','1');
+					$("#share_question").css("pointer-events", "auto");
+					$('#share_question').css('opacity','1');
 					if(x!="00:00"){
 						
 						$("#timer").html("Finished");
@@ -557,6 +579,11 @@ $('#'+id_correct).prop("checked", true);
 						$('#push-submit-stop').css('opacity','1');
 						$("#issue").css("pointer-events", "none");
 						$('#issue').css('opacity','0.4');
+				
+						$("#edit_question").css("pointer-events", "none");
+						$('#edit_question').css('opacity','0.4');
+						$("#share_question").css("pointer-events", "none");
+						$('#share_question').css('opacity','0.4');
 					}
 					
 					//$("#resub").css("display", "none");

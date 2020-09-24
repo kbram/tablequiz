@@ -30,8 +30,8 @@
 
 		<div class="col-12 d-flex justify-content-between">
 
-		<p ><a href="#" class="text-white" id="pre"><small class="small">previous quiz</small></a></p>
-		<p><a href="#" class="text-white" id="next"><small class="small">next quiz</small></a></p>
+		<p ><a href="#" class="text-white" id="pre" ><small class="small">previous quiz</small></a></p>
+		<p><a href="#" class="text-white" id="next" ><small class="small">next quiz</small></a></p>
 
 		</div>   
 
@@ -58,7 +58,7 @@
 			<h4 class='bernhard notification'>Not submitted</h4>
 			</div>
 			<div  class='col-12 the__question text-center mB-2'>
-			<h4 class='questionno' style='min-width:50vw !important;'> Please wait for question ! </h4>
+			<h4 class='questionno' id='' style='min-width:50vw !important;'> Please wait for question ! </h4>
 </div>
 		</div>         
 

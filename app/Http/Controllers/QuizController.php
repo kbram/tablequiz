@@ -21,6 +21,7 @@ use App\Models\TeamAnswer;
 
 use App\Events\FormSubmittedStop;
 use App\Events\FormSubmittedPause;
+use App\Events\FormSubmittedIssue;
 
 use Session;
 use App\Http\Controllers\MasterQuestionController;
@@ -556,9 +557,47 @@ $points = [];
     public function stop_quiz()
     {
         $quizId=request()->quizId;
-        $text="stop";
+        $question=request()->question;
+        $answer=request()->answer;
+  
+        $answerId=request()->answerId;
+        $questionId=request()->questionId;
+        $roundId=request()->roundId;
+        $quizId=request()->quizId;
+        $type=request()->type;
+        
+        $correct_ans=request()->correct_ans;
+        $media_type = request()->media_type;
+        $media_link = request()->media_link;
+        $media_path = request()->media_path;
+        
         event(new FormSubmittedStop($text));
         return redirect("quiz/start_quiz/{$quizId}");
+
+    }
+    public function issue_answer()
+    {
+        $question=request()->question;
+        $answer=request()->answer;
+        $media=request()->media;
+        $answerId=request()->answerId;
+        $questionId=request()->questionId;
+
+        $roundId=request()->roundId;
+        $quizId=request()->quizId;
+        $type=request()->type;
+        $correct_ans=request()->correct_ans;
+        $media_type = request()->media_type;
+
+        $media_link = request()->media_link;
+        $media_path = request()->media_path;
+
+        $t = [$question,$answer,$media,$answerId,$questionId,$roundId,$quizId,$type,$correct_ans,$media_type,$media_link,$media_path];
+       
+
+       
+        event(new FormSubmittedIssue($t));
+        return redirect()->back();
 
     }
     public function pause_quiz()
