@@ -105,7 +105,7 @@
 								<tr style="height:0!important"><td class="p-0"></td></tr>
 								<tr>
 									<td>Quizzes created:</td>
-									<td>13</td>
+									<td>{{$quizzes->count()}}</td>
 								</tr>
 								<tr>
 									<td>Quizzes played:</td>
@@ -115,10 +115,7 @@
 									<td>Last position</td>
 									<td>23<sup>rd</sup></td>
 								</tr>
-								<tr>
-									<td>Money earned:</td>
-									<td>€0.69</td>
-								</tr>
+								
 								
 							</tbody>
 							<tfoot>

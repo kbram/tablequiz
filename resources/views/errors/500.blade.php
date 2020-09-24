@@ -1,47 +1,35 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>500 | Internal Server Error</title>
 
-        <link href="//fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
-        <style>
-            html, body {
-                height: 100%;
-            }
+        @extends('layouts.tablequizapp')
 
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                color: #B0BEC5;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="container page__inner">
+            <div class="text-center col">
+            <img class="q-img mb-3" src="{{asset('site_design/images/homepage__logo.png')}}" height="300px">
+            <h1 class="bernhard ">OOPS !</h1>
 
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
+            <h1 class="bernhard ">500 | Internal Server Error !</h1>
 
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
+            <h1 class="bernhard "></h1>
 
-            .title {
-                font-size: 72px;
-                margin-bottom: 40px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Internal Server Error 500</div>
+
+        </div>
+
+                <div class="modal-body ">
+                   
+                    
+                </div>
             </div>
         </div>
-    </body>
-</html>
+    </div>
+</div>
+@endsection
+
+
+
+
+
+
