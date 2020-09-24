@@ -85,7 +85,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="modal__edit__image position-relative">
-                                        <img class="modal__edit__image__image position-absolute" id="round_image" style="display:block;margin-left:auto;margin-right:auto;" src="#">
+                                        <img class="modal__edit__image__image position-relative" id="round_image" style="display:block;margin-left:auto;margin-right:auto;" src="#">
                                         <div class="modal__edit__image__mask"></div>
                                     </div>
                                     <div class="modal__edit__image__range">
