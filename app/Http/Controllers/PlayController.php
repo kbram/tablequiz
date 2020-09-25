@@ -163,7 +163,6 @@ public function answer(Request $request){
 
         $user=Session::get('teamname');
         
-        
 
         $quiz = Quiz::find($quiz_id);
         $roundCount=$quiz->rounds()->count();
@@ -172,6 +171,8 @@ public function answer(Request $request){
         $answers = Answer::where('question_id',$question_id)->get();
 
         $team_answer = new TeamAnswer ;
+
+
     if($type == 1){
         $correct_answer = Answer::where('question_id',$question_id)->where('status',1)->first()->id;
         if($correct_answer == $user_answer_id){

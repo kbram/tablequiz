@@ -369,7 +369,7 @@ public function postRound(Request $request){
             
 public function add_round_question(Request $request)
     {
-
+// dd($request);
         $categories = QuizCategory::all();
         $questions = GlobalQuestion::all();
         $answers = GlobalAnswer::all();

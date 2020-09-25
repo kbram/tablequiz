@@ -57,7 +57,7 @@ var i =0;
           
 
 
-            var newRow ='<div class="row multiple__choice__row  pb-3 align-items-center"><div class="col-7 multi"><input name="'+gtname+'" class="form-control multiple-choice-answer" type="text"></div><div class="col-1 justify-content-center p-0 d-flex"><span class="minus">-</span></div><div class="col-1 justify-content-center"><span class="plus">+</span></div><div class="col-3 text-center form-check"><input class="multiple-choice-correct-answer" type="radio" id="rdd" name="'+gtname_correct+'"  ></div></div>';
+            var newRow ='<div class="row multiple__choice__row  pb-3 align-items-center"><div class="col-7 multi"><input name="'+gtname+'" class="form-control multiple-choice-answer" type="text" required></div><div class="col-1 justify-content-center p-0 d-flex"><span class="minus">-</span></div><div class="col-1 justify-content-center"><span class="plus">+</span></div><div class="col-3 text-center form-check"><input class="multiple-choice-correct-answer" type="radio" id="rdd" name="'+gtname_correct+'"  ></div></div>';
 
 
             $(this).parents('.multiple__choice__row').after(newRow);
@@ -235,7 +235,7 @@ $('#login-btn').click(function(e) {
         var button = $(this);
         $(this).closest('.multiple__choice__row__in_modal').each(function() {
 
-            var newRow = '<div class="form-row multiple__choice__row__in_modal pb-0 mb-2 align-items-center"><div class="col-7"><input name="multiple__choice__answer[]" class="readonly form-control" type="text"></div><div class="col-1 justify-content-center tempVis"><span class="minus">-</span></div><div class="col-1 justify-content-center tempVis"><span class="plus">+</span></div><div class="col-3 text-center form-check hidd"><input type="radio" class="" name="multiple__choice__correct__answer"></div></div></div>';
+            var newRow = '<div class="form-row multiple__choice__row__in_modal pb-0 mb-2 align-items-center"><div class="col-7"><input name="multiple__choice__answer[]" class="readonly form-control" type="text" ></div><div class="col-1 justify-content-center tempVis"><span class="minus">-</span></div><div class="col-1 justify-content-center tempVis"><span class="plus">+</span></div><div class="col-3 text-center form-check hidd"><input type="radio" class="" name="multiple__choice__correct__answer"></div></div></div>';
             var parent = $(this);
 
             if (button.hasClass('plus')) {
@@ -248,27 +248,27 @@ $('#login-btn').click(function(e) {
         })
 
     })
-    $('select#question__type').on('change',function(){
-		if($(this).val() == "numeric__question"){
-			$('#standard__answer').removeClass('d-flex').addClass('d-none');
-			$('#multiple__choice__legend').removeClass('d-flex').addClass('d-none');
-			$('#multiple__choice__answer').removeClass('d-flex').addClass('d-none');
-			$('#numeric__answer').addClass('d-flex').removeClass('d-none');
-		}
-		if($(this).val() == "standard__question"){
-			$('#standard__answer').addClass('d-flex').removeClass('d-none');
-			$('#multiple__choice__legend').removeClass('d-flex').addClass('d-none');
-			$('#multiple__choice__answer').removeClass('d-flex').addClass('d-none');
-			$('#numeric__answer').removeClass('d-flex').addClass('d-none');
-		}
-		if($(this).val() == "multiple__choice__question"){
-            console.log("man_mul");
-			$('#standard__answer').removeClass('d-flex').addClass('d-none');
-			$('#multiple__choice__legend').addClass('d-flex').removeClass('d-none');
-			$('#multiple__choice__answer').addClass('d-flex').removeClass('d-none');
-			$('#numeric__answer').removeClass('d-flex').addClass('d-none');
-		}
-	})
+    // $('select#question__type').on('change',function(){
+	// 	if($(this).val() == "numeric__question"){
+	// 		$('#standard__answer').removeClass('d-flex').addClass('d-none');
+	// 		$('#multiple__choice__legend').removeClass('d-flex').addClass('d-none');
+	// 		$('#multiple__choice__answer').removeClass('d-flex').addClass('d-none');
+	// 		$('#numeric__answer').addClass('d-flex').removeClass('d-none');
+	// 	}
+	// 	if($(this).val() == "standard__question"){
+	// 		$('#standard__answer').addClass('d-flex').removeClass('d-none');
+	// 		$('#multiple__choice__legend').removeClass('d-flex').addClass('d-none');
+	// 		$('#multiple__choice__answer').removeClass('d-flex').addClass('d-none');
+	// 		$('#numeric__answer').removeClass('d-flex').addClass('d-none');
+	// 	}
+	// 	if($(this).val() == "multiple__choice__question"){
+    //         console.log("man_mul");
+	// 		$('#standard__answer').removeClass('d-flex').addClass('d-none');
+	// 		$('#multiple__choice__legend').addClass('d-flex').removeClass('d-none');
+	// 		$('#multiple__choice__answer').addClass('d-flex').removeClass('d-none');
+	// 		$('#numeric__answer').removeClass('d-flex').addClass('d-none');
+	// 	}
+	// })
     $("body").delegate('select.question__type', 'change', function() {
 
         if ($(this).val() == "numeric__question") {
@@ -276,9 +276,23 @@ $('#login-btn').click(function(e) {
             $(this).parents(".article_question").children(".multiple__choice__legend").removeClass('d-flex').addClass('d-none');
             $(this).parents(".article_question").children(".multiple__choice__answer").removeClass('d-flex').addClass('d-none');
             $(this).parents(".article_question").children(".numeric__answer").addClass('d-flex').removeClass('d-none');
+            $(this).parents(".article_question").children(".numeric__answer").find(".form-control").attr("required",true);
+            $(this).parents(".article_question").children(".standard__answer").find(".answer").attr("required",false);
+            $(this).parents(".article_question").children(".multiple__choice__answer").find('.multiple-choice-answer').attr("required",false);
+
+
+
         }
         if ($(this).val() == "standard__question") {
+            console.log("standad select");
+
             $(this).parents(".article_question").children(".standard__answer").removeClass('d-none');
+            $(this).parents(".article_question").children(".standard__answer").find(".answer").attr("required",true);
+            $(this).parents(".article_question").children(".numeric__answer").find(".form-control").attr("required",false);
+            $(this).parents(".article_question").children(".multiple__choice__answer").find('.multiple-choice-answer').attr("required",false);
+
+
+
             $(this).parents(".article_question").children(".multiple__choice__legend").removeClass('d-flex').addClass('d-none');
             $(this).parents(".article_question").children(".multiple__choice__answer").removeClass('d-flex').addClass('d-none');
             $(this).parents(".article_question").children(".numeric__answer").removeClass('d-flex').addClass('d-none');
@@ -288,7 +302,13 @@ $('#login-btn').click(function(e) {
             $(this).parents(".article_question").children(".standard__answer").removeClass('d-flex').addClass('d-none');
             $(this).parents(".article_question").children(".multiple__choice__legend").addClass('d-flex').removeClass('d-none');
             $(this).parents(".article_question").children(".multiple__choice__answer").addClass('d-flex').removeClass('d-none');
+            $(this).parents(".article_question").children(".multiple__choice__answer").find('.multiple-choice-answer').attr("required",true);
+
             $(this).parents(".article_question").children(".numeric__answer").removeClass('d-flex').addClass('d-none');
+            $(this).parents(".article_question").children(".standard__answer").find(".answer").attr("required",false);
+            $(this).parents(".article_question").children(".numeric__answer").find(".form-control").attr("required",false);
+
+
         }
     })
 

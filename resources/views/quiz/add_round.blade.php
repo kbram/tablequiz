@@ -161,7 +161,7 @@
 				<div class="col-md-8">
 					<div class="row align-items-center">
 						<div class="col-lg-6">
-							<select id="question__type"  class="form-control question__type" name="question__type[]">
+							<select id="question__type"  class="form-control question__type" name="question__type[]" required>
 								<option value="standard__question">Standard</option>
 								<option value="multiple__choice__question">Multiple choice</option>
 								<option value="numeric__question">Numeric</option>
@@ -332,7 +332,7 @@
 					<label for="standard__question__answer">Answer</label>
 				</div>
 				<div class="col-md-8">
-					<input class="form-control answer" name="standard__question__answer__0" type="text">
+					<input class="form-control answer" name="standard__question__answer__0" type="text" required>
 				</div>
 			</div>
 			<div class="form-row d-none numeric__answer" id="numeric__answer">
@@ -340,7 +340,7 @@
 					<label for="numeric__question__answer">Answer</label>
 				</div>
 				<div class="col-md-8">
-					<input class="form-control" name="numeric__question__answer__0" type="number">
+					<input class="form-control" name="numeric__question__answer__0" type="number" >
 				</div>
 			</div>
 			<div class="form-row d-none mb-n4 mb-md-4 multiple__choice__legend" style="min-height:0;" id="multiple__choice__legend">
