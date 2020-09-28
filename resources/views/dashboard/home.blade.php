@@ -105,7 +105,7 @@
 								<tr style="height:0!important"><td class="p-0"></td></tr>
 								<tr>
 									<td>Quizzes created:</td>
-									@if(@isset($quizzes))
+									@if(!empty($quizzes))
 									<td>{{$quizzes->count()}}</td>
 									@else
 									<td>0</td>

@@ -116,6 +116,10 @@ else{
     public function start(Request $request)
     {   
         $quiz=$request->input('quiz_name');
+        if($quiz==""){
+            echo '<script>alert("Please Enter the value")</script>'; 
+            return view('play.play-quiz');
+        }
         return redirect()->action(
             'PlayController@selecturl', ['quiz_name' => $quiz]
         );
@@ -144,12 +148,16 @@ else{
     public function selecturl($quiz_name){
 
         $quiz=Quiz::where('quiz_link',$quiz_name)->first();
-        $image=QuizSetupIcon::where('quiz_id',$quiz->id)->first()->local_path;
-
-
-        $roundCount=$quiz->rounds()->count();
-        $questionCounts=$quiz->questions()->count();
-        return view('play.start-quiz',compact('quiz','roundCount','questionCounts','image'));
+        if(!empty($quiz)){ 
+            $image=QuizSetupIcon::where('quiz_id',$quiz->id)->first()->local_path;
+            $roundCount=$quiz->rounds()->count();
+            $questionCounts=$quiz->questions()->count();
+            return view('play.start-quiz',compact('quiz','roundCount','questionCounts','image'));
+        }else{
+            echo '<script>alert("Team Name Not Match")</script>'; 
+            return view('play.play-quiz');
+        }
+       
 
     }
 //answer

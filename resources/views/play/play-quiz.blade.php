@@ -26,7 +26,7 @@
 		<div class="col-12 d-flex justify-content-between">
 			<p id="quizname" class="text-white" style="min-width:13vw !important;">{{$quiz->quiz__name}}</p>
 			<p id="quizid"  style="display:none;">{{$quiz->id}}</p>
-			<p><a href="#" class="text-white"><small>Exit quiz</small></a></p>
+			<p id="exit" ><a href="#" class="text-white"><small>Exit quiz</small></a></p>
 		</div>
 		<article class="col-12 pb-5">
 
