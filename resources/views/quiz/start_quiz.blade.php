@@ -126,6 +126,7 @@
 									<p class="question"><span>Question:</span><span>{{$question->question}}</span></p>
 									<input type="hidden" class="question-timer" value="{{$question->time_limit}}">
 									<input type="hidden" class="question-type" value="{{$question->question_type}}">
+									<input type="hidden" class="question-issue" value="0">
 									<input type="hidden" class="question-round" value="{{$question->round_id}}">
 									<input type="hidden" class="question-user" value="{{$question->user_id}}">
 									<input type="hidden" class="question-id" value="{{$question->id}}">

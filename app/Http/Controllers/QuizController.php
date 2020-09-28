@@ -43,6 +43,10 @@ use App\Models\GlobalAnswer;
 
 class QuizController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(){
         $quizzes = Quiz::all();
         
@@ -549,7 +553,9 @@ $points = [];
       $media_link = request()->media_link;
       $media_path = request()->media_path;
 
-      $t = [$question,$answer,$media,$answerId,$questionId,$roundId,$quizId,$type,$time,$media_type,$media_link,$media_path];
+      $points=TeamAnswer::where('question_id',$questionId)->get();
+
+      $t = [$question,$answer,$media,$answerId,$questionId,$roundId,$quizId,$type,$time,$media_type,$media_link,$media_path,$points];
       //$text=$question."#^".$answer."#^".$media."#^".$answerId."#^".$questionId."#^".$roundId."#^".$quizId."#^".$type."#^".$time;
       event(new FormSubmitted($t));
       return redirect()->back();
@@ -570,7 +576,7 @@ $points = [];
         $media_type = request()->media_type;
         $media_link = request()->media_link;
         $media_path = request()->media_path;
-        
+        $text=$quizId; 
         event(new FormSubmittedStop($text));
         return redirect("quiz/start_quiz/{$quizId}");
 
@@ -591,8 +597,12 @@ $points = [];
 
         $media_link = request()->media_link;
         $media_path = request()->media_path;
+        
+        
+        $points=TeamAnswer::where('question_id',$questionId)->get();
+      
 
-        $t = [$question,$answer,$media,$answerId,$questionId,$roundId,$quizId,$type,$correct_ans,$media_type,$media_link,$media_path];
+        $t = [$question,$answer,$media,$answerId,$questionId,$roundId,$quizId,$type,$correct_ans,$media_type,$media_link,$media_path,$points];
        
 
        
@@ -603,7 +613,7 @@ $points = [];
     public function pause_quiz()
     {
         $quizId=request()->quizId;
-        $text="pause";
+        $text=$quizId;
         event(new FormSubmittedPause($text));
         return redirect("quiz/start_quiz/{$quizId}");
 
