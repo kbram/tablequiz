@@ -1383,7 +1383,8 @@ $(document).ready(function() {
   
     });
 });
-
-
-
+$("#exit").click(function() {
+    '{{Session::forget('teamname')}}'
+    window.location.replace("/");
+});
 </script>
