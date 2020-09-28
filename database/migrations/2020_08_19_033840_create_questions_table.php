@@ -21,7 +21,7 @@ class CreateQuestionsTable extends Migration
             $table->foreign('round_id')->references('id')->on('quiz_rounds')->onDelete('cascade');
             $table->string('question_type');
             $table->text('question');
-            $table->integer('time_limit');
+            $table->integer('time_limit')->nullable();
             $table->timestamps();
         });
     }

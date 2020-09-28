@@ -12,6 +12,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use jeremykenedy\LaravelRoles\Models\Role;
+use Session;
 
 class RegisterController extends Controller
 {
@@ -43,7 +44,7 @@ class RegisterController extends Controller
      * @return void
      */
     public function __construct()
-    {
+    {   
         $this->middleware('guest', [
             'except' => 'logout',
         ]);
@@ -57,7 +58,7 @@ class RegisterController extends Controller
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
-    {
+    { 
         $data['captcha'] = $this->captchaCheck();
 
         if (! config('settings.reCaptchStatus')) {
@@ -73,10 +74,11 @@ class RegisterController extends Controller
                 'email'                 => 'required|email|max:255|unique:users',
                 'password'              => 'required|min:6|max:30|confirmed',
                 'password_confirmation' => 'required|same:password',
-                'g-recaptcha-response'  => '',
-                'captcha'               => 'required|min:1',
+                // 'g-recaptcha-response'  => '',
+                // 'captcha'               => 'required|min:1',
             ],
             [
+                'email.email'                  => trans('auth.emailInvalid'),
                 'name.unique'                   => trans('auth.userNameTaken'),
                 'name.required'                 => trans('auth.userNameRequired'),
                 'first_name.required'           => trans('auth.fNameRequired'),
@@ -86,10 +88,12 @@ class RegisterController extends Controller
                 'password.required'             => trans('auth.passwordRequired'),
                 'password.min'                  => trans('auth.PasswordMin'),
                 'password.max'                  => trans('auth.PasswordMax'),
-                'g-recaptcha-response.required' => trans('auth.captchaRequire'),
-                'captcha.min'                   => trans('auth.CaptchaWrong'),
+                // 'g-recaptcha-response.required' => trans('auth.captchaRequire'),
+                // 'captcha.min'                   => trans('auth.CaptchaWrong'),
             ]
         );
+
+      
     }
 
     /**
@@ -100,15 +104,16 @@ class RegisterController extends Controller
      * @return User
      */
     protected function create(array $data)
-    {
+    {     
         $ipAddress = new CaptureIpTrait();
 
         if (config('settings.activation')) {
             $role = Role::where('slug', '=', 'unverified')->first();
             $activated = false;
         } else {
-            $role = Role::where('slug', '=', 'user')->first();
+            $role = Role::where('slug', '=', 'quizmaster')->first();
             $activated = true;
+
         }
 
         $user = User::create([
@@ -121,6 +126,7 @@ class RegisterController extends Controller
             'signup_ip_address' => $ipAddress->getClientIp(),
             'activated'         => $activated,
         ]);
+
 
         $user->attachRole($role);
         $this->initiateEmailActivation($user);

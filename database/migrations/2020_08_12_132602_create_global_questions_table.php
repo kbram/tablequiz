@@ -17,7 +17,7 @@ class CreateGlobalQuestionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('question_type');
             $table->string('question');
-            $table->string('time_limit');
+            $table->string('time_limit')->nullable();
             $table->bigInteger('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('quiz_categories')->onDelete('cascade');
             $table->timestamps();

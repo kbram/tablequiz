@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Quiz;
 use App\Models\QuizCategory;
 use Illuminate\Support\Facades\Storage;
+use App\Events\FormSubmitted;
 
 
 use App\Models\UserPayment;
@@ -16,7 +17,11 @@ use App\Models\Answer;
 use App\Models\QuizRoundImage;
 use App\Models\PriceBand;
 
+use App\Models\TeamAnswer;
 
+use App\Events\FormSubmittedStop;
+use App\Events\FormSubmittedPause;
+use App\Events\FormSubmittedIssue;
 
 use Session;
 use App\Http\Controllers\MasterQuestionController;
@@ -63,7 +68,7 @@ class QuizController extends Controller
         $answers = GlobalAnswer::all();
         $medias = GlobalQuestionMedia::all();
         $question = GlobalQuestion::where('id',1)->get();
-
+        
         $validator = Validator::make($request->all(),
         [
           'quiz__name'                => 'required|unique:quizzes',
@@ -73,6 +78,37 @@ class QuizController extends Controller
         ]);
         
         if ($validator->fails()) {
+            $link = $request->input('quiz__link');
+
+            if ($request->hasFile('upload__quiz__icon')) {
+
+                $quiz_icon = $request->file('upload__quiz__icon');
+      
+                $filename = $link.$quiz_icon->getClientOriginalExtension();  
+                $save_path1 = '/storage/quizicon/'.$link.'/quiz_icon/';
+      
+                $save_path = storage_path('app/public'). '/quizicon/'.$link.'/quiz_icon/';
+                $save_path_thumb = storage_path('app/public').'/quizicon/'.$link.'/quiz_icon/'.'/thumb/';
+      
+                $public_path = storage_path('app/public'). '/quizicon/'.$link.'/quiz_icon/'.$filename;
+                $public_path_thumb= storage_path('app/public'). '/quizicon/'.$link.'/quiz_icon/'.'/thumb/'.$filename;
+      
+                // Make the user a folder and set permissions
+                File::makeDirectory($save_path, $mode = 0755, true, true);
+                File::makeDirectory($save_path_thumb, $mode = 0755, true, true);
+      
+                Image::make($quiz_icon)->resize(250,250)->save($save_path_thumb.$filename);
+      
+                $quiz_icon->move($save_path, $filename); 
+                
+                Session::put('public_path', $public_path);
+                Session::put('public_path_thumb', $public_path_thumb);
+                Session::put('file_name', $filename);
+                Session::put('save_path1', $save_path1);
+                Session::put('save_path', $save_path);
+
+      
+               } 
             
             return back()->withErrors($validator)->withInput();
         }
@@ -80,7 +116,6 @@ class QuizController extends Controller
         $link = $request->input('quiz__link');
 
         if ($request->hasFile('upload__quiz__icon')) {
-            // dd($request->hasFile('upload__quiz__icon'));
 
           $quiz_icon = $request->file('upload__quiz__icon');
 
@@ -90,13 +125,8 @@ class QuizController extends Controller
           $save_path = storage_path('app/public'). '/quizicon/'.$link.'/quiz_icon/';
           $save_path_thumb = storage_path('app/public').'/quizicon/'.$link.'/quiz_icon/'.'/thumb/';
 
-          // $path = $save_path . $filename;
-          // $path_thumb    = $save_path_thumb . $filename;
-
           $public_path = storage_path('app/public'). '/quizicon/'.$link.'/quiz_icon/'.$filename;
           $public_path_thumb= storage_path('app/public'). '/quizicon/'.$link.'/quiz_icon/'.'/thumb/'.$filename;
-
-          //resize the image            
 
           // Make the user a folder and set permissions
           File::makeDirectory($save_path, $mode = 0755, true, true);
@@ -107,15 +137,29 @@ class QuizController extends Controller
           $quiz_icon->move($save_path, $filename);            
   
 
+          Session::forget('file_name');
+          Session::forget('save_path1'); 
+          Session::forget('save_path');
+          Session::forget('public_path');
+          Session::forget('public_path_thumb');
          } 
+         elseif(Session::has('public_path'))
+         {
+
+          $filename = Session::get('file_name');
+          $save_path1 = Session::get('save_path1'); 
+          $save_path = Session::get('save_path');
+          $public_path = Session::get('public_path');
+          $public_path_thumb= Session::get('public_path_thumb');
+
+         }
          else{
+
           $filename = 'homepage__logo.png'; 
           $save_path1 = '/storage'; 
           $save_path = storage_path('app/public');
           $public_path = storage_path('app/public');
           $public_path_thumb= storage_path('app/public').'/thumb';
-
-
 
          }
      
@@ -141,8 +185,14 @@ class QuizController extends Controller
   
             $quizIcon->save();
 
-           $cat = QuizCategory::all();
-           $quiz = $quiz->quiz_link;
+            Session::forget('file_name');
+            Session::forget('save_path1'); 
+            Session::forget('save_path');
+            Session::forget('public_path');
+            Session::forget('public_path_thumb');
+
+            $cat = QuizCategory::all();
+            $quiz = $quiz->quiz_link;
 
 
            return View('quiz.add_round', compact('categories','answers','medias','quiz'));
@@ -430,8 +480,12 @@ $round_image->save();
         
         
     }
+        
+    
+
     public function update(Request $request,$id)
-            {
+     {     
+        
             $validator = Validator::make(
             $request->all(),
             [
@@ -496,31 +550,116 @@ $round_image->save();
                $quizIcon->save();
                } 
 
-        return view('quiz.add_round');      
+        return redirect()->back();      
 
     }    
     
+
     public function start_quiz($id)
-    {
+    {  
+$points = [];
+        $teams = TeamAnswer::groupBy('team_name')->pluck('team_name');
+        foreach($teams as $team){
+            $points[$team]=TeamAnswer::where('team_name',$team)->where('status',1)->count();
+            
+              }
+
+       $quiz_id=$id;
        $questions=[];
        $answers=[];
+       $medias=[];
        $rounds =QuizRound::where('quiz_id',$id)->get();
        foreach($rounds as $round){
         $questions[$round->id]=Question::where('round_id',$round->id)->get();
-          
-       }
-        
+          }
+      //  dd(count($rounds));
        foreach($questions as $question){
            foreach($question as $questio){
                  $answers[$questio->id]=Answer::where('question_id',$questio->id)->get();
         }
-      }        
-            
-							
+        foreach($question as $questio){
+            $medias[$questio->id]=QuestionMedia::where('question_id',$questio->id)->get();
+   }  
+    
+    }  
       
-        return view('quiz.start_quiz',compact('questions','answers','rounds'));
+        return view('quiz.start_quiz',compact('questions','answers','rounds','quiz_id','medias','teams','points'));
     }
 
+    public function run_quiz()
+    {  
+      $question=request()->question;
+      $answer=request()->answer;
+      $media=request()->media;
+      $answerId=request()->answerId;
+      $questionId=request()->questionId;
+      $roundId=request()->roundId;
+      $quizId=request()->quizId;
+      $type=request()->type;
+      $time=request()->time;
+      $media_type = request()->media_type;
+      $media_link = request()->media_link;
+      $media_path = request()->media_path;
+
+      $t = [$question,$answer,$media,$answerId,$questionId,$roundId,$quizId,$type,$time,$media_type,$media_link,$media_path];
+      //$text=$question."#^".$answer."#^".$media."#^".$answerId."#^".$questionId."#^".$roundId."#^".$quizId."#^".$type."#^".$time;
+      event(new FormSubmitted($t));
+      return redirect()->back();
+    }
+    public function stop_quiz()
+    {
+        $quizId=request()->quizId;
+        $question=request()->question;
+        $answer=request()->answer;
+  
+        $answerId=request()->answerId;
+        $questionId=request()->questionId;
+        $roundId=request()->roundId;
+        $quizId=request()->quizId;
+        $type=request()->type;
+        
+        $correct_ans=request()->correct_ans;
+        $media_type = request()->media_type;
+        $media_link = request()->media_link;
+        $media_path = request()->media_path;
+        
+        event(new FormSubmittedStop($text));
+        return redirect("quiz/start_quiz/{$quizId}");
+
+    }
+    public function issue_answer()
+    {
+        $question=request()->question;
+        $answer=request()->answer;
+        $media=request()->media;
+        $answerId=request()->answerId;
+        $questionId=request()->questionId;
+
+        $roundId=request()->roundId;
+        $quizId=request()->quizId;
+        $type=request()->type;
+        $correct_ans=request()->correct_ans;
+        $media_type = request()->media_type;
+
+        $media_link = request()->media_link;
+        $media_path = request()->media_path;
+
+        $t = [$question,$answer,$media,$answerId,$questionId,$roundId,$quizId,$type,$correct_ans,$media_type,$media_link,$media_path];
+       
+
+       
+        event(new FormSubmittedIssue($t));
+        return redirect()->back();
+
+    }
+    public function pause_quiz()
+    {
+        $quizId=request()->quizId;
+        $text="pause";
+        event(new FormSubmittedPause($text));
+        return redirect("quiz/start_quiz/{$quizId}");
+
+    }
     public function slider()
     {
         return view('quiz.slider');

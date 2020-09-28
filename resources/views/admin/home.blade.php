@@ -40,7 +40,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="/admin/categories">
+						<a href="/admin/questions">
 							<span><i class="fas fa-question-circle"></i></span>
 							Questions
 						</a>
@@ -110,7 +110,7 @@
 								</tr>
 							</thead>
 							<tbody>
-
+							    @if(!empty($quizzes))
 								@foreach($quizzes as $quiz)
 
 								@if ($quiz->is_blocked)
@@ -176,8 +176,11 @@
 								</tr>
 								@endif
 								@endforeach
-								
-
+								@else
+								<tr> 
+								<p>No quizzes to show</p>
+								</tr>
+							@endif
 							</tbody>
 							<tfoot>
 								<tr>

@@ -51,23 +51,28 @@
 		</aside>
 		
 		<section class="col-lg-9 dashboard__content">
-			<div class="row">
-				<div class="col-12">
-					<div class="row">
-						<div class="col-lg-9">
-							<h2>Questions</h2>
-						</div>
-						<div class="col-lg-3 ">
+	<div class="row">
+			<div class="col-lg-9 col-sm-6 ">
+				<h2>Add new question</h2>
+			</div>
+		<div class="col-lg-3 col-sm-6 ">
 							@if(config('usersmanagement.enableSearchUsers'))
 								@include('partials.search-questions-form')
 							@endif
 							
-						</div>
-					</div>
+		</div>
+	</div>
+
+			<article class="article">
+				
+			<div class="row">
+				<div class="col-12">
+						
+						
+					
 					
 					
 					<div class="dashboard__container flex-grow-0 pt-4 mb-3">
-						<h3>Add new question</h3>
 						
 						<form action="/admin/questions" enctype="multipart/form-data" method="post" class="pt-3 add__new__in__admin">
 							@csrf
@@ -79,6 +84,7 @@
 
 								<select name="category__type" id="category__type" class="form-control" >
 							    <option value="{{(old('category__type') ?? '')}}" selected >{{(old('category__type') != '' ? old('category__type') : 'Please Choose...')}}</option>
+
                                 @foreach($categories as $category)
 						           <option value="{{$category->category_name }}" value="show">{{ $category->category_name }}</option>
 								@endforeach
@@ -156,14 +162,13 @@
 								<div class="modal" id="add__image__media" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
 								  <div class="modal-dialog" role="document">
 									<div class="modal-content">
-									  <div class="modal-header justify-content-center">
 										<h1 class="modal-title" id="add__image__media__modal__heading"></h1>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										  <span aria-hidden="true">&times;</span>
-										</button>
-									  </div>
+										
 									  <div class="modal-body">
-										<p class="text-center py-2">Add <span id="add__image__media__text"></span> to reference in your question</p>
+										<p class="text-center py-2 justify-content-center">Add <span id="add__image__media__text"></span> to reference in your question<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										  <span aria-hidden="true">&times;</span>
+										</button></p>
+										
 										<div class="form-row">
 											<div class="col-md-4">
 												<label>Add link</label>
@@ -194,14 +199,12 @@
                             	<div class="modal" id="add__audio__media" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
 								  <div class="modal-dialog" role="document">
 									<div class="modal-content">
-									  <div class="modal-header justify-content-center">
 										<h1 class="modal-title" id="add__audio__media__modal__heading"></h1>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										  <span aria-hidden="true">&times;</span>
-										</button>
-									  </div>
+										
 									  <div class="modal-body">
-										<p class="text-center py-2">Add <span id="add__audio__media__text"></span> to reference in your question</p>
+										<p class="text-center py-2 justify-content-center">Add <span id="add__audio__media__text"></span> to reference in your question <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										  <span aria-hidden="true">&times;</span>
+										</button></p>
 										<div class="form-row">
 											<div class="col-md-4">
 												<label>Add link</label>
@@ -232,14 +235,12 @@
 								<div class="modal" id="add__video__media" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
 								  <div class="modal-dialog" role="document">
 									<div class="modal-content">
-									  <div class="modal-header justify-content-center">
 										<h1 class="modal-title" id="add__video__media__modal__heading"></h1>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										  <span aria-hidden="true">&times;</span>
-										</button>
-									  </div>
+										
 									  <div class="modal-body">
-										<p class="text-center py-2">Add <span id="add__video__media__text"></span> to reference in your question</p>
+										<p class="text-center py-2 justify-content-center">Add <span id="add__video__media__text"></span> to reference in your question<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										  <span aria-hidden="true">&times;</span>
+										</button></p>
 										<div class="form-row">
 											<div class="col-md-4">
 												<label>Add link</label>
@@ -310,7 +311,7 @@
 										<div  id="dynamicTable" class="col-7">
 										
 											
-									 <input  name="multiple__choice__answer__1" class="form-control" type="text" >		   
+									 <input  name="multiple__choice__answer__0[]" class="form-control multiple-choice-answer" type="text" >		   
 										</div> 
 										<div class="col-1 justify-content-center">
 											&nbsp;
@@ -320,7 +321,8 @@
 											
 										</div>
 										<div class="col-3 text-center form-check">
-											<input  type="radio" class="" name="multiple__choice__correct__answer" value=0 >
+										<input type="radio" value="0" class="multiple-choice-correct-answer" name="multiple__choice__correct__answer__0">
+									
 										</div>
 									</div>
 
@@ -353,9 +355,9 @@
 							</div>
 						</div>
 						</form>
+</article>
 
-					</div>
-					<div class="dashboard__container flex-grow-1">
+<div class="dashboard__container flex-grow-1">
 						<table class="table table-striped table-borderless m-0 h-100 my__quizzes">
 							<thead>
 								<tr>
@@ -365,9 +367,8 @@
 								</tr>
 							</thead>
 							<tbody id="questions_table">
-							
-							@foreach($questions as $question)
-							
+							@if(!empty($questions))
+							@foreach($questions as $question)						
 
 							<tr>	
 								<td>{{$question->question}}</td>  
@@ -388,12 +389,14 @@
 								</form>
 								</td>
 							</tr>
-							 @endforeach
-							
-								 
+							@endforeach
+							@else
+							<tr><p>No questions to show </p></tr>
+						    @endif	
+	 
 							</tbody>
 								
-							<tbody id="questions_table"></tbody>
+							<!-- <tbody id="questions_table"></tbody> -->
 							@if(config('usersmanagement.enableSearchUsers'))
 								<tbody id="search_results"></tbody>
 							@endif
@@ -407,8 +410,12 @@
 						</table>
 						{{ $questions->links() }}
 					</div>
+					</div>
+					
 				</div>
 			</div>
+			
+</div>
 		</section>
 	</div>
 	

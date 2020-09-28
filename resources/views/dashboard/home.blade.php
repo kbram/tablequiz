@@ -105,7 +105,11 @@
 								<tr style="height:0!important"><td class="p-0"></td></tr>
 								<tr>
 									<td>Quizzes created:</td>
-									<td>13</td>
+									@if(@isset($quizzes))
+									<td>{{$quizzes->count()}}</td>
+									@else
+									<td>0</td>
+									@endif
 								</tr>
 								<tr>
 									<td>Quizzes played:</td>
@@ -115,10 +119,7 @@
 									<td>Last position</td>
 									<td>23<sup>rd</sup></td>
 								</tr>
-								<tr>
-									<td>Money earned:</td>
-									<td>€0.69</td>
-								</tr>
+								
 								
 							</tbody>
 							<tfoot>
@@ -152,13 +153,15 @@
 							</thead>
 						
 							<tbody id="users">
-							@foreach($quizzes ?? '' as $quiz)
+							@if(!empty($quizzes))
+							@foreach($quizzes as $quiz)
 
 							<tr>
                                     
 									 <td>{{$quiz->quiz__name}}</td>
+									 <td>{{$questionCounts[$quiz->id]}}</td>
 									 <td>{{$roundCount[$quiz->id]}}</td>
- 									 <td>{{$questionCounts[$quiz->id]}}</td>
+ 									
 
 									<td class="d-none" id="quizLink{{$quiz->id}}">{{$quiz ->quiz_link}}</td>
 									<td class="quiz_actions d-flex flex-row justify-content-lg-end">
@@ -184,7 +187,9 @@
 									</td>
 								</tr>
 								@endforeach
-								
+								@else
+								<p>No quizzes to show</p>
+							@endif	
 									
 								
 								

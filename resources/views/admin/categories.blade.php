@@ -107,6 +107,7 @@
 
 							
 							<tbody>
+							@if(!empty($categories))
 							  	@foreach($categories as $category)
                                         <tr>
                                             <td>{{$category->category_name}}</td>
@@ -115,8 +116,10 @@
                                             <td class="quiz_actions d-flex flex-row justify-content-lg-center">
 												<div class="d-flex flex-column">
 													<i class="fas fa-pencil-alt"></i>
-													<a href="{{ URL::to('admin/categories/edit/'.$category->id)}}"><span>Edit</span></a>
-												</div>									
+													<span><a href="{{ URL::to('admin/categories/edit/'.$category->id)}}">Edit</a></span>
+												</div>
+												
+																	
 												
 												<form method="POST" action="/admin/categories/{{$category->id}}" class="p-0">
 												{{ csrf_field() }}	
@@ -130,7 +133,9 @@
                                         </tr>
                                             
                              	@endforeach
-								
+								@else
+								<p>No categories created yet!</p>
+								@endif
 							</tbody>
 							<tfoot>
 								<tr>
@@ -140,7 +145,9 @@
 								</tr>
 							</tfoot>
 						</table>
-						
+						@if(!empty($categories))
+						{{ $categories->links() }}
+						@endif
 					</div>
 				</div>
 			</div>
@@ -150,5 +157,35 @@
 @endsection
 
 @section('footer_scripts')
-@include('scripts.delete-model')
+<script>
+
+    $('span.delete').click(function(e){
+         
+        e.preventDefault() // Don't post the form, unless confirmed
+        
+        
+                swal({
+                    title: "Are you sure?",
+                    text: "Once you delete a category, all the questions under this category will also be deleted and you can't get it back",
+                    buttons: true,
+                    dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                    if (willDelete) {
+                            $(e.target).closest('form').submit();
+                           
+                        swal(" Your data has been deleted!", {
+                        icon: "success",
+                        
+                        });
+                    } else {
+                        swal("Your data is safe!");
+                    }
+                    // $(e.target).closest('form').submit();
+                    });
+            
+                    // $(e.target.id).closest('form').submit();
+    });
+</script>
+
 @endsection

@@ -6,88 +6,36 @@
 .small{
 	color:#5A37BA;
 }
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 
 @endsection
 @section('content')
-<script>
-
-	// Enable pusher logging - don't include this in production
-	Pusher.logToConsole = true;
-
-	var pusher = new Pusher('87436df86baf66b2192a', {
-	cluster: 'ap2'
-	});
-
-	var channel = pusher.subscribe('my-channel');
-	channel.bind('form-submitted', function(data) {
-		//alert(JSON.stringify(data));
-		var message = JSON.stringify(data);
-		var m0 = message.replace('{"text":"','');
-		var m0 = m0.replace('"}','');
-		var m=m0.split("#^");
-		var questionno=m[0];
-		var issueq=sessionStorage.getItem("issuequestion");
-		issueq=issueq+"@*"+m0;
-		sessionStorage.setItem("issuequestion", issueq);
-		
-		
-		$('h4.questionno').text(questionno);
-		$('h4.notification').text(m[1]);
-		//$('h4.ans').text(m[2]);
-		var med = m[8];
-		$('div.med').text(med);
-
-		var answer=m[2].split("\\\\");
-		var answerId=m[4];
-		var questionId=m[5];
-		var roundId=m[6];
-		var quizId=m[7];
-		var type=m[8];
-		var text0="<div class='justify-content-center row'>";
-		for (var i = 0; i < answer.length; i++) {
-			text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
-			"<input type='text' name='answer' hidden value='"+answerId+"'/>"+
-			"<input type='text' name='question' hidden value='"+questionId+"'/>"+
-			"<input type='text' name='round' hidden value='"+roundId+"'/>"+
-			"<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
-			"<p>"+answer[i]+"</p>"+ 
-			"</form>";	
-		} 
-		text0 += "</div> <div class='break'></div>"+
-		"<div class='justify-content-center row'>"+
-			"<div class=''>"+
-				"<br><a class='btn btn-primary d-block d-lg-inline-block card__from__modal' onclick='document.getElementById('"+answerId+"').submit()'>Submit Answer</a>"+
-			"</div>"+
-		"</div>";
-		$('#all-answer').empty();
-		$('#all-answer').append(text0);
-		document.getElementById("demo").innerHTML=issueq;
-	});
-	
-</script>
 
 <!-- <section class="container page__inner"> -->
-<!--
-	<div class="row mb-3">
-		<div class="col">
-			<h2 class="text-white text-center bernhard">MadDog's Geography Quiz</h2>
-		</div>
-	</div>
--->
+@if(Session::has('teamname'))
+
+
 	<div class="row">
+
 		<div class="col-12 d-flex justify-content-between">
-			<p class="text-white" style="min-width:13vw !important;">{{$quiz->quiz__name}}</p>
+			<p id="quizname" class="text-white" style="min-width:13vw !important;">{{$quiz->quiz__name}}</p>
+			<p id="quizid"  style="display:none;">{{$quiz->id}}</p>
 			<p><a href="#" class="text-white"><small>Exit quiz</small></a></p>
 		</div>
 		<article class="col-12 pb-5">
 
 		<div class="col-12 d-flex justify-content-between">
 
-		<p ><a href="#" class="text-white"><small class="small">previous quiz</small></a></p>
-		<p><a href="#" class="text-white"><small class="small">next quiz</small></a></p>
+		<p ><a href="#" class="text-white" id="pre" ><small class="small">previous quiz</small></a></p>
+		<p><a href="#" class="text-white" id="next" ><small class="small">next quiz</small></a></p>
 
-		</div> 
+		</div>   
 
 
 			<div class="row border-bottom pb-2 mb-5">
@@ -97,48 +45,39 @@
 				</div>
 				<div class="col-12">
 					<div>
-						<p class=" justify-content-center d-flex align-items-center m-0">Time remaining: <strong class="pl-2">28</strong></p>
+						<p class=" justify-content-center d-flex align-items-center m-0">Time remaining: <strong class="timer"></strong></p>
 					</div>
 				</div>
 			</div>
-			<div class="row question__container">
-				<div class="col-12 media__container p-0 mb-5">
-					<img src="../images/suir.jpg" >
-				</div>
-				<div class="col-12 text-center">
-					<h4 class="bernhard">Question {{$question->id}}</h4>
-				</div>
-				<div class="col-12 the__question text-center mB-2">
-					<h4 class="" style="min-width:38vw !important;"> {{$question->question}} </h4>
-				</div>
+			
+			<!-- question part apand -->
+
+			<div id="ques" class='row question__container'>
+
+			
+
+			<div class='col-12 text-center'>
+			<h4 class='bernhard notification'>Not submitted</h4>
 			</div>
+			<div  class='col-12 the__question text-center mB-2'>
+			<h4 class='questionno' id='' style='min-width:50vw !important;'> Please wait for question ! </h4>
+</div>
+		</div>         
 
 
-			@if($question->question_type == 'standard__question')
 			<div id="all-answer" class="row answer__options pt-4 justify-content-center flex-wrap">
 			
+
+
+
 			</div>
-            @endif
 
-
-
-	
-
-
-
-<br>
-<div class="justify-content-center row">
-<div class="col-5">
-<a   class="btn btn-primary d-block d-lg-inline-block card__from__modal" onclick="document.getElementById('answer').submit()">Submit Answer</a>
-</div> 
-</div>
-	
 		</article>
-		
+		<p id="demo"></p>
 	</div>
 <!-- </section> -->
-<!-- 
-<script>
+
+<!-- <script>
 
 	var correct = {!! json_encode(Session::get("$quiz->id-$round->id-$question->id") ) !!};
 
@@ -169,23 +108,52 @@
 	console.log(worng);
 	}
 
+
+	
 </script> -->
-<!-- 
-<script>
 
 
-$(function() {
-    $('.single__answer').click(function() {
-		$(this).attr('id', 'answer');
-		console.log("change");
-    });
-});
-</script> -->
 
 @include('scripts.playquiz')
 
+@else
+
+
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="container page__inner">
+            <div class="text-center col">
+            <h1 class="bernhard ">OOPS !</h1>
+
+            <img class="q-img mb-3" src="{{asset('site_design/images/homepage__logo.png')}}" height="300px">
+            <h1 class="bernhard ">404</h1>
+
+            <h1 class="bernhard ">PAGE NOT FOUND !</h1>
+
+            <h1 class="bernhard "></h1>
+
+
+        </div>
+
+                <div class="modal-body ">
+                   
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+
+
+@endif
+
 @endsection
 @section('footer_scripts')
+@include('scripts.timer')
 @endsection
 
 

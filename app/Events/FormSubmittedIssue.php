@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class FormSubmitted implements ShouldBroadcast
+class FormSubmittedIssue implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -20,7 +20,6 @@ class FormSubmitted implements ShouldBroadcast
      * @return void
      */
     public $text;
-
     public function __construct($text)
     {
         $this->text=$text;
@@ -33,10 +32,10 @@ class FormSubmitted implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('my-channel');
+        return new Channel('my-channel3');
     }
     public function broadcastAs()
     {
-        return 'form-submitted';
+        return 'form-submitted3';
     }
 }

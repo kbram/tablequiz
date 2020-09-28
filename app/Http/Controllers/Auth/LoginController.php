@@ -23,6 +23,22 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+
+protected function authenticated()
+{
+if(auth()->user()->hasRole('admin'))
+ {
+     Session::put('admin','admin');
+    return redirect('admin/home');
+}
+elseif(auth()->user()->hasRole('quizmaster')){
+    Session::put('quizmaster','master');
+
+    return redirect('dashboard/home');
+}
+ return redirect('/home');
+}
+
     /**
      * Where to redirect users after login.
      *

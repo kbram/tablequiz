@@ -40,7 +40,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="/admin/categories">
+						<a href="/admin/questions">
 							<span><i class="fas fa-question-circle"></i></span>
 							Questions
 						</a>
@@ -77,7 +77,7 @@
 								</tr>
 							</thead>
 							<tbody id="quizzes_table">
-								
+							@if(!empty($quizzes))	
 							@foreach($quizzes as $quiz)	
 							@if ($quiz->is_blocked)					
 								<tr>
@@ -117,7 +117,7 @@
 									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
 										<div class="d-flex flex-column pl-0">
 											<i class="far fa-eye"></i>
-											<a href="/admin/home/view/{{$quiz->id}}"><span class="view-qz" id="view-qz{{$quiz->id}}">View Qs</span></a>
+											<span class="view-qz" id="view-qz{{$quiz->id}}"><a href="/admin/home/view/{{$quiz->id}}">View Qs</a></span>
 										</div>
 										<div class="d-flex flex-column">
 										<i class="fas fa-share-alt"></i><span class="share" id="{{$quiz->id}}">Share</span>
@@ -133,9 +133,15 @@
 										</form>
 									</td>
 								</tr>
-
-								@endif
+							@endif						
+								
 								@endforeach
+								@else
+								<tr>
+								<p>No quizzes to show</p>
+								</tr>
+								
+								@endif
 								
 								
 								
@@ -147,7 +153,7 @@
 							<tfoot>
 								<tr>
 									<td colspan="6" class="text-center text-muted">
-										<a href="/dashboard/my-quizzes"><small>View all</small></a>
+										<!-- <a href="/dashboard/my-quizzes"><small>View all</small></a> -->
 									</td>
 								</tr>
 							</tfoot>

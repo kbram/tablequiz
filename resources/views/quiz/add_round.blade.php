@@ -1,7 +1,7 @@
 @extends('layouts.tablequizapp')
 @section('template_linked_css')
 <style>
-	#blah {
+	#round_image{
 		transform-origin: top left;
 		-webkit-transform-origin: top left;
 		-ms-transform-origin: top left;
@@ -26,16 +26,20 @@
 		-ms-transform: rotate(270deg) translateX(-100%);
 	}
 </style>
+
 @endsection
 @section('content')
 <script src='jquery-3.2.1.min.js'></script> 
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 <section class="container page__inner">
-<form id="add_round" action="/round" method="post" enctype="multipart/form-data" role="main" novalidate>
+
+<form id="add_round" action="/round" method="post" enctype="multipart/form-data" role="main" >
 		 @csrf
 <div class="is_container row" >
 
-		<article class="col-12">
+		<article class="col-12 ">
 
 			<div class="article__heading">
 				<h1>Round {{$round_count ?? '1'}} Setup</h1>
@@ -65,7 +69,7 @@
 			<div class="form-row">
 				<div class="col-md-4">
 					<label for="round__background">Round background</label>
-					<span class="helper__text" data-placement="left" data-toggle="tooltip" title="Some text about the round background to go here."><i class="fa fa-info-circle"></i></span>
+					<span class="helper__text" data-placement="left" data-toggle="tooltip" title="You can add background images to each round you create by uploading the image here."><i class="fa fa-info-circle"></i></span>
 				</div>
 				<div class=" col-md-4">
 					<a href="#" class="d-block btn btn-outline-secondary" data-toggle="modal" data-target="#edit__round__bg__modal">Upload</a>
@@ -85,8 +89,8 @@
 							</div>
 							<div class="modal-body">
 								<div class="modal__edit__image position-relative">
+								   <img class="modal__edit__image__image position-relative" id="round_image" style="display:block;margin-left:auto;margin-right:auto;" src="#">
 									<div class="modal__edit__image__mask"></div>
-									<img class="modal__edit__image__image" id="blah" style="display:block;margin-left:auto;margin-right:auto;" src="#">
 								</div>
 								<div class="modal__edit__image__range">
 									<div class="form-row align-items-center">
@@ -105,6 +109,7 @@
 										</div>
 										<div class="col-9">
 											<input type="range" min="1" max="100" class="form-control-range" id="formControlRange">
+											
 										</div>
 									</div>
 								</div>
@@ -116,7 +121,7 @@
 									</label>
 								</div>
 								<div class="col-md-3 ml-0 ml-lg-1 d-flex">
-									<button type="submit" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
+									<button id="pro" type="submit" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
 
 								</div>
 							</div>
@@ -142,7 +147,7 @@
 <!-- <form class="is_container row" id="add_round" action="/question" method="post" enctype="multipart/form-data" role="main">
 @csrf	 -->
 
-		<article class="col-12 article">
+		<article class="col-12 article ">
 <div class="article_question">
 			<div class="article__heading">
 				<h1>Question <span id="number"> 1</span></h1>
@@ -156,7 +161,7 @@
 				<div class="col-md-8">
 					<div class="row align-items-center">
 						<div class="col-lg-6">
-							<select id="question__type"  class="form-control question__type" name="question__type[]">
+							<select id="question__type"  class="form-control question__type" name="question__type[]" required>
 								<option value="standard__question">Standard</option>
 								<option value="multiple__choice__question">Multiple choice</option>
 								<option value="numeric__question">Numeric</option>
@@ -178,7 +183,7 @@
 					<label for="question">Question</label>
 				</div>
 				<div class="col-md-8">
-					<input name="question[]" type="text" class="form-control question">
+					<input name="question[]" type="text" class="form-control question" required > 
 				</div>
 				@if ($errors->has('question'))
                         <span class="help-block">
@@ -207,7 +212,7 @@
 				<div class="modal" id="add__image__media" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
  								  <div class="modal-dialog" role="document">
  									<div class="modal-content">
- 									  <div class="modal-header justify-content-center">
+ 									  <div class="modal-header">
  										<h1 class="modal-title" id="add__image__media__modal__heading"></h1>
  										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
  										  <span aria-hidden="true">&times;</span>
@@ -220,7 +225,7 @@
  												<label>Add link image</label>
  											</div>
  											<div class="col-md-8">
- 												<input type="url" name="add_link_to_image__media__0" class="form-control add-image-media-link" id="add__image__media__text">
+ 												<input type="url" name="add_link_to_image__media__0" class="form-control add-image-media-link" value="" id="add__image__media__text">
  											</div>
  										</div>
  										<div class="text-center w-100">
@@ -229,14 +234,15 @@
  										<div class="form-row justify-content-center pt-3">
  											<div class="col-md-3">	
  											   <label class="d-block" for="upload__image__media__file">Upload
- 													<input type="file" class="form-control-file" id="upload__image__media__file" value="Upload" name="image_media_0">
+ 													<input type="file" class="form-control-file " id="upload__image__media__file" value="Upload" name="image_media_0">
  												</label>
  											</div>
  										</div>
  									  </div>
+									 
  									  <div class="modal-footer justify-content-center">
  										  <div class="col-sm-4">
- 											<button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
+ 											<button id="pro1" type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
  										  </div>
  									  </div>
  									</div>
@@ -246,7 +252,7 @@
                              	<div class="modal" id="add__audio__media" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
  								  <div class="modal-dialog" role="document">
  									<div class="modal-content">
- 									  <div class="modal-header justify-content-center">
+ 									  <div class="modal-header ">
  										<h1 class="modal-title" id="add__audio__media__modal__heading"></h1>
  										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
  										  <span aria-hidden="true">&times;</span>
@@ -275,7 +281,7 @@
  									  </div>
  									  <div class="modal-footer justify-content-center">
  										  <div class="col-sm-4">
- 											<button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
+ 											<button id="pro2" type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
  										  </div>
  									  </div>
  									</div>
@@ -284,7 +290,7 @@
  								<div class="modal" id="add__video__media" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
  								  <div class="modal-dialog" role="document">
  									<div class="modal-content">
- 									  <div class="modal-header justify-content-center">
+ 									  <div class="modal-header ">
  										<h1 class="modal-title" id="add__video__media__modal__heading"></h1>
  										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
  										  <span aria-hidden="true">&times;</span>
@@ -313,7 +319,7 @@
  									  </div>
  									  <div class="modal-footer justify-content-center">
  										  <div class="col-sm-4">
- 											<button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
+ 											<button id="pro3" type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
  										  </div>
  									  </div>
  									</div>
@@ -326,7 +332,7 @@
 					<label for="standard__question__answer">Answer</label>
 				</div>
 				<div class="col-md-8">
-					<input class="form-control answer" name="standard__question__answer__0" type="text">
+					<input class="form-control answer" name="standard__question__answer__0" type="text" required>
 				</div>
 			</div>
 			<div class="form-row d-none numeric__answer" id="numeric__answer">
@@ -334,7 +340,7 @@
 					<label for="numeric__question__answer">Answer</label>
 				</div>
 				<div class="col-md-8">
-					<input class="form-control" name="numeric__question__answer__0" type="number">
+					<input class="form-control" name="numeric__question__answer__0" type="number" >
 				</div>
 			</div>
 			<div class="form-row d-none mb-n4 mb-md-4 multiple__choice__legend" style="min-height:0;" id="multiple__choice__legend">
@@ -346,11 +352,11 @@
 				<div class="col-md-4 align-self-start">
 					<label for="multiple__choice__answer">Answer</label>
 				</div>
-				<div class="col-md-8">
+				<div class="col-md-8 multi-choice">
 
 					<div class="row multiple__choice__row   pb-3 align-items-center">
-						<div class="col-7 multi ">
-							<input name="multiple__choice__answer__0[]" class="multiple-choice-answer form-control" type="text">
+						<div class="col-7">
+							<input name="multiple__choice__answer__0[]" class="multiple-choice-answer form-control first-multi-answer" type="text">
 						</div>
 						<div class="col-1 justify-content-center p-0 d-flex">
 							&nbsp;
@@ -408,11 +414,18 @@
 				<div class="modal-dialog" role="document">
 					<div class="modal-content pb-4">
 
-						<div class="modal-header justify-content-center border-0">
-							<h1 class="modal-title" id="suggestedQuestionsHeading">Suggested Questions</h1>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
+						<div class="modal-header  border-0 row">
+							<div class="col-sm-2">
+								<button type="button" id="suggested__modal__back" class="p-2" style="background-color: transparent;float:left;padding: 0;border: 0;">
+									<i class="fas fa-angle-left"></i>
+								</button>
+							</div>
+							<div class="col-sm-8"><h1 class="modal-title " align="center" id="suggestedQuestionsHeading">Suggested Questions</h1></div>
+							<div class="col-sm-2">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
 						</div>
 						<div class="modal-body categories d-flex w-100 pb-4">
 							<div class="row suggested__categories px-3 w-100 no-gutters">
@@ -523,8 +536,176 @@
 @endsection
 
 @section('footer_scripts')
+<script>    
+var size=2000;
+$('#upload__quiz__icon').on('change', function() { 
+	size=this.files[0].size;
+}); 
+$("#pro").click(function(){
+	var s=$('#upload__quiz__icon').val();
+	s=Math.round(size/100);
+	if(s=="" ){
+
+	}else{
+		let timerInterval
+		Swal.fire({
+		title: 'File Uploading!',
+		html: 'please wait <br><b></b> kb remaining',
+		timer: s,
+		timerProgressBar: true,
+		onBeforeOpen: () => {
+			Swal.showLoading()
+			timerInterval = setInterval(() => {
+			const content = Swal.getContent()
+			if (content) {
+				const b = content.querySelector('b')
+				if (b) {
+				b.textContent = Swal.getTimerLeft()
+				}
+			}
+			}, 100)
+		},
+		onClose: () => {
+			clearInterval(timerInterval)
+		}
+		}).then((result) => {
+		/* Read more about handling dismissals below */
+		if (result.dismiss === Swal.DismissReason.timer) {
+			console.log('I was closed by the timer')
+		}
+		})
+	}
+});
+
+var size1=2000;
+$('#upload__image__media__file').on('change', function() { 
+	size1=this.files[0].size;
+}); 
+
+$("#pro1").click(function(){
+	var s=$('#upload__image__media__file').val();
+	var s1=$('#add__image__media__text').val();
+	s=Math.round(size1/100);
+	if(s=="" && s1==""){
+
+	}else{
+		let timerInterval
+		Swal.fire({
+		title: 'File Uploading!',
+		html: 'please wait <br><b></b> kb remaining',
+		timer: s,
+		timerProgressBar: true,
+		onBeforeOpen: () => {
+			Swal.showLoading()
+			timerInterval = setInterval(() => {
+			const content = Swal.getContent()
+			if (content) {
+				const b = content.querySelector('b')
+				if (b) {
+				b.textContent = Swal.getTimerLeft()
+				}
+			}
+			}, 100)
+		},
+		onClose: () => {
+			clearInterval(timerInterval)
+		}
+		}).then((result) => {
+		/* Read more about handling dismissals below */
+		if (result.dismiss === Swal.DismissReason.timer) {
+			console.log('I was closed by the timer')
+		}
+		})
+	}
+});
+
+var size2=2000;
+
+$('#upload__audio__media__file').on('change', function() { 
+	size2=this.files[0].size;
+}); 
+
+$("#pro2").click(function(){
+	var s=$('#upload__audio__media__file').val();
+	var s1=$('#add__audio__media__text').val();
+	s=Math.round(size2/100);
+	if(s=="" && s1==""){
+
+	}else{
+		let timerInterval
+		Swal.fire({
+		title: 'File Uploading!',
+		html: 'please wait <br><b></b> kb remaining',
+		timer: s,
+		timerProgressBar: true,
+		onBeforeOpen: () => {
+			Swal.showLoading()
+			timerInterval = setInterval(() => {
+			const content = Swal.getContent()
+			if (content) {
+				const b = content.querySelector('b')
+				if (b) {
+				b.textContent = Swal.getTimerLeft()
+				}
+			}
+			}, 100)
+		},
+		onClose: () => {
+			clearInterval(timerInterval)
+		}
+		}).then((result) => {
+		/* Read more about handling dismissals below */
+		if (result.dismiss === Swal.DismissReason.timer) {
+			console.log('I was closed by the timer')
+		}
+		})
+	}
+});
+var size3=2000;
+
+$('#upload__video__media__file').on('change', function() { 
+	size3=this.files[0].size;
+}); 
+$("#pro3").click(function(){
+	var s=$('#upload__video__media__file').val();
+	var s1=$('#add__video__media__text').val();
+	s=Math.round(size3/100);
+	if(s=="" && s1==""){
+
+	}else{
+		let timerInterval
+		Swal.fire({
+		title: 'File Uploading!',
+		html: 'please wait <br><b></b> kb remaining',
+		timer: s,
+		timerProgressBar: true,
+		onBeforeOpen: () => {
+			Swal.showLoading()
+			timerInterval = setInterval(() => {
+			const content = Swal.getContent()
+			if (content) {
+				const b = content.querySelector('b')
+				if (b) {
+				b.textContent = Swal.getTimerLeft()
+				}
+			}
+			}, 100)
+		},
+		onClose: () => {
+			clearInterval(timerInterval)
+		}
+		}).then((result) => {
+		/* Read more about handling dismissals below */
+		if (result.dismiss === Swal.DismissReason.timer) {
+			console.log('I was closed by the timer')
+		}
+		})
+	}
+});
+</script>
 @include('scripts.suggest')
 @include('scripts.bg-image');
+@include('scripts.payment');
 @include('scripts.payment');
 
 

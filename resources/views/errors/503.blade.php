@@ -1,47 +1,33 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>503 | Be right back.</title>
+ @extends('layouts.tablequizapp')
 
-        <link href="//fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="container page__inner">
+            <div class="text-center col">
+            <img class="q-img mb-3" src="{{asset('site_design/images/homepage__logo.png')}}" height="300px">
+            <h1 class="bernhard ">OOPS !</h1>
 
-        <style>
-            html, body {
-                height: 100%;
-            }
+            <h1 class="bernhard ">503 | Be right back.</h1>
 
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                color: #B0BEC5;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
+            <h1 class="bernhard "></h1>
 
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
 
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
+        </div>
 
-            .title {
-                font-size: 72px;
-                margin-bottom: 40px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Be right back.</div>
+                <div class="modal-body ">
+                   
+                    
+                </div>
             </div>
         </div>
-    </body>
-</html>
+    </div>
+</div>
+@endsection
+
+
+
+
+
+

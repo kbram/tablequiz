@@ -15,7 +15,7 @@
         <!-- Replace this with 3D slider -->
         <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
         <!-- end -->
-        <link rel="stylesheet" href="{{asset('site_design/css/style.css?v=0.5')}}">
+        <link rel="stylesheet" href="{{asset('site_design/css/style.css')}}">
         
         {{-- CSRF Token --}}
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -49,8 +49,10 @@
         
     </head>
     <body>
+ 
+       
 
-            @include('partials.tablequiz.head')
+        @include('partials.tablequiz.head')
 
             <main class="container-fluid page-wrap d-flex">
 
@@ -62,9 +64,8 @@
         
 
             @include('partials.tablequiz.sign-up__modal')
-                
-        
-        <script src="https://use.fontawesome.com/releases/v5.3.0/js/all.js"></script>
+
+            <script src="https://use.fontawesome.com/releases/v5.3.0/js/all.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -81,8 +82,10 @@
 
         <script src="https://use.fontawesome.com/releases/v5.3.0/js/all.js"></script>
 
+
         {{-- Scripts --}}
         @yield('footer_scripts')
+
 
     </body>
 </html>

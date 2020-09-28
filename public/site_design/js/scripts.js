@@ -1,5 +1,5 @@
 jQuery(document).ready(function($) {
-console.log("working");
+
 
     $('.quiz__slider').slick({
         prevArrow: '<button type="button" class="slick-btns slick-prev"><i class="fa fa-angle-left"</button>',
@@ -38,11 +38,12 @@ console.log("working");
     // })
 
     // Forms - add another multiple choice Q //
-$('.multiple__choice__row').each(function() {
+
+//$('.multiple__choice__row').each(function() {
 var i =0;
         //var newRow ='<div class="row multiple__choice__row pb-3 align-items-center"><div class="col-7"><input name="multiple__choice__answer__1[]" class="form-control" type="text"></div><div class="col-1 justify-content-center p-0 d-flex"><span class="minus">-</span></div><div class="col-1 justify-content-center"><span class="plus">+</span></div><div class="col-3 text-center form-check"><input type="radio" id="rdd" name="multiple__choice__correct__answer" value="'+i+'"></div></div>';
 
-        var parent = $(this);
+        // var parent = $(this);
         $('body').on('click','span.plus',function(){
             i+=1;
 
@@ -53,10 +54,10 @@ var i =0;
             console.log(gtname_correct);
 
             var gtname_correct_val=$(this).closest('.multiple__choice__row').find('.multiple-choice-answer').val();
-            console.log(gtname_correct_val);
+          
 
 
-            var newRow ='<div class="row multiple__choice__row  pb-3 align-items-center"><div class="col-7 multi"><input name="'+gtname+'" class="form-control multiple-choice-answer" type="text"></div><div class="col-1 justify-content-center p-0 d-flex"><span class="minus">-</span></div><div class="col-1 justify-content-center"><span class="plus">+</span></div><div class="col-3 text-center form-check"><input class="multiple-choice-correct-answer" type="radio" id="rdd" name="'+gtname_correct+'" value="'+i+'" ></div></div>';
+            var newRow ='<div class="row multiple__choice__row  pb-3 align-items-center"><div class="col-7 multi"><input name="'+gtname+'" class="form-control multiple-choice-answer" type="text" required></div><div class="col-1 justify-content-center p-0 d-flex"><span class="minus">-</span></div><div class="col-1 justify-content-center"><span class="plus">+</span></div><div class="col-3 text-center form-check"><input class="multiple-choice-correct-answer" type="radio" id="rdd" name="'+gtname_correct+'"  ></div></div>';
 
 
             $(this).parents('.multiple__choice__row').after(newRow);
@@ -64,14 +65,14 @@ var i =0;
             $(this).parents('.multiple__choice__row').detach();
         })
 
-    });
+    // });
 
   
 //kopi 
     // Forms - add another multiple choice Q //
 	// $('.multiple__choice__row').each(function(){
 		
-		// var i=0;
+		var i=0;
 		//var newRow ='<div class="row multiple__choice__row pb-3 align-items-center"><div class="col-7"><input name="multiple__choice__answer__1[]" class="form-control" type="text"></div><div class="col-1 justify-content-center p-0 d-flex"><span class="minus">-</span></div><div class="col-1 justify-content-center"><span class="plus">+</span></div><div class="col-3 text-center form-check"><input type="radio" id="rdd" name="multiple__choice__correct__answer" value="'+i+'"></div></div>';
 		
 	// 	var parent = $(this);
@@ -90,18 +91,19 @@ var i =0;
      
      
      
+// two function for appending multiple choice locating a one class
 
     $("body").delegate('input:radio.multiple-choice-correct-answer', 'click', function() {
-
+          
         var gtname_correct_val=$(this).closest('.multiple__choice__row').find('.multiple-choice-answer').val();
+        // console.log(gtname_correct_val);
+        
         $(this).val(gtname_correct_val);
-
+        console.log('radio value'+gtname_correct_val);
+          
     });
+    
 
-
-    $('body').on('click', '.multiple__choice__row__in_modal span', function() {
-        console.log("click different");
-	});
 	
        
 	
@@ -167,21 +169,73 @@ $('#login-btn').click(function(e) {
 			$('#modal__payment').removeClass('d-none');
 		},
 		error: function(result,error) {
-			alert('error');
-		   console.log('err'+error);
+            var validate=result.responseJSON.errors;
+            $('.text-danger').html('');
+            if(validate.email){
+                $('#login_email').after('<span class="text-danger"><strong>'+validate.email+'</strong></span>');
+            }
+
+            if(validate.password){
+                $('#password').after('<span class="text-danger"><strong>'+validate.password+'</strong></span>');
+            }
+		   
 		   },
     });
     return false;
 });
 
-	
+    /**kopi ajax sign Up */
+    $('#signup-btn').click(function(e) { 
+        e.preventDefault();
+        $.ajax({ 
+            data: $(this).closest('.popupLogIn').serialize(), 
+            type: 'post', 
+            url: $(this).closest('.popupLogIn').attr('action'), 
+            success: function(response) { 
+                $('#modal__login').addClass('d-none');
+                $('#modal__signup').addClass('d-none');
+                $('#modal__payment').removeClass('d-none');
+            },
+            error: function(result,error) {
+                var validate=result.responseJSON.errors;
+                
+                  $('.text-danger').html('');
+                 if(validate.first_name){ 
+                    $('#first_name').after('<span class="text-danger"><strong>'+validate.first_name+'</strong></span>');
+                }
+                if(validate.last_name){             
+                    $('#last_name').after('<span class="text-danger"><strong>'+validate.last_name+'</strong></span>');
+                }
+                
+                if(validate.name){
+                    $('#name').after('<span class="text-danger"><strong>'+validate.name+'</strong></span>');
+                }
+               
+                if(validate.email){
+                    $('#email').after('<span class="text-danger"><strong>'+validate.email+'</strong></span>');
+                }
+                
+                if(validate.password){
+                    $('#password_signup').after('<span class="text-danger"><strong>'+validate.email+'</strong></span>');
+                }
+
+                if(validate.password_confirmation){
+                    $('#password_signup_confirm').after('<span class="text-danger"><strong>'+validate.password_confirmation+'</strong></span>');
+                }
+
+               
+               },
+        });
+        return false;
+    });
+    
     
     $('body').on('click','.multiple__choice__row__in_modal span',function(){
 		 
         var button = $(this);
         $(this).closest('.multiple__choice__row__in_modal').each(function() {
 
-            var newRow = '<div class="form-row multiple__choice__row__in_modal pb-0 mb-2 align-items-center"><div class="col-7"><input name="multiple__choice__answer[]" class="readonly form-control" type="text"></div><div class="col-1 justify-content-center tempVis"><span class="minus">-</span></div><div class="col-1 justify-content-center tempVis"><span class="plus">+</span></div><div class="col-3 text-center form-check hidd"><input type="radio" class="" name="multiple__choice__correct__answer"></div></div></div>';
+            var newRow = '<div class="form-row multiple__choice__row__in_modal pb-0 mb-2 align-items-center"><div class="col-7"><input name="multiple__choice__answer[]" class="readonly form-control" type="text" ></div><div class="col-1 justify-content-center tempVis"><span class="minus">-</span></div><div class="col-1 justify-content-center tempVis"><span class="plus">+</span></div><div class="col-3 text-center form-check hidd"><input type="radio" class="" name="multiple__choice__correct__answer"></div></div></div>';
             var parent = $(this);
 
             if (button.hasClass('plus')) {
@@ -194,6 +248,27 @@ $('#login-btn').click(function(e) {
         })
 
     })
+    // $('select#question__type').on('change',function(){
+	// 	if($(this).val() == "numeric__question"){
+	// 		$('#standard__answer').removeClass('d-flex').addClass('d-none');
+	// 		$('#multiple__choice__legend').removeClass('d-flex').addClass('d-none');
+	// 		$('#multiple__choice__answer').removeClass('d-flex').addClass('d-none');
+	// 		$('#numeric__answer').addClass('d-flex').removeClass('d-none');
+	// 	}
+	// 	if($(this).val() == "standard__question"){
+	// 		$('#standard__answer').addClass('d-flex').removeClass('d-none');
+	// 		$('#multiple__choice__legend').removeClass('d-flex').addClass('d-none');
+	// 		$('#multiple__choice__answer').removeClass('d-flex').addClass('d-none');
+	// 		$('#numeric__answer').removeClass('d-flex').addClass('d-none');
+	// 	}
+	// 	if($(this).val() == "multiple__choice__question"){
+    //         console.log("man_mul");
+	// 		$('#standard__answer').removeClass('d-flex').addClass('d-none');
+	// 		$('#multiple__choice__legend').addClass('d-flex').removeClass('d-none');
+	// 		$('#multiple__choice__answer').addClass('d-flex').removeClass('d-none');
+	// 		$('#numeric__answer').removeClass('d-flex').addClass('d-none');
+	// 	}
+	// })
     $("body").delegate('select.question__type', 'change', function() {
 
         if ($(this).val() == "numeric__question") {
@@ -201,9 +276,23 @@ $('#login-btn').click(function(e) {
             $(this).parents(".article_question").children(".multiple__choice__legend").removeClass('d-flex').addClass('d-none');
             $(this).parents(".article_question").children(".multiple__choice__answer").removeClass('d-flex').addClass('d-none');
             $(this).parents(".article_question").children(".numeric__answer").addClass('d-flex').removeClass('d-none');
+            $(this).parents(".article_question").children(".numeric__answer").find(".form-control").attr("required",true);
+            $(this).parents(".article_question").children(".standard__answer").find(".answer").attr("required",false);
+            $(this).parents(".article_question").children(".multiple__choice__answer").find('.multiple-choice-answer').attr("required",false);
+
+
+
         }
         if ($(this).val() == "standard__question") {
+            console.log("standad select");
+
             $(this).parents(".article_question").children(".standard__answer").removeClass('d-none');
+            $(this).parents(".article_question").children(".standard__answer").find(".answer").attr("required",true);
+            $(this).parents(".article_question").children(".numeric__answer").find(".form-control").attr("required",false);
+            $(this).parents(".article_question").children(".multiple__choice__answer").find('.multiple-choice-answer').attr("required",false);
+
+
+
             $(this).parents(".article_question").children(".multiple__choice__legend").removeClass('d-flex').addClass('d-none');
             $(this).parents(".article_question").children(".multiple__choice__answer").removeClass('d-flex').addClass('d-none');
             $(this).parents(".article_question").children(".numeric__answer").removeClass('d-flex').addClass('d-none');
@@ -213,10 +302,17 @@ $('#login-btn').click(function(e) {
             $(this).parents(".article_question").children(".standard__answer").removeClass('d-flex').addClass('d-none');
             $(this).parents(".article_question").children(".multiple__choice__legend").addClass('d-flex').removeClass('d-none');
             $(this).parents(".article_question").children(".multiple__choice__answer").addClass('d-flex').removeClass('d-none');
+            $(this).parents(".article_question").children(".multiple__choice__answer").find('.multiple-choice-answer').attr("required",true);
+
             $(this).parents(".article_question").children(".numeric__answer").removeClass('d-flex').addClass('d-none');
+            $(this).parents(".article_question").children(".standard__answer").find(".answer").attr("required",false);
+            $(this).parents(".article_question").children(".numeric__answer").find(".form-control").attr("required",false);
+
+
         }
     })
 
+    
 
 
 
@@ -325,7 +421,10 @@ $('#login-btn').click(function(e) {
 		})
 	});
     
-	var clicked = 0;
+    var clicked = 0;
+    $('#cll').click(function(){  
+        clicked = 0;
+    });
     $('#category__chosen__next, .suggested_category__icon').click(function(){  
 		setTimeout(function(){ 
 			clicked += 1;
@@ -374,42 +473,30 @@ $('#login-btn').click(function(e) {
 		count += 1;
 		arcount+=1;
          //var new_question = '<article class="col-12 article"><div class="article__heading"><h1>Question '+count+'</h1></div><div class="form-row mt-md-5 align-items-start align-items-lg-center"><div class="col-md-4"><label for="question__type">Question type</label></div><div class="col-md-8"><div class="row align-items-center"><div class="col-lg-6"><select id="question__type" class="question-type form-control"><option value="standard__question">Standard</option><option value="multiple__choice__question">Multiple choice</option><option value="numeric__question">Numeric</option></select></div><div class="col-lg-2 d-flex align-items-center justify-content-center"><p class="my-2 m-lg-0">OR</p></div><div class="col-lg-4"><a class="d-block btn btn-outline-primary suggested_q_link" href="#" data-toggle="modal" data-target="#suggestedQuestion"><span style="color:var(--orange)">Use a suggested question</span></a></div></div></div></div><div class="form-row"><div class="col-md-4"><label for="question">Question</label></div><div class="col-md-8"><input name="question" type="text" class="question form-control"></div></div><div class="form-row"><div class="col-md-4"><label>Add media</label></div><div class="col-md-8"><div class="row "><div class="col-md-4 pr-0"><a href="#" class="btn btn-outline-secondary d-block hasPlus" data-toggle="modal" data-target="#add__media" data-title="Image" data-add-text="an image">Image</a></div><div class="col-md-4 pr-0"><a href="#" class="btn btn-outline-secondary d-block hasPlus" data-toggle="modal" data-target="#add__media" data-title="Audio" data-add-text="any audio file">Audio</a></div><div class="col-md-4"><a href="#" class="btn btn-outline-secondary d-block hasPlus" data-toggle="modal" data-target="#add__media" data-title="Video" data-add-text="any video file">Video</a></div></div></div><div class="modal" id="add__media" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true"> <div class="modal-dialog" role="document"><div class="modal-content"> <div class="modal-header justify-content-center"><h1 class="modal-title" id="add__media__modal__heading"></h1><button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span></button> </div><div class="modal-body"><p class="text-center py-2">Add <span id="add__media__text"></span> to reference in your question</p><div class="form-row"><div class="col-md-4"><label>Add link</label></div><div class="col-md-8"><input type="url" name="add_link_to_media" class="form-control"></div></div><div class="text-center w-100"> <span>OR</span></div><div class="form-row justify-content-center pt-3"><div class="col-md-3"> <label class="d-block" for="upload__media__file">Upload<input type="file" class="form-control-file" id="upload__media__file" value="Upload"></label></div></div></div><div class="modal-footer justify-content-center"> <div class="col-sm-4"><button type="button" class="d-block btn btn-primary">Save</button> </div></div></div></div></div></div><div class="form-row d-flex" id="standard__answer"><div class="col-md-4"><label for="standard__question__answer">Answer</label></div><div class="col-md-8"><input class="form-control answer" name="standard__question__answer" type="text"></div></div><div class="form-row d-none" id="numeric__answer"><div class="col-md-4"><label for="numeric__question__answer">Answer</label></div><div class="col-md-8"><input class="form-control" name="numeric__question__answer" type="number"></div></div><div class="form-row d-none" style="min-height:0;" id="multiple__choice__legend"><div class="offset-md-10 col-2"><small class="d-block text-center pl-4">Correct answer</small></div></div><div class="form-row d-none" id="multiple__choice__answer"><div class="col-md-4 align-self-start"><label for="multiple__choice__answer">Answer</label></div><div class="col-md-8"><div class="row multiple__choice__row pb-3 align-items-center"><div class="col-7"><input name="multiple__choice__answer__1" class="form-control" type="text"> </div><div class="col-1 justify-content-center">&nbsp;</div><div class="col-1 justify-content-center"><span class="plus">+</span></div><div class="col-3 text-center form-check"><input type="radio" class="" name="multiple__choice__correct__answer"></div></div></div></div><div class="form-row"><div class="col-md-4"><label for="time__limit">Time limit</label></div><div class="col-md-4"><input class="form-control time-limit" type="number" name="time__limit"></div><div class="col"><small class="form-text text-muted">Seconds</small></div></div></article>';
-	       var new_question ='<article class="col-12 article"><div class="article_question"> <div class="article__heading"> <h1>Question ' + count + '</h1> </div> <div class="form-row mt-md-5 align-items-start align-items-lg-center"> <div class="col-md-4"> <label for="question__type">Question type</label> </div> <div class="col-md-8"> <div class="row align-items-center"> <div class="col-lg-6"> <select name="question__type[]" id="question__type" class="form-control question__type"> <option value="standard__question">Standard</option> <option value="multiple__choice__question">Multiple choice</option> <option value="numeric__question">Numeric</option> </select> </div> <div class="col-lg-2 d-flex align-items-center justify-content-center"> <p class="my-2 m-lg-0">OR</p> </div> <div class="col-lg-4"> <a class="d-block btn btn-outline-primary suggested_q_link" href="#" data-toggle="modal" data-target="#suggestedQuestion"> <span style="color:var(--orange)">Use a suggested question</span> </a> </div> </div> </div> </div> <div class="form-row"> <div class="col-md-4"> <label for="question">Question</label> </div> <div class="col-md-8"> <input name="question[]" type="text" class="question form-control"> </div> </div> <div class="form-row"> <div class="col-md-4"> <label>Add media</label> </div> <div class="col-md-8"> <div class="row mt-3"> <div class="col-md-4 pr-md-0 mb-3 mb-lg-0"><input type="hidden"  name="hidden-media-image' +arcount+ '" class="hidden-media-image" value=""><a href="#" class="btn btn-outline-secondary d-block hasPlus" data-toggle="modal" data-target="#add__image__media' + count + '" data-title="Image" data-add-text="an image">Image</a> </div> <div class="col-md-4 pr-md-0 mb-3 mb-lg-0"><input type="hidden"  name="hidden-media-audio' +arcount+ '" class="hidden-media-audio" value=""><a href="#" class="btn btn-outline-secondary d-block hasPlus" data-toggle="modal" data-target="#add__audio__media' + count + '" data-title="Audio" data-add-text="any audio file">Audio</a> </div> <div class="col-md-4 pr-md-0 pr-md-3"><input type="hidden"  name="hidden-media-video' +arcount+ '" class="hidden-media-video" value=""><a href="#" class="btn btn-outline-secondary d-block hasPlus" data-toggle="modal" data-target="#add__video__media' + count + '" data-title="Video" data-add-text="any video file">Video</a> </div> </div> </div> <div class="modal" id="add__image__media' + count + '" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true"><div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header justify-content-center"> <h1 class="modal-title" id="add__image__media__modal__heading"></h1> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div> <div class="modal-body"> <p class="text-center py-2">Add <span id="add__image__media__text"></span> to reference in your question</p> <div class="form-row"> <div class="col-md-4"> <label>Add link image ' + count + '</label> </div> <div class="col-md-8"> <input type="url" name="add_link_to_image__media__'+arcount+'" class="form-control add-image-media-link" id="add__image__media__text"> </div> </div> <div class="text-center w-100"> <span>OR</span> </div> <div class="form-row justify-content-center pt-3"> <div class="col-md-3"> <label class="d-block" for="upload__image__media__file__'+arcount+'">Upload <input type="file" class="form-control-file" id="upload__image__media__file__'+arcount+'" value="Upload" name="image_media_'+arcount+'"> </label> </div> </div> </div> <div class="modal-footer justify-content-center"> <div class="col-sm-4"> <button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button> </div> </div> </div> </div> </div> <div class="modal" id="add__audio__media' + count + '" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true"> <div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header justify-content-center"> <h1 class="modal-title" id="add__audio__media__modal__heading"></h1> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div> <div class="modal-body"> <p class="text-center py-2">Add <span id="add__audio__media__text"></span> to reference in your question</p> <div class="form-row"> <div class="col-md-4"> <label>Add link audio ' + count + '</label> </div> <div class="col-md-8"> <input type="url" name="add_link_to_audio__media__'+arcount+'" class="form-control add-audio-media-link" id="add__audio__media__text"> </div> </div> <div class="text-center w-100"> <span>OR</span> </div> <div class="form-row justify-content-center pt-3"> <div class="col-md-3"> <label class="d-block" for="upload__audio__media__file">Upload <input type="file" class="form-control-file" id="upload__audio__media__file__'+arcount+'" value="Upload" name="audio_media_'+arcount+'"> </label> </div> </div> </div> <div class="modal-footer justify-content-center"> <div class="col-sm-4"> <button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button> </div> </div> </div> </div> </div> <div class="modal" id="add__video__media' + count + '" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true"> <div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header justify-content-center"> <h1 class="modal-title" id="add__video__media__modal__heading"></h1> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div> <div class="modal-body"> <p class="text-center py-2">Add <span id="add__video__media__text"></span>to reference in your question</p> <div class="form-row"> <div class="col-md-4"> <label>Add link video' + count + '</label> </div> <div class="col-md-8"> <input type="url" name="add_link_to_video__media__'+arcount+'" class="form-control add-video-media-link" id="add__video__media__text"> </div> </div> <div class="text-center w-100"> <span>OR</span> </div> <div class="form-row justify-content-center pt-3"> <div class="col-md-3"> <label class="d-block" for="upload__video__media__file">Upload <input type="file" class="form-control-file" id="upload__video__media__file__'+arcount+'" value="Upload" name="video_media_'+arcount+'"> </label> </div> </div> </div> <div class="modal-footer justify-content-center"> <div class="col-sm-4"> <button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button> </div> </div> </div> </div> </div> </div> <div class="form-row d-flex standard__answer" id="standard__answer"> <div class="col-md-4"><label for="standard__question__answer">Answer</label> </div> <div class="col-md-8"> <input class="form-control answer" name="standard__question__answer__'+arcount+'" type="text"> </div> </div> <div class="form-row d-none numeric__answer" id="numeric__answer"> <div class="col-md-4"> <label for="numeric__question__answer">Answer</label> </div> <div class="col-md-8"> <input class="form-control" name="numeric__question__answer__'+arcount+'" type="number"> </div> </div> <div class="form-row d-none multiple__choice__legend" style="min-height:0;" id="multiple__choice__legend"> <div class="offset-md-10 col-2"><small class="d-block text-center pl-4">Correct answer</small> </div> </div> <div class="form-row d-none multiple__choice__answer" id="multiple__choice__answer"> <div class="col-md-4 align-self-start"> <label for="multiple__choice__answer">Answer</label> </div> <div class="col-md-8 multi-choice"> <div class="row multiple__choice__row pb-3 align-items-center"> <div class="col-7"><input name="multiple__choice__answer__'+arcount+'[]" class="multiple-choice-answer first-multi-answer form-control" type="text"> </div> <div class="col-1 justify-content-center">&nbsp; </div> <div class="col-1 justify-content-center"> <span class="plus">+</span> </div> <div class="col-3 text-center form-check"> <input type="radio" class="multiple-choice-correct-answer" name="multiple__choice__correct__answer__'+arcount+'" value=0 > </div> </div> </div> </div> <div class="form-row"> <div class="col-md-4"> <label for="time__limit">Time limit</label> </div> <div class="col-md-4"><input class="form-control time-limit" type="number" name="time__limit[]"> </div> <div class="col"> <small class="form-text text-muted">Seconds</small> </div> </div> </div> </div> </div> </div> </article>'; 
+	       var new_question ='<article class="col-12 article"><div class="article_question"> <div class="article__heading"> <h1>Question ' + count + '</h1> <button type="button" class="close" aria-lable="Close"><span aria-hidden="true">&times;</span></button></div> <div class="form-row mt-md-5 align-items-start align-items-lg-center"> <div class="col-md-4"> <label for="question__type">Question type</label> </div> <div class="col-md-8"> <div class="row align-items-center"> <div class="col-lg-6"> <select name="question__type[]" id="question__type" class="form-control question__type"> <option value="standard__question">Standard</option> <option value="multiple__choice__question">Multiple choice</option> <option value="numeric__question">Numeric</option> </select> </div> <div class="col-lg-2 d-flex align-items-center justify-content-center"> <p class="my-2 m-lg-0">OR</p> </div> <div class="col-lg-4"> <a class="d-block btn btn-outline-primary suggested_q_link" href="#" data-toggle="modal" data-target="#suggestedQuestion"> <span style="color:var(--orange)">Use a suggested question</span> </a> </div> </div> </div> </div> <div class="form-row"> <div class="col-md-4"> <label for="question">Question</label> </div> <div class="col-md-8"> <input name="question[]" type="text" class="question form-control"> </div> </div> <div class="form-row"> <div class="col-md-4"> <label>Add media</label> </div> <div class="col-md-8"> <div class="row mt-3"> <div class="col-md-4 pr-md-0 mb-3 mb-lg-0"><input type="hidden"  name="hidden-media-image' +arcount+ '" class="hidden-media-image" value=""><a href="#" class="btn btn-outline-secondary d-block " data-toggle="modal" data-target="#add__image__media' + count + '" data-title="Image" data-add-text="an image"><span class="pr-2 icon_"><i class="far fa-image"></i></span>Image</a> </div> <div class="col-md-4 pr-md-0 mb-3 mb-lg-0"><input type="hidden"  name="hidden-media-audio' +arcount+ '" class="hidden-media-audio" value=""><a href="#" class="btn btn-outline-secondary d-block" data-toggle="modal" data-target="#add__audio__media' + count + '" data-title="Audio" data-add-text="any audio file"><span class="pr-2 icon_"><i class="fas fa-music"></i></span>Audio</a> </div> <div class="col-md-4 pr-md-0 pr-md-3"><input type="hidden"  name="hidden-media-video' +arcount+ '" class="hidden-media-video" value=""><a href="#" class="btn btn-outline-secondary d-block " data-toggle="modal" data-target="#add__video__media' + count + '" data-title="Video" data-add-text="any video file"><span class="pr-2 icon_"><i class="fas fa-video"></i></span>Video</a> </div> </div> </div> <div class="modal" id="add__image__media' + count + '" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true"><div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header justify-content-center"> <h1 class="modal-title" id="add__image__media__modal__heading"></h1> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div> <div class="modal-body"> <p class="text-center py-2">Add <span id="add__image__media__text"></span> to reference in your question</p> <div class="form-row"> <div class="col-md-4"> <label>Add link image ' + count + '</label> </div> <div class="col-md-8"> <input type="url" name="add_link_to_image__media__'+arcount+'" class="form-control add-image-media-link" id="add__image__media__text"> </div> </div> <div class="text-center w-100"> <span>OR</span> </div> <div class="form-row justify-content-center pt-3"> <div class="col-md-3"> <label class="d-block" for="upload__image__media__file__'+arcount+'">Upload <input type="file" class="form-control-file" id="upload__image__media__file__'+arcount+'" value="Upload" name="image_media_'+arcount+'"> </label> </div> </div> </div> <div class="modal-footer justify-content-center"> <div class="col-sm-4"> <button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button> </div> </div> </div> </div> </div> <div class="modal" id="add__audio__media' + count + '" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true"> <div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header justify-content-center"> <h1 class="modal-title" id="add__audio__media__modal__heading"></h1> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div> <div class="modal-body"> <p class="text-center py-2">Add <span id="add__audio__media__text"></span> to reference in your question</p> <div class="form-row"> <div class="col-md-4"> <label>Add link audio ' + count + '</label> </div> <div class="col-md-8"> <input type="url" name="add_link_to_audio__media__'+arcount+'" class="form-control add-audio-media-link" id="add__audio__media__text"> </div> </div> <div class="text-center w-100"> <span>OR</span> </div> <div class="form-row justify-content-center pt-3"> <div class="col-md-3"> <label class="d-block" for="upload__audio__media__file">Upload <input type="file" class="form-control-file" id="upload__audio__media__file__'+arcount+'" value="Upload" name="audio_media_'+arcount+'"> </label> </div> </div> </div> <div class="modal-footer justify-content-center"> <div class="col-sm-4"> <button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button> </div> </div> </div> </div> </div> <div class="modal" id="add__video__media' + count + '" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true"> <div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header justify-content-center"> <h1 class="modal-title" id="add__video__media__modal__heading"></h1> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div> <div class="modal-body"> <p class="text-center py-2">Add <span id="add__video__media__text"></span>to reference in your question</p> <div class="form-row"> <div class="col-md-4"> <label>Add link video' + count + '</label> </div> <div class="col-md-8"> <input type="url" name="add_link_to_video__media__'+arcount+'" class="form-control add-video-media-link" id="add__video__media__text"> </div> </div> <div class="text-center w-100"> <span>OR</span> </div> <div class="form-row justify-content-center pt-3"> <div class="col-md-3"> <label class="d-block" for="upload__video__media__file">Upload <input type="file" class="form-control-file" id="upload__video__media__file__'+arcount+'" value="Upload" name="video_media_'+arcount+'"> </label> </div> </div> </div> <div class="modal-footer justify-content-center"> <div class="col-sm-4"> <button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button> </div> </div> </div> </div> </div> </div> <div class="form-row d-flex standard__answer" id="standard__answer"> <div class="col-md-4"><label for="standard__question__answer">Answer</label> </div> <div class="col-md-8"> <input class="form-control answer" name="standard__question__answer__'+arcount+'" type="text" required> </div> </div> <div class="form-row d-none numeric__answer" id="numeric__answer"> <div class="col-md-4"> <label for="numeric__question__answer">Answer</label> </div> <div class="col-md-8"> <input class="form-control" name="numeric__question__answer__'+arcount+'" type="number"> </div> </div> <div class="form-row d-none multiple__choice__legend" style="min-height:0;" id="multiple__choice__legend"> <div class="offset-md-10 col-2"><small class="d-block text-center pl-4">Correct answer</small> </div> </div> <div class="form-row d-none multiple__choice__answer" id="multiple__choice__answer"> <div class="col-md-4 align-self-start"> <label for="multiple__choice__answer">Answer</label> </div> <div class="col-md-8 multi-choice"> <div class="row multiple__choice__row pb-3 align-items-center"> <div class="col-7"><input name="multiple__choice__answer__'+arcount+'[]" class="multiple-choice-answer first-multi-answer form-control" type="text"> </div> <div class="col-1 justify-content-center">&nbsp; </div> <div class="col-1 justify-content-center"> <span class="plus">+</span> </div> <div class="col-3 text-center form-check"> <input type="radio" class="multiple-choice-correct-answer" name="multiple__choice__correct__answer__'+arcount+'" value=0 > </div> </div> </div> </div> <div class="form-row"> <div class="col-md-4"> <label for="time__limit">Time limit</label> </div> <div class="col-md-4"><input class="form-control time-limit" type="number" name="time__limit[]"> </div> <div class="col"> <small class="form-text text-muted">Seconds</small> </div> </div> </div> </div> </div> </div> </article>'; 
          $('#add-new-question').before(new_question);
          
+         //sam backup
+         // 	       var new_question ='<article class="col-12 article"><div class="article_question"> <div class="article__heading"> <h1>Question ' + count + '</h1> </div> <div class="form-row mt-md-5 align-items-start align-items-lg-center"> <div class="col-md-4"> <label for="question__type">Question type</label> </div> <div class="col-md-8"> <div class="row align-items-center"> <div class="col-lg-6"> <select name="question__type[]" id="question__type" class="form-control question__type"> <option value="standard__question">Standard</option> <option value="multiple__choice__question">Multiple choice</option> <option value="numeric__question">Numeric</option> </select> </div> <div class="col-lg-2 d-flex align-items-center justify-content-center"> <p class="my-2 m-lg-0">OR</p> </div> <div class="col-lg-4"> <a class="d-block btn btn-outline-primary suggested_q_link" href="#" data-toggle="modal" data-target="#suggestedQuestion"> <span style="color:var(--orange)">Use a suggested question</span> </a> </div> </div> </div> </div> <div class="form-row"> <div class="col-md-4"> <label for="question">Question</label> </div> <div class="col-md-8"> <input name="question[]" type="text" class="question form-control"> </div> </div> <div class="form-row"> <div class="col-md-4"> <label>Add media</label> </div> <div class="col-md-8"> <div class="row mt-3"> <div class="col-md-4 pr-md-0 mb-3 mb-lg-0"><input type="hidden"  name="hidden-media-image' +arcount+ '" class="hidden-media-image" value=""><a href="#" class="btn btn-outline-secondary d-block " data-toggle="modal" data-target="#add__image__media' + count + '" data-title="Image" data-add-text="an image"><span class="pr-2 icon_"><i class="far fa-image"></i></span>Image</a> </div> <div class="col-md-4 pr-md-0 mb-3 mb-lg-0"><input type="hidden"  name="hidden-media-audio' +arcount+ '" class="hidden-media-audio" value=""><a href="#" class="btn btn-outline-secondary d-block" data-toggle="modal" data-target="#add__audio__media' + count + '" data-title="Audio" data-add-text="any audio file"><span class="pr-2 icon_"><i class="fas fa-music"></i></span>Audio</a> </div> <div class="col-md-4 pr-md-0 pr-md-3"><input type="hidden"  name="hidden-media-video' +arcount+ '" class="hidden-media-video" value=""><a href="#" class="btn btn-outline-secondary d-block " data-toggle="modal" data-target="#add__video__media' + count + '" data-title="Video" data-add-text="any video file"><span class="pr-2 icon_"><i class="fas fa-video"></i></span>Video</a> </div> </div> </div> <div class="modal" id="add__image__media' + count + '" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true"><div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header justify-content-center"> <h1 class="modal-title" id="add__image__media__modal__heading"></h1> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div> <div class="modal-body"> <p class="text-center py-2">Add <span id="add__image__media__text"></span> to reference in your question</p> <div class="form-row"> <div class="col-md-4"> <label>Add link image ' + count + '</label> </div> <div class="col-md-8"> <input type="url" name="add_link_to_image__media__'+arcount+'" class="form-control add-image-media-link" id="add__image__media__text"> </div> </div> <div class="text-center w-100"> <span>OR</span> </div> <div class="form-row justify-content-center pt-3"> <div class="col-md-3"> <label class="d-block" for="upload__image__media__file__'+arcount+'">Upload <input type="file" class="form-control-file" id="upload__image__media__file__'+arcount+'" value="Upload" name="image_media_'+arcount+'"> </label> </div> </div> </div> <div class="modal-footer justify-content-center"> <div class="col-sm-4"> <button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button> </div> </div> </div> </div> </div> <div class="modal" id="add__audio__media' + count + '" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true"> <div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header justify-content-center"> <h1 class="modal-title" id="add__audio__media__modal__heading"></h1> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div> <div class="modal-body"> <p class="text-center py-2">Add <span id="add__audio__media__text"></span> to reference in your question</p> <div class="form-row"> <div class="col-md-4"> <label>Add link audio ' + count + '</label> </div> <div class="col-md-8"> <input type="url" name="add_link_to_audio__media__'+arcount+'" class="form-control add-audio-media-link" id="add__audio__media__text"> </div> </div> <div class="text-center w-100"> <span>OR</span> </div> <div class="form-row justify-content-center pt-3"> <div class="col-md-3"> <label class="d-block" for="upload__audio__media__file">Upload <input type="file" class="form-control-file" id="upload__audio__media__file__'+arcount+'" value="Upload" name="audio_media_'+arcount+'"> </label> </div> </div> </div> <div class="modal-footer justify-content-center"> <div class="col-sm-4"> <button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button> </div> </div> </div> </div> </div> <div class="modal" id="add__video__media' + count + '" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true"> <div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header justify-content-center"> <h1 class="modal-title" id="add__video__media__modal__heading"></h1> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div> <div class="modal-body"> <p class="text-center py-2">Add <span id="add__video__media__text"></span>to reference in your question</p> <div class="form-row"> <div class="col-md-4"> <label>Add link video' + count + '</label> </div> <div class="col-md-8"> <input type="url" name="add_link_to_video__media__'+arcount+'" class="form-control add-video-media-link" id="add__video__media__text"> </div> </div> <div class="text-center w-100"> <span>OR</span> </div> <div class="form-row justify-content-center pt-3"> <div class="col-md-3"> <label class="d-block" for="upload__video__media__file">Upload <input type="file" class="form-control-file" id="upload__video__media__file__'+arcount+'" value="Upload" name="video_media_'+arcount+'"> </label> </div> </div> </div> <div class="modal-footer justify-content-center"> <div class="col-sm-4"> <button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button> </div> </div> </div> </div> </div> </div> <div class="form-row d-flex standard__answer" id="standard__answer"> <div class="col-md-4"><label for="standard__question__answer">Answer</label> </div> <div class="col-md-8"> <input class="form-control answer" name="standard__question__answer__'+arcount+'" type="text"> </div> </div> <div class="form-row d-none numeric__answer" id="numeric__answer"> <div class="col-md-4"> <label for="numeric__question__answer">Answer</label> </div> <div class="col-md-8"> <input class="form-control" name="numeric__question__answer__'+arcount+'" type="number"> </div> </div> <div class="form-row d-none multiple__choice__legend" style="min-height:0;" id="multiple__choice__legend"> <div class="offset-md-10 col-2"><small class="d-block text-center pl-4">Correct answer</small> </div> </div> <div class="form-row d-none multiple__choice__answer" id="multiple__choice__answer"> <div class="col-md-4 align-self-start"> <label for="multiple__choice__answer">Answer</label> </div> <div class="col-md-8 multi-choice"> <div class="row multiple__choice__row pb-3 align-items-center"> <div class="col-7"><input name="multiple__choice__answer__'+arcount+'[]" class="multiple-choice-answer first-multi-answer form-control" type="text"> </div> <div class="col-1 justify-content-center">&nbsp; </div> <div class="col-1 justify-content-center"> <span class="plus">+</span> </div> <div class="col-3 text-center form-check"> <input type="radio" class="multiple-choice-correct-answer" name="multiple__choice__correct__answer__'+arcount+'" value=0 > </div> </div> </div> </div> <div class="form-row"> <div class="col-md-4"> <label for="time__limit">Time limit</label> </div> <div class="col-md-4"><input class="form-control time-limit" type="number" name="time__limit[]"> </div> <div class="col"> <small class="form-text text-muted">Seconds</small> </div> </div> </div> </div> </div> </div> </article>'; 
+
          //thushapan 
     //      var new_question ='<article class="col-12 article"><div class="article_question"> <div class="article__heading"> <h1>Question ' + count + '</h1> </div> <div class="form-row mt-md-5 align-items-start align-items-lg-center"> <div class="col-md-4"> <label for="question__type">Question type</label> </div> <div class="col-md-8"> <div class="row align-items-center"> <div class="col-lg-6"> <select name="question__type[]" id="question__type" class="form-control question__type"> <option value="standard__question">Standard</option> <option value="multiple__choice__question">Multiple choice</option> <option value="numeric__question">Numeric</option> </select> </div> <div class="col-lg-2 d-flex align-items-center justify-content-center"> <p class="my-2 m-lg-0">OR</p> </div> <div class="col-lg-4"> <a class="d-block btn btn-outline-primary suggested_q_link" href="#" data-toggle="modal" data-target="#suggestedQuestion"> <span style="color:var(--orange)">Use a suggested question</span> </a> </div> </div> </div> </div> <div class="form-row"> <div class="col-md-4"> <label for="question">Question</label> </div> <div class="col-md-8"> <input name="question[]" type="text" class="question form-control"> </div> </div> <div class="form-row"> <div class="col-md-4"> <label>Add media</label> </div> <div class="col-md-8"> <div class="row mt-3"> <div class="col-md-4 pr-md-0 mb-3 mb-lg-0"> <a href="#" class="btn btn-outline-secondary d-block hasPlus" data-toggle="modal" data-target="#add__image__media' + count + '" data-title="Image" data-add-text="an image">Image</a> </div> <div class="col-md-4 pr-md-0 mb-3 mb-lg-0"> <a href="#" class="btn btn-outline-secondary d-block hasPlus" data-toggle="modal" data-target="#add__audio__media' + count + '" data-title="Audio" data-add-text="any audio file">Audio</a> </div> <div class="col-md-4 pr-md-0 pr-md-3"> <a href="#" class="btn btn-outline-secondary d-block hasPlus" data-toggle="modal" data-target="#add__video__media' + count + '" data-title="Video" data-add-text="any video file">Video</a> </div> </div> </div> <div class="modal" id="add__image__media' + count + '" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true"><div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header justify-content-center"> <h1 class="modal-title" id="add__image__media__modal__heading"></h1> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div> <div class="modal-body"> <p class="text-center py-2">Add <span id="add__image__media__text"></span> to reference in your question</p> <div class="form-row"> <div class="col-md-4"> <label>Add link image ' + count + '</label> </div> <div class="col-md-8"> <input type="url" name="add_link_to_image__media__'+arcount+'" class="form-control" id="add__image__media__text"> </div> </div> <div class="text-center w-100"> <span>OR</span> </div> <div class="form-row justify-content-center pt-3"> <div class="col-md-3"> <label class="d-block" for="upload__image__media__file__'+arcount+'">Upload <input type="file" class="form-control-file" id="upload__image__media__file__'+arcount+'" value="Upload" name="image_media_'+arcount+'"> </label> </div> </div> </div> <div class="modal-footer justify-content-center"> <div class="col-sm-4"> <button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button> </div> </div> </div> </div> </div> <div class="modal" id="add__audio__media' + count + '" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true"> <div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header justify-content-center"> <h1 class="modal-title" id="add__audio__media__modal__heading"></h1> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div> <div class="modal-body"> <p class="text-center py-2">Add <span id="add__audio__media__text"></span> to reference in your question</p> <div class="form-row"> <div class="col-md-4"> <label>Add link audio ' + count + '</label> </div> <div class="col-md-8"> <input type="url" name="add_link_to_audio__media__'+arcount+'" class="form-control" id="add__audio__media__text"> </div> </div> <div class="text-center w-100"> <span>OR</span> </div> <div class="form-row justify-content-center pt-3"> <div class="col-md-3"> <label class="d-block" for="upload__audio__media__file__'+arcount+'">Upload <input type="file" class="form-control-file" id="upload__audio__media__file__'+arcount+'" value="Upload" name="audio_media_'+arcount+'"> </label> </div> </div> </div> <div class="modal-footer justify-content-center"> <div class="col-sm-4"> <button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button> </div> </div> </div> </div> </div> <div class="modal" id="add__video__media' + count + '" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true"> <div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header justify-content-center"> <h1 class="modal-title" id="add__video__media__modal__heading"></h1> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div> <div class="modal-body"> <p class="text-center py-2">Add <span id="add__video__media__text"></span>to reference in your question</p> <div class="form-row"> <div class="col-md-4"> <label>Add link video' + count + '</label> </div> <div class="col-md-8"> <input type="url" name="add_link_to_video__media__'+arcount+'" class="form-control" id="add__video__media__text"> </div> </div> <div class="text-center w-100"> <span>OR</span> </div> <div class="form-row justify-content-center pt-3"> <div class="col-md-3"> <label class="d-block" for="upload__video__media__file__'+arcount+'">Upload <input type="file" class="form-control-file" id="upload__video__media__file__'+arcount+'" value="Upload" name="video_media_'+arcount+'"> </label> </div> </div> </div> <div class="modal-footer justify-content-center"> <div class="col-sm-4"> <button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button> </div> </div> </div> </div> </div> </div> <div class="form-row d-flex standard__answer" id="standard__answer"> <div class="col-md-4"><label for="standard__question__answer">Answer</label> </div> <div class="col-md-8"> <input class="form-control answer" name="standard__question__answer__'+arcount+'" type="text"> </div> </div> <div class="form-row d-none numeric__answer" id="numeric__answer"> <div class="col-md-4"> <label for="numeric__question__answer">Answer</label> </div> <div class="col-md-8"> <input class="form-control" name="numeric__question__answer__'+arcount+'" type="number"> </div> </div> <div class="form-row d-none multiple__choice__legend" style="min-height:0;" id="multiple__choice__legend"> <div class="offset-md-10 col-2"><small class="d-block text-center pl-4">Correct answer</small> </div> </div> <div class="form-row d-none multiple__choice__answer" id="multiple__choice__answer"> <div class="col-md-4 align-self-start"> <label for="multiple__choice__answer">Answer</label> </div> <div class="col-md-8 multi-choice"> <div class="row multiple__choice__row pb-3 align-items-center"> <div class="col-7"><input name="multiple__choice__answer__'+arcount+'[]" class="multiple-choice-answer first-multi-answer form-control" type="text"> </div> <div class="col-1 justify-content-center">&nbsp; </div> <div class="col-1 justify-content-center"> <span class="plus">+</span> </div> <div class="col-3 text-center form-check"> <input type="radio" class="multiple-choice-correct-answer" name="multiple__choice__correct__answer__'+arcount+'" value=0 > </div> </div> </div> </div> <div class="form-row"> <div class="col-md-4"> <label for="time__limit">Time limit</label> </div> <div class="col-md-4"><input class="form-control time-limit" type="number" name="time__limit[]"> </div> <div class="col"> <small class="form-text text-muted">Seconds</small> </div> </div> </div> </div> </div> </div> </article>';  
     // $('#add-new-question').before(new_question);
        
     })
 
-//answer multible
-var $box=null;
+/***delete method */
+$("body").on('click','.close',function(e) {     
+    e.preventDefault();
+       var id=$(this).closest('.article').find('.article_question').attr("id");
+     if(id==null){
+        count--;
+        arcount--;
 
-$('.single__answer')
-	.click(function() {
-		if ($box == null) {
-			$box = $(this);
-            $box.css("box-shadow","3px 3px 15px #7343C1, -1px -1px 5px rgba(0, 0, 0, 0.045)");
-            $box.attr('id', 'answer');
+       $(this).closest('.article').remove();
 
-        } 
-        else  {
-            $box.css("box-shadow","");
-            $box.attr('id', 'disable');
-
-            if($box != $(this))
-            {
-                			$box = $(this);
-                            $box.css("box-shadow","3px 3px 15px #7343C1, -1px -1px 5px rgba(0, 0, 0, 0.045)");
-                            $box.attr('id', 'answer');
-
-            }
-            else
-		        $box = null;
-		}
-	}
-);
+     }
+    })
 
 
 
@@ -453,4 +540,8 @@ $('.single__answer')
 
 
     })
+
+
+      
+  
 });

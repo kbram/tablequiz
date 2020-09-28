@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Events\FormSubmitted;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +15,13 @@ use App\Events\FormSubmitted;
 |
 */
 
+Route::get('reset', function () {
+    Artisan::call('route:clear');
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('config:cache');
+    // Artisan::call('storage:link');
+});
 
 // Homepage Route
 Route::group(['middleware' => ['web', 'checkblocked']], function () {
@@ -59,7 +65,7 @@ Route::group(['middleware' => ['auth', 'activated', 'activity', 'checkblocked']]
 Route::group(['middleware' => ['auth', 'activated', 'activity', 'twostep', 'checkblocked']], function () {
 
     //  Homepage Route - Redirect based on user role is in controller.
-    Route::get('/homelaravel', ['as' => 'public.home',   'uses' => 'UserController@index']);
+    Route::get('/homelaravel', ['as' => 'public.home',   'uses' => 'DashboardController@showMyQuizzes']);
 
     // Show users profile - viewable by other users.
     Route::get('profile/{username}', [
@@ -191,6 +197,14 @@ Route::post('round/store', 'QuizRoundController@store');
 Route::get('round/edit', 'QuizRoundController@edit');
 Route::get('round/show', 'QuizRoundController@show');
 Route::post('round/upload', 'QuizRoundController@upload');
+
+Route::get('round/edit/{id}', 'QuizRoundController@new_edit');
+Route::get('round_ques_list/edit/{name}/{id}', 'QuizRoundController@round_ques_list_edit');
+Route::get('round_question/edit/{id}', 'MasterQuestionController@edit');
+Route::post('question/upload/{id}', 'MasterQuestionController@upload');
+Route::post('round/upload/{id}', 'QuizRoundController@round_upload');
+
+
 Route::get('about_us',function(){
     return view('about_us');
 });
@@ -320,23 +334,35 @@ Route::post('ajax/image/{id}', 'MasterQuestionController@image');
 Route::post('ajax/audio/{id}', 'MasterQuestionController@audio');
 Route::post('ajax/video/{id}', 'MasterQuestionController@video');
 
+Route::post('ajax/team_result/{id}', 'DashboardController@team_result');
 
 Route::post('payment', 'StripePaymentController@payment_detail');
 
 
 //card
 Route::get('card', 'StripePaymentController@card');
-Route::post('/quiz/run_quiz', function(){
-    $questionno=request()->questionno;
-    $question=request()->question;
-    $answer=request()->answer;
-    $media=request()->media;
-    $answerId=request()->answerId;
-    $questionId=request()->questionId;
-    $roundId=request()->roundId;
-    $quizId=request()->quizId;
-    $type=request()->type;
-    $text=$questionno."#^".$question."#^".$answer."#^".$media."#^".$answerId."#^".$questionId."#^".$roundId."#^".$quizId."#^".$type;
-    event(new FormSubmitted($text));
-    return view("quiz.start_quiz");
-});
+//bavaram
+Route::post('/quiz/run_quiz','QuizController@run_quiz');
+
+// Route::post('/quiz/run_quiz', function(){
+//     $questionno=request()->questionno;
+//     $question=request()->question;
+//     $answer=request()->answer;
+//     $media=request()->media;
+//     $answerId=request()->answerId;
+//     $questionId=request()->questionId;
+//     $roundId=request()->roundId;
+//     $quizId=request()->quizId;
+//     $type=request()->type;
+//     $text=$questionno."#^".$question."#^".$answer."#^".$media."#^".$answerId."#^".$questionId."#^".$roundId."#^".$quizId."#^".$type;
+//     event(new FormSubmitted($text));
+//     return redirect("quiz/start_quiz/{$quizId}");
+    
+// });
+//
+Route::post('/quiz/stop_quiz', 'QuizController@stop_quiz');
+Route::post('/quiz/pause_quiz', 'QuizController@pause_quiz');
+Route::post('/quiz/issue_answer', 'QuizController@issue_answer');
+
+
+Route::post('/playquiz/save/answer', 'PlayController@saveanswer');

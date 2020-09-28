@@ -1,4 +1,18 @@
 @extends('layouts.tablequizapp')
+@section('template_linked_css')
+<style>
+#myProgress {
+  width: 100%;
+  background-color: #ddd;
+}
+
+#myBar {
+  width: 1%;
+  height: 30px;
+  background-color: #ff8243;
+}
+</style>
+@endsection
 @section('content')
 
 <section class="container page__inner">
@@ -16,7 +30,7 @@
 						<label for="quiz__name">Quiz name</label>
 					</div>
 					<div class="col-md-8">
-						<input autocomplete="nothanks" type="text" name="quiz__name" class="form-control" value="{{ old('quiz__name') }}">
+						<input autocomplete="nothanks" type="text" name="quiz__name" class="form-control" value="{{ old('quiz__name') }}" required>
 					
 						@if ($errors->has('quiz__name'))
                                     <span class="help-block">
@@ -33,7 +47,7 @@
 						<label for="quiz__password">Quiz password</label>
 					</div>
 					<div class="col-md-8">
-						<input type="text" name="quiz__password" class="form-control" placeholder="(optional)" >
+						<input type="text" name="quiz__password" class="form-control" placeholder="(optional)"  >
 					</div>
 				</div>
 <!-- QUIZ LINK -->
@@ -47,7 +61,7 @@
 						<p class="disabled__text">TableQuiz.app/</p>
 					</div>
 					<div class="col-sm">
-						<input type="text" name="quiz__link" class="form-control" value="{{ old('quiz__link') }}">
+						<input type="text" name="quiz__link" class="form-control" value="{{ old('quiz__link') }} " >
 						@if ($errors->has('quiz__link'))
                                     <span class="help-block">
                                             <p>{{ $errors->first('quiz__link') }}</p>
@@ -79,28 +93,31 @@
 							</button>
 						  </div>
 						  <div class="modal-body">
-							<div class="modal__edit__image">
-								<div class="modal__edit__image__mask"></div>
-								<div class="modal__edit__size" id="img-wrapper">
-								<img class="modal__edit__image__image imagePreview" src="" id="image_preview_container" style="display:block;margin-left:auto;margin-right:auto;">
+							<div class="modal__edit__image position-relative">
+								<div class="modal__edit__size " id="img-wrapper">
+								<img class="modal__edit__image__image imagePreview position-relative" src="" id="image_preview_container" style="display:block;margin-left:auto;margin-right:auto;">
 								</div>
+								<div class="modal__edit__image__mask"></div>
 							</div>
 							<div class="modal__edit__image__range">
 								<div class="form-group">
 									<label for="formControlRange">Edit size</label>
 									<input type="range" class="form-control-range formControlRange" id="formControlRange" class="slider" min="1" max="100">
-									<div id="demo" class="d-none"></div>
+									<div id="demo" style="display:none;" class="d-none"></div>
+									<div id="myProgress">
+									<div id="myBar"></div>
+									</div>
 								  </div>
 							</div>
 						  </div>
 						  <div class="modal-footer justify-content-center row no-gutters">
-							 <div class="col-md-3"> 
+							 <div class="col-md-3">
 								 <label class="d-block" for="upload__quiz__icon">Upload
-									<input type="file"  class="form-control-file imagePreviewInput" id="upload__quiz__icon" name="upload__quiz__icon" value="Upload">
+									<input type="file"  class="form-control-file imagePreviewInput" id="upload__quiz__icon" name="upload__quiz__icon" value="Upload" >
 								</label>
 							</div>
 							<div class="col-md-3">
-								<button type="button" class="d-block btn btn-primary"data-dismiss="modal">Save</button>
+								<button id="pro" type="button" class="d-block btn btn-primary" data-dismiss="" > Save</button>
 							</div>
 						  </div>
 						</div>
@@ -116,7 +133,7 @@
 					</div>
 					<div class="col-md-4">
 						<select id="quiz__participants" class="form-control" name="quiz__participants">
-							<option disabled selected >{{(old('quiz__participants') != '' ? old('quiz__participants') : 'Please Choose...')}}</option>
+							<option  selected >{{(old('quiz__participants') != '' ? old('quiz__participants') : 'Please Choose...')}}</option>
 							@foreach($bands as $band)
 								@if(($band->band_type)== "participants costs")
 									@if(($band->to)== null)
@@ -150,9 +167,9 @@
 										<div class="col-6 col-sm-4 participants__number p-1">
 											<div class="participants__choice p-3" >
 												@if(($band->to)== null)
-													<input type="text" hidden class="participant" value="{{$band->from}}+" >{{$band->from}}+</input>
+													<input type="text" hidden class="participant" value="{{$band->from}}+" required >{{$band->from}}+</input>
 												@else
-													<input type="text" hidden class="participant" value="{{$band->from}}-{{$band->to}}" >{{$band->from}}-{{$band->to}}</input>
+													<input type="text" hidden class="participant" value="{{$band->from}}-{{$band->to}}" required>{{$band->from}}-{{$band->to}}</input>
 												@endif
 
 
@@ -198,6 +215,39 @@
 <script>    
 
 
+$("#pro").click(function(){
+	var s=$('#image_preview_container').attr('src');
+	//$("#demo").show();
+	
+	
+	if(s!=""){
+		sessionStorage.setItem("im", s);
+		var i = 0;
+		if (i == 0) {
+			i = 1;
+			var elem = document.getElementById("myBar");
+			var width = 1;
+			var id = setInterval(frame, 10);
+			function frame() {
+			if (width >= 100) {
+				
+				$("#pro").attr("data-dismiss","modal");
+				$("#pro").text("Close");
+				$("#pro").removeClass("btn-primary");
+				$("#pro").addClass("btn-danger");
+				//$('#image_preview_container').attr('src','');
+				//$("#demo").hide();
+				clearInterval(id);
+				i = 0;
+			} else {
+				width++;
+				elem.style.width = width + "%";
+			}
+			}
+		}		
+	}
+});
+
 $('.participants__choice').click(function() {
 
 var val =$(this).find('.participant').val();
@@ -207,9 +257,9 @@ $('#quiz__participants option[value='+val+']').attr("selected",true).change();
 
 });
 
+
 		
 </script>
 @include('scripts.quiz-icon-preview')
-
 
 @endsection
