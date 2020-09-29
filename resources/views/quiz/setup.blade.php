@@ -24,7 +24,7 @@
 				<h1>Quiz Setup</h1>
 			</div>
 
-			<form action="/store/image" method="post" enctype="multipart/form-data" class="pt-2 pt-lg-4">
+			<form action="/quiz" method="post" enctype="multipart/form-data" class="pt-2 pt-lg-4">
 				@csrf
 
 				<!-- QUIZ NAME -->

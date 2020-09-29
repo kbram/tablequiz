@@ -118,7 +118,7 @@ else{
         $quiz=$request->input('quiz_name');
         if($quiz==""){
             echo '<script>alert("Please Enter the value")</script>'; 
-            return view('play.play-quiz');
+            return view('home2');
         }
         return redirect()->action(
             'PlayController@selecturl', ['quiz_name' => $quiz]
