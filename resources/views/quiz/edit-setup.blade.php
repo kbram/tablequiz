@@ -68,15 +68,20 @@
 								</div>
 								<div class="modal-body">
 									<div class="modal__edit__image position-relative">
-										<div class="modal__edit__size" id="img-wrapper">
+										<!-- <div class="modal__edit__size" id="img-wrapper">
 											<img class="modal__edit__image__image imagePreview position-relative" src="{{ $image }}" id="image_preview_container" name="image_preview_container" style="display:block;margin-left:auto;margin-right:auto;">
+										</div> -->
+										<!-- <base href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/"> -->
+										<div id="image-container">
+											<img src="{{ $image }}" id="image_preview_container" alt='kopi'>
 										</div>
 										<div class="modal__edit__image__mask"></div>
 									</div>
 									<div class="modal__edit__image__range">
 										<div class="form-group">
 											<label for="formControlRangesize">Edit size</label>
-											<input type="range" class="form-control-range formControlRange " id="formControlRange" name="formControlRange" min="1" max="100">
+											<input type="range" class="form-control-range slider" min="1" max="4" value="1" step="0.1" id="zoomer" oninput="deepdive()">
+											<!-- <input type="range" class="form-control-range formControlRange " id="formControlRange" name="formControlRange" min="1" max="100"> -->
 											<div id="demo" class="d-none"></div>
 										</div>
 									</div>
