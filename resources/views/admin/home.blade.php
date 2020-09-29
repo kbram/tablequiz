@@ -154,7 +154,7 @@
 									<td class="quiz_actions db d-flex flex-row justify-content-lg-center">
 										<div class="d-flex flex-column">
 											<i class="far fa-eye"></i>
-											<a href="/admin/home/view/{{$quiz->id}}"><span class="view-qz" id="view-qz{{$quiz->id}}">View Qs</span></a>
+											<span class="view-qz" id="view-qz{{$quiz->id}}"><a href="/admin/home/view/{{$quiz->id}}">View Qs</a></span>
 										</div>
 										<div class="d-flex flex-column">
 											<i class="fas fa-share-alt"></i><span class="share" id="{{$quiz->id}}">Share</span>
