@@ -11,108 +11,106 @@ $(document).ready(function() {
       e.preventDefault();
 
       $('.quiz__slider .quiz__single_question__container').each(function(){
-      time=JSON.parse(sessionStorage.getItem("nowtimeon"));
-      timeon=0;
-      if(time!=null){
-         var splity=time.split(":");
-         timeon=parseInt(splity[0])*60+parseInt(splity[1]);
-      }
-      p=JSON.parse(sessionStorage.getItem("play"));
-      
-      if(p==null){
-         pl= true;
-      }else{
-         pl=p;
-      }
-
-       var answer="";
-       var answer_id="";
-       var type="";
-       var media_type="";
-       var media_path="";
-       var media_link="";
-       var time=0;
-
-      var current=$(this);
-      var hidden=current.attr('aria-hidden');
-      if(hidden=="false"){
-         var ti =$("#timer").text();
-         
-         if(ti!="Finished"){
-            var question =current.find('.question > span:nth-child(2)').text();
-            
-            time =current.find('.question-timer').val();
-            var round =current.find('.question-round').val();
-            var type =current.find('.question-type').val();
-            var user =current.find('.question-user').val();
-            var id =current.find('.question-id').val();
-            var quiz_id =current.find('.quiz-id').val();
-            if(pl==true){
-               var time =current.find('.question-timer').val();
-            }else{
-               var time=timeon;
-            }
-            //sessionStorage.setItem("play", false);
-            //console.log('type'+type);
-            current.find('.answer > span:nth-child(2)').each(function(){
-                answer+=$(this).text()+"/";
-           });
-           current.find('.answer-id').each(function(){
-                answer_id+=$(this).val()+"/";
-           });
-           current.find('.question-media-type').each(function(){
-                media_type+=$(this).val()+"/";
-           });
-
-           current.find('.question-media-path').each(function(){
-                media_path+=$(this).val()+"**";
-           });
-
-
-           current.find('.question-media-ink').each(function(){
-                media_link+=$(this).val()+"**";
-            });
-
-
-             
-           
-            $.ajax({
-        type: "POST",
-        url: "/quiz/run_quiz",
-        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-        data:{
-           question:question,
-           answer:answer,
-           media_type:media_type,
-           media_link:media_link,
-           media_path:media_path,
-
-           answerId:answer_id,
-           questionId:id,
-           roundId:round,
-           quizId:quiz_id,
-           type:type,
-           time:time,
-
-        },
-        success: function(data) {
-         
-         },
-
-         });
-
+         time=JSON.parse(sessionStorage.getItem("nowtimeon"));
+         timeon=0;
+         if(time!=null){
+            var splity=time.split(":");
+            timeon=parseInt(splity[0])*60+parseInt(splity[1]);
          }
-      }
+         p=JSON.parse(sessionStorage.getItem("play"));
+         
+         if(p==null){
+            pl= true;
+         }else{
+            pl=p;
+         }
+
+         var answer="";
+         var answer_id="";
+         var type="";
+         var media_type="";
+         var media_path="";
+         var media_link="";
+         var time=0;
+
+         var current=$(this);
+         var hidden=current.attr('aria-hidden');
+         if(hidden=="false"){
+            var ti =$("#timer").text();
+            
+            if(ti!="Finished"){
+               var question =current.find('.question > span:nth-child(2)').text();
+               
+               time =current.find('.question-timer').val();
+               var round =current.find('.question-round').val();
+               var type =current.find('.question-type').val();
+               var user =current.find('.question-user').val();
+               var id =current.find('.question-id').val();
+               var quiz_id =current.find('.quiz-id').val();
+               if(pl==true){
+                  var time =current.find('.question-timer').val();
+               }else{
+                  var time=timeon;
+               }
+               //sessionStorage.setItem("play", false);
+               //console.log('type'+type);
+               current.find('.answer > span:nth-child(2)').each(function(){
+                     answer+=$(this).text()+"/";
+               });
+               current.find('.answer-id').each(function(){
+                     answer_id+=$(this).val()+"/";
+               });
+               current.find('.question-media-type').each(function(){
+                     media_type+=$(this).val()+"/";
+               });
+
+               current.find('.question-media-path').each(function(){
+                     media_path+=$(this).val()+"**";
+               });
+
+
+               current.find('.question-media-ink').each(function(){
+                     media_link+=$(this).val()+"**";
+               });
+
+
+                  
+               
+               $.ajax({
+               type: "POST",
+               url: "/quiz/run_quiz",
+               headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+               data:{
+                  question:question,
+                  answer:answer,
+                  media_type:media_type,
+                  media_link:media_link,
+                  media_path:media_path,
+
+                  answerId:answer_id,
+                  questionId:id,
+                  roundId:round,
+                  quizId:quiz_id,
+                  type:type,
+                  time:time,
+
+               },
+               success: function(data) {
+               
+               },
+
+               });
+
+            }
+         }
          
          
             
-         });
-       
-      
-      });
+      });    
+   });
 
-//kopi round
-var progress=0;
+      //kopi round
+      var progress=0;
       var round_count=-1;
       var progress_divide=100;
       $('.progress_round_label').each(function(){
@@ -121,18 +119,11 @@ var progress=0;
       progress_divide/=round_count;
       progress_add= progress_divide;
 
-        //console.log('progrss'+progress_divide);
-        //console.log('progrss'+progress_add);
-    
-//kopi round end
-
-
-
      
       $('#issue').click(function(e){
          
 
-         e.preventDefault();
+      e.preventDefault();
       $('.quiz__slider .quiz__single_question__container').each(function(){
       time=JSON.parse(sessionStorage.getItem("nowtimeon"));
       timeon=0;
@@ -165,6 +156,12 @@ var progress=0;
             var question =current.find('.question > span:nth-child(2)').text();
             
             time =current.find('.question-timer').val();
+
+            var issue =current.find('.question-issue').val();
+            
+
+            current.find('.question-issue').val("1");
+            
             var round =current.find('.question-round').val();
             var type =current.find('.question-type').val();
             var user =current.find('.question-user').val();
@@ -198,7 +195,8 @@ var progress=0;
 
 
             var x=time;
-           
+           if(issue=="0"){
+             
             $.ajax({
         type: "POST",
         url: "/quiz/run_quiz",
@@ -223,6 +221,7 @@ var progress=0;
          },
 
          });
+      }
       }
       else{
          //alert("Already Finished");
@@ -264,8 +263,18 @@ var progress=0;
                min = '0' + min;
             
             }
-            
-            $('.countdown__time').text(min + ":" + remSec);
+            $('.quiz__slider .quiz__single_question__container').each(function(){
+               var current=$(this);
+               var hidden=current.attr('aria-hidden');
+               if(hidden=="false"){
+                  var issue =current.find('.question-issue').val();
+                  if(issue=="1"){
+                     $('.countdown__time').text("Finished");
+                  }else{
+                     $('.countdown__time').text(min + ":" + remSec);
+                  }
+               }
+            });
          }
 
    });
@@ -310,7 +319,18 @@ var progress=0;
                min = '0' + min;
             
             }
-            $('.countdown__time').text(min + ":" + remSec);
+            $('.quiz__slider .quiz__single_question__container').each(function(){
+               var current=$(this);
+               var hidden=current.attr('aria-hidden');
+               if(hidden=="false"){
+                  var issue =current.find('.question-issue').val();
+                  if(issue=="1"){
+                     $('.countdown__time').text("Finished");
+                  }else{
+                     $('.countdown__time').text(min + ":" + remSec);
+                  }
+               }
+            });
             /*
             var text=$("#timer").text();
             sessionStorage.setItem("nowstarttimeon", true);
@@ -381,7 +401,7 @@ $('#share_question').click(function(e){
                   
                   swal("You are not submit answer !",'please update correct answer...', "danger");
                }else{
-                  var quizId =current.find('.question-id').val();
+                  
                   var question =current.find('.question > span:nth-child(2)').text();
                
                   var time =current.find('.question-timer').val();
@@ -433,7 +453,7 @@ $('#share_question').click(function(e){
                         answerId:answer_id,
                         questionId:id,
                         roundId:round,
-                        quizId:quizId,
+                        quizId:quiz_id,
                         type:type,
                         correct_ans:answerright,
                      },

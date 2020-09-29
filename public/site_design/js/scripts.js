@@ -541,7 +541,28 @@ $("body").on('click','.close',function(e) {
 
     })
 
-
+    $('#publish-quiz').click(function(e){ console.log('hi round');  
+       e.preventDefault();
+    $.ajax({ 
+        data: $('#add_round').serialize(), 
+        type: 'post', 
+        url: $('#add_round').attr('action'), 
+        success: function(response) { 
+            console.log('success');
+            $('#publishQuizModal').show();
+            // $('#modal__login').addClass('d-none');
+			// $('#modal__signup').addClass('d-none');
+			// $('#modal__payment').removeClass('d-none');
+		},
+		error: function(result,error) {
+            console.log('errror');
+		    $('#publishQuizModal').show();
+		   },
+    });
+    return false;
+             
+      
+   });
       
   
 });

@@ -85,7 +85,10 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="modal__edit__image position-relative">
-                                        <img class="modal__edit__image__image position-relative" id="round_image" style="display:block;margin-left:auto;margin-right:auto;" src="#">
+                                        <!-- <img class="modal__edit__image__image position-relative" id="round_image" style="display:block;margin-left:auto;margin-right:auto;" src="#"> -->
+                                        <div id="image-container">
+											<img src="" id="round_image" alt=''>
+										</div>	
                                         <div class="modal__edit__image__mask"></div>
                                     </div>
                                     <div class="modal__edit__image__range">
@@ -104,7 +107,9 @@
                                                 <label for="formControlRange"><small>Edit size</small></label>
                                             </div>
                                             <div class="col-9">
-                                                <input type="range" min="1" max="100" class="form-control-range" id="formControlRange">
+                                                <!-- <input type="range" min="1" max="100" class="form-control-range" id="formControlRange"> -->
+                                                <input type="range" class="form-control-range slider" min="1" max="4" value="1" step="0.1" id="zoomer" oninput="deepdive()">
+
                                             </div>
                                         </div>
                                     </div>

@@ -89,8 +89,12 @@
 							</div>
 							<div class="modal-body">
 								<div class="modal__edit__image position-relative">
-								   <img class="modal__edit__image__image position-relative" id="round_image" style="display:block;margin-left:auto;margin-right:auto;" src="#">
-									<div class="modal__edit__image__mask"></div>
+								   <!-- <img class="modal__edit__image__image position-relative" id="round_image" style="display:block;margin-left:auto;margin-right:auto;" src="#"> -->
+								   <!-- <base href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/"> -->
+										<div id="image-container">
+											<img src="" id="round_image" alt=''>
+										</div>	
+								   <div class="modal__edit__image__mask"></div>
 								</div>
 								<div class="modal__edit__image__range">
 									<div class="form-row align-items-center">
@@ -108,8 +112,9 @@
 											<label for="formControlRange"><small>Edit size</small></label>
 										</div>
 										<div class="col-9">
-											<input type="range" min="1" max="100" class="form-control-range" id="formControlRange">
-											
+											<!-- <input type="range" min="1" max="100" class="form-control-range" id="formControlRange"> -->
+											<input type="range" class="form-control-range slider" min="1" max="4" value="1" step="0.1" id="zoomer" oninput="deepdive()">
+
 										</div>
 									</div>
 								</div>
@@ -527,7 +532,8 @@
 			<button type="submit"  class="btn btn-secondary d-block" id="nextRound"><span class="pr-3"><i class="fa fa-plus"></i></span>Next round</a>
 		</div>
 		<div class="col-md-4 px-0 px-md-4">
-			<a href="#" data-toggle="modal" id="publish-quiz" data-target="#publishQuizModal" class="btn btn-primary d-block publish-quiz">Publish Quiz</a>
+		<button type="button"  class="btn btn-primary d-block" id="publish-quiz">Publish Quiz</a>
+			<!-- <a href="#" data-toggle="modal" id="publish-quiz" data-target="#publishQuizModal" class="btn btn-primary d-block publish-quiz">Publish Quiz</a> -->
 		</div>
 	</section>
 	</form>
