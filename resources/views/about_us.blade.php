@@ -91,8 +91,8 @@ Quizzes can be setup and ran free of charge and ran using a simple link, no inst
 <br>
 <br>
 <hr>
-
-
+<br>
+<br>
 <div class="row ">
 
 <div class="col-lg-7 col-md-12 col-sm-12">

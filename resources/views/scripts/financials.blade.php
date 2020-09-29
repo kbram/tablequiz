@@ -6,6 +6,7 @@
     e.preventDefault();
     var id=e.target.id;
 
+    swal("Added !!!",'Another Price Band is added', "success");
     $.ajax({
         type: "POST",
         url: "{{route('update')}}",
@@ -47,8 +48,10 @@
      e.preventDefault();
 
     
-    
+
+     swal("Deleted !!!",'Price Band is deleted...', "danger")
      var idb=$(this).attr("id");
+    
       if(idb=="question"){
         var x='<div class="row d-flex">'+
 							'<span class="col-9">'+
