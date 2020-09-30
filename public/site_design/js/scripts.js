@@ -550,6 +550,7 @@ $("body").on('click','.question-close',function(e) {
         data: $('#add_round').serialize(), 
         type: 'post', 
         url: $('#add_round').attr('action'), 
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
         success: function(response) { 
             console.log('success');
             $('#publishQuizModal').modal("show");
@@ -557,7 +558,7 @@ $("body").on('click','.question-close',function(e) {
 		},
 		error: function(result,error) {
             console.log('errror');
-		  //  $('#publishQuizModal').modal("show");
+		    $('#modal__payment').modal("show");
 		   },
     });
     return false;
