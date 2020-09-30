@@ -712,7 +712,7 @@ $("#pro3").click(function(){
 @include('scripts.suggest')
 @include('scripts.bg-image');
 @include('scripts.payment');
-@include('scripts.payment');
+
 
 
 @endsection
