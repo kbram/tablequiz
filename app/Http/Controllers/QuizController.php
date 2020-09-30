@@ -43,10 +43,7 @@ use App\Models\GlobalAnswer;
 
 class QuizController extends Controller
 {
-    public function __construct()
-    {
-        // $this->middleware('auth');
-    }
+   
     public function index(){
         $quizzes = Quiz::all();
         
