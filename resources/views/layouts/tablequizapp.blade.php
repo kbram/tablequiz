@@ -48,7 +48,7 @@
         @yield('head')
         
     </head>
-    <body>
+    <body style="overflow-x: visible;">
  
     
         @include('partials.tablequiz.head')
