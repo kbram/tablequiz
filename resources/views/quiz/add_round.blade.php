@@ -532,8 +532,8 @@
 			<button type="submit"  class="btn btn-secondary d-block" id="nextRound"><span class="pr-3"><i class="fa fa-plus"></i></span>Next round</a>
 		</div>
 		<div class="col-md-4 px-0 px-md-4">
-		<button type="button"  class="btn btn-primary d-block" id="publish-quiz">Publish Quiz</a>
-			<!-- <a href="#" data-toggle="modal" id="publish-quiz" data-target="#publishQuizModal" class="btn btn-primary d-block publish-quiz">Publish Quiz</a> -->
+		<!--<button type="button"  class="btn btn-primary d-block" id="publish-quiz">Publish Quiz</a>-->
+		<a href="#" data-toggle="modal" id="publish-quiz" data-target="#publishQuizModal" class="btn btn-primary d-block publish-quiz">Publish Quiz</a>
 		</div>
 	</section>
 	</form>
