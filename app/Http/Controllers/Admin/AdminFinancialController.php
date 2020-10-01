@@ -26,14 +26,13 @@ class AdminFinancialController extends Controller
     public function index(){
 
         $band_type_configs = [
-            'background_band_type' => Config::get('background_band_type'),
-            'question_band_type' =>   Config::get('question_band_type'),
-            'participant_band_type' => Config::get('participant_band_type'),
+            'background_band_type' => Config::get('priceband.type.background_band_type'),
+            'question_band_type' =>   Config::get('priceband.type.question_band_type'),
+            'participant_band_type' => Config::get('priceband.type.participant_band_type'),
         ];
-
-        $questionCosts = PriceBand::where('band_type','=','questions costs')->get();
-        $backgroundCosts = PriceBand::where('band_type','=','backgrounds costs')->get();
-        $participantCosts = PriceBand::where('band_type','=','participants costs')->get();
+        $questionCosts = PriceBand::where('band_type','=',Config::get('priceband.type.question_band_type'))->get();
+        $backgroundCosts = PriceBand::where('band_type','=',Config::get('priceband.type.background_band_type'))->get();
+        $participantCosts = PriceBand::where('band_type','=',Config::get('priceband.type.participant_band_type'))->get();
 
         return view('admin.financials',compact('questionCosts','backgroundCosts','participantCosts','band_type_configs'));
        

@@ -413,15 +413,16 @@ public function add_round_question(Request $request)
 
       $round_background->move($save_path, $filename);            
 
+      
      } 
 
      else{
 
-        $filename = 'round_back.jpg'; 
-        $save_path1 = '/storage'; 
-        $save_path = storage_path('app/public');
-        $public_path = storage_path('app/public');
-        $public_path_thumb= storage_path('app/public').'/thumb';
+        $filename = 0 ; 
+        $save_path1 = 0; 
+        $save_path = 0;
+        $public_path = 0;
+        $public_path_thumb= 0;
          }
 
 

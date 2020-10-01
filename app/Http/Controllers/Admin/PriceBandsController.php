@@ -49,7 +49,6 @@ class PriceBandsController extends Controller
             ]
             );
             if ($validator->fails()) {
-              dd("sam");
             return back()->withErrors($validator)->withInput();
             }  
 

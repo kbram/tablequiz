@@ -63,7 +63,6 @@
 						<div class="d-flex">
 						   <h3 class="col-8">Set price band for no. questions</h3>
 						</div>							
-											
 							@if(@isset($questionCosts))
 							@if( $questionCosts->count() > 0)
 							@php
