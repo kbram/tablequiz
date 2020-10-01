@@ -42,7 +42,7 @@ class DashboardController extends Controller
     }}
 
     public function index(){
-        $quizzes=Auth::user()->quizzes()->get();
+        $quizzes=Auth::user()->quizzes()->paginate(5);
         if($quizzes->isEmpty()){
             return view('dashboard.home');
            }
@@ -59,9 +59,20 @@ class DashboardController extends Controller
     }}
 
     public function myQuiz(){
-        return view('dashboard.my-quizzes');
+        $quizzes = Auth::user()->quizzes()->get();
+         if($quizzes->isEmpty()){
+            return view('dashboard.my-quizzes')->with('message','No quizzes to show');
+         }
+         else{          
+            foreach($quizzes as $quiz){
+                $roundCount[$quiz->id]=$quiz->rounds()->count();
+                $questionCounts[$quiz->id]=$quiz->questions()->count();
+            }
+        
+        return view('dashboard.my-quizzes',compact('quizzes','roundCount','questionCounts'));
+        
+        }
     }
-
     public function setting(){
 
         $user = auth()->user();

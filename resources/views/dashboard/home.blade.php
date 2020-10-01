@@ -197,7 +197,12 @@
 							<tfoot>
 								<tr>
 									<td colspan="4" class="text-right text-muted">
-										<a href="my-quizzes.php"><small>View all</small></a>
+											<br>
+								@if(!empty($quizzes))
+									<div  class="d-flex justify-content-center">{{$quizzes->links()}}</div>
+										<a href="../dashboard/quizzes"><small>View all</small></a>
+								@endif	
+								
 									</td>
 								</tr>
 							</tfoot>
