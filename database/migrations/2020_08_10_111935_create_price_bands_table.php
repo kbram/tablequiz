@@ -30,6 +30,6 @@ class CreatePriceBandsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('prize_bands');
+        Schema::dropIfExists('price_bands');
     }
 }

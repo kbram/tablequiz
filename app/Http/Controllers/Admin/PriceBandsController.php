@@ -1,24 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 
 use Illuminate\Http\Request;
 use App\Models\PriceBand;
 use Validator;
 class PriceBandsController extends Controller
 {
-    public function index(){
-         $questionCosts = PriceBand::where('band_type','=','questions costs')->get();
-         $backgroundCosts = PriceBand::where('band_type','=','backgrounds costs')->get();
-         $participantCosts = PriceBand::where('band_type','=','participants costs')->get();
-         if(($questionCosts->isEmpty())||($backgroundCosts->isEmpty())||($participantCosts->isEmpty())){
-          return view('admin.financials',compact('questionCosts','backgroundCosts','participantCosts'));
-        }
-       else{
-        return view('admin.financials',compact('questionCosts','backgroundCosts','participantCosts'));
-       }
-    }
+   
 
     
   public function update(Request $request)
@@ -69,8 +60,12 @@ class PriceBandsController extends Controller
         $priceBand->from =$request->new_from;
         $priceBand->to = $request->new_to;
         $priceBand->cost = $request->new_cost;
-        $priceBand->band_type=$request->band_type;
+        $priceBand->band_type=Str::slug($request->band_type, '-');
         $priceBand->save();
+
+
+
+
 
         }
        

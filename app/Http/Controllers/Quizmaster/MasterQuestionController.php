@@ -1,6 +1,8 @@
 <?php                                                                                                                                                             
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Quizmaster;
+use App\Http\Controllers\Controller;
+
 use App\Models\Question;
 use App\Models\Answer;
 use Validator;
