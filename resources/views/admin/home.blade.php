@@ -189,14 +189,13 @@
 										<br>
 									@if(!empty($quizzes))
 										<div  class="d-flex justify-content-center">{{$quizzes->links()}}</div>
-										<a href="../admin/quizzes"><small>View all</small></a>
+										<a href="/admin/quizzes"><small>View all</small></a>
 									@endif
 									
 									</td>
 								</tr>
 							</tfoot>
 						</table>
-
 					</div>
 				</div>
 			</div>
