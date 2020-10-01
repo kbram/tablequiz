@@ -51,7 +51,7 @@ class AdminDetailsController extends Controller
     {   
         $cusers=User::count();
         $cquzzes=Quiz::count();
-        $quizzes =Quiz::orderBy('id', 'desc')->take(10)->get();
+        $quizzes =Quiz::orderBy('id', 'desc')->paginate(5);
         if($quizzes->isEmpty()){
             return view('admin.home',compact('cusers','cquzzes'));
         }

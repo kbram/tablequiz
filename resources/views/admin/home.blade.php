@@ -186,7 +186,9 @@
 							<tfoot>
 								<tr>
 									<td colspan="4" class="text-right text-muted">
-										<a href="../admin/quizzes"><small>View all</small></a>
+										<br>
+									<div  class="d-flex justify-content-center">{{$quizzes->links()}}</div>
+									<a href="../admin/quizzes"><small>View all</small></a>
 									</td>
 								</tr>
 							</tfoot>
