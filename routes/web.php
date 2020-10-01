@@ -151,6 +151,8 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
     // Route::get('admin/financials', 'Admin\AdminDetailsController@financials');
     // Route::get('admin/questions', 'Admin\AdminDetailsController@questions');
     Route::get('admin/quizzes', 'Admin\AdminDetailsController@quizzes');
+    Route::get('dashboard/quizzes', 'Quizmaster\DashboardController@myQuiz');
+    
     Route::get('admin/users', 'Admin\AdminDetailsController@users');
     
 
