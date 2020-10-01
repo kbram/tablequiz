@@ -112,7 +112,7 @@
 						<select id="quiz__participants" class="form-control" name="quiz__participants">
 							<option selected>{{($quiz->no_of_participants != '' ? $quiz->no_of_participants : 'Please Choose...')}}</option>
 							@foreach($bands as $band)
-							@if(($band->band_type)== "participants costs")
+							@if(($band->band_type)== Config::get('priceband.type.participant_band_type'))
 							@if(($band->to)== null)
 							<option class="{{$band->from}}" value="{{$band->from}}">{{$band->from}}+</option>
 							@else
@@ -140,7 +140,7 @@
 								</div>
 								<div class="modal-body row no-gutters participants">
 									@foreach($bands as $band)
-									@if(($band->band_type)== "participants costs")
+									@if(($band->band_type)== Config::get('priceband.type.participant_band_type'))
 									<div class="col-6 col-sm-4 participants__number p-1">
 										<div class="participants__choice p-3">
 											@if(($band->to)== null)
