@@ -688,10 +688,10 @@ $points = [];
     }
 
     public function setup()
-    {    
-        $participants=Participant::all();
+    {     
+        $participants = PriceBand::where('band_type','=',Config::get('priceband.type.participant_band_type'))->get();
+        //$participants=Participant::all();
         $bands=PriceBand::all();
-        return view('quiz.setup',compact('participants', 'bands'));    }
-
-    
+        return view('quiz.setup',compact('participants', 'bands'));    
+    }
 }

@@ -7,7 +7,9 @@ use Illuminate\Http\Response;
 use App\Models\User;
 use App\Models\Quiz;
 use Illuminate\Support\Facades\Route;
-use App\Models\Participant;
+use App\Models\PriceBand;
+use Config;
+
 class AdminDetailsController extends Controller
 {
     /**
@@ -105,7 +107,8 @@ class AdminDetailsController extends Controller
     }
 }
     public function quizView($id){
-        $participants=Participant::all();
+        $participants = PriceBand::where('band_type','=',Config::get('priceband.type.participant_band_type'))->get();
+        // $participants=Participant::all();
         $quizzes = Quiz::find($id);
         $image=$quizzes->icon()->first()->local_path;
 
