@@ -188,9 +188,8 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
 Route::redirect('/php', '/phpinfo', 301);
 
 //kopi route can start here
-Route::group(['middleware' => ['auth', 'activated', 'role:quizmaster', 'activity', 'twostep', 'checkblocked']], function () {
-    Route::get('quiz/start_quiz/{id}', 'QuizController@start_quiz');
-});
+Route::get('quiz/start_quiz/{id}', 'QuizController@start_quiz');
+
 Route::get('quiz/slider', 'QuizController@slider');
 //Route::get('quiz/add_round', 'QuizController@add_round');
 Route::get('quiz/add_round_2', 'QuizController@add_round_2');
