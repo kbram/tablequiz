@@ -17,11 +17,11 @@
 
 
 //Image Rotate
-var angle = 0,
+var angle = 360,
   img = document.getElementById('round_image');
 document.getElementById('rotate').onclick = function() {
-  angle = (angle + 90) % 360;
-  img.className = "rotate" + angle;
+  angle = (angle - 90) % 360;
+ img.style.transform = 'rotate('+angle+'deg)';
 }
 
 
@@ -71,7 +71,6 @@ function deepdive(){
      #image-container {
   width: 100%;
   font-size: 0;
-  border: 1px solid #111;
   overflow: hidden;
   margin: 0 auto;
  /* margin-top: 2rem;*/
