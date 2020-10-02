@@ -265,7 +265,7 @@ Route::get('setup/create', 'QuizController@create');
 
 Route::get('admin/questions', 'Admin\AdminQuestionController@create')->name('admin-questions');
 Route::post('admin/questions', 'Admin\AdminQuestionController@store')->name('admin-questions');
-Route::get('questions/{id}/edit', 'Admin\AdminQuestionController@edit');
+Route::get('questions/{id}/edit', 'Admin\AdminQuestionController@edit')->name('admin-questions-edit');
 Route::post('questions/{id}/update', 'Admin\AdminQuestionController@update');
 
 //christy route can start from here

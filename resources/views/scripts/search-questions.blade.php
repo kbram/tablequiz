@@ -23,19 +23,22 @@
                 url: "{{ route('search-questions') }}",
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 data: searchform.serialize(),
-                success: function (questions) {
-                    let jsonData = JSON.parse(questions);
-                    if (jsonData.length != 0) {
+                success: function (data) {
+                    let jsonData = JSON.parse(data[0]);
+
+                    if (jsonData[0].length != 0) {
                         questionsTable.hide();
-                        $.each(jsonData, function(index, val) {
-                            let editCellHtml = '<div class="d-flex flex-column"><i class="fas fa-pencil-alt"></i><span>Edit</span></div> ';
-                            let deleteCellHtml = '<div class="d-flex flex-column"><i class="fas fa-times-circle"></i><span>Delete</span></div>';
+                        $.each(jsonData[0], function(index, val) {
+                            console.log(val);
+                            console.log(jsonData[1]);
+                            let editCellHtml = '<div class="d-flex flex-column"><i class="fas fa-pencil-alt"></i><span><a href="/questions/'+val.id+'/edit" data-toggle="tooltip" title="edit">Edit</a></span></div> ';
+                            let deleteCellHtml = '<form method="POST" action="/admin/questions/'+val.id+'" class="p-0"><input type="hidden" name="_token" value="{{csrf_token()}}"><div class="d-flex flex-column"><i class="fas fa-times-circle"></i><span class="delete">Delete</span></div></form>';
 											
                             
-                            
+                           
                             resultsContainer.append('<tr>' +
                                 '<td>' + val.question + '</td>' +
-                                '<td >' + val.category + '</td>' +
+                                '<td >' +jsonData[1][val.category_id] + '</td>' +
                                '<td class="quiz_actions d-flex flex-row justify-content-lg-center">' + editCellHtml + deleteCellHtml + '</td>' +
                                
                             '</tr>');

@@ -573,29 +573,23 @@ class AdminQuestionController extends Controller
                
               foreach ($searchValues as $value) {
                 $q->orWhere('question', 'like', "%{$value}%");
-                $q->orWhere('category_name', 'like', "%{$value}%");
-                
+               
                 }
             })->get();
-             
-            $category = QuizCategory::where('id','like', $searchTerm.'%')
-                            ->orWhere('category_name', 'like', $searchTerm.'%')->get();
 
-            foreach($questions as $question){
-                   $question['category']=QuizCategory::where('id', $question->category_id)->value('category_name'); 
-              }
-          
-        
-              $response = array(
-                'status' => 'success',
-                'msg' => $ques,
-                'ans' => $ans,
-                'img' => $medias,
-            );
-            return response()->json($response);
-   
+            
+
+            $categories = QuizCategory::all();
+      
+            foreach($categories as $category){
+              $cat[$category -> id] = $category->category_name;
+            
+            }
+            
+            $data = [$questions, $cat];
+
            return response()->json([
-               json_encode($response),
+               json_encode($data),
            ], Response::HTTP_OK);
            
        }
