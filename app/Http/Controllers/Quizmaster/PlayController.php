@@ -123,7 +123,7 @@ else{
             return view('home2');
         }
         return redirect()->action(
-            'PlayController@selecturl', ['quiz_name' => $quiz]
+            'Quizmaster\PlayController@selecturl', ['quiz_name' => $quiz]
         );
     }
 

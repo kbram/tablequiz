@@ -22,6 +22,7 @@ class CreateQuizzesTable extends Migration
             $table->string('quiz_link');
             $table->string('no_of_participants');
             $table->boolean('is_blocked')->default(false);
+            $table->boolean('payment')->default(false);
             $table->timestamps();
             
         });
