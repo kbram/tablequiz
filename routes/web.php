@@ -20,7 +20,7 @@ Route::get('reset', function () {
     Artisan::call('cache:clear');
     Artisan::call('config:clear');
     Artisan::call('config:cache');
-    // Artisan::call('storage:link');
+    Artisan::call('storage:link');
 });
 
 // Homepage Route
@@ -65,7 +65,7 @@ Route::group(['middleware' => ['auth', 'activated', 'activity', 'checkblocked']]
 Route::group(['middleware' => ['auth', 'activated', 'activity', 'twostep', 'checkblocked']], function () {
 
     //  Homepage Route - Redirect based on user role is in controller.
-    Route::get('/homelaravel', ['as' => 'public.home',   'uses' => 'DashboardController@showMyQuizzes']);
+    Route::get('/homelaravel', ['as' => 'public.home',   'uses' => 'Quizmaster\DashboardController@showMyQuizzes']);
 
     // Show users profile - viewable by other users.
     Route::get('profile/{username}', [
@@ -142,16 +142,18 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
     ]);
 
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
-    Route::get('routes', 'AdminDetailsController@listRoutes');
-    Route::get('active-users', 'AdminDetailsController@activeUsers');
+    Route::get('routes', 'Admin\AdminDetailsController@listRoutes');
+    Route::get('active-users', 'Admin\AdminDetailsController@activeUsers');
 
     //admin routes here
-    Route::get('admin/home', 'AdminDetailsController@home');
-    Route::get('admin/categories', 'AdminDetailsController@categories');
-    Route::get('admin/financials', 'AdminDetailsController@financials');
-    // Route::get('admin/questions', 'AdminDetailsController@questions');
-    Route::get('admin/quizzes', 'AdminDetailsController@quizzes');
-    Route::get('admin/users', 'AdminDetailsController@users');
+    Route::get('admin/home', 'Admin\AdminDetailsController@home');
+    Route::get('admin/categories', 'Admin\AdminDetailsController@categories');
+    // Route::get('admin/financials', 'Admin\AdminDetailsController@financials');
+    // Route::get('admin/questions', 'Admin\AdminDetailsController@questions');
+    Route::get('admin/quizzes', 'Admin\AdminDetailsController@quizzes');
+    Route::get('dashboard/quizzes', 'Quizmaster\DashboardController@myQuiz');
+    
+    Route::get('admin/users', 'Admin\AdminDetailsController@users');
     
 
     //admin question
@@ -159,23 +161,23 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
     Route::post('search-quizzes','QuizController@search')->name('search-quizzes');
 
     //admin financial controller
-    Route::get('admin/financials','PriceBandsController@index');
+    Route::get('admin/financials','Admin\AdminFinancialController@index');
 
     //adminquestionccontroller
-    Route::post('search-questions','AdminQuestionController@search')->name('search-questions');
-    Route::post('/admin/questions/{id}','AdminQuestionController@destroy');
+    Route::post('search-questions','Admin\AdminQuestionController@search')->name('search-questions');
+    Route::post('/admin/questions/{id}','Admin\AdminQuestionController@destroy');
 
     //admin categories
-    Route::post('/admin/categories/{id}','QuizCategoriesController@destroy');
+    Route::post('/admin/categories/{id}','Admin\QuizCategoriesController@destroy');
 
     //admin home view quiz
-    Route::get('admin/home/view/{id}','AdminDetailsController@quizView');
-    Route::post('admin/home/block/{id}','AdminDetailsController@block');
-    Route::post('admin/home/un-block/{id}','AdminDetailsController@un_block');
+    Route::get('admin/home/view/{id}','Admin\AdminDetailsController@quizView');
+    Route::post('admin/home/block/{id}','Admin\AdminDetailsController@block');
+    Route::post('admin/home/un-block/{id}','Admin\AdminDetailsController@un_block');
 
-    Route::post('admin/home/blockuser/{id}','AdminDetailsController@blockuser');
-    Route::post('admin/home/un-blockuser/{id}','AdminDetailsController@un_blockuser');
-    Route::get('admin/{id}/userquizzes', 'AdminDetailsController@userquizzes')->name('userquizzes');
+    Route::post('admin/home/blockuser/{id}','Admin\AdminDetailsController@blockuser');
+    Route::post('admin/home/un-blockuser/{id}','Admin\AdminDetailsController@un_blockuser');
+    Route::get('admin/{id}/userquizzes', 'Admin\AdminDetailsController@userquizzes')->name('userquizzes');
 
 
     //admin user search
@@ -202,8 +204,8 @@ Route::post('round/upload', 'QuizRoundController@upload');
 
 Route::get('round/edit/{id}', 'QuizRoundController@new_edit');
 Route::get('round_ques_list/edit/{name}/{id}', 'QuizRoundController@round_ques_list_edit');
-Route::get('round_question/edit/{id}', 'MasterQuestionController@edit');
-Route::post('question/upload/{id}', 'MasterQuestionController@upload');
+Route::get('round_question/edit/{id}', 'Quizmaster\MasterQuestionController@edit');
+Route::post('question/upload/{id}', 'Quizmaster\MasterQuestionController@upload');
 Route::post('round/upload/{id}', 'QuizRoundController@round_upload');
 
 
@@ -213,19 +215,19 @@ Route::get('about_us',function(){
 Route::get('contact_us',function(){
     return view('contact_us');
 });
-Route::post('admin/financials/update', 'PriceBandsController@update')->name('update');
-Route::post('admin/financials/delete','PriceBandsController@destroy')->name('delete');
+Route::post('admin/financials/update', 'Admin\PriceBandsController@update')->name('update');
+Route::post('admin/financials/delete','Admin\PriceBandsController@destroy')->name('delete');
 
 Route::post('dashboard/user-update', 'UsersManagementController@user_update');
 
 
 //sam route can start here
-Route::get('playquiz/{quiz_id}/{round_id}/{question_id}', 'PlayController@testplay')->name('play.quiz');
-Route::post('startquiz', 'PlayController@start');
+Route::get('playquiz/{quiz_id}/{round_id}/{question_id}', 'Quizmaster\PlayController@testplay')->name('play.quiz');
+Route::post('startquiz', 'Quizmaster\PlayController@start');
 
 //error
-Route::get('startquiz-password/{id}', 'PlayController@errorpassword');
-Route::get('startquiz-team/{id}', 'PlayController@errorteam');
+Route::get('startquiz-password/{id}', 'Quizmaster\PlayController@errorpassword');
+Route::get('startquiz-team/{id}', 'Quizmaster\PlayController@errorteam');
 
 
 
@@ -238,16 +240,16 @@ Route::post('setup/update/{id}','QuizController@update');
 //christy route can start from here
 
 //quiz category route
-Route::get('admin/categories', 'QuizCategoriesController@create');
-Route::post('admin/categories', 'QuizCategoriesController@store');
-Route::get('admin/categories/edit/{id}', 'QuizCategoriesController@edit');
-Route::post('admin/categories/update/{id}', 'QuizCategoriesController@update');
+Route::get('admin/categories', 'Admin\QuizCategoriesController@create');
+Route::post('admin/categories', 'Admin\QuizCategoriesController@store');
+Route::get('admin/categories/edit/{id}', 'Admin\QuizCategoriesController@edit');
+Route::post('admin/categories/update/{id}', 'Admin\QuizCategoriesController@update');
 
 //quizmaster question routes
 Route::post('/quiz','QuizController@store');
-Route::post('/round','MasterQuestionController@add_round_question');
-Route::post('/question','MasterQuestionController@postQuestion');
-Route::post('/quizsetup','MasterQuestionController@store');
+Route::post('/round','Quizmaster\MasterQuestionController@add_round_question');
+Route::post('/question','Quizmaster\MasterQuestionController@postQuestion');
+Route::post('/quizsetup','Quizmaster\MasterQuestionController@store');
 Route::get('/addround/{id}','QuizRoundController@getRound');
 
 
@@ -257,27 +259,27 @@ Route::get('/addround/{id}','QuizRoundController@getRound');
 //christy route can start from here
 
 //kanu routes
+//correction-middle
 Route::get('setup/create', 'QuizController@create');
 
 
 
-Route::get('admin/questions', 'AdminQuestionController@create')->name('admin-questions');
-Route::post('admin/questions', 'AdminQuestionController@store')->name('admin-questions');
-Route::get('questions/{id}/edit', 'AdminQuestionController@edit');
-Route::post('questions/{id}/update', 'AdminQuestionController@update');
+Route::get('admin/questions', 'Admin\AdminQuestionController@create')->name('admin-questions');
+Route::post('admin/questions', 'Admin\AdminQuestionController@store')->name('admin-questions');
+Route::get('questions/{id}/edit', 'Admin\AdminQuestionController@edit');
+Route::post('questions/{id}/update', 'Admin\AdminQuestionController@update');
 
 //christy route can start from here
-Route::get('/dashboard/home','DashboardController@index');
-Route::get('/dashboard/my-quizzes','DashboardController@showMyQuizzes');
+Route::get('/dashboard/home','Quizmaster\DashboardController@index');
+Route::get('/dashboard/my-quizzes','Quizmaster\DashboardController@showMyQuizzes');
 Route::get('quizzes/{id}/edit','QuizController@editQuiz');
 
-Route::get('dashboard/settings','DashboardController@setting');
+Route::get('dashboard/settings','Quizmaster\DashboardController@setting');
 
 //adminquestionccontroller
-Route::post('search-questions','AdminQuestionController@search')->name('search-questions');
+Route::post('search-questions','Admin\AdminQuestionController@search')->name('search-questions');
 
-//admin financial controller
-Route::get('admin/financials','PriceBandsController@index');
+
 
 //home
 Route::get('/', function () {
@@ -303,7 +305,7 @@ Route::post('stripe', 'StripePaymentController@stripePost')->name('stripe.post')
 //play quiz url
 
 
-Route::get('play/{quiz_name}','PlayController@selecturl');
+Route::get('play/{quiz_name}','Quizmaster\PlayController@selecturl');
 
 
 //TEST
@@ -312,10 +314,10 @@ Route::get('/test/test' , function(){
 });
 
 //test answer
-Route::post('playquiz/answer', 'PlayController@answer');
-Route::get('test','MasterQuestionController@index');
+Route::post('playquiz/answer', 'Quizmaster\PlayController@answer');
+Route::get('test','Quizmaster\MasterQuestionController@index');
 
-Route::post('playquiz/{id}', 'PlayController@play');
+Route::post('playquiz/{id}', 'Quizmaster\PlayController@play');
 
 
 Route::get('/addroundtest' , function(){
@@ -331,12 +333,12 @@ Route::get('hometest', 'QuizController@AfterLogin');
 
 
 //kopi ajax
-Route::post('ajax/standard/{id}','MasterQuestionController@standard');
-Route::post('ajax/image/{id}', 'MasterQuestionController@image');
-Route::post('ajax/audio/{id}', 'MasterQuestionController@audio');
-Route::post('ajax/video/{id}', 'MasterQuestionController@video');
+Route::post('ajax/standard/{id}','Quizmaster\MasterQuestionController@standard');
+Route::post('ajax/image/{id}', 'Quizmaster\MasterQuestionController@image');
+Route::post('ajax/audio/{id}', 'Quizmaster\MasterQuestionController@audio');
+Route::post('ajax/video/{id}', 'Quizmaster\MasterQuestionController@video');
 
-Route::post('ajax/team_result/{id}', 'DashboardController@team_result');
+Route::post('ajax/team_result/{id}', 'Quizmaster\DashboardController@team_result');
 
 Route::post('payment', 'StripePaymentController@payment_detail');
 
@@ -367,4 +369,4 @@ Route::post('/quiz/pause_quiz', 'QuizController@pause_quiz');
 Route::post('/quiz/issue_answer', 'QuizController@issue_answer');
 
 
-Route::post('/playquiz/save/answer', 'PlayController@saveanswer');
+Route::post('/playquiz/save/answer', 'Quizmaster\PlayController@saveanswer');

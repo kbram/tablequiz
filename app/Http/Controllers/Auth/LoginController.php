@@ -26,12 +26,13 @@ class LoginController extends Controller
 
 protected function authenticated()
 {
-if(auth()->user()->hasRole('admin'))
- {
+if(auth()->user()->hasRole('admin')){
+    app('App\Http\Controllers\QuizController')->AfterLogin();
      Session::put('admin','admin');
     return redirect('admin/home');
 }
 elseif(auth()->user()->hasRole('quizmaster')){
+    app('App\Http\Controllers\QuizController')->AfterLogin();
     Session::put('quizmaster','master');
 
     return redirect('dashboard/home');

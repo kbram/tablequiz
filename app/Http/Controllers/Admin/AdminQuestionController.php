@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 
 use App\Models\GlobalQuestion;
 use App\Models\QuizCategory;
@@ -53,7 +54,7 @@ class AdminQuestionController extends Controller
     public function store(Request $request)
     {
 
-    //  dd($request);
+    // dd($request);
 
 
      $validator = Validator::make( $request->all(),
@@ -275,7 +276,7 @@ class AdminQuestionController extends Controller
 
             $answer->save();
 
-           return redirect()->action( 'AdminQuestionController@create');
+           return redirect()->action( 'Admin\AdminQuestionController@create');
         
     }
         public function edit($id)

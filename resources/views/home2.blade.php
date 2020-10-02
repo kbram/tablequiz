@@ -11,23 +11,24 @@
 				<h1 class="landing__page pb-3"><span>The easy-to-use</span> customisable<br>quizzing tool!</h1>	
 				<div class="row pt-4 pr-lg-5">
 					<div class="col-lg-6 mb-3 mb-lg-0">
-						<a href="setup/create/" class="btn btn-primary d-block">Create a quiz</a>
-						@php
+						<a href="/setup/create/" class="btn btn-primary d-block">Create a quiz</a>
 						
-							if(count($errors)==0){
+						
+							@if(count($errors)>0)
 								
 								
-							}else{
+						
 								
-								if($errors->first('email')=="These credentials do not match our records."){
-									echo "<script>$(document).ready(function($) { $('#publishQuizModal').modal('show');});</script>";
-								}else{
-									echo "<script>$(document).ready(function($) { $('#modal__login').addClass('d-none');$('#modal__signup').removeClass('d-none');$('#publishQuizModal').modal('show');});</script>";
-								}
+								@if($errors->first('email')=="These credentials do not match our records.")
+									<script>$(document).ready(function($) { $('#publishQuizModal').modal('show');});</script>
 								
+								@else
+									<script>$(document).ready(function($) { $('#modal__login').addClass('d-none');$('#modal__signup').removeClass('d-none');$('#publishQuizModal').modal('show');});</script>
 								
-							}
-						@endphp
+								@endif
+								
+						
+						@endif
 
 						<div></div>
 					</div>
@@ -37,7 +38,7 @@
 				</div>
 			</div>
 			<div class="col-md-6 order-0 order-md-1">
-				<img src="site_design/images/homepage__logo.png" class="homepage__logo" alt="TableQuiz.app logo">
+				<img src="{{asset('site_design/images/homepage__logo.png')}}" class="homepage__logo" alt="TableQuiz.app logo">
 			</div>
 
 		</div>
@@ -50,7 +51,8 @@
 		<div class="container somepage__white_section__inner text-body">
 			<div class="row align-items-center">
 				<div class="col-lg-6">
-					<img src="site_design/images/homepage__lower.jpg" class="homepage__lower">
+					
+					<img src="{{asset('site_design/images/homepage__lower.jpg')}}" class="homepage__lower">
 				</div>
 				<div class="col-lg-6 mt-5 mt-lg-0">
 					<h1 class="my-5">Why use TableQuiz.app for your next quiz?</h1>

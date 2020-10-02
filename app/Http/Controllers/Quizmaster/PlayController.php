@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Quizmaster;
+use App\Http\Controllers\Controller;
+
 
 use Illuminate\Http\Request;
 use App\Models\Quiz;

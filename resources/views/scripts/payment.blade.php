@@ -3,6 +3,26 @@ $(document).ready(function() {
     $('.publish-quiz').click(function(e){
         e.preventDefault();
 
+        console.log("hi round");
+
+  $.ajax({
+    data: $("#add_round").serialize(),
+    type: "post",
+    url: $("#add_round").attr("action"),
+    headers: {
+        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+    },
+    success: function (response) {
+        console.log("success");
+        $("#publishQuizModal").modal("show");
+    },
+    error: function (result, error) {
+        console.log("errror");
+        //$("#publishQuizModal").modal("show");
+        //$("#modal__payment").modal("show");
+    },
+});
+    
         $.ajax({
         type: "POST",
         url: "/payment",

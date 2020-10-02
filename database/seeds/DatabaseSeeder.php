@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ThemesTableSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(CategoriesTableSeeder::class);
-        $this->call(price_band::class);
+        $this->call(PricebandsTableSeeder::class);
 
         Model::reguard();
     }

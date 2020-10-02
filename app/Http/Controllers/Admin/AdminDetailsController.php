@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\User;
@@ -50,7 +51,7 @@ class AdminDetailsController extends Controller
     {   
         $cusers=User::count();
         $cquzzes=Quiz::count();
-        $quizzes =Quiz::all();
+        $quizzes =Quiz::orderBy('id', 'desc')->paginate(5);
         if($quizzes->isEmpty()){
             return view('admin.home',compact('cusers','cquzzes'));
         }
@@ -68,10 +69,6 @@ class AdminDetailsController extends Controller
         return view('admin.categories');
     }
 
-    public function financials()
-    {   
-        return view('admin.financials');
-    }
 
     
 
