@@ -49,7 +49,7 @@
 
 
 				<li>
-				<a  class="btn btn-primary d-block d-lg-inline-block card__from__modal " href="/dashboard/home">Dash Board</a>
+				<a  class="btn btn-primary d-block d-lg-inline-block card__from__modal " href="/dashboard/home">Dashboard</a>
 
 				</li>
 				
@@ -82,7 +82,7 @@
 				</li>
 
 				<li>
-				<a  class="btn btn-primary d-block d-lg-inline-block card__from__modal publish-quiz" href="/admin/home">Dash Board</a>
+				<a  class="btn btn-primary d-block d-lg-inline-block card__from__modal publish-quiz" href="/admin/home">Dashboard</a>
 
 				</li>
 				
