@@ -86,7 +86,7 @@
 										   
 									<span>to</span>
 									<input id="to{{$questionCost->id}}" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="{{$questionCost->to}}"> 
-									<input id="type{{$questionCost->id}}" hidden name="type" type="text" value="questions-costs" >   
+									<input id="type{{$questionCost->id}}" hidden name="type" type="text" value="{{Config::get('priceband.type.question_band_type')}}" >   
 								</div>
 								<div class="col-4 col-md-3 pt-2 pt-md-0">
 								<span style="line-height: 1.1" class="d-block">Question Cost</span>
@@ -173,7 +173,7 @@
 									<input id="from{{$backgroundCost->id}}" maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1" placeholder="{{$backgroundCost->from}}">
 									<span>to</span>
 									<input id="to{{$backgroundCost->id}}"  maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="{{$backgroundCost->to}}">
-									<input id="type{{$backgroundCost->id}}" hidden name="type" type="text" value="backgrounds-costs" >   
+									<input id="type{{$backgroundCost->id}}" hidden name="type" type="text" value="{{Config::get('priceband.type.background_band_type')}}" >   
 
 								</div>
 								<div class="col-4 col-md-3 pt-2 pt-md-0">
@@ -261,7 +261,7 @@
 									<input id="from{{$participantCost->id}}" maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1" placeholder="{{$participantCost->from}}" >
 									<span>to</span>
 									<input id="to{{$participantCost->id}}" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="{{$participantCost->to}}">
-									<input id="type{{$participantCost->id}}" hidden name="type" type="text" value="participants-costs" >   
+									<input id="type{{$participantCost->id}}" hidden name="type" type="text" value="{{Config::get('priceband.type.participant_band_type')}}" >   
 
 								</div>
 								<div class="col-4 col-md-3 pt-2 pt-md-0">
