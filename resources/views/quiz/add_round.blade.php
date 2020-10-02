@@ -1,33 +1,5 @@
 @extends('layouts.tablequizapp')
-@section('template_linked_css')
-<style>
-	#round_image{
-		transform-origin: top left;
-		-webkit-transform-origin: top left;
-		-ms-transform-origin: top left;
-	}
 
-	.rotate90 {
-		transform: rotate(90deg) translateY(-100%);
-		-webkit-transform: rotate(90deg) translateY(-100%);
-		-ms-transform: rotate(90deg) translateY(-100%);
-	}
-
-	.rotate180 {
-		transform: rotate(180deg) translate(-100%, -100%);
-		-webkit-transform: rotate(180deg) translate(-100%, -100%);
-		-ms-transform: rotate(180deg) translateX(-100%, -100%);
-	}
-
-	.rotate270 {
-
-		transform: rotate(270deg) translateX(-100%);
-		-webkit-transform: rotate(270deg) translateX(-100%);
-		-ms-transform: rotate(270deg) translateX(-100%);
-	}
-</style>
-
-@endsection
 @section('content')
 <script src='jquery-3.2.1.min.js'></script> 
 
@@ -88,13 +60,12 @@
 								</button>
 							</div>
 							<div class="modal-body">
-								<div class="modal__edit__image position-relative">
+								<div class="modal__edit__image position-relative border">
 								   <!-- <img class="modal__edit__image__image position-relative" id="round_image" style="display:block;margin-left:auto;margin-right:auto;" src="#"> -->
 								   <!-- <base href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/"> -->
 										<div id="image-container">
 											<img src="" id="round_image" alt=''>
 										</div>	
-								   <div class="modal__edit__image__mask"></div>
 								</div>
 								<div class="modal__edit__image__range">
 									<div class="form-row align-items-center">
