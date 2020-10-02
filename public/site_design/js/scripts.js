@@ -310,27 +310,27 @@ $('#login-btn').click(function(e) {
         })
 
     })
-    // $('select#question__type').on('change',function(){
-	// 	if($(this).val() == "numeric__question"){
-	// 		$('#standard__answer').removeClass('d-flex').addClass('d-none');
-	// 		$('#multiple__choice__legend').removeClass('d-flex').addClass('d-none');
-	// 		$('#multiple__choice__answer').removeClass('d-flex').addClass('d-none');
-	// 		$('#numeric__answer').addClass('d-flex').removeClass('d-none');
-	// 	}
-	// 	if($(this).val() == "standard__question"){
-	// 		$('#standard__answer').addClass('d-flex').removeClass('d-none');
-	// 		$('#multiple__choice__legend').removeClass('d-flex').addClass('d-none');
-	// 		$('#multiple__choice__answer').removeClass('d-flex').addClass('d-none');
-	// 		$('#numeric__answer').removeClass('d-flex').addClass('d-none');
-	// 	}
-	// 	if($(this).val() == "multiple__choice__question"){
-    //         console.log("man_mul");
-	// 		$('#standard__answer').removeClass('d-flex').addClass('d-none');
-	// 		$('#multiple__choice__legend').addClass('d-flex').removeClass('d-none');
-	// 		$('#multiple__choice__answer').addClass('d-flex').removeClass('d-none');
-	// 		$('#numeric__answer').removeClass('d-flex').addClass('d-none');
-	// 	}
-	// })
+    $('select#question__type').on('change',function(){
+		if($(this).val() == "numeric__question"){
+			$('#standard__answer').removeClass('d-flex').addClass('d-none');
+			$('#multiple__choice__legend').removeClass('d-flex').addClass('d-none');
+			$('#multiple__choice__answer').removeClass('d-flex').addClass('d-none');
+			$('#numeric__answer').addClass('d-flex').removeClass('d-none');
+		}
+		if($(this).val() == "standard__question"){
+			$('#standard__answer').addClass('d-flex').removeClass('d-none');
+			$('#multiple__choice__legend').removeClass('d-flex').addClass('d-none');
+			$('#multiple__choice__answer').removeClass('d-flex').addClass('d-none');
+			$('#numeric__answer').removeClass('d-flex').addClass('d-none');
+		}
+		if($(this).val() == "multiple__choice__question"){
+            console.log("man_mul");
+			$('#standard__answer').removeClass('d-flex').addClass('d-none');
+			$('#multiple__choice__legend').addClass('d-flex').removeClass('d-none');
+			$('#multiple__choice__answer').addClass('d-flex').removeClass('d-none');
+			$('#numeric__answer').removeClass('d-flex').addClass('d-none');
+		}
+	})
     $("body").delegate('select.question__type', 'change', function() {
 
         if ($(this).val() == "numeric__question") {
