@@ -1,6 +1,6 @@
 <script>
 
-    $('span.delete').click(function(e){
+$("body").delegate('span.delete', 'click',function(e){
          
         e.preventDefault() // Don't post the form, unless confirmed
         
