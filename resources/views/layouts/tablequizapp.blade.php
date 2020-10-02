@@ -84,7 +84,9 @@
 
         <script src="https://use.fontawesome.com/releases/v5.3.0/js/all.js"></script>
 
-
+@include('scripts.suggest')
+@include('scripts.bg-image')
+@include('scripts.payment')
         {{-- Scripts --}}
         @yield('footer_scripts')
 

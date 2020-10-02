@@ -1,6 +1,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
     $('.publish-quiz').click(function(e){
+        console.log("click public");
         e.preventDefault();
 
         console.log("hi round");

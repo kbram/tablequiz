@@ -33,7 +33,7 @@
 						<label for="quiz__name">Quiz name</label>
 					</div>
 					<div class="col-md-8">
-						<input autocomplete="nothanks" type="text" name="quiz__name" class="form-control" value="{{ old('quiz__name') }}">
+						<input autocomplete="nothanks" type="text" name="quiz__name" class="form-control" value="{{ old('quiz__name') }}" required>
 
 						@if ($errors->has('quiz__name'))
 						<span class="help-block">
@@ -145,8 +145,8 @@
 						<label for="quiz__participants">No.of participants</label>
 					</div>
 					<div class="col-md-4">
-						<select id="quiz__participants" class="form-control" name="quiz__participants">
-							<option disabled selected>{{(old('quiz__participants') != '' ? old('quiz__participants') : 'Please Choose...')}}</option>
+						<select id="quiz__participants" class="form-control" name="quiz__participants" required>
+							<option value="" disabled selected>{{(old('quiz__participants') != '' ? old('quiz__participants') : 'Please Choose...')}}</option>
 							@foreach($bands as $band)
 							@if(($band->band_type)== Config::get('priceband.type.participant_band_type'))
 							@if(($band->to)== null)

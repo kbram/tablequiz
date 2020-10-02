@@ -42,7 +42,9 @@ class StripePaymentController extends Controller
      */
     public function stripePost(Request $request)
     {
-        $quizzes=Auth::user()->quizzes()->get();
+
+        $quiz=Auth::user()->quizzes()->latest()->first('id');
+
 
         $payment_deatils = UserPayment::where('user_id', Auth::id())->first();
         $validator = Validator::make($request->all(),
@@ -55,9 +57,8 @@ class StripePaymentController extends Controller
         ]
         );
 
-
+$quiz -> payment = true;
         if ($validator->fails()) {
-
             return back()->withErrors($validator)->withInput();
         }
 
@@ -94,7 +95,9 @@ if(!$payment_deatils){
 
 
 
+
 //here
+
 
 
 
@@ -129,11 +132,12 @@ if(!$payment_deatils){
        $question_cost=PriceBand::where('band_type',Config::get('priceband.type.question_band_type'))->where('from','<=',$request->count)->where('to','>=',$request->count)->get('cost')->first();
        $image=0;
        $quiz_id=Quiz::where('user_id',$user->id)->get('id')->first();
-        $rounds=QuizRound::where('quiz_id',$quiz_id->id)->get();
+       $rounds=QuizRound::where('quiz_id',$quiz_id->id)->get();
          
         foreach($rounds as $round){
-             $image +=QuizRoundImage::where('round_id',$round->id)->count();
+             $image +=QuizRoundImage::where('round_id',$round->id)->where('name', '!=' , 0)->count();
         }
+
     $backgroun_cost=PriceBand::where('band_type',Config::get('priceband.type.background_band_type'))->where('from','<=',$image)->where('to','>=',$image)->get('cost')->first();
 
        $response = array(

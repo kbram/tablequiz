@@ -86,7 +86,7 @@ class QuizController extends Controller
 
                 $quiz_icon = $request->file('upload__quiz__icon');
       
-                $filename = $link.$quiz_icon->getClientOriginalExtension();  
+                $filename = $link.'.'.$quiz_icon->getClientOriginalExtension();  
                 $save_path1 = '/storage/quizicon/'.$link.'/quiz_icon/';
       
                 $save_path = storage_path('app/public'). '/quizicon/'.$link.'/quiz_icon/';

@@ -23,6 +23,8 @@ class Quiz extends Model
         'quiz_password',
         'quiz_link',
         'no_of_participants',
+        'payment',
+
         
     ];
 
