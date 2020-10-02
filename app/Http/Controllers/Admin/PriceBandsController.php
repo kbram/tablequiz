@@ -13,10 +13,8 @@ class PriceBandsController extends Controller
 
     
   public function update(Request $request)
-  {  
+  { 
         if($request->id){
-
-
           $validator = Validator::make(
             $request->all(),
             [

@@ -374,7 +374,6 @@
 
          sessionStorage.count = Number(sessionStorage.count) + 1;
 
-
          var id = e.target.id;
          var question = $("div #question" + id).val();
          var time_limit = $("small #time-limit" + id).val();
