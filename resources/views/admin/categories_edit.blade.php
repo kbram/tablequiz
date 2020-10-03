@@ -116,11 +116,14 @@
 												<div class="d-flex flex-column">
 													<i class="fas fa-pencil-alt"></i>
 													<a href="{{ URL::to('admin/categories/edit/'.$category->id)}}"><span>Edit</span></a>
-												</div>									
+												</div>
+												<form method="POST" action="/admin/categories/edit/{{$category->id}}" class="p-0">
+												{{ csrf_field() }}										
 												<div class="d-flex flex-column">
 													<i class="fas fa-times-circle"></i>
-													<span>Delete</span>
+													<span class="delete">Delete</span>
 												</div>
+												</form>
 											</td>
                                             
                                         </tr>
@@ -147,5 +150,35 @@
 @endsection
 
 @section('footer_scripts')
+<script>
+
+    $('span.delete').click(function(e){
+         
+        e.preventDefault() // Don't post the form, unless confirmed
+        
+        
+                swal({
+                    title: "Are you sure?",
+                    text: "Once you delete a category, all the questions under this category will also be deleted and you can't get it back",
+                    buttons: true,
+                    dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                    if (willDelete) {
+                            $(e.target).closest('form').submit();
+                           
+                        swal(" Your data has been deleted!", {
+                        icon: "success",
+                        
+                        });
+                    } else {
+                        swal("Your data is safe!");
+                    }
+                    // $(e.target).closest('form').submit();
+                    });
+            
+                    // $(e.target.id).closest('form').submit();
+    });
+</script>
 
 @endsection

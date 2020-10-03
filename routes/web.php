@@ -169,6 +169,7 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
 
     //admin categories
     Route::post('/admin/categories/{id}','Admin\QuizCategoriesController@destroy');
+    Route::post('/admin/categories/edit/{id}','Admin\QuizCategoriesController@destroy');
 
     //admin home view quiz
     Route::get('admin/home/view/{id}','Admin\AdminDetailsController@quizView');
