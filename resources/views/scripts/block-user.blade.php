@@ -1,7 +1,7 @@
 <script type="text/javascript">
   $(document).ready(function() {
     
-    $(".blockuser").click(function(e) {
+    $("body").delegate('.blockuser', 'click',function(e) {
         e.preventDefault();
         var id=e.target.id;
         var text=$('#'+id).text();
