@@ -1,6 +1,6 @@
 
 <script type="text/javascript">
-$('.share').click(function(e){
+$("body").delegate('.share', 'click',function(e){
     var id=e.target.id;
     var text  = document.getElementById("quizLink"+id).innerHTML;
     copyText(text);
