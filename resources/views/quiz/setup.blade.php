@@ -96,21 +96,16 @@
 								</div>
 
 								<div class="modal-body">
-									<div class="modal__edit__image position-relative">
-										<!-- <div class="modal__edit__size " id="img-wrapper">
-								<img class="modal__edit__image__image imagePreview position-relative hubblepic" src="" id="image_preview_container" style="display:block;margin-left:auto;margin-right:auto;">
-								</div> -->
-										<!-- <base href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/"> -->
+									<div class="modal__edit__image position-relative border h-100">
+
 										<div id="image-container">
-											<img src="" id="image_preview_container" alt='kopi'>
+
 										</div>
-										<div class="modal__edit__image__mask"></div>
 									</div>
 									<div class="modal__edit__image__range">
 										<div class="form-group">
 											<label for="formControlRange">Edit size</label>
-											<!-- <input type="range" class="form-control-range formControlRange" id="formControlRange" class="slider" min="1" max="100"> -->
-											<input type="range" class="form-control-range slider" min="1" max="4" value="1" step="0.1" id="zoomer" oninput="deepdive()">
+											<!-- <input type="range" class="form-control-range slider" min="1" max="4" value="1" step="0.1" id="zoomer"> -->
 											<div id="demo" style="display:none;" class="d-none"></div>
 											<div id="myProgress">
 												<div id="myBar"></div>
@@ -122,10 +117,8 @@
 									<div class="col-md-3">
 										<label class="d-block" for="upload__quiz__icon">Upload
 											<input type="file" class="form-control-file imagePreviewInput" id="upload__quiz__icon" name="upload__quiz__icon" value="Upload">
-											<input type="hidden" name="x1" id="crop_x1" value="65">
-											<input type="hidden" name="y1" id="crop_y1" value="40">
-											<input type="hidden" name="width" id="crop_width" value="100">
-											<input type="hidden" name="height" id="crop_height" value="100">
+											<input type="hidden" name="crop_image" id="crop-image" value="">
+
 
 										</label>
 									</div>
@@ -226,12 +219,50 @@
 
 @section('footer_scripts')
 <script>
+
+var image_src;
+  $('.imagePreviewInput').on('change', function(){
+	  /**progress bar */
+	  $("#pro").text("Save");
+	$("#pro").addClass("btn-primary");
+	var elem = document.getElementById("myBar");
+	elem.style.width = "1%";
+
+    var reader = new FileReader();
+    reader.onload = function (event) {
+
+      $image_crop.croppie('bind', {
+        url: event.target.result
+      }).then(function(){
+        console.log('jQuery bind complete');
+        image_src=event.target.result;
+        
+
+      });
+    }
+    reader.readAsDataURL(this.files[0]);
+  });
+
 	$("#pro").click(function() {
-		var s = $('#image_preview_container').attr('src');
+
+		if(image_src){ console.log('image src');
+		$image_crop.croppie('result', {
+							type: 'canvas',
+							size: 'viewport'
+						}).then(function(response) {
+							$('#crop-image').val(response);
+							console.log(response);
+
+						})
+
+					}
+		var s = $('.cr-boundary').attr('src');
 		//$("#demo").show();
+          console.log(event.target.result);
 
 
-		if (s != "") {
+
+		if (s != "undefind") {
 			sessionStorage.setItem("im", s);
 			var i = 0;
 			if (i == 0) {
@@ -247,6 +278,9 @@
 						$("#pro").text("Close");
 						$("#pro").removeClass("btn-primary");
 						$("#pro").addClass("btn-danger");
+
+						/**image crop */
+						
 						//$('#image_preview_container').attr('src','');
 						//$("#demo").hide();
 						clearInterval(id);
@@ -269,6 +303,6 @@
 
 	});
 </script>
-@include('scripts.quiz-icon-preview')
-
+<!-- @include('scripts.quiz-icon-preview') -->
+@include('scripts.crop-image')
 @endsection
