@@ -36,7 +36,8 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/activate';
+    protected $redirectTo = '/dashboard/home';
+
 
     /**
      * Create a new controller instance.
@@ -107,14 +108,17 @@ class RegisterController extends Controller
     {     
         $ipAddress = new CaptureIpTrait();
 
-        if (config('settings.activation')) {
-            $role = Role::where('slug', '=', 'unverified')->first();
-            $activated = false;
-        } else {
-            $role = Role::where('slug', '=', 'quizmaster')->first();
-            $activated = true;
+        // if (config('settings.activation')) {
+        //     $role = Role::where('slug', '=', 'unverified')->first();
+        //     $activated = false;
+        // } else {
+        //     $role = Role::where('slug', '=', 'quizmaster')->first();
+        //     $activated = true;
 
-        }
+        // }
+
+        $role = Role::where('slug', '=', 'quizmaster')->first();
+            $activated = true;
 
         $user = User::create([
             'name'              => strip_tags($data['name']),
@@ -129,11 +133,12 @@ class RegisterController extends Controller
 
 
         $user->attachRole($role);
-        $this->initiateEmailActivation($user);
+        // $this->initiateEmailActivation($user);
 
         $profile = new Profile();
         $user->profile()->save($profile);
         $user->save();
+        Session::put('quizmaster','master');
 
         return $user;
     }
