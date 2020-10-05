@@ -85,6 +85,8 @@
 								<div class="modal-footer justify-content-center row no-gutters">
 									<div class="col-md-3">
 										<label class="d-block" for="upload__quiz__icon">Upload
+										<input type="hidden" name="crop_image" id="crop-image" value="">
+											<input type="hidden" name="original_image" id="original-image" value="">
 											<input type="file" class="form-control-file imagePreviewInput" name="upload__quiz__icon" id="upload__quiz__icon" value="Upload">
 										</label>
 									</div>
