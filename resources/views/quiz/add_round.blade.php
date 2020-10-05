@@ -410,7 +410,17 @@
 								<div id="{{$category->id}}" class="suggested__category suggested_category__icon col-6 col-sm-4 text-center p-2" data-id="{{$category->id}}">
 									<div class="d-flex flex-column h-100 participants__choice justify-content-center align-items-center p-4">
 										<div class="icon pb-2">
+											
+											<!-- @if($category->id >6)
+												@foreach($categoriesImgs as $categoriesImg) 
+													@if($category->id==$categoriesImg->category_id)
+													<i ><img class="q-img mb-3" src="{{$categoriesImg->local_path}}" height="200px"></i>
+														
+													@endif
+												@endforeach
+											@else -->
 											<i class="far fa-futbol"></i>
+											<!-- @endif -->
 										</div>
 										<p id="{{$category->category_name}}">
 
