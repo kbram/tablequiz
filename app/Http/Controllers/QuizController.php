@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Quiz;
 use App\Models\User;
 use App\Models\QuizCategory;
+use App\Models\QuizCategoryImage;
 use Illuminate\Support\Facades\Storage;
 use App\Events\FormSubmitted;
 
@@ -196,9 +197,8 @@ class QuizController extends Controller
 
             $cat = QuizCategory::all();
             $quiz = $quiz->quiz_link;
-
-
-           return View('quiz.add_round', compact('categories','answers','medias','quiz'));
+            $categoriesImgs = QuizCategoryImage::all();
+           return View('quiz.add_round', compact('categories','answers','medias','quiz','categoriesImgs'));
 
            
         }
@@ -212,14 +212,14 @@ class QuizController extends Controller
             Session::push('quiz_image',$filename);
 
             $cat = QuizCategory::all();
-
+            $categoriesImgs = QuizCategoryImage::all();
             $quiz = $request->input('quiz__link');
 
-            return View('quiz.add_round', compact('categories','answers','medias','quiz'));
+            return View('quiz.add_round', compact('categories','answers','medias','quiz','categoriesImgs'));
 
 
         }
-    }
+    } 
 
     public function AfterLogin(){
 
