@@ -20,7 +20,7 @@ class CreateQuizSetupIconsTable extends Migration
             $table->string('public_path');
             $table->string('local_path');
             $table->string('thumb_path');
-
+            $table->mediumText('txt_image');
             $table->timestamps();
 
 
