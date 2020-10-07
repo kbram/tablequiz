@@ -225,12 +225,17 @@
 </section>
 @endsection
 @section('footer_scripts')
-<!-- <style>
+ <style>
 
 :root {
 	--footerHeight: 200px;
 }
-</style> -->
+@media (min-width: 992px) {
+	:root {
+		--footerHeight: 160px;
+	}
+}
+</style> 
 @include('scripts.share-quiz')
 @include('scripts.quiz-icon-preview')
 
