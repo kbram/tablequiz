@@ -129,8 +129,9 @@ jQuery(document).ready(function ($) {
     });
 
     $(".sign_up__from__modal").click(function () {
-        console.log("hi");
+        //console.log("hi");
         $("#modal__login").addClass("d-none");
+        $("#modal__signup").animate({ scrollTop: 0 }, "slow");
         $("#modal__signup").removeClass("d-none");
     });
 
