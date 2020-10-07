@@ -386,7 +386,7 @@ public function add_round_question(Request $request)
 
 
 
-//background image save
+//background image save 
 
     if ($request->hasFile('bg_image')) {
 
@@ -741,11 +741,16 @@ if(Session::has('question_video_'.$i)){
 
     else{
             
+        if($request->round_name){
+            if(count($request->question) != 0){
+            
             Session::push('round_question', $_REQUEST);
             Session::push('round_bg_public_path',$public_path);
             Session::push('round_bg_public_path_thumb',$public_path_thumb);
             Session::push('round_bg_save_path1',$save_path1);
             Session::push('round_bg_filename',$filename);
+        } 
+    }
 
             
 

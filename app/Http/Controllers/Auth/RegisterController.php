@@ -139,6 +139,9 @@ class RegisterController extends Controller
         $user->profile()->save($profile);
         $user->save();
         Session::put('quizmaster','master');
+        if(Session::has('quiz')){
+        app('App\Http\Controllers\QuizController')->AfterLogin($user->id);
+        }
 
         return $user;
     }
