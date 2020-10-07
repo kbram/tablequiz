@@ -148,7 +148,6 @@
 								<tr>
 									<td>{{$quiz->quiz__name}}</td>
 									<td>{{ $users[$quiz->id]}}</td>
-										<!-- {{Session::push()}} -->
 									<td class="d-none" id="quizLink{{$quiz -> id}}">{{$quiz -> quiz_link}}</td>
 									<td class="d-none" id="emailLink{{$quiz->id}}">{{$result[$quiz->id]}}</td>
 									<td class="quiz_actions db d-flex flex-row justify-content-lg-center">
