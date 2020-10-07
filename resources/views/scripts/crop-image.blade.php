@@ -50,16 +50,17 @@ $(document).ready(function(){
  var get_image_url=$('#get_image_url').val();
        var find_crop_image=$('.edit-quiz-image-container').find('.cr-image');
        var find_crop_slider=$('.edit-quiz-image-container').find('.cr-slider');
+       var find_crop_overlay=$('.edit-quiz-image-container').find('.cr-overlay');
        find_crop_image.attr('src',get_image_url);
        find_crop_image.attr('style','opacity: 1; transform: translate3d(82.5px, 66px, 0px) scale(1.5); transform-origin: 149.5px 84px;');
-       find_crop_slider.attr('min',1.0989);
-       find_crop_slider.attr('max',1.5000);
+       find_crop_slider.attr('min','1.0811');
+       find_crop_slider.attr('max','1.5000');
        find_crop_slider.attr('aria-valuenow',1.5);
        $('.cr-slider').addClass('slider');
-    $('.cr-slider').css('width','100%');
-    $('.cr-slider').removeClass('cr-slider');
-
-    
+       $('.cr-slider').css('width','100%');
+       $('.cr-slider').removeClass('cr-slider');
+       find_crop_overlay.attr('style','width: 409.5px; height: 277.5px; top: 11.25px; left: 27.25px;');
+  
 });  
 </script>
 
