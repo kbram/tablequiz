@@ -178,12 +178,21 @@
 											<i class="fas fa-share-alt"></i>
 											<span class="share" id="{{$quiz->id}}">Share</span>
 										</div>
+										@if($quiz->payment==1)
 										<a href="/quiz/start_quiz/{{$quiz->id}}">
 											<div class="d-flex flex-column">
 												<i class="fas fa-play"></i>
 												<span>Start</span>
 											</div>
 										</a>
+										@else
+										<a data-toggle="modal" data-target="#publishQuizModal" >
+											<div class="d-flex flex-column">
+												<i class="fas fa-credit-card"></i>
+												<span>Unpaid</span>
+											</div>
+										</a>
+										@endif
 									</td>
 								</tr>
 								@endforeach
@@ -216,6 +225,12 @@
 </section>
 @endsection
 @section('footer_scripts')
+<!-- <style>
+
+:root {
+	--footerHeight: 200px;
+}
+</style> -->
 @include('scripts.share-quiz')
 @include('scripts.quiz-icon-preview')
 
