@@ -238,8 +238,9 @@ class QuizController extends Controller
         
     } 
 
-    public function AfterLogin()
+    public function AfterLogin($id)
     {
+
 
         if (Session::get('quiz')) {
 
@@ -249,7 +250,7 @@ class QuizController extends Controller
             $quiz->quiz_password          = $session_quiz['quiz__password'];
             $quiz->quiz_link              = $session_quiz['quiz__link'];
             $quiz->no_of_participants     = $session_quiz['quiz__participants'];
-            $quiz->user_id = auth()->id();
+            $quiz->user_id = $id;
 
             $quiz->save();
 
@@ -305,9 +306,11 @@ class QuizController extends Controller
                 for ($i = 0; $i < count($question_types); $i++) {
                     $questinon_save = new Question;
 
-                    $questinon_save->user_id = auth()->id();
+                    $questinon_save->user_id = $id;
                     $questinon_save->round_id = $round->id;
-                    $questinon_save->time_limit = $round_session[$k]['time__limit'][$i];;
+                    if($round_session[$k]['time__limit'][$i]){
+                    $questinon_save->time_limit = $round_session[$k]['time__limit'][$i];
+                    }
                     $questinon_save->question_type = $round_session[$k]['question__type'][$i];
                     $questinon_save->question = $round_session[$k]['question'][$i];
 

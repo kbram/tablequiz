@@ -3,9 +3,10 @@ $(document).ready(function() {
     $('.publish-quiz').click(function(e){
         e.preventDefault();
 
-        console.log("hi round");
 
   $.ajax({
+
+
     data: $("#add_round").serialize(),
     type: "post",
     url: $("#add_round").attr("action"),
