@@ -50,7 +50,9 @@ class AdminDetailsController extends Controller
     }
 
     public function home()
-    {   
+    {          
+      
+
         $cusers=User::count();
         $cquzzes=Quiz::count();
         $quizzes =Quiz::orderBy('id', 'desc')->paginate(5);

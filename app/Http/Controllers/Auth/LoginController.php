@@ -27,13 +27,20 @@ class LoginController extends Controller
 protected function authenticated()
 {
 if(auth()->user()->hasRole('admin')){
-    app('App\Http\Controllers\QuizController')->AfterLogin();
      Session::put('admin','admin');
+
+     if(Session::has('quiz')){
+        app('App\Http\Controllers\QuizController')->AfterLogin(auth()->user()->id);
+        }
+
     return redirect('admin/home');
 }
 elseif(auth()->user()->hasRole('quizmaster')){
-    app('App\Http\Controllers\QuizController')->AfterLogin();
     Session::put('quizmaster','master');
+
+    if(Session::has('quiz')){
+        app('App\Http\Controllers\QuizController')->AfterLogin(auth()->user()->id);
+        }
 
     return redirect('dashboard/home');
 }
