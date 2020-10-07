@@ -46,7 +46,6 @@ use App\Models\GlobalAnswer;
 
 class QuizController extends Controller
 {
-
     public function index()
     {
         $quizzes = Quiz::all();
@@ -68,7 +67,7 @@ class QuizController extends Controller
      */
     public function store(Request $request)
     {
-
+        $image_data="";
         $categories = QuizCategory::all();
         $questions = GlobalQuestion::all();
         $answers = GlobalAnswer::all();
