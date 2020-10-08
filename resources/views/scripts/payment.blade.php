@@ -35,7 +35,7 @@ var quiz_id = "";
         success: function(data) {
             var participants=data.participants.no_of_participants;
             var participants_cost=data.participants_cost[0].cost;
-            quiz_id = data.quiz_id.id;
+            quiz_id = data.quiz_id;
              var questions_cost=0;
             $('#modal__payment').find('.no-participants td:nth-child(2)').text(participants);
             $('#modal__payment').find('.no-participants td:nth-child(3)').text(participants_cost);
