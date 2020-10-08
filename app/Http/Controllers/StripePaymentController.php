@@ -136,23 +136,30 @@ $quiz->save();
                 $sp=explode('-',$participant_range);
                 $get_no=$sp[1];
                 $participants_cost=PriceBand::where('band_type',Config::get('priceband.type.participant_band_type'))->where('to',$get_no)->get('cost');
-                $question_cost=2; 
+                
+                $question_cost=PriceBand::where('band_type',Config::get('priceband.type.question_band_type'))->where('from','<=',2)->where('to','>=',2)->get('cost')->first();
                 $image=0;
                 $rounds=QuizRound::where('quiz_id',$request->id)->get();
 
                 
                 foreach($rounds as $round){
-                    $image +=QuizRoundImage::where('round_id',$round->id)->count();
+                    $image +=QuizRoundImage::where('name','!=','0')->where('round_id',$round->id)->count();
+                }
+
+                if($image == 0){
+                    $background_cost  = 0;
+                }
+                else{
+                    $background_cost=PriceBand::where('band_type',Config::get('priceband.type.background_band_type'))->where('from','<=',$image)->where('to','>=',$image)->get('cost')->first();
+                    $background_cost = $background_cost->cost; 
                 }
                 
-                 $backgroun_cost=PriceBand::where('band_type',Config::get('priceband.type.background_band_type'))->where('from','<=',$image)->where('to','>=',$image)->get('cost')->first();
-    
                 $response = array(
                         'participants' =>  $participants,
                         'participants_cost' => $participants_cost,
                         'question_cost' => $question_cost,
                         'bg_image' => $image, 
-                        'bg_image_cost' => $backgroun_cost,
+                        'bg_image_cost' => $background_cost,
                          'quiz_id' => $request->id
                     );
             }
@@ -184,7 +191,7 @@ $quiz->save();
                     else{
                         $background_cost=PriceBand::where('band_type',Config::get('priceband.type.background_band_type'))->where('from','<=',$image)->where('to','>=',$image)->get('cost')->first();
                     $background_cost = $background_cost->cost   ; 
-                    }
+                }
 
 
                 $response = array(
