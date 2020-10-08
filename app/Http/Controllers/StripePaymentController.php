@@ -75,14 +75,14 @@ try{
         ]);
 
 
-// card deatils saved
+// Here database will be updated with payment details
 
 if(!$payment_deatils){
     $payment=new UserPayment;
 }
-    else{
+else{
     $payment= UserPayment::where('user_id', Auth::id())->first(); 
-        }
+    }
     $payment -> name        =  $request->input('cardholder_name');
     $payment -> street      =  $request->input('cardholder_street');
     $payment -> city        =  $request->input('cardholder_city');
@@ -136,7 +136,7 @@ $quiz->save();
                 $sp=explode('-',$participant_range);
                 $get_no=$sp[1];
                 $participants_cost=PriceBand::where('band_type',Config::get('priceband.type.participant_band_type'))->where('to',$get_no)->get('cost');
-                $question_cost=2; 
+                $question_cost=2; // want to remove these hard code values   
                 $image=0;
                 $rounds=QuizRound::where('quiz_id',$request->id)->get();
                 
@@ -154,8 +154,7 @@ $quiz->save();
                         'bg_image_cost' => $backgroun_cost,
                          'quiz_id' => $request->id
                     );
-            }
-            else{
+            }else{
                 $user = auth()->user();
                 $participants=Quiz::where('user_id',$user->id)->get('no_of_participants')->last();
                 $participant_range=$participants['no_of_participants'];
@@ -164,30 +163,20 @@ $quiz->save();
                 $participants_cost=PriceBand::where('band_type',Config::get('priceband.type.participant_band_type'))->where('to',$get_no)->get('cost');
                 $question_cost=PriceBand::where('band_type',Config::get('priceband.type.question_band_type'))->where('from','<=',$request->count)->where('to','>=',$request->count)->get('cost')->first();
                 $image=0;
-                $quiz_id=Quiz::where('user_id',$user->id)->get('id')->last();
+                $quiz_id=Quiz::where('user_id',$user->id)->get('id')->first();
                     $rounds=QuizRound::where('quiz_id',$quiz_id->id)->get();
+                    
                     foreach($rounds as $round){
-                        $image +=QuizRoundImage::where('name','!=','0')->where('round_id',$round->id)->count();
+                        $image +=QuizRoundImage::where('round_id',$round->id)->where('name','!=','0')->count();
                     }
-
-
-                                   
-                     
-                    if($image == 0){
-                        $background_cost  = 0;
-                    }
-                    else{
-                        $background_cost=PriceBand::where('band_type',Config::get('priceband.type.background_band_type'))->where('from','<=',$image)->where('to','>=',$image)->get('cost')->first();
-                    $background_cost = $background_cost->cost   ; 
-                    }
-
-
+                $backgroun_cost=PriceBand::where('band_type',Config::get('priceband.type.background_band_type'))->where('from','<=',$image)->where('to','>=',$image)->get('cost')->first();
+    
                 $response = array(
                         'participants' =>  $participants,
                         'participants_cost' => $participants_cost,
                         'question_cost' => $question_cost,
                         'bg_image' => $image, 
-                        'bg_image_cost' => $background_cost,
+                        'bg_image_cost' => $backgroun_cost,
                          'quiz_id' => $quiz_id->id
                     );
             }
