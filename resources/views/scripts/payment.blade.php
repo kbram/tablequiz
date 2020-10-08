@@ -33,6 +33,7 @@ var quiz_id = "";
             count : sessionStorage.count
         },
         success: function(data) {
+            console.log(data);
             var participants=data.participants.no_of_participants;
             var participants_cost=data.participants_cost[0].cost;
             quiz_id = data.quiz_id;
@@ -52,11 +53,12 @@ var quiz_id = "";
             }
                   
     var customised_backgrounds_details=$('#modal__payment').find('.customised-backgrounds td:nth-child(2)').text(data.bg_image);
-    var customised_backgrounds_price=$('#modal__payment').find('.customised-backgrounds td:nth-child(3)').text(data.bg_image_cost.cost);
+    console.log(data.bg_image_cost.cost);
+    var customised_backgrounds_price=$('#modal__payment').find('.customised-backgrounds td:nth-child(3)').text(data.bg_image_cost);
   
-    $('#modal__payment').find('.total-cost td:nth-child(2)>strong').text(Number(participants_cost)+Number(questions_cost)+Number(data.bg_image_cost.cost));
-
-    var total_card = Number(participants_cost)+Number(questions_cost)+Number(data.bg_image_cost.cost ); 
+    $('#modal__payment').find('.total-cost td:nth-child(2)>strong').text(Number(participants_cost)+Number(questions_cost)+Number(data.bg_image_cost));
+   
+    var total_card = Number(participants_cost)+Number(questions_cost)+Number(data.bg_image_cost ); 
     $('#card_total').val(total_card);
     $('#quiz_id').val(quiz_id);
     console.log(quiz_id);

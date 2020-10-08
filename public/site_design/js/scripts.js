@@ -215,19 +215,19 @@ jQuery(document).ready(function ($) {
                             .text(data.bg_image);
                         var customised_backgrounds_price = $("#modal__payment")
                             .find(".customised-backgrounds td:nth-child(3)")
-                            .text(data.bg_image_cost.cost);
+                            .text(data.bg_image_cost);
 
                         $("#modal__payment")
                             .find(".total-cost td:nth-child(2)>strong")
                             .text(
                                 Number(participants_cost) +
                                     Number(questions_cost) +
-                                    Number(data.bg_image_cost.cost)
+                                    Number(data.bg_image_cost)
                             );
                         var total_card =
                             Number(participants_cost) +
                             Number(questions_cost) +
-                            Number(data.bg_image_cost.cost);
+                            Number(data.bg_image_cost);
                         $("#card_total").val(total_card);
                         $('#quiz_id').val(quiz_id);
 

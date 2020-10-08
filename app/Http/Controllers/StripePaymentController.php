@@ -154,7 +154,8 @@ $quiz->save();
                         'bg_image_cost' => $backgroun_cost,
                          'quiz_id' => $request->id
                     );
-            }else{
+            }
+            else{
                 $user = auth()->user();
                 $participants=Quiz::where('user_id',$user->id)->get('no_of_participants')->last();
                 $participant_range=$participants['no_of_participants'];
@@ -163,20 +164,30 @@ $quiz->save();
                 $participants_cost=PriceBand::where('band_type',Config::get('priceband.type.participant_band_type'))->where('to',$get_no)->get('cost');
                 $question_cost=PriceBand::where('band_type',Config::get('priceband.type.question_band_type'))->where('from','<=',$request->count)->where('to','>=',$request->count)->get('cost')->first();
                 $image=0;
-                $quiz_id=Quiz::where('user_id',$user->id)->get('id')->first();
+                $quiz_id=Quiz::where('user_id',$user->id)->get('id')->last();
                     $rounds=QuizRound::where('quiz_id',$quiz_id->id)->get();
-                    
                     foreach($rounds as $round){
-                        $image +=QuizRoundImage::where('round_id',$round->id)->where('name','!=','0')->count();
+                        $image +=QuizRoundImage::where('name','!=','0')->where('round_id',$round->id)->count();
                     }
-                $backgroun_cost=PriceBand::where('band_type',Config::get('priceband.type.background_band_type'))->where('from','<=',$image)->where('to','>=',$image)->get('cost')->first();
-    
+
+
+                                   
+                     
+                    if($image == 0){
+                        $background_cost  = 0;
+                    }
+                    else{
+                        $background_cost=PriceBand::where('band_type',Config::get('priceband.type.background_band_type'))->where('from','<=',$image)->where('to','>=',$image)->get('cost')->first();
+                    $background_cost = $background_cost->cost   ; 
+                    }
+
+
                 $response = array(
                         'participants' =>  $participants,
                         'participants_cost' => $participants_cost,
                         'question_cost' => $question_cost,
                         'bg_image' => $image, 
-                        'bg_image_cost' => $backgroun_cost,
+                        'bg_image_cost' => $background_cost,
                          'quiz_id' => $quiz_id->id
                     );
             }
