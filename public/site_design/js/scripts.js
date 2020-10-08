@@ -153,7 +153,6 @@ jQuery(document).ready(function ($) {
         e.preventDefault();
         console.log("iiiiiiiiiiiiiiiiiiiiiiiii" + sessionStorage.count);
 
-        
         reload = function () {
             location.href = location.href;
         };
@@ -304,7 +303,6 @@ jQuery(document).ready(function ($) {
                 $("#modal__login").addClass("d-none");
                 $("#modal__signup").addClass("d-none");
                 $.ajax({
-                    
                     type: "POST",
                     url: "/payment",
                     headers: {
@@ -316,7 +314,7 @@ jQuery(document).ready(function ($) {
                         count: sessionStorage.count,
                     },
                     success: function (data) {
-                        console.log("eeeeeeeeeeeeeee"+data);
+                        console.log("eeeeeeeeeeeeeee" + data);
                         var participants = data.participants.no_of_participants;
                         var participants_cost = data.participants_cost[0].cost;
                         var questions_cost = 0;
@@ -931,8 +929,8 @@ jQuery(document).ready(function ($) {
         });
     });
 
-        $('.view-card').click(function(e){ console.log('hi round');
-
+    $(".view-card").click(function (e) {
+        var quiz=this.id;
         //    e.preventDefault();
         // $.ajax({
         //     data: $('#add_round').serialize(),
@@ -942,26 +940,25 @@ jQuery(document).ready(function ($) {
         //     success: function(response) {
         //         $('#publishQuizModal').modal("show");
 
-    	// 	},
-    	// 	error: function(result,error) {
+        // 	},
+        // 	error: function(result,error) {
         //         console.log('errror');
-    	// 	   //$('#publishQuizModal').modal("show");
-    	// 	   },
+        // 	   //$('#publishQuizModal').modal("show");
+        // 	   },
         // });
 
         $.ajax({
             type: "POST",
             url: "/payment",
             headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                    "content"
-                ),
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             data: {
                 count: sessionStorage.count,
+                id:quiz,
             },
             success: function (data) {
-                $('#publishQuizModal').modal("show");
+                $("#publishQuizModal").modal("show");
                 var participants = data.participants.no_of_participants;
                 var participants_cost = data.participants_cost[0].cost;
                 var questions_cost = 0;
@@ -989,9 +986,7 @@ jQuery(document).ready(function ($) {
                     questions_cost = 0;
                 }
 
-                var customised_backgrounds_details = $(
-                    "#modal__payment"
-                )
+                var customised_backgrounds_details = $("#modal__payment")
                     .find(".customised-backgrounds td:nth-child(2)")
                     .text(data.bg_image);
                 var customised_backgrounds_price = $("#modal__payment")
@@ -1014,8 +1009,5 @@ jQuery(document).ready(function ($) {
             error: function (result, error) {},
         });
         return false;
-
-       });
-
-       
+    });
 });
