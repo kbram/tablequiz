@@ -77,8 +77,17 @@
 										</td>
 										@endforeach
 										@else
-										<p>No quizzes created yet!</p>
-										@endif
+							<br>
+							<br>
+
+								<h4 class="pt-3 pl-3 text-center">No quizzes to show</h4>
+								<!-- <img class="text-center" src="{{asset('site_design/images/homepage__logo.png')}}" height="100px"> -->
+
+								
+								<br><br>
+
+
+							@endif	
 								</tr>
 								
 						</table>

@@ -32,8 +32,15 @@
 							Settings
 						</a>
 					</li>
+					<br>
+					<br>
+					<br>
+					<br>
+
+
 				</ul>
 				<a href="/setup/create" class="btn btn-primary hasPlus d-block">New Quiz</a>
+
 			</div>
 		</aside>
 		
@@ -142,6 +149,10 @@
 
 					<div class="dashboard__container flex-grow-1 p-0">
 						<table class="table table-striped table-borderless m-0 h-100 my__quizzes">
+							
+						
+							<tbody id="users">
+							@if(!empty($quizzes))
 							<thead>
 								<tr>
 									<th>Quiz name</th>
@@ -151,9 +162,6 @@
 									<th class="text-center">Actions</th>
 								</tr>
 							</thead>
-						
-							<tbody id="users">
-							@if(!empty($quizzes))
 							@foreach($quizzes as $quiz)
 
 							<tr>
@@ -196,13 +204,23 @@
 									</td>
 								</tr>
 								@endforeach
-								@else
-								<p>No quizzes to show</p>
-							@endif	
+							
 									
 								
 								
 							</tbody>
+							@else
+							<br>
+							<br>
+
+								<h4 class="pt-3 pl-3 text-center">No quizzes to show</h4>
+								<!-- <img class="text-center" src="{{asset('site_design/images/homepage__logo.png')}}" height="100px"> -->
+
+								
+								<br><br>
+
+
+							@endif	
 							<tfoot>
 								<tr>
 									<td colspan="4" class="text-right text-muted">
