@@ -140,7 +140,7 @@ $quiz->save();
         $rounds=QuizRound::where('quiz_id',$quiz_id->id)->get();
          
         foreach($rounds as $round){
-             $image +=QuizRoundImage::where('round_id',$round->id)->count();
+             $image +=QuizRoundImage::where('round_id',$round->id)->where('name','!=','0')->count();
         }
     $background_cost=PriceBand::where('band_type',Config::get('priceband.type.background_band_type'))->where('from','<=',$image)->where('to','>=',$image)->get('cost')->first();
        $response = array(
