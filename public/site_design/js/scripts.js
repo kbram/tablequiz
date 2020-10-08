@@ -322,6 +322,8 @@ jQuery(document).ready(function ($) {
                         var participants = data.participants.no_of_participants;
                         var participants_cost = data.participants_cost[0].cost;
                         var questions_cost = 0;
+                        var quiz_id = data.quiz_id;
+
                         console.log(typeof participants_cost);
                         $("#modal__payment")
                             .find(".no-participants td:nth-child(2)")
@@ -353,21 +355,21 @@ jQuery(document).ready(function ($) {
                             .text(data.bg_image);
                         var customised_backgrounds_price = $("#modal__payment")
                             .find(".customised-backgrounds td:nth-child(3)")
-                            .text(data.bg_image_cost.cost);
+                            .text(data.bg_image_cost);
 
                         $("#modal__payment")
                             .find(".total-cost td:nth-child(2)>strong")
                             .text(
                                 Number(participants_cost) +
                                     Number(questions_cost) +
-                                    Number(data.bg_image_cost.cost)
+                                    Number(data.bg_image_cost)
                             );
                         var total_card =
                             Number(participants_cost) +
                             Number(questions_cost) +
-                            Number(data.bg_image_cost.cost);
-                        $("#card_total").val(total_card);
-                    },
+                            Number(data.bg_image_cost);
+                            $("#card_total").val(total_card);
+                            $('#quiz_id').val(quiz_id);                    },
                     error: function (result, error) {
                         console.log("uuuuuuu");
                     },
@@ -995,19 +997,19 @@ jQuery(document).ready(function ($) {
                     .text(data.bg_image);
                 var customised_backgrounds_price = $("#modal__payment")
                     .find(".customised-backgrounds td:nth-child(3)")
-                    .text(data.bg_image_cost.cost);
+                    .text(data.bg_image_cost);
 
                 $("#modal__payment")
                     .find(".total-cost td:nth-child(2)>strong")
                     .text(
                         Number(participants_cost) +
                             Number(questions_cost) +
-                            Number(data.bg_image_cost.cost)
+                            Number(data.bg_image_cost)
                     );
                 var total_card =
                     Number(participants_cost) +
                     Number(questions_cost) +
-                    Number(data.bg_image_cost.cost);
+                    Number(data.bg_image_cost);
                 $("#card_total").val(total_card);
             },
             error: function (result, error) {},
