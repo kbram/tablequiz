@@ -182,7 +182,7 @@ jQuery(document).ready(function ($) {
                         var participants = data.participants.no_of_participants;
                         var participants_cost = data.participants_cost[0].cost;
                         var questions_cost = 0;
-                        var quiz_id = data.quiz_id.id;
+                        var quiz_id = data.quiz_id;
 
                         console.log(typeof participants_cost);
                         $("#modal__payment")
