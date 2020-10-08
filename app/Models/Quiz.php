@@ -23,7 +23,7 @@ class Quiz extends Model
         'quiz_password',
         'quiz_link',
         'no_of_participants',
-        
+        'no_suggested_questions'
     ];
 
     public function user()

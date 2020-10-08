@@ -23,6 +23,8 @@ class CreateQuizzesTable extends Migration
             $table->string('no_of_participants');
             $table->boolean('is_blocked')->default(false);
             $table->boolean('payment')->default(false);
+            $table->bigInteger('no_suggested_questions')->nullable();
+
             $table->timestamps();
             
         });
