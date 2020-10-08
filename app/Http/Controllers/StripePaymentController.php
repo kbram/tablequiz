@@ -73,24 +73,25 @@ try{
         ]);
 
 
-//card deatils saved
-// if(!$payment_deatils){
-    // $payment=new UserPayment;
-// }
-    // else{
-    // $payment= UserPayment::where('user_id', Auth::id()); 
-    //     }
-    // $payment -> name        =  $request->input('cardholder_name');
-    // $payment -> street      =  $request->input('cardholder_street');
-    // $payment -> city        =  $request->input('cardholder_city');
-    // $payment -> country     =  $request->input('cardholder_country');
-    // $payment -> card_number =  $request->input('cardholder_number');
-    // $payment -> exp_month   =  $request->input('cardholder_expiry_month');
-    // $payment -> exp_year    =  $request->input('cardholder_expiry_year');
-    // $payment -> cvv         =  $request->input('card-cvc');
-    // $payment -> user_id     =  Auth::id();
+// card deatils saved
+
+if(!$payment_deatils){
+    $payment=new UserPayment;
+}
+    else{
+    $payment= UserPayment::where('user_id', Auth::id()); 
+        }
+    $payment -> name        =  $request->input('cardholder_name');
+    $payment -> street      =  $request->input('cardholder_street');
+    $payment -> city        =  $request->input('cardholder_city');
+    $payment -> country     =  $request->input('cardholder_country');
+    $payment -> card_number =  $request->input('cardholder_number');
+    $payment -> exp_month   =  $request->input('cardholder_expiry_month');
+    $payment -> exp_year    =  $request->input('cardholder_expiry_year');
+    $payment -> cvv         =  $request->input('card-cvc');
+    $payment -> user_id     =  Auth::id();
     
-    // $payment->save();    
+    $payment->save();    
 
 
 
@@ -128,8 +129,8 @@ try{
        $participants_cost=PriceBand::where('band_type',Config::get('priceband.type.participant_band_type'))->where('to',$get_no)->get('cost');
        $question_cost=PriceBand::where('band_type',Config::get('priceband.type.question_band_type'))->where('from','<=',$request->count)->where('to','>=',$request->count)->get('cost')->first();
        $image=0;
-       $quiz_id=Quiz::where('user_id',$user->id)->get('id')->first();
-        $rounds=QuizRound::where('quiz_id',$quiz_id->id)->get();
+       $quiz_id=Quiz::where('user_id',$user->id)->get('id')->last();
+        $rounds=QuizRound::where('quiz_id',$quiz_id)->get();
          
         foreach($rounds as $round){
              $image +=QuizRoundImage::where('round_id',$round->id)->count();
@@ -141,7 +142,8 @@ try{
               'participants_cost' => $participants_cost,
               'question_cost' => $question_cost,
                'bg_image' => $image, 
-               'bg_image_cost' => $backgroun_cost
+               'bg_image_cost' => $backgroun_cost,
+               'quiz_id' => $quiz_id
         );
         return response()->json($response);
     
