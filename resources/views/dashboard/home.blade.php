@@ -164,7 +164,7 @@
  									
 
 									<td class="d-none" id="quizLink{{$quiz->id}}">{{$quiz ->quiz_link}}</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-end">
+									<td class="quiz_actions d-flex flex-row justify-content-center">
 										<a href="{{ URL::to('quizzes/'. $quiz->id .'/edit') }}">			
 										<div class="d-flex flex-column pl-0 pl-md-4">
 											<i class="fas fa-edit"></i>
@@ -180,7 +180,7 @@
 										</div>
 										@if($quiz->payment==1)
 										<a href="/quiz/start_quiz/{{$quiz->id}}">
-											<div class="d-flex flex-column">
+											<div class="d-flex flex-column pl-3">
 												<i class="fas fa-play"></i>
 												<span>Start</span>
 											</div>
@@ -230,11 +230,11 @@
 :root {
 	--footerHeight: 200px;
 }
-@media (min-width: 992px) {
+/* @media (min-width: 992px) {
 	:root {
 		--footerHeight: 160px;
 	}
-}
+} */
 </style> 
 @include('scripts.share-quiz')
 @include('scripts.quiz-icon-preview')
