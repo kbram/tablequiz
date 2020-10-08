@@ -30,7 +30,7 @@
 		@csrf
 		  	<div class="form-row">
 				<div class="col-md-5">
-			  		<label for="login__user">Username/email</label>
+			  		<label for="login__user">Email</label>
 				</div>
 			  	<div class="col-md-7">
 					<input id="login_email" type="email" name="email"  type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="login__user" value="{{ old('email') }}" required> 
