@@ -5,10 +5,17 @@ $(document).ready(function() {
         e.preventDefault();
 
 var quiz_id = "";
+var formdata = new FormData($("#add_round")[0]);
+
   $.ajax({
 
 
-    data: $("#add_round").serialize(),
+    data: formdata,
+    processData: false,
+    contentType: false,
+    cache: false,
+    enctype: 'multipart/form-data',
+
     type: "post",
     url: $("#add_round").attr("action"),
     headers: {
@@ -33,7 +40,6 @@ var quiz_id = "";
             count : sessionStorage.count
         },
         success: function(data) {
-            console.log(data);
             var participants=data.participants.no_of_participants;
             var participants_cost=data.participants_cost[0].cost;
             quiz_id = data.quiz_id;
