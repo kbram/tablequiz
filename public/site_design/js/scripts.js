@@ -183,6 +183,8 @@ jQuery(document).ready(function ($) {
                         var participants = data.participants.no_of_participants;
                         var participants_cost = data.participants_cost[0].cost;
                         var questions_cost = 0;
+                        var quiz_id = data.quiz_id.id;
+
                         console.log(typeof participants_cost);
                         $("#modal__payment")
                             .find(".no-participants td:nth-child(2)")
@@ -228,6 +230,8 @@ jQuery(document).ready(function ($) {
                             Number(questions_cost) +
                             Number(data.bg_image_cost.cost);
                         $("#card_total").val(total_card);
+                        $('#quiz_id').val(quiz_id);
+
                     },
                     error: function (result, error) {},
                 });

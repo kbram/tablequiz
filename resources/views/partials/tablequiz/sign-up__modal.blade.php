@@ -315,6 +315,7 @@
 				  <div class="col-md-7">
 <!-- amount -->
                       <input hidden sclass="form-control" id="card_total" type="text" name="total_card" >
+                      <input hidden sclass="form-control" id="quiz_id" type="text" name="quiz_id" >
 
 
 					  <input class="form-control" id="card-holder-name" type="text" name="cardholder_name" value='{{ $payment_deatils->name ?? ""}}'>

@@ -32,8 +32,14 @@
 							Settings
 						</a>
 					</li>
+					<br>
+					<br>
+					<br>
+					<br>
+
+					<a href="/setup/create" class="btn btn-primary hasPlus d-block">New Quiz</a>
+
 				</ul>
-				<a href="/setup/create" class="btn btn-primary hasPlus d-block">New Quiz</a>
 			</div>
 		</aside>
 		

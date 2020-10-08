@@ -1,9 +1,10 @@
 <script type="text/javascript">
 $(document).ready(function() {
+    
     $('.publish-quiz').click(function(e){
         e.preventDefault();
 
-
+var quiz_id = "";
   $.ajax({
 
 
@@ -34,8 +35,8 @@ $(document).ready(function() {
         success: function(data) {
             var participants=data.participants.no_of_participants;
             var participants_cost=data.participants_cost[0].cost;
+            quiz_id = data.quiz_id.id;
              var questions_cost=0;
-             console.log(typeof(participants_cost));
             $('#modal__payment').find('.no-participants td:nth-child(2)').text(participants);
             $('#modal__payment').find('.no-participants td:nth-child(3)').text(participants_cost);
 
@@ -57,6 +58,10 @@ $(document).ready(function() {
 
     var total_card = Number(participants_cost)+Number(questions_cost)+Number(data.bg_image_cost.cost ); 
     $('#card_total').val(total_card);
+    $('#quiz_id').val(quiz_id);
+    console.log(quiz_id);
+
+
         },
         error: function(result,error) {
             
@@ -71,6 +76,7 @@ $(document).ready(function() {
       //card fill
 
       $.getJSON('/card',function (data){
+        
         $('#modal__payment').find('#card-holder-name').val(data.name);
         $('#modal__payment').find('#cardholder_street').val(data.street);
         $('#modal__payment').find('#cardholder_city').val(data.city);

@@ -151,7 +151,6 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
     // Route::get('admin/financials', 'Admin\AdminDetailsController@financials');
     // Route::get('admin/questions', 'Admin\AdminDetailsController@questions');
     Route::get('admin/quizzes', 'Admin\AdminDetailsController@quizzes');
-    Route::get('dashboard/quizzes', 'Quizmaster\DashboardController@myQuiz');
     
     Route::get('admin/users', 'Admin\AdminDetailsController@users');
     
@@ -251,6 +250,8 @@ Route::post('/round','Quizmaster\MasterQuestionController@add_round_question');
 Route::post('/question','Quizmaster\MasterQuestionController@postQuestion');
 Route::post('/quizsetup','Quizmaster\MasterQuestionController@store');
 Route::get('/addround/{id}','QuizRoundController@getRound');
+Route::get('dashboard/quizzes', 'Quizmaster\DashboardController@myQuiz');
+
 
 
 
