@@ -40,6 +40,8 @@ var formdata = new FormData($("#add_round")[0]);
             count : sessionStorage.count
         },
         success: function(data) {
+
+
             var participants=data.participants.no_of_participants;
             var participants_cost=data.participants_cost[0].cost;
             quiz_id = data.quiz_id;
