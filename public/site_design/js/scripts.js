@@ -945,10 +945,10 @@ jQuery(document).ready(function ($) {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             data: {
-                count: sessionStorage.count,
                 id:quiz,
             },
             success: function (data) {
+                console.log(data.question_cost.cost);
                 $("#publishQuizModal").modal("show");
                 var participants = data.participants.no_of_participants;
                 var participants_cost = data.participants_cost[0].cost;
@@ -965,7 +965,7 @@ jQuery(document).ready(function ($) {
 
                 $("#modal__payment")
                     .find(".suggested-questions td:nth-child(2)")
-                    .text(sessionStorage.count);
+                    .text(data.question_count);
 
                 if (data.question_cost != null) {
                     $("#modal__payment")
