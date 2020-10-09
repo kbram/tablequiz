@@ -43,7 +43,7 @@
 				</li>
 
 				<li>
-				<a data-toggle="modal" data-target="#publishQuizModal" class="btn btn-primary d-block d-lg-inline-block card__from__modal publish-quiz" href="#">view card</a>
+				<a data-toggle="modal" data-target="#publishQuizModal" class="btn btn-primary d-block d-lg-inline-block card__from__modal view-card" href="#">view card</a>
 
 				</li>
 

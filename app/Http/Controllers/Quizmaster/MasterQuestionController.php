@@ -389,6 +389,15 @@ public function add_round_question(Request $request)
 //background image save 
 
     if ($request->hasFile('bg_image')) {
+      
+         /** round_crop image decode start*/
+         $data = $request->round_crop_image;
+         $txt_data=$data;
+         $image_array_1 = explode(";", $data);
+         $image_array_2 = explode(",", $image_array_1[1]);
+         $data = base64_decode($image_array_2[1]);
+       /** round_crop image decode end*/
+       
 
       $round_background = $request->file('bg_image');
       $filename = 'round_bg.'.$round_background->getClientOriginalExtension();  
@@ -409,10 +418,12 @@ public function add_round_question(Request $request)
       File::makeDirectory($save_path, $mode = 0755, true, true);
       File::makeDirectory($save_path_thumb, $mode = 0755, true, true);
 
-      Image::make($round_background)->resize(250,250)->save($save_path_thumb.$filename);
+     // Image::make($round_background)->resize(250,250)->save($save_path_thumb.$filename);
 
-      $round_background->move($save_path, $filename);            
-
+     // $round_background->move($save_path, $filename);            
+      
+      //Image::make($data)->save($save_path_thumb . $filename);
+      Image::make($data)->save($save_path.$filename);
       
      } 
 
@@ -569,6 +580,13 @@ if($request->$vid_link){
      //auth check
 
      if(Auth::user()){
+            /** round crop image decode start*/
+            $data = $request->round_crop_image;
+            $txt_data=$data;
+            $image_array_1 = explode(";", $data);
+            $image_array_2 = explode(",", $image_array_1[1]);
+            $data = base64_decode($image_array_2[1]);
+          /** round crop image decode end*/
 
         $quiz_id_round = Session::get('quiz_id_round');
         
@@ -586,7 +604,7 @@ if($request->$vid_link){
             $round_image->local_path        = $save_path1 . '/' . $filename;
             $round_image->round_id           =$round->id;
             $round_image->thumb_path        = $public_path_thumb;
-  
+            $round_image->txt_image       = $request->round_original_image;
             $round_image->save();
 
     //save question part
@@ -749,6 +767,7 @@ if(Session::has('question_video_'.$i)){
             Session::push('round_bg_public_path_thumb',$public_path_thumb);
             Session::push('round_bg_save_path1',$save_path1);
             Session::push('round_bg_filename',$filename);
+            Session::push('round_txt_image',$request->round_original_image);
         } 
     }
 

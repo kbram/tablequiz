@@ -68,7 +68,7 @@ class QuizController extends Controller
      */
     public function store(Request $request)
     {
-
+        
         $categories = QuizCategory::all();
         $questions = GlobalQuestion::all();
         $answers = GlobalAnswer::all();
@@ -277,7 +277,7 @@ class QuizController extends Controller
             $round_bg_path_thumb = Session::get('round_bg_public_path_thumb');
             $round_bg_save = Session::get('round_bg_save_path1');
             $round_bg_file =  Session::get('round_bg_filename');
-
+            $round_txt_image = Session::get('round_txt_image');
 
             $round_session = Session::get('round_question');
             for ($k = 0; $k < count($round_session); $k++) {
@@ -296,7 +296,7 @@ class QuizController extends Controller
                 $round_image->local_path        = $round_bg_save[$k] . '/' . $round_bg_file[$k];
                 $round_image->round_id          = $round->id;
                 $round_image->thumb_path        = $round_bg_path_thumb[$k];
-
+                $round_image->txt_image         = $round_txt_image[$k];
                 $round_image->save();
 
 
