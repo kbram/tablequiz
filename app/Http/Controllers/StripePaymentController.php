@@ -137,7 +137,7 @@ $quiz->save();
                 $get_no=$sp[1];
                 $participants_cost=PriceBand::where('band_type',Config::get('priceband.type.participant_band_type'))->where('to',$get_no)->get('cost');
                 
-                $suggested_question_no=Quiz::where('id',$request->id)->get('no_suggested_questions')->last();
+                $suggested_question_no=Quiz::where('id',$request->id)->value('no_suggested_questions');
                 $question_cost=PriceBand::where('band_type',Config::get('priceband.type.question_band_type'))->where('from','<=',$suggested_question_no)->where('to','>=',$suggested_question_no)->get('cost')->first();
                 $image=0;
                 $rounds=QuizRound::where('quiz_id',$request->id)->get();
@@ -159,6 +159,7 @@ $quiz->save();
                         'participants' =>  $participants,
                         'participants_cost' => $participants_cost,
                         'question_cost' => $question_cost,
+                        'question_count' => $suggested_question_no,
                         'bg_image' => $image, 
                         'bg_image_cost' => $background_cost,
                         'quiz_id' => $request->id
