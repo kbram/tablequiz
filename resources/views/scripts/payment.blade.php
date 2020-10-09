@@ -1,13 +1,21 @@
 <script type="text/javascript">
 $(document).ready(function() {
+    
     $('.publish-quiz').click(function(e){
         e.preventDefault();
 
+var quiz_id = "";
+var formdata = new FormData($("#add_round")[0]);
 
   $.ajax({
 
 
-    data: $("#add_round").serialize(),
+    data: formdata,
+    processData: false,
+    contentType: false,
+    cache: false,
+    enctype: 'multipart/form-data',
+
     type: "post",
     url: $("#add_round").attr("action"),
     headers: {
@@ -34,8 +42,8 @@ $(document).ready(function() {
         success: function(data) {
             var participants=data.participants.no_of_participants;
             var participants_cost=data.participants_cost[0].cost;
+            quiz_id = data.quiz_id;
              var questions_cost=0;
-             console.log(typeof(participants_cost));
             $('#modal__payment').find('.no-participants td:nth-child(2)').text(participants);
             $('#modal__payment').find('.no-participants td:nth-child(3)').text(participants_cost);
 
@@ -51,12 +59,17 @@ $(document).ready(function() {
             }
                   
     var customised_backgrounds_details=$('#modal__payment').find('.customised-backgrounds td:nth-child(2)').text(data.bg_image);
-    var customised_backgrounds_price=$('#modal__payment').find('.customised-backgrounds td:nth-child(3)').text(data.bg_image_cost.cost);
+    console.log(data.bg_image_cost.cost);
+    var customised_backgrounds_price=$('#modal__payment').find('.customised-backgrounds td:nth-child(3)').text(data.bg_image_cost);
   
-    $('#modal__payment').find('.total-cost td:nth-child(2)>strong').text(Number(participants_cost)+Number(questions_cost)+Number(data.bg_image_cost.cost));
-
-    var total_card = Number(participants_cost)+Number(questions_cost)+Number(data.bg_image_cost.cost ); 
+    $('#modal__payment').find('.total-cost td:nth-child(2)>strong').text(Number(participants_cost)+Number(questions_cost)+Number(data.bg_image_cost));
+   
+    var total_card = Number(participants_cost)+Number(questions_cost)+Number(data.bg_image_cost ); 
     $('#card_total').val(total_card);
+    $('#quiz_id').val(quiz_id);
+    console.log(quiz_id);
+
+
         },
         error: function(result,error) {
             
@@ -71,6 +84,7 @@ $(document).ready(function() {
       //card fill
 
       $.getJSON('/card',function (data){
+        
         $('#modal__payment').find('#card-holder-name').val(data.name);
         $('#modal__payment').find('#cardholder_street').val(data.street);
         $('#modal__payment').find('#cardholder_city').val(data.city);

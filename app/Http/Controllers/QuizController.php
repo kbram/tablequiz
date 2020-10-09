@@ -46,7 +46,6 @@ use App\Models\GlobalAnswer;
 
 class QuizController extends Controller
 {
-
     public function index()
     {
         $quizzes = Quiz::all();
@@ -68,7 +67,7 @@ class QuizController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $image_data="";
         $categories = QuizCategory::all();
         $questions = GlobalQuestion::all();
         $answers = GlobalAnswer::all();
@@ -561,6 +560,8 @@ class QuizController extends Controller
         }
 
         $quiz_id = $id;
+        $quizzes= Quiz::where('id', $id)->get();
+        //dd($pay);
         $questions = [];
         $answers = [];
         $medias = [];
@@ -578,7 +579,7 @@ class QuizController extends Controller
             }
         }
 
-        return view('quiz.start_quiz', compact('questions', 'answers', 'rounds', 'quiz_id', 'medias', 'teams', 'points'));
+        return view('quiz.start_quiz', compact('questions', 'answers', 'rounds', 'quiz_id', 'medias', 'teams', 'points','quizzes'));
     }
 
     public function run_quiz()

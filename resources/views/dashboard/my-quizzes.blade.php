@@ -68,17 +68,35 @@
 											<i class="fas fa-share-alt"></i>
 											<span class="share" id="{{$quiz->id}}">Share</span>
 										</div>
+										@if($quiz->payment==1)
 										<a href="/quiz/start_quiz/{{$quiz->id}}">
-											<div class="d-flex flex-column">
+											<div class="d-flex flex-column pl-3">
 												<i class="fas fa-play"></i>
 												<span>Start</span>
 											</div>
 										</a>
+										@else 
+										<a class="view-card"  id="{{$quiz->id}}">
+											<div class="d-flex flex-column">
+												<i class="fas fa-credit-card"></i>
+												<span>Unpaid</span>
+											</div>
+										</a>
+										@endif
 										</td>
 										@endforeach
 										@else
-										<p>No quizzes created yet!</p>
-										@endif
+							<br>
+							<br>
+
+								<h4 class="pt-3 pl-3 text-center">No quizzes to show</h4>
+								<!-- <img class="text-center" src="{{asset('site_design/images/homepage__logo.png')}}" height="100px"> -->
+
+								
+								<br><br>
+
+
+							@endif	
 								</tr>
 								
 						</table>

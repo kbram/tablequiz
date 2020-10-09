@@ -32,8 +32,15 @@
 							Settings
 						</a>
 					</li>
+					<br>
+					<br>
+					<br>
+					<br>
+
+
 				</ul>
 				<a href="/setup/create" class="btn btn-primary hasPlus d-block">New Quiz</a>
+
 			</div>
 		</aside>
 		
@@ -142,6 +149,10 @@
 
 					<div class="dashboard__container flex-grow-1 p-0">
 						<table class="table table-striped table-borderless m-0 h-100 my__quizzes">
+							
+						
+							<tbody id="users">
+							@if(!empty($quizzes))
 							<thead>
 								<tr>
 									<th>Quiz name</th>
@@ -151,9 +162,6 @@
 									<th class="text-center">Actions</th>
 								</tr>
 							</thead>
-						
-							<tbody id="users">
-							@if(!empty($quizzes))
 							@foreach($quizzes as $quiz)
 
 							<tr>
@@ -164,7 +172,7 @@
  									
 
 									<td class="d-none" id="quizLink{{$quiz->id}}">{{$quiz ->quiz_link}}</td>
-									<td class="quiz_actions d-flex flex-row justify-content-lg-end">
+									<td class="quiz_actions d-flex flex-row justify-content-center">
 										<a href="{{ URL::to('quizzes/'. $quiz->id .'/edit') }}">			
 										<div class="d-flex flex-column pl-0 pl-md-4">
 											<i class="fas fa-edit"></i>
@@ -180,13 +188,13 @@
 										</div>
 										@if($quiz->payment==1)
 										<a href="/quiz/start_quiz/{{$quiz->id}}">
-											<div class="d-flex flex-column">
+											<div class="d-flex flex-column pl-3">
 												<i class="fas fa-play"></i>
 												<span>Start</span>
 											</div>
 										</a>
-										@else
-										<a data-toggle="modal" data-target="#publishQuizModal" >
+										@else 
+										<a class="view-card"  id="{{$quiz->id}}">
 											<div class="d-flex flex-column">
 												<i class="fas fa-credit-card"></i>
 												<span>Unpaid</span>
@@ -196,13 +204,23 @@
 									</td>
 								</tr>
 								@endforeach
-								@else
-								<p>No quizzes to show</p>
-							@endif	
+							
 									
 								
 								
 							</tbody>
+							@else
+							<br>
+							<br>
+
+								<h4 class="pt-3 pl-3 text-center">No quizzes to show</h4>
+								<!-- <img class="text-center" src="{{asset('site_design/images/homepage__logo.png')}}" height="100px"> -->
+
+								
+								<br><br>
+
+
+							@endif	
 							<tfoot>
 								<tr>
 									<td colspan="4" class="text-right text-muted">
@@ -225,12 +243,17 @@
 </section>
 @endsection
 @section('footer_scripts')
-<!-- <style>
+ <style>
 
 :root {
 	--footerHeight: 200px;
 }
-</style> -->
+/* @media (min-width: 992px) {
+	:root {
+		--footerHeight: 160px;
+	}
+} */
+</style> 
 @include('scripts.share-quiz')
 @include('scripts.quiz-icon-preview')
 
