@@ -150,16 +150,17 @@ $quiz->save();
                     $background_cost  = 0;
                 }
                 else{
-                    $question_cost=PriceBand::where('band_type',Config::get('priceband.type.question_band_type'))->where('from','<=',$suggested_question_no)->where('to','>=',$suggested_question_no)->get('cost')->first();
-                    $question_cost = $question_cost->cost; 
+                    
+                    $background_cost=PriceBand::where('band_type',Config::get('priceband.type.background_band_type'))->where('from','<=',$image)->where('to','>=',$image)->get('cost')->first();
+                    $background_cost = $background_cost->cost; 
                 }
 
                 if($suggested_question_no == 0){
                     $question_cost  = 0;
                 }
                 else{
-                    $background_cost=PriceBand::where('band_type',Config::get('priceband.type.background_band_type'))->where('from','<=',$image)->where('to','>=',$image)->get('cost')->first();
-                    $background_cost = $background_cost->cost; 
+                    $question_cost=PriceBand::where('band_type',Config::get('priceband.type.question_band_type'))->where('from','<=',$suggested_question_no)->where('to','>=',$suggested_question_no)->get('cost')->first();
+                    $question_cost = $question_cost->cost; 
                 }
                 $response = array(
                         'participants' =>  $participants,
