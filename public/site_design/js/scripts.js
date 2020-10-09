@@ -1029,4 +1029,11 @@ jQuery(document).ready(function ($) {
     
     
     });
+
+
+    $('.close_log').click(function(){
+        window.location.href = "/" ;
+        
+
+    });
 });
