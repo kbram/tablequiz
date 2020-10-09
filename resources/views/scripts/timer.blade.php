@@ -264,35 +264,35 @@ $(document).ready(function() {
             
         if(type == "multiple__choice__question"){
             for (var i = 0; i < answer.length; i++) {
-                var x="bg-white";
+                var x="single__answer_white";
                 
                 if(putanswer[quseee][1]==""){
                     if(putanswer[quseee][2]==answerId[i]){
-                        x="bg-warning";
+                        x="single__answer_warning";
                     }else{
-                        x="bg-white";
+                        x="single__answer_white";
                     }
                 }else{                
                     if(putanswer[quseee][2]==""){
                         if(answerId[i]==putanswer[quseee][1]){
                             x="bg-primary";
                         }else{
-                            x="bg-white";
+                            x="single__answer_white";
                         }
                     }else{
                         if(putanswer[quseee][1]==putanswer[quseee][2]){
                             if(answerId[i]==putanswer[quseee][1]){
-                                x="bg-success";
+                                x="single__answer_correct";
                             }else{
-                                x="bg-white";
+                                x="single__answer_white";
                             }
                         }else{
                             if(answerId[i]==putanswer[quseee][1]){
-                                x="bg-danger";
+                                x="single__answer_wrong";
                             }else if(answerId[i]==putanswer[quseee][2]){
-                                x="bg-success";
+                                x="single__answer_correct";
                             }else{
-                                x="bg-white";
+                                x="single__answer_white";
                             }
                         }
                     }
@@ -311,7 +311,7 @@ $(document).ready(function() {
                 "</form>";	
             } 
         }else if(type == "standard__question"){
-            var x="bg-white";
+            var x="single__answer_white";
             var coans=Object.values(issueq[quseee][12][0]);
             
             
@@ -331,14 +331,14 @@ $(document).ready(function() {
             
             if(correct==1){
                 answer=an0;
-                x="bg-success";
+                x="single__answer_correct";
             }else if(correct==0){
                 answer=an0;
-                x="bg-danger";
-                ttt = "<div class='col-md-3 single__answer bg-success  mb-md-3 px-3 py-4 text-center mx-2' style='color:white;font-weight: bold;'>"+an+" </div>";
+                x="single__answer_wrong";
+                ttt = "<div class='col-md-3 single__answer single__answer_correct  mb-md-3 px-3 py-4 text-center mx-2' style='color:black;font-weight: bold;'>"+an+" </div>";
             }else{
                 answer="non";
-                x="bg-white";
+                x="single__answer_white";
             }
             console.log(an0);
             text0 += "<form  method='post' name='form'  class='col-md-3 single__answer "+x+"  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
@@ -356,7 +356,7 @@ $(document).ready(function() {
                             "</div>"+
                             "</form>"+ttt;	
         }else if(type == "numeric__question"){
-            var x="bg-white";
+            var x="single__answer_white";
             var coans=Object.values(issueq[quseee][12][0]);
             var teamname = '{{ Session::get('teamname')}}';
             var len=issueq[quseee][12].length;
@@ -374,14 +374,14 @@ $(document).ready(function() {
             
             if(correct==1){
                 answer=an0;
-                x="bg-success";
+                x="single__answer_correct";
             }else if(correct==0){
                 answer=an0;
-                x="bg-danger";
-                ttt = "<p class='col-md-3 single__answer bg-success  mb-md-3 px-3 py-4 text-center mx-2' style='color:white;font-weight: bold;'>"+an+"</p>";
+                x="single__answer_wrong";
+                ttt = "<p class='col-md-3 single__answer single__answer_correct  mb-md-3 px-3 py-4 text-center mx-2' style='color:black;font-weight: bold;'>"+an+"</p>";
             }else{
                 answer="non";
-                x="bg-white";
+                x="single__answer_white";
             }
             
             text0 += "<form  method='post' name='form'  class='col-md-3 single__answer "+x+"  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
@@ -453,34 +453,34 @@ $(document).ready(function() {
             
         if(type == "multiple__choice__question"){
             for (var i = 0; i < answer.length; i++) {
-                var x="bg-white";
+                var x="single__answer_white";
                 if(putanswer[quseee][1]==""){
                     if(putanswer[quseee][2]==answerId[i]){
-                        x="bg-warning";
+                        x="single__answer_warning";
                     }else{
-                        x="bg-white";
+                        x="single__answer_white";
                     }
                 }else{                
                     if(putanswer[quseee][2]==""){
                         if(answerId[i]==putanswer[quseee][1]){
                             x="bg-primary";
                         }else{
-                            x="bg-white";
+                            x="single__answer_white";
                         }
                     }else{
                         if(putanswer[quseee][1]==putanswer[quseee][2]){
                             if(answerId[i]==putanswer[quseee][1]){
-                                x="bg-success";
+                                x="single__answer_correct";
                             }else{
-                                x="bg-white";
+                                x="single__answer_white";
                             }
                         }else{
                             if(answerId[i]==putanswer[quseee][1]){
-                                x="bg-danger";
+                                x="single__answer_wrong";
                             }else if(answerId[i]==putanswer[quseee][2]){
-                                x="bg-success";
+                                x="single__answer_correct";
                             }else{
-                                x="bg-white";
+                                x="single__answer_white";
                             }
                         }
                     }
@@ -499,7 +499,7 @@ $(document).ready(function() {
                 "</form>";	   
             } 
         }else if(type == "standard__question"){
-            var x="bg-white";
+            var x="single__answer_white";
             var coans=Object.values(issueq[quseee][12][0]);
             var teamname = '{{ Session::get('teamname')}}';
             var len=issueq[quseee][12].length;
@@ -517,14 +517,14 @@ $(document).ready(function() {
             
             if(correct==1){
                 answer=an0;
-                x="bg-success";
+                x="single__answer_correct";
             }else if(correct==0){
                 answer=an0;
-                x="bg-danger";
-                ttt = "<p class='col-md-3 single__answer bg-success  mb-md-3 px-3 py-4 text-center mx-2' style='color:white;font-weight: bold;'>"+an+"</p>";
+                x="single__answer_wrong";
+                ttt = "<p class='col-md-3 single__answer single__answer_correct  mb-md-3 px-3 py-4 text-center mx-2' style='color:black;font-weight: bold;'>"+an+"</p>";
             }else{
                 answer="non";
-                x="bg-white";
+                x="single__answer_white";
             }
             
             text0 += "<form  method='post' name='form'  class='col-md-3 single__answer "+x+"  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
@@ -542,7 +542,7 @@ $(document).ready(function() {
                     "</div>"+
                             "</form>"+ttt;	
         }else if(type == "numeric__question"){
-            var x="bg-white";
+            var x="single__answer_white";
             var coans=Object.values(issueq[quseee][12][0]);
             var teamname = '{{ Session::get('teamname')}}';
             var len=issueq[quseee][12].length;
@@ -560,14 +560,14 @@ $(document).ready(function() {
             
             if(correct==1){
                 answer=Object.values(issueq[quseee][12][i])[4];
-                x="bg-success";
+                x="single__answer_correct";
             }else if(correct==0){
                 answer=Object.values(issueq[quseee][12][i])[4];
-                x="bg-danger";
-                ttt = "<p class='col-md-3 single__answer bg-success  mb-md-3 px-3 py-4 text-center mx-2' style='color:white;font-weight: bold;'>"+an+"</p>";
+                x="single__answer_wrong";
+                ttt = "<p class='col-md-3 single__answer single__answer_correct  mb-md-3 px-3 py-4 text-center mx-2' style='color:black;font-weight: bold;'>"+an+"</p>";
             }else{
                 answer="non";
-                x="bg-white";
+                x="single__answer_white";
             }
             
             text0 += "<form  method='post' name='form'  class='col-md-3 single__answer "+x+"  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
@@ -729,27 +729,27 @@ $(document).ready(function() {
     
             if(type == "multiple__choice__question"){
                 for (var i = 0; i < answer.length; i++) {
-                    var x="bg-white";
+                    var x="single__answer_white";
                     if(putanswer[quseee][1]==""){
                         if(putanswer[quseee][2]==answerId[i]){
-                            x="bg-warning";
+                            x="single__answer_warning";
                         }else{
-                            x="bg-white";
+                            x="single__answer_white";
                         }
                     }else{
                         if(putanswer[quseee][1]==putanswer[quseee][2]){
                             if(answerId[i]==putanswer[quseee][1]){
-                                x="bg-success";
+                                x="single__answer_correct";
                             }else{
-                                x="bg-white";
+                                x="single__answer_white";
                             }
                         }else{
                             if(answerId[i]==putanswer[quseee][1]){
-                                x="bg-danger";
+                                x="single__answer_wrong";
                             }else if(answerId[i]==putanswer[quseee][2]){
-                                x="bg-success";
+                                x="single__answer_correct";
                             }else{
-                                x="bg-white";
+                                x="single__answer_white";
                             }
                         }
                     }
@@ -769,7 +769,7 @@ $(document).ready(function() {
                     "</form>";
                 } 
             }else if(type == "standard__question"){
-                var x="bg-white";
+                var x="single__answer_white";
                 var coans=Object.values(message.text[12][0]);
                 var teamname = '{{ Session::get('teamname')}}';
                 var len=message.text[12].length;
@@ -786,15 +786,15 @@ $(document).ready(function() {
                 var answer="non";
                 if(correct==1){
                     answer=an0;
-                    x="bg-success";
+                    x="single__answer_correct";
                 }else if(correct==0){
                     answer=an0;
-                    x="bg-danger";
+                    x="single__answer_wrong";
                     //console.log("ffffffffffffffffffffffff"+typeof an);
-                    ttt = "<p class='col-md-3 single__answer bg-success  mb-md-3 px-3 py-4 text-center mx-2' style='color:white;font-weight: bold;'>"+an+"</p>";
+                    ttt = "<p class='col-md-3 single__answer single__answer_correct  mb-md-3 px-3 py-4 text-center mx-2' style='color:black;font-weight: bold;'>"+an+"</p>";
                 }else{
                     answer="non";
-                    x="bg-white";
+                    x="single__answer_white";
                 }
                 
                 text0 += "<form  method='post' name='form'  class='col-md-3 single__answer "+x+"  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
@@ -812,7 +812,7 @@ $(document).ready(function() {
                     "</div>"+
                     "</form>"+ttt;	
             }else if(type == "numeric__question"){
-                var x="bg-white";
+                var x="single__answer_white";
                 var coans=Object.values(message.text[12][0]);
                 var teamname = '{{ Session::get('teamname')}}';
                 var len=message.text[12].length;
@@ -829,14 +829,14 @@ $(document).ready(function() {
                 var answer="non";
                 if(correct==1){
                     answer=an0;
-                    x="bg-success";
+                    x="single__answer_correct";
                 }else if(correct==0){
                     answer=an0;
-                    x="bg-danger";
-                    ttt = "<p class='col-md-3 single__answer bg-success  mb-md-3 px-3 py-4 text-center mx-2' style='color:white;font-weight: bold;'>"+an+"</p>";
+                    x="single__answer_wrong";
+                    ttt = "<p class='col-md-3 single__answer single__answer_correct  mb-md-3 px-3 py-4 text-center mx-2' style='color:black;font-weight: bold;'>"+an+"</p>";
                 }else{
                     answer="non";
-                    x="bg-white";
+                    x="single__answer_white";
                 }
                 
                 text0 += "<form  method='post' name='form'  class='col-md-3 single__answer "+x+"  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
@@ -1148,27 +1148,27 @@ $(document).ready(function() {
                     }
                     if(type == "multiple__choice__question"){
                         for (var i = 0; i < answer.length; i++) {
-                            var x="bg-white";
+                            var x="single__answer_white";
                             if(putanswer[quseee][1]==""){
                                 if(putanswer[quseee][2]==answerId[i]){
-                                    x="bg-warning";
+                                    x="single__answer_warning";
                                 }else{
-                                    x="bg-white";
+                                    x="single__answer_white";
                                 }
                             }else{
                                 if(putanswer[quseee][1]==putanswer[quseee][2]){
                                     if(answerId[i]==putanswer[quseee][1]){
-                                        x="bg-success";
+                                        x="single__answer_correct";
                                     }else{
-                                        x="bg-white";
+                                        x="single__answer_white";
                                     }
                                 }else{
                                     if(answerId[i]==putanswer[quseee][1]){
-                                        x="bg-danger";
+                                        x="single__answer_wrong";
                                     }else if(answerId[i]==putanswer[quseee][2]){
-                                        x="bg-success";
+                                        x="single__answer_correct";
                                     }else{
-                                        x="bg-white";
+                                        x="single__answer_white";
                                     }
                                 }
                             }
@@ -1189,7 +1189,7 @@ $(document).ready(function() {
                                 
                         } 
                     }else if(type == "standard__question"){
-                        var x="bg-white";
+                        var x="single__answer_white";
                         var coans=Object.values(message.text[12][0]);
                         var teamname = '{{ Session::get('teamname')}}';
                         var len=message.text[12].length;
@@ -1208,14 +1208,14 @@ $(document).ready(function() {
                         
                         if(correct==1){
                             answer=an0;
-                            x="bg-success";
+                            x="single__answer_correct";
                         }else if(correct==0){
                             answer=an0;
-                            x="bg-danger";
-                            ttt = "<p class='col-md-3 single__answer bg-success  mb-md-3 px-3 py-4 text-center mx-2' style='color:white;font-weight: bold;'>"+an+"</p>";
+                            x="single__answer_wrong";
+                            ttt = "<p class='col-md-3 single__answer single__answer_correct  mb-md-3 px-3 py-4 text-center mx-2' style='color:black;font-weight: bold;'>"+an+"</p>";
                         }else{
                             answer="non";
-                            x="bg-white";
+                            x="single__answer_white";
                         }
                         
                         text0 += "<form  method='post' name='form'  class='col-md-3 single__answer "+x+"  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
@@ -1234,7 +1234,7 @@ $(document).ready(function() {
                             "</form>"+ttt;	
                     
                     }else if(type == "numeric__question"){
-                        var x="bg-white";
+                        var x="single__answer_white";
                         var coans=Object.values(message.text[12][0]);
                         var teamname = '{{ Session::get('teamname')}}';
                         var len=message.text[12].length;
@@ -1252,14 +1252,14 @@ $(document).ready(function() {
                         
                         if(correct==1){
                             answer=Object.values(message.text[12][i])[4];
-                            x="bg-success";
+                            x="single__answer_correct";
                         }else if(correct==0){
                             answer=Object.values(message.text[12][i])[4];
-                            x="bg-danger";
-                            ttt = "<p class='col-md-3 single__answer bg-success  mb-md-3 px-3 py-4 text-center mx-2' style='color:white;font-weight: bold;'>"+an+"</p>";
+                            x="single__answer_wrong";
+                            ttt = "<p class='col-md-3 single__answer single__answer_correct  mb-md-3 px-3 py-4 text-center mx-2' style='color:black;font-weight: bold;'>"+an+"</p>";
                         }else{
                             answer="non";
-                            x="bg-white";
+                            x="single__answer_white";
                         }
                         
                         text0 += "<form  method='post' name='form'  class='col-md-3 single__answer "+x+"  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
