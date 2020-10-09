@@ -937,22 +937,7 @@ jQuery(document).ready(function ($) {
 
     $(".view-card").click(function (e) {
         var quiz=this.id;
-        //    e.preventDefault();
-        // $.ajax({
-        //     data: $('#add_round').serialize(),
-        //     type: 'post',
-        //     url: $('#add_round').attr('action'),
-        //     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-        //     success: function(response) {
-        //         $('#publishQuizModal').modal("show");
-
-        // 	},
-        // 	error: function(result,error) {
-        //         console.log('errror');
-        // 	   //$('#publishQuizModal').modal("show");
-        // 	   },
-        // });
-
+      
         $.ajax({
             type: "POST",
             url: "/payment",
@@ -968,6 +953,8 @@ jQuery(document).ready(function ($) {
                 var participants = data.participants.no_of_participants;
                 var participants_cost = data.participants_cost[0].cost;
                 var questions_cost = 0;
+                quiz_id = quiz;
+
                 console.log(typeof participants_cost);
                 $("#modal__payment")
                     .find(".no-participants td:nth-child(2)")
@@ -1010,10 +997,36 @@ jQuery(document).ready(function ($) {
                     Number(participants_cost) +
                     Number(questions_cost) +
                     Number(data.bg_image_cost);
-                $("#card_total").val(total_card);
-            },
+                    $('#card_total').val(total_card);
+                    $('#quiz_id').val(quiz_id);  
+                
+                
+                
+                
+                },
             error: function (result, error) {},
         });
+
+
+   //card fill
+
+   $.getJSON('/card',function (data){
+        
+    $('#modal__payment').find('#card-holder-name').val(data.name);
+    $('#modal__payment').find('#cardholder_street').val(data.street);
+    $('#modal__payment').find('#cardholder_city').val(data.city);
+    $('#modal__payment').find('#cardholder_country').val(data.country);
+    $('#modal__payment').find('#cardholder_number').val(data.card_number);
+    $('#modal__payment').find('#cardholder_expiry_month').val(data.exp_month);
+    $('#modal__payment').find('#cardholder_expiry_year').val(data.exp_year);
+    $('#modal__payment').find('#card-cvc').val(data.cvv);
+
+});
+
         return false;
+    
+        
+    
+    
     });
 });

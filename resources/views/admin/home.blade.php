@@ -42,7 +42,7 @@
 					<li>
 						<a href="/admin/questions">
 							<span><i class="fas fa-question-circle"></i></span>
-							Questions
+							Question
 						</a>
 					</li>
 

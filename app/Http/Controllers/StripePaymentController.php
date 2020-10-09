@@ -161,7 +161,7 @@ $quiz->save();
                         'question_cost' => $question_cost,
                         'bg_image' => $image, 
                         'bg_image_cost' => $background_cost,
-                         'quiz_id' => $request->id
+                        'quiz_id' => $request->id
                     );
             }
             else{
