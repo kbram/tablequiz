@@ -61,6 +61,7 @@ $(document).ready(function() {
                 "<input type='text' name='question' hidden value='"+questionId+"'/>"+
                 "<input type='text' name='round' hidden value='"+roundId+"'/>"+
                 "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+                "<input type='text' name='teamname' hidden value='{{ Session::get('teamname')}}'/>"+
                 "<p>"+answer[i]+"</p>"+ 
                 "</form>";	
             } 
@@ -76,6 +77,7 @@ $(document).ready(function() {
                 "<input type='text' name='question' hidden value='"+questionId+"'/>"+
                 "<input type='text' name='round' hidden value='"+roundId+"'/>"+
                 "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+                "<input type='text' name='teamname' hidden value='{{ Session::get('teamname')}}'/>"+
                 "<input type='text' class='form-control' name='answer' placeholder='Enter answer'/>"+
                 "</div>"+
                 "</form>";	
@@ -91,6 +93,7 @@ $(document).ready(function() {
                 "<input type='text' name='question' hidden value='"+questionId+"'/>"+
                 "<input type='text' name='round' hidden value='"+roundId+"'/>"+
                 "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+                "<input type='text' name='teamname' hidden value='{{ Session::get('teamname')}}'/>"+
                 "<input type='number' class='form-control' name='answer' placeholder='Enter answer'/>"+
                 "</div>"+
                 "</form>"; 
@@ -303,6 +306,7 @@ $(document).ready(function() {
                 "<input type='text' name='question' hidden value='"+questionId+"'/>"+
                 "<input type='text' name='round' hidden value='"+roundId+"'/>"+
                 "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+                "<input type='text' name='teamname' hidden value='{{ Session::get('teamname')}}'/>"+
                 "<p>"+answer[i]+"</p>"+ 
                 "</form>";	
             } 
@@ -347,6 +351,7 @@ $(document).ready(function() {
                             "<input type='text' name='question' hidden value='"+questionId+"'/>"+
                             "<input type='text' name='round' hidden value='"+roundId+"'/>"+
                             "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+                            "<input type='text' name='teamname' hidden value='{{ Session::get('teamname')}}'/>"+
                             "<input type='number' class='form-control' name='answer' value='"+answer+"' placeholder='Enter answer'/>"+
                             "</div>"+
                             "</form>"+ttt;	
@@ -389,6 +394,7 @@ $(document).ready(function() {
                             "<input type='text' name='question' hidden value='"+questionId+"'/>"+
                             "<input type='text' name='round' hidden value='"+roundId+"'/>"+
                             "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+                            "<input type='text' name='teamname' hidden value='{{ Session::get('teamname')}}'/>"+
                             "<input type='number' class='form-control' name='answer' value='"+answer+"' placeholder='Enter answer'/>"+
                             "</div>"+
                             "</form>"+ttt;	
@@ -488,6 +494,7 @@ $(document).ready(function() {
                 "<input type='text' name='question' hidden value='"+questionId+"'/>"+
                 "<input type='text' name='round' hidden value='"+roundId+"'/>"+
                 "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+                "<input type='text' name='teamname' hidden value='{{ Session::get('teamname')}}'/>"+
                 "<p>"+answer[i]+"</p>"+ 
                 "</form>";	   
             } 
@@ -530,6 +537,7 @@ $(document).ready(function() {
                     "<input type='text' name='question' hidden value='"+questionId+"'/>"+
                     "<input type='text' name='round' hidden value='"+roundId+"'/>"+
                     "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+                    "<input type='text' name='teamname' hidden value='{{ Session::get('teamname')}}'/>"+
                     "<input type='number' class='form-control' name='answer' value='"+answer+"' placeholder='Enter answer'/>"+
                     "</div>"+
                             "</form>"+ttt;	
@@ -572,6 +580,7 @@ $(document).ready(function() {
                     "<input type='text' name='question' hidden value='"+questionId+"'/>"+
                     "<input type='text' name='round' hidden value='"+roundId+"'/>"+
                     "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+                    "<input type='text' name='teamname' hidden value='{{ Session::get('teamname')}}'/>"+
                     "<input type='number' class='form-control' name='answer' value='"+answer+"' placeholder='Enter answer'/>"+
                     "</div>"+
                     "</form>"+ttt;	
@@ -755,6 +764,7 @@ $(document).ready(function() {
                     "<input type='text' name='question' hidden value='"+questionId+"'/>"+
                     "<input type='text' name='round' hidden value='"+roundId+"'/>"+
                     "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+                    "<input type='text' name='teamname' hidden value='{{ Session::get('teamname')}}'/>"+
                     "<p>"+answer[i]+"</p>"+ 
                     "</form>";
                 } 
@@ -797,6 +807,7 @@ $(document).ready(function() {
                     "<input type='text' name='question' hidden value='"+questionId+"'/>"+
                     "<input type='text' name='round' hidden value='"+roundId+"'/>"+
                     "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+                    "<input type='text' name='teamname' hidden value='{{ Session::get('teamname')}}'/>"+
                     "<input type='number' class='form-control' name='answer' value='"+answer+"' placeholder='Enter answer'/>"+
                     "</div>"+
                     "</form>"+ttt;	
@@ -838,6 +849,7 @@ $(document).ready(function() {
                     "<input type='text' name='question' hidden value='"+questionId+"'/>"+
                     "<input type='text' name='round' hidden value='"+roundId+"'/>"+
                     "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+                    "<input type='text' name='teamname' hidden value='{{ Session::get('teamname')}}'/>"+
                     "<input type='number' class='form-control' name='answer' value='"+answer+"' placeholder='Enter answer'/>"+
                     "</div>"+
                     "</form>"+ttt;	    	
@@ -961,6 +973,7 @@ $(document).ready(function() {
                     "<input type='text' name='question' hidden value='"+questionId+"'/>"+
                     "<input type='text' name='round' hidden value='"+roundId+"'/>"+
                     "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+                    "<input type='text' name='teamname' hidden value='{{ Session::get('teamname')}}'/>"+
                     "<p>"+answer[i]+"</p>"+ 
                     "</form>";	
                 } 
@@ -973,9 +986,10 @@ $(document).ready(function() {
                     "<input type='text' name='question' hidden value='"+questionId+"'/>"+
                     "<input type='text' name='round' hidden value='"+roundId+"'/>"+
                     "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+                    "<input type='text' name='teamname' hidden value='{{ Session::get('teamname')}}'/>"+
                     "<input type='text' class='form-control' name='answer' placeholder='Enter answer'/>"+
                     "</div>"+
-                    "</form>";	
+                    "</form>";	 
             }else if(type == "numeric__question"){
                 text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
                     "<div class='form-group'>"+
@@ -987,6 +1001,7 @@ $(document).ready(function() {
                     "<input type='text' name='question' hidden value='"+questionId+"'/>"+
                     "<input type='text' name='round' hidden value='"+roundId+"'/>"+
                     "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+                    "<input type='text' name='teamname' hidden value='{{ Session::get('teamname')}}'/>"+
                     "<input type='number' class='form-control' name='answer' placeholder='Enter answer'/>"+
                     "</div>"+
                     "</form>";	
@@ -1168,6 +1183,7 @@ $(document).ready(function() {
                             "<input type='text' name='question' hidden value='"+questionId+"'/>"+
                             "<input type='text' name='round' hidden value='"+roundId+"'/>"+
                             "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+                            "<input type='text' name='teamname' hidden value='{{ Session::get('teamname')}}'/>"+
                             "<p>"+answer[i]+"</p>"+ 
                             "</form>";	
                                 
@@ -1212,6 +1228,7 @@ $(document).ready(function() {
                             "<input type='text' name='question' hidden value='"+questionId+"'/>"+
                             "<input type='text' name='round' hidden value='"+roundId+"'/>"+
                             "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+                            "<input type='text' name='teamname' hidden value='{{ Session::get('teamname')}}'/>"+
                             "<input type='number' class='form-control' name='answer' value='"+answer+"' placeholder='Enter answer'/>"+
                             "</div>"+
                             "</form>"+ttt;	
@@ -1255,6 +1272,7 @@ $(document).ready(function() {
                             "<input type='text' name='question' hidden value='"+questionId+"'/>"+
                             "<input type='text' name='round' hidden value='"+roundId+"'/>"+
                             "<input type='text' name='quiz' hidden value='"+quizId+"'/>"+
+                            "<input type='text' name='teamname' hidden value='{{ Session::get('teamname')}}'/>"+
                             "<input type='number' class='form-control' name='answer' value='"+answer+"' placeholder='Enter answer'/>"+
                             "</div>"+
                             "</form>"+ttt;

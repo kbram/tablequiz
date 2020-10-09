@@ -8,9 +8,7 @@
 @if($quizzes[0]->user_id==Auth::user()->id && $quizzes[0]->payment==1)
 <section class="container page__inner dashboard">
 	<div class="dashboard__wrapper">
-
 		<div class="row" style="height:60px;">
-
 			<div class="offset-lg-3 col-lg-9 px-5">
 				<div class="progress position-relative">
 					<div id="round-progress" class="progress-bar" role="progressbar" style="" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
@@ -432,50 +430,48 @@
 		var m0 = message.replace('{"text":"','');
 		var m0 = m0.replace('"}','');
 		var m=m0.split("#^");
-//console.log(m);
-var status = m[2];
-//console.log(status);
- 
+		//console.log(m);
+		var status = m[2];
+		//console.log(status);
+		console.log(m0);
 
-var id_correct = m[0]+"1";
-var id_wrong = m[0]+"0";
+		var id_correct = m[0]+"1";
+		var id_wrong = m[0]+"0";
 
-//console.log(status);
+		//console.log(status);
 
 		// var text="<tr><td>"+m[0]+"</td><td>"+m[1]+"</td><td><form><input type='radio' id="+id_correct+" name='correct_answer_1' value='correct'><input type='radio' name='correct_answer_1' id="+id_wrong+" value='incorrect'></form></td><td></td></form></tr>";
-		
+
 		var text = "<hr> <div class='row container h-25 align-items-center justify-content-center'> <p class='col-md-4 pb-0 text-center'>"+m[0]+"</p> <input  type='text' name='team[]' hidden class='col-md-4 pb-0 text-center' value="+m[0]+"><input  type='text' name='quiz/"+m[0]+"' hidden class='col-md-4 pb-0 text-center' value="+m[4]+"><input  type='text' name='round/"+m[0]+"' hidden class='col-md-4 pb-0 text-center' value="+m[6]+"><input  type='text' name='question/"+m[0]+"' hidden class='col-md-4 pb-0 text-center' value="+m[5]+"> <p class='col-md-4 pb-0 text-center'>"+m[1]+"</p> <div class='col-md-4 pb-0 text-center '> <div class='row d-flex'> <input type='radio' id="+id_correct+" name='status/"+m[0]+"' value=1 class='col-md-6 py-0 text-muted text-center'> <input type='radio' name='status/"+m[0]+"' id="+id_wrong+" value=0 class='col-md-6 py-0 text-muted text-center'> </div> </div> </div>"
 		// var id =$('.question-id').val();
 		var id;
-$('.quiz__slider .quiz__single_question__container').each(function(){
-		var current=$(this);
-		var hidden=current.attr('aria-hidden');
-         if(hidden=="false"){
-			id =current.find('.question-id').val(); 
-			//alert(id);
-		 }
-		 
+		$('.quiz__slider .quiz__single_question__container').each(function(){
+				var current=$(this);
+				var hidden=current.attr('aria-hidden');
+				if(hidden=="false"){
+				id =current.find('.question-id').val(); 
+				//alert(id);
+				}
+		});
+		if(id == m[5]){
+				$(text).appendTo($("#all-answer_submit"));
+			}
 
+		if(status){
+			if(Number(status) == 1){
+				$('#'+id_correct).prop("checked", true);
+						//console.log("correct");
+			}
+			else if(Number(status) == 0){
+				$('#'+id_wrong).prop("checked", true);
+
+				//console.log("not correct");
+			}
+		}
+				
+				//$('#all-answer tbody').append(text);
 });
-if(id == m[5]){
-		$(text).appendTo($("#all-answer_submit"));
-	}
-
-if(status){
-		if(Number(status) == 1){
-$('#'+id_correct).prop("checked", true);
-			//console.log("correct");
-		}
-		else if(Number(status) == 0){
-			$('#'+id_wrong).prop("checked", true);
-
-			//console.log("not correct");
-		}
-	}
-		
-		//$('#all-answer tbody').append(text);
-	});
-	//var x=1;
+			//var x=1;
 	
 	
 	function pause() {
