@@ -3,9 +3,7 @@
 
 */
 
-
 /* Mixins */
-
 
 /* Usage: @include phone { css here } */
 
@@ -73,7 +71,8 @@
 
 .fade {
     opacity: 0;
-    transition: opacity cubic-bezier(0.19, 1, 0.22, 1) 0.4s, transform cubic-bezier(0.19, 1, 0.22, 1) 0.45s;
+    transition: opacity cubic-bezier(0.19, 1, 0.22, 1) 0.4s,
+        transform cubic-bezier(0.19, 1, 0.22, 1) 0.45s;
     -webkit-transform: translateY(30px);
     -ms-transform: translateY(30px);
     transform: translateY(30px);
@@ -581,30 +580,29 @@ html {
 }
 
 @media screen and (min-width: 576px) {
-     :root {
+    :root {
         --gutter: calc((100vw - 540px) / 2);
     }
 }
 
 @media (min-width: 769px) {
-     :root {
+    :root {
         --gutter: calc((100vw - 720px) / 2);
     }
 }
 
 @media (min-width: 992px) {
-     :root {
+    :root {
         --gutter: calc((100vw - 960px) / 2);
         --footerHeight: 160px;
     }
 }
 
 @media (min-width: 1200px) {
-     :root {
+    :root {
         --gutter: calc((100vw - 1140px) / 2);
     }
 }
-
 
 /* Reusable header and footer styles */
 
@@ -781,7 +779,7 @@ nav.main__navigation.menuOpen ul li.social__icons a {
     text-transform: uppercase;
     letter-spacing: 2px;
     font-size: 85%;
-    padding: .75rem;
+    padding: 0.75rem;
 }
 
 .btn.btn-success {
@@ -934,7 +932,7 @@ article .btn.btn-outline-light {
 }
 
 input.form-control {
-    padding: 0.65rem .75rem;
+    padding: 0.65rem 0.75rem;
 }
 
 .form-row {
@@ -977,10 +975,10 @@ input.form-control {
 select.form-control {
     background-color: white;
     border: 2px solid #cfd4da;
-    padding: .75rem;
+    padding: 0.75rem;
 }
 
-label[for^=upload] {
+label[for^="upload"] {
     display: inline-block;
     font-weight: 400;
     text-align: center;
@@ -991,10 +989,10 @@ label[for^=upload] {
     user-select: none;
     background-color: transparent;
     border: 2px solid #2ccfbe;
-    padding: .75rem .75rem;
+    padding: 0.75rem 0.75rem;
     font-size: 1rem;
     line-height: 1.5;
-    border-radius: .25rem;
+    border-radius: 0.25rem;
     color: #2ccfbe;
     width: auto;
     text-transform: uppercase;
@@ -1002,21 +1000,21 @@ label[for^=upload] {
     font-size: 85%;
 }
 
-label[for^=upload]:hover {
+label[for^="upload"]:hover {
     cursor: pointer;
     border-color: var(--TQorange);
     color: var(--TQorange);
 }
 
-label[for^=upload] input[type="file"] {
+label[for^="upload"] input[type="file"] {
     display: none;
 }
 
-article label[for^=upload] {
+article label[for^="upload"] {
     color: #2ccfbe;
 }
 
-input[type='radio']:after {
+input[type="radio"]:after {
     width: 15px;
     height: 15px;
     border-radius: 15px;
@@ -1024,14 +1022,14 @@ input[type='radio']:after {
     left: -1px;
     position: relative;
     background: var(--whiteGradient);
-    content: '';
+    content: "";
     display: inline-block;
     visibility: visible;
     border: 1px solid #ccc;
     cursor: pointer;
 }
 
-input[type='radio']:checked:after {
+input[type="radio"]:checked:after {
     width: 15px;
     height: 15px;
     border-radius: 15px;
@@ -1039,7 +1037,7 @@ input[type='radio']:checked:after {
     left: -1px;
     position: relative;
     background: var(--orangeGradient);
-    content: '';
+    content: "";
     display: inline-block;
     visibility: visible;
     border: 1.5px solid #eee;
@@ -1255,7 +1253,8 @@ input[type='radio']:checked:after {
 
 body {
     color: white;
-    background-image: var(--purpleGradient), url("/site_design/images/pattern.jpg");
+    background-image: var(--purpleGradient),
+        url("/site_design/images/pattern.jpg");
     background-size: 125%;
     background-repeat: repeat;
     background-blend-mode: multiply;
@@ -1308,18 +1307,18 @@ article {
     margin-bottom: 30px;
 }
 
-article[class^='col'] {
+article[class^="col"] {
     padding: 30px 60px;
 }
 
 @media (min-width: 1200px) {
-    article[class^='col'] {
+    article[class^="col"] {
         padding: 30px 90px;
     }
 }
 
 @media (max-width: 768px) {
-    article[class^='col'] {
+    article[class^="col"] {
         padding: 30px;
     }
 }
@@ -1387,7 +1386,7 @@ a.back_to__login {
 }
 
 a.back_to__login span {
-    padding-left: .375rem;
+    padding-left: 0.375rem;
 }
 
 .change__image {
@@ -1481,7 +1480,7 @@ a.back_to__login span {
 }
 
 .dashboard__container table span.trophy.third {
-    color: #A77044;
+    color: #a77044;
 }
 
 .dashboard__container table tfoot {
@@ -1493,8 +1492,8 @@ a.back_to__login span {
 }
 
 .dashboard__container table tfoot td {
-    padding-top: .25rem;
-    padding-bottom: .25rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
 }
 
 @media (min-width: 992px) {
@@ -1514,7 +1513,7 @@ a.back_to__login span {
 .dashboard__container h5 {
     color: var(--primaryColour);
     font-weight: 600;
-    font-family: 'bernhard-gothic-urw', sofia-pro, sans-serif;
+    font-family: "bernhard-gothic-urw", sofia-pro, sans-serif;
 }
 
 @media (max-width: 991px) {
@@ -1528,7 +1527,7 @@ a.back_to__login span {
 }
 
 .dashboard__sidebar ul li a {
-    font-family: 'bernhard-gothic-urw', sofia-pro, sans-serif;
+    font-family: "bernhard-gothic-urw", sofia-pro, sans-serif;
     text-decoration: none;
     color: #222;
     font-size: 110%;
@@ -1678,7 +1677,6 @@ p.form__explainer {
 img.homepage__lower {
     width: 100%;
     margin-left: 40px;
-    
 }
 
 @media (min-width: 1200px) {
@@ -1997,7 +1995,8 @@ label[for="upload__category__image"].orange_text:hover {
 
 .page-wrap {
     min-height: 100vh;
-    padding: calc(45px + var(--headerHeight)) var(--gutter) calc(var(--footerHeight) + 30px);
+    padding: calc(45px + var(--headerHeight)) var(--gutter)
+        calc(var(--footerHeight) + 30px);
 }
 
 .participants__choice {
@@ -2161,7 +2160,7 @@ input[name="quiz"] {
         width: 50%;
         margin-bottom: 1.2rem;
     }
-    .quiz_actions .db div:nth-child(2n+1) {
+    .quiz_actions .db div:nth-child(2n + 1) {
         padding-left: 0;
     }
 }
@@ -2238,27 +2237,49 @@ select {
 
 @media (min-width: 992px) {
     .suggested_q_link {
-        padding: .75rem 0.2rem;
+        padding: 0.75rem 0.2rem;
         line-height: 1.1;
     }
 }
 
 .single__answer {
-    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2), -1px -1px 5px rgba(0, 0, 0, 0.045);
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2),
+        -1px -1px 5px rgba(0, 0, 0, 0.045);
     border-radius: 15px;
 }
 
 /* edited for answer  */
+.small {
+    color: #5a37ba;
+}
+.break {
+    flex-basis: 100%;
+    height: 0;
+}
 .single__answer_correct {
-    box-shadow: 3px 3px 6px rgba(5, 172, 47, 0.795), -1px -1px 5px rgba(0, 0, 0, 0.045);
-    border-radius: 15px;
-    pointer-events:none;
+    box-shadow: 3px 3px 6px rgba(5, 172, 47, 0.795),
+        -1px -1px 15px rgba(0, 0, 0, 0.045);
+    border-radius: 25px;
+    pointer-events: none;
 }
 
 .single__answer_wrong {
-    box-shadow: 3px 3px 6px rgba(202, 8, 8, 0.767), -1px -1px 5px rgba(214, 19, 19, 0.045);
-    border-radius: 15px;
-    pointer-events:none;
+    box-shadow: 3px 3px 6px rgba(202, 8, 8, 0.767),
+        -1px -1px 15px rgba(214, 19, 19, 0.045);
+    border-radius: 25px;
+    pointer-events: none;
+}
+.single__answer_white {
+    box-shadow: 3px 3px 6px rgba(255, 255, 255, 0.767),
+        -1px -1px 15px rgba(214, 19, 19, 0.045);
+    border-radius: 25px;
+    pointer-events: none;
+}
+.single__answer_warning {
+    box-shadow: 3px 3px 6px rgba(240, 156, 31, 0.767),
+        -1px -1px 15px rgba(214, 123, 19, 0.045);
+    border-radius: 25px;
+    pointer-events: none;
 }
 
 .single__answer_correct:hover {
@@ -2288,9 +2309,8 @@ select {
     transform: translate(2px);
 }
 
-.cursor_not{
+.cursor_not {
     cursor: not-allowed;
-    
 }
 
 .single__suggested__question__attributes p {
@@ -2407,9 +2427,30 @@ select {
 
 .social__login.instagram {
     background: #f09433;
-    background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-    background: -webkit-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    background: -moz-linear-gradient(
+        45deg,
+        #f09433 0%,
+        #e6683c 25%,
+        #dc2743 50%,
+        #cc2366 75%,
+        #bc1888 100%
+    );
+    background: -webkit-linear-gradient(
+        45deg,
+        #f09433 0%,
+        #e6683c 25%,
+        #dc2743 50%,
+        #cc2366 75%,
+        #bc1888 100%
+    );
+    background: linear-gradient(
+        45deg,
+        #f09433 0%,
+        #e6683c 25%,
+        #dc2743 50%,
+        #cc2366 75%,
+        #bc1888 100%
+    );
     filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888', GradientType=1);
 }
 
