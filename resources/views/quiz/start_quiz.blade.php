@@ -6,7 +6,6 @@
 
 
 @if($quizzes[0]->user_id==Auth::user()->id && $quizzes[0]->payment==1)
-
 <section class="container page__inner dashboard">
 	<div class="dashboard__wrapper">
 
