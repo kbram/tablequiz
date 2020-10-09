@@ -193,7 +193,7 @@
 												<span>Start</span>
 											</div>
 										</a>
-										@else
+										@else 
 										<a class="view-card"  id="{{$quiz->id}}">
 											<div class="d-flex flex-column">
 												<i class="fas fa-credit-card"></i>
