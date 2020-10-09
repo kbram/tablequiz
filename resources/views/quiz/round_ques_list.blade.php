@@ -57,12 +57,14 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <div class="modal__edit__image position-relative">
-                                        <!-- <img class="modal__edit__image__image position-relative" id="round_image" style="display:block;margin-left:auto;margin-right:auto;" src="#"> -->
-                                        <div id="image-container">
-											<img src="" id="round_image" alt=''>
-										</div>	
-                                        
+                                    <div class="modal__edit__image position-relative border">
+                                    <div class="img-container">
+											<div class="row">
+												<div class="col-md-8">
+													<img id="image" src="">
+												</div>										
+											</div>
+										</div>
                                     </div>
                                     <div class="modal__edit__image__range">
                                         <div class="form-row align-items-center">
@@ -91,6 +93,8 @@
                                     <div class="col-md-3 mr-0 mr-lg-1">
                                         <label class="d-block" for="upload__quiz__icon">Upload
                                             <input type="file" class="form-control-file" id="upload__quiz__icon" name="bg_image" value="Upload">
+                                            <input type="hidden" id="edit-round-image-crop" name="image_crop">
+                                            <input type="hidden" id="edit-round-original-image" name="original-image">
                                         </label>
                                     </div>
                                     <div class="col-md-3 ml-0 ml-lg-1 d-flex">
@@ -167,6 +171,60 @@
 @endsection
 
 @section('footer_scripts')
+@include('scripts.add-round-image')
+<script>
+
+	
+var image = document.getElementById('image');
+       var cropper;
+      
+    //    cropper = new Cropper(image, {
+	//   aspectRatio: 1,
+	//   viewMode: 3,
+	//   preview: '.preview'
+    // });
+	$('#upload__quiz__icon').on('change', function(e) { 
+       //  $('#image').remove();
+    /**new crop image round start*/
+	var files = e.target.files;
+    var done = function (url) {
+	  image.src = url;
+	
+     cropper = new Cropper(image, {
+	  aspectRatio: 1,
+	  viewMode: 3,
+	  preview: '.preview'
+    });
+    };
+    var reader;
+    var file;
+    var url;
+
+    if (files && files.length > 0) {
+      file = files[0];
+	  reader = new FileReader();
+        reader.onload = function (e) {
+			$('#edit-round-original-image').val(e.target.result);
+          done(reader.result);
+		};
+		reader.readAsDataURL(file);
+
+    //   if (true) {console.log('kpss');
+    //     done(URL.createObjectURL(file));
+    //   } else if (FileReader) {
+    //     reader = new FileReader();
+    //     reader.onload = function (e) {console.log(e.target.result);console.log('kp');
+    //       done(reader.result);
+    //     };
+    //     reader.readAsDataURL(file);
+    //   }
+    }
+/**new crop image round end */
+
+		size = this.files[0].size;
+	});
+</script>
+@include('scripts.add-round-image')
 @include('scripts.suggest')
 @include('scripts.bg-image');
 @include('scripts.payment');

@@ -116,18 +116,24 @@ class QuizRoundController extends Controller
     public function round_ques_list_edit($name,$id){
       
         $rounds=QuizRound::where('id',$id)->get();
+        $round_image=QuizRoundImage::where('round_id',$id)->first('txt_image');
+        $round_image_data="";
+        if($round_image->txt_image){
+            $round_image_data =$round_image->txt_image;
+        }
+      
         $questions_counts=[];
         foreach($rounds as $round){
             $questions_counts[$round->id]=Question::where('round_id',$round->id)->count();
               }
               $questions=Question::where('round_id',$id)->get();
               $count=0;
-        return view('quiz.round_ques_list',compact('rounds','questions','questions_counts','name','count','id'));
+        return view('quiz.round_ques_list',compact('round_image_data','rounds','questions','questions_counts','name','count','id'));
     }
 
 
     public function round_upload(Request $request,$id){
-      
+         dd($request);
          $get_quiz_id=QuizRound::where('id',$id)->get('quiz_id');
          $get_quiz_link=Quiz::where('id',$get_quiz_id[0]->quiz_id)->get();
          $quiz_link=$get_quiz_link[0]->quiz_link;
