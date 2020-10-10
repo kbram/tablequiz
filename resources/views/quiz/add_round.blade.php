@@ -65,7 +65,7 @@
 										<div class="img-container">
 											<div class="row">
 												<div class="col-md-8">
-													<img id="image" src="">
+													<img id="image" src="" style="height: 300px; width:464px">
 												</div>										
 											</div>
 										</div>
@@ -546,7 +546,7 @@
 
 	
 	var size = 2000;
-
+     var cp_count=0;
 	
        var image = document.getElementById('image');
 	   var cropper;
@@ -556,7 +556,10 @@
 
 	$('#upload__quiz__icon').on('change', function(e) { 
 		//cropper.destroy();
-		
+		if(cp_count){
+		cropper.destroy();
+        cropper = null;
+		}
 	   //$('.cropper-hide').attr('src','hih');
     /**new crop image round start*/
 	var files = e.target.files;
@@ -570,6 +573,7 @@
 	  
     });
 	console.log($('.cropper-container').attr('class'));
+	cp_count=1
     };
     var reader;
     var file;
