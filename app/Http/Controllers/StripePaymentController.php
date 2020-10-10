@@ -13,6 +13,8 @@ use App\Models\Quiz;
 use App\Models\Participant;
 use App\Models\PriceBand; 
 use App\Models\QuizRound;
+use App\Models\PaymentDetails;
+
 
 use App\Models\QuizRoundImage;
 use Exception;
@@ -95,7 +97,11 @@ if(!$payment_deatils){
     
     $payment->save();    
 
-    
+$payment_details = new PaymentDetails;
+$payment_details->user_id = Auth::id();
+$payment_details->amount =  $request->total_card ;
+$payment_details->save();
+
 
 
 
