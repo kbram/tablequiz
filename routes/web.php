@@ -251,6 +251,7 @@ Route::post('/question','Quizmaster\MasterQuestionController@postQuestion');
 Route::post('/quizsetup','Quizmaster\MasterQuestionController@store');
 Route::get('/addround/{id}','QuizRoundController@getRound');
 Route::get('dashboard/quizzes', 'Quizmaster\DashboardController@myQuiz');
+Route::get('dashboard/results', 'Quizmaster\DashboardController@results');
 
 
 
@@ -272,7 +273,7 @@ Route::post('questions/{id}/update', 'Admin\AdminQuestionController@update');
 
 //christy route can start from here
 Route::get('/dashboard/home','Quizmaster\DashboardController@index');
-Route::get('/dashboard/my-quizzes','Quizmaster\DashboardController@showMyQuizzes');
+//Route::get('/dashboard/my-quizzes','Quizmaster\DashboardController@showMyQuizzes');
 Route::get('quizzes/{id}/edit','QuizController@editQuiz');
 
 Route::get('dashboard/settings','Quizmaster\DashboardController@setting');
