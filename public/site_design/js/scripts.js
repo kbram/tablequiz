@@ -937,7 +937,9 @@ jQuery(document).ready(function ($) {
 
     $(".view-card").click(function (e) {
         var quiz=this.id;
-      
+        
+        $(".close_pay").removeClass("close_pay");
+
         $.ajax({
             type: "POST",
             url: "/payment",
@@ -970,8 +972,8 @@ jQuery(document).ready(function ($) {
                 if (data.question_cost != null) {
                     $("#modal__payment")
                         .find(".suggested-questions td:nth-child(3)")
-                        .text(data.question_cost.cost);
-                    questions_cost = data.question_cost.cost;
+                        .text(data.question_cost);
+                    questions_cost = data.question_cost;
                 } else {
                     $("#modal__payment")
                         .find(".suggested-questions td:nth-child(3)")
@@ -1036,4 +1038,11 @@ jQuery(document).ready(function ($) {
         
 
     });
+
+    $('.close_pay').click(function(){
+        window.location.href = "/dashboard/home" ;
+        
+
+    });
+
 });

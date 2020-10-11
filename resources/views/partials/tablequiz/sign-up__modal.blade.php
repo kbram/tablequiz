@@ -247,7 +247,7 @@
 
       <div class="modal-header justify-content-center d-flex">
         <h1 class="modal-title" id="publishQuizModalLabel">Your cart</h1>
-        <button type="button" class="close close_log" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close close_pay" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
 		  <a class="back_to__login" href="#"><i class="fa fa-angle-left"></i><span>Back</span></a>
