@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateUserProfile;
 use App\Models\Profile;
 use App\Models\Theme;
 use App\Models\User;
+use App\Models\UserPayment;
 use App\Notifications\SendGoodbyeEmail;
 use App\Traits\CaptureIpTrait;
 use File;
@@ -149,64 +150,76 @@ class ProfilesController extends Controller
     public function updateUserAccount(Request $request, $id)
     {
 
-        $currentUser = \Auth::user();
-        $user = User::findOrFail($id);
-        $emailCheck = ($request->input('email') !== '') && ($request->input('email') !== $user->email);
-        $ipAddress = new CaptureIpTrait();
-        $rules = [];
+$user = \Auth::user();
 
-        if ($user->name !== $request->input('name')) {
-            $usernameRules = [
-                'name' => 'required|max:255|unique:users',
-            ];
-        } else {
-            $usernameRules = [
-                'name' => 'required|max:255',
-            ];
-        }
-        if ($emailCheck) {
-            $emailRules = [
-                'email' => 'email|max:255|unique:users',
-            ];
-        } else {
-            $emailRules = [
-                'email' => 'email|max:255',
-            ];
-        }
-        $additionalRules = [
-            'first_name' => 'nullable|string|max:255',
-            'last_name'  => 'nullable|string|max:255',
-        ];
+$user -> first_name = $request->first_name ; 
+$user -> last_name = $request->last_name ; 
+$user -> name = $request->name ;
+$user -> email = $request->email ;
+$user -> password = Hash::make($request->input('password')) ;
 
-        $password_rules = [
-            'password'              => 'nullable|min:6|max:20|confirmed',
-            'password_confirmation' => 'nullable|same:password',
-        ];
+$user->save();
 
-        $rules = array_merge($usernameRules, $emailRules, $additionalRules, $password_rules);
-        $validator = Validator::make($request->all(), $rules);
+return redirect()->back();
 
-        if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
-        }
+        // $currentUser = \Auth::user();
+        // $user = User::findOrFail($id);
+        // $emailCheck = ($request->input('email') !== '') && ($request->input('email') !== $user->email);
+        // $ipAddress = new CaptureIpTrait();
+        // $rules = [];
 
-        $user->name = strip_tags($request->input('name'));
-        $user->first_name = strip_tags($request->input('first_name'));
-        $user->last_name = strip_tags($request->input('last_name'));
+        // if ($user->name !== $request->input('name')) {
+        //     $usernameRules = [
+        //         'name' => 'required|max:255|unique:users',
+        //     ];
+        // } else {
+        //     $usernameRules = [
+        //         'name' => 'required|max:255',
+        //     ];
+        // }
+        // if ($emailCheck) {
+        //     $emailRules = [
+        //         'email' => 'email|max:255|unique:users',
+        //     ];
+        // } else {
+        //     $emailRules = [
+        //         'email' => 'email|max:255',
+        //     ];
+        // }
+        // $additionalRules = [
+        //     'first_name' => 'nullable|string|max:255',
+        //     'last_name'  => 'nullable|string|max:255',
+        // ];
 
-        if ($emailCheck) {
-            $user->email = $request->input('email');
-        }
+        // $password_rules = [
+        //     'password'              => 'nullable|min:6|max:20|confirmed',
+        //     'password_confirmation' => 'nullable|same:password',
+        // ];
 
-        if ($request->input('password') !== null) {
-            $user->password = Hash::make($request->input('password'));
-        }
+        // $rules = array_merge($usernameRules, $emailRules, $additionalRules, $password_rules);
+        // $validator = Validator::make($request->all(), $rules);
 
-        $user->updated_ip_address = $ipAddress->getClientIp();
+        // if ($validator->fails()) {
+        //     return back()->withErrors($validator)->withInput();
+        // }
 
-        $user->save();
+        // $user->name = strip_tags($request->input('name'));
+        // $user->first_name = strip_tags($request->input('first_name'));
+        // $user->last_name = strip_tags($request->input('last_name'));
+
+        // if ($emailCheck) {
+        //     $user->email = $request->input('email');
+        // }
+
+        // if ($request->input('password') !== null) {
+        //     $user->password = Hash::make($request->input('password'));
+        // }
+
+        // $user->updated_ip_address = $ipAddress->getClientIp();
+
+        // $user->save();
         
-        return redirect()->back();
+        // return redirect()->back();
 
         // return redirect('profile/'.$user->name.'/edit')->with('success', trans('profile.updateAccountSuccess'));
     }
@@ -233,6 +246,24 @@ class ProfilesController extends Controller
         $user->save();
 
         return redirect('profile/'.$user->name.'/edit')->with('success', trans('profile.updatePWSuccess'));
+    }
+
+    public function updateUserpayment(Request $request, $id){
+        dd($request);
+        $payment = UserPayment::where('user_id',$id)->get()->first();
+        $payment->name = $request->card_name_;
+        $payment->street = $request->street_address_;
+        $payment->city = $request->city_;
+        $payment->country = $request->county_;
+        $payment->card_number = $request->card_number_;
+        $payment->exp_month = $request->card_month;
+        $payment->exp_year = $request->card_year;
+        $payment->cvv       = $request->card_cvv_;
+
+        $payment -> save();
+        return redirect()->back();
+
+
     }
 
     /**
