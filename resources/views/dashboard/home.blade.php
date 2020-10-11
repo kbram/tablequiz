@@ -127,7 +127,11 @@
 								</tr>
 								<tr>
 									<td>Quizzes played:</td>
+									@if(!empty($quizplayed))
 									<td>{{$quizplayed}}</td>
+									@else
+									<td>0</td>
+									@endif
 								</tr>
 								<tr>
 									<td>Last position</td>
