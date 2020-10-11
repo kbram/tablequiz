@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Quiz;
 use Illuminate\Support\Facades\Route;
 use App\Models\PriceBand;
+use App\Models\PaymentDetails;
+
 use Config;
 
 class AdminDetailsController extends Controller
@@ -61,8 +63,9 @@ class AdminDetailsController extends Controller
         foreach($quizzes as $quiz){
         $result[$quiz->id] = $quiz->user()->first()->email;
         $users[$quiz->id]=$quiz->user()->first()->name;
+        $money = PaymentDetails::sum('amount');
         }
-        return view('admin.home',compact('quizzes','result','cusers','cquzzes','users'));
+        return view('admin.home',compact('quizzes','result','cusers','cquzzes','users','money'));
         }
 }
 

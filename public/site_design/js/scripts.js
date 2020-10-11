@@ -937,7 +937,9 @@ jQuery(document).ready(function ($) {
 
     $(".view-card").click(function (e) {
         var quiz=this.id;
-      
+        
+        $(".close_pay").removeClass("close_pay");
+
         $.ajax({
             type: "POST",
             url: "/payment",
@@ -945,10 +947,10 @@ jQuery(document).ready(function ($) {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             data: {
-                count: sessionStorage.count,
                 id:quiz,
             },
             success: function (data) {
+                console.log(data.question_cost.cost);
                 $("#publishQuizModal").modal("show");
                 var participants = data.participants.no_of_participants;
                 var participants_cost = data.participants_cost[0].cost;
@@ -965,13 +967,13 @@ jQuery(document).ready(function ($) {
 
                 $("#modal__payment")
                     .find(".suggested-questions td:nth-child(2)")
-                    .text(sessionStorage.count);
+                    .text(data.question_count);
 
                 if (data.question_cost != null) {
                     $("#modal__payment")
                         .find(".suggested-questions td:nth-child(3)")
-                        .text(data.question_cost.cost);
-                    questions_cost = data.question_cost.cost;
+                        .text(data.question_cost);
+                    questions_cost = data.question_cost;
                 } else {
                     $("#modal__payment")
                         .find(".suggested-questions td:nth-child(3)")
@@ -1029,4 +1031,18 @@ jQuery(document).ready(function ($) {
     
     
     });
+
+
+    $('.close_log').click(function(){
+        window.location.href = "/" ;
+        
+
+    });
+
+    $('.close_pay').click(function(){
+        window.location.href = "/dashboard/home" ;
+        
+
+    });
+
 });
