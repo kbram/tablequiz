@@ -97,6 +97,10 @@ Route::group(['middleware' => ['auth', 'activated', 'currentUser', 'activity', '
         'as'   => '{username}',
         'uses' => 'ProfilesController@updateUserAccount',
     ]);
+
+    Route::post('profile/{id}/updateUserpayment', 'ProfilesController@updateUserpayment');
+
+
     Route::put('profile/{username}/updateUserPassword', [
         'as'   => '{username}',
         'uses' => 'ProfilesController@updateUserPassword',

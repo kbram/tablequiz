@@ -10,6 +10,7 @@ use App\Models\QuizRound;
 use App\Models\GlobalQuestion;
 use App\User; 
 use App\Models\TeamAnswer;
+use App\Models\UserPayment;
 use Auth;
 use DB;
 
@@ -92,8 +93,8 @@ class DashboardController extends Controller
     public function setting(){
 
         $user = auth()->user();
-        
-        return view('dashboard.settings',compact('user'));
+        $payment = UserPayment::where('user_id',$user->id)->first();
+        return view('dashboard.settings',compact('user','payment'));
     }
 
     public function team_result($id){
