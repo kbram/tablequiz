@@ -106,20 +106,20 @@ class DashboardController extends Controller
         );
         return response()->json($response);
     }
-    // public function showMyQuizzes(){
-    //     $quizzes=Auth::user()->quizzes()->get();
-    //     if($quizzes->isEmpty()){
-    //      return view('dashboard.my-quizzes');
-    //     }
-    //  else{
-    //      foreach($quizzes as $quiz)
-    //      { 
+    public function showMyQuizzes(){
+        $quizzes=Auth::user()->quizzes()->get();
+        if($quizzes->isEmpty()){
+         return view('dashboard.my-quizzes');
+        }
+     else{
+         foreach($quizzes as $quiz)
+         { 
             
-    //          $roundCount[$quiz->id]=$quiz->rounds()->count();
+             $roundCount[$quiz->id]=$quiz->rounds()->count();
  
-    //          $questionCounts[$quiz->id]=$quiz->questions()->count();
-    //      }
-    //      return view('dashboard.my-quizzes',compact('quizzes','roundCount','questionCounts'));
-    //  }}
+             $questionCounts[$quiz->id]=$quiz->questions()->count();
+         }
+         return view('dashboard.my-quizzes',compact('quizzes','roundCount','questionCounts'));
+     }}
     
  }
