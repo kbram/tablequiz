@@ -68,7 +68,6 @@ class QuizController extends Controller
     public function store(Request $request)
     {
         $image_data="";
-        
         $categories = QuizCategory::all();
         $questions = GlobalQuestion::all();
         $answers = GlobalAnswer::all();

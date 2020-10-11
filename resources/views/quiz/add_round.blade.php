@@ -546,7 +546,8 @@
 
 	
 	var size = 2000;
-
+     var cp_count=0;
+	 var find_class=1;
 	
        var image = document.getElementById('image');
 	   var cropper;
@@ -554,22 +555,31 @@
 
 	});
 
-	$('#upload__quiz__icon').on('change', function(e) { 
+	$('#upload__quiz__icon').on('change', function(e) {
 		//cropper.destroy();
-		
+		if(cp_count){
+		cropper.destroy();
+        cropper = null;
+		}
 	   //$('.cropper-hide').attr('src','hih');
     /**new crop image round start*/
 	var files = e.target.files;
     var done = function (url) {
 	  image.src = url;
-	  console.log($('.cropper-container').attr('class'));
+	 
      cropper = new Cropper(image, {
 	  aspectRatio: 1,
 	  viewMode: 3,
 	  preview: '.preview',
 	  
     });
-	console.log($('.cropper-container').attr('class'));
+	//setTimeout(function(){ alert("Hello"); }, 3000);
+	setTimeout(function(){ console.log($('.cropper-container').attr('class'));
+	
+		$('.cropper-container').css('left',70);
+	}, 100);
+
+	cp_count=1
     };
     var reader;
     var file;
@@ -581,10 +591,12 @@
         reader.onload = function (e) {
 			$('#round-original-image').val(e.target.result);
 			$('.cropper-hide').attr('src',e.target.result);
-			//$('.cropper-container').css('width','300px');
-			$('.cropper-container').addClass('kopikopi');
+			
+			
 			
           done(reader.result);
+		  console.log($('.cropper-container').attr('class'));
+
 		};
 		reader.readAsDataURL(file);
 
@@ -601,6 +613,8 @@
 /**new crop image round end */
 
 		size = this.files[0].size;
+		$('.cropper-container').addClass('kopikopi');
+		console.log($('.cropper-container').attr('class'));
 	});
 	$("#pro").click(function() {
 		

@@ -61,7 +61,7 @@
                                     <div class="img-container">
 											<div class="row">
 												<div class="col-md-8">
-													<img id="image" src="">
+													<img id="image" src="{{$round_image_data}}">
 												</div>										
 											</div>
 										</div>
@@ -177,15 +177,26 @@
 	
 var image = document.getElementById('image');
        var cropper;
-      
-    //    cropper = new Cropper(image, {
-	//   aspectRatio: 1,
-	//   viewMode: 3,
-	//   preview: '.preview'
-    // });
+       var cp_count=1;
+	 var find_class=1;
+
+        cropper = new Cropper(image, {
+	  aspectRatio: 1,
+	  viewMode: 3,
+	  preview: '.preview'
+     });
+     setTimeout(function(){ console.log($('.cropper-container').attr('class'));
+    $('.cropper-container').css('left',70);
+    }, 100);
+
 	$('#upload__quiz__icon').on('change', function(e) { 
-       //  $('#image').remove();
+      
     /**new crop image round start*/
+    if(cp_count){
+		cropper.destroy();
+        cropper = null;
+		}
+
 	var files = e.target.files;
     var done = function (url) {
 	  image.src = url;
@@ -195,6 +206,10 @@ var image = document.getElementById('image');
 	  viewMode: 3,
 	  preview: '.preview'
     });
+    setTimeout(function(){ console.log($('.cropper-container').attr('class'));
+    $('.cropper-container').css('left',70);
+    }, 100);
+   
     };
     var reader;
     var file;
