@@ -109,7 +109,7 @@
 								<label for="card_name_">Cardholder name</label>
 							</div>
 							<div class="col-sm-6">
-								<input class="form-control" name="card_name_" value="{{$payment->name}}" type="text" required>
+								<input class="form-control" name="card_name_" value="{{$payment->name ?? ''}}" type="text" required>
 							</div>
 						</div>
 						<div class="form-row">
@@ -117,7 +117,7 @@
 								<label for="street_address_">Street</label>
 							</div>
 							<div class="col-sm-6">
-								<input class="form-control" name="street_address_" value="{{$payment->street}}" type="text" required>
+								<input class="form-control" name="street_address_" value="{{$payment->street ?? ''}}" type="text" required>
 							</div>
 						</div>
 
@@ -126,16 +126,16 @@
 								<label for="city_">City</label>
 							</div>
 							<div class="col-sm-6">
-								<input class="form-control" name="city_" value="{{$payment->city}}" type="text" required>
+								<input class="form-control" name="city_" value="{{$payment->city ?? ''}}" type="text" required>
 							</div>
 						</div>
 
 						<div class="form-row">
 							<div class="col-sm-4">
-								<label for="county_">County</label>
+								<label for="county_">Country</label>
 							</div>
 							<div class="col-sm-6">
-								<input class="form-control" name="county_" value="{{$payment->country}}" type="text" required>
+								<input class="form-control" name="county_" value="{{$payment->country ?? ''}}" type="text" required>
 							</div>
 						</div>
 
@@ -145,7 +145,7 @@
 							</div>
 							<div class="col-sm-6">
 								<div class="input-group">
-									<input type="password" class="form-control pwd no" value="{{$payment->card_number}}" name="card_number_" required>
+									<input type="password" class="form-control pwd no" value="{{$payment->card_number ?? ''}}" name="card_number_" required>
 									<div class="input-group-append">
 										<span class="input-group-text">
 											<button class="btn btn-default reveal" id="eye_no" type="button"><i class="fas fa-eye"></i></button>
@@ -162,7 +162,7 @@
 							</div>
 							<div class="col-sm-6">
 								<div class="input-group">
-								<input type="number" class="form-control " value="{{$payment->exp_month}}" name="card_month" required>
+								<input type="number" class="form-control " value="{{$payment->exp_month ?? ''}}" name="card_month" required>
 									<div class="input-group-append">
 										
 									</div>          
@@ -176,7 +176,7 @@
 							</div>
 							<div class="col-sm-6">
 								<div class="input-group">
-									<input type="number" class="form-control " value="{{$payment->exp_year}}" name="card_year" required>
+									<input type="number" class="form-control " value="{{$payment->exp_year ?? ''}}" name="card_year" required>
 									<div class="input-group-append">
 								
 									</div>          
@@ -190,7 +190,7 @@
 							</div>
 							<div class="col-sm-2">
 								<div class="input-group">
-									<input type="password" class="form-control pwd cvv" value="{{$payment->cvv}}" maxlength="4" name="card_cvv_" required>
+									<input type="password" class="form-control pwd cvv" value="{{$payment->cvv ?? ''}}" maxlength="4" name="card_cvv_" required>
 									<div class="input-group-append">
 										<span class="input-group-text">
 											<button class="btn btn-default reveal" id="eye_cvv"type="button"><i class="fas fa-eye"></i></button>
