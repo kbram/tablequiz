@@ -39,7 +39,7 @@
 			</div>
 			<div class="row">
 				<div class="dashboard__container col">
-					<form class="settings pt-1" action="/profile/{{$user->name}}/updateUserAccount" method="post">
+					<form class="settings pt-1" action="/profile/{{$user->id}}/updateUserAccount" method="post">
 					     @csrf
 						<h3>Edit my details</h3>
 						<div class="form-row mt-4">
@@ -141,20 +141,11 @@
 
 						<div class="form-row">
 							<div class="col-sm-4">
-								<label for="country_">Country</label>
-							</div>
-							<div class="col-sm-6">
-								<input class="form-control" name="country_" value="{{$payment->country}}" type="text" required>
-							</div>
-						</div>
-
-						<div class="form-row">
-							<div class="col-sm-4">
 								<label for="card_number_">Card Number</label>
 							</div>
 							<div class="col-sm-6">
 								<div class="input-group">
-									<input type="password" class="form-control pwd no" value="4104554345029981" name="card_number_" required>
+									<input type="password" class="form-control pwd no" value="{{$payment->card_number}}" name="card_number_" required>
 									<div class="input-group-append">
 										<span class="input-group-text">
 											<button class="btn btn-default reveal" id="eye_no" type="button"><i class="fas fa-eye"></i></button>
@@ -171,7 +162,7 @@
 							</div>
 							<div class="col-sm-6">
 								<div class="input-group">
-								<input type="number" class="form-control " value="" name="card_month" required>
+								<input type="number" class="form-control " value="{{$payment->exp_month}}" name="card_month" required>
 									<div class="input-group-append">
 										
 									</div>          
@@ -185,7 +176,7 @@
 							</div>
 							<div class="col-sm-6">
 								<div class="input-group">
-									<input type="number" class="form-control " value="" name="card_year" required>
+									<input type="number" class="form-control " value="{{$payment->exp_year}}" name="card_year" required>
 									<div class="input-group-append">
 								
 									</div>          
@@ -199,7 +190,7 @@
 							</div>
 							<div class="col-sm-2">
 								<div class="input-group">
-									<input type="password" class="form-control pwd cvv" value="332" maxlength="4" name="card_cvv_" required>
+									<input type="password" class="form-control pwd cvv" value="{{$payment->cvv}}" maxlength="4" name="card_cvv_" required>
 									<div class="input-group-append">
 										<span class="input-group-text">
 											<button class="btn btn-default reveal" id="eye_cvv"type="button"><i class="fas fa-eye"></i></button>

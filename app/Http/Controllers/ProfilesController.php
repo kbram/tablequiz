@@ -249,7 +249,7 @@ return redirect()->back();
     }
 
     public function updateUserpayment(Request $request, $id){
-        dd($request);
+        
         $payment = UserPayment::where('user_id',$id)->get()->first();
         $payment->name = $request->card_name_;
         $payment->street = $request->street_address_;
