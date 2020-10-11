@@ -579,10 +579,6 @@
 		$('.cropper-container').css('left',70);
 	}, 100);
 
-	
-	$('.cropper-container').css('left',70);
-			console.log($('.cropper-container').attr('class'));
-
 	cp_count=1
     };
     var reader;
