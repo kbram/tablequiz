@@ -180,7 +180,7 @@ $(document).ready(function() {
         }
         
         if(ti==0 || ti==null){
-            $(".timer").html("Not setxx");
+            $(".timer").html("Not set");
             if(sessionStorage.getItem("stop")=="null"){
                 $('#resub1').empty();
                 $('.single__answer').css('cursor','not-allowed');
@@ -624,8 +624,8 @@ $(document).ready(function() {
             clearInterval(countDown);
         }
     });
-    var channel1 = pusher.subscribe('my-channel2');
-    channel1.bind('form-submitted2', function(data) {
+    var channel2 = pusher.subscribe('my-channel2');
+    channel2.bind('form-submitted2', function(data) {
         var quizId = data.text;
         var qid=$('#quizid').text();
         if(parseInt(quizId)===parseInt(qid)){
@@ -636,8 +636,8 @@ $(document).ready(function() {
         }
     });
     
-    var channel1 = pusher.subscribe('my-channel3');
-    channel1.bind('form-submitted3', function(data) {       
+    var channel3 = pusher.subscribe('my-channel3');
+    channel3.bind('form-submitted3', function(data) {       
         qustno=issueq.length-1;
         quseee=issueq.length-1;
         $("#next").hide();
@@ -1036,8 +1036,8 @@ $(document).ready(function() {
                 }, 1000);
             }
 
-            var channel1 = pusher.subscribe('my-channel1');
-            channel1.bind('form-submitted1', function(data) {
+            var channel2 = pusher.subscribe('my-channel1');
+            channel2.bind('form-submitted1', function(data) {
                 var quizId = data.text;
                 var qid=$('#quizid').text();
                 if(parseInt(quizId)===parseInt(qid)){
@@ -1051,8 +1051,8 @@ $(document).ready(function() {
                     clearInterval(countDown);
                 }
             });
-            var channel1 = pusher.subscribe('my-channel2');
-            channel1.bind('form-submitted2', function(data) {
+            var channel3 = pusher.subscribe('my-channel2');
+            channel3.bind('form-submitted2', function(data) {
                 var quizId = data.text;
                 var qid=$('#quizid').text();
                 if(parseInt(quizId)===parseInt(qid)){
@@ -1063,8 +1063,8 @@ $(document).ready(function() {
                 }
             });
     
-            var channel1 = pusher.subscribe('my-channel3');
-            channel1.bind('form-submitted3', function(data) {
+            var channel4 = pusher.subscribe('my-channel3');
+            channel4.bind('form-submitted3', function(data) {
                 swal("Teacher share your Answer !",'you can get your results...', "info");
                 qustno=issueq.length-1;
                 quseee=issueq.length-1;

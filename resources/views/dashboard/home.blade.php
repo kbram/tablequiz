@@ -127,7 +127,7 @@
 								</tr>
 								<tr>
 									<td>Quizzes played:</td>
-									<td>222</td>
+									<td>{{$quizplayed}}</td>
 								</tr>
 								<tr>
 									<td>Last position</td>

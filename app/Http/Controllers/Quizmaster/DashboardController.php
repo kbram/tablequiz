@@ -38,7 +38,8 @@ class DashboardController extends Controller
             }else{
                 $teamNames=DB::table('team_answers')->where('quiz_id',$lastQuiz->quiz_id)->where('status','1')->select('team_name', DB::raw('count(*) as total'))->groupBy('team_name')->orderBy('total','desc')->limit(3)->get();
                 $teamcount=DB::table('team_answers')->where('quiz_id',$lastQuiz->quiz_id)->select('team_name')->groupBy('team_name')->get()->count();
-                return view('dashboard.home',compact('quizzes','roundCount','questionCounts','teamNames','lastQuiz','teamcount'));
+                $quizplayed=DB::table('team_answers')->select('quiz_id')->groupBy('quiz_id')->get()->count();
+                return view('dashboard.home',compact('quizzes','roundCount','questionCounts','teamNames','lastQuiz','teamcount','quizplayed'));
             }
             
         }
