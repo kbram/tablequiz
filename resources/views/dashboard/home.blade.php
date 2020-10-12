@@ -79,7 +79,7 @@
 										@foreach($teamNames as $teamName)
 										<tr>
 											@foreach($quizzes as $quiz)
-												@if($quiz->id==$lastQuiz->quiz_id)
+												@if($quiz->id==$lastQuiz->id)
 													<td>{{$quiz->quiz__name}}</td>
 												@endif
 											@endforeach
@@ -258,18 +258,9 @@
 	</div>
 </section>
 @endsection
-@section('footer_scripts')
- <style>
 
-/* :root {
-	--footerHeight: 200px;
-} */
-/* @media (min-width: 992px) {
-	:root {
-		--footerHeight: 160px;
-	}
-} */
-</style> 
+@section('footer_scripts')
+
 @include('scripts.share-quiz')
 @include('scripts.quiz-icon-preview')
 

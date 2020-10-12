@@ -25,7 +25,8 @@ class DashboardController extends Controller
     }
     public function index(){
         $quizzes=Auth::user()->quizzes()->paginate(5);
-        $lastQuiz=DB::table('team_answers')->orderBy('created_at','desc')->first();
+        
+        $lastQuiz=DB::table('team_answers')->join('quizzes','team_answers.quiz_id','quizzes.id')->where('quizzes.user_id',Auth::user()->id)->orderBy('team_answers.created_at','desc')->first();
         if($quizzes->isEmpty()){
             return view('dashboard.home');
         }
@@ -37,9 +38,9 @@ class DashboardController extends Controller
             if(!$lastQuiz){
                 return view('dashboard.home',compact('quizzes','roundCount','questionCounts'));
             }else{
-                $teamNames=DB::table('team_answers')->where('quiz_id',$lastQuiz->quiz_id)->where('status','1')->select('team_name', DB::raw('count(*) as total'))->groupBy('team_name')->orderBy('total','desc')->limit(3)->get();
-                $teamcount=DB::table('team_answers')->where('quiz_id',$lastQuiz->quiz_id)->select('team_name')->groupBy('team_name')->get()->count();
-                $quizplayed=DB::table('team_answers')->select('quiz_id')->groupBy('quiz_id')->get()->count();
+                $teamNames=DB::table('team_answers')->where('quiz_id',$lastQuiz->id)->where('status','1')->select('team_name', DB::raw('count(*) as total'))->groupBy('team_name')->orderBy('total','desc')->limit(3)->get();
+                $teamcount=DB::table('team_answers')->where('quiz_id',$lastQuiz->id)->select('team_name')->groupBy('team_name')->get()->count();
+                $quizplayed=DB::table('team_answers')->where('quiz_id',$lastQuiz->id)->select('quiz_id')->groupBy('quiz_id')->get()->count();
                 return view('dashboard.home',compact('quizzes','roundCount','questionCounts','teamNames','lastQuiz','teamcount','quizplayed'));
             }
             
@@ -106,20 +107,20 @@ class DashboardController extends Controller
         );
         return response()->json($response);
     }
-    // public function showMyQuizzes(){
-    //     $quizzes=Auth::user()->quizzes()->get();
-    //     if($quizzes->isEmpty()){
-    //      return view('dashboard.my-quizzes');
-    //     }
-    //  else{
-    //      foreach($quizzes as $quiz)
-    //      { 
+    public function showMyQuizzes(){
+        $quizzes=Auth::user()->quizzes()->get();
+        if($quizzes->isEmpty()){
+         return view('dashboard.my-quizzes');
+        }
+     else{
+         foreach($quizzes as $quiz)
+         { 
             
-    //          $roundCount[$quiz->id]=$quiz->rounds()->count();
+             $roundCount[$quiz->id]=$quiz->rounds()->count();
  
-    //          $questionCounts[$quiz->id]=$quiz->questions()->count();
-    //      }
-    //      return view('dashboard.my-quizzes',compact('quizzes','roundCount','questionCounts'));
-    //  }}
+             $questionCounts[$quiz->id]=$quiz->questions()->count();
+         }
+         return view('dashboard.my-quizzes',compact('quizzes','roundCount','questionCounts'));
+     }}
     
  }

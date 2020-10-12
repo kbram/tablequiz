@@ -17,9 +17,13 @@
 
 
 //Image Rotate
-var angle = 360,
-  img = document.getElementById('round_image');
-document.getElementById('rotate').onclick = function() {
+var angle = 360;
+  //img = document.getElementById('image');
+
+document.getElementById('rotate').onclick = function() { 
+  var img = document.getElementsByClassName('cropper-hide'); console.log(img);
+     $('.cropper-hide').addClass('kopi');
+     $('.cropper-hide').css('transform','rotate('+angle+'deg)');
   angle = (angle - 90) % 360;
  img.style.transform = 'rotate('+angle+'deg)';
 }
@@ -27,7 +31,7 @@ document.getElementById('rotate').onclick = function() {
 
 
 
-  $(document).ready(function() {
+  $(document).ready(function() { 
     function readURL(input) {
   if (input.files && input.files[0]) {
     var reader = new FileReader();
@@ -59,12 +63,13 @@ $("#upload__quiz__icon").change(function() {
 
 <script>
     var zoomer = document.getElementById('zoomer');
-var hubblepic = document.getElementById('round_image');
+var hubblepic = document.getElementById('image');
 
-function deepdive(){ 
-	zoomlevel = zoomer.valueAsNumber;
-  hubblepic.style.webkitTransform = "scale("+zoomlevel+")";
-	hubblepic.style.transform = "scale("+zoomlevel+")";
+function deepdive(){   hubblepic =$('.cropper-hide');
+  zoomlevel = zoomer.valueAsNumber;
+  $('.cropper-hide').css('transform','scale('+zoomlevel+')');
+  // hubblepic.style.webkitTransform = "scale("+zoomlevel+")";
+	// hubblepic.style.transform = "scale("+zoomlevel+")";
 }
 </script>
 <style>
@@ -169,7 +174,7 @@ function dragElement(elmnt) {
 
 
 <style>
-	.container {
+	/* .container {
   margin-top: 50px;
   cursor: move;
 
@@ -182,6 +187,6 @@ function dragElement(elmnt) {
   height: 200px;
   clear: both;
   border: 1px solid black;
-}
+} */
 
 </style>

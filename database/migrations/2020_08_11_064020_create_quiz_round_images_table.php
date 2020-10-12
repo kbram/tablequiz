@@ -19,6 +19,7 @@ class CreateQuizRoundImagesTable extends Migration
             $table->string('local_path');
             $table->string('public_path');
             $table->string('thumb_path');
+            $table->mediumText('txt_image')->nullable();
             $table->bigInteger('round_id')->unsigned();
             $table->foreign('round_id')->references('id')->on('quiz_rounds')->onDelete('cascade');
             $table->timestamps();
