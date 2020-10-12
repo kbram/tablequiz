@@ -31,7 +31,7 @@ class WelcomeMail extends Mailable
     public function build()
     {
         $subject = 'Welcome';
-        return $this->view('emails.pp')->subject($subject);
+        return $this->view('emails.welcomemail')->subject($subject);
     
       
     }
