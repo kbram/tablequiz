@@ -33,7 +33,7 @@
         @yield('template_linked_css')
 
         <style type="text/css">
-            @yield('template_fastload_css')
+            @yield('template_fastload_css');
 
         </style>
 
@@ -48,7 +48,7 @@
         @yield('head')
         
     </head>
-    <body style="overflow-x: visible;">
+    <body>
  
     
         @include('partials.tablequiz.head')

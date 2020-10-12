@@ -169,19 +169,19 @@ function dragElement(elmnt) {
 
 
 <style>
-	.container {
+	/* .container {
   margin-top: 50px;
   cursor: move;
 
   
-}
-
+} */
+/* 
 #screen {
   overflow: hidden;
   width: 200px;
   height: 200px;
   clear: both;
   border: 1px solid black;
-}
+} */
 
 </style>
