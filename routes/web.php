@@ -277,7 +277,7 @@ Route::post('questions/{id}/update', 'Admin\AdminQuestionController@update');
 
 //christy route can start from here
 Route::get('/dashboard/home','Quizmaster\DashboardController@index');
-//Route::get('/dashboard/my-quizzes','Quizmaster\DashboardController@showMyQuizzes');
+Route::get('/dashboard/my-quizzes','Quizmaster\DashboardController@showMyQuizzes');
 Route::get('quizzes/{id}/edit','QuizController@editQuiz');
 
 Route::get('dashboard/settings','Quizmaster\DashboardController@setting');

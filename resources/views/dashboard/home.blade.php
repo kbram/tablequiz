@@ -79,7 +79,7 @@
 										@foreach($teamNames as $teamName)
 										<tr>
 											@foreach($quizzes as $quiz)
-												@if($quiz->id==$lastQuiz->quiz_id)
+												@if($quiz->id==$lastQuiz->id)
 													<td>{{$quiz->quiz__name}}</td>
 												@endif
 											@endforeach
