@@ -630,7 +630,7 @@
 /**crop image round save btn end */
 
 		var s = $('#upload__quiz__icon').val();
-		s = Math.round(size / 100);
+		s = Math.round(size / 1000);
 		if (s == "") {
 
 		} else {
@@ -672,7 +672,7 @@
 	$("#pro1").click(function() {
 		var s = $('#upload__image__media__file').val();
 		var s1 = $('#add__image__media__text').val();
-		s = Math.round(size1 / 100);
+		s = Math.round(size1 / 1000);
 		if (s == "" && s1 == "") {
 
 		} else {
@@ -715,7 +715,7 @@
 	$("#pro2").click(function() {
 		var s = $('#upload__audio__media__file').val();
 		var s1 = $('#add__audio__media__text').val();
-		s = Math.round(size2 / 100);
+		s = Math.round(size2 / 1000);
 		if (s == "" && s1 == "") {
 
 		} else {
@@ -756,7 +756,7 @@
 	$("#pro3").click(function() {
 		var s = $('#upload__video__media__file').val();
 		var s1 = $('#add__video__media__text').val();
-		s = Math.round(size3 / 100);
+		s = Math.round(size3 / 1000);
 		if (s == "" && s1 == "") {
 
 		} else {
