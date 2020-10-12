@@ -60,8 +60,8 @@
                                     <div class="modal__edit__image position-relative border">
                                     <div class="img-container">
 											<div class="row">
-												<div class="col-md-8">
-													<img id="image" src="{{$round_image_data}}">
+												<div class="col-md-12">
+													<img id="image" src="{{$round_image_data}}" height="300px">
 												</div>										
 											</div>
 										</div>
@@ -186,7 +186,7 @@ var image = document.getElementById('image');
 	  preview: '.preview'
      });
      setTimeout(function(){ console.log($('.cropper-container').attr('class'));
-    $('.cropper-container').css('left',70);
+    //$('.cropper-container').css('left',70);
     }, 100);
 
 	$('#upload__quiz__icon').on('change', function(e) { 
