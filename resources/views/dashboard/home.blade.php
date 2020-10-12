@@ -261,9 +261,9 @@
 @section('footer_scripts')
  <style>
 
-:root {
+/* :root {
 	--footerHeight: 200px;
-}
+} */
 /* @media (min-width: 992px) {
 	:root {
 		--footerHeight: 160px;

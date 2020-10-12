@@ -524,12 +524,12 @@
 
 @section('footer_scripts')
 <style>
-@media (min-width: 992px) {
+/* @media (min-width: 992px) {
      :root {
         --gutter: calc((100vw - 960px) / 2);
         --footerHeight: 205px;
     }
-}
+} */
 </style>
 <script>    
 var size=2000;

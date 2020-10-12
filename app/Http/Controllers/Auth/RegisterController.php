@@ -12,6 +12,9 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use jeremykenedy\LaravelRoles\Models\Role;
+use App\Mail\WelcomeMail;
+use Illuminate\Support\Facades\Mail;
+
 use Session;
 
 class RegisterController extends Controller
@@ -137,7 +140,19 @@ class RegisterController extends Controller
 
         $profile = new Profile();
         $user->profile()->save($profile);
+
+        $email = $data['email'];
+        $maildata = ([
+            'name' => strip_tags($data['first_name']),
+            'email' => $email,
+            'username' => strip_tags($data['name']),
+            'message' => 'hi'
+            ]);
+
+        Mail::to($email)->send(new WelcomeMail($maildata));
+
         $user->save();
+
         Session::put('quizmaster','master');
         if(Session::has('quiz')){
         app('App\Http\Controllers\QuizController')->AfterLogin($user->id);
