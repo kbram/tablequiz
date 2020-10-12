@@ -2,6 +2,7 @@
 //bavaram
 
 $(document).ready(function() { 
+    /**after refresh start*/
     $(".timer").html("Wait.....");
     $("#pre").hide();
     $("#next").hide();
@@ -143,7 +144,7 @@ $(document).ready(function() {
 
             //send answer
 
-            $('.answer_submit').on('click',function(e){
+            $('.answer_submit').on('click',function(e){ 
                 e.preventDefault();  
                 var answer = $('#answer');
                 var aa=$('#answer').serializeArray();
@@ -165,13 +166,23 @@ $(document).ready(function() {
                     $('#resub').css('opacity','0.4');
                     $('.single__answer').css('cursor','not-allowed');
                     $('.single__answer').css('pointer-events','none');
+
+                    //answer media add start
+                    /*after refresh */
+                    var formdata = new FormData($("#answer")[0]);
+                   
                     $.ajax({
                         type: "POST",
                         url: "/playquiz/answer",
                         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                        data: $('#answer').serialize(),
+                        data: formdata,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        enctype: 'multipart/form-data',
                         
-                        success: function(data) {
+                        success: function(data) { console.log('hihi');
+                          console.log(formdata);
                             swal("Answer Submited!",'wait for the next ...', "success");
                         },
                     });
@@ -862,7 +873,7 @@ $(document).ready(function() {
             $('h4.notification').text('');
         }
     });
-
+/**after play push */
 	var channel = pusher.subscribe('my-channel');
 	channel.bind('form-submitted', function(data) {
         var qid=$('#quizid').text();
@@ -978,7 +989,7 @@ $(document).ready(function() {
                     "</form>";	
                 } 
             }else if(type == "standard__question"){
-                text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+                text0 += "<form action='/playquiz/answer' method='post' id='"+answerId[i]+"' enctype='multipart/form-data' role='main' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
                     "<div class='form-group'>"+
                     "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
                     "<input type='text' name='answer_id' hidden value='"+answerId[0]+"'/>"+
@@ -989,7 +1000,19 @@ $(document).ready(function() {
                     "<input type='text' name='teamname' hidden value='{{ Session::get('teamname')}}'/>"+
                     "<input type='text' class='form-control' name='answer' placeholder='Enter answer'/>"+
                     "</div>"+
-                    "</form>";	 
+                   
+                    /*add media file start*/
+                    "<div class='form-group'>"+
+                    "<div class='form-row justify-content-center pt-3'>"+
+						"<div class='col-md-8'>"+
+								"<label class='d-block' for='upload__image__media__file'>Upload"+
+									"<input type='file' class='form-control-file' id='upload__image__media__file' value='Upload' name='media_file'>"+
+                                "</label>"+
+						"</div>"+
+					"</div>"+
+                      "</div>"+
+                        "</form>";
+                    /*add media file end*/	 
             }else if(type == "numeric__question"){
                 text0 += "<form action='/playquiz/answer' method='post' name='form' id='"+answerId[i]+"' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
                     "<div class='form-group'>"+
@@ -1338,12 +1361,20 @@ $(document).ready(function() {
                 $('#resub').css('opacity','0.4');
                 $('.single__answer').css('cursor','not-allowed');
                 $('.single__answer').css('pointer-events','none');
+                 
+                 /*before refresh */
+                 console.log('before refresh');  
+                 var formdata = new FormData($("#answer")[0]);
 
                 $.ajax({
                     type: "POST",
                     url: "/playquiz/answer",
                     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                    data: $('#answer').serialize(),
+                    data: formdata,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        enctype: 'multipart/form-data',
                     
                     success: function(data) {
                         swal("Answer Submited!",'wait for the next ...', "success")
@@ -1402,7 +1433,7 @@ $(document).ready(function() {
     });
 });
 $("#exit").click(function() {
-    '{{Session::forget('teamname')}}'
-    window.location.replace("/");
+    
+    window.location.replace("/exitquiz");
 });
 </script>

@@ -10,7 +10,7 @@ use App\Models\QuizRound;
 use App\Models\Question;
 use App\Models\Answer;
 use Image;
-
+use File;
 use App\Models\QuizTeam;
 use App\Models\TeamAnswer;
 use App\Models\QuizSetupIcon;
@@ -164,6 +164,19 @@ else{
     }
 //answer
 public function answer(Request $request){
+
+    $answer_path=0;
+    if ($request->hasFile('media_file')) {
+        $answer_image = $request->file('media_file');
+        $filename = $request->teamname.'.'.$answer_image->getClientOriginalExtension();
+        $save_path = storage_path('app/public') . '/answer/' .$request->teamname;
+        File::makeDirectory($save_path, $mode = 0755, true, true);
+        $answer_image ->move($save_path, $filename); 
+        $answer_path=$save_path.'/'.$filename;
+    }
+       
+
+
         $quiz_id = $request->input('quiz');
         $round_id = $request->input('round');
         $question_id = $request->input('question');
@@ -222,8 +235,11 @@ public function answer(Request $request){
         
         $team_answer -> team_name = $user;
         $team_answer -> answer_id = $user_answer_id ;
-        $team_answer -> answer = $user_answer;
-
+        if($answer_path){
+            $team_answer -> answer = $answer_path;
+        }else{
+            $team_answer -> answer = $user_answer;
+        } 
         $team_answer -> question_id = $question_id ;
         $team_answer -> quiz_id = $quiz_id ;
         $team_answer -> round_id = $round_id;
@@ -261,4 +277,8 @@ $saveanswer -> save();
 }
 }
 
+public function exitquiz(){
+    Session::forget('teamname');
+     return view('home2');
+}
 }

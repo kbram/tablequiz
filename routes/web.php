@@ -312,6 +312,7 @@ Route::post('stripe', 'StripePaymentController@stripePost')->name('stripe.post')
 
 
 Route::get('play/{quiz_name}','Quizmaster\PlayController@selecturl');
+Route::get('/exitquiz','Quizmaster\PlayController@exitquiz');
 
 
 //TEST
