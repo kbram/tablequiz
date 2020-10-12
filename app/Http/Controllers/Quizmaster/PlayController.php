@@ -260,5 +260,10 @@ $saveanswer -> save();
 
 }
 }
+public function exitquiz(){
+    Session::forget('teamname');
+    return view('home2');
+    }
+
 
 }

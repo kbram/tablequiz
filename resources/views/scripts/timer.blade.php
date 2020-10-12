@@ -1402,7 +1402,6 @@ $(document).ready(function() {
     });
 });
 $("#exit").click(function() {
-    '{{Session::forget('teamname')}}'
-    window.location.replace("/");
+    window.location.replace("/exitquiz");
 });
 </script>

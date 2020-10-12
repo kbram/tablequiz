@@ -64,8 +64,8 @@
 
 										<div class="img-container">
 											<div class="row">
-												<div class="col-md-8">
-													<img id="image" src="">
+												<div class="col-md-12">
+													<img id="image" src="" height="300px">
 												</div>										
 											</div>
 										</div>
@@ -84,16 +84,16 @@
 												</div>
 											</div>
 										</div>
-										<div class="form-row">
+										<!-- <div class="form-row">
 											<div class="col-3">
 												<label for="formControlRange"><small>Edit size</small></label>
 											</div>
 											<div class="col-9">
-												<!-- <input type="range" min="1" max="100" class="form-control-range" id="formControlRange"> -->
+												<input type="range" min="1" max="100" class="form-control-range" id="formControlRange"> 
 												<input type="range" class="form-control-range slider" min="1" max="4" value="1" step="0.1" id="zoomer" oninput="deepdive()">
 											
 											</div>
-										</div>
+										</div> -->
 									</div>
 								</div>
 								<div class="modal-footer justify-content-center row no-gutters align-items-stretch">
@@ -561,7 +561,7 @@
 	  image.src = url;
 	 
      cropper = new Cropper(image, {
-	  aspectRatio: 1,
+	  aspectRatio: 3/2,
 	  viewMode: 3,
 	  preview: '.preview',
 	  
@@ -569,7 +569,7 @@
 	//setTimeout(function(){ alert("Hello"); }, 3000);
 	setTimeout(function(){ console.log($('.cropper-container').attr('class'));
 	
-		$('.cropper-container').css('left',70);
+		//$('.cropper-container').css('left',70);
 	}, 100);
 
 	cp_count=1
