@@ -66,41 +66,48 @@
 
 					<div class="dashboard__container flex-grow-1 p-0">
 						<table class="table table-striped table-borderless latest__results m-0 h-100">
-							<thead>
-								<tr>
-									<th>Quiz name</th>
-									<th>Team name</th>
-									<th>Position</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>MadDog's Geograph Quiz</td>
-									<td>Quzzington F.c.</td>
-									<td>11<sup>th</sup></td>
-								</tr>
-								
-								<tr>
-									<td>MadDog's Geograph Quiz</td>
-									<td>Quzzington F.c.</td>
-									<td>1<sup>st</sup>
-										<span class="trophy first"><i class="fas fa-trophy"></i>
-										</span>
-									</td>
-								</tr>
-								
-								<tr>
-									<td>MadDog's Geograph Quiz</td>
-									<td>Quzzington F.c.</td>
-									<td>11<sup>th</sup></td>
-								</tr>
-							</tbody>
-							<tfoot>
-								<tr>
-									<td colspan="2"></td>
-									<td class="text-right text-muted"><small><a href="#">View more</a></small></td>
-								</tr>
-							</tfoot>
+							@if(!empty($lastQuiz))
+								<thead>
+									<tr>
+										<th>Quiz name</th>
+										<th>Team name</th>
+										<th>Position</th>
+									</tr>
+								</thead>
+								<tbody>
+									@php $pos = ['st','nd','rd','th','th','th','th','th','th']; $x=1; @endphp
+										@foreach($teamNames as $teamName)
+										<tr>
+											@foreach($quizzes as $quiz)
+												@if($quiz->id==$lastQuiz->id)
+													<td>{{$quiz->quiz__name}}</td>
+												@endif
+											@endforeach
+											<td>{{$teamName->team_name}}</td>
+											@if($x==1)
+												<td>{{$x}}<sup>{{$pos[$x-1]}}</sup><span class="trophy first"><i class="fas fa-trophy"></i>
+											</span></td>
+											@else
+												<td>{{$x}}<sup>{{$pos[$x-1]}}</sup></td>
+											@endif
+											@php $x=$x+1; @endphp
+										</tr>
+										@endforeach
+									
+								</tbody>
+
+								<tfoot>
+									<tr>
+										<td colspan="2"></td>
+										<td class="text-right text-muted"><small><a href="/dashboard/results">View more</a></small></td>
+									</tr>
+								</tfoot>
+							@else
+							<br>
+							<br>
+								<h4 class="pt-3 pl-3 text-center">Any Result not Found</h4>					
+								<br><br>
+							@endif	
 						</table>
 					</div>
 				</div>
@@ -120,11 +127,20 @@
 								</tr>
 								<tr>
 									<td>Quizzes played:</td>
-									<td>222</td>
+									@if(!empty($quizplayed))
+									<td>{{$quizplayed}}</td>
+									@else
+									<td>0</td>
+									@endif
 								</tr>
 								<tr>
 									<td>Last position</td>
-									<td>23<sup>rd</sup></td>
+									@if(!empty($teamcount))
+									<td>{{$teamcount}}<sup>{{$pos[$teamcount%10-1]}}</sup></td>
+									@else
+
+									<td>0</td>
+									@endif
 								</tr>
 								
 								
@@ -242,18 +258,9 @@
 	</div>
 </section>
 @endsection
-@section('footer_scripts')
- <style>
 
-:root {
-	--footerHeight: 200px;
-}
-/* @media (min-width: 992px) {
-	:root {
-		--footerHeight: 160px;
-	}
-} */
-</style> 
+@section('footer_scripts')
+
 @include('scripts.share-quiz')
 @include('scripts.quiz-icon-preview')
 

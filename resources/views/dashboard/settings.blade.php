@@ -39,7 +39,7 @@
 			</div>
 			<div class="row">
 				<div class="dashboard__container col">
-					<form class="settings pt-1" action="/profile/{{$user->id }}/updateUserAccount" method="post">
+					<form class="settings pt-1" action="/profile/{{$user->id}}/updateUserAccount" method="post">
 					     @csrf
 						<h3>Edit my details</h3>
 						<div class="form-row mt-4">
@@ -47,7 +47,7 @@
 								<label for="first_name_">First name</label>
 							</div>
 							<div class="col-sm-6">
-								<input class="form-control" name="first_name" value="{{$user->first_name}}">
+								<input class="form-control" name="first_name" value="{{$user->first_name}}" required>
 							</div>
 						</div>
 						<div class="form-row">
@@ -55,7 +55,7 @@
 								<label for="last_name_">Last name</label>
 							</div>
 							<div class="col-sm-6">
-								<input class="form-control" name="last_name" value="{{$user->last_name}}">
+								<input class="form-control" name="last_name" value="{{$user->last_name}}" required>
 							</div>
 						</div>
 						<div class="form-row">
@@ -63,7 +63,7 @@
 								<label for="username_">Username</label>
 							</div>
 							<div class="col-sm-6">
-								<input class="form-control" name="name" value="{{$user->name}}">
+								<input class="form-control" name="name" value="{{$user->name}}" required>
 							</div>
 						</div>
 						<div class="form-row">
@@ -71,7 +71,7 @@
 								<label for="username_">Email address</label>
 							</div>
 							<div class="col-sm-6">
-								<input class="form-control" name="email" value="{{$user->email}}" type="email">
+								<input class="form-control" name="email" value="{{$user->email}}" type="email" required>
 							</div>
 						</div>
 						<div class="form-row">
@@ -79,7 +79,7 @@
 								<label for="confirm_password_">Password</label>
 							</div>
 							<div class="col-sm-6">
-								<input class="form-control" name="password" value="" type="password">
+								<input class="form-control" name="password" value="" type="password" required>
 							</div>
 						</div>
 						<div class="form-row">
@@ -87,7 +87,7 @@
 								<label for="confirm_password_">Confirm password</label>
 							</div>
 							<div class="col-sm-6">
-								<input class="form-control" name="password_confirmation" value="" type="password">
+							<input class="form-control" name="password" value="" type="password" required>
 							</div>
 						</div>
 						<div class="form-row d-flex justify-content-center pt-4 mb-0">
@@ -101,14 +101,15 @@
 			</div>
 			<div class="row mt-3">
 				<div class="dashboard__container col">
-					<form class="Settings pt-1">
+					<form class="Settings pt-1" action="/profile/{{$user->id}}/updateUserpayment" method="post">
+					@csrf
 						<h3>Payment details</h3>
 						<div class="form-row mt-4">
 							<div class="col-sm-4">
 								<label for="card_name_">Cardholder name</label>
 							</div>
 							<div class="col-sm-6">
-								<input class="form-control" name="card_name_" value="Senan Cronin" type="text">
+								<input class="form-control" name="card_name_" value="{{$payment->name ?? ''}}" type="text" required>
 							</div>
 						</div>
 						<div class="form-row">
@@ -116,7 +117,7 @@
 								<label for="street_address_">Street</label>
 							</div>
 							<div class="col-sm-6">
-								<input class="form-control" name="street_address_" value="The Paint Box" type="text">
+								<input class="form-control" name="street_address_" value="{{$payment->street ?? ''}}" type="text" required>
 							</div>
 						</div>
 
@@ -125,25 +126,16 @@
 								<label for="city_">City</label>
 							</div>
 							<div class="col-sm-6">
-								<input class="form-control" name="city_" value="Barna" type="text">
+								<input class="form-control" name="city_" value="{{$payment->city ?? ''}}" type="text" required>
 							</div>
 						</div>
 
 						<div class="form-row">
 							<div class="col-sm-4">
-								<label for="county_">County</label>
+								<label for="county_">Country</label>
 							</div>
 							<div class="col-sm-6">
-								<input class="form-control" name="county_" value="Co. Galway" type="text">
-							</div>
-						</div>
-
-						<div class="form-row">
-							<div class="col-sm-4">
-								<label for="country_">Country</label>
-							</div>
-							<div class="col-sm-6">
-								<input class="form-control" name="country_" value="Ireland" type="text">
+								<input class="form-control" name="county_" value="{{$payment->country ?? ''}}" type="text" required>
 							</div>
 						</div>
 
@@ -153,11 +145,40 @@
 							</div>
 							<div class="col-sm-6">
 								<div class="input-group">
-									<input type="password" class="form-control pwd no" value="4104554345029981" name="card_number_">
+									<input type="password" class="form-control pwd no" value="{{$payment->card_number ?? ''}}" name="card_number_" required>
 									<div class="input-group-append">
 										<span class="input-group-text">
 											<button class="btn btn-default reveal" id="eye_no" type="button"><i class="fas fa-eye"></i></button>
 										</span>
+									</div>          
+								</div>
+							</div>
+						</div>
+
+
+						<div class="form-row">
+							<div class="col-sm-4">
+								<label for="card_number_">Card expiry Month </label>
+							</div>
+							<div class="col-sm-6">
+								<div class="input-group">
+								<input type="number" class="form-control " value="{{$payment->exp_month ?? ''}}" name="card_month" required>
+									<div class="input-group-append">
+										
+									</div>          
+								</div>
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class="col-sm-4">
+								<label for="card_number_">Card expiry Year </label>
+							</div>
+							<div class="col-sm-6">
+								<div class="input-group">
+									<input type="number" class="form-control " value="{{$payment->exp_year ?? ''}}" name="card_year" required>
+									<div class="input-group-append">
+								
 									</div>          
 								</div>
 							</div>
@@ -169,7 +190,7 @@
 							</div>
 							<div class="col-sm-2">
 								<div class="input-group">
-									<input type="password" class="form-control pwd cvv" value="332" maxlength="4" name="card_cvv_">
+									<input type="password" class="form-control pwd cvv" value="{{$payment->cvv ?? ''}}" maxlength="4" name="card_cvv_" required>
 									<div class="input-group-append">
 										<span class="input-group-text">
 											<button class="btn btn-default reveal" id="eye_cvv"type="button"><i class="fas fa-eye"></i></button>

@@ -170,8 +170,7 @@ public function answer(Request $request){
         $user_answer_id = $request->input('answer_id');
         $user_answer = $request->input('answer');
         $type = $request->input('type');
-
-        $user=Session::get('teamname');
+        $user= $request->input('teamname');
         
 
         $quiz = Quiz::find($quiz_id);
@@ -221,7 +220,7 @@ public function answer(Request $request){
 
         
         
-        $team_answer -> team_name = Session::get('teamname');
+        $team_answer -> team_name = $user;
         $team_answer -> answer_id = $user_answer_id ;
         $team_answer -> answer = $user_answer;
 
@@ -261,5 +260,10 @@ $saveanswer -> save();
 
 }
 }
+public function exitquiz(){
+    Session::forget('teamname');
+    return view('home2');
+    }
+
 
 }

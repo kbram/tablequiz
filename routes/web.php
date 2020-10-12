@@ -97,6 +97,10 @@ Route::group(['middleware' => ['auth', 'activated', 'currentUser', 'activity', '
         'as'   => '{username}',
         'uses' => 'ProfilesController@updateUserAccount',
     ]);
+
+    Route::post('profile/{id}/updateUserpayment', 'ProfilesController@updateUserpayment');
+
+
     Route::put('profile/{username}/updateUserPassword', [
         'as'   => '{username}',
         'uses' => 'ProfilesController@updateUserPassword',
@@ -251,6 +255,7 @@ Route::post('/question','Quizmaster\MasterQuestionController@postQuestion');
 Route::post('/quizsetup','Quizmaster\MasterQuestionController@store');
 Route::get('/addround/{id}','QuizRoundController@getRound');
 Route::get('dashboard/quizzes', 'Quizmaster\DashboardController@myQuiz');
+Route::get('dashboard/results', 'Quizmaster\DashboardController@results');
 
 
 
@@ -307,6 +312,7 @@ Route::post('stripe', 'StripePaymentController@stripePost')->name('stripe.post')
 
 
 Route::get('play/{quiz_name}','Quizmaster\PlayController@selecturl');
+Route::get('/exitquiz','Quizmaster\PlayController@exitquiz');
 
 
 //TEST

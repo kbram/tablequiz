@@ -13,6 +13,8 @@ use App\Models\Quiz;
 use App\Models\Participant;
 use App\Models\PriceBand; 
 use App\Models\QuizRound;
+use App\Models\PaymentDetails;
+
 
 use App\Models\QuizRoundImage;
 use Exception;
@@ -95,7 +97,11 @@ if(!$payment_deatils){
     
     $payment->save();    
 
-    
+$payment_details = new PaymentDetails;
+$payment_details->user_id = Auth::id();
+$payment_details->amount =  $request->total_card ;
+$payment_details->save();
+
 
 
 
@@ -138,7 +144,6 @@ $quiz->save();
                 $participants_cost=PriceBand::where('band_type',Config::get('priceband.type.participant_band_type'))->where('to',$get_no)->get('cost');
                 
                 $suggested_question_no=Quiz::where('id',$request->id)->value('no_suggested_questions');
-                $question_cost=PriceBand::where('band_type',Config::get('priceband.type.question_band_type'))->where('from','<=',$suggested_question_no)->where('to','>=',$suggested_question_no)->get('cost')->first();
                 $image=0;
                 $rounds=QuizRound::where('quiz_id',$request->id)->get();
 
@@ -151,10 +156,18 @@ $quiz->save();
                     $background_cost  = 0;
                 }
                 else{
+                    
                     $background_cost=PriceBand::where('band_type',Config::get('priceband.type.background_band_type'))->where('from','<=',$image)->where('to','>=',$image)->get('cost')->first();
                     $background_cost = $background_cost->cost; 
                 }
-                
+
+                if($suggested_question_no == 0){
+                    $question_cost  = 0;
+                }
+                else{
+                    $question_cost=PriceBand::where('band_type',Config::get('priceband.type.question_band_type'))->where('from','<=',$suggested_question_no)->where('to','>=',$suggested_question_no)->get('cost')->first();
+                    $question_cost = $question_cost->cost; 
+                }
                 $response = array(
                         'participants' =>  $participants,
                         'participants_cost' => $participants_cost,
