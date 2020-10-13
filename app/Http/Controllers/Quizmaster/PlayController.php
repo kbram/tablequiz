@@ -33,90 +33,66 @@ class PlayController extends Controller
 
     }
 
-    public function play(Request $request ,$id)
-{
-     $quiz = Quiz::find($id);
-     $roundCount=$quiz->rounds()->count();
-     $rounds = $quiz->rounds()->first();
-     $questionCounts=$quiz->questions()->count();
-
-     //check if password
-     if($quiz -> quiz_password){
-
-     //match password
-     if($quiz -> quiz_password == $request->input('quiz__password')){
-        Session::forget('fail');
-
-
-
-    //check team already registed
-    if(QuizTeam::where('team_name', $request->input('quiz__team'))->where('quiz_id',$id)->first())
-    {
-
-        Session::put('failteam','team already join for this quiz');
-
-        return redirect('startquiz-team/'.$quiz->id);
-
-     }
-
-     //not registed
-     else{
-        Session::forget('failteam');
-        Session::put('teamname',$request->input('quiz__team'));
-
-    $teamquiz = new QuizTeam;
-    $teamquiz -> quiz_id = $quiz->id;
-    $teamquiz -> team_name = $request->input('quiz__team');
-    $teamquiz->save();
-
-    return redirect('playquiz/'.$quiz->id.'/1/1');
-
-    return view('play.play-quiz',compact('quiz','roundCount'));    
- }   
-}
-
-
-else{
-    Session::put('fail','password incorrect');
-    Session::forget('failteam');
-    return redirect('startquiz-password/'.$quiz->id);
-
-}
-
-}
-else{
-
-    if(QuizTeam::where('team_name', $request->input('quiz__team'))->first())
-     {
-        Session::put('failteam','team already join for this quiz');
-
-
-        return redirect('startquiz-team/'.$quiz->id);
-
-     }
-
-     else{
-
-        Session::forget('failteam');
-        Session::put('teamname',$request->input('quiz__team'));
-
-
-        $teamquiz = new QuizTeam;
-        $teamquiz -> quiz_id = $quiz->id;
-        $teamquiz -> team_name = $request->input('quiz__team');
-        $teamquiz->save();
+    public function play(Request $request ,$id){
+        $quiz = Quiz::find($id);
+        $studentlimit = Quiz::where('id',$id)->first();
+        $splitstudentlimit=explode('-',$studentlimit->no_of_participants);
+        $studentcount=QuizTeam::where('quiz_id',$id)->get()->count();
+        
+        $roundCount=$quiz->rounds()->count();
+        $rounds = $quiz->rounds()->first();
+        $questionCounts=$quiz->questions()->count();
     
-    
-        return redirect('playquiz/'.$quiz->id.'/1/1');
-    }  
+        //check if password
+        if($quiz->quiz_password){
+        //match password
+            if($quiz->quiz_password == $request->input('quiz__password')){
+                Session::forget('fail');
+                //check team already registed
+                if(QuizTeam::where('team_name', $request->input('quiz__team'))->where('quiz_id',$id)->first()){
+                    Session::put('failteam','team already join for this quiz');
+                    return redirect('startquiz-team/'.$quiz->id);
+                }
+                //not registed
+                else{
+                   // dd($quiz->id);
+                   if((int)$splitstudentlimit[1]<=$studentcount){
+                        echo '<script>alert("Sorry !!!, Allocated Participants are joined, Try next Time.....")</script>'; 
+                        return view('home2');
+                   }else{
+                    Session::forget('failteam');
+                    Session::put('teamname',$request->input('quiz__team'));
 
-     
-
-
-}
-    }
-    public function start(Request $request)
-    {   
+                    $teamquiz = new QuizTeam;
+                    $teamquiz -> quiz_id = $quiz->id;
+                    $teamquiz -> team_name = $request->input('quiz__team');
+                    $teamquiz->save();
+                    //dd($teamquiz);
+                    return redirect('playquiz/'.$quiz->id.'/1/1');
+                    return view('play.play-quiz',compact('quiz','roundCount'));   
+                   }
+                }   
+            }else{
+                Session::put('fail','password incorrect');
+                Session::forget('failteam');
+                return redirect('startquiz-password/'.$quiz->id);
+            }
+        }else{
+            if(QuizTeam::where('team_name', $request->input('quiz__team'))->first()){
+                Session::put('failteam','team already join for this quiz');
+                return redirect('startquiz-team/'.$quiz->id);
+            }else{
+                Session::forget('failteam');
+                Session::put('teamname',$request->input('quiz__team'));
+                $teamquiz = new QuizTeam;
+                $teamquiz -> quiz_id = $quiz->id;
+                $teamquiz -> team_name = $request->input('quiz__team');
+                $teamquiz->save();                                                  
+                return redirect('playquiz/'.$quiz->id.'/1/1');
+            } 
+        }
+    }   
+    public function start(Request $request){   
         $quiz=$request->input('quiz_name');
         if($quiz==""){
             echo '<script>alert("Please Enter the value")</script>'; 
@@ -261,29 +237,24 @@ public function answer(Request $request){
 }
 
 public function saveanswer(Request $request){
-$teams = $request->team;
-foreach($teams as $team){
-$quiz = $request->input('quiz/'.$team);
-$round = $request->input('round/'.$team);
-$question = $request->input('question/'.$team);
-$answer_status = $request->input('status/'.$team);
+    $teams = $request->team;
+    foreach($teams as $team){
+        $quiz = $request->input('quiz/'.$team);
+        $round = $request->input('round/'.$team);
+        $question = $request->input('question/'.$team);
+        $answer_status = $request->input('status/'.$team);
 
-$saveanswer = TeamAnswer::where('quiz_id',$quiz)->where('round_id',$round)->where('question_id',$question)->where('team_name',$team)->first();
+        $saveanswer = TeamAnswer::where('quiz_id',$quiz)->where('round_id',$round)->where('question_id',$question)->where('team_name',$team)->first();
 
-$saveanswer -> status = $answer_status ;
+        $saveanswer -> status = $answer_status ;
 
-$saveanswer -> save();
+        $saveanswer -> save();
 
+    }
 }
-}
-public function exitquiz(){
-    Session::forget('teamname');
-    return view('home2');
+    public function exitquiz(){
+        Session::forget('teamname');
+        return view('home2');
     }
 
-
-public function exitquiz(){
-    Session::forget('teamname');
-     return view('home2');
-}
 }
