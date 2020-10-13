@@ -23,7 +23,7 @@ var formdata = new FormData($("#add_round")[0]);
     },
     success: function (response) {
         console.log("success");
-        $("#publishQuizModal").modal("show");
+        //$("#publishQuizModal").modal("show");
     },
     error: function (result, error) {
         console.log("errror");
