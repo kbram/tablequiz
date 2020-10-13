@@ -64,7 +64,7 @@ jQuery(document).ready(function ($) {
             var newRow =
                 '<div class="row multiple__choice__row  pb-3 align-items-center"><div class="col-7 multi"><input name="' +
                 gtname +
-                '" class="form-control multiple-choice-answer" type="text" required></div><div class="col-1 justify-content-center p-0 d-flex"><span class="minus">-</span></div><div class="col-1 justify-content-center"><span class="plus">+</span></div><div class="col-3 text-center form-check"><input class="multiple-choice-correct-answer" type="radio" id="rdd" name="' +
+                '" class="form-control multiple-choice-answer" type="text" required></div><div class="col-1 justify-content-center p-0 d-flex"><span class="minus">-</span></div><div class="col-1 justify-content-center"><span class="plus">+</span></div><div class="col-3 text-center form-check"><input class="multiple-choice-correct-answer" type="radio"  id="rdd" name="' +
                 gtname_correct +
                 '"  ></div></div>';
 
@@ -468,7 +468,7 @@ jQuery(document).ready(function ($) {
             .closest(".multiple__choice__row__in_modal")
             .each(function () {
                 var newRow =
-                    '<div class="form-row multiple__choice__row__in_modal pb-0 mb-2 align-items-center"><div class="col-7"><input name="multiple__choice__answer[]" class="readonly form-control" type="text" ></div><div class="col-1 justify-content-center tempVis"><span class="minus">-</span></div><div class="col-1 justify-content-center tempVis"><span class="plus">+</span></div><div class="col-3 text-center form-check hidd"><input type="radio" class="" name="multiple__choice__correct__answer"></div></div></div>';
+                    '<div class="form-row multiple__choice__row__in_modal pb-0 mb-2 align-items-center"><div class="col-7"><input name="multiple__choice__answer[]" class="readonly form-control" type="text" ></div><div class="col-1 justify-content-center tempVis"><span class="minus">-</span></div><div class="col-1 justify-content-center tempVis"><span class="plus">+</span></div><div class="col-3 text-center form-check hidd"><input type="radio"  class="" name="multiple__choice__correct__answer"></div></div></div>';
                 var parent = $(this);
 
                 if (button.hasClass("plus")) {
@@ -864,7 +864,7 @@ jQuery(document).ready(function ($) {
             arcount +
             '" type="number"> </div> </div> <div class="form-row d-none multiple__choice__legend" style="min-height:0;" id="multiple__choice__legend"> <div class="offset-md-10 col-2"><small class="d-block text-center pl-4">Correct answer</small> </div> </div> <div class="form-row d-none multiple__choice__answer" id="multiple__choice__answer"> <div class="col-md-4 align-self-start"> <label for="multiple__choice__answer">Answer</label> </div> <div class="col-md-8 multi-choice"> <div class="row multiple__choice__row pb-3 align-items-center"> <div class="col-7"><input name="multiple__choice__answer__' +
             arcount +
-            '[]" class="multiple-choice-answer first-multi-answer form-control" type="text"> </div> <div class="col-1 justify-content-center">&nbsp; </div> <div class="col-1 justify-content-center"> <span class="plus">+</span> </div> <div class="col-3 text-center form-check"> <input type="radio" class="multiple-choice-correct-answer" name="multiple__choice__correct__answer__' +
+            '[]" class="multiple-choice-answer first-multi-answer form-control" type="text"> </div> <div class="col-1 justify-content-center">&nbsp; </div> <div class="col-1 justify-content-center"> <span class="plus">+</span> </div> <div class="col-3 text-center form-check"> <input type="radio" checked="checked" class="multiple-choice-correct-answer" name="multiple__choice__correct__answer__' +
             arcount +
             '" value=0 > </div> </div> </div> </div> <div class="form-row"> <div class="col-md-4"> <label for="time__limit">Time limit</label> </div> <div class="col-md-4"><input class="form-control time-limit" type="number" name="time__limit[]"> </div> <div class="col"> <small class="form-text text-muted">Seconds</small> </div> </div> </div> </div> </div> </div> </article>';
         $("#add-new-question").before(new_question);
