@@ -194,7 +194,8 @@ var size = 2000;
 
        
 	$('#upload__quiz__icon').on('change', function(e) { 
-      
+        cropper1.destroy();
+        cropper1 = null;
     /**new crop image round start*/
     if(cp_count){
 		cropper.destroy();
