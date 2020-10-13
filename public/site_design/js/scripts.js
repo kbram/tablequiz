@@ -1061,10 +1061,32 @@ jQuery(document).ready(function ($) {
 
     // });
 
-    // $('.close_pay').click(function(){
-    //     window.location.href = "/dashboard/home" ;
+    $('.close_pay').click(function(){
+
+
+        swal({
+            title: "Cancle payment ?",
+            text: "",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              swal("Poof! Your imaginary file has been deleted!", {
+                icon: "success",
+                
+              });
+              window.location.href = "/dashboard/home" ;
+            } else {
+              swal("please pay for your quiz");
+              $("#publishQuizModal").modal("show");
+            }
+          });
+
+        
         
 
-    // });
+    });
 
 });
