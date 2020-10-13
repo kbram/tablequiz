@@ -30,7 +30,8 @@ document.getElementById('rotate').onclick = function() {
      cropper = new Cropper(image, {
 	  aspectRatio: 3/2,
 	  viewMode: 3,
-	  preview: '.preview',
+    preview: '.preview',
+    
 	  ready() {
     this.cropper.rotate(angle);
   },
