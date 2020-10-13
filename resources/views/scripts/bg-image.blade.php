@@ -21,11 +21,21 @@ var angle = 360;
   //img = document.getElementById('image');
 
 document.getElementById('rotate').onclick = function() { 
+        cropper.destroy();
+        cropper = null;
      var img = document.getElementsByClassName('cropper-hide');
      angle = (angle - 90) % 360;
-     $('.cropper-container').css('transform','rotate('+angle+'deg)');
+   //  $('.cropper-container').css('transform','rotate('+angle+'deg)');
    
-
+     cropper = new Cropper(image, {
+	  aspectRatio: 3/2,
+	  viewMode: 3,
+	  preview: '.preview',
+	  ready() {
+    this.cropper.rotate(angle);
+  },
+	  
+	});
 }
 
 
