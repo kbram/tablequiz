@@ -202,8 +202,8 @@ jQuery(document).ready(function ($) {
                         if (data.question_cost != null) {
                             $("#modal__payment")
                                 .find(".suggested-questions td:nth-child(3)")
-                                .text(data.question_cost.cost);
-                            questions_cost = data.question_cost.cost;
+                                .text(data.question_cost);
+                            questions_cost = data.question_cost;
                         } else {
                             $("#modal__payment")
                                 .find(".suggested-questions td:nth-child(3)")
@@ -343,8 +343,8 @@ jQuery(document).ready(function ($) {
                         if (data.question_cost != null) {
                             $("#modal__payment")
                                 .find(".suggested-questions td:nth-child(3)")
-                                .text(data.question_cost.cost);
-                            questions_cost = data.question_cost.cost;
+                                .text(data.question_cost);
+                            questions_cost = data.question_cost;
                         } else {
                             $("#modal__payment")
                                 .find(".suggested-questions td:nth-child(3)")

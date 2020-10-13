@@ -23,15 +23,7 @@ var formdata = new FormData($("#add_round")[0]);
     },
     success: function (response) {
         console.log("success");
-        //$("#publishQuizModal").modal("show");
-    },
-    error: function (result, error) {
-        console.log("errror");
-        //$("#publishQuizModal").modal("show");
-        //$("#modal__payment").modal("show");
-    },
-});
-    
+       
         $.ajax({
         type: "POST",
         url: "/payment",
@@ -49,11 +41,11 @@ var formdata = new FormData($("#add_round")[0]);
                     $('#modal__payment').find('.no-participants td:nth-child(2)').text(participants);
             $('#modal__payment').find('.no-participants td:nth-child(3)').text(participants_cost);
 
-            $('#modal__payment').find('.suggested-questions td:nth-child(2)').text(sessionStorage.count)
+            $('#modal__payment').find('.suggested-questions td:nth-child(2)').text(sessionStorage.count);
 
             if(data.question_cost != null){
-                $('#modal__payment').find('.suggested-questions td:nth-child(3)').text(data.question_cost.cost);
-                questions_cost=data.question_cost.cost
+                $('#modal__payment').find('.suggested-questions td:nth-child(3)').text(data.question_cost);
+                questions_cost=data.question_cost;
             }
             else{
                 $('#modal__payment').find('.suggested-questions td:nth-child(3)').text(0);
@@ -81,6 +73,14 @@ var formdata = new FormData($("#add_round")[0]);
         },
 
       });
+    },
+    error: function (result, error) {
+        console.log("errror");
+        //$("#publishQuizModal").modal("show");
+        //$("#modal__payment").modal("show");
+    },
+});
+    
 
 
 
