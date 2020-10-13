@@ -28,7 +28,7 @@
 </style>
 @endsection
 @section('content')
-<script src='jquery-3.2.1.min.js'></script>
+<!-- <script src='jquery-3.2.1.min.js'></script> -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <section class="container page__inner">
     <div class="row">
