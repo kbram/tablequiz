@@ -715,7 +715,14 @@ if(Session::has('question_video_'.$i)){
 
 //media upload end
             if(count($request->$multi_con)>1){
-                $correct = $request->input('multiple__choice__correct__answer__'.$i);
+                if($request->input('multiple__choice__correct__answer__'.$i) == 0){
+                    
+                    $correct = $request->$multi_con[0] ;
+                }
+                else{
+                    $correct = $request->input('multiple__choice__correct__answer__'.$i);
+
+                }
                         
                 for($j=0; $j<count($request->$multi_con); $j++){
                     $answer_save = new Answer;

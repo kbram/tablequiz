@@ -349,7 +349,7 @@
 										<span class="plus">+</span>
 									</div>
 									<div class="col-3 col-md-3 text-center form-check px-0 px-md-4">
-										<input type="radio" value="0" class="multiple-choice-correct-answer" name="multiple__choice__correct__answer__0">
+										<input type="radio" value="0" checked="checked" class="multiple-choice-correct-answer" name="multiple__choice__correct__answer__0">
 									</div>
 								</div>
 

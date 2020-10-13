@@ -72,7 +72,7 @@ Route::group(['middleware' => ['auth', 'activated', 'activity', 'twostep', 'chec
         'as'   => '{username}',
         'uses' => 'ProfilesController@show',
     ]);
-    Route::get('home', 'QuizController@AfterLogin');
+     Route::get('home', 'Quizmaster\DashboardController@index');
 
 
 });
