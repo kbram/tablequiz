@@ -22,8 +22,8 @@ var formdata = new FormData($("#add_round")[0]);
         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
     },
     success: function (response) {
-        console.log("success");
-        $("#publishQuizModal").modal("show");
+        console.log("successsdsdsdsd");
+        // $("#publishQuizModal").modal("show");
     },
     error: function (result, error) {
         console.log("errror");

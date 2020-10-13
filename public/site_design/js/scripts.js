@@ -660,7 +660,7 @@ jQuery(document).ready(function ($) {
 
     $("select#quiz__participants").on("change", function () {
         console.log("hi modal");
-        $("#select_participants__modal").modal();
+        $("#select_participants__modal").modal("show");
     });
 
     // Click to Copy //
