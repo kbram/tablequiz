@@ -44,7 +44,7 @@
 						<span class="helper__text" data-placement="left" data-toggle="tooltip" title="You can add background images to each round you create by uploading the image here."><i class="fa fa-info-circle"></i></span>
 					</div>
 					<div class=" col-md-4">
-						<a href="#" class="d-block btn btn-outline-secondary" data-toggle="modal" data-target="#edit__round__bg__modal">Upload</a>
+						<a href="#" class="d-block btn btn-outline-secondary add-round-img-btn" data-toggle="modal" data-target="#edit__round__bg__modal">Upload</a>
 					</div>
 					<div class="col-md-3">
 						<p class="form__explainer">
@@ -65,7 +65,8 @@
 										<div class="img-container">
 											<div class="row">
 												<div class="col-md-12">
-													<img id="image" src="" height="300px">
+												
+													<img id="image" src="{{asset('storage/homepage__logo.png')}}" height="300px">
 												</div>										
 											</div>
 										</div>
@@ -544,6 +545,7 @@
 	
 	var size = 2000;
      var cp_count=0;
+	 var edit_cp_count=1;
 	 var find_class=1;
 	
        var image = document.getElementById('image');
@@ -551,9 +553,24 @@
 	   $('#crop-click').click(function(){
 
 	});
-
+	var cropper1;
+	$('.add-round-img-btn').click(function(){
+     cropper1 = new Cropper(image, {
+	  aspectRatio: 3/2,
+	  viewMode: 3,
+	  preview: '.preview'
+    });
+ });
+     
 	$('#upload__quiz__icon').on('change', function(e) {
 		//cropper.destroy();
+          if(edit_cp_count){
+		cropper1.destroy();
+        cropper1 = null;
+		edit_cp_count=0;
+		  }
+		
+
 		if(cp_count){
 		cropper.destroy();
         cropper = null;
@@ -568,8 +585,9 @@
 	  aspectRatio: 3/2,
 	  viewMode: 3,
 	  preview: '.preview',
-	  
-    });
+  
+	});
+
 	//setTimeout(function(){ alert("Hello"); }, 3000);
 	setTimeout(function(){ console.log($('.cropper-container').attr('class'));
 	
