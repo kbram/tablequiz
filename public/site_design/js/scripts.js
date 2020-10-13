@@ -1056,16 +1056,16 @@ console.log("removed"+quiz);
 
    
 
-    $('.close_log').click(function(){
-        window.location.href = "/" ;
+    // $('.close_log').click(function(){
+    //     window.location.href = "/" ;
         
 
-    });
+    // });
 
-    $('.close_pay').click(function(){
-        window.location.href = "/dashboard/home" ;
+    // $('.close_pay').click(function(){
+    //     window.location.href = "/dashboard/home" ;
         
 
-    });
+    // });
 
 });

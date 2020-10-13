@@ -224,7 +224,14 @@ $quiz->save();
     
 }
 else{
-dd("not auth");
+    $response = array(
+        'participants' =>  0,
+        
+       
+    );
+    return response()->json($response);
+
+
 }
     }
 }
