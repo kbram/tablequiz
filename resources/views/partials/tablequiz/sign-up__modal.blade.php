@@ -64,11 +64,13 @@
 					<!-- for check out view -> to__checkout -->
 					@endif
 					<a class="text-dark " href="{{ route('password.request') }}">
-                           <p>     Forgot your password ? </p>
+						<p>		Forgot your password ? </p>
+
                 </a>
 				</div>
-				
+				<div id ="loading"class=""></div>
 			</div>
+			
 		</form>
 
 		<div class="or__separator"><span>OR</span></div> 
@@ -200,6 +202,7 @@
 					@endif
 					
 				</div>
+				<div id ="loading1"class=""></div>
 			</div>
 		</form>
 		<div class="or__separator"><span>OR</span></div> 

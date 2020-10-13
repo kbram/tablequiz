@@ -151,6 +151,8 @@ jQuery(document).ready(function ($) {
 
     $("#login-btn").click(function (e) {
         e.preventDefault();
+        $("#loading").addClass("loader");
+
         console.log("iiiiiiiiiiiiiiiiiiiiiiiii" + sessionStorage.count);
 
         reload = function () {
@@ -179,6 +181,7 @@ jQuery(document).ready(function ($) {
                         count: sessionStorage.count,
                     },
                     success: function (data) {
+                        $("#loading").removeClass("loader");
                         var participants = data.participants.no_of_participants;
                         var participants_cost = data.participants_cost[0].cost;
                         var questions_cost = 0;
@@ -229,8 +232,7 @@ jQuery(document).ready(function ($) {
                             Number(questions_cost) +
                             Number(data.bg_image_cost);
                         $("#card_total").val(total_card);
-                        $('#quiz_id').val(quiz_id);
-
+                        $("#quiz_id").val(quiz_id);
                     },
                     error: function (result, error) {},
                 });
@@ -263,6 +265,7 @@ jQuery(document).ready(function ($) {
             },
             error: function (result, error) {
                 console.log(result);
+                $("#loading").removeClass("loader");
                 var validate = result.responseJSON.errors;
                 console.log("gfgdfgdfgggggggggggg" + validate);
                 $(".text-danger").html("");
@@ -290,7 +293,7 @@ jQuery(document).ready(function ($) {
     /**kopi ajax sign Up */
     $("#signup-btn").click(function (e) {
         e.preventDefault();
-
+        $("#loading1").addClass("loader");
         reload = function () {
             location.href = location.href;
         };
@@ -304,6 +307,7 @@ jQuery(document).ready(function ($) {
             },
             success: function (response) {
                 console.log("signup success");
+                $("#loading1").removeClass("loader");
                 $("#modal__login").addClass("d-none");
                 $("#modal__signup").addClass("d-none");
                 $.ajax({
@@ -368,8 +372,9 @@ jQuery(document).ready(function ($) {
                             Number(participants_cost) +
                             Number(questions_cost) +
                             Number(data.bg_image_cost);
-                            $("#card_total").val(total_card);
-                            $('#quiz_id').val(quiz_id);                    },
+                        $("#card_total").val(total_card);
+                        $("#quiz_id").val(quiz_id);
+                    },
                     error: function (result, error) {
                         console.log("uuuuuuu");
                     },
@@ -402,6 +407,7 @@ jQuery(document).ready(function ($) {
                 $("#modal__payment").removeClass("d-none");
             },
             error: function (result, error) {
+                $("#loading1").removeClass("loader");
                 var validate = result.responseJSON.errors;
 
                 $(".text-danger").html("");
@@ -936,9 +942,7 @@ jQuery(document).ready(function ($) {
     });
 
     $(".view-card").click(function (e) {
-        var quiz=this.id;
-        
-
+        var quiz = this.id;
 
         $(".close_pay").removeClass("close_pay");
 
@@ -949,7 +953,7 @@ jQuery(document).ready(function ($) {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             data: {
-                id:quiz,
+                id: quiz,
             },
             success: function (data) {
                 console.log(data.question_cost.cost);
@@ -1001,71 +1005,58 @@ jQuery(document).ready(function ($) {
                     Number(participants_cost) +
                     Number(questions_cost) +
                     Number(data.bg_image_cost);
-                    $('#card_total').val(total_card);
-                    $('#quiz_id').val(quiz_id);  
-                
-                
-                
-                
-                },
+                $("#card_total").val(total_card);
+                $("#quiz_id").val(quiz_id);
+            },
             error: function (result, error) {},
         });
 
+        //card fill
 
-   //card fill
+        $.getJSON("/card", function (data) {
+            $("#modal__payment").find("#card-holder-name").val(data.name);
+            $("#modal__payment").find("#cardholder_street").val(data.street);
+            $("#modal__payment").find("#cardholder_city").val(data.city);
+            $("#modal__payment").find("#cardholder_country").val(data.country);
+            $("#modal__payment")
+                .find("#cardholder_number")
+                .val(data.card_number);
+            $("#modal__payment")
+                .find("#cardholder_expiry_month")
+                .val(data.exp_month);
+            $("#modal__payment")
+                .find("#cardholder_expiry_year")
+                .val(data.exp_year);
+            $("#modal__payment").find("#card-cvc").val(data.cvv);
+        });
 
-   $.getJSON('/card',function (data){
-        
-    $('#modal__payment').find('#card-holder-name').val(data.name);
-    $('#modal__payment').find('#cardholder_street').val(data.street);
-    $('#modal__payment').find('#cardholder_city').val(data.city);
-    $('#modal__payment').find('#cardholder_country').val(data.country);
-    $('#modal__payment').find('#cardholder_number').val(data.card_number);
-    $('#modal__payment').find('#cardholder_expiry_month').val(data.exp_month);
-    $('#modal__payment').find('#cardholder_expiry_year').val(data.exp_year);
-    $('#modal__payment').find('#card-cvc').val(data.cvv);
-
-});
-
-$('.remove_bg').click(function(e){
-    e.preventDefault(); 
-console.log("removed"+quiz);
-    $.ajax({
-        type: "POST",
-        url: "/removebg",
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-        data: {
-            id:quiz,
-        },
-        success: function (data) { 
-            },
-        error: function (result, error) {},
-    });
-
-});  
+        $(".remove_bg").click(function (e) {
+            e.preventDefault();
+            console.log("removed" + quiz);
+            $.ajax({
+                type: "POST",
+                url: "/removebg",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+                data: {
+                    id: quiz,
+                },
+                success: function (data) {},
+                error: function (result, error) {},
+            });
+        });
 
         return false;
-    
-        
-    
-    
     });
 
-
-   
-
-    $('.close_log').click(function(){
-        window.location.href = "/" ;
-        
-
+    $(".close_log").click(function () {
+        window.location.href = "/";
     });
 
-    $('.close_pay').click(function(){
-        window.location.href = "/dashboard/home" ;
-        
-
+    $(".close_pay").click(function () {
+        window.location.href = "/dashboard/home";
     });
-
 });
