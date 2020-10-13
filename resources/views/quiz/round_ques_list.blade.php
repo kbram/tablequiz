@@ -41,7 +41,7 @@
                         <span class="helper__text" data-placement="left" data-toggle="tooltip" title="You can add background images to each round you create by uploading the image here."><i class="fa fa-info-circle"></i></span>
                     </div>
                     <div class=" col-md-4">
-                        <a href="#" class="d-block btn btn-outline-secondary" data-toggle="modal" data-target="#edit__round__bg__modal">Upload</a>
+                        <a href="#" class="d-block btn btn-outline-secondary edit-round-img-btn" data-toggle="modal" data-target="#edit__round__bg__modal">Upload</a>
                     </div>
                     <div class="col-md-3">
                         <p class="form__explainer">
@@ -177,9 +177,22 @@
 var size = 2000;
      var cp_count=0;
 	 var find_class=1;
+
+     var cropper1;
+
+ $('.edit-round-img-btn').click(function(){
+     cropper1 = new Cropper(image, {
+	  aspectRatio: 3/2,
+	  viewMode: 3,
+	  preview: '.preview'
+    });
+ });
+     
 	
        var image = document.getElementById('image');
 	   var cropper;
+
+       
 	$('#upload__quiz__icon').on('change', function(e) { 
       
     /**new crop image round start*/
