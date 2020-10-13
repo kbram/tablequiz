@@ -133,26 +133,32 @@ class QuizRoundController extends Controller
 
 
     public function round_upload(Request $request,$id){
-         dd($request);
+        
          $get_quiz_id=QuizRound::where('id',$id)->get('quiz_id');
          $get_quiz_link=Quiz::where('id',$get_quiz_id[0]->quiz_id)->get();
          $quiz_link=$get_quiz_link[0]->quiz_link;
         
-    if ($request->hasFile('bg_image')) {
+    if ($request->image_crop) {
+ /** edit_round_crop image decode start*/
+         $data = $request->image_crop;
+         $image_array_1 = explode(";", $data);
+         $image_array_2 = explode(",", $image_array_1[1]);
+         $data = base64_decode($image_array_2[1]);
+       /** edit_round_crop image decode end*/
 
         $round_background = $request->file('bg_image');
   
         $filename = 'round_bg.'.$round_background->getClientOriginalExtension();  
-        $save_path1 = '/storage/round_bg/'.$quiz_link.'/round_bg/';
+        $save_path1 = '/storage/round_bg/'.$get_quiz_link.'/round_bg/';
   
-        $save_path = storage_path('app/public'). '/round_bg/'.$quiz_link.'/round_bg/';
-        $save_path_thumb = storage_path('app/public').'/round_bg/'.$quiz_link.'/round_bg/'.'/thumb/';
+        $save_path = storage_path('app/public'). '/round_bg/'.$get_quiz_link.'/round_bg/';
+        $save_path_thumb = storage_path('app/public').'/round_bg/'.$get_quiz_link.'/round_bg/'.'/thumb/';
   
         // $path = $save_path . $filename;
         // $path_thumb    = $save_path_thumb . $filename;
   
-        $public_path = storage_path('app/public'). '/round_bg/'.$quiz_link.'/round_bg/'.$filename;
-        $public_path_thumb= storage_path('app/public'). '/round_bg/'.$quiz_link.'/round_bg/'.'/thumb/'.$filename;
+        $public_path = storage_path('app/public'). '/round_bg/'.$get_quiz_link.'/round_bg/'.$filename;
+        $public_path_thumb= storage_path('app/public'). '/round_bg/'.$get_quiz_link.'/round_bg/'.'/thumb/'.$filename;
   
         //resize the image            
   
@@ -160,16 +166,16 @@ class QuizRoundController extends Controller
         File::makeDirectory($save_path, $mode = 0755, true, true);
         File::makeDirectory($save_path_thumb, $mode = 0755, true, true);
   
-        Image::make($round_background)->resize(250,250)->save($save_path_thumb.$filename);
-  
-        $round_background->move($save_path, $filename);        
+         Image::make($data)->save($save_path_thumb . $filename);
+        Image::make($data)->save($save_path.$filename);       
         
         
-            $round_image = QuizRoundImage::where('round_id',$id);
+             $round_image = QuizRoundImage::where('round_id',$id);
              $round_image->name       = $filename;
              $round_image->public_path       = $public_path;
              $round_image->local_path        = $save_path1 . '/' . $filename;
              $round_image->thumb_path        = $public_path_thumb;
+             $round_image->txt_image        = $request->original_image;
              $round_image->save();
         
        

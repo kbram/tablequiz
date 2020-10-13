@@ -64,8 +64,8 @@
 
 										<div class="img-container">
 											<div class="row">
-												<div class="col-md-8">
-													<img id="image" src="">
+												<div class="col-md-12">
+													<img id="image" src="" height="300px">
 												</div>										
 											</div>
 										</div>
@@ -568,7 +568,7 @@
 	  image.src = url;
 	 
      cropper = new Cropper(image, {
-	  aspectRatio: 1,
+	  aspectRatio: 3/2,
 	  viewMode: 3,
 	  preview: '.preview',
 	  
@@ -576,7 +576,7 @@
 	//setTimeout(function(){ alert("Hello"); }, 3000);
 	setTimeout(function(){ console.log($('.cropper-container').attr('class'));
 	
-		$('.cropper-container').css('left',70);
+	//	$('.cropper-container').css('left',70);
 	}, 100);
 
 	cp_count=1
