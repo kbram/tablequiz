@@ -107,8 +107,8 @@ class PlayController extends Controller
     {   
         $quiz=Quiz::where('id',$id)->first();
         $image=QuizSetupIcon::where('quiz_id',$quiz->id)->first()->local_path;
-            $roundCount=$quiz->rounds()->count();
-            $questionCounts=$quiz->questions()->count();
+        $roundCount=$quiz->rounds()->count();
+        $questionCounts=$quiz->questions()->count();
         return view('play.start-quiz',compact('quiz','roundCount','questionCounts','image'));
     }
 
