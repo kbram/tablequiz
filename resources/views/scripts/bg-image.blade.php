@@ -23,7 +23,7 @@ var angle = 360;
 document.getElementById('rotate').onclick = function() { 
      var img = document.getElementsByClassName('cropper-hide');
      angle = (angle - 90) % 360;
-     $('.cropper-view-box').css('transform','rotate('+angle+'deg)');
+     $('.cropper-container').css('transform','rotate('+angle+'deg)');
    
 
 }
