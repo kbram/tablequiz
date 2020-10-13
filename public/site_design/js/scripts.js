@@ -938,6 +938,8 @@ jQuery(document).ready(function ($) {
     $(".view-card").click(function (e) {
         var quiz=this.id;
         
+
+
         $(".close_pay").removeClass("close_pay");
 
         $.ajax({
@@ -1025,6 +1027,25 @@ jQuery(document).ready(function ($) {
 
 });
 
+$('.remove_bg').click(function(e){
+    e.preventDefault(); 
+console.log("removed"+quiz);
+    $.ajax({
+        type: "POST",
+        url: "/removebg",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        data: {
+            id:quiz,
+        },
+        success: function (data) { 
+            },
+        error: function (result, error) {},
+    });
+
+});  
+
         return false;
     
         
@@ -1032,6 +1053,8 @@ jQuery(document).ready(function ($) {
     
     });
 
+
+   
 
     $('.close_log').click(function(){
         window.location.href = "/" ;
