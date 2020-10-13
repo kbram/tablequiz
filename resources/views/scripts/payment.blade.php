@@ -40,13 +40,13 @@ var formdata = new FormData($("#add_round")[0]);
             count : sessionStorage.count
         },
         success: function(data) {
-
+            if(data.participants != 0){         
 
             var participants=data.participants.no_of_participants;
             var participants_cost=data.participants_cost[0].cost;
             quiz_id = data.quiz_id;
              var questions_cost=0;
-            $('#modal__payment').find('.no-participants td:nth-child(2)').text(participants);
+                    $('#modal__payment').find('.no-participants td:nth-child(2)').text(participants);
             $('#modal__payment').find('.no-participants td:nth-child(3)').text(participants_cost);
 
             $('#modal__payment').find('.suggested-questions td:nth-child(2)').text(sessionStorage.count)
@@ -70,6 +70,7 @@ var formdata = new FormData($("#add_round")[0]);
     $('#card_total').val(total_card);
     $('#quiz_id').val(quiz_id);
     console.log(quiz_id);
+        }
 
 
         },

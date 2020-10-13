@@ -390,7 +390,17 @@ class QuizController extends Controller
                     $numeric_con = $numeic . $i;
 
                     if (count($round_session[$k][$multi_con]) > 1) {
-                        $correct = $round_session[$k]['multiple__choice__correct__answer__' . $i];
+
+                        if($round_session[$k]['multiple__choice__correct__answer__' . $i] == 0){
+                    
+                            $correct = $round_session[$k]['multiple__choice__correct__answer__0'];
+                        }
+                        else{
+                            $correct = $round_session[$k]['multiple__choice__correct__answer__' . $i];
+        
+                        }
+
+                        
 
                         for ($j = 0; $j < count($round_session[$k][$multi_con]); $j++) {
                             $answer_save = new Answer;

@@ -64,7 +64,7 @@ jQuery(document).ready(function ($) {
             var newRow =
                 '<div class="row multiple__choice__row  pb-3 align-items-center"><div class="col-7 multi"><input name="' +
                 gtname +
-                '" class="form-control multiple-choice-answer" type="text" required></div><div class="col-1 justify-content-center p-0 d-flex"><span class="minus">-</span></div><div class="col-1 justify-content-center"><span class="plus">+</span></div><div class="col-3 text-center form-check"><input class="multiple-choice-correct-answer" type="radio" id="rdd" name="' +
+                '" class="form-control multiple-choice-answer" type="text" required></div><div class="col-1 justify-content-center p-0 d-flex"><span class="minus">-</span></div><div class="col-1 justify-content-center"><span class="plus">+</span></div><div class="col-3 text-center form-check"><input class="multiple-choice-correct-answer" type="radio"  id="rdd" name="' +
                 gtname_correct +
                 '"  ></div></div>';
 
@@ -151,6 +151,8 @@ jQuery(document).ready(function ($) {
 
     $("#login-btn").click(function (e) {
         e.preventDefault();
+        $("#loading").addClass("loader");
+
         console.log("iiiiiiiiiiiiiiiiiiiiiiiii" + sessionStorage.count);
 
         reload = function () {
@@ -179,6 +181,7 @@ jQuery(document).ready(function ($) {
                         count: sessionStorage.count,
                     },
                     success: function (data) {
+                        $("#loading").removeClass("loader");
                         var participants = data.participants.no_of_participants;
                         var participants_cost = data.participants_cost[0].cost;
                         var questions_cost = 0;
@@ -229,8 +232,7 @@ jQuery(document).ready(function ($) {
                             Number(questions_cost) +
                             Number(data.bg_image_cost);
                         $("#card_total").val(total_card);
-                        $('#quiz_id').val(quiz_id);
-
+                        $("#quiz_id").val(quiz_id);
                     },
                     error: function (result, error) {},
                 });
@@ -263,6 +265,7 @@ jQuery(document).ready(function ($) {
             },
             error: function (result, error) {
                 console.log(result);
+                $("#loading").removeClass("loader");
                 var validate = result.responseJSON.errors;
                 console.log("gfgdfgdfgggggggggggg" + validate);
                 $(".text-danger").html("");
@@ -290,7 +293,7 @@ jQuery(document).ready(function ($) {
     /**kopi ajax sign Up */
     $("#signup-btn").click(function (e) {
         e.preventDefault();
-
+        $("#loading1").addClass("loader");
         reload = function () {
             location.href = location.href;
         };
@@ -304,6 +307,7 @@ jQuery(document).ready(function ($) {
             },
             success: function (response) {
                 console.log("signup success");
+                $("#loading1").removeClass("loader");
                 $("#modal__login").addClass("d-none");
                 $("#modal__signup").addClass("d-none");
                 $.ajax({
@@ -368,8 +372,9 @@ jQuery(document).ready(function ($) {
                             Number(participants_cost) +
                             Number(questions_cost) +
                             Number(data.bg_image_cost);
-                            $("#card_total").val(total_card);
-                            $('#quiz_id').val(quiz_id);                    },
+                        $("#card_total").val(total_card);
+                        $("#quiz_id").val(quiz_id);
+                    },
                     error: function (result, error) {
                         console.log("uuuuuuu");
                     },
@@ -402,6 +407,7 @@ jQuery(document).ready(function ($) {
                 $("#modal__payment").removeClass("d-none");
             },
             error: function (result, error) {
+                $("#loading1").removeClass("loader");
                 var validate = result.responseJSON.errors;
 
                 $(".text-danger").html("");
@@ -462,7 +468,7 @@ jQuery(document).ready(function ($) {
             .closest(".multiple__choice__row__in_modal")
             .each(function () {
                 var newRow =
-                    '<div class="form-row multiple__choice__row__in_modal pb-0 mb-2 align-items-center"><div class="col-7"><input name="multiple__choice__answer[]" class="readonly form-control" type="text" ></div><div class="col-1 justify-content-center tempVis"><span class="minus">-</span></div><div class="col-1 justify-content-center tempVis"><span class="plus">+</span></div><div class="col-3 text-center form-check hidd"><input type="radio" class="" name="multiple__choice__correct__answer"></div></div></div>';
+                    '<div class="form-row multiple__choice__row__in_modal pb-0 mb-2 align-items-center"><div class="col-7"><input name="multiple__choice__answer[]" class="readonly form-control" type="text" ></div><div class="col-1 justify-content-center tempVis"><span class="minus">-</span></div><div class="col-1 justify-content-center tempVis"><span class="plus">+</span></div><div class="col-3 text-center form-check hidd"><input type="radio"  class="" name="multiple__choice__correct__answer"></div></div></div>';
                 var parent = $(this);
 
                 if (button.hasClass("plus")) {
@@ -858,7 +864,7 @@ jQuery(document).ready(function ($) {
             arcount +
             '" type="number"> </div> </div> <div class="form-row d-none multiple__choice__legend" style="min-height:0;" id="multiple__choice__legend"> <div class="offset-md-10 col-2"><small class="d-block text-center pl-4">Correct answer</small> </div> </div> <div class="form-row d-none multiple__choice__answer" id="multiple__choice__answer"> <div class="col-md-4 align-self-start"> <label for="multiple__choice__answer">Answer</label> </div> <div class="col-md-8 multi-choice"> <div class="row multiple__choice__row pb-3 align-items-center"> <div class="col-7"><input name="multiple__choice__answer__' +
             arcount +
-            '[]" class="multiple-choice-answer first-multi-answer form-control" type="text"> </div> <div class="col-1 justify-content-center">&nbsp; </div> <div class="col-1 justify-content-center"> <span class="plus">+</span> </div> <div class="col-3 text-center form-check"> <input type="radio" class="multiple-choice-correct-answer" name="multiple__choice__correct__answer__' +
+            '[]" class="multiple-choice-answer first-multi-answer form-control" type="text"> </div> <div class="col-1 justify-content-center">&nbsp; </div> <div class="col-1 justify-content-center"> <span class="plus">+</span> </div> <div class="col-3 text-center form-check"> <input type="radio" checked="checked" class="multiple-choice-correct-answer" name="multiple__choice__correct__answer__' +
             arcount +
             '" value=0 > </div> </div> </div> </div> <div class="form-row"> <div class="col-md-4"> <label for="time__limit">Time limit</label> </div> <div class="col-md-4"><input class="form-control time-limit" type="number" name="time__limit[]"> </div> <div class="col"> <small class="form-text text-muted">Seconds</small> </div> </div> </div> </div> </div> </div> </article>';
         $("#add-new-question").before(new_question);
@@ -936,9 +942,7 @@ jQuery(document).ready(function ($) {
     });
 
     $(".view-card").click(function (e) {
-        var quiz=this.id;
-        
-
+        var quiz = this.id;
 
         $(".close_pay").removeClass("close_pay");
 
@@ -949,7 +953,7 @@ jQuery(document).ready(function ($) {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             data: {
-                id:quiz,
+                id: quiz,
             },
             success: function (data) {
                 console.log(data.question_cost.cost);
@@ -1001,71 +1005,66 @@ jQuery(document).ready(function ($) {
                     Number(participants_cost) +
                     Number(questions_cost) +
                     Number(data.bg_image_cost);
-                    $('#card_total').val(total_card);
-                    $('#quiz_id').val(quiz_id);  
-                
-                
-                
-                
-                },
+                $("#card_total").val(total_card);
+                $("#quiz_id").val(quiz_id);
+            },
             error: function (result, error) {},
         });
 
+        //card fill
 
-   //card fill
+        $.getJSON("/card", function (data) {
+            $("#modal__payment").find("#card-holder-name").val(data.name);
+            $("#modal__payment").find("#cardholder_street").val(data.street);
+            $("#modal__payment").find("#cardholder_city").val(data.city);
+            $("#modal__payment").find("#cardholder_country").val(data.country);
+            $("#modal__payment")
+                .find("#cardholder_number")
+                .val(data.card_number);
+            $("#modal__payment")
+                .find("#cardholder_expiry_month")
+                .val(data.exp_month);
+            $("#modal__payment")
+                .find("#cardholder_expiry_year")
+                .val(data.exp_year);
+            $("#modal__payment").find("#card-cvc").val(data.cvv);
+        });
 
-   $.getJSON('/card',function (data){
-        
-    $('#modal__payment').find('#card-holder-name').val(data.name);
-    $('#modal__payment').find('#cardholder_street').val(data.street);
-    $('#modal__payment').find('#cardholder_city').val(data.city);
-    $('#modal__payment').find('#cardholder_country').val(data.country);
-    $('#modal__payment').find('#cardholder_number').val(data.card_number);
-    $('#modal__payment').find('#cardholder_expiry_month').val(data.exp_month);
-    $('#modal__payment').find('#cardholder_expiry_year').val(data.exp_year);
-    $('#modal__payment').find('#card-cvc').val(data.cvv);
-
-});
-
-$('.remove_bg').click(function(e){
-    e.preventDefault(); 
-console.log("removed"+quiz);
-    $.ajax({
-        type: "POST",
-        url: "/removebg",
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-        data: {
-            id:quiz,
-        },
-        success: function (data) { 
-            },
-        error: function (result, error) {},
-    });
-
-});  
+        $(".remove_bg").click(function (e) {
+            e.preventDefault();
+            console.log("removed" + quiz);
+            $.ajax({
+                type: "POST",
+                url: "/removebg",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+                data: {
+                    id: quiz,
+                },
+                success: function (data) {},
+                error: function (result, error) {},
+            });
+        });
 
         return false;
-    
-        
-    
-    
     });
 
 
    
 
-    $('.close_log').click(function(){
-        window.location.href = "/" ;
+    // $('.close_log').click(function(){
+    //     window.location.href = "/" ;
         
 
-    });
+    // });
 
-    $('.close_pay').click(function(){
-        window.location.href = "/dashboard/home" ;
+    // $('.close_pay').click(function(){
+    //     window.location.href = "/dashboard/home" ;
         
 
-    });
+    // });
 
 });

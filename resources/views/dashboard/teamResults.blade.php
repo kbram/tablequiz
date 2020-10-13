@@ -77,7 +77,7 @@
                             @else
                             <br>
 							<br>
-								<h4 class="pt-3 pl-3 text-center">Any Result not Found</h4>					
+								<h4 class="pt-3 pl-3 text-center">No Result Found</h4>					
 								<br><br>
 							@endif	
 						</table>

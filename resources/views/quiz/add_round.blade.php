@@ -350,7 +350,7 @@
 										<span class="plus">+</span>
 									</div>
 									<div class="col-3 col-md-3 text-center form-check px-0 px-md-4">
-										<input type="radio" value="0" class="multiple-choice-correct-answer" name="multiple__choice__correct__answer__0">
+										<input type="radio" value="0" checked="checked" class="multiple-choice-correct-answer" name="multiple__choice__correct__answer__0">
 									</div>
 								</div>
 
@@ -525,11 +525,9 @@
 			</div>
 			<div class="col-md-4 px-0 px-md-4">
 				<!--<button type="button"  class="btn btn-primary d-block" id="publish-quiz">Publish Quiz</a>-->
-				@if(Auth::check())
-				<a href="#" data-toggle="modal" id="publish-quiz" data-target="#publishQuizModal" class="btn btn-primary d-block publish-quiz">Publish Quiz</a>
-				@else
-				<a href="#" data-toggle="modal" id="publish-quiz" data-target="#publishQuizModal" class="btn btn-primary d-block">Publish Quiz</a>
-				@endif
+				
+				<a href="#" data-toggle="modal" id="publish-quiz" data-target="#publishQuizModal" class="btn btn-primary d-block publish-quiz ">Publish Quiz</a>
+				
 			</div>
 		</section>
 	</form>
