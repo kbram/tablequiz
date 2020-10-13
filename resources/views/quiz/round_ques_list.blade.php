@@ -2,7 +2,7 @@
 
 @section('content')
 <script src='jquery-3.2.1.min.js'></script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <section class="container page__inner">
     <form id="add_round" action="/round/upload/{{$id}}" method="post" enctype="multipart/form-data" role="main" novalidate>
         @csrf
@@ -93,12 +93,12 @@
                                     <div class="col-md-3 mr-0 mr-lg-1">
                                         <label class="d-block" for="upload__quiz__icon">Upload
                                             <input type="file" class="form-control-file" id="upload__quiz__icon" name="bg_image" value="Upload">
-                                            <input type="hidden" id="edit-round-image-crop" name="image_crop">
-                                            <input type="hidden" id="edit-round-original-image" name="original_image">
+                                            <input type="hidden" id="edit-round-image-crop" name="image_crop" value="" >
+                                            <input type="hidden" id="edit-round-original-image" name="original_image" value="">
                                         </label>
                                     </div>
                                     <div class="col-md-3 ml-0 ml-lg-1 d-flex">
-                                        <button type="submit" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
+                                        <button id="pro" type="submit" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
 
                                     </div>
                                 </div>
@@ -174,21 +174,12 @@
 @include('scripts.add-round-image')
 <script>
 
-	
-var image = document.getElementById('image');
-       var cropper;
-       var cp_count=1;
+var size = 2000;
+     var cp_count=0;
 	 var find_class=1;
-
-        cropper = new Cropper(image, {
-	  aspectRatio: 1,
-	  viewMode: 3,
-	  preview: '.preview'
-     });
-     setTimeout(function(){ console.log($('.cropper-container').attr('class'));
-    //$('.cropper-container').css('left',70);
-    }, 100);
-
+	
+       var image = document.getElementById('image');
+	   var cropper;
 	$('#upload__quiz__icon').on('change', function(e) { 
       
     /**new crop image round start*/
@@ -237,7 +228,70 @@ var image = document.getElementById('image');
 /**new crop image round end */
 
 		size = this.files[0].size;
+        $('.cropper-container').addClass('kopikopi');
+		console.log($('.cropper-container').attr('class'));
 	});
+
+	$("#pro").click(function() {
+		
+		/**crop image round save btn start */
+		canvas = cropper.getCroppedCanvas({
+	    width: 160,
+	    height: 160,
+      });
+
+    canvas.toBlob(function(blob) {
+        url = URL.createObjectURL(blob);
+        var reader = new FileReader();
+         reader.readAsDataURL(blob); 
+         reader.onloadend = function() {
+            var base64data = reader.result;	
+            $('#edit-round-image-crop').val(base64data);
+        
+         }
+    });
+    
+/**crop image round save btn end */
+
+		var s = $('#upload__quiz__icon').val();
+		s = Math.round(size / 1000);
+		if (s == "") {
+
+		} else {
+			let timerInterval
+            
+			Swal.fire({
+				title: 'File Uploading!',
+				html: 'please wait <br><b></b> kb remaining',
+				timer: s,
+				timerProgressBar: true,
+				onBeforeOpen: () => {
+					Swal.showLoading()
+					timerInterval = setInterval(() => {
+						const content = Swal.getContent()
+						if (content) {
+							const b = content.querySelector('b')
+							if (b) {
+								b.textContent = Swal.getTimerLeft()
+							}
+						}
+					}, 100)
+				},
+				onClose: () => {
+					clearInterval(timerInterval)
+				}
+			}).then((result) => {
+				/* Read more about handling dismissals below */
+				if (result.dismiss === Swal.DismissReason.timer) {
+					console.log('I was closed by the timer')
+				}
+			})
+            
+		}
+        
+	});
+
+
 </script>
 @include('scripts.add-round-image')
 @include('scripts.suggest')
