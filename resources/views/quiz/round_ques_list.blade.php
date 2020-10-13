@@ -94,7 +94,7 @@
                                         <label class="d-block" for="upload__quiz__icon">Upload
                                             <input type="file" class="form-control-file" id="upload__quiz__icon" name="bg_image" value="Upload">
                                             <input type="hidden" id="edit-round-image-crop" name="image_crop">
-                                            <input type="hidden" id="edit-round-original-image" name="original-image">
+                                            <input type="hidden" id="edit-round-original-image" name="original_image">
                                         </label>
                                     </div>
                                     <div class="col-md-3 ml-0 ml-lg-1 d-flex">
@@ -202,12 +202,12 @@ var image = document.getElementById('image');
 	  image.src = url;
 	
      cropper = new Cropper(image, {
-	  aspectRatio: 1,
+	  aspectRatio: 3/2,
 	  viewMode: 3,
 	  preview: '.preview'
     });
     setTimeout(function(){ console.log($('.cropper-container').attr('class'));
-    $('.cropper-container').css('left',70);
+   // $('.cropper-container').css('left',70);
     }, 100);
    
     };
