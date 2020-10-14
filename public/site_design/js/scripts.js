@@ -121,12 +121,12 @@ jQuery(document).ready(function ($) {
         }
     });
 
-    $("#modal__payment__table tr").each(function () {
-        var parent = $(this);
-        $(".checkout__remove", parent).click(function () {
-            parent.detach();
-        });
-    });
+    // $("#modal__payment__table tr").each(function () {
+    //     var parent = $(this);
+    //     $(".checkout__remove", parent).click(function () {
+    //         parent.detach();
+    //     });
+    // });
 
     $(".sign_up__from__modal").click(function () {
         //console.log("hi");
@@ -941,8 +941,9 @@ jQuery(document).ready(function ($) {
         });
     });
 
+    var quiz
     $(".view-card").click(function (e) {
-        var quiz = this.id;
+       quiz = this.id;
 
         $(".close_pay").removeClass("close_pay");
 
@@ -1052,8 +1053,36 @@ jQuery(document).ready(function ($) {
         return false;
     });
 
-
-   
+ /** Remove SUggested Question */
+ $(".remove_suggested_que").click(function (e) { console.log('hihi'); 
+    e.preventDefault();
+  var current= $(this).closest(".suggested-questions");
+    $.ajax({
+        type: "POST",
+        url: "/removeSuggest",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                "content"
+            ),
+        },
+        data: {
+            id: quiz,
+        },
+        success: function (data) { console.log('it is success suggested');
+        var total=$('#modal__payment').find('.total-cost td:nth-child(2)>strong').text();
+        var suggest_cost=$('#modal__payment').find('.suggested-questions td:nth-child(3)').text();
+           // current.remove();
+           current.css('pointer-events','auto');
+           current.css('opacity',0.5);
+           
+            var subtract=Number(total)-Number(suggest_cost);
+            var total=$('#modal__payment').find('.total-cost td:nth-child(2)>strong').text(subtract.toFixed(2));
+        },
+        error: function (result, error) {
+            console.log('error suggested');
+        },
+    });
+});
 
     // $('.close_log').click(function(){
     //     window.location.href = "/" ;

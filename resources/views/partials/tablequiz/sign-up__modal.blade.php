@@ -277,7 +277,7 @@
 					<td>Suggested questions</td>
 					<td></td>
 					<td></td>
-					<td><span class="checkout__remove">-</span></td>
+					<td><span class="checkout__remove remove_suggested_que">-</span></td>
 				</tr>
 				 
 				<tr class="customised-backgrounds">

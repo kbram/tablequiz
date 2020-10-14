@@ -22,6 +22,7 @@ class CreateQuestionsTable extends Migration
             $table->string('question_type');
             $table->text('question');
             $table->integer('time_limit')->nullable();
+            $table->boolean('is_suggested')->default(false);
             $table->timestamps();
         });
     }

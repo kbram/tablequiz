@@ -312,7 +312,10 @@ class QuizController extends Controller
                     }
                     $questinon_save->question_type = $round_session[$k]['question__type'][$i];
                     $questinon_save->question = $round_session[$k]['question'][$i];
-
+                   
+                    if($round_session[$k]['is_suggested'][$i]){
+                    $questinon_save->is_suggested=true;
+                    }
                     $questinon_save->save();
 
 

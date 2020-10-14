@@ -379,3 +379,4 @@ Route::post('/quiz/issue_answer', 'QuizController@issue_answer');
 Route::post('/playquiz/save/answer', 'Quizmaster\PlayController@saveanswer');
 
 Route::post('/removebg','RemoveCartController@removebackground');
+Route::post('/removeSuggest','RemoveCartController@RemoveSuggestedQuestion');

@@ -579,7 +579,7 @@ if($request->$vid_link){
 
      //auth check
 
-     if(Auth::user()){
+     if(Auth::user()){ 
             /** round crop image decode start*/
             $data;
             $txt_data;
@@ -602,7 +602,7 @@ if($request->$vid_link){
             $round->quiz_id          = $quiz_id_round ;
             $round->save();
 
-
+         
         $round_image = new QuizRoundImage;
 
             $round_image->name       = $filename;
@@ -612,7 +612,7 @@ if($request->$vid_link){
             $round_image->thumb_path        = $public_path_thumb;
             $round_image->txt_image       = $request->round_original_image;
             $round_image->save();
-
+      
     //save question part
 
 
@@ -628,13 +628,19 @@ if($request->$vid_link){
 
         for($i=0; $i<count($question_types); $i++){
             $questinon_save = new Question;
-
+           if($request->is_suggested){
+                 
+           }
+         
             $questinon_save->user_id = auth()->id();
             $questinon_save->round_id = $round->id;
             $questinon_save->time_limit = $request->time__limit[$i];
             $questinon_save->question_type = $request->question__type[$i];
             $questinon_save->question = $request->question[$i];
-
+            if($request->is_suggested){
+                $questinon_save->is_suggested=true;
+            }
+            
             $questinon_save ->save();
 
             $standard='standard__question__answer__';
@@ -781,6 +787,7 @@ if(Session::has('question_video_'.$i)){
             Session::push('round_bg_save_path1',$save_path1);
             Session::push('round_bg_filename',$filename);
             Session::push('round_txt_image',$request->round_original_image);
+            
         } 
     }
 

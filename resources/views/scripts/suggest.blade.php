@@ -23,6 +23,7 @@
    var add_image_media_link;
    var add_audio_media_link;
    var add_video_media_link;
+   var suggested_question;
 
 
 
@@ -365,7 +366,7 @@
          add_image_media_link = $(this).closest('.article').find('.add-image-media-link');
          add_audio_media_link = $(this).closest('.article').find('.add-audio-media-link');
          add_video_media_link = $(this).closest('.article').find('.add-video-media-link');
-
+         suggested_question =   $(this).closest('.article').find('.suggested_question');
 
       });
       // when click add-question button get all data from specific suggested question
@@ -383,7 +384,7 @@
          /**get image name */
          var get_image_src = $("#image" + id).attr("src");
 
-
+         suggested_question.val(1);
          get_question.val(question);
          get_time_limit.val(time_limit);
          get_answer.val(answer);

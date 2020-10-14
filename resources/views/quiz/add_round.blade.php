@@ -169,6 +169,7 @@
 							</div>
 							<div class="col-md-8">
 								<input name="question[]" type="text" class="form-control question" required>
+								<input type="hidden" name="is_suggested[]" class="suggested_question">
 							</div>
 							@if ($errors->has('question'))
 							<span class="help-block">
@@ -540,7 +541,7 @@
 
 <script>
 
-	
+var image_src;
 	var size = 2000;
      var cp_count=0;
 	 var edit_cp_count=1;
@@ -603,9 +604,9 @@
 	  reader = new FileReader();
         reader.onload = function (e) {
 			$('#round-original-image').val(e.target.result);
-			$('.cropper-hide').attr('src',e.target.result);
+		//	$('.cropper-hide').attr('src',e.target.result);
 			
-			
+		image_src=event.target.result;
 			
           done(reader.result);
 		  console.log($('.cropper-container').attr('class'));
@@ -629,9 +630,10 @@
 		$('.cropper-container').addClass('kopikopi');
 		console.log($('.cropper-container').attr('class'));
 	});
-	$("#pro").click(function() {
+	$("#pro").click(function() { console.log('hi click');
 		
 		/**crop image round save btn start */
+		if(image_src){
 		canvas = cropper.getCroppedCanvas({
 	    width: 160,
 	    height: 160,
@@ -647,6 +649,8 @@
         
          }
     });
+
+		}
 /**crop image round save btn end */
 
 		var s = $('#upload__quiz__icon').val();
