@@ -121,12 +121,12 @@ jQuery(document).ready(function ($) {
         }
     });
 
-    $("#modal__payment__table tr").each(function () {
-        var parent = $(this);
-        $(".checkout__remove", parent).click(function () {
-            parent.detach();
-        });
-    });
+    // $("#modal__payment__table tr").each(function () {
+    //     var parent = $(this);
+    //     $(".checkout__remove", parent).click(function () {
+    //         parent.detach();
+    //     });
+    // });
 
     $(".sign_up__from__modal").click(function () {
         //console.log("hi");
@@ -148,6 +148,8 @@ jQuery(document).ready(function ($) {
     });
 
     /**kopi ajax login  */
+    var quiz ; 
+
 
     $("#login-btn").click(function (e) {
         e.preventDefault();
@@ -186,6 +188,7 @@ jQuery(document).ready(function ($) {
                         var participants_cost = data.participants_cost[0].cost;
                         var questions_cost = 0;
                         var quiz_id = data.quiz_id;
+                        quiz = quiz_id;
 
                         console.log(typeof participants_cost);
                         $("#modal__payment")
@@ -214,8 +217,20 @@ jQuery(document).ready(function ($) {
                         var customised_backgrounds_details = $(
                             "#modal__payment"
                         )
+
                             .find(".customised-backgrounds td:nth-child(2)")
                             .text(data.bg_image);
+console.log(data.bg_image);
+                            if(data.bg_image == 0){
+
+                                $(".remove_bg").css({
+                                    
+                                    "pointer-events": "none",
+                                    "cursor": "not-allowed"
+                                });
+        
+                            }
+
                         var customised_backgrounds_price = $("#modal__payment")
                             .find(".customised-backgrounds td:nth-child(3)")
                             .text(data.bg_image_cost);
@@ -327,6 +342,7 @@ jQuery(document).ready(function ($) {
                         var participants_cost = data.participants_cost[0].cost;
                         var questions_cost = 0;
                         var quiz_id = data.quiz_id;
+                        quiz = quiz_id;
 
                         console.log(typeof participants_cost);
                         $("#modal__payment")
@@ -357,6 +373,19 @@ jQuery(document).ready(function ($) {
                         )
                             .find(".customised-backgrounds td:nth-child(2)")
                             .text(data.bg_image);
+
+
+
+                            if(data.bg_image == 0){
+
+                                $(".remove_bg").css({
+                                    
+                                    "pointer-events": "none",
+                                    "cursor": "not-allowed"
+                                });
+        
+                            }
+
                         var customised_backgrounds_price = $("#modal__payment")
                             .find(".customised-backgrounds td:nth-child(3)")
                             .text(data.bg_image_cost);
@@ -941,8 +970,16 @@ jQuery(document).ready(function ($) {
         });
     });
 
+
+//remove
+
+
+//remove
+
+
+
     $(".view-card").click(function (e) {
-        var quiz = this.id;
+         quiz = this.id;
 
         $(".close_pay").removeClass("close_pay");
 
@@ -990,6 +1027,17 @@ jQuery(document).ready(function ($) {
                 var customised_backgrounds_details = $("#modal__payment")
                     .find(".customised-backgrounds td:nth-child(2)")
                     .text(data.bg_image);
+                    console.log(data.bg_image);
+
+                    if(data.bg_image == 0){
+
+                        $(".remove_bg").css({
+                            
+                            "pointer-events": "none",
+                            "cursor": "not-allowed"
+                        });
+
+                    }
                 var customised_backgrounds_price = $("#modal__payment")
                     .find(".customised-backgrounds td:nth-child(3)")
                     .text(data.bg_image_cost);
@@ -1011,6 +1059,7 @@ jQuery(document).ready(function ($) {
             error: function (result, error) {},
         });
 
+
         //card fill
 
         $.getJSON("/card", function (data) {
@@ -1030,10 +1079,196 @@ jQuery(document).ready(function ($) {
             $("#modal__payment").find("#card-cvc").val(data.cvv);
         });
 
-        $(".remove_bg").click(function (e) {
-            e.preventDefault();
-            console.log("removed" + quiz);
-            $.ajax({
+
+
+
+
+        
+
+        
+        return false;
+    });
+
+
+
+    //public quiz
+$(document).ready(function() {
+    
+    $('.publish-quiz').click(function(e){
+        e.preventDefault();
+
+var quiz_id = "";
+
+var formdata = new FormData($("#add_round")[0]);
+
+  $.ajax({
+
+
+    data: formdata,
+    processData: false,
+    contentType: false,
+    cache: false,
+    enctype: 'multipart/form-data',
+
+    type: "post",
+    url: $("#add_round").attr("action"),
+    headers: {
+        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+    },
+    success: function (response) {
+        console.log("success");
+       
+        $.ajax({
+        type: "POST",
+        url: "/payment",
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        data:{
+            count : sessionStorage.count
+        },
+        success: function(data) {
+            if(data.participants != 0){         
+
+            var participants=data.participants.no_of_participants;
+            var participants_cost=data.participants_cost[0].cost;
+            quiz_id = data.quiz_id;
+            quiz = quiz_id;
+             var questions_cost=0;
+                    $('#modal__payment').find('.no-participants td:nth-child(2)').text(participants);
+            $('#modal__payment').find('.no-participants td:nth-child(3)').text(participants_cost);
+
+            $('#modal__payment').find('.suggested-questions td:nth-child(2)').text(sessionStorage.count);
+
+            if(data.question_cost != null){
+                $('#modal__payment').find('.suggested-questions td:nth-child(3)').text(data.question_cost);
+                questions_cost=data.question_cost;
+            }
+            else{
+                $('#modal__payment').find('.suggested-questions td:nth-child(3)').text(0);
+                 questions_cost=0;
+            }
+                  
+    var customised_backgrounds_details=$('#modal__payment').find('.customised-backgrounds td:nth-child(2)').text(data.bg_image);
+    console.log(data.bg_image_cost);
+    var customised_backgrounds_price=$('#modal__payment').find('.customised-backgrounds td:nth-child(3)').text(data.bg_image_cost);
+
+
+    if(data.bg_image == 0){
+
+$(".remove_bg").css({
+    
+    "pointer-events": "none",
+    "cursor": "not-allowed"
+});
+
+}
+  
+    $('#modal__payment').find('.total-cost td:nth-child(2)>strong').text(Number(participants_cost)+Number(questions_cost)+Number(data.bg_image_cost));
+   
+    var total_card = Number(participants_cost)+Number(questions_cost)+Number(data.bg_image_cost ); 
+    $('#card_total').val(total_card);
+    $('#quiz_id').val(quiz_id);
+    console.log(quiz_id);
+        }
+
+
+        },
+        error: function(result,error) {
+            
+       
+        
+        },
+
+      });
+    },
+    error: function (result, error) {
+        console.log("errror");
+        //$("#publishQuizModal").modal("show");
+        //$("#modal__payment").modal("show");
+    },
+});
+    
+
+
+
+      //card fill
+
+      $.getJSON('/card',function (data){
+        
+        $('#modal__payment').find('#card-holder-name').val(data.name);
+        $('#modal__payment').find('#cardholder_street').val(data.street);
+        $('#modal__payment').find('#cardholder_city').val(data.city);
+        $('#modal__payment').find('#cardholder_country').val(data.country);
+        $('#modal__payment').find('#cardholder_number').val(data.card_number);
+        $('#modal__payment').find('#cardholder_expiry_month').val(data.exp_month);
+        $('#modal__payment').find('#cardholder_expiry_year').val(data.exp_year);
+        $('#modal__payment').find('#card-cvc').val(data.cvv);
+
+});
+
+
+
+
+
+
+
+    
+
+   
+    });
+   
+});
+
+    //
+
+    $(".remove_bg").click(function (e) {
+        e.preventDefault();
+        console.log("removed" + quiz);
+
+        var backgrounds_price = $("#modal__payment")
+                    .find(".customised-backgrounds td:nth-child(3)")
+                    .text();
+    
+        swal({
+            title: "Are You Sure ?",
+            text: "it will remove all backgrounds you added !",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              swal("All backgrounds has been deleted!", {
+                icon: "success",
+                
+              });
+    
+              var customised_backgrounds_details = $("#modal__payment")
+              .find(".customised-backgrounds td:nth-child(2)")
+              .text(0);
+    
+          var customised_backgrounds_price = $("#modal__payment")
+              .find(".customised-backgrounds td:nth-child(3)")
+              .text(0);   
+
+        
+             var current_total = $("#modal__payment").find(".total-cost td:nth-child(2)>strong").text();
+             var total = Number(current_total) - Number(backgrounds_price);
+          console.log(total);
+          $("#modal__payment")
+                    .find(".total-cost td:nth-child(2)>strong")
+                    .text(total);
+
+                    $("#card_total").val(total);
+
+            
+                    $(".remove_bg").css({
+    
+                        "pointer-events": "none",
+                        "cursor": "not-allowed"
+                    });
+              
+    
+              $.ajax({
                 type: "POST",
                 url: "/removebg",
                 headers: {
@@ -1047,12 +1282,16 @@ jQuery(document).ready(function ($) {
                 success: function (data) {},
                 error: function (result, error) {},
             });
-        });
-
-        return false;
+    
+    
+            } else {
+              swal("your backgrounds are safe");
+            }
+          });
+    
+    
+       
     });
-
-
    
 
     // $('.close_log').click(function(){
@@ -1088,5 +1327,8 @@ jQuery(document).ready(function ($) {
         
 
     });
+
+
+    
 
 });

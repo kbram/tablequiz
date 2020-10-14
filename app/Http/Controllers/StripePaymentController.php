@@ -216,7 +216,7 @@ $quiz->save();
                         $question_cost  = 0;
                     }
                     else{
-                        $question_cost=PriceBand::where('band_type',Config::get('priceband.type.question_band_type'))->where('from','<=',$suggested_question_no)->where('to','>=',$suggested_question_no)->get('cost')->first();
+                        $question_cost=PriceBand::where('band_type',Config::get('priceband.type.question_band_type'))->where('from','<=',$request->count)->where('to','>=',$request->count)->get('cost')->first();
                         $question_cost = $question_cost->cost; 
                     }
 
