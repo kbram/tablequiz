@@ -221,15 +221,18 @@ jQuery(document).ready(function ($) {
                             .find(".customised-backgrounds td:nth-child(2)")
                             .text(data.bg_image);
 console.log(data.bg_image);
-                            if(data.bg_image == 0){
 
-                                $(".remove_bg").css({
-                                    
-                                    "pointer-events": "none",
-                                    "cursor": "not-allowed"
-                                });
+if(data.bg_image == 0){
+
+    $(".customised-backgrounds").css({
         
-                            }
+                            "pointer-events": "none",
+                            "cursor": "not-allowed",
+                            'opacity': 0.5
+                            
+                        });
+    
+    }
 
                         var customised_backgrounds_price = $("#modal__payment")
                             .find(".customised-backgrounds td:nth-child(3)")
@@ -375,16 +378,17 @@ console.log(data.bg_image);
                             .text(data.bg_image);
 
 
-
                             if(data.bg_image == 0){
 
-                                $(".remove_bg").css({
+                                $(".customised-backgrounds").css({
                                     
-                                    "pointer-events": "none",
-                                    "cursor": "not-allowed"
-                                });
-        
-                            }
+                                                        "pointer-events": "none",
+                                                        "cursor": "not-allowed",
+                                                        'opacity': 0.5
+                                                        
+                                                    });
+                                
+                                }
 
                         var customised_backgrounds_price = $("#modal__payment")
                             .find(".customised-backgrounds td:nth-child(3)")
@@ -1031,13 +1035,15 @@ console.log(data.bg_image);
 
                     if(data.bg_image == 0){
 
-                        $(".remove_bg").css({
+                        $(".customised-backgrounds").css({
                             
-                            "pointer-events": "none",
-                            "cursor": "not-allowed"
-                        });
-
-                    }
+                                                "pointer-events": "none",
+                                                "cursor": "not-allowed",
+                                                'opacity': 0.5
+                                                
+                                            });
+                        
+                        }
                 var customised_backgrounds_price = $("#modal__payment")
                     .find(".customised-backgrounds td:nth-child(3)")
                     .text(data.bg_image_cost);
@@ -1154,18 +1160,19 @@ var formdata = new FormData($("#add_round")[0]);
 
     if(data.bg_image == 0){
 
-$(".remove_bg").css({
+$(".customised-backgrounds").css({
     
-    "pointer-events": "none",
-    "cursor": "not-allowed"
-});
+                        "pointer-events": "none",
+                        "cursor": "not-allowed",
+                        'opacity': 0.5
+                        
+                    });
 
 }
   
     $('#modal__payment').find('.total-cost td:nth-child(2)>strong').text(Number(participants_cost)+Number(questions_cost)+Number(data.bg_image_cost));
    
     var total_card = Number(participants_cost)+Number(questions_cost)+Number(data.bg_image_cost ); 
-    $('#card_total').val(total_card);
     $('#quiz_id').val(quiz_id);
     console.log(quiz_id);
         }
@@ -1261,10 +1268,12 @@ $(".remove_bg").css({
                     $("#card_total").val(total);
 
             
-                    $(".remove_bg").css({
+                    $(".customised-backgrounds").css({
     
                         "pointer-events": "none",
-                        "cursor": "not-allowed"
+                        "cursor": "not-allowed",
+                        'opacity': 0.5
+                        
                     });
               
     
