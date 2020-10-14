@@ -233,6 +233,12 @@ if(data.bg_image == 0){
                         });
     
     }
+                            
+                            if(data.question_cost == 0){
+
+                                $(".suggested-questions").css({"pointer-events": "none", "opacity":0.5});
+        
+                            }
 
                         var customised_backgrounds_price = $("#modal__payment")
                             .find(".customised-backgrounds td:nth-child(3)")
@@ -389,6 +395,12 @@ if(data.bg_image == 0){
                                                     });
                                 
                                 }
+
+                            if(data.question_cost == 0){
+
+                                $(".suggested-questions").css({"pointer-events": "none", "opacity":0.5});
+        
+                            }
 
                         var customised_backgrounds_price = $("#modal__payment")
                             .find(".customised-backgrounds td:nth-child(3)")
@@ -1042,8 +1054,14 @@ if(data.bg_image == 0){
                                                 'opacity': 0.5
                                                 
                                             });
-                        
-                        }
+                       
+
+                    }
+                    if(data.question_cost == 0){
+
+                        $(".suggested-questions").css({"pointer-events": "none", "opacity":0.5});
+
+                    }
                 var customised_backgrounds_price = $("#modal__payment")
                     .find(".customised-backgrounds td:nth-child(3)")
                     .text(data.bg_image_cost);
@@ -1167,6 +1185,12 @@ $(".customised-backgrounds").css({
                         'opacity': 0.5
                         
                     });
+
+}
+
+if(data.question_cost == 0){
+
+    $(".suggested-questions").css({"pointer-events": "none", "opacity":0.5});
 
 }
   
@@ -1321,7 +1345,7 @@ $(".customised-backgrounds").css({
         var total=$('#modal__payment').find('.total-cost td:nth-child(2)>strong').text();
         var suggest_cost=$('#modal__payment').find('.suggested-questions td:nth-child(3)').text();
            // current.remove();
-           current.css('pointer-events','auto');
+           current.css('pointer-events','none');
            current.css('opacity',0.5);
            
             var subtract=Number(total)-Number(suggest_cost);

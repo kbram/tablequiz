@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\QuizRound;
 use App\Models\QuizRoundImage;
 use App\Models\Question;
-
+use App\Models\Quiz;
 
 class RemoveCartController extends Controller
 {
@@ -30,6 +30,10 @@ class RemoveCartController extends Controller
 
 public function RemoveSuggestedQuestion(Request $request){   
     $round_ids = QuizRound::where('quiz_id' , $request->id)->get('id');
+    $quiz=Quiz::find($request->id);
+    $quiz->no_suggested_questions=0;
+    $quiz->save();
+    
     foreach($round_ids as $round_id){ 
         $round_que =Question::where('round_id', $round_id->id)->where('is_suggested',true)->delete();
        
