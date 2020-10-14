@@ -1349,7 +1349,10 @@ if(data.question_cost == 0){
            current.css('opacity',0.5);
            
             var subtract=Number(total)-Number(suggest_cost);
+        
             var total=$('#modal__payment').find('.total-cost td:nth-child(2)>strong').text(subtract.toFixed(2));
+            $("#card_total").val(subtract);
+
         },
         error: function (result, error) {
             console.log('error suggested');

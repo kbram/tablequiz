@@ -147,6 +147,9 @@ $quiz->save();
                 $image=0;
                 $rounds=QuizRound::where('quiz_id',$request->id)->get();
 
+                $quiz_suggested_questions = Quiz::find($request->id);
+                $quiz_suggested_questions->no_suggested_questions = $request->count ;
+                $quiz_suggested_questions -> save();
                 
                 foreach($rounds as $round){
                     $image +=QuizRoundImage::where('name','!=','0')->where('round_id',$round->id)->count();
