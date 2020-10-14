@@ -135,7 +135,7 @@
         <div class="row">
 
             <article class="col-12 article">
-<input type="hidden" name="suggest" value="{{$id}}">
+
                     @csrf
                     <div class="article_question">
                         <div class="article__heading">
@@ -189,9 +189,12 @@
                         <div class="form-row">
                             <div class="col-md-4">
                                 <label for="question">Question</label>
+                                
                             </div>
                             <div class="col-md-8">
                                 <input name="question" type="text" class="form-control question" value="{{$question->question}}">
+                                <input class="suggest" type="hidden" name="suggest" id="{{$id}}" value="">
+
                             </div>
                             @if ($errors->has('question'))
                             <span class="help-block">

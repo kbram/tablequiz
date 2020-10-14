@@ -10,6 +10,8 @@
 
    /**get suggested questions*/
    var get_question;
+   var get_suggest;
+
    var get_time_limit;
    var get_answer;
    var question_type;
@@ -354,6 +356,8 @@
 
       $("body").on('click', '.suggested_q_link', function() {
          get_question = $(this).closest('.article').find('.question');
+         get_suggest = $(this).closest('.article').find('.suggest');
+
          get_time_limit = $(this).closest('.article').find('.time-limit');
          get_answer = $(this).closest('.article').find('.answer');
          get_question_type = $(this).closest('.article').find('.question-type');
@@ -386,6 +390,7 @@
 
          suggested_question.val(1);
          get_question.val(question);
+         get_suggest.val("1");
          get_time_limit.val(time_limit);
          get_answer.val(answer);
          get_question_type.val(question_type);

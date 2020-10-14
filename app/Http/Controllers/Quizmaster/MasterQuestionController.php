@@ -50,11 +50,14 @@ class MasterQuestionController extends Controller
     }
     /**kopi question edit uploade */
     public function upload(Request $request,$id){
-        // $suggest=$request->suggest;
-        
-        // $quiz = Quiz::find($suggest);
-        // $quiz->no_suggested_questions+=1;
-        // $quiz->save();
+        if($request->suggest==1){
+            $suggest=$request->suggest;
+            $quiz = Quiz::find($suggest);
+            $quiz->payment=0;
+            $quiz->no_suggested_questions+=1;
+            $quiz->save();
+        }
+       
 
         $question = Question::findorfail($id); 
          if($request->question){
