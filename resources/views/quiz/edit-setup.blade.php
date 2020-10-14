@@ -51,7 +51,7 @@
 						<label>Quiz icon</label>
 					</div>
 					<div class=" col-md-4">
-						<a href="#" class="d-block btn btn-outline-secondary" data-toggle="modal" data-target="#edit__icon__modal">Upload</a>
+						<a href="#" class="d-block btn btn-outline-secondary edit-quiz-upload" data-toggle="modal" data-target="#edit__icon__modal">Upload</a>
 					</div>
 					<div class="col-md-3">
 						<p class="form__explainer">
