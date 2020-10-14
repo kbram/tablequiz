@@ -2529,14 +2529,15 @@ p.time__remaining span {
     color: var(--primaryColour);
 }
 .loader {
-    border: 9px solid #ffffff;
+    border: 5px solid #ffffff;
     border-radius: 50%;
-    border-top: 9px solid #4f37ed;
-    width: 80px;
-    height: 80px;
-    position: absolute;
+    border-top: 5px solid #ee8e4f;
+    width: 30px;
+    height: 30px;
+    position:absolute;
     z-index: 200;
-    
+    margin-left: 10px;
+   
     -webkit-animation: spin 2s linear infinite; /* Safari */
     animation: spin 2s linear infinite;
   }

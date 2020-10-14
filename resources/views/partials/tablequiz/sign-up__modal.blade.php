@@ -57,18 +57,22 @@
 			<div class="form-row  text-center justify-content-center mt-5">
 				<div class="col-lg-4 col-md-4 ">
 				@if (session()->has('quiz'))
-					<input class="d-block btn btn-primary pb-3 " id="login-btn" type="submit" value="Log In">
-					
+			
+					<button class="d-block btn btn-primary pb-3 " id="login-btn" type="submit">Log In
+					<span id ="loading" class=""></span></button>
 					@else
-					<input class="d-block btn  btn-primary pb-3" type="submit" value="Log In">
+					
+					<button class="d-block btn  btn-primary pb-3" type="submit" >Log In
+					<span id ="loading" class=""></span></button>
 					<!-- for check out view -> to__checkout -->
+					
 					@endif
 					<a class="text-dark " href="{{ route('password.request') }}">
 						<p>		Forgot your password ? </p>
 
                 </a>
 				</div>
-				<div id ="loading"class=""></div>
+				
 			</div>
 			
 		</form>
@@ -196,13 +200,15 @@
 			<div class="form-row d-flex justify-content-center mt-5">
 				<div class="col-10 col-md-4">
 				@if (session()->has('quiz'))
-					<input class="d-block btn btn-primary to__checkout" id="signup-btn" type="submit" value="Sign Up">
+					<button class="d-block btn btn-primary to__checkout" id="signup-btn" type="submit">Sign Up
+					<span id ="loading1"class="" ></span></button>
 					@else
-					<input class="d-block btn btn-primary to__checkout" type="submit" value="Sign Up">
+					<button class="d-block btn btn-primary to__checkout" type="submit">Sign Up
+					<span id ="loading1"class="" ></span></button>
 					@endif
 					
 				</div>
-				<div id ="loading1"class=""></div>
+				
 			</div>
 		</form>
 		<div class="or__separator"><span>OR</span></div> 
