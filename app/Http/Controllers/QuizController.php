@@ -501,9 +501,9 @@ class QuizController extends Controller
 
         $quiz = Quiz::find($id);
         $bands = PriceBand::all();
-
+        $round_count=QuizRound::where('quiz_id',$id)->get()->count();
         $image = $quiz->icon()->first()->txt_image;
-        return view('quiz.edit-setup', compact('quiz', 'image', 'bands'));
+        return view('quiz.edit-setup', compact('quiz', 'image', 'bands','round_count'));
     }
 
 
