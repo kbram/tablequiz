@@ -1285,8 +1285,25 @@ if(data.question_cost == 0){
             icon: "success",
             
           });
-         // varr
+
+          var current_total = $("#modal__payment").find(".total-cost td:nth-child(2)>strong").text();
+          var suggest_cost=$('#modal__payment').find('.suggested-questions td:nth-child(3)').text();
+          
+             // current.remove();
+             
+
+             $('#modal__payment').find('.suggested-questions td:nth-child(3)').text(0);
+             $('#modal__payment').find('.suggested-questions td:nth-child(2)').text(0);
+
+              var total = Number(current_total) - Number(suggest_cost);
+              $('#modal__payment').find('.total-cost td:nth-child(2)>strong').text(total);
+              $("#card_total").val(total);
+         
+              // varr
          var current= $(this).closest(".suggested-questions");
+         current.css('pointer-events','none');
+         current.css('opacity',0.5);
+
          $.ajax({
              type: "POST",
              url: "/removeSuggest",
@@ -1299,20 +1316,7 @@ if(data.question_cost == 0){
                  id: quiz,
              },
              success: function (data) { console.log('it is success suggested');
-             var total=$('#modal__payment').find('.total-cost td:nth-child(2)>strong').text();
-             var suggest_cost=$('#modal__payment').find('.suggested-questions td:nth-child(3)').text();
-                // current.remove();
-                current.css('pointer-events','none');
-                current.css('opacity',0.5);
-
-                var suggest_cost=$('#modal__payment').find('.suggested-questions td:nth-child(3)').text(0);
-                $('#modal__payment').find('.suggested-questions td:nth-child(2)').text(0);
-
-                 var subtract=Number(total)-Number(suggest_cost);
-                 var total=$('#modal__payment').find('.total-cost td:nth-child(2)>strong').text(subtract.toFixed(2));
-                 $("#card_total").val(subtract);
-
-
+            
                 },
              error: function (result, error) {
                  console.log('error suggested');
@@ -1347,7 +1351,7 @@ if(data.question_cost == 0){
           })
           .then((willDelete) => {
             if (willDelete) {
-              swal("Poof! Your imaginary file has been deleted!", {
+              swal("you quiz added as unpaid !", {
                 icon: "success",
                 
               });
