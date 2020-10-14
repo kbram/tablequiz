@@ -15,10 +15,15 @@ class RemoveCartController extends Controller
     $round_ids = QuizRound::where('quiz_id' , $request->id)->get('id');
     foreach($round_ids as $round_id){
         $round_img = QuizRoundImage::where('round_id', $round_id->id)->get()->first();
-        $round_img -> enable = false ;
-        $round_img -> save();
-        
+        $round_img -> delete();
+
     }
+
+    // $quiz = Quiz::find($request->id)->with('rounds');
+    
+
+
+
     
    }
 

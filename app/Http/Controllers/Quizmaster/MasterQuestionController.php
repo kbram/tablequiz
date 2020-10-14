@@ -579,7 +579,8 @@ if($request->$vid_link){
 
      //auth check
 
-     if(Auth::user()){ 
+     if(Auth::user()){
+       
             /** round crop image decode start*/
             $data;
             $txt_data;
@@ -595,7 +596,6 @@ if($request->$vid_link){
           /** round crop image decode end*/
 
         $quiz_id_round = Session::get('quiz_id_round');
-        
         $round = new QuizRound;
             $round->round_name              = $request->input('round_name');
             $round->round_slug          = $request->input('round_count');

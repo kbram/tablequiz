@@ -179,7 +179,7 @@ $quiz->save();
                     );
             }
             else{
-
+                
                 $user = auth()->user();
                 $participants=Quiz::where('user_id',$user->id)->get('no_of_participants')->last();
                 $participant_range=$participants['no_of_participants'];
@@ -194,19 +194,31 @@ $quiz->save();
                 $quiz_suggested_questions = Quiz::find($quiz_id->id);
                 $quiz_suggested_questions->no_suggested_questions = $request->count ;
                 $quiz_suggested_questions -> save();
-
+               
                     $rounds=QuizRound::where('quiz_id',$quiz_id->id)->get();
+                    
+
+                   
                     foreach($rounds as $round){
                         $image +=QuizRoundImage::where('name','!=','0')->where('round_id',$round->id)->count();
                     }                
-                     
+                   
                     if($image == 0){
                         $background_cost  = 0;
                     }
                     else{
+                        
                         $background_cost=PriceBand::where('band_type',Config::get('priceband.type.background_band_type'))->where('from','<=',$image)->where('to','>=',$image)->get('cost')->first();
-                    $background_cost = $background_cost->cost   ; 
-                }
+                        $background_cost = $background_cost->cost; 
+                    }
+    
+                    if($request->count == 0){
+                        $question_cost  = 0;
+                    }
+                    else{
+                        $question_cost=PriceBand::where('band_type',Config::get('priceband.type.question_band_type'))->where('from','<=',$request->count)->where('to','>=',$request->count)->get('cost')->first();
+                        $question_cost = $question_cost->cost; 
+                    }
 
 
                 $response = array(

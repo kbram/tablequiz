@@ -435,10 +435,28 @@ class QuizController extends Controller
                     }
                 }
             }
+            Session::forget('quiz');
+            Session::forget('quiz_image');
+            Session::forget('round_question');
+            Session::forget('round_bg_public_path');
+            Session::forget('round_bg_public_path_thumb');
+            Session::forget('round_bg_save_path1');
+            Session::forget('round_bg_filename');
+            Session::forget('round_txt_image');
+
+
+
+
+
+
+
+
             return view('home2');
         } else {
+           
             return view('home2');
         }
+
     }
 
 
