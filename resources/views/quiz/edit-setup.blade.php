@@ -177,7 +177,9 @@
 						<input class="d-block btn btn-secondary hasArrow" type="submit" value="Save">
 					</div>
 					<div class="text-center m-2">
-						<a href="/round/edit/{{$quiz->id}}" class="btn btn-primary d-block">Edit Round</a>
+						@if($round_count!=0)
+						<a href="/round/edit/{{$quiz->id}}/1" class="btn btn-primary d-block">Edit Round</a>
+						@endif
 					</div>
 				</div>
 			</form>

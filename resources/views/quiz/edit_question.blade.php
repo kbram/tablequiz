@@ -31,10 +31,11 @@
 <!-- <script src='jquery-3.2.1.min.js'></script> -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <section class="container page__inner">
+<form id="add_round" action="/question/upload/{{$question->id}}" method="post" enctype="multipart/form-data" role="main" novalidate>
     <div class="row">
 
         <article class="col-12 article">
-            <form id="add_round" action="/question/upload/{{$question->id}}" method="post" enctype="multipart/form-data" role="main" novalidate>
+        
                 @csrf
                 <div class="article_question">
                     <div class="article__heading">
@@ -508,7 +509,7 @@
                                     <div class="icon pb-2">
                                         <i class="fas fa-music"></i>
                                     </div>
-                                    <p class="">Audio-based Q&amp;A</p>
+                                    <p class=""formudio-based Q&amp;A</p>
                                 </div>
                             </div>
 
@@ -532,7 +533,7 @@
 
                             <ul class="all_suggested_questions list-unstyled p-0 m-0">
 
-                                <!-- kopi start finished -->
+                                <!-- kopi formstart finished -->
 
 
                             </ul>
@@ -544,14 +545,15 @@
         </div>
 
 
-    </div>
-    <div class="button__holder w-100 pt-0 mt-5 justify-content-center d-md-flex" id="add-new-question">
+    
+        <div class="button__holder w-100 pt-0 mt-5 justify-content-center d-md-flex" id="add-new-question">
 
-        <div class="col-md-4 p-0">
-            <button type="submit" class="btn btn-white d-block" id="addQuestions">Save Question</button>
+            <div class="col-md-4 p-0">
+                <button type="submit" class="btn btn-white d-block" id="addQuestions">Save Question</button>
+            </div>
+
         </div>
-
-    </div>
+     </div>
 
     </form>
 </section>
