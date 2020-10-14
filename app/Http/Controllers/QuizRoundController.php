@@ -11,7 +11,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Input;
-
+use App\Models\Answer;
+use App\Models\QuizCategory;
 
 use File;
 use Image;
@@ -104,33 +105,35 @@ class QuizRoundController extends Controller
         return view('quiz.add_round_edit');
     }
 
-    public function new_edit($id){
-        $rounds=QuizRound::where('quiz_id',$id)->get();
+    public function new_edit($id,$rid){
+        $round=QuizRound::where('quiz_id',$id)->get()->take($rid)->last();
+        //dd($round);
+        $payment=Quiz::where('id',$id)->get();
+        $pay=$payment[0]->payment;
+       //dd($pay);
+        $round_count=QuizRound::where('quiz_id',$id)->get()->count();
+        //  dd($round_count);
         //dd($rounds);
-        $questions_counts=[];
-        foreach($rounds as $round){
-            $questions_counts[$round->id]=Question::where('round_id',$round->id)->count();
-              }
-             // dd($questions_counts[11]);
-        return view('quiz.round_list',compact('rounds','questions_counts'));
-    }
-
-    public function round_ques_list_edit($name,$id){
-      
-        $rounds=QuizRound::where('id',$id)->get();
-        $round_image=QuizRoundImage::where('round_id',$id)->first('txt_image');
+        $categories = QuizCategory::all();
+       //$rounds=QuizRound::where('id',$rid)->get();
+        $round_image=QuizRoundImage::where('round_id',$round->id)->first('txt_image');
         $round_image_data="";
+        $answers=Answer::all();
         if($round_image->txt_image){
             $round_image_data =$round_image->txt_image;
         }
-      
-        $questions_counts=[];
-        foreach($rounds as $round){
-            $questions_counts[$round->id]=Question::where('round_id',$round->id)->count();
-              }
-              $questions=Question::where('round_id',$id)->get();
-              $count=0;
-        return view('quiz.round_ques_list',compact('round_image_data','rounds','questions','questions_counts','name','count','id'));
+        $firstround=QuizRound::where('quiz_id',$id)->get()->first();
+        $lastround=QuizRound::where('quiz_id',$id)->get()->last();
+        $frid=$firstround->id;
+        $lrid=$lastround->id;
+              
+        $questions=Question::where('round_id',$round->id)->get();
+        $count=0;
+        return view('quiz.round_ques_list',compact('round_image_data','count','questions','answers','categories','round','round_count','id','rid','pay','frid','lrid'));
+    }
+
+    public function round_ques_list_edit($name,$id){
+       
     }
 
 
