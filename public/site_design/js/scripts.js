@@ -44,22 +44,10 @@ jQuery(document).ready(function ($) {
         .on("click", "span.plus", function () {
             i += 1;
 
-            var gtname = $(this)
-                .closest("article")
-                .find(".multiple-choice-answer")
-                .attr("name");
-            console.log(gtname);
-
-            var gtname_correct = $(this)
-                .closest("article")
-                .find(".multiple-choice-correct-answer")
-                .attr("name");
-            console.log(gtname_correct);
-
-            var gtname_correct_val = $(this)
-                .closest(".multiple__choice__row")
-                .find(".multiple-choice-answer")
-                .val();
+            var gtname = $(this).closest("article").find(".multiple-choice-answer").attr("name");
+            var gtname_correct = $(this).closest("article").find(".multiple-choice-correct-answer").attr("name");
+          
+            var gtname_correct_val = $(this).closest(".multiple__choice__row").find(".multiple-choice-answer").val();
 
             var newRow =
                 '<div class="row multiple__choice__row  pb-3 align-items-center"><div class="col-7 multi"><input name="' +
@@ -191,48 +179,26 @@ jQuery(document).ready(function ($) {
                         quiz = quiz_id;
 
                         console.log(typeof participants_cost);
-                        $("#modal__payment")
-                            .find(".no-participants td:nth-child(2)")
-                            .text(participants);
-                        $("#modal__payment")
-                            .find(".no-participants td:nth-child(3)")
-                            .text(participants_cost);
-
-                        $("#modal__payment")
-                            .find(".suggested-questions td:nth-child(2)")
-                            .text(sessionStorage.count);
+                        $("#modal__payment").find(".no-participants td:nth-child(2)").text(participants);
+                        $("#modal__payment").find(".no-participants td:nth-child(3)").text(participants_cost);
+                        $("#modal__payment").find(".suggested-questions td:nth-child(2)").text(sessionStorage.count);
 
                         if (data.question_cost != null) {
-                            $("#modal__payment")
-                                .find(".suggested-questions td:nth-child(3)")
-                                .text(data.question_cost);
+                            $("#modal__payment").find(".suggested-questions td:nth-child(3)").text(data.question_cost);
                             questions_cost = data.question_cost;
                         } else {
-                            $("#modal__payment")
-                                .find(".suggested-questions td:nth-child(3)")
-                                .text(0);
+                            $("#modal__payment").find(".suggested-questions td:nth-child(3)").text(0);
                             questions_cost = 0;
                         }
 
-                        var customised_backgrounds_details = $(
-                            "#modal__payment"
-                        )
+             var customised_backgrounds_details = $( "#modal__payment").find(".customised-backgrounds td:nth-child(2)").text(data.bg_image);
 
-                            .find(".customised-backgrounds td:nth-child(2)")
-                            .text(data.bg_image);
-console.log(data.bg_image);
 
 if(data.bg_image == 0){
 
-    $(".customised-backgrounds").css({
-        
-                            "pointer-events": "none",
-                            "cursor": "not-allowed",
-                            'opacity': 0.5
-                            
-                        });
+    $(".customised-backgrounds").css({"pointer-events": "none","cursor": "not-allowed",'opacity': 0.5});
     
-    }
+              }
                             
                             if(data.question_cost == 0){
 
@@ -240,21 +206,10 @@ if(data.bg_image == 0){
         
                             }
 
-                        var customised_backgrounds_price = $("#modal__payment")
-                            .find(".customised-backgrounds td:nth-child(3)")
-                            .text(data.bg_image_cost);
+        var customised_backgrounds_price = $("#modal__payment").find(".customised-backgrounds td:nth-child(3)").text(data.bg_image_cost);
 
-                        $("#modal__payment")
-                            .find(".total-cost td:nth-child(2)>strong")
-                            .text(
-                                Number(participants_cost) +
-                                    Number(questions_cost) +
-                                    Number(data.bg_image_cost)
-                            );
-                        var total_card =
-                            Number(participants_cost) +
-                            Number(questions_cost) +
-                            Number(data.bg_image_cost);
+        $("#modal__payment").find(".total-cost td:nth-child(2)>strong").text(Number(participants_cost) +Number(questions_cost) +Number(data.bg_image_cost));
+        var total_card =Number(participants_cost) +Number(questions_cost) +Number(data.bg_image_cost);
                         $("#card_total").val(total_card);
                         $("#quiz_id").val(quiz_id);
                     },
@@ -262,25 +217,13 @@ if(data.bg_image == 0){
                 });
                 //card fill
                 $.getJSON("/card", function (data) {
-                    $("#modal__payment")
-                        .find("#card-holder-name")
-                        .val(data.name);
-                    $("#modal__payment")
-                        .find("#cardholder_street")
-                        .val(data.street);
-                    $("#modal__payment")
-                        .find("#cardholder_city")
-                        .val(data.city);
-                    $("#modal__payment")
-                        .find("#cardholder_country")
-                        .val(data.country);
-                    $("#modal__payment")
-                        .find("#cardholder_number")
-                        .val(data.card_number);
-                    $("#modal__payment")
-                        .find("#cardholder_expiry_month")
-                        .val(data.exp_month);
-                    $("#modal__payment")
+        $("#modal__payment").find("#card-holder-name").val(data.name);
+        $("#modal__payment").find("#cardholder_street").val(data.street);
+        $("#modal__payment").find("#cardholder_city").val(data.city);
+        $("#modal__payment").find("#cardholder_country").val(data.country);
+        $("#modal__payment").find("#cardholder_number").val(data.card_number);
+        $("#modal__payment").find("#cardholder_expiry_month").val(data.exp_month);
+        $("#modal__payment")
                         .find("#cardholder_expiry_year")
                         .val(data.exp_year);
                     $("#modal__payment").find("#card-cvc").val(data.cvv);
@@ -1329,32 +1272,58 @@ if(data.question_cost == 0){
  /** Remove SUggested Question */
  $(".remove_suggested_que").click(function (e) { console.log('hihi'); 
     e.preventDefault();
-  var current= $(this).closest(".suggested-questions");
-    $.ajax({
-        type: "POST",
-        url: "/removeSuggest",
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                "content"
-            ),
-        },
-        data: {
-            id: quiz,
-        },
-        success: function (data) { console.log('it is success suggested');
-        var total=$('#modal__payment').find('.total-cost td:nth-child(2)>strong').text();
-        var suggest_cost=$('#modal__payment').find('.suggested-questions td:nth-child(3)').text();
-           // current.remove();
-           current.css('pointer-events','none');
-           current.css('opacity',0.5);
-           
-            var subtract=Number(total)-Number(suggest_cost);
-            var total=$('#modal__payment').find('.total-cost td:nth-child(2)>strong').text(subtract.toFixed(2));
-        },
-        error: function (result, error) {
-            console.log('error suggested');
-        },
-    });
+     
+    swal({
+        title: "Are You Sure ?",
+        text: "it will remove all suggested questions you added !",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }) .then((willDelete) => {
+        if (willDelete) {
+          swal("All suggested questions has been deleted!", {
+            icon: "success",
+            
+          });
+         // varr
+         var current= $(this).closest(".suggested-questions");
+         $.ajax({
+             type: "POST",
+             url: "/removeSuggest",
+             headers: {
+                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                     "content"
+                 ),
+             },
+             data: {
+                 id: quiz,
+             },
+             success: function (data) { console.log('it is success suggested');
+             var total=$('#modal__payment').find('.total-cost td:nth-child(2)>strong').text();
+             var suggest_cost=$('#modal__payment').find('.suggested-questions td:nth-child(3)').text();
+                // current.remove();
+                current.css('pointer-events','none');
+                current.css('opacity',0.5);
+
+                var suggest_cost=$('#modal__payment').find('.suggested-questions td:nth-child(3)').text(0);
+                $('#modal__payment').find('.suggested-questions td:nth-child(2)').text(0);
+
+                 var subtract=Number(total)-Number(suggest_cost);
+                 var total=$('#modal__payment').find('.total-cost td:nth-child(2)>strong').text(subtract.toFixed(2));
+             },
+             error: function (result, error) {
+                 console.log('error suggested');
+             },
+         });
+          
+
+
+        } else {
+          swal("your suggested questions are safe");
+        }
+      });
+
+
 });
 
     // $('.close_log').click(function(){
