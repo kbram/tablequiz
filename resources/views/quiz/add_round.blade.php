@@ -543,46 +543,31 @@
 
 var image_src;
 	var size = 2000;
-     var cp_count=0;
-	 var edit_cp_count=1;
-	 var find_class=1;
-	
        var image = document.getElementById('image');
 	   var cropper;
 	   $('#crop-click').click(function(){
 
 	});
-	var cropper1;
+	var cropper;
 	$('.add-round-img-btn').click(function(){
-     cropper1 = new Cropper(image, {
+     cropper = new Cropper(image, {
 	  aspectRatio: 3/2,
-	  viewMode: 3,
+	  viewMode: 1,
 	  preview: '.preview'
     });
  });
      
 	$('#upload__quiz__icon').on('change', function(e) {
-		//cropper.destroy();
-          if(edit_cp_count){
-		cropper1.destroy();
-        cropper1 = null;
-		edit_cp_count=0;
-		  }
-		
-
-		if(cp_count){
-		cropper.destroy();
-        cropper = null;
-		}
-	   //$('.cropper-hide').attr('src','hih');
-    /**new crop image round start*/
+		 cropper.destroy();
+		 cropper = null;
+		 
 	var files = e.target.files;
     var done = function (url) {
 	  image.src = url;
 	 
      cropper = new Cropper(image, {
 	  aspectRatio: 3/2,
-	  viewMode: 3,
+	  viewMode: 1,
 	  preview: '.preview',
   
 	});
@@ -592,8 +577,6 @@ var image_src;
 	
 		//$('.cropper-container').css('left',70);
 	}, 100);
-
-	cp_count=1
     };
     var reader;
     var file;

@@ -10,7 +10,7 @@ img {
 }
 
 .modal-lg{
-  max-width: 1000px !important;
+ /* max-width: 1000px !important;*/
 }
 </style>
 
