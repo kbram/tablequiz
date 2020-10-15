@@ -200,6 +200,7 @@
 							
 										<div class="d-flex flex-column">
 											<i class="fas fa-share-alt"></i>
+											<input type="hidden" id="get_url" value="{{asset('/')}}">
 											<span class="share" id="{{$quiz->id}}">Share</span>
 										</div>
 										@if($quiz->payment==1)

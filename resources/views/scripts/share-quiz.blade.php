@@ -7,7 +7,8 @@ $("body").delegate('.share', 'click',function(e){
     swal("Quiz Link copied","","success");
 
     function copyText(text) {
-    navigator.clipboard.writeText("https://tablequiz.app/"+text);
+      var get_url=$('#get_url').val();
+    navigator.clipboard.writeText(get_url+"play/"+text);
     }
   });
 
