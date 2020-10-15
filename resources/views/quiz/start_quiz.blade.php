@@ -73,7 +73,7 @@
 					</ul>
 				</div>
 			</aside>
-			<div class="col-lg-9 order-0 order-md-1">
+			<div class="col-lg-9 order-0 order-md-1 ">
 				<div class="row">
 					<div class="col">
 
@@ -166,7 +166,13 @@
 		<div class="row">
 			<aside class="col-lg-3 dashboard__sidebar d-flex flex-column order-1 order-md-0">
 				<div class="dashboard__container mt-2 p-0 d-flex flex-grow-1">
+					@if(empty($teams))
+						<div class="d-flex align-items-center justify-content-center mx-auto">
+						<h3>No Result Found</h3>
+						</div>
+					@else
 					<table class="table table-striped table-borderless mb-0">
+					
 						<thead>
 							<tr>
 								<th>Leaderboard</th>
@@ -174,16 +180,18 @@
 							</tr>
 						</thead>
 						<tbody >
-						@foreach($teams as $team)
-							<tr>
-								<td>{{$team}}</td>
-								<td>{{$points[$team]}}</td>
-							</tr>
-						@endforeach
+						
+							@foreach($teams as $team)
+								<tr>
+									<td>{{$team}}</td>
+									<td>{{$points[$team]}}</td>
+								</tr>
+							@endforeach
+						
 						</tbody>
-
+						
 					</table>
-
+					@endif
 				</div>
 			</aside>
 			<section class="col-lg-9 order-0 order-md-1">
@@ -209,7 +217,7 @@
 								</tr>
 							</thead> -->
 
-							<div class="row container align-items-center justify-content-center">
+							<div class="row container align-items-center justify-content-center" id="Markingtable">
 								<div class="col-md-4 pb-0 text-center"><strong>User</strong></div>
 								<div class="col-md-4 pb-0 text-center"><strong>Answers</strong></div>
 
@@ -234,7 +242,7 @@
 						</div>
 
 <br>
-						<div class="row align-items-center text-white justify-content-center">
+						<div class="row align-items-center text-white justify-content-center " id="Markingsubmit">
 							<div class="col-9 col-md-4">
 								<a id="save_answer_button" class="d-block btn btn-primary">Save answers</a>
 							</div>
@@ -281,6 +289,17 @@
 
 @endif
 <script>
+$(document).ready(function(){
+	
+	if (!$('#all-answer_submit').is(':empty')) {
+		var x='<div id="noresult" class="d-flex align-items-center justify-content-center mx-auto">'+
+				'<br><br><br><br><br><br><h3>No Submissions Found</h3>'+
+				'</div>';
+		$("#all-answer_submit").append(x);
+		//$("#Markingtable").addClass("d-none");
+		//$("#Markingsubmit").addClass("d-none");
+	}
+});
 	var time=JSON.parse(sessionStorage.getItem("nowtimeon"));
 	
     var timeon=0;
@@ -426,6 +445,9 @@
 	
 	channel.bind('form-submitted0', function(data) {
 		//alert(JSON.stringify(data));	
+		$("#noresult").remove();
+		//$("#Markingtable").addClass("d-block");
+		//$("#Markingsubmit").addClass("d-block");
 		var message =JSON.stringify(data);	
 		var m0 = message.replace('{"text":"','');
 		var m0 = m0.replace('"}','');
