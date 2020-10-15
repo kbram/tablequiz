@@ -78,9 +78,10 @@
 									@php $pos = ['st','nd','rd','th','th','th','th','th','th']; $x=1; @endphp
 										@foreach($teamNames as $teamName)
 										<tr>
-											@foreach($quizzes as $quiz)
+											@foreach($testquizzes as $quiz)
 												@if($quiz->id==$lastQuiz->id)
-													<td>{{$quiz->quiz__name}}</td>
+
+													<td> {{$quiz->quiz__name}}</td>
 												@endif
 											@endforeach
 											<td>{{$teamName->team_name}}</td>

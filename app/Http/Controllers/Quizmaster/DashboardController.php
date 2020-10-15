@@ -25,7 +25,7 @@ class DashboardController extends Controller
     }
     public function index(){
         $quizzes=Auth::user()->quizzes()->paginate(5);
-        
+        $testquizzes=Auth::user()->quizzes()->get();
         $lastQuiz=DB::table('team_answers')->join('quizzes','team_answers.quiz_id','quizzes.id')->where('quizzes.user_id',Auth::user()->id)->orderBy('team_answers.created_at','desc')->first();
         if($quizzes->isEmpty()){
             return view('dashboard.home');
@@ -41,7 +41,7 @@ class DashboardController extends Controller
                 $teamNames=DB::table('team_answers')->where('quiz_id',$lastQuiz->id)->where('status','1')->select('team_name', DB::raw('count(*) as total'))->groupBy('team_name')->orderBy('total','desc')->limit(3)->get();
                 $teamcount=DB::table('team_answers')->where('quiz_id',$lastQuiz->id)->select('team_name')->groupBy('team_name')->get()->count();
                 $quizplayed=DB::table('team_answers')->where('quiz_id',$lastQuiz->id)->select('quiz_id')->groupBy('quiz_id')->get()->count();
-                return view('dashboard.home',compact('quizzes','roundCount','questionCounts','teamNames','lastQuiz','teamcount','quizplayed'));
+                return view('dashboard.home',compact('quizzes','roundCount','questionCounts','teamNames','lastQuiz','teamcount','quizplayed','testquizzes'));
             }
             
         }
