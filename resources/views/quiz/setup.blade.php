@@ -71,6 +71,7 @@
 						@endif
 						<input tabindex="-1" type="text" id="full__uri">
 					</div>
+					<input type="hidden" id="get_url" value="{{asset('/')}}">
 					<span class="copy__icon quiz__link" id="copy" title="Copy text"><i class="fa fa-copy"></i></span>
 				</div>
 				<!-- QUIZ ICON -->
