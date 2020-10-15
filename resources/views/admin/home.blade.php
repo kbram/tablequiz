@@ -126,6 +126,7 @@
 											<a href="/admin/home/view/{{$quiz->id}}"><span class="view-qz" id="view-qz{{$quiz->id}}">View Qs</span></a>
 										</div>
 										<div class="d-flex flex-column"  style=" pointer-events: none;opacity: 0.4;">
+									
 											<i class="fas fa-share-alt"></i><span class="share" id="{{$quiz->id}}">Share</span>
 
 										</div>
@@ -156,6 +157,7 @@
 											<span class="view-qz" id="view-qz{{$quiz->id}}"><a href="/admin/home/view/{{$quiz->id}}">View Qs</a></span>
 										</div>
 										<div class="d-flex flex-column">
+										<input type="hidden" id="get_url" value="{{asset('/')}}">
 											<i class="fas fa-share-alt"></i><span class="share" id="{{$quiz->id}}">Share</span>
 
 										</div>

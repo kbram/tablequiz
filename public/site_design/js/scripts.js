@@ -672,7 +672,8 @@ if(data.bg_image == 0){
         var noSpaces = userInput.replace(/\s+/g, "");
         var noPunc = noSpaces.replace(/[^\w\s]/gi, "");
         $('input[name="quiz__link"]').val(noPunc);
-        $('input[id="full__uri"]').val("https://tablequiz.app/" + noPunc);
+        var get_url=$('#get_url').val();
+        $('input[id="full__uri"]').val(get_url+"play/"+ noPunc);
     }
 
     function removeSpacesFromQuizName() {
@@ -680,7 +681,8 @@ if(data.bg_image == 0){
         var noSpaces = userInput.replace(/\s+/g, "");
         var noPunc = noSpaces.replace(/[^\w\s]/gi, "");
         $('input[name="quiz__link"]').val(noPunc);
-        $('input[id="full__uri"]').val("https://tablequiz.app/" + noPunc);
+        var get_url=$('#get_url').val();
+        $('input[id="full__uri"]').val(get_url+"play/"+ noPunc);
     }
 
     function removeSpacesFromPassword() {
