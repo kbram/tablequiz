@@ -246,7 +246,7 @@ var image_src;
 
 	$("#pro").click(function() {
 		
-		if(image_src){ console.log('image src');
+		if(image_src){
 		$image_crop.croppie('result', {
 							type: 'canvas',
 							size: 'viewport'
@@ -255,7 +255,7 @@ var image_src;
 							$('#original-image').val(image_src);
 
 						})
-
+						
 					}
 		var s = $('.cr-boundary').attr('src');
 		//$("#demo").show();
@@ -293,6 +293,7 @@ var image_src;
 				}
 			}
 		}
+	
 	});
 
 	$('.participants__choice').click(function() {

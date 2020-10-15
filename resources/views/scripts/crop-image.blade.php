@@ -98,24 +98,11 @@ function convertImgToBase64(url, callback, outputFormat){
 
   });
 
-  
-
-
-
-  $('#btn-crop').click(function(event){
-    $image_crop.croppie('result', {
-      type: 'canvas',
-      size: 'viewport'
-    }).then(function(response){
-        $('#crop-image').val(response);
-        console.log(response);
-     
-    })
-  });
- 
-
+  $("#edit__icon__modal").on('hidden.bs.modal', function(){
+                   	/**croppie destroy */
+		$('#image-container').croppie('destroy');
+             });
     
-     
 });  
 </script>
 

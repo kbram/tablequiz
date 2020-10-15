@@ -767,32 +767,21 @@
 <script>
 
 var size = 2000;
-     var cp_count=0;
-	 var find_class=1;
-
-     var cropper1;
-
+     var cropper;
  $('.edit-round-img-btn').click(function(){
-     cropper1 = new Cropper(image, {
+     cropper = new Cropper(image, {
 	  aspectRatio: 3/2,
-	  viewMode: 3,
+	  viewMode:1,
 	  preview: '.preview'
     });
  });
      
 	
        var image = document.getElementById('image');
-	   var cropper;
-
-       
+	
 	$('#upload__quiz__icon').on('change', function(e) { 
-        cropper1.destroy();
-        cropper1 = null;
-    /**new crop image round start*/
-    if(cp_count){
-		cropper.destroy();
+        cropper.destroy();
         cropper = null;
-		}
 
 	var files = e.target.files;
     var done = function (url) {
@@ -800,7 +789,7 @@ var size = 2000;
 	
      cropper = new Cropper(image, {
 	  aspectRatio: 3/2,
-	  viewMode: 3,
+	  viewMode:1,
 	  preview: '.preview'
     });
     setTimeout(function(){ console.log($('.cropper-container').attr('class'));
@@ -821,15 +810,6 @@ var size = 2000;
 		};
 		reader.readAsDataURL(file);
 
-    //   if (true) {console.log('kpss');
-    //     done(URL.createObjectURL(file));
-    //   } else if (FileReader) {
-    //     reader = new FileReader();
-    //     reader.onload = function (e) {console.log(e.target.result);console.log('kp');
-    //       done(reader.result);
-    //     };
-    //     reader.readAsDataURL(file);
-    //   }
     }
 /**new crop image round end */
 
