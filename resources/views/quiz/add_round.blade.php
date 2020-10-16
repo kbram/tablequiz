@@ -97,6 +97,8 @@
 										</div> -->
 									</div>
 								</div>
+								<p class="text-center" id="size_error"></p>
+
 								<div class="modal-footer justify-content-center row no-gutters align-items-stretch">
 									<div class="col-md-3 mr-0 mr-lg-1">
 										<label class="d-block" for="upload__quiz__icon">Upload
@@ -105,7 +107,7 @@
 											<input type="hidden" id="round-original-image" name="round_original_image" value="">
 										</label>
 									</div>
-									<div class="col-md-3 ml-0 ml-lg-1 d-flex">
+									<div class="col-md-3 ml-0 ml-lg-1 d-flex save_btn">
 										<button id="pro" type="submit" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
 
 									</div>
@@ -208,7 +210,7 @@
 											<p class="text-center py-2">Add <span id="add__image__media__text"></span> to reference in your question</p>
 											<div class="form-row">
 												<div class="col-md-4">
-													<label>Add link image</label>
+													<label>Add link </label>
 												</div>
 												<div class="col-md-8">
 													<input type="url" name="add_link_to_image__media__0" class="form-control add-image-media-link" value="" id="add__image__media__text">
@@ -286,7 +288,7 @@
 											<p class="text-center py-2">Add <span id="add__video__media__text"></span>to reference in your question</p>
 											<div class="form-row">
 												<div class="col-md-4">
-													<label>Add link video</label>
+													<label>Add link </label>
 												</div>
 												<div class="col-md-8">
 													<input type="url" name="add_link_to_video__media__0" class="form-control add-video-media-link" id="add__video__media__text">

@@ -374,10 +374,8 @@
 
       });
       // when click add-question button get all data from specific suggested question
-      sessionStorage.count = 0;
       $('body').on('click', 'button.add-question', function(e) {
 
-         sessionStorage.count = Number(sessionStorage.count) + 1;
 
          var id = e.target.id;
          var question = $("div #question" + id).val();

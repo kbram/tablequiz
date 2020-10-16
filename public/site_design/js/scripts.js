@@ -143,7 +143,6 @@ jQuery(document).ready(function ($) {
         e.preventDefault();
         $("#loading").addClass("loader");
 
-        console.log("iiiiiiiiiiiiiiiiiiiiiiiii" + sessionStorage.count);
 
         reload = function () {
             location.href = location.href;
@@ -168,7 +167,6 @@ jQuery(document).ready(function ($) {
                         ),
                     },
                     data: {
-                        count: sessionStorage.count,
                     },
                     success: function (data) {
                         $("#loading").removeClass("loader");
@@ -181,7 +179,7 @@ jQuery(document).ready(function ($) {
                         console.log(typeof participants_cost);
                         $("#modal__payment").find(".no-participants td:nth-child(2)").text(participants);
                         $("#modal__payment").find(".no-participants td:nth-child(3)").text(participants_cost);
-                        $("#modal__payment").find(".suggested-questions td:nth-child(2)").text(sessionStorage.count);
+                        $("#modal__payment").find(".suggested-questions td:nth-child(2)").text(data.question_count);
 
                         if (data.question_cost != null) {
                             $("#modal__payment").find(".suggested-questions td:nth-child(3)").text(data.question_cost);
@@ -286,7 +284,6 @@ if(data.bg_image == 0){
                         ),
                     },
                     data: {
-                        count: sessionStorage.count,
                     },
                     success: function (data) {
                         console.log("eeeeeeeeeeeeeee" + data);
@@ -306,7 +303,7 @@ if(data.bg_image == 0){
 
                         $("#modal__payment")
                             .find(".suggested-questions td:nth-child(2)")
-                            .text(sessionStorage.count);
+                            .text(data.question_count);
 
                         if (data.question_cost != null) {
                             $("#modal__payment")
@@ -954,7 +951,6 @@ if(data.bg_image == 0){
                 id: quiz,
             },
             success: function (data) {
-                console.log(data.question_cost.cost);
                 $("#publishQuizModal").modal("show");
                 var participants = data.participants.no_of_participants;
                 var participants_cost = data.participants_cost[0].cost;
@@ -1091,9 +1087,7 @@ var formdata = new FormData($("#add_round")[0]);
         type: "POST",
         url: "/payment",
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-        data:{
-            count : sessionStorage.count
-        },
+        
         success: function(data) {
             if(data.participants != 0){         
 
@@ -1105,7 +1099,7 @@ var formdata = new FormData($("#add_round")[0]);
                     $('#modal__payment').find('.no-participants td:nth-child(2)').text(participants);
             $('#modal__payment').find('.no-participants td:nth-child(3)').text(participants_cost);
 
-            $('#modal__payment').find('.suggested-questions td:nth-child(2)').text(sessionStorage.count);
+            $('#modal__payment').find('.suggested-questions td:nth-child(2)').text(data.question_count);
 
             if(data.question_cost != null){
                 $('#modal__payment').find('.suggested-questions td:nth-child(3)').text(data.question_cost);
@@ -1369,7 +1363,24 @@ if(data.question_cost == 0){
 
     });
 
+    $("#upload__quiz__icon").change(function(){
+        $("#size_error").html("");
+        $(".save_btn").css('pointer-events','');
+        $(".pro").css('cursor','');
+        var file_size = $('#upload__quiz__icon')[0].files[0].size;
+        if(file_size>2000000){
+        $("#size_error").html("<i class='fas fa-exclamation-triangle' style='font-size:20px;color:red'></i> Image size greater than 2mb");
+        $(".save_btn").css('pointer-events','none');
+        $(".pro").css('cursor','not-allowed');
 
+        $("#size_error").css('color','red');
+        return false;
+        }
+        return true;
+        });
+
+
+    
     
 
 });

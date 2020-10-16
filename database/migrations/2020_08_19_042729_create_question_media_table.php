@@ -20,7 +20,7 @@ class CreateQuestionMediaTable extends Migration
             $table->string('local_path')->nullable();
             $table->string('public_path')->nullable();
             $table->bigInteger('question_id')->unsigned();
-            $table->foreign('question_id')->references('id')->on('questions');
+            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
             $table->timestamps();
         });
     }

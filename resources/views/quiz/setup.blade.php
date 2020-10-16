@@ -105,7 +105,7 @@
 									</div>
 									<div class="modal__edit__image__range">
 										<div class="form-group">
-											<label for="formControlRange">Edit size</label>
+											<label for="formControlRange"></label>
 											<!-- <input type="range" class="form-control-range slider" min="1" max="4" value="1" step="0.1" id="zoomer"> -->
 											<div id="demo" style="display:none;" class="d-none"></div>
 											<div id="myProgress">
@@ -114,18 +114,24 @@
 										</div>
 									</div>
 								</div>
+								<p class="text-center" id="size_error"></p>
+
 								<div class="modal-footer justify-content-center row no-gutters">
+
 									<div class="col-md-3">
 										<label class="d-block" for="upload__quiz__icon">Upload
+
 											<input type="file" class="form-control-file imagePreviewInput" id="upload__quiz__icon" name="upload__quiz__icon" value="Upload">
 											<input type="hidden" name="crop_image" id="crop-image" value="">
 											<input type="hidden" name="original_image" id="original-image" value="">
 
 										</label>
 									</div>
-									<div class="col-md-3">
+
+									<div class="col-md-3 save_btn">
 										<button id="pro" type="button" class="d-block btn btn-primary" data-dismiss=""> Save</button>
 									</div>
+
 								</div>
 							</div>
 						</div>

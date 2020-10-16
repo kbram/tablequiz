@@ -84,6 +84,8 @@
 						@endphp
 
 							@foreach($rounds as $round)
+
+						
 							 @foreach($questions[$round->id] as $question)
 							<div class="quiz__single_question__container d-flex flex-column align-items-center">
 								<h4>Question No: <span class="question_number">{{$i++}}</span></h4>
@@ -94,19 +96,22 @@
 
 @foreach($medias[$question->id] as $media)
 @if($media->media_type == 'image')
-
-	<img src="{{asset($media->public_path)}}" height='250px'>
+	<img src="{{$media->public_path ? asset($media->public_path) : $media->media_link}}" height='225px'>
 @endif
 @if($media->media_type == 'audio')
 <audio controls>
-	<source src="{{asset($media->public_path)}}" type="audio/mpeg">
+	<source src="{{$media->public_path ? asset($media->public_path) : $media->media_link}}" type="audio/mpeg" height='225px'>
 </audio>
 @endif
 @if($media->media_type == 'video')
-
+@if($media->media_link)
+<iframe height='225px' src="{{$media->media_link}}"> </iframe>
+@endif
+@if($media->public_path)
 <video controls>
-	<source src="{{asset($media->public_path)}}" type="video/mp4">
+	<source src="{{$media->public_path ? asset($media->public_path) : $media->media_link}}" type="video/mp4" height='225px'>
 </video>
+@endif
 @endif
 @endforeach
 
@@ -116,11 +121,11 @@
 
 							
 								<div class="quiz__single_question__image">
-									<img src="{{asset('site_design/images/homepage__logo.png')}}" height='170px'>
+									<img src="{{asset('site_design/images/homepage__logo.png')}}" height='225px'>
 								</div>
 
 								@endif
-								<div class="quiz__single_question__qa text-center w-100">
+								<div class="quiz__single_question__qa text-center w-100 ">
 												
 								
 									<p class="question"><span>Question:</span><span>{{$question->question}}</span></p>
@@ -221,7 +226,7 @@
 								<div class="col-md-4 pb-0 text-center"><strong>User</strong></div>
 								<div class="col-md-4 pb-0 text-center"><strong>Answers</strong></div>
 
-								<div class="col-md-4 pb-0 text-center pt-3"><strong>Marking</strong>
+								<div class="col-md-4 pb-0 text-center pt-3"><strong>Marking:</strong>
 
 									<div class="row d-flex">
 											<div class="col-md-6 py-0 text-muted text-center"><small>Correct</small></div>
@@ -252,6 +257,11 @@
 					</div>
 				</div>
 			</section>
+
+
+
+
+			
 		</div>
 
 	</div>

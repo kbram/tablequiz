@@ -696,7 +696,7 @@ $(document).ready(function() {
         
         if(parseInt(quizId)===parseInt(qid)){
             var text0 ='';
-            if(!media_type){   
+            if(!media_type){
                 var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
                     "<img class='q-img' src='{{asset('site_design/images/homepage__logo.png')}}' height='170px'>"+
                     "</div>"+
@@ -706,9 +706,24 @@ $(document).ready(function() {
                     "<div  class='col-12 the__question text-center mB-2'>"+
                     "<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
                     "</div>";
-            }else if(media_type[0] == 'image'){
+            }
+            else if(media_type[0] == 'image'){
+
+                if(!media_path[0]){
+                    var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
+                    "<img class='q-img' src='"+media_link[0]+"' >"+
+                    "</div>"+
+                    "<div class='col-12 text-center'>"+
+                    "<h4 class='bernhard notification'>Not submitted</h4>" +
+                    "</div>"+
+                    "<div  class='col-12 the__question text-center mB-2'>"+
+                    "<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
+                    "</div>";                }
+
+else{
+
                 var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
-                    "<img class='q-img' src='{{asset('')}}"+media_path[0]+"' height='170px'>"+
+                    "<img class='q-img' src='{{asset('')}}"+media_path[0]+"' >"+
                     "</div>"+
                     "<div class='col-12 text-center'>"+
                     "<h4 class='bernhard notification'>Not submitted</h4>" +
@@ -716,8 +731,21 @@ $(document).ready(function() {
                     "<div  class='col-12 the__question text-center mB-2'>"+
                     "<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
                     "</div>";
+}
             }else if(media_type[0] == 'audio'){
+                if(!media_path[0]){
                 var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
+                "<iframe height='225px' src='"+media_link[0]+"'> </iframe>"+
+                    "</div>"+
+                    "<div class='col-12 text-center'>"+
+                    "<h4 class='bernhard notification'>Not submitted</h4>" +
+                    "</div>"+
+                    "<div  class='col-12 the__question text-center mB-2'>"+
+                    "<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
+                    "</div>";
+                }
+                else{
+                    var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
                     "<audio class='q-img' controls> <source src='{{asset('')}}"+media_path[0]+"' type='audio/mpeg'> </audio>"+
                     "</div>"+
                     "<div class='col-12 text-center'>"+
@@ -726,16 +754,30 @@ $(document).ready(function() {
                     "<div  class='col-12 the__question text-center mB-2'>"+
                     "<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
                     "</div>";
+                }
             }else if(media_type[0] == 'video'){
+                if(!media_path[0]){
                 var textq="<div id='resub3' class='col-12 media__container p-0 mb-5 text-center position-relative'>"+
-                    "<video class='justify-content-center align-self-center' controls> <source src='{{asset('')}}"+media_path[0]+"' type='audio/mpeg' width='100px'> </video>"+
+                   "<iframe height='300px' width='600px'  src='"+media_link[0]+"'> </iframe>"+
                     "</div>"+
                     "<div class='col-12 text-center'>"+
                     "<h4 class='bernhard notification'>Not submitted</h4>" +
                     "</div>"+
                     "<div  class='col-12 the__question text-center mB-2'>"+
                     "<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
-                     "</div>";
+                    "</div>";
+                }
+                else{
+                    var textq="<div id='resub3' class='col-12 media__container p-0 mb-5 text-center position-relative'>"+
+                    "<video class='justify-content-center align-self-center' controls> <source src='{{asset('')}}"+media_path[0]+"' type='audio/mpeg' > </video>"+
+                    "</div>"+
+                    "<div class='col-12 text-center'>"+
+                    "<h4 class='bernhard notification'>Not submitted</h4>" +
+                    "</div>"+
+                    "<div  class='col-12 the__question text-center mB-2'>"+
+                    "<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
+                    "</div>";
+                }
             }
     
             if(type == "multiple__choice__question"){
@@ -941,9 +983,24 @@ $(document).ready(function() {
                     "<div  class='col-12 the__question text-center mB-2'>"+
                     "<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
                     "</div>";
-            }else if(media_type[0] == 'image'){
+            }
+            else if(media_type[0] == 'image'){
+
+                if(!media_path[0]){
+                    var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
+                    "<img class='q-img' src='"+media_link[0]+"' >"+
+                    "</div>"+
+                    "<div class='col-12 text-center'>"+
+                    "<h4 class='bernhard notification'>Not submitted</h4>" +
+                    "</div>"+
+                    "<div  class='col-12 the__question text-center mB-2'>"+
+                    "<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
+                    "</div>";                }
+
+else{
+
                 var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
-                    "<img class='q-img' src='{{asset('')}}"+media_path[0]+"' height='170px'>"+
+                    "<img class='q-img' src='{{asset('')}}"+media_path[0]+"' >"+
                     "</div>"+
                     "<div class='col-12 text-center'>"+
                     "<h4 class='bernhard notification'>Not submitted</h4>" +
@@ -951,8 +1008,21 @@ $(document).ready(function() {
                     "<div  class='col-12 the__question text-center mB-2'>"+
                     "<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
                     "</div>";
+}
             }else if(media_type[0] == 'audio'){
+                if(!media_path[0]){
                 var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
+                "<iframe height='225px' src='"+media_link[0]+"'> </iframe>"+
+                    "</div>"+
+                    "<div class='col-12 text-center'>"+
+                    "<h4 class='bernhard notification'>Not submitted</h4>" +
+                    "</div>"+
+                    "<div  class='col-12 the__question text-center mB-2'>"+
+                    "<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
+                    "</div>";
+                }
+                else{
+                    var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
                     "<audio class='q-img' controls> <source src='{{asset('')}}"+media_path[0]+"' type='audio/mpeg'> </audio>"+
                     "</div>"+
                     "<div class='col-12 text-center'>"+
@@ -961,9 +1031,11 @@ $(document).ready(function() {
                     "<div  class='col-12 the__question text-center mB-2'>"+
                     "<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
                     "</div>";
+                }
             }else if(media_type[0] == 'video'){
+                if(!media_path[0]){
                 var textq="<div id='resub3' class='col-12 media__container p-0 mb-5 text-center position-relative'>"+
-                    "<video class='justify-content-center align-self-center' controls> <source src='{{asset('')}}"+media_path[0]+"' type='audio/mpeg' width='100px'> </video>"+
+                   "<iframe height='300px' width='600px'  src='"+media_link[0]+"'> </iframe>"+
                     "</div>"+
                     "<div class='col-12 text-center'>"+
                     "<h4 class='bernhard notification'>Not submitted</h4>" +
@@ -971,6 +1043,18 @@ $(document).ready(function() {
                     "<div  class='col-12 the__question text-center mB-2'>"+
                     "<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
                     "</div>";
+                }
+                else{
+                    var textq="<div id='resub3' class='col-12 media__container p-0 mb-5 text-center position-relative'>"+
+                    "<video class='justify-content-center align-self-center' controls> <source src='{{asset('')}}"+media_path[0]+"' type='audio/mpeg' > </video>"+
+                    "</div>"+
+                    "<div class='col-12 text-center'>"+
+                    "<h4 class='bernhard notification'>Not submitted</h4>" +
+                    "</div>"+
+                    "<div  class='col-12 the__question text-center mB-2'>"+
+                    "<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
+                    "</div>";
+                }
             }
             if(type == "multiple__choice__question"){
                 for (var i = 0; i < answer.length; i++) {
@@ -989,8 +1073,9 @@ $(document).ready(function() {
                     "</form>";	
                 } 
             }else if(type == "standard__question"){
-                text0 += "<form action='/playquiz/answer' method='post' id='"+answerId[i]+"' enctype='multipart/form-data' role='main' class='col-md-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
-                    "<div class='form-group'>"+
+                text0 += "<form action='/playquiz/answer' method='post' id='"+answerId[i]+"' enctype='multipart/form-data' role='main' class='col-md-6 col-3 single__answer bg-white  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
+                "<div class='d-block'>"+    
+                "<div class='form-group'>"+
                     "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
                     "<input type='text' name='answer_id' hidden value='"+answerId[0]+"'/>"+
                     "<input type='text' name='type' hidden value=2 />"+
@@ -1000,17 +1085,19 @@ $(document).ready(function() {
                     "<input type='text' name='teamname' hidden value='{{ Session::get('teamname')}}'/>"+
                     "<input type='text' class='form-control' name='answer' placeholder='Enter answer'/>"+
                     "</div>"+
-                   
+                   "<p>OR</p>"+
                     /*add media file start*/
                     "<div class='form-group'>"+
                     "<div class='form-row justify-content-center pt-3'>"+
 						"<div class='col-md-8'>"+
-								"<label class='d-block' for='upload__image__media__file'>Upload"+
-									"<input type='file' class='form-control-file' id='upload__image__media__file' value='Upload' name='media_file'>"+
+								"<label class='d-block' for='upload__image__media__file'>Upload Media Answer"+
+									"<input type='file' class='form-control-file' id='upload__image__media__file' value='Upload Media Answer ' name='media_file'>"+
                                 "</label>"+
 						"</div>"+
 					"</div>"+
                       "</div>"+
+                      "</div>"+
+
                         "</form>";
                     /*add media file end*/	 
             }else if(type == "numeric__question"){
@@ -1128,47 +1215,89 @@ $(document).ready(function() {
                 //console.log(an);
                 if(parseInt(quizId)===parseInt(qid)){
                     var text0 ='';
-                    if(!media_type){   
-                        var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
-                            "<img class='q-img' src='{{asset('site_design/images/homepage__logo.png')}}' height='170px'>"+
-                            "</div>"+
-                            "<div class='col-12 text-center'>"+
-                            "<h4 class='bernhard notification'>Not submitted</h4>" +
-                            "</div>"+
-                            "<div  class='col-12 the__question text-center mB-2'>"+
-                            "<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
-                            "</div>";
-                    }else if(media_type[0] == 'image'){
-                        var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
-                            "<img class='q-img' src='{{asset('')}}"+media_path[0]+"' height='170px'>"+
-                            "</div>"+
-                            "<div class='col-12 text-center'>"+
-                            "<h4 class='bernhard notification'>Not submitted</h4>" +
-                            "</div>"+
-                            "<div  class='col-12 the__question text-center mB-2'>"+
-                            "<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
-                            "</div>";
-                    }else if(media_type[0] == 'audio'){
-                        var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
-                            "<audio class='q-img' controls> <source src='{{asset('')}}"+media_path[0]+"' type='audio/mpeg'> </audio>"+
-                            "</div>"+
-                            "<div class='col-12 text-center'>"+
-                            "<h4 class='bernhard notification'>Not submitted</h4>" +
-                            "</div>"+
-                            "<div  class='col-12 the__question text-center mB-2'>"+
-                            "<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
-                            "</div>";
-                    }else if(media_type[0] == 'video'){
-                        var textq="<div id='resub3' class='col-12 media__container p-0 mb-5 text-center position-relative'>"+
-                            "<video class='justify-content-center align-self-center' controls> <source src='{{asset('')}}"+media_path[0]+"' type='audio/mpeg' width='100px'> </video>"+
-                            "</div>"+
-                            "<div class='col-12 text-center'>"+
-                            "<h4 class='bernhard notification'>Not submitted</h4>" +
-                            "</div>"+
-                            "<div  class='col-12 the__question text-center mB-2'>"+
-                            "<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
-                            "</div>";
-                    }
+                    if(!media_type){
+                var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
+                    "<img class='q-img' src='{{asset('site_design/images/homepage__logo.png')}}' height='170px'>"+
+                    "</div>"+
+                    "<div class='col-12 text-center'>"+
+                    "<h4 class='bernhard notification'>Not submitted</h4>" +
+                    "</div>"+
+                    "<div  class='col-12 the__question text-center mB-2'>"+
+                    "<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
+                    "</div>";
+            }
+            else if(media_type[0] == 'image'){
+
+                if(!media_path[0]){
+                    var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
+                    "<img class='q-img' src='"+media_link[0]+"' >"+
+                    "</div>"+
+                    "<div class='col-12 text-center'>"+
+                    "<h4 class='bernhard notification'>Not submitted</h4>" +
+                    "</div>"+
+                    "<div  class='col-12 the__question text-center mB-2'>"+
+                    "<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
+                    "</div>";                }
+
+else{
+
+                var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
+                    "<img class='q-img' src='{{asset('')}}"+media_path[0]+"' >"+
+                    "</div>"+
+                    "<div class='col-12 text-center'>"+
+                    "<h4 class='bernhard notification'>Not submitted</h4>" +
+                    "</div>"+
+                    "<div  class='col-12 the__question text-center mB-2'>"+
+                    "<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
+                    "</div>";
+}
+            }else if(media_type[0] == 'audio'){
+                if(!media_path[0]){
+                var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
+                "<iframe height='225px' src='"+media_link[0]+"'> </iframe>"+
+                    "</div>"+
+                    "<div class='col-12 text-center'>"+
+                    "<h4 class='bernhard notification'>Not submitted</h4>" +
+                    "</div>"+
+                    "<div  class='col-12 the__question text-center mB-2'>"+
+                    "<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
+                    "</div>";
+                }
+                else{
+                    var textq="<div id='resub3' class='col-12 media__container p-0 mb-5'>"+
+                    "<audio class='q-img' controls> <source src='{{asset('')}}"+media_path[0]+"' type='audio/mpeg'> </audio>"+
+                    "</div>"+
+                    "<div class='col-12 text-center'>"+
+                    "<h4 class='bernhard notification'>Not submitted</h4>" +
+                    "</div>"+
+                    "<div  class='col-12 the__question text-center mB-2'>"+
+                    "<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
+                    "</div>";
+                }
+            }else if(media_type[0] == 'video'){
+                if(!media_path[0]){
+                var textq="<div id='resub3' class='col-12 media__container p-0 mb-5 text-center position-relative'>"+
+                   "<iframe height='300px' width='600px'  src='"+media_link[0]+"'> </iframe>"+
+                    "</div>"+
+                    "<div class='col-12 text-center'>"+
+                    "<h4 class='bernhard notification'>Not submitted</h4>" +
+                    "</div>"+
+                    "<div  class='col-12 the__question text-center mB-2'>"+
+                    "<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
+                    "</div>";
+                }
+                else{
+                    var textq="<div id='resub3' class='col-12 media__container p-0 mb-5 text-center position-relative'>"+
+                    "<video class='justify-content-center align-self-center' controls> <source src='{{asset('')}}"+media_path[0]+"' type='audio/mpeg' > </video>"+
+                    "</div>"+
+                    "<div class='col-12 text-center'>"+
+                    "<h4 class='bernhard notification'>Not submitted</h4>" +
+                    "</div>"+
+                    "<div  class='col-12 the__question text-center mB-2'>"+
+                    "<h4 class='questionno' id='' style='min-width:50vw !important;'>  </h4>"+
+                    "</div>";
+                }
+            }
                     if(type == "multiple__choice__question"){
                         for (var i = 0; i < answer.length; i++) {
                             var x="single__answer_white";
