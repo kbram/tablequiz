@@ -123,7 +123,6 @@
 
 											<input type="file" class="form-control-file imagePreviewInput" id="upload__quiz__icon" name="upload__quiz__icon" value="Upload">
 											<input type="hidden" name="crop_image" id="crop-image" value="">
-											<input type="hidden" name="original_image" id="original-image" value="">
 
 										</label>
 									</div>
@@ -258,7 +257,6 @@ var image_src;
 							size: 'viewport'
 						}).then(function(response) {
 							$('#crop-image').val(response);
-							$('#original-image').val(image_src);
 
 						})
 						

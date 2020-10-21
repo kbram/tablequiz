@@ -67,7 +67,7 @@ class QuizController extends Controller
      */
     public function store(Request $request)
     {
-        $image_data="";
+        
         $categories = QuizCategory::all();
         $questions = GlobalQuestion::all();
         $answers = GlobalAnswer::all();
@@ -91,7 +91,6 @@ class QuizController extends Controller
 
                 /** crop image decode */
                 $data = $request->crop_image;
-                $txt_data=$data;
                 $image_array_1 = explode(";", $data);
                 $image_array_2 = explode(",", $image_array_1[1]);
                 $data = base64_decode($image_array_2[1]);
@@ -100,11 +99,13 @@ class QuizController extends Controller
 
                 $quiz_icon = $request->file('upload__quiz__icon');
                 $filename = $link .'.'.$quiz_icon->getClientOriginalExtension();
-                $txt_filename = $link .'.txt';
                 $save_path1 = '/storage/quizicon/' . $link . '/quiz_icon/';
                 $save_path = storage_path('app/public') . '/quizicon/' . $link . '/quiz_icon/';
+                $save_path2= storage_path('app/public') . '/quizicon/' . $link . '/quiz_icon/' . '/orgimg/';
                 $save_path_thumb = storage_path('app/public') . '/quizicon/' . $link . '/quiz_icon/' . '/thumb/';
-                $public_path = storage_path('app/public') . '/quizicon/' . $link . '/quiz_icon/' . $filename;
+
+                $public_path = '/storage/quizicon/' . $link . '/quiz_icon/' . $filename;
+                $public_path2= '/storage/quizicon/' . $link . '/quiz_icon/' . '/orgimg/'. $filename;
                 $public_path_thumb = storage_path('app/public') . '/quizicon/' . $link . '/quiz_icon/' . '/thumb/' . $filename;
   
            
@@ -114,16 +115,16 @@ class QuizController extends Controller
 
                Image::make($data)->save($save_path_thumb . $filename);
                Image::make($data)->save($save_path.$filename);
-
+               $quiz_icon->move($save_path2, $filename);
          
 
-
-                Session::put('txt_image',$request->original_image);
                 Session::put('public_path', $public_path);
+                Session::put('public_path2',$save_path2);
                 Session::put('public_path_thumb', $public_path_thumb);
                 Session::put('file_name', $filename);
                 Session::put('save_path1', $save_path1);
                 Session::put('save_path', $save_path);
+                Session::put('save_path2', $save_path);
 
             }
 
@@ -146,29 +147,34 @@ class QuizController extends Controller
             $save_path1 = '/storage/quizicon/' . $link . '/quiz_icon/';
 
             $save_path = storage_path('app/public') . '/quizicon/' . $link . '/quiz_icon/';
+            $save_path2= storage_path('app/public') . '/quizicon/' . $link . '/quiz_icon/' . '/orgimg/';
             $save_path_thumb = storage_path('app/public') . '/quizicon/' . $link . '/quiz_icon/' . '/thumb/';
 
-            $public_path = storage_path('app/public') . '/quizicon/' . $link . '/quiz_icon/' . $filename;
+            $public_path = '/storage/quizicon/' . '/quizicon/' . $link . '/quiz_icon/' . $filename;
+            $public_path2= '/storage/quizicon/' . $link . '/quiz_icon/' . '/orgimg/'. $filename;
             $public_path_thumb = storage_path('app/public') . '/quizicon/' . $link . '/quiz_icon/' . '/thumb/' . $filename;
             $image_data = $request->original_image;
             // Make the user a folder and set permissions
             File::makeDirectory($save_path, $mode = 0755, true, true);
             File::makeDirectory($save_path_thumb, $mode = 0755, true, true);
+            File::makeDirectory($save_path2, $mode = 0755, true, true);
 
             Image::make($data)->save($save_path_thumb . $filename);
            Image::make($data)->save($save_path.$filename);
-          // File::make($txt_data)->save($save_path.$txt_filename);
-          // File::put($save_path.'/'.$txt_filename,$txt_data);
+          $quiz_icon->move($save_path2, $filename);
 
-            Session::forget('txt_image');
+            
+          
             Session::forget('file_name');
             Session::forget('save_path1');
             Session::forget('save_path');
+            Session::forget('save_path2');
             Session::forget('public_path');
+            Session::forget('public_path2');
             Session::forget('public_path_thumb');
 
         } elseif (Session::has('public_path')) {
-            $image_data = Session::get('txt_image');
+            $public_path2= Session::get('public_path2');
             $filename = Session::get('file_name');
             $save_path1 = Session::get('save_path1');
             $save_path = Session::get('save_path');
@@ -181,6 +187,7 @@ class QuizController extends Controller
             $save_path1 = '/storage';
             $save_path = storage_path('app/public');
             $public_path = storage_path('app/public');
+            $public_path2 = storage_path('app/public');
             $public_path_thumb = storage_path('app/public') . '/thumb';
         }
 
@@ -203,9 +210,10 @@ class QuizController extends Controller
             $quizIcon->local_path        = $save_path1 . '/' . $filename;
             $quizIcon->quiz_id           = $quiz->id;
             $quizIcon->thumb_path        = $public_path_thumb;
-            $quizIcon->txt_image        = $image_data;
+            $quizIcon->public_path2      =$public_path2;
 
             $quizIcon->save();
+            Session::forget('public_path2');
             Session::forget('txt_image');
             Session::forget('file_name');
             Session::forget('save_path1');
@@ -226,6 +234,7 @@ class QuizController extends Controller
             Session::push('quiz_image', $public_path_thumb);
             Session::push('quiz_image', $save_path1);
             Session::push('quiz_image', $filename);
+            Session::push('quiz_image', $public_path2);
 
             $cat = QuizCategory::all();
             $categoriesImgs = QuizCategoryImage::all();
@@ -262,7 +271,7 @@ class QuizController extends Controller
             $quizIcon->local_path        = $session_quiz_image[2] . '/' . $session_quiz_image[3];
             $quizIcon->quiz_id           = $quiz->id;
             $quizIcon->thumb_path        = $session_quiz_image[1];
-            $quizIcon->txt_image         = $session_quiz['original_image'];
+            $quizIcon->public_path2      = $session_quiz_image[4];;
          
             $quizIcon->save();
 
@@ -505,14 +514,14 @@ class QuizController extends Controller
         $quiz = Quiz::find($id);
         $bands = PriceBand::all();
         $round_count=QuizRound::where('quiz_id',$id)->get()->count();
-        $image = $quiz->icon()->first()->txt_image;
+        $image = $quiz->icon()->first()->public_path2;
         return view('quiz.edit-setup', compact('quiz', 'image', 'bands','round_count'));
     }
 
 
 
     public function update(Request $request, $id)
-    {
+    {  
 
         $validator = Validator::make(
             $request->all(),

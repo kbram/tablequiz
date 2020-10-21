@@ -47,6 +47,7 @@
                         <p class="form__explainer">
                             <small class="form-text text-muted">250 x 250 pixels<br>Max. upload size 2mb</small>
                         </p>
+                        
                     </div>
                     <div class="modal" id="edit__round__bg__modal" tabindex="-1" role="dialog" aria-labelledby="edit__round__bg__modal" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -61,7 +62,7 @@
                                     <div class="img-container">
 											<div class="row">
 												<div class="col-md-12">
-													<img id="image" src="{{$round_image_data}}" height="300px">
+													<img id="image" src="{{asset($round_image_data)}}" height="300px">
 												</div>										
 											</div>
 										</div>
@@ -94,7 +95,6 @@
                                         <label class="d-block" for="upload__quiz__icon">Upload
                                             <input type="file" class="form-control-file" id="upload__quiz__icon" name="bg_image" value="Upload">
                                             <input type="hidden" id="edit-round-image-crop" name="image_crop" value="" >
-                                            <input type="hidden" id="edit-round-original-image" name="original_image" value="">
                                         </label>
                                     </div>
                                     <div class="col-md-3 ml-0 ml-lg-1 d-flex">
@@ -805,7 +805,6 @@ var size = 2000;
       file = files[0];
 	  reader = new FileReader();
         reader.onload = function (e) {
-			$('#edit-round-original-image').val(e.target.result);
           done(reader.result);
 		};
 		reader.readAsDataURL(file);
@@ -814,8 +813,7 @@ var size = 2000;
 /**new crop image round end */
 
 		size = this.files[0].size;
-        $('.cropper-container').addClass('kopikopi');
-		console.log($('.cropper-container').attr('class'));
+	
 	});
 
 	$("#pro").click(function() {

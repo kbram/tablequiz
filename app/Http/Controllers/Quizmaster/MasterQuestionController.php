@@ -304,7 +304,7 @@ class MasterQuestionController extends Controller
     
 public function postRound(Request $request){
 
-    dd(Session::get('image'),Session::get('quiz'));
+ 
 
             Session::forget('round');
             Session::forget('image');
@@ -400,7 +400,6 @@ public function add_round_question(Request $request)
       
          /** round_crop image decode start*/
          $data = $request->round_crop_image;
-         $txt_data=$data;
          $image_array_1 = explode(";", $data);
          $image_array_2 = explode(",", $image_array_1[1]);
          $data = base64_decode($image_array_2[1]);
@@ -412,26 +411,25 @@ public function add_round_question(Request $request)
       $save_path1 = '/storage/round_bg/'.$quiz_link.'/round_bg/';
 
       $save_path = storage_path('app/public'). '/round_bg/'.$quiz_link.'/round_bg/';
+      $save_path2 = storage_path('app/public'). '/round_bg/'.$quiz_link.'/round_bg/'.'/orgimg/';
       $save_path_thumb = storage_path('app/public').'/round_bg/'.$quiz_link.'/round_bg/'.'/thumb/';
 
       // $path = $save_path . $filename;
       // $path_thumb    = $save_path_thumb . $filename;
 
-      $public_path = storage_path('app/public'). '/round_bg/'.$quiz.'/round_bg/'.$filename;
-      $public_path_thumb= storage_path('app/public'). '/round_bg/'.$quiz.'/round_bg/'.'/thumb/'.$filename;
+      $public_path = '/storage/'. '/round_bg/'.$quiz_link.'/round_bg/'.$filename;
+      $public_path2 = '/storage/round_bg/'.$quiz_link.'/round_bg/'.'/orgimg/'.$filename;
+      $public_path_thumb= '/storage/round_bg/'. '/round_bg/'.$quiz_link.'/round_bg/'.'/thumb/'.$filename;
 
       //resize the image            
 
       // Make the user a folder and set permissions
       File::makeDirectory($save_path, $mode = 0755, true, true);
       File::makeDirectory($save_path_thumb, $mode = 0755, true, true);
+      File::makeDirectory($save_path2, $mode = 0755, true, true);
 
-     // Image::make($round_background)->resize(250,250)->save($save_path_thumb.$filename);
-
-     // $round_background->move($save_path, $filename);            
-      
-      //Image::make($data)->save($save_path_thumb . $filename);
       Image::make($data)->save($save_path.$filename);
+      $round_background->move($save_path2, $filename);
       
      } 
 
@@ -615,10 +613,10 @@ if($request->$vid_link){
 
             $round_image->name       = $filename;
             $round_image->public_path       = $public_path;
+            $round_image->public_path2       =$public_path2;
             $round_image->local_path        = $save_path1 . '/' . $filename;
             $round_image->round_id           =$round->id;
             $round_image->thumb_path        = $public_path_thumb;
-            $round_image->txt_image       = $request->round_original_image;
             $round_image->save();
       
     //save question part

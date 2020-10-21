@@ -68,7 +68,7 @@
 								</div>
 								<div class="modal-body">
 									<div class="modal__edit__image position-relative border h-100">
-								       <input type="hidden" id="get_image_url" value="{{ $image }}">
+								       <input type="hidden" id="get_image_url" value="{{asset($image)}}">
 								    	<div id="image-container" class="edit-quiz-image-container">
 										</div>
 										
@@ -86,7 +86,6 @@
 									<div class="col-md-3">
 										<label class="d-block" for="upload__quiz__icon">Upload
 										<input type="hidden" name="crop_image" id="crop-image" value="">
-											<input type="hidden" name="original_image" id="original-image" value="">
 											<input type="file" class="form-control-file imagePreviewInput" name="upload__quiz__icon" id="upload__quiz__icon" value="Upload">
 										</label>
 									</div>

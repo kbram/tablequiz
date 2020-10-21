@@ -1,5 +1,4 @@
 
-
    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css">
@@ -29,7 +28,6 @@ function convertImgToBase64(url, callback, outputFormat){
 
 
     var imageUrl =$('#get_default_image').val();
-    console.log('imageUrl', imageUrl);
     convertImgToBase64(imageUrl, function(base64Img){
                 get_image_url=base64Img;
     });
@@ -57,8 +55,6 @@ function convertImgToBase64(url, callback, outputFormat){
       }).then(function(){
         console.log('jQuery bind complete');
         
-        
-
       });
 
       $('.cr-slider').addClass('slider');
