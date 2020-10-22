@@ -379,7 +379,6 @@ public function postRound(Request $request){
             
 public function add_round_question(Request $request)
     {
-// dd($request);
         $categories = QuizCategory::all();
         $questions = GlobalQuestion::all();
         $answers = GlobalAnswer::all();
@@ -636,16 +635,12 @@ if($request->$vid_link){
 
         for($i=0; $i<count($question_types); $i++){
             $questinon_save = new Question;
-           if($request->is_suggested){
-                 
-           }
-         
             $questinon_save->user_id = auth()->id();
             $questinon_save->round_id = $round->id;
             $questinon_save->time_limit = $request->time__limit[$i];
             $questinon_save->question_type = $request->question__type[$i];
             $questinon_save->question = $request->question[$i];
-            if($request->is_suggested){
+            if($request->is_suggested[$i]){
                 $questinon_save->is_suggested=true;
             }
             

@@ -265,7 +265,7 @@ var image_src;
 					}
 		var s = $('.cr-boundary').attr('src');
 		//$("#demo").show();
-          console.log(event.target.result);
+        //   console.log(result);
 
 
 
