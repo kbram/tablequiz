@@ -18,7 +18,6 @@ class QuizRoundImage extends Model
         'public_path',
         'thumb_path',
         'round_id',
-        'txt_image'
         
     ];
 

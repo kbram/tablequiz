@@ -214,7 +214,6 @@ class QuizController extends Controller
 
             $quizIcon->save();
             Session::forget('public_path2');
-            Session::forget('txt_image');
             Session::forget('file_name');
             Session::forget('save_path1');
             Session::forget('save_path');
@@ -281,11 +280,12 @@ class QuizController extends Controller
 
             //round save.........................................................
             //round image 
-            $round_bg_public =  Session::get('round_bg_public_path');
+            $round_bg_public =  Session::get('round_bg_public_path');           
+            $round_bg_public_2 =  Session::get('round_bg_public_path2');
+
             $round_bg_path_thumb = Session::get('round_bg_public_path_thumb');
             $round_bg_save = Session::get('round_bg_save_path1');
             $round_bg_file =  Session::get('round_bg_filename');
-            $round_txt_image = Session::get('round_txt_image');
 
             $round_session = Session::get('round_question');
             for ($k = 0; $k < count($round_session); $k++) {
@@ -301,10 +301,11 @@ class QuizController extends Controller
                 $round_image = new QuizRoundImage;
                 $round_image->name              = $round_bg_file[$k];
                 $round_image->public_path       = $round_bg_public[$k];
+                $round_image->public_path2       = $round_bg_public_2[$k];
+
                 $round_image->local_path        = $round_bg_save[$k] . '/' . $round_bg_file[$k];
                 $round_image->round_id          = $round->id;
                 $round_image->thumb_path        = $round_bg_path_thumb[$k];
-                $round_image->txt_image         = $round_txt_image[$k];
                 $round_image->save();
 
 
@@ -448,10 +449,11 @@ class QuizController extends Controller
             Session::forget('quiz_image');
             Session::forget('round_question');
             Session::forget('round_bg_public_path');
+            Session::forget('round_bg_public_path_2');
+
             Session::forget('round_bg_public_path_thumb');
             Session::forget('round_bg_save_path1');
             Session::forget('round_bg_filename');
-            Session::forget('round_txt_image');
 
 
 

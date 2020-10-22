@@ -784,10 +784,11 @@ if(Session::has('question_video_'.$i)){
             
             Session::push('round_question', $_REQUEST);
             Session::push('round_bg_public_path',$public_path);
+            Session::push('round_bg_public_path2',$public_path2);
+
             Session::push('round_bg_public_path_thumb',$public_path_thumb);
             Session::push('round_bg_save_path1',$save_path1);
             Session::push('round_bg_filename',$filename);
-            Session::push('round_txt_image',$request->round_original_image);
             
         } 
     }
