@@ -265,6 +265,12 @@
 		</div>
 
 	</div>
+	<!-- The Modal -->
+<div id="myModal" class="modal">
+  <span id="image-close">&times;</span>
+  <img class="modal-content" id="img01">
+  <div id="caption"></div>
+</div>
 </section>
 
 @else
@@ -295,9 +301,125 @@
         </div>
     </div>
 </div>
+
 @endsection
 
 @endif
+
+<script>
+$(document).ready(function(){
+var modal = $("#myModal");
+console.log('modal show');
+console.log(modal);
+var modalImg = $("#img01");
+var captionText = $("#caption");
+
+$("body").delegate("#myImg","click",function(){
+  modal.css("display","block");
+  modalImg.attr('src',this.src);
+  captionText.innerHTML = this.alt;
+  
+});
+
+$('#image-close').click(function(){
+	modal.css("display","none");
+	console.log('close');
+});
+
+
+});
+</script>
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+#myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+#myModal{
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {  
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+#image-close{
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
+</style>
+
 <script>
 $(document).ready(function(){
 	
@@ -465,17 +587,35 @@ $(document).ready(function(){
 		//console.log(m);
 		var status = m[2];
 		//console.log(status);
-		console.log(m0);
-
+		console.log(m[7]);
+		
 		var id_correct = m[0]+"1";
 		var id_wrong = m[0]+"0";
 
 		//console.log(status);
 
 		// var text="<tr><td>"+m[0]+"</td><td>"+m[1]+"</td><td><form><input type='radio' id="+id_correct+" name='correct_answer_1' value='correct'><input type='radio' name='correct_answer_1' id="+id_wrong+" value='incorrect'></form></td><td></td></form></tr>";
+        var text='';
+		var img_ans = "<hr> <div class='row container h-25 align-items-center justify-content-center'><p class='col-md-4 pb-0 text-center'>"+m[0]+"</p><input  type='text' name='team[]' hidden class='col-md-4 pb-0 text-center' value="+m[0]+"><input  type='text' name='quiz/"+m[0]+"' hidden class='col-md-4 pb-0 text-center' value="+m[4]+"><input  type='text' name='round/"+m[0]+"' hidden class='col-md-4 pb-0 text-center' value="+m[6]+"><input  type='text' name='question/"+m[0]+"' hidden class='col-md-4 pb-0 text-center' value="+m[5]+"><p class='col-md-4 pb-0 text-center'>"+m[1]+" <img src='{{asset('/')}}"+m[7]+"' alt='image' width='50px' height='50px' style='border: 3px solid #dee2e6!important;' id='myImg'> </p><div class='col-md-4 pb-0 text-center '> <div class='row d-flex'> <input type='radio' id="+id_correct+" name='status/"+m[0]+"' value=1 class='col-md-6 py-0 text-muted text-center'> <input type='radio' name='status/"+m[0]+"' id="+id_wrong+" value=0 class='col-md-6 py-0 text-muted text-center'> </div> </div> </div>";
+		var img_only="<hr> <div class='row container h-25 align-items-center justify-content-center'><p class='col-md-4 pb-0 text-center'>"+m[0]+"</p><input  type='text' name='team[]' hidden class='col-md-4 pb-0 text-center' value="+m[0]+"><input  type='text' name='quiz/"+m[0]+"' hidden class='col-md-4 pb-0 text-center' value="+m[4]+"><input  type='text' name='round/"+m[0]+"' hidden class='col-md-4 pb-0 text-center' value="+m[6]+"><input  type='text' name='question/"+m[0]+"' hidden class='col-md-4 pb-0 text-center' value="+m[5]+"><p class='col-md-4 pb-0 text-center'><img src='{{asset('/')}}"+m[7]+"' alt='image' width='50px' height='50px' style='border: 3px solid #dee2e6!important;' id='myImg'> </p><div class='col-md-4 pb-0 text-center '> <div class='row d-flex'> <input type='radio' id="+id_correct+" name='status/"+m[0]+"' value=1 class='col-md-6 py-0 text-muted text-center'> <input type='radio' name='status/"+m[0]+"' id="+id_wrong+" value=0 class='col-md-6 py-0 text-muted text-center'> </div> </div> </div>";
+		var ans_only="<hr> <div class='row container h-25 align-items-center justify-content-center'><p class='col-md-4 pb-0 text-center'>"+m[0]+"</p><input  type='text' name='team[]' hidden class='col-md-4 pb-0 text-center' value="+m[0]+"><input  type='text' name='quiz/"+m[0]+"' hidden class='col-md-4 pb-0 text-center' value="+m[4]+"><input  type='text' name='round/"+m[0]+"' hidden class='col-md-4 pb-0 text-center' value="+m[6]+"><input  type='text' name='question/"+m[0]+"' hidden class='col-md-4 pb-0 text-center' value="+m[5]+"><p class='col-md-4 pb-0 text-center'>"+m[1]+"</p><div class='col-md-4 pb-0 text-center '> <div class='row d-flex'> <input type='radio' id="+id_correct+" name='status/"+m[0]+"' value=1 class='col-md-6 py-0 text-muted text-center'> <input type='radio' name='status/"+m[0]+"' id="+id_wrong+" value=0 class='col-md-6 py-0 text-muted text-center'> </div> </div> </div>";
+		 
+		if((m[7]!=0) && m[1]) {
+			var text=img_ans;
+			console.log('both are ok');
+			console.log('path'+m[7]);
+			console.log('answer'+m[1]);
+		}
+			 
+		else if(m[7]!=0) {
+			var text=img_only;
+			console.log('image only');
+		}
+		else if(m[1]) {
+			var text=ans_only;
+			console.log('answer only');
+		}
 
-		var text = "<hr> <div class='row container h-25 align-items-center justify-content-center'> <p class='col-md-4 pb-0 text-center'>"+m[0]+"</p> <input  type='text' name='team[]' hidden class='col-md-4 pb-0 text-center' value="+m[0]+"><input  type='text' name='quiz/"+m[0]+"' hidden class='col-md-4 pb-0 text-center' value="+m[4]+"><input  type='text' name='round/"+m[0]+"' hidden class='col-md-4 pb-0 text-center' value="+m[6]+"><input  type='text' name='question/"+m[0]+"' hidden class='col-md-4 pb-0 text-center' value="+m[5]+"> <p class='col-md-4 pb-0 text-center'>"+m[1]+"</p> <div class='col-md-4 pb-0 text-center '> <div class='row d-flex'> <input type='radio' id="+id_correct+" name='status/"+m[0]+"' value=1 class='col-md-6 py-0 text-muted text-center'> <input type='radio' name='status/"+m[0]+"' id="+id_wrong+" value=0 class='col-md-6 py-0 text-muted text-center'> </div> </div> </div>"
-		// var id =$('.question-id').val();
 		var id;
 		$('.quiz__slider .quiz__single_question__container').each(function(){
 				var current=$(this);

@@ -21,15 +21,11 @@ use Session;
 class PlayController extends Controller
 {
 
-    public function testplay($quiz_id,$round_id,$question_id){
+    public function testplay($quiz_id){
         $quiz = Quiz::find($quiz_id);
         $roundCount=$quiz->rounds()->count();
-        $round = QuizRound::where('round_slug',$round_id)->first();
-        $question = Question::where('round_id', $round->id)->first();
-        $answers = Answer::where('question_id',$question->id)->get();
 
-
-    return view('play.play-quiz',compact('quiz','roundCount','round','question','answers'));    
+    return view('play.play-quiz',compact('quiz','roundCount'));    
 
     }
 
@@ -43,6 +39,7 @@ class PlayController extends Controller
         $rounds = $quiz->rounds()->first();
         $questionCounts=$quiz->questions()->count();
     
+       
         //check if password
         if($quiz->quiz_password){
         //match password
@@ -67,9 +64,8 @@ class PlayController extends Controller
                     $teamquiz -> quiz_id = $quiz->id;
                     $teamquiz -> team_name = $request->input('quiz__team');
                     $teamquiz->save();
-                    //dd($teamquiz);
-                    return redirect('playquiz/'.$quiz->id.'/1/1');
-                    return view('play.play-quiz',compact('quiz','roundCount'));   
+                    return redirect('playquiz/'.$quiz->id);
+                   
                    }
                 }   
             }else{
@@ -88,7 +84,7 @@ class PlayController extends Controller
                 $teamquiz -> quiz_id = $quiz->id;
                 $teamquiz -> team_name = $request->input('quiz__team');
                 $teamquiz->save();                                                  
-                return redirect('playquiz/'.$quiz->id.'/1/1');
+                return redirect('playquiz/'.$quiz->id);
             } 
         }
     }   
@@ -139,16 +135,17 @@ class PlayController extends Controller
 
     }
 //answer
-public function answer(Request $request){
+public function answer(Request $request){ 
 
     $answer_path=0;
     if ($request->hasFile('media_file')) {
         $answer_image = $request->file('media_file');
         $filename = $request->teamname.'.'.$answer_image->getClientOriginalExtension();
         $save_path = storage_path('app/public') . '/answer/' .$request->teamname;
+        $public_path='storage/'. '/answer/' .$request->teamname.'/'.$filename;
         File::makeDirectory($save_path, $mode = 0755, true, true);
         $answer_image ->move($save_path, $filename); 
-        $answer_path=$save_path.'/'.$filename;
+        $answer_path=$public_path;
     }
        
 
@@ -181,39 +178,27 @@ public function answer(Request $request){
 
         }
         $team_answer -> status = $status;
-        $text=$user."#^".$user_answer."#^".$status."#^".$type."#^".$quiz_id."#^".$question_id."#^".$round_id;
+        $text=$user."#^".$user_answer."#^".$status."#^".$type."#^".$quiz_id."#^".$question_id."#^".$round_id."#^".$answer_path;
         event(new FormSubmittedStu($text));
 
 
     }
     else{
-        $text=$user."#^".$user_answer."#^".''."#^".$type."#^".$quiz_id."#^".$question_id."#^".$round_id;
+        $text=$user."#^".$user_answer."#^".''."#^".$type."#^".$quiz_id."#^".$question_id."#^".$round_id."#^".$answer_path;
         event(new FormSubmittedStu($text));
 
     }
         
-
-        // $session_key = $quiz_id."-".$round_id."-".$question_id;
-        // $session_key_wrong = $quiz_id."-".$question_id;
-
-
-        //restric anothorise 
-
-    //     if(TeamAnswer::where('quiz_id',$quiz_id)
-    //                    ->where('question_id',$question_id)
-    //                    ->where('team_name',Session::get('teamname'))->first()){
-    //                     return view('play.play-quiz',compact('quiz','roundCount','round','question','answers'));    
-
-    //                    }                       
-    //  else{
 
         
         
         $team_answer -> team_name = $user;
         $team_answer -> answer_id = $user_answer_id ;
         if($answer_path){
-            $team_answer -> answer = $answer_path;
-        }else{
+            $team_answer -> answer_path = $answer_path;
+        }
+        
+        if($user_answer){
             $team_answer -> answer = $user_answer;
         } 
         $team_answer -> question_id = $question_id ;
