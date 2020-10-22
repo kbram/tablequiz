@@ -831,7 +831,7 @@ if(data.bg_image == 0){
             count +
             '</label> </div> <div class="col-md-8"> <input type="url" name="add_link_to_audio__media__' +
             arcount +
-            '" class="form-control add-audio-media-link" id="add__audio__media__text"> </div> </div> <div class="text-center w-100"> <span>OR</span> </div> <div class="form-row justify-content-center pt-3"> <div class="col-md-3"> <label class="d-block" for="upload__audio__media__file">Upload <input type="file" class="form-control-file" id="upload__audio__media__file__' +
+            '" class="form-control add-audio-media-link" id="add__audio__media__text"> </div> </div> <div class="text-center w-100"> <span>OR</span> </div> <div class="form-row justify-content-center pt-3"> <div class="col-md-3"> <label class="d-block" for="upload__audio__media__file__'+arcount+'">Upload <input type="file" class="form-control-file" id="upload__audio__media__file__' +
             arcount +
             '" value="Upload" name="audio_media_' +
             arcount +
@@ -841,7 +841,7 @@ if(data.bg_image == 0){
             count +
             '</label> </div> <div class="col-md-8"> <input type="url" name="add_link_to_video__media__' +
             arcount +
-            '" class="form-control add-video-media-link" id="add__video__media__text"> </div> </div> <div class="text-center w-100"> <span>OR</span> </div> <div class="form-row justify-content-center pt-3"> <div class="col-md-3"> <label class="d-block" for="upload__video__media__file">Upload <input type="file" class="form-control-file" id="upload__video__media__file__' +
+            '" class="form-control add-video-media-link" id="add__video__media__text"> </div> </div> <div class="text-center w-100"> <span>OR</span> </div> <div class="form-row justify-content-center pt-3"> <div class="col-md-3"> <label class="d-block" for="upload__video__media__file__'+arcount+'">Upload <input type="file" class="form-control-file" id="upload__video__media__file__' +
             arcount +
             '" value="Upload" name="video_media_' +
             arcount +
