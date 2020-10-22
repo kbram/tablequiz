@@ -104,7 +104,6 @@
 										<label class="d-block" for="upload__quiz__icon">Upload
 											<input type="file" class="form-control-file" id="upload__quiz__icon" name="bg_image" value="Upload">
 											<input type="hidden" id="round-image-crop" name="round_crop_image" value="">
-											<input type="hidden" id="round-original-image" name="round_original_image" value="">
 										</label>
 									</div>
 									<div class="col-md-3 ml-0 ml-lg-1 d-flex save_btn">
@@ -540,96 +539,67 @@
 
 @section('footer_scripts')
 @include('scripts.add-round-image')
-
 <script>
-
-var image_src;
+    var image_src;
 	var size = 2000;
-       var image = document.getElementById('image');
-	   var cropper;
-	   $('#crop-click').click(function(){
-
-	});
+    var image = document.getElementById('image');
 	var cropper;
+
 	$('.add-round-img-btn').click(function(){
-     cropper = new Cropper(image, {
-	  aspectRatio: 3/2,
-	  viewMode: 1,
-	  preview: '.preview'
+        cropper = new Cropper(image, {
+	    aspectRatio: 3/2,
+	    viewMode: 1,
+	    preview: '.preview'
     });
  });
      
 	$('#upload__quiz__icon').on('change', function(e) {
 		 cropper.destroy();
-		 cropper = null;
-		 
-	var files = e.target.files;
-    var done = function (url) {
-	  image.src = url;
-	 
-     cropper = new Cropper(image, {
-	  aspectRatio: 3/2,
-	  viewMode: 1,
-	  preview: '.preview',
+		 cropper = null; 
+	 var files = e.target.files;
+     var done = function (url) {
+	    image.src = url;
+	    cropper = new Cropper(image, {
+	    aspectRatio: 3/2,
+	    viewMode: 1,
+	    preview: '.preview',
   
 	});
 
-	//setTimeout(function(){ alert("Hello"); }, 3000);
-	setTimeout(function(){ console.log($('.cropper-container').attr('class'));
-	
-		//$('.cropper-container').css('left',70);
-	}, 100);
+	setTimeout(function(){ console.log($('.cropper-container').attr('class'));}, 100);
     };
+
     var reader;
     var file;
     var url;
 
     if (files && files.length > 0) {
-      file = files[0];
-	  reader = new FileReader();
-        reader.onload = function (e) {
-			$('#round-original-image').val(e.target.result);
-		//	$('.cropper-hide').attr('src',e.target.result);
-			
-		image_src=event.target.result;
-			
-          done(reader.result);
-		  console.log($('.cropper-container').attr('class'));
-
+           file = files[0];
+	       reader = new FileReader();
+           reader.onload = function (e) {
+		   image_src=event.target.result;
+		   done(reader.result);
 		};
 		reader.readAsDataURL(file);
-
-    //   if (true) {console.log('kpss');
-    //     done(URL.createObjectURL(file));
-    //   } else if (FileReader) {
-    //     reader = new FileReader();
-    //     reader.onload = function (e) {console.log(e.target.result);console.log('kp');
-    //       done(reader.result);
-    //     };
-    //     reader.readAsDataURL(file);
-    //   }
     }
 /**new crop image round end */
-
 		size = this.files[0].size;
-		$('.cropper-container').addClass('kopikopi');
-		console.log($('.cropper-container').attr('class'));
+
 	});
 	$("#pro").click(function() { console.log('hi click');
-		
 		/**crop image round save btn start */
-		if(image_src){
-		canvas = cropper.getCroppedCanvas({
-	    width: 160,
-	    height: 160,
+	if(image_src){
+		 canvas = cropper.getCroppedCanvas({
+	     width: 160,
+	     height: 160,
       });
 
     canvas.toBlob(function(blob) {
-        url = URL.createObjectURL(blob);
+            url = URL.createObjectURL(blob);
         var reader = new FileReader();
-         reader.readAsDataURL(blob); 
-         reader.onloadend = function() {
-            var base64data = reader.result;	
+            reader.readAsDataURL(blob); 
+            reader.onloadend = function() {
+        var base64data = reader.result;	
             $('#round-image-crop').val(base64data);
         
          }
@@ -637,7 +607,6 @@ var image_src;
 
 		}
 /**crop image round save btn end */
-
 		var s = $('#upload__quiz__icon').val();
 		s = Math.round(size / 1000);
 		if (s == "") {
@@ -799,7 +768,6 @@ var image_src;
 		}
 	});
 </script>
-@include('scripts.add-round-image')
 @include('scripts.suggest')
 @include('scripts.bg-image');
 @include('scripts.payment');

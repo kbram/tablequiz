@@ -225,7 +225,7 @@ Route::post('dashboard/user-update', 'UsersManagementController@user_update');
 
 
 //sam route can start here
-Route::get('playquiz/{quiz_id}/{round_id}/{question_id}', 'Quizmaster\PlayController@testplay')->name('play.quiz');
+Route::get('playquiz/{quiz_id}', 'Quizmaster\PlayController@testplay')->name('play.quiz');
 Route::post('startquiz', 'Quizmaster\PlayController@start');
 
 //error
@@ -380,3 +380,4 @@ Route::post('/playquiz/save/answer', 'Quizmaster\PlayController@saveanswer');
 
 Route::post('/removebg','RemoveCartController@removebackground');
 Route::post('/removeSuggest','RemoveCartController@RemoveSuggestedQuestion');
+Route::post('/removeParticipants','RemoveCartController@RemoveParticipants');

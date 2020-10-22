@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PriceBand;
 use Illuminate\Http\Request;
 use App\Models\QuizRound;
 use App\Models\QuizRoundImage;
@@ -39,6 +40,15 @@ public function RemoveSuggestedQuestion(Request $request){
        
     }
     return 'success';
+   }
+
+   public function RemoveParticipants(Request $request){
+    $price=PriceBand::where('band_type','participants-costs')->first();
+    $quiz=Quiz::find($request->id);
+    $quiz->no_of_participants=$price->from.'-'.$price->to;
+    $quiz->save();
+
+    return $price;
    }
 
 }

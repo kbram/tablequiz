@@ -40,8 +40,8 @@
 
 			<div class="row border-bottom pb-2 mb-5">
 				<div class="col-12 d-flex justify-content-center flex-column">
-					<p class="mb-0 text-center"><strong>Round {{$round->id}} of {{$roundCount}}</strong></p>
-					<p class="bernhard round__name my-2 text-center">{{$round->round_name}}</p>
+					<p class="mb-0 text-center"><strong>Round  of </strong></p>
+					<p class="bernhard round__name my-2 text-center"></p>
 				</div>
 				<div class="col-12">
 					<div>
@@ -75,42 +75,6 @@
 		</article>
 		<p id="demo"></p>
 	</div>
-<!-- </section> -->
-
-<!-- <script>
-
-	var correct = {!! json_encode(Session::get("$quiz->id-$round->id-$question->id") ) !!};
-
-    var wrong = {!! json_encode(Session::get("$quiz->id-$question->id") ) !!};
-	var allele =  document.getElementsByClassName("answers");
-	var all = document.getElementById("all-answer");
-
-
-	if (correct ){
-	var ele = document.getElementById(correct);
-
-	ele.classList.remove("single__answer");
-    ele.classList.add("single__answer_correct");
-	all.classList.add("cursor_not");
-
-
-	console.log(correct);
-
-    }
-
-	if (wrong){
-	var ele = document.getElementById(wrong);
-	ele.classList.remove("single__answer");
-    ele.classList.add("single__answer_wrong");
-	all.classList.add("cursor_not");
-
-
-	console.log(worng);
-	}
-
-
-	
-</script> -->
 
 
 
