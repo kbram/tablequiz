@@ -276,7 +276,7 @@
 					<td>No. participants</td>
 					<td></td>
 					<td></td>
-					<td><span class="checkout__remove">-</span></td>
+					<td><span class="checkout__remove remove_no_participants">-</span></td>
 				</tr>
 				 
 				<tr class="suggested-questions">

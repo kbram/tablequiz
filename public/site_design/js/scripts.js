@@ -954,6 +954,7 @@ if(data.bg_image == 0){
                 $("#publishQuizModal").modal("show");
                 var participants = data.participants.no_of_participants;
                 var participants_cost = data.participants_cost[0].cost;
+               
                 var questions_cost = 0;
                 quiz_id = quiz;
 
@@ -1003,6 +1004,13 @@ if(data.bg_image == 0){
                         $(".suggested-questions").css({"pointer-events": "none", "opacity":0.5});
 
                     }
+
+                    if(participants_cost== 0){
+                        $("#modal__payment").find(".no-participants td:nth-child(3)").text(0);
+                        $(".no-participants").css({"pointer-events": "none", "opacity":0.5});
+
+                    }
+
                 var customised_backgrounds_price = $("#modal__payment")
                     .find(".customised-backgrounds td:nth-child(3)")
                     .text(data.bg_image_cost);
@@ -1266,7 +1274,7 @@ if(data.question_cost == 0){
     });
 
  /** Remove SUggested Question */
- $(".remove_suggested_que").click(function (e) { console.log('hihi'); 
+ $(".remove_suggested_que").click(function (e) {
     e.preventDefault();
      
     swal({
@@ -1334,6 +1342,73 @@ if(data.question_cost == 0){
         
 
     // });
+
+    /**remove no of participants */
+    $(".remove_no_participants").click(function (e) {
+        e.preventDefault();
+         
+        swal({
+            title: "Are You Sure ?",
+            text: "it will remove all no of participants you added and set 0-10 particiapnts only!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          }) .then((willDelete) => {
+            if (willDelete) {
+              swal("selected participants have been removed!", {
+                icon: "success",
+                
+              });
+    
+              var current_total = $("#modal__payment").find(".total-cost td:nth-child(2)>strong").text();
+              var suggest_cost=$('#modal__payment').find('.no-participants td:nth-child(3)').text();
+              
+                 // current.remove();
+                 
+    
+                // $('#modal__payment').find('.no-participants td:nth-child(3)').text(0);
+                 //$('#modal__payment').find('.no-participants td:nth-child(2)').text('1-10');
+    
+                  var total = Number(current_total) - Number(suggest_cost);
+                  $('#modal__payment').find('.total-cost td:nth-child(2)>strong').text(total);
+                  $("#card_total").val(total);
+             
+                  // varr
+             var current= $(this).closest(".no-participants");
+             current.css('pointer-events','none');
+             current.css('opacity',0.5);
+    
+             $.ajax({
+                 type: "POST",
+                 url: "/removeParticipants",
+                 headers: {
+                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                         "content"
+                     ),
+                 },
+                 data: {
+                     id: quiz,
+                 },
+                 success: function (data) { 
+                           $('#modal__payment').find('.no-participants td:nth-child(3)').text(0);
+                           $('#modal__payment').find('.no-participants td:nth-child(2)').text(data.from+'-'+data.to);
+                    },
+                 error: function (result, error) {
+                   
+                 },
+             });
+              
+    
+    
+            } else {
+              swal("your participants are safe");
+            }
+          });
+    
+    
+    });
+
+    /** no of participants end */
 
     $('.close_pay').click(function(){
 
