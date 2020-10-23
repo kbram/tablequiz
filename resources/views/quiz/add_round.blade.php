@@ -577,7 +577,7 @@
            file = files[0];
 	       reader = new FileReader();
            reader.onload = function (e) {
-		   image_src=event.target.result;
+		   image_src=e.target.result;
 		   done(reader.result);
 		};
 		reader.readAsDataURL(file);
