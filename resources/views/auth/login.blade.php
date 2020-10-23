@@ -368,7 +368,7 @@
 					  <label for="cardholder_number">Card number:</label>
 					 </div>
 				  <div class="col-md-7">
-					  <input   class="form-control card-number"  type="number" name="cardholder_number" id="cardholder_number" value='{{ $payment_deatils->card_number ?? ""}}'>
+					  <input   class="form-control card-number" min=0 oninput="validity.valid||(value='');" type="number" name="cardholder_number" id="cardholder_number" value='{{ $payment_deatils->card_number ?? ""}}'>
 				  </div>
 			 </div>
 
@@ -378,7 +378,7 @@
 					  <label for="cardholder_expiry">Card expiry Month:</label>
 					 </div>
 				  <div class="col-md-7">
-					  <input class="form-control card-expiry-month" size='2' type="number" name="cardholder_expiry_month" id="cardholder_expiry_month" value='{{ $payment_deatils->exp_month ?? ""}}'>
+					  <input class="form-control card-expiry-month" min=0 oninput="validity.valid||(value='');" max=12 size='2' type="number" name="cardholder_expiry_month" id="cardholder_expiry_month" value='{{ $payment_deatils->exp_month ?? ""}}'>
 				  </div>
 			 </div>
 
@@ -388,7 +388,7 @@
 					  <label for="cardholder_expiry">Card expiry Year:</label>
 					 </div>
 				  <div class="col-md-7">
-					  <input class="form-control card-expiry-year"  size='4' type="number" name="cardholder_expiry_year" id="cardholder_expiry_year" value='{{ $payment_deatils->exp_year ?? ""}}'>
+					  <input class="form-control card-expiry-year" min=0 oninput="validity.valid||(value='');"  size='4' type="number" name="cardholder_expiry_year" id="cardholder_expiry_year" value='{{ $payment_deatils->exp_year ?? ""}}'>
 				  </div>
 			 </div>
 
@@ -397,8 +397,7 @@
 					  <label for="cardholder_cvv">CVV:</label>
 					 </div>
 				  <div class="col-md-7">
-					  <input  class="form-control w-25 card-cvc" maxlength="4	" type="text" name="card-cvc" id="card-cvc" value='{{ $payment_deatils->cvv ?? ""}}' size='4' 
-                                    >
+					  <input  class="form-control w-25 card-cvc" maxlength="3" min=0 oninput="validity.valid||(value='');" type="number" name="card-cvc" id="card-cvc" value='{{ $payment_deatils->cvv ?? ""}}' size='3' >
 				  </div>
 			 </div>
 

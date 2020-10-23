@@ -438,6 +438,7 @@ public function add_round_question(Request $request)
         $save_path1 = 0; 
         $save_path = 0;
         $public_path = 0;
+        $public_path2 = 0;
         $public_path_thumb= 0;
          }
 

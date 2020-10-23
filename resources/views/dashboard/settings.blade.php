@@ -162,7 +162,7 @@
 							</div>
 							<div class="col-sm-6">
 								<div class="input-group">
-								<input type="number" class="form-control " value="{{$payment->exp_month ?? ''}}" name="card_month" required>
+								<input type="number" class="form-control " min=0 oninput="validity.valid||(value='');" value="{{$payment->exp_month ?? ''}}" name="card_month" required>
 									<div class="input-group-append">
 										
 									</div>          
@@ -176,7 +176,7 @@
 							</div>
 							<div class="col-sm-6">
 								<div class="input-group">
-									<input type="number" class="form-control " value="{{$payment->exp_year ?? ''}}" name="card_year" required>
+									<input type="number" min=0 oninput="validity.valid||(value='');" class="form-control " value="{{$payment->exp_year ?? ''}}" name="card_year" required>
 									<div class="input-group-append">
 								
 									</div>          

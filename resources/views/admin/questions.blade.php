@@ -337,7 +337,7 @@
 									<label for="time__limit">Time limit</label>
 								</div>
 								<div class="col-md-4">
-									<input class="form-control" type="number" name="time__limit" >
+									<input class="form-control" min=0 oninput="validity.valid||(value='');" type="number" name="time__limit" >
 									@if($errors->has('time__limit'))
                                     <span class="help-block">
                                             <p>{{ $errors->first('time__limit') }}</p>

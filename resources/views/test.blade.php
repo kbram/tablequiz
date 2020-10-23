@@ -238,7 +238,7 @@
                                                         <div class="col-md-4">
                                                             <label for="time__limit">Time limit</label>
                                                         </div>
-                                                        <div class="col-md-4"><input class="form-control time-limit" type="number" name="time__limit[]">
+                                                        <div class="col-md-4"><input class="form-control time-limit" min=0 oninput="validity.valid||(value='');" type="number" name="time__limit[]">
                                                     </div>
                                                     <div class="col">
                                                         <small class="form-text text-muted">Seconds</small>

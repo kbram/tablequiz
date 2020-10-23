@@ -513,7 +513,7 @@
 									<label for="time__limit">Time limit</label>
 								</div>
 								<div class="col-md-4">
-									<input class="form-control" type="number" name="time__limit" value="{{($questions->time_limit != '' ? $questions->time_limit : '')}}"  >
+									<input class="form-control" min=0 oninput="validity.valid||(value='');" type="number" name="time__limit" value="{{($questions->time_limit != '' ? $questions->time_limit : '')}}"  >
 								</div>
 								<div class="col">
 									<small class="form-text text-muted">Seconds</small>

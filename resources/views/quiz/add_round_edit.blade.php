@@ -245,7 +245,7 @@
 				<div class="col-md-8">
 					<div class="row">
 						<div class="col-md-4 pr-md-0">
-							<input class="form-control" type="number" name="time__limit">
+							<input class="form-control" min=0 oninput="validity.valid||(value='');" type="number" name="time__limit">
 						</div>
 						<div class="col-md-2 text-right d-flex align-items-center justify-content-end">
 							<small class="form-text text-muted mt-0">Seconds</small>
