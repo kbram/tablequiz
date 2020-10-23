@@ -99,9 +99,11 @@
 @endif
 @endauth
 
-		<div id="menu__btn">
-			<i class=" fa-bars"></i>
+
+<div id="menu__btn">
+<i class="fas fa-bars"></i>
 		</div>
+
 </header>
 	
 	
