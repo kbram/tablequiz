@@ -211,7 +211,7 @@
       $image_crop.croppie('bind', {
         url: event.target.result
       }).then(function(){
-        console.log('jQuery bind complete');
+      
         image_src=event.target.result;
         
 

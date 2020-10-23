@@ -469,10 +469,10 @@ $(document).ready(function(){
 			$("#push-submit").css("pointer-events", "none");
 			$('#push-submit').css('opacity','0.4');
 			
-			//pl=false;
+			
 			var splity=time.split(":");
 			timeon=parseInt(splity[0])*60+parseInt(splity[1]);
-			//alert(timeon);
+			
 			var y=timeon;
 			
 			if(pl==true){
@@ -480,7 +480,7 @@ $(document).ready(function(){
 				$('#timer').removeClass("countdown__time");
 				$('#que').removeClass("question_number2");
 				$('#timer').html(time);
-				//alert(time);
+				
 				$("#push-submit-pause").css("pointer-events", "none");
 				$('#push-submit-pause').css('opacity','0.4');
 				
@@ -576,7 +576,7 @@ $(document).ready(function(){
 	var channel = pusher.subscribe('my-channel0');
 	
 	channel.bind('form-submitted0', function(data) {
-		//alert(JSON.stringify(data));	
+			
 		$("#noresult").remove();
 		//$("#Markingtable").addClass("d-block");
 		//$("#Markingsubmit").addClass("d-block");
@@ -622,7 +622,7 @@ $(document).ready(function(){
 				var hidden=current.attr('aria-hidden');
 				if(hidden=="false"){
 				id =current.find('.question-id').val(); 
-				//alert(id);
+				
 				}
 		});
 		if(id == m[5]){
@@ -706,7 +706,7 @@ $(document).ready(function(){
 			//pl=false;
 			
 			y=document.getElementById("timer").textContent;
-			//alert(y);
+			
 			var x=document.getElementById("timer").textContent;
 			var splity=y.split(":");
 			y=parseInt(splity[0])*60+parseInt(splity[1]);

@@ -52,7 +52,7 @@ if(ct>1){
         },
         error: function(result,error) {
             
-        console.log(error);
+       
         
         },
 

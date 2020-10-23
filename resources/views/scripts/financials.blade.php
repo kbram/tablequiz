@@ -41,7 +41,7 @@
     }, 1000);
         },
         error: function(result,error) {
-         alert('error');
+        
         
         },
        
@@ -85,7 +85,7 @@
 
       
       if($(this).closest('.price-band-financials').find(".pl").css("display")=="none"){
-        //alert("fe");
+       
         //$(this).closest('.dashboard__container').find('.financial-append').append(x);
          $(this).closest('.dashboard__container').find("#dem1").show();
          $(this).closest('.dashboard__container').find("#dem2").show();
@@ -109,7 +109,7 @@
              
          },
          success: function(results) {
-           console.log("delete");
+         
 
             $('#msg'+id).text('Deleted sucessfully');
             setTimeout(function() {
@@ -120,7 +120,7 @@
 
          },
          error: function(result,error) {
-          alert('error');
+         
          
          },
         

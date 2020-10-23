@@ -566,7 +566,7 @@
   
 	});
 
-	setTimeout(function(){ console.log($('.cropper-container').attr('class'));}, 100);
+	//setTimeout(function(){}, 100);
     };
 
     var reader;
@@ -586,7 +586,7 @@
 		size = this.files[0].size;
 
 	});
-	$("#pro").click(function() { console.log('hi click');
+	$("#pro").click(function() {
 		/**crop image round save btn start */
 	if(image_src){
 		 canvas = cropper.getCroppedCanvas({

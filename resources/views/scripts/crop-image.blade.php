@@ -53,7 +53,7 @@ function convertImgToBase64(url, callback, outputFormat){
   $image_crop.croppie('bind', {
         url:get_image_url
       }).then(function(){
-        console.log('jQuery bind complete');
+       
         
       });
 
@@ -82,7 +82,7 @@ function convertImgToBase64(url, callback, outputFormat){
   $image_crop.croppie('bind', {
         url:get_image_url
       }).then(function(){
-        console.log('jQuery bind complete');
+       
         
         
 

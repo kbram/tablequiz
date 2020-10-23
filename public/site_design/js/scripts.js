@@ -92,10 +92,10 @@ jQuery(document).ready(function ($) {
                 .closest(".multiple__choice__row")
                 .find(".multiple-choice-answer")
                 .val();
-            // console.log(gtname_correct_val);
+            
 
             $(this).val(gtname_correct_val);
-            console.log("radio value" + gtname_correct_val);
+           
         }
     );
 
@@ -117,14 +117,14 @@ jQuery(document).ready(function ($) {
     // });
 
     $(".sign_up__from__modal").click(function () {
-        //console.log("hi");
+       
         $("#modal__login").addClass("d-none");
         $("#modal__signup").animate({ scrollTop: 0 }, "slow");
         $("#modal__signup").removeClass("d-none");
     });
 
     $(".login__from__modal").click(function () {
-        console.log("hi");
+       
         $("#modal__login").removeClass("d-none");
         $("#modal__signup, #modal__payment").addClass("d-none");
     });
@@ -176,7 +176,7 @@ jQuery(document).ready(function ($) {
                         var quiz_id = data.quiz_id;
                         quiz = quiz_id;
 
-                        console.log(typeof participants_cost);
+                       
                         $("#modal__payment").find(".no-participants td:nth-child(2)").text(participants);
                         $("#modal__payment").find(".no-participants td:nth-child(3)").text(participants_cost);
                         $("#modal__payment").find(".suggested-questions td:nth-child(2)").text(data.question_count);
@@ -229,10 +229,10 @@ if(data.bg_image == 0){
                 $("#modal__payment").removeClass("d-none");
             },
             error: function (result, error) {
-                console.log(result);
+               
                 $("#loading").removeClass("loader");
                 var validate = result.responseJSON.errors;
-                console.log("gfgdfgdfgggggggggggg" + validate);
+              
                 $(".text-danger").html("");
                 if (validate.email) {
                     $("#login_email").after(
@@ -271,7 +271,7 @@ if(data.bg_image == 0){
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             success: function (response) {
-                console.log("signup success");
+               
                 $("#loading1").removeClass("loader");
                 $("#modal__login").addClass("d-none");
                 $("#modal__signup").addClass("d-none");
@@ -286,14 +286,14 @@ if(data.bg_image == 0){
                     data: {
                     },
                     success: function (data) {
-                        console.log("eeeeeeeeeeeeeee" + data);
+                       
                         var participants = data.participants.no_of_participants;
                         var participants_cost = data.participants_cost[0].cost;
                         var questions_cost = 0;
                         var quiz_id = data.quiz_id;
                         quiz = quiz_id;
 
-                        console.log(typeof participants_cost);
+                       
                         $("#modal__payment")
                             .find(".no-participants td:nth-child(2)")
                             .text(participants);
@@ -361,7 +361,7 @@ if(data.bg_image == 0){
                         $("#quiz_id").val(quiz_id);
                     },
                     error: function (result, error) {
-                        console.log("uuuuuuu");
+                      
                     },
                 });
                 //card fill
@@ -488,7 +488,7 @@ if(data.bg_image == 0){
             $("#numeric__answer").removeClass("d-flex").addClass("d-none");
         }
         if ($(this).val() == "multiple__choice__question") {
-            console.log("man_mul");
+          
             $("#standard__answer").removeClass("d-flex").addClass("d-none");
             $("#multiple__choice__legend")
                 .addClass("d-flex")
@@ -538,7 +538,7 @@ if(data.bg_image == 0){
                 .attr("required", false);
         }
         if ($(this).val() == "standard__question") {
-            console.log("standad select");
+           
 
             $(this)
                 .parents(".article_question")
@@ -577,7 +577,7 @@ if(data.bg_image == 0){
                 .addClass("d-none");
         }
         if ($(this).val() == "multiple__choice__question") {
-            console.log("multi select");
+          
             $(this)
                 .parents(".article_question")
                 .children(".standard__answer")
@@ -650,14 +650,14 @@ if(data.bg_image == 0){
     //Bring up modal when number of participants is changed //
 
     $("select#quiz__participants").on("change", function () {
-        console.log("hi modal");
+       
         $("#select_participants__modal").modal("show");
     });
 
     // Click to Copy //
 
     $(".copy__icon.quiz__link").click(function () {
-        console.log("copy");
+       
         $("input#full__uri").select();
 
         document.execCommand("copy");
@@ -689,7 +689,7 @@ if(data.bg_image == 0){
     }
 
     $('input[name="quiz__name"]').keyup(function () {
-        console.log("hi");
+       
         generate_quiz_name();
     });
     $('input[name="quiz__link"]').on("focusout", function () {
@@ -958,7 +958,7 @@ if(data.bg_image == 0){
                 var questions_cost = 0;
                 quiz_id = quiz;
 
-                console.log(typeof participants_cost);
+               
                 $("#modal__payment")
                     .find(".no-participants td:nth-child(2)")
                     .text(participants);
@@ -985,7 +985,7 @@ if(data.bg_image == 0){
                 var customised_backgrounds_details = $("#modal__payment")
                     .find(".customised-backgrounds td:nth-child(2)")
                     .text(data.bg_image);
-                    console.log(data.bg_image);
+                   
 
                     if(data.bg_image == 0){
 
@@ -1089,7 +1089,7 @@ var formdata = new FormData($("#add_round")[0]);
         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
     },
     success: function (response) {
-        console.log("success");
+       
        
         $.ajax({
         type: "POST",
@@ -1119,7 +1119,7 @@ var formdata = new FormData($("#add_round")[0]);
             }
                   
     var customised_backgrounds_details=$('#modal__payment').find('.customised-backgrounds td:nth-child(2)').text(data.bg_image);
-    console.log(data.bg_image_cost);
+   
     var customised_backgrounds_price=$('#modal__payment').find('.customised-backgrounds td:nth-child(3)').text(data.bg_image_cost);
 
 
@@ -1145,7 +1145,7 @@ if(data.question_cost == 0){
    
     var total_card = Number(participants_cost)+Number(questions_cost)+Number(data.bg_image_cost ); 
     $('#quiz_id').val(quiz_id);
-    console.log(quiz_id);
+   
         }
 
 
@@ -1159,7 +1159,7 @@ if(data.question_cost == 0){
       });
     },
     error: function (result, error) {
-        console.log("errror");
+       
         //$("#publishQuizModal").modal("show");
         //$("#modal__payment").modal("show");
     },
@@ -1200,7 +1200,7 @@ if(data.question_cost == 0){
 
     $(".remove_bg").click(function (e) {
         e.preventDefault();
-        console.log("removed" + quiz);
+       
 
         var backgrounds_price = $("#modal__payment")
                     .find(".customised-backgrounds td:nth-child(3)")
@@ -1231,7 +1231,7 @@ if(data.question_cost == 0){
         
              var current_total = $("#modal__payment").find(".total-cost td:nth-child(2)>strong").text();
              var total = Number(current_total) - Number(backgrounds_price);
-          console.log(total);
+         
           $("#modal__payment")
                     .find(".total-cost td:nth-child(2)>strong")
                     .text(total);
@@ -1319,11 +1319,11 @@ if(data.question_cost == 0){
              data: {
                  id: quiz,
              },
-             success: function (data) { console.log('it is success suggested');
+             success: function (data) {
             
                 },
              error: function (result, error) {
-                 console.log('error suggested');
+                
              },
          });
           

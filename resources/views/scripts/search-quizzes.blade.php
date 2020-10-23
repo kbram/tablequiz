@@ -29,7 +29,7 @@
                     let jsonData = JSON.parse(quizzes);
                     if (jsonData.length != 0) {
                         quizTable.hide();
-                        console.log(jsonData);
+                       
                         $.each(jsonData, function(index, val) {
 
                             var block=val.is_blocked;

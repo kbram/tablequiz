@@ -792,9 +792,9 @@ var size = 2000;
 	  viewMode:1,
 	  preview: '.preview'
     });
-    setTimeout(function(){ console.log($('.cropper-container').attr('class'));
-   // $('.cropper-container').css('left',70);
-    }, 100);
+//     setTimeout(function(){
+//    // $('.cropper-container').css('left',70);
+//     }, 100);
    
     };
     var reader;

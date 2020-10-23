@@ -78,7 +78,7 @@
                   }, 1000);
                },
                error: function(result, error) {
-                  alert('error');
+                  
 
                },
                dataType: 'JSON',
@@ -166,7 +166,7 @@
                   }, 1000);
                },
                error: function(result, error) {
-                  alert('error');
+                  
 
                },
                dataType: 'JSON',
@@ -190,7 +190,7 @@
 
                         $(".all_suggested_questions").append('<li class="single__suggested__question text-body p-3 border rounded mb-4"><div class="single__suggested__question__image position-relative"><img src=' + baseUrl + img_url + ' id="image' + get_id + '" class="w-100"><div class="change__image position-absolute px-4 invisible"><label class="d-block m-0 border-0" for="upload__quiz__icon"><i class="fas fa-edit"></i> Change<input type="file" class="form-control-file" id="upload__quiz__icon" value="Upload"> </label></div></div><div class="single__suggested__question__attributes row pt-3"><div class="col-md-3 text-center d-flex align-items-center justify-content-center"><span class="pr-2"><i class="fa fa-clock"></i></span></div><div class="col-md-9 d-flex align-items-center" style="height:48px"><p class="m-0"><span class="pr-2"><small><input id="time-limit' + get_id + '" class="form-control readonly edit__time__limit" readonly type="text" value="' + time_limit + '">s</small></span>Time-limited</p></div><div class="col-2 col-md-3 text-center d-flex align-items-center justify-content-center pt-2"><span class="pr-2"><i class="fas fa-list-ul"></i></span></div><div class="col-10 col-md-9 d-flex align-items-center"><p class="w-50 pr-0 m-0 pt-2"><select class="pr-5 disabled form-control" disabled id="suggested__question__type' + get_id + '"></select></p></div><div class="col-2 col-md-3 text-center d-flex align-items-center justify-content-center pt-2"><span class="pr-2"><i class="far fa-image"></i></span></div><div class="col-10 col-md-9 d-flex align-items-center"><p class="pr-0 w-50 m-0 pt-2"><select class="disabled form-control pr-5" disabled><option>Image based</option><option>Audio based</option><option>Video based</option><option>Standard Q&amp;A</option></select></p></div> </div><div class="single__suggested__question__question pt-4 row"><p class="col-3"><span class="d-inline-block w-25">Question: </span></p> <p class="col-9 the_question"><input type="text" id="question' + get_id + '" class="form-control readonly" readonly value="' + get_que + '"></p></div><div class="single__suggested__question__answer row pb-3"><div class="offset-3 col-9"><div class="form-row" style="min-height:0"><div class="offset-10 col"><small class="form-text text-center d-none correct_answer_heading">Correct:</small></div></div></div><p class="col-3"><span class="d-inline-block w-25 answers__label">Answers: </span></p><div  class="col-9 the_answer"><div  id="ans' + get_id + '" class=" add-answer align-items-center form-row"><div class="col-10 d-none"><a href="#" class="btn btn-primary d-block">Add answer</a></div></div></div></div><div class="single__suggested__question__footer border-top pt-3 d-flex justify-content-center align-items-center"><button id="' + get_id + '" class="btn btn-primary mr-1 add-question" data-dismiss="modal">Add question</button><button  type="button" class="btn btn-secondary ml-1 edit__question">Edit question</button></div></li>');
                         if (question_type == 'standard__question') {
-                           console.log('it works stand');
+                         
                            $("#suggested__question__type" + get_id).append('<option value="text">Text</option><option value="multiple" >Multiple choice</option><option value="numeric">Numeric</option>')
                         } else if (question_type == 'multiple__choice__question') {
                            $("#suggested__question__type" + get_id).append('<option value="multiple">Multiple choice</option><option value="text" >Text</option><option value="numeric">Numeric</option>')
@@ -236,8 +236,7 @@
                   }, 1000);
                },
                error: function(result, error) {
-                  alert('error');
-
+                  
                },
                dataType: 'JSON',
                success: function(data) {
@@ -304,7 +303,7 @@
                   }, 1000);
                },
                error: function(result, error) {
-                  alert('error');
+                  
 
                },
                dataType: 'JSON',
@@ -406,17 +405,17 @@
          });
 
          if (values.length > 1) {
-            console.log('lenght max');
+         
             standard__answer.removeClass('d-flex').addClass('d-none');
             multiple__choice__legend.addClass('d-flex').removeClass('d-none');
             multiple__choice__answer.addClass('d-flex').removeClass('d-none');
             numeric__answer.removeClass('d-flex').addClass('d-none');
 
             get_first_multi_choice_append.val(values[0].value);
-            console.log('ans' + values[0].value);
+          
          }
          for (var i = 1; i < values.length; i++) {
-            console.log('lenght count');
+           
             var value = values[i].value;
             var newRow = '<div class="row multiple__choice__row pb-3 align-items-center"><div class="col-7"><input name="multiple__choice__answer__1[]" class="form-control" type="text" value="' + value + '"></div><div class="col-1 justify-content-center p-0 d-flex"><span class="minus">-</span></div><div class="col-1 justify-content-center"><span class="plus">+</span></div><div class="col-3 text-center form-check"><input type="radio" id="rdd" name="multiple__choice__correct__answer" value="' + i + '"></div></div>';
             get_multi_choice_append.append(newRow);
@@ -435,7 +434,7 @@
 
       /**edit question change from main script to suggested script */
       $("body").delegate('.edit__question', 'click', function(e) {
-         console.log('edit question');
+        
          e.preventDefault();
          var parent = $(this).closest('.single__suggested__question');
          $('.readonly', parent).removeAttr('readonly');

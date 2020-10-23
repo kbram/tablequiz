@@ -29,8 +29,7 @@
                     if (jsonData[0].length != 0) {
                         questionsTable.hide();
                         $.each(jsonData[0], function(index, val) {
-                            console.log(val);
-                            console.log(jsonData[1]);
+                           
                             let editCellHtml = '<div class="d-flex flex-column"><i class="fas fa-pencil-alt"></i><span><a href="/questions/'+val.id+'/edit" data-toggle="tooltip" title="edit">Edit</a></span></div> ';
                             let deleteCellHtml = '<form method="POST" action="/admin/questions/'+val.id+'" class="p-0"><input type="hidden" name="_token" value="{{csrf_token()}}"><div class="d-flex flex-column"><i class="fas fa-times-circle"></i><span class="delete">Delete</span></div></form>';
 											

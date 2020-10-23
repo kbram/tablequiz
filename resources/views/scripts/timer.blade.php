@@ -119,7 +119,7 @@ $(document).ready(function() {
            
             $('.single__answer')
                 .click(function() {
-               // console.log("click on single answer");
+             
                 if ($box == null) {
                     $box = $(this);
                     $box.css("box-shadow","3px 3px 15px #7343C1, -1px -1px 5px rgba(0, 0, 0, 0.045)");
@@ -181,8 +181,7 @@ $(document).ready(function() {
                         cache: false,
                         enctype: 'multipart/form-data',
                         
-                        success: function(data) { console.log('hihi');
-                          console.log(formdata);
+                        success: function(data) {
                             swal("Answer Submited!",'wait for the next ...', "success");
                         },
                     });
@@ -351,7 +350,7 @@ $(document).ready(function() {
                 answer="non";
                 x="single__answer_white";
             }
-            console.log(an0);
+           
             text0 += "<form  method='post' name='form'  class='col-md-3 single__answer "+x+"  mb-md-3 px-3 py-4 text-center mx-2 answers '>"+
                             "<div class='form-group'>"+
                             "<input name='_token' value='{{ csrf_token() }}' type='hidden'>"+
@@ -968,8 +967,6 @@ else{
 
 
         timeon=message.text[8];
-        // alert("quizid:"+parseInt(quizId));
-        // alert("qid:"+parseInt(qid));
 
         if(parseInt(quizId)===parseInt(qid)){
             var text0 ='';
@@ -1492,7 +1489,7 @@ else{
                 $('.single__answer').css('pointer-events','none');
                  
                  /*before refresh */
-                 console.log('before refresh');  
+                 
                  var formdata = new FormData($("#answer")[0]);
 
                 $.ajax({

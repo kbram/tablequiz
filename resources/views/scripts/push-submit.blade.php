@@ -224,7 +224,7 @@ $(document).ready(function() {
       }
       }
       else{
-         //alert("Already Finished");
+         
       }
          }
          
@@ -297,10 +297,10 @@ $(document).ready(function() {
                     $('#round-progress').css("width",progress_add+'%');
                      progress_add+=progress_divide;
                      progress=Number(round_val);
-                    // console.log('progrss if'+progress_add);
+                    
                   }
                  else{
-                  //console.log('progrss else'+progress_add);
+                  
                  }
 
             var time =current.find('.question-timer').val();
@@ -396,7 +396,7 @@ $('#share_question').click(function(e){
             if(hidden=="false"){
                
                var answerright =current.find('.answer-right').val();
-               //alert(answerright);
+               
                if(answerright==null){
                   
                   swal("You are not submit answer !",'please update correct answer...', "danger");
