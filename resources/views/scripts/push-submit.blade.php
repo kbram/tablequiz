@@ -53,7 +53,7 @@ $(document).ready(function() {
                   var time=timeon;
                }
                //sessionStorage.setItem("play", false);
-               //console.log('type'+type);
+               
                current.find('.answer > span:nth-child(2)').each(function(){
                      answer+=$(this).text()+"/";
                });
@@ -173,7 +173,7 @@ $(document).ready(function() {
                var time=timeon;
             }
             //sessionStorage.setItem("play", false);
-            //console.log('type'+type);
+           
             current.find('.answer > span:nth-child(2)').each(function(){
                 answer+=$(this).text()+"/";
            });

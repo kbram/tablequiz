@@ -309,8 +309,7 @@
 <script>
 $(document).ready(function(){
 var modal = $("#myModal");
-console.log('modal show');
-console.log(modal);
+
 var modalImg = $("#img01");
 var captionText = $("#caption");
 
@@ -323,7 +322,7 @@ $("body").delegate("#myImg","click",function(){
 
 $('#image-close').click(function(){
 	modal.css("display","none");
-	console.log('close');
+	
 });
 
 
@@ -584,15 +583,15 @@ $(document).ready(function(){
 		var m0 = message.replace('{"text":"','');
 		var m0 = m0.replace('"}','');
 		var m=m0.split("#^");
-		//console.log(m);
+		
 		var status = m[2];
-		//console.log(status);
-		console.log(m[7]);
+		
+		
 		
 		var id_correct = m[0]+"1";
 		var id_wrong = m[0]+"0";
 
-		//console.log(status);
+		
 
 		// var text="<tr><td>"+m[0]+"</td><td>"+m[1]+"</td><td><form><input type='radio' id="+id_correct+" name='correct_answer_1' value='correct'><input type='radio' name='correct_answer_1' id="+id_wrong+" value='incorrect'></form></td><td></td></form></tr>";
         var text='';
@@ -602,18 +601,16 @@ $(document).ready(function(){
 		 
 		if((m[7]!=0) && m[1]) {
 			var text=img_ans;
-			console.log('both are ok');
-			console.log('path'+m[7]);
-			console.log('answer'+m[1]);
+			
 		}
 			 
 		else if(m[7]!=0) {
 			var text=img_only;
-			console.log('image only');
+			
 		}
 		else if(m[1]) {
 			var text=ans_only;
-			console.log('answer only');
+			
 		}
 
 		var id;
@@ -632,12 +629,12 @@ $(document).ready(function(){
 		if(status){
 			if(Number(status) == 1){
 				$('#'+id_correct).prop("checked", true);
-						//console.log("correct");
+						
 			}
 			else if(Number(status) == 0){
 				$('#'+id_wrong).prop("checked", true);
 
-				//console.log("not correct");
+				
 			}
 		}
 				

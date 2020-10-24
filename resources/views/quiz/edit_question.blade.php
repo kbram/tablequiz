@@ -594,7 +594,7 @@ $("#pro1").click(function(){
 		}).then((result) => {
 		/* Read more about handling dismissals below */
 		if (result.dismiss === Swal.DismissReason.timer) {
-			console.log('I was closed by the timer')
+			
 		}
 		})
 	}
@@ -637,7 +637,7 @@ $("#pro2").click(function(){
 		}).then((result) => {
 		/* Read more about handling dismissals below */
 		if (result.dismiss === Swal.DismissReason.timer) {
-			console.log('I was closed by the timer')
+			
 		}
 		})
 	}
@@ -678,7 +678,7 @@ $("#pro3").click(function(){
 		}).then((result) => {
 		/* Read more about handling dismissals below */
 		if (result.dismiss === Swal.DismissReason.timer) {
-			console.log('I was closed by the timer')
+			
 		}
 		})
 	}

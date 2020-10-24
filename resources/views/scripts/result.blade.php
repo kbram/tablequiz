@@ -28,7 +28,7 @@ $(document).ready(function() {
         //   var ans=data.ans;
         $("#all-answer_submit").html('');
         var ct = data.length;
-console.log(data);
+
 if(ct>1){
         for( var i=0; i<ct; i++){
 

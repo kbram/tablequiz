@@ -100,7 +100,7 @@ $(document).ready(function() {
                 "</form>"; 
         }
 
-        //console.log(answer);
+        
         text0 += "</div> <div class='break'></div>";
         
         if((time!=null || ti==0 || ti==null) && quseee==qustno){
@@ -842,7 +842,7 @@ else{
                 }else if(correct==0){
                     answer=an0;
                     x="single__answer_wrong";
-                    //console.log("ffffffffffffffffffffffff"+typeof an);
+                   
                     ttt = "<p class='col-md-3 single__answer single__answer_correct  mb-md-3 px-3 py-4 text-center mx-2' style='color:black;font-weight: bold;'>"+an+"</p>";
                 }else{
                     answer="non";
@@ -1209,7 +1209,7 @@ else{
                     }
                 }
                 sessionStorage.setItem("putanswer", JSON.stringify(putanswer));
-                //console.log(an);
+              
                 if(parseInt(quizId)===parseInt(qid)){
                     var text0 ='';
                     if(!media_type){
