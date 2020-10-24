@@ -1,5 +1,12 @@
 @extends('layouts.tablequizapp')
+@section('template_linked_css')
+<style>
+.swal-modal .swal-text {
+    text-align: center;
+}
+</style>
 
+@endsection
 @section('content')
 <!-- <script src='jquery-3.2.1.min.js'></script> -->
 

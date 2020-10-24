@@ -50,5 +50,9 @@ public function RemoveSuggestedQuestion(Request $request){
 
     return $price;
    }
-
+   
+   public function getDefaultParticipants(){
+    $price=PriceBand::where('band_type','participants-costs')->first();
+    return $price;
+   }
 }

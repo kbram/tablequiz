@@ -1346,10 +1346,30 @@ jQuery(document).ready(function ($) {
     /**remove no of participants */
     $(".remove_no_participants").click(function (e) {
         e.preventDefault();
+        /**get dafault no 0f participants */
+        var default_participants='';
+        $.ajax({
+            type: "POST",
+            url: "/getDefaultParticipants",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                    "content"
+                ),
+            },
+            data: {
+                id: quiz,
+            },
+            success: function (data) {
+                default_participants=data.from+'-'+data.to;
+            },
+            error: function (result, error) {
 
+            },
+        }).then(()=>{
+        /**get dafault no 0f participants end*/
         swal({
             title: "Are You Sure ?",
-            text: "it will remove all no of participants you added and set 0-10 particiapnts only!",
+            text: "it will remove all no of participants you added and set to \n"+default_participants+" participants only!",
             icon: "warning",
             buttons: true,
             dangerMode: true,
@@ -1363,11 +1383,6 @@ jQuery(document).ready(function ($) {
                 var current_total = $("#modal__payment").find(".total-cost td:nth-child(2)>strong").text();
                 var suggest_cost = $('#modal__payment').find('.no-participants td:nth-child(3)').text();
 
-                // current.remove();
-
-
-                // $('#modal__payment').find('.no-participants td:nth-child(3)').text(0);
-                //$('#modal__payment').find('.no-participants td:nth-child(2)').text('1-10');
 
                 var total = Number(current_total) - Number(suggest_cost);
                 $('#modal__payment').find('.total-cost td:nth-child(2)>strong').text(total);
@@ -1403,7 +1418,7 @@ jQuery(document).ready(function ($) {
             } else {
                 swal("your participants are safe");
             }
-        });
+        })});
 
 
     });
