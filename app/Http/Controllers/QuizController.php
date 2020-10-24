@@ -67,7 +67,6 @@ class QuizController extends Controller
      */
     public function store(Request $request)
     {
-        
         $categories = QuizCategory::all();
         $questions = GlobalQuestion::all();
         $answers = GlobalAnswer::all();
@@ -105,7 +104,7 @@ class QuizController extends Controller
                 $save_path_thumb = storage_path('app/public') . '/quizicon/' . $link . '/quiz_icon/' . '/thumb/';
 
                 $public_path = '/storage/quizicon/' . $link . '/quiz_icon/' . $filename;
-                $public_path2= '/storage/quizicon/' . $link . '/quiz_icon/' . '/orgimg/'. $filename;
+                $public_path2= '/storage/quizicon/' . $link . '/quiz_icon/orgimg/'. $filename;
                 $public_path_thumb = storage_path('app/public') . '/quizicon/' . $link . '/quiz_icon/' . '/thumb/' . $filename;
   
            
@@ -119,12 +118,12 @@ class QuizController extends Controller
          
 
                 Session::put('public_path', $public_path);
-                Session::put('public_path2',$save_path2);
+                Session::put('public_path2',$public_path2);
                 Session::put('public_path_thumb', $public_path_thumb);
                 Session::put('file_name', $filename);
                 Session::put('save_path1', $save_path1);
                 Session::put('save_path', $save_path);
-                Session::put('save_path2', $save_path);
+                Session::put('save_path2', $save_path2);
 
             }
 
@@ -151,7 +150,7 @@ class QuizController extends Controller
             $save_path_thumb = storage_path('app/public') . '/quizicon/' . $link . '/quiz_icon/' . '/thumb/';
 
             $public_path = '/storage/quizicon/' . '/quizicon/' . $link . '/quiz_icon/' . $filename;
-            $public_path2= '/storage/quizicon/' . $link . '/quiz_icon/' . '/orgimg/'. $filename;
+            $public_path2= '/storage/quizicon/' . $link . '/quiz_icon/orgimg/'. $filename;
             $public_path_thumb = storage_path('app/public') . '/quizicon/' . $link . '/quiz_icon/' . '/thumb/' . $filename;
             $image_data = $request->original_image;
             // Make the user a folder and set permissions
@@ -205,7 +204,6 @@ class QuizController extends Controller
 
 
             $quizIcon = new QuizSetupIcon;
-
             $quizIcon->public_path       = $public_path;
             $quizIcon->local_path        = $save_path1 . '/' . $filename;
             $quizIcon->quiz_id           = $quiz->id;
@@ -551,11 +549,7 @@ class QuizController extends Controller
         $quiz_id = Quiz::where('quiz__name', $quiz->quiz__name)->first()->id;
 
         if ($request->hasFile('upload__quiz__icon')) {
-
-
-
             $quiz_icon = $request->file('upload__quiz__icon');
-
             $filename = 'quiz_icon.' . $quiz_icon->getClientOriginalExtension();
             $save_path1 = '/storage/quizicon/' . $quiz_id . '/quiz_icon/';
 
@@ -569,15 +563,11 @@ class QuizController extends Controller
             $public_path = storage_path('app/public') . '/quizicon/' . $quiz_id . '/quiz_icon/' . $filename;
 
 
-            //resize the image            
+                  
 
             // Make the user a folder and set permissions
             File::makeDirectory($save_path, $mode = 0755, true, true);
-
-            // Image::make($quiz_icon)->resize(250,250)->save($save_path_thumb.$filename);
-
             $quiz_icon->move($save_path, $filename);
-
             if (Storage::exists($public_path)) {
                 unlink($public_path);
             }
