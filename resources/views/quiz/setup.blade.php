@@ -63,7 +63,7 @@
 						<p class="disabled__text">TableQuiz.app/</p>
 					</div>
 					<div class="col-sm">
-						<input type="text" name="quiz__link" class="form-control" value="{{ old('quiz__link') }}">
+						<input type="text" name="quiz__link" readonly="readonly" class="form-control" value="{{ old('quiz__link') }}">
 						@if ($errors->has('quiz__link'))
 						<span class="help-block">
 							<p>{{ $errors->first('quiz__link') }}</p>
@@ -145,7 +145,7 @@
 					</div>
 					<div class="col-md-4">
 						<select id="quiz__participants" class="form-control" name="quiz__participants">
-							<option  selected>{{(old('quiz__participants') != '' ? old('quiz__participants') : 'Please Choose...')}}</option>
+							<option  value="" selected>{{(old('quiz__participants') != '' ? old('quiz__participants') : 'Please Choose...')}}</option>
 							@foreach($bands as $band)
 							@if(($band->band_type)== Config::get('priceband.type.participant_band_type'))
 							@if(($band->to)== null)
