@@ -86,7 +86,7 @@ class QuizController extends Controller
         if ($validator->fails()) {
             $link = $request->input('quiz__link');
 
-            if ($request->hasFile('upload__quiz__icon')) {
+            if ($request->crop_image) {
 
                 /** crop image decode */
                 $data = $request->crop_image;
@@ -132,7 +132,7 @@ class QuizController extends Controller
 
         $link = $request->input('quiz__link');
 
-        if ($request->hasFile('upload__quiz__icon')) {
+        if ($request->crop_image) {
              
             $data = $request->crop_image;
             $txt_data=$data;  
@@ -526,7 +526,7 @@ class QuizController extends Controller
 
     public function update(Request $request, $id)
     {  
-
+           
         $validator = Validator::make(
             $request->all(),
             [
@@ -549,27 +549,17 @@ class QuizController extends Controller
         $quiz->no_of_participants     =  $request->input('quiz__participants');
         $quiz->user_id = auth()->id();
         $quiz->save();
-        // dd($quiz);
+        
         $quiz_id = Quiz::where('quiz__name', $quiz->quiz__name)->first()->id;
 
-        if ($request->hasFile('upload__quiz__icon')) {
+        if ($request->crop_image) {
             $quiz_icon = $request->file('upload__quiz__icon');
             $filename = 'quiz_icon.' . $quiz_icon->getClientOriginalExtension();
             $save_path1 = '/storage/quizicon/' . $quiz_id . '/quiz_icon/';
 
             $save_path = storage_path('app/public') . '/quizicon/' . $quiz_id . '/quiz_icon/';
-
-
-
-            // $path = $save_path . $filename;
-            // $path_thumb    = $save_path_thumb . $filename;
-
             $public_path = storage_path('app/public') . '/quizicon/' . $quiz_id . '/quiz_icon/' . $filename;
 
-
-                  
-
-            // Make the user a folder and set permissions
             File::makeDirectory($save_path, $mode = 0755, true, true);
             $quiz_icon->move($save_path, $filename);
             if (Storage::exists($public_path)) {
