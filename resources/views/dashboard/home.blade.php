@@ -1,5 +1,12 @@
 @extends('layouts.tablequizapp')
+@section('template_linked_css')
+<style>
+.swal-modal .swal-text {
+    text-align: center;
+}
+</style>
 
+@endsection
 
 
 @section('content')
@@ -262,7 +269,6 @@
 @endsection
 
 @section('footer_scripts')
-
 @include('scripts.share-quiz')
 @include('scripts.quiz-icon-preview')
 

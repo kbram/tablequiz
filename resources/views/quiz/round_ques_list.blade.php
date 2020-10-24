@@ -768,6 +768,8 @@
 
 var size = 2000;
      var cropper;
+     var image = document.getElementById('image');
+     
  $('.edit-round-img-btn').click(function(){
      cropper = new Cropper(image, {
 	  aspectRatio: 3/2,
@@ -776,8 +778,7 @@ var size = 2000;
     });
  });
      
-	
-       var image = document.getElementById('image');
+
 	
 	$('#upload__quiz__icon').on('change', function(e) { 
         cropper.destroy();

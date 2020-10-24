@@ -381,3 +381,4 @@ Route::post('/playquiz/save/answer', 'Quizmaster\PlayController@saveanswer');
 Route::post('/removebg','RemoveCartController@removebackground');
 Route::post('/removeSuggest','RemoveCartController@RemoveSuggestedQuestion');
 Route::post('/removeParticipants','RemoveCartController@RemoveParticipants');
+Route::post('/getDefaultParticipants','RemoveCartController@getDefaultParticipants');

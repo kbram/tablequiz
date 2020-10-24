@@ -1,5 +1,12 @@
 @extends('layouts.tablequizapp')
+@section('template_linked_css')
+<style>
+.swal-modal .swal-text {
+    text-align: center;
+}
+</style>
 
+@endsection
 @section('content')
 <!-- <script src='jquery-3.2.1.min.js'></script> -->
 
@@ -636,7 +643,7 @@
 			}).then((result) => {
 				/* Read more about handling dismissals below */
 				if (result.dismiss === Swal.DismissReason.timer) {
-					console.log('I was closed by the timer')
+					
 				}
 			})
 		}
@@ -678,7 +685,7 @@
 			}).then((result) => {
 				/* Read more about handling dismissals below */
 				if (result.dismiss === Swal.DismissReason.timer) {
-					console.log('I was closed by the timer')
+					
 				}
 			})
 		}
@@ -721,7 +728,7 @@
 			}).then((result) => {
 				/* Read more about handling dismissals below */
 				if (result.dismiss === Swal.DismissReason.timer) {
-					console.log('I was closed by the timer')
+					
 				}
 			})
 		}
@@ -762,7 +769,7 @@
 			}).then((result) => {
 				/* Read more about handling dismissals below */
 				if (result.dismiss === Swal.DismissReason.timer) {
-					console.log('I was closed by the timer')
+					
 				}
 			})
 		}

@@ -143,7 +143,7 @@ class QuizRoundController extends Controller
        //  $get_quiz_link=Quiz::where('id',$get_quiz_id[0]->quiz_id)->get();
       //   $quiz_link=$get_quiz_link[0]->quiz_link;
      $round_name= $get_round_name[0]['round_name'];
-    if ($request->image_crop) {
+    if (($request->bg_image) && ($request->image_crop)) {
  /** edit_round_crop image decode start*/
          $data = $request->image_crop;
          $image_array_1 = explode(";", $data);
@@ -163,9 +163,9 @@ class QuizRoundController extends Controller
         // $path = $save_path . $filename;
         // $path_thumb    = $save_path_thumb . $filename;
   
-        $public_path = '/storage/quizicon/' . '/round_bg/'.$round_name.'/round_bg/'.$filename;
-        $public_path2 = '/storage/quizicon/' . '/round_bg/'.$round_name.'/round_bg/'.'/orgimg/'.$filename;
-        $public_path_thumb='/storage/quizicon/' . '/round_bg/'.$round_name.'/round_bg/'.'/thumb/'.$filename;
+        $public_path = '/storage/round_bg/' .$round_name.'/round_bg/'.$filename;
+        $public_path2 = '/storage/round_bg/' .$round_name.'/round_bg/'.'/orgimg/'.$filename;
+        $public_path_thumb='/storage/round_bg/'.$round_name.'/round_bg/'.'/thumb/'.$filename;
   
         //resize the image            
        
@@ -174,7 +174,8 @@ class QuizRoundController extends Controller
         File::makeDirectory($save_path_thumb, $mode = 0755, true, true);
       
          Image::make($data)->save($save_path_thumb.$filename);  
-        Image::make($data)->save($save_path.$filename);       
+        Image::make($data)->save($save_path.$filename);      
+        $round_background ->move($save_path2, $filename); 
        
         
              $round_image = QuizRoundImage::where('round_id',$id)->get()->first();
