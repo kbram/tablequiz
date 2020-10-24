@@ -1144,6 +1144,7 @@ jQuery(document).ready(function ($) {
                                 $('#modal__payment').find('.total-cost td:nth-child(2)>strong').text(Number(participants_cost) + Number(questions_cost) + Number(data.bg_image_cost));
 
                                 var total_card = Number(participants_cost) + Number(questions_cost) + Number(data.bg_image_cost);
+                                $("#card_total").val(total_card);
                                 $('#quiz_id').val(quiz_id);
 
                             }

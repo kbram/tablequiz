@@ -288,6 +288,9 @@ class QuizController extends Controller
             $round_bg_file =  Session::get('round_bg_filename');
 
             $round_session = Session::get('round_question');
+
+            if($round_session){
+            
             for ($k = 0; $k < count($round_session); $k++) {
 
                 $round = new QuizRound;
@@ -445,6 +448,7 @@ class QuizController extends Controller
                     }
                 }
             }
+        }
             Session::forget('quiz');
             Session::forget('quiz_image');
             Session::forget('round_question');
