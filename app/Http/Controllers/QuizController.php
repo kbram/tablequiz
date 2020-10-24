@@ -205,7 +205,7 @@ class QuizController extends Controller
 
             $quizIcon = new QuizSetupIcon;
             $quizIcon->public_path       = $public_path;
-            $quizIcon->local_path        = $save_path1 . '/' . $filename;
+            $quizIcon->local_path        = $save_path1 . $filename;
             $quizIcon->quiz_id           = $quiz->id;
             $quizIcon->thumb_path        = $public_path_thumb;
             $quizIcon->public_path2      =$public_path2;
@@ -265,7 +265,7 @@ class QuizController extends Controller
             $quizIcon = new QuizSetupIcon;
 
             $quizIcon->public_path       = $session_quiz_image[0];
-            $quizIcon->local_path        = $session_quiz_image[2] . '/' . $session_quiz_image[3];
+            $quizIcon->local_path        = $session_quiz_image[2] . $session_quiz_image[3];
             $quizIcon->quiz_id           = $quiz->id;
             $quizIcon->thumb_path        = $session_quiz_image[1];
             $quizIcon->public_path2      = $session_quiz_image[4];;
@@ -552,25 +552,33 @@ class QuizController extends Controller
         
         $quiz_id = Quiz::where('quiz__name', $quiz->quiz__name)->first()->id;
 
-        if ($request->crop_image) {
-            $quiz_icon = $request->file('upload__quiz__icon');
-            $filename = 'quiz_icon.' . $quiz_icon->getClientOriginalExtension();
-            $save_path1 = '/storage/quizicon/' . $quiz_id . '/quiz_icon/';
-
-            $save_path = storage_path('app/public') . '/quizicon/' . $quiz_id . '/quiz_icon/';
-            $public_path = storage_path('app/public') . '/quizicon/' . $quiz_id . '/quiz_icon/' . $filename;
-
-            File::makeDirectory($save_path, $mode = 0755, true, true);
-            $quiz_icon->move($save_path, $filename);
-            if (Storage::exists($public_path)) {
-                unlink($public_path);
+        if ($request->crop_image) { 
+             /** crop image decode */
+             $data = $request->crop_image;
+             $image_array_1 = explode(";", $data);
+             $image_array_2 = explode(",", $image_array_1[1]);
+             $data = base64_decode($image_array_2[1]);
+           /** crop image decode */
+            $quizicon=QuizSetupIcon::find($id);
+            $usersImage = public_path($quizicon->local_path);
+            if (File::exists($usersImage)) { // unlink or remove previous image from folder
+                unlink($usersImage);
+                Image::make($data)->save($usersImage);
             }
-            $quizIcon = QuizSetupIcon::findorfail($id);
+            
 
-            $quizIcon->public_path       = $public_path;
-            $quizIcon->local_path        = $save_path1 . '/' . $filename;
-            $quizIcon->quiz_id           = $quiz_id;
-            $quizIcon->save();
+            if($request->upload__quiz__icon){ 
+                $usersImage = public_path($quizicon->public_path2);
+               
+                if (File::exists($usersImage)) { // unlink or remove previous image from folder
+                    unlink($usersImage);
+                    $quiz_icon = $request->file('upload__quiz__icon');
+                    Image::make($quiz_icon)->save($usersImage);
+                }
+             
+              
+            }
+           
         }
 
         return redirect()->back();

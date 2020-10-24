@@ -291,7 +291,7 @@ $('.edit-quiz-upload').click(function(){
 
   $("#pro").click(function() {
 		
-		if((image_src) || (get_image_url)){ console.log('hello croper');
+		if((image_src) || (get_image_url)){
 		$image_crop.croppie('result', {
 							type: 'canvas',
 							size: 'viewport'

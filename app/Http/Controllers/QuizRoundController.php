@@ -140,8 +140,6 @@ class QuizRoundController extends Controller
     public function round_upload(Request $request,$id){
         
          $get_round_name=QuizRound::where('id',$id)->get('round_name');
-       //  $get_quiz_link=Quiz::where('id',$get_quiz_id[0]->quiz_id)->get();
-      //   $quiz_link=$get_quiz_link[0]->quiz_link;
      $round_name= $get_round_name[0]['round_name'];
     if (($request->bg_image) && ($request->image_crop)) {
  /** edit_round_crop image decode start*/
