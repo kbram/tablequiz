@@ -23,6 +23,17 @@ Route::get('reset', function () {
     Artisan::call('storage:link');
 });
 
+Route::get('migrate', function () {
+    Artisan::call('migrate:fresh');
+    return "migrated";   
+});
+
+Route::get('seed', function () {
+    Artisan::call('db:seed --class DatabaseSeeder'); 
+    return "seeded";   
+  
+});
+
 // Homepage Route
 Route::group(['middleware' => ['web', 'checkblocked']], function () {
     // Route::get('/', 'WelcomeController@welcome')->name('welcome');
