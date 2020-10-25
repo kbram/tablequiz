@@ -225,10 +225,44 @@
 
 @section('footer_scripts')
 <script>
+	var def_count=0;
+$('.quiz-upload').click(function(){
+	var imageUrl 
+	   if(def_count==0){
+	 imageUrl =$('#get_default_image').val();
+	   }else{
+		imageUrl=image_src ;
+	   }
+   
+    $image_crop = $('#image-container').croppie({
+    enableExif: true,
+    viewport: {
+      width:200,
+      height:200,
+      type:'circle' //circle
+    },
+    boundary:{
+      width:464,
+      height:300
+    }
+  });
+
+  $image_crop.croppie('bind', {
+        url: imageUrl
+      }).then(function(){
+
+
+      });
+
+      $('.cr-slider').addClass('slider');
+       $('.cr-slider').css('width','100%');
+       $('.cr-slider').removeClass('cr-slider');
+  });
 
 var image_src;
   $('.imagePreviewInput').on('change', function(){
 	  /**progress bar */
+	  def_count=1;
 	  $("#pro").text("Save");
 	$("#pro").addClass("btn-primary");
 	var elem = document.getElementById("myBar");
