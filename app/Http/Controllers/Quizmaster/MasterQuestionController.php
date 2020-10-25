@@ -546,7 +546,7 @@ class MasterQuestionController extends Controller
         if (Auth::user()) {
 
             if ($request->round_name) {
-                if (count($request->question) != 0) {            /** round crop image decode start*/
+                if ($request->question[0]) {   
             $data;
             $txt_data;
             $image_array_1;
@@ -721,7 +721,7 @@ class MasterQuestionController extends Controller
         else {
 
             if ($request->round_name) {
-                if (count($request->question) != 0) {
+                if ($request->question[0]) {   
 
                     Session::push('round_question', $_REQUEST);
                     Session::push('round_bg_public_path', $public_path);
