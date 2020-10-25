@@ -51,7 +51,7 @@ class MasterQuestionController extends Controller
     }
     /**kopi question edit uploade */
     public function upload(Request $request, $id)
-    {     dd($request);
+    {     
         if ($request->suggest == 1) {
             $suggest = $request->suggest;
             $quiz = Quiz::find($suggest);
@@ -147,7 +147,6 @@ class MasterQuestionController extends Controller
 
     // public function postRound(Request $request){
     //     session(['quiz' => 'quiz']);
-    //          // dd($request);
     //     for($i=0; $i<count($request->question); $i++){
     //         echo $request->question[$i];
     //         $standard='standard__question__answer__';
@@ -445,6 +444,7 @@ class MasterQuestionController extends Controller
             if ($request->hasFile($img)) {
 
                 $question_img = $request->file($img);
+                
 
                 $filename = 'image.' . $question_img->getClientOriginalExtension();
                 $save_path1 = '/storage/question/' . $question_image . '/question/';
@@ -518,7 +518,6 @@ class MasterQuestionController extends Controller
 
                 $question_vid->move($save_path, $filename);
 
-     //end question media
                 Session::put('question_video_' . $m, $public_path);
             }
 
@@ -538,7 +537,7 @@ class MasterQuestionController extends Controller
             }
         }
 
-
+     //end question media
 
         //end question media
 
@@ -739,7 +738,7 @@ class MasterQuestionController extends Controller
 
         // Session::push('round_question',$request->except('bg_image','image_media'));
 
-        // dd(Session::get('round_question'));
+      
 
         // Session::push('quiz_image',$public_path);
         // Session::push('quiz_image',$public_path_thumb);
@@ -762,13 +761,13 @@ class MasterQuestionController extends Controller
     //     $round_sessions = Session::get('round_question');
     //     foreach($round_session as $round_session ){
 
-           
-}
     //     $round = new QuizRound;
     //         $round->round_name              = $round_session->round_name;
     //         $round->round_slug          = $round_session->round_count;
     //         $round->quiz_id          = $quiz_id_round ;
     //         $round->save();
+          
+
 
     //     $round_image = new QuizRoundImage;
 
@@ -859,4 +858,5 @@ class MasterQuestionController extends Controller
     // }
 
 
+}
 }

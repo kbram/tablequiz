@@ -65,10 +65,10 @@ class DashboardController extends Controller
     public function results(){
         $quizzes=Quiz::all();
         $onlyteamNames=Auth::user()->quizzes()->get('id');
-       // dd($onlyteamNames[0]->id);
+       
         $teamNames=DB::table('team_answers')->where('status','1')->select('team_name','quiz_id', DB::raw('count(*) as total'))
         ->orderBy('total','desc')->groupBy('quiz_id','team_name')->get();
-         //dd($teamNames);
+         
         if($teamNames->isEmpty()){
             return view('dashboard.teamResults')->with('message','No quizzes to show','onlyteamNames');
          }

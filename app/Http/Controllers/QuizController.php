@@ -595,7 +595,7 @@ class QuizController extends Controller
 
         $quiz_id = $id;
         $quizzes= Quiz::where('id', $id)->get();
-        //dd($pay);
+        
         $questions = [];
         $answers = [];
         $medias = [];
@@ -603,7 +603,7 @@ class QuizController extends Controller
         foreach ($rounds as $round) {
             $questions[$round->id] = Question::where('round_id', $round->id)->get();
         }
-        //  dd(count($rounds));
+       
         foreach ($questions as $question) {
             foreach ($question as $questio) {
                 $answers[$questio->id] = Answer::where('question_id', $questio->id)->get();

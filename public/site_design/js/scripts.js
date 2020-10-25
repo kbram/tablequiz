@@ -1090,7 +1090,6 @@ jQuery(document).ready(function ($) {
                 },
                 success: function (response) {
 
-
                     $.ajax({
                         type: "POST",
                         url: "/payment",

@@ -54,7 +54,7 @@ class AdminQuestionController extends Controller
     public function store(Request $request)
     {
 
-    // dd($request);
+   
 
 
      $validator = Validator::make( $request->all(),
@@ -68,7 +68,7 @@ class AdminQuestionController extends Controller
        }
 
      if($request->input('question__type') == 'standard__question'){
-      // dd($request);
+    
           $validator = Validator::make($request->all(),
           [
             'category__type'               => 'required',
@@ -523,7 +523,7 @@ class AdminQuestionController extends Controller
             }
 
             elseif($request->input('question__type') == 'multiple__choice__question'){
-              dd($request);
+              
                 $answer                      = GlobalAnswer::where('question_id',$id)->first();
                 $answer->answer              = $answer_get;
                 $answer->answer_stat         = true;
@@ -544,7 +544,7 @@ class AdminQuestionController extends Controller
        } 
        public function search(Request $request)
        {
-         //dd($request);
+         
          
            $searchTerm = $request->input('question_search_box');
            $searchRules = [
