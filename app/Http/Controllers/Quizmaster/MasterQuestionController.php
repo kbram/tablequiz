@@ -444,6 +444,7 @@ class MasterQuestionController extends Controller
             if ($request->hasFile($img)) {
 
                 $question_img = $request->file($img);
+                
 
                 $filename = 'image.' . $question_img->getClientOriginalExtension();
                 $save_path1 = '/storage/question/' . $question_image . '/question/';
