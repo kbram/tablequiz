@@ -546,9 +546,8 @@ class MasterQuestionController extends Controller
 
         if (Auth::user()) {
 
-     if(Auth::user()){
-if($request->input('round_name')){
-            /** round crop image decode start*/
+            if ($request->round_name) {
+                if (count($request->question) != 0) {            /** round crop image decode start*/
             $data;
             $txt_data;
             $image_array_1;
@@ -715,8 +714,12 @@ if($request->input('round_name')){
                     $answer_save->save();
                 }
             }
-            return View('quiz.add_round', compact('categories', 'answers', 'medias', 'round_count', 'quiz'));
-        } else {
+        } 
+    }
+    return View('quiz.add_round', compact('categories', 'answers', 'medias', 'round_count', 'quiz'));
+
+    }
+        else {
 
             if ($request->round_name) {
                 if (count($request->question) != 0) {
@@ -731,14 +734,8 @@ if($request->input('round_name')){
                 }
             }
 
-
-        }
-
-        
-        return View('quiz.add_round', compact('categories','answers','medias','round_count','quiz'));
-
             return View('quiz.add_round', compact('categories', 'answers', 'medias', 'round_count', 'quiz'));
-        }
+        
 
         // Session::push('round_question',$request->except('bg_image','image_media'));
 
