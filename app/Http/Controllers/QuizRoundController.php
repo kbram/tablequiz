@@ -107,13 +107,12 @@ class QuizRoundController extends Controller
 
     public function new_edit($id,$rid){
         $round=QuizRound::where('quiz_id',$id)->get()->take($rid)->last();
-        //dd($round);
+       
         $payment=Quiz::where('id',$id)->get();
         $pay=$payment[0]->payment;
-       //dd($pay);
+       
         $round_count=QuizRound::where('quiz_id',$id)->get()->count();
-        //  dd($round_count);
-        //dd($rounds);
+       
         $categories = QuizCategory::all();
        //$rounds=QuizRound::where('id',$rid)->get();
         $round_image=QuizRoundImage::where('round_id',$round->id)->first('public_path2');

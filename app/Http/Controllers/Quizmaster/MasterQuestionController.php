@@ -51,7 +51,7 @@ class MasterQuestionController extends Controller
     }
     /**kopi question edit uploade */
     public function upload(Request $request, $id)
-    {     dd($request);
+    {     
         if ($request->suggest == 1) {
             $suggest = $request->suggest;
             $quiz = Quiz::find($suggest);
@@ -147,7 +147,6 @@ class MasterQuestionController extends Controller
 
     // public function postRound(Request $request){
     //     session(['quiz' => 'quiz']);
-    //          // dd($request);
     //     for($i=0; $i<count($request->question); $i++){
     //         echo $request->question[$i];
     //         $standard='standard__question__answer__';
@@ -734,7 +733,7 @@ class MasterQuestionController extends Controller
 
         // Session::push('round_question',$request->except('bg_image','image_media'));
 
-        // dd(Session::get('round_question'));
+      
 
         // Session::push('quiz_image',$public_path);
         // Session::push('quiz_image',$public_path_thumb);

@@ -52,7 +52,7 @@ class PlayController extends Controller
                 }
                 //not registed
                 else{
-                   // dd($quiz->id);
+                   
                    if((int)$splitstudentlimit[1]<=$studentcount){
                         echo '<script>alert("Sorry !!!, Allocated Participants are joined, Try next Time.....")</script>'; 
                         return view('home2');
