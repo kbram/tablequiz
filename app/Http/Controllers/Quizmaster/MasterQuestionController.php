@@ -348,6 +348,7 @@ class MasterQuestionController extends Controller
 
     public function add_round_question(Request $request)
     {
+
         $categories = QuizCategory::all();
         $questions = GlobalQuestion::all();
         $answers = GlobalAnswer::all();
@@ -535,7 +536,7 @@ class MasterQuestionController extends Controller
             }
         }
 
-
+     //end question media
 
         //end question media
 
@@ -543,6 +544,8 @@ class MasterQuestionController extends Controller
 
         if (Auth::user()) {
 
+     
+if($request->input('round_name')){
             /** round crop image decode start*/
             $data;
             $txt_data;
@@ -727,6 +730,10 @@ class MasterQuestionController extends Controller
             }
 
 
+        }
+
+        
+        return View('quiz.add_round', compact('categories','answers','medias','round_count','quiz'));
 
             return View('quiz.add_round', compact('categories', 'answers', 'medias', 'round_count', 'quiz'));
         }
@@ -761,6 +768,8 @@ class MasterQuestionController extends Controller
     //         $round->round_slug          = $round_session->round_count;
     //         $round->quiz_id          = $quiz_id_round ;
     //         $round->save();
+          
+
 
     //     $round_image = new QuizRoundImage;
 
