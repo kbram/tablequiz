@@ -138,58 +138,36 @@ class QuizRoundController extends Controller
 
 
     public function round_upload(Request $request,$id){
-        
          $get_round_name=QuizRound::where('id',$id)->get('round_name');
-       //  $get_quiz_link=Quiz::where('id',$get_quiz_id[0]->quiz_id)->get();
-      //   $quiz_link=$get_quiz_link[0]->quiz_link;
      $round_name= $get_round_name[0]['round_name'];
-    if (($request->bg_image) && ($request->image_crop)) {
- /** edit_round_crop image decode start*/
-         $data = $request->image_crop;
-         $image_array_1 = explode(";", $data);
-         $image_array_2 = explode(",", $image_array_1[1]);
-         $data = base64_decode($image_array_2[1]);
-       /** edit_round_crop image decode end*/
+     if ($request->image_crop) { 
+        /** crop image decode */
+        $data = $request->image_crop;
+        $image_array_1 = explode(";", $data);
+        $image_array_2 = explode(",", $image_array_1[1]);
+        $data = base64_decode($image_array_2[1]);
+      /** crop image decode */
+       $round_bg=QuizRoundImage::where('round_id',$id)->first();
+       $usersImage = public_path($round_bg->local_path);
+       if (File::exists($usersImage)) { 
+           unlink($usersImage);
+           Image::make($data)->save($usersImage);
+       }
+       
 
-        $round_background = $request->file('bg_image');
+       if($request->file('bg_image')){ 
+           $usersImage = public_path($round_bg->public_path2);
+          
+           if (File::exists($usersImage)) { 
+               unlink($usersImage);
+               $round_img= $request->file('bg_image');
+               Image::make($round_img)->save($usersImage);
+           }
         
-        $filename = 'round_bg.'.$round_background->getClientOriginalExtension();  
-        $save_path1 = '/storage/round_bg/'.$round_name.'/round_bg/';
-  
-        $save_path = storage_path('app/public'). '/round_bg/'.$round_name.'/round_bg/';
-        $save_path2 = storage_path('app/public'). '/round_bg/'.$round_name.'/round_bg/'.'/orgimg/';
-        $save_path_thumb = storage_path('app/public').'/round_bg/'.$round_name.'/round_bg/'.'/thumb/';
-       
-        // $path = $save_path . $filename;
-        // $path_thumb    = $save_path_thumb . $filename;
-  
-        $public_path = '/storage/round_bg/' .$round_name.'/round_bg/'.$filename;
-        $public_path2 = '/storage/round_bg/' .$round_name.'/round_bg/'.'/orgimg/'.$filename;
-        $public_path_thumb='/storage/round_bg/'.$round_name.'/round_bg/'.'/thumb/'.$filename;
-  
-        //resize the image            
-       
-        // Make the user a folder and set permissions
-        File::makeDirectory($save_path, $mode = 0755, true, true);
-        File::makeDirectory($save_path_thumb, $mode = 0755, true, true);
-      
-         Image::make($data)->save($save_path_thumb.$filename);  
-        Image::make($data)->save($save_path.$filename);      
-        $round_background ->move($save_path2, $filename); 
-       
-        
-             $round_image = QuizRoundImage::where('round_id',$id)->get()->first();
-             $round_image->name       = $filename;
-             $round_image->public_path       = $public_path;
-             $round_image->local_path        = $save_path1 . '/' . $filename;
-             $round_image->thumb_path        = $public_path_thumb;
-             $round_image->public_path2       = $public_path2;
          
-             $round_image->save();
-        
-       
-       } 
-       
+       }
+      
+   }
            $round = QuizRound::findorfail($id); 
             $round->round_name = $request->input('round_name');
             $round->save();

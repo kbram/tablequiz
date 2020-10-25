@@ -1,5 +1,19 @@
 @extends('layouts.tablequizapp')
+@section('template_linked_css')
+<style>
+	#myProgress {
+		width: 100%;
+		background-color: #ddd;
+	}
 
+	#myBar {
+		width: 1%;
+		height: 30px;
+		background-color: #ff8243;
+	}
+</style>
+
+@endsection
 
 @section('content')
 
@@ -79,6 +93,9 @@
 											<!-- <input type="range" class="form-control-range slider" min="1" max="4" value="1" step="0.1" id="zoomer" oninput="deepdive()"> -->
 											<!-- <input type="range" class="form-control-range formControlRange " id="formControlRange" name="formControlRange" min="1" max="100"> -->
 											<div id="demo" class="d-none"></div>
+											<div id="myProgress">
+												<div id="myBar"></div>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -89,8 +106,11 @@
 											<input type="file" class="form-control-file imagePreviewInput" name="upload__quiz__icon" id="upload__quiz__icon" value="Upload">
 										</label>
 									</div>
-									<div class="col-md-3">
+									<!-- <div class="col-md-3">
 										<button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
+									</div> -->
+									<div class="col-md-3 save_btn">
+										<button id="pro" type="button" class="d-block btn btn-primary" data-dismiss=""> Save</button>
 									</div>
 								</div>
 							</div>
@@ -267,6 +287,57 @@ $('.edit-quiz-upload').click(function(){
     }
     reader.readAsDataURL(this.files[0]);
   });
+
+
+  $("#pro").click(function() {
+		
+		if((image_src) || (get_image_url)){
+		$image_crop.croppie('result', {
+							type: 'canvas',
+							size: 'viewport'
+						}).then(function(response) {
+							$('#crop-image').val(response);
+
+						})
+						
+					}
+		var s = $('.cr-boundary').attr('src');
+		
+
+
+
+		if (s != "undefind") {
+			sessionStorage.setItem("im", s);
+			var i = 0;
+			if (i == 0) {
+				i = 1;
+				var elem = document.getElementById("myBar");
+				var width = 1;
+				var id = setInterval(frame, 10);
+
+				function frame() {
+					if (width >= 100) {
+
+						$("#pro").attr("data-dismiss", "modal");
+						$("#pro").text("Close");
+						$("#pro").removeClass("btn-primary");
+						$("#pro").addClass("btn-danger");
+
+						/**image crop */
+						
+						//$('#image_preview_container').attr('src','');
+						//$("#demo").hide();
+						clearInterval(id);
+						i = 0;
+					} else {
+						width++;
+						elem.style.width = width + "%";
+					}
+				}
+			}
+		}
+	
+	});
 </script>
 @include('scripts.crop-image')
 @endsection
