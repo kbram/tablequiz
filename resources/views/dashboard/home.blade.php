@@ -127,8 +127,8 @@
 								<tr style="height:0!important"><td class="p-0"></td></tr>
 								<tr>
 									<td>Quizzes created:</td>
-									@if(!empty($quizzes))
-									<td>{{$quizzes->count()}}</td>
+									@if(!empty($testquizzes))
+									<td>{{$testquizzes->count()}}</td>
 									@else
 									<td>0</td>
 									@endif

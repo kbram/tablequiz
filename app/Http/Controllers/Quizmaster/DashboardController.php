@@ -36,7 +36,7 @@ class DashboardController extends Controller
                 $questionCounts[$quiz->id]=$quiz->questions()->count();
             }
             if(!$lastQuiz){
-                return view('dashboard.home',compact('quizzes','roundCount','questionCounts'));
+                return view('dashboard.home',compact('quizzes','roundCount','questionCounts','testquizzes'));
             }else{
                 $teamNames=DB::table('team_answers')->where('quiz_id',$lastQuiz->id)->where('status','1')->select('team_name', DB::raw('count(*) as total'))->groupBy('team_name')->orderBy('total','desc')->limit(3)->get();
                 $teamcount=DB::table('team_answers')->where('quiz_id',$lastQuiz->id)->select('team_name')->groupBy('team_name')->get()->count();
