@@ -379,6 +379,7 @@ public function postRound(Request $request){
             
 public function add_round_question(Request $request)
     {
+
         $categories = QuizCategory::all();
         $questions = GlobalQuestion::all();
         $answers = GlobalAnswer::all();
@@ -579,14 +580,12 @@ if($request->$vid_link){
  
 }
 
- 
-
      //end question media
 
      //auth check
 
      if(Auth::user()){
-       
+if($request->input('round_name')){
             /** round crop image decode start*/
             $data;
             $txt_data;
@@ -773,6 +772,8 @@ if(Session::has('question_video_'.$i)){
                      }
 
         }
+
+        
         return View('quiz.add_round', compact('categories','answers','medias','round_count','quiz'));
 
         }
@@ -817,6 +818,7 @@ if(Session::has('question_video_'.$i)){
 
 
 }            
+}
 
 
 

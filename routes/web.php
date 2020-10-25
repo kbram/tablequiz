@@ -30,7 +30,6 @@ Route::get('migrate', function () {
 
 Route::get('seed', function () {
     Artisan::call('db:seed --class DatabaseSeeder'); 
-    return "seeded";   
   
 });
 

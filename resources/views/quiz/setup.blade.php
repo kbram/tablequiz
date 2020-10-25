@@ -145,7 +145,7 @@
 					</div>
 					<div class="col-md-4">
 						<select id="quiz__participants" class="form-control" name="quiz__participants">
-							<option  value="" selected>{{(old('quiz__participants') != '' ? old('quiz__participants') : 'Please Choose...')}}</option>
+							<option  value="{{(old('quiz__participants') != '' ? old('quiz__participants') : 'Please Choose...')}}" selected>{{(old('quiz__participants') != '' ? old('quiz__participants') : 'Please Choose...')}}</option>
 							@foreach($bands as $band)
 							@if(($band->band_type)== Config::get('priceband.type.participant_band_type'))
 							@if(($band->to)== null)
