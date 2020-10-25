@@ -561,7 +561,7 @@ class QuizController extends Controller
            /** crop image decode */
             $quizicon=QuizSetupIcon::find($id);
             $usersImage = public_path($quizicon->local_path);
-            if (File::exists($usersImage)) { // unlink or remove previous image from folder
+            if (File::exists($usersImage)) { 
                 unlink($usersImage);
                 Image::make($data)->save($usersImage);
             }
@@ -570,7 +570,7 @@ class QuizController extends Controller
             if($request->upload__quiz__icon){ 
                 $usersImage = public_path($quizicon->public_path2);
                
-                if (File::exists($usersImage)) { // unlink or remove previous image from folder
+                if (File::exists($usersImage)) { 
                     unlink($usersImage);
                     $quiz_icon = $request->file('upload__quiz__icon');
                     Image::make($quiz_icon)->save($usersImage);
