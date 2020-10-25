@@ -205,7 +205,7 @@ class QuizController extends Controller
 
             $quizIcon = new QuizSetupIcon;
             $quizIcon->public_path       = $public_path;
-            $quizIcon->local_path        = $save_path1 . $filename;
+            $quizIcon->local_path        = $save_path1 . '/'. $filename;
             $quizIcon->quiz_id           = $quiz->id;
             $quizIcon->thumb_path        = $public_path_thumb;
             $quizIcon->public_path2      =$public_path2;
@@ -265,7 +265,7 @@ class QuizController extends Controller
             $quizIcon = new QuizSetupIcon;
 
             $quizIcon->public_path       = $session_quiz_image[0];
-            $quizIcon->local_path        = $session_quiz_image[2] . $session_quiz_image[3];
+            $quizIcon->local_path        = $session_quiz_image[2] .  '/'.$session_quiz_image[3];
             $quizIcon->quiz_id           = $quiz->id;
             $quizIcon->thumb_path        = $session_quiz_image[1];
             $quizIcon->public_path2      = $session_quiz_image[4];;
@@ -559,7 +559,7 @@ class QuizController extends Controller
              $image_array_2 = explode(",", $image_array_1[1]);
              $data = base64_decode($image_array_2[1]);
            /** crop image decode */
-            $quizicon=QuizSetupIcon::find($id);
+            $quizicon=QuizSetupIcon::where('quiz_id',$id)->first();
             $usersImage = public_path($quizicon->local_path);
             if (File::exists($usersImage)) { 
                 unlink($usersImage);

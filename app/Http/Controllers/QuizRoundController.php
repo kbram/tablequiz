@@ -147,7 +147,7 @@ class QuizRoundController extends Controller
         $image_array_2 = explode(",", $image_array_1[1]);
         $data = base64_decode($image_array_2[1]);
       /** crop image decode */
-       $round_bg=QuizRoundImage::find($id);
+       $round_bg=QuizRoundImage::where('round_id',$id)->first();
        $usersImage = public_path($round_bg->local_path);
        if (File::exists($usersImage)) { 
            unlink($usersImage);
