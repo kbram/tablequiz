@@ -6,36 +6,6 @@
 <script>
 $(document).ready(function(){
 
-  $('.quiz-upload').click(function(){
-    var imageUrl =$('#get_default_image').val();
-    $image_crop = $('#image-container').croppie({
-    enableExif: true,
-    viewport: {
-      width:200,
-      height:200,
-      type:'circle' //circle
-    },
-    boundary:{
-      width:464,
-      height:300
-    }
-  });
-
-  $image_crop.croppie('bind', {
-        url: imageUrl
-      }).then(function(){
-
-
-      });
-
-      $('.cr-slider').addClass('slider');
-       $('.cr-slider').css('width','100%');
-       $('.cr-slider').removeClass('cr-slider');
-  });
-
-
-
-  
 
   $("#edit__icon__modal").on('hidden.bs.modal', function(){
                    	/**croppie destroy */
