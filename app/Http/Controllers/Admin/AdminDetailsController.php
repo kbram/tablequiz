@@ -99,6 +99,7 @@ class AdminDetailsController extends Controller
     public function users()
     {  
         $users = User::all();
+        $users =User::orderBy('id', 'asc')->paginate(10);
         if($users->isEmpty()){
             return view('admin.users')->with('message','No quizzes to show');
            }
