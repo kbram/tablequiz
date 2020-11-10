@@ -176,11 +176,16 @@
 								
 							
 						  </div> -->
-						  <div class="modal-footer justify-content-center row no-gutters">
-							<div class="col-md-3">
-								<a href="/admin/quizzes" type="button" class="d-block btn btn-primary"data-dismiss="modal">Back</a>
-							</div>
-						  </div>
+						  
+						  <div class="form-row form-footer d-flex justify-content-center">
+					<div class="text-center m-2">
+					<a href="/admin/quizzes" type="button" class="d-block btn btn-secondary hasArrow">Back</a>
+						<!-- <input class="d-block btn btn-secondary hasArrow" type="submit" value="Save"> -->
+					</div>
+					<div class="text-center m-2">
+						<a href="/round/show/{{$id}}/1" class="btn btn-primary d-block ">Show Round</a>
+					</div>
+				</div>
 						</div>
 					  </div>
 					</div>

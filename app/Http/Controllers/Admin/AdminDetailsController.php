@@ -96,7 +96,7 @@ class AdminDetailsController extends Controller
 
     public function users()
     {  
-        $users = User::all();
+        $users = User::all();   
         if($users->isEmpty()){
             return view('admin.users')->with('message','No quizzes to show');
            }
@@ -115,7 +115,7 @@ class AdminDetailsController extends Controller
         $quizzes = Quiz::find($id);
         $image=$quizzes->icon()->first()->local_path;
 
-        return view('quiz.show-setup',compact('quizzes','participants','image'));
+        return view('quiz.show-setup',compact('quizzes','participants','image','id'));
     }
 
     public function block($id){

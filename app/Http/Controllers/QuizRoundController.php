@@ -130,7 +130,31 @@ class QuizRoundController extends Controller
         $count=0;
         return view('quiz.round_ques_list',compact('round_image_data','count','questions','answers','categories','round','round_count','id','rid','pay','frid','lrid'));
     }
-
+    public function new_show($id,$rid){
+        $round=QuizRound::where('quiz_id',$id)->get()->take($rid)->last();
+       
+        $payment=Quiz::where('id',$id)->get();
+        $pay=$payment[0]->payment;
+       
+        $round_count=QuizRound::where('quiz_id',$id)->get()->count();
+       
+        $categories = QuizCategory::all();
+       //$rounds=QuizRound::where('id',$rid)->get();
+        $round_image=QuizRoundImage::where('round_id',$round->id)->first('public_path2');
+        $round_image_data="";
+        $answers=Answer::all();
+        if($round_image->public_path2){
+            $round_image_data =$round_image->public_path2;
+        }
+        $firstround=QuizRound::where('quiz_id',$id)->get()->first();
+        $lastround=QuizRound::where('quiz_id',$id)->get()->last();
+        $frid=$firstround->id;
+        $lrid=$lastround->id;
+              
+        $questions=Question::where('round_id',$round->id)->get();
+        $count=0;
+        return view('quiz.round_ques_list_show',compact('round_image_data','count','questions','answers','categories','round','round_count','id','rid','pay','frid','lrid'));
+    }
     public function round_ques_list_edit($name,$id){
        
     }
