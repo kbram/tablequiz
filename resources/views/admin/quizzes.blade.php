@@ -161,7 +161,8 @@
 								</tr>
 							</tfoot>
 						</table>
-						
+						{{ $quizzes->links() }}
+
 					</div>
 				</div>
 			</div>
