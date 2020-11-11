@@ -1,19 +1,4 @@
 @extends('layouts.tablequizapp')
-@section('template_linked_css')
-<style>
-	#myProgress {
-		width: 100%;
-		background-color: #ddd;
-	}
-
-	#myBar {
-		width: 1%;
-		height: 30px;
-		background-color: #ff8243;
-	}
-</style>
-
-@endsection
 @section('content')
 
 
@@ -89,7 +74,7 @@
 					</div>
 					<div class="modal" id="edit__icon__modal" tabindex="-1" role="dialog" aria-labelledby="edit__icon__modal" aria-hidden="true">
 						<div class="modal-dialog modal-dialog-centered" role="document">
-							<div class="modal-content">
+							<div class="modal-content" id="modal-content">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 										<span aria-hidden="true">&times;</span>
@@ -128,7 +113,7 @@
 									</div>
 
 									<div class="col-md-3 save_btn">
-										<button id="pro" type="button" class="d-block btn btn-primary" data-dismiss=""> Save</button>
+										<button id="pro" type="button" class="d-block btn btn-primary pb-3" data-dismiss=""> Save <span id ="loading" class=""></span></button>
 									</div>
 
 								</div>
@@ -261,10 +246,9 @@ $('.quiz-upload').click(function(){
 
 var image_src;
   $('.imagePreviewInput').on('change', function(){
-	  /**progress bar */
+	  /**progress bar */	
 	  def_count=1;
-	  $("#pro").text("Save");
-	$("#pro").addClass("btn-primary");
+    //  $("#pro").text("Save");
 	var elem = document.getElementById("myBar");
 	elem.style.width = "1%";
 
@@ -283,8 +267,8 @@ var image_src;
     reader.readAsDataURL(this.files[0]);
   });
 
-	$("#pro").click(function() {
-		
+	    $("#pro").click(function() {
+		$("#loading").addClass("loader");
 		if(image_src){
 		$image_crop.croppie('result', {
 							type: 'canvas',
@@ -299,8 +283,9 @@ var image_src;
 		
 
 
-
+			
 		if (s != "undefind") {
+			
 			sessionStorage.setItem("im", s);
 			var i = 0;
 			if (i == 0) {
@@ -316,17 +301,14 @@ var image_src;
 						$("#pro").text("Close");
 						$("#pro").removeClass("btn-primary");
 						$("#pro").addClass("btn-danger");
-
+						$("#loading").removeClass("loader");
 						/**image crop */
 						
 						//$('#image_preview_container').attr('src','');
 						//$("#demo").hide();
 						clearInterval(id);
 						i = 0;
-					} else {
-						width++;
-						elem.style.width = width + "%";
-					}
+					} 
 				}
 			}
 		}
