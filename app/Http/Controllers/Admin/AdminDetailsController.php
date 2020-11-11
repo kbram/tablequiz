@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\PriceBand;
 use App\Models\PaymentDetails;
 
+
 use Config;
 
 class AdminDetailsController extends Controller
@@ -80,6 +81,7 @@ class AdminDetailsController extends Controller
     public function quizzes()
     {   
          $quizzes = Quiz::all();
+        $quizzes =Quiz::orderBy('id', 'asc')->paginate(10);
          if($quizzes->isEmpty()){
           return view('admin.quizzes')->with('message','No quizzes to show');
          }
@@ -96,7 +98,8 @@ class AdminDetailsController extends Controller
 
     public function users()
     {  
-        $users = User::all();   
+        $users = User::all();
+        $users =User::orderBy('id', 'asc')->paginate(10);
         if($users->isEmpty()){
             return view('admin.users')->with('message','No quizzes to show');
            }

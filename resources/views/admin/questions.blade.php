@@ -379,7 +379,7 @@
 						       <td class="quiz_actions d-flex flex-row justify-content-lg-center">
 							   <div class="d-flex flex-column">
 									<i class="fas fa-pencil-alt"></i>
-									<span><a href="{{ URL::to('questions/'. $question->id .'/edit') }}" data-toggle="tooltip" title="edit">
+									<span><a href="{{ URL::to('questions/'. $question->id .'/edit') }}">
                                                    Edit
                                                 </a></span>
 								</div>
