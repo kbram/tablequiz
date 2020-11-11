@@ -84,10 +84,10 @@
 									<span>From</span>
 								</div>
 								<div class="col-8 col-md-4 d-flex flex-row align-items-center justify-content-md-center">
-									<input id="from{{$questionCost->id}}" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="{{$questionCost->from}}"> 
+									<input id="from{{$questionCost->id}}" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="{{$questionCost->from}}" value="{{$questionCost->from}}"> 
 										   
 									<span>to</span>
-									<input id="to{{$questionCost->id}}" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="{{$questionCost->to}}"> 
+									<input id="to{{$questionCost->id}}" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="{{$questionCost->to}}" value="{{$questionCost->to}}"> 
 									<input id="type{{$questionCost->id}}" hidden name="type" type="text" value="{{Config::get('priceband.type.question_band_type')}}" >   
 								</div>
 								<div class="col-4 col-md-3 pt-2 pt-md-0">
@@ -99,7 +99,7 @@
 											<span class="input-group-text">&euro;</span>
 										</div>
 										
-										<input id="cost{{$questionCost->id}}" maxlength="10" class="form-control" placeholder="{{$questionCost->cost}}" >
+										<input id="cost{{$questionCost->id}}" maxlength="10" class="form-control" placeholder="{{$questionCost->cost}}" value="{{$questionCost->cost}}">
 										
 										<button type="submit" id="{{ $questionCost->id }}" maxlength="3" class=" form-control ml-1 SavePriceband" value="" ><i class="fa fa-check-circle" style="color:blue"></i></button>
 										
@@ -172,9 +172,9 @@
 									<span>From</span>
 								</div>
 								<div class="col-8 col-md-4 d-flex flex-row align-items-center justify-content-md-center">
-									<input id="from{{$backgroundCost->id}}" maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1" placeholder="{{$backgroundCost->from}}">
+									<input id="from{{$backgroundCost->id}}" maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1" placeholder="{{$backgroundCost->from}}"  value="{{$backgroundCost->from}}">
 									<span>to</span>
-									<input id="to{{$backgroundCost->id}}"  maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="{{$backgroundCost->to}}">
+									<input id="to{{$backgroundCost->id}}"  maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="{{$backgroundCost->to}}" value="{{$backgroundCost->to}}">
 									<input id="type{{$backgroundCost->id}}" hidden name="type" type="text" value="{{Config::get('priceband.type.background_band_type')}}" >   
 
 								</div>
@@ -186,7 +186,7 @@
 										<div class="input-group-prepend">
 											<span class="input-group-text">&euro;</span>
 										</div>
-										<input id="cost{{$backgroundCost->id}}" name="band__costs" maxlength="10" class="form-control" placeholder="{{$backgroundCost->cost}}">
+										<input id="cost{{$backgroundCost->id}}" name="band__costs" maxlength="10" class="form-control" placeholder="{{$backgroundCost->cost}}" value="{{$backgroundCost->cost}}">
 										<button type="submit" id="{{$backgroundCost->id}}" maxlength="3" class=" form-control ml-1 SavePriceband" value="" ><i class="fa fa-check-circle" style="color:blue"></i></button>
 										
 										@if($c==1 && $c==$count)
@@ -255,14 +255,14 @@
 								$c += 1;
 							@endphp
 							<span id="msg{{$participantCost->id}}" class="text-success"></span>
-							<form class="form-row pt-4 align-items-center mb-0 price-band-financials" action="" method=""">
+							<form class="form-row pt-4 align-items-center mb-0 price-band-financials" action="" method="">
 								<div class="col-4 col-md-1">
 									<span>From</span>
 								</div>
 								<div class="col-8 col-md-4 d-flex flex-row align-items-center justify-content-md-center">
-									<input id="from{{$participantCost->id}}" maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1" placeholder="{{$participantCost->from}}" >
+									<input id="from{{$participantCost->id}}" maxlength="3" class="mr-2 mx-md-2 form-control flex-grow-1" placeholder="{{$participantCost->from}}" value="{{$participantCost->from}}" >
 									<span>to</span>
-									<input id="to{{$participantCost->id}}" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="{{$participantCost->to}}">
+									<input id="to{{$participantCost->id}}" maxlength="3" class="ml-2 mx-md-2 form-control flex-grow-1" placeholder="{{$participantCost->to}}" value="{{$participantCost->to}}">
 									<input id="type{{$participantCost->id}}" hidden name="type" type="text" value="{{Config::get('priceband.type.participant_band_type')}}" >   
 
 								</div>
@@ -274,7 +274,7 @@
 										<div class="input-group-prepend">
 											<span class="input-group-text">&euro;</span>
 										</div>
-										<input id="cost{{$participantCost->id}}" maxlength="10" class="form-control" placeholder="{{$participantCost->cost}}">
+										<input id="cost{{$participantCost->id}}" maxlength="10" class="form-control" placeholder="{{$participantCost->cost}}" value="{{$participantCost->cost}}">
 										<button id="{{$participantCost->id}}"  maxlength="3" class=" form-control ml-1 SavePriceband" value="" ><i class="fa fa-check-circle" style="color:blue"></i></button>
 										
 										

@@ -32,9 +32,9 @@
             
         },
         success: function(results) {
-
+          
            $('#msg'+id).text('updated sucessfully');
-           location.reload();
+           //location.reload();
            setTimeout(function() {
 
         $("#msg"+id).text('')
