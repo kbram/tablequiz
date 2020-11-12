@@ -760,6 +760,8 @@ jQuery(document).ready(function ($) {
         }, 300);
     });
     $("#suggested__modal__back").click(function () {
+        $('ul.all_suggested_questions').html('');
+    
         clicked -= 1;
         $("#category__chosen__next").attr("data-clicked", clicked);
         if (clicked == 0) {
