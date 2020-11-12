@@ -558,6 +558,9 @@
 	    viewMode: 1,
 	    preview: '.preview'
     });
+	setTimeout(function(){console.log($('div.img-container>cropper-bg').attr('class'));
+		$('.cropper-bg').removeClass('cropper-bg');
+	},1000);
  });
      
 	$('#upload__quiz__icon').on('change', function(e) {
@@ -573,7 +576,9 @@
   
 	});
 
-	//setTimeout(function(){}, 100);
+	setTimeout(function(){console.log($('div.img-container>cropper-bg').attr('class'));
+		$('.cropper-bg').removeClass('cropper-bg');
+	},1000);
     };
 
     var reader;
