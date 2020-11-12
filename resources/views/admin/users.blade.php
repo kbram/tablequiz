@@ -156,11 +156,15 @@
 							<tfoot>
 								<tr>
 									
-									<td colspan="4" class="text-center text-muted"><small><a href="#">View more</a></small></td>
+									<td colspan="4" class="text-center text-muted">
+									<br>
+										@if(!empty($users))
+											<div  class="d-flex justify-content-center">{{$users->links()}}</div>
+										@endif
+									</td>	
 								</tr>
 							</tfoot>
 						</table>
-						{{ $users->links() }}
 
 					</div>
 				</div>

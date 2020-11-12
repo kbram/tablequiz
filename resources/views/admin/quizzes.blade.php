@@ -156,12 +156,15 @@
 							<tfoot>
 								<tr>
 									<td colspan="6" class="text-center text-muted">
-										<!-- <a href="/dashboard/my-quizzes"><small>View all</small></a> -->
+									<br>
+										@if(!empty($quizzes))
+											<div  class="d-flex justify-content-center">{{$quizzes->links()}}</div>
+										@endif
+									</td>	
 									</td>
 								</tr>
 							</tfoot>
 						</table>
-						{{ $quizzes->links() }}
 
 					</div>
 				</div>
