@@ -760,6 +760,8 @@ jQuery(document).ready(function ($) {
         }, 300);
     });
     $("#suggested__modal__back").click(function () {
+        $('ul.all_suggested_questions').html('');
+    
         clicked -= 1;
         $("#category__chosen__next").attr("data-clicked", clicked);
         if (clicked == 0) {
@@ -815,8 +817,7 @@ jQuery(document).ready(function ($) {
             count +
             '" data-title="Video" data-add-text="any video file"><span class="pr-2 icon_"><i class="fas fa-video"></i></span>Video</a> </div> </div> </div> <div class="modal" id="add__image__media' +
             count +
-            '" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true"><div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header "> <h1 class="modal-title" id="add__image__media__modal__heading"></h1> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div> <div class="modal-body"> <p class="text-center py-2">Add <span id="add__image__media__text"></span> to reference in your question</p> <div class="form-row"> <div class="col-md-4"> <label>Add link image ' +
-            count +
+            '" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true"><div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header "> <h1 class="modal-title" id="add__image__media__modal__heading"></h1> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div> <div class="modal-body"> <p class="text-center py-2">Add <span id="add__image__media__text"></span> to reference in your question</p> <div class="form-row"> <div class="col-md-4"> <label>Add link'+
             '</label> </div> <div class="col-md-8"> <input type="url" name="add_link_to_image__media__' +
             arcount +
             '" class="form-control add-image-media-link" id="add__image__media__text"> </div> </div> <div class="text-center w-100"> <span>OR</span> </div> <div class="form-row justify-content-center pt-3"> <div class="col-md-3"> <label class="d-block" for="upload__image__media__file__' +
@@ -827,8 +828,7 @@ jQuery(document).ready(function ($) {
             arcount +
             '"> </label> </div> </div> </div> <div class="modal-footer justify-content-center"> <div class="col-sm-4"> <button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button> </div> </div> </div> </div> </div> <div class="modal" id="add__audio__media' +
             count +
-            '" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true"> <div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header"> <h1 class="modal-title" id="add__audio__media__modal__heading"></h1> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div> <div class="modal-body"> <p class="text-center py-2">Add <span id="add__audio__media__text"></span> to reference in your question</p> <div class="form-row"> <div class="col-md-4"> <label>Add link audio ' +
-            count +
+            '" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true"> <div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header"> <h1 class="modal-title" id="add__audio__media__modal__heading"></h1> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div> <div class="modal-body"> <p class="text-center py-2">Add <span id="add__audio__media__text"></span> to reference in your question</p> <div class="form-row"> <div class="col-md-4"> <label>Add link'+
             '</label> </div> <div class="col-md-8"> <input type="url" name="add_link_to_audio__media__' +
             arcount +
             '" class="form-control add-audio-media-link" id="add__audio__media__text"> </div> </div> <div class="text-center w-100"> <span>OR</span> </div> <div class="form-row justify-content-center pt-3"> <div class="col-md-3"> <label class="d-block" for="upload__audio__media__file__' + arcount + '">Upload <input type="file" class="form-control-file" id="upload__audio__media__file__' +
@@ -837,8 +837,7 @@ jQuery(document).ready(function ($) {
             arcount +
             '"> </label> </div> </div> </div> <div class="modal-footer justify-content-center"> <div class="col-sm-4"> <button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button> </div> </div> </div> </div> </div> <div class="modal" id="add__video__media' +
             count +
-            '" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true"> <div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header"> <h1 class="modal-title" id="add__video__media__modal__heading"></h1> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div> <div class="modal-body"> <p class="text-center py-2">Add <span id="add__video__media__text"></span>to reference in your question</p> <div class="form-row"> <div class="col-md-4"> <label>Add link video' +
-            count +
+            '" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true"> <div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header"> <h1 class="modal-title" id="add__video__media__modal__heading"></h1> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div> <div class="modal-body"> <p class="text-center py-2">Add <span id="add__video__media__text"></span>to reference in your question</p> <div class="form-row"> <div class="col-md-4"> <label>Add link'+
             '</label> </div> <div class="col-md-8"> <input type="url" name="add_link_to_video__media__' +
             arcount +
             '" class="form-control add-video-media-link" id="add__video__media__text"> </div> </div> <div class="text-center w-100"> <span>OR</span> </div> <div class="form-row justify-content-center pt-3"> <div class="col-md-3"> <label class="d-block" for="upload__video__media__file__' + arcount + '">Upload <input type="file" class="form-control-file" id="upload__video__media__file__' +

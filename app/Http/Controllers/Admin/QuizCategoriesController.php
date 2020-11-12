@@ -100,7 +100,7 @@ class QuizCategoriesController extends Controller
 
 
     public function update(Request $request,$id)
-  {  
+  { 
    
     $validator = Validator::make(
       $request->all(),
@@ -119,9 +119,9 @@ class QuizCategoriesController extends Controller
         $categories -> category_name =  $request->input('category_name');
         $categories -> category_slug = Str::slug($request->input('category_name'),'-');
         $categories->save();
-    
+   
         $category_id=QuizCategory::where('category_name',$categories -> category_name)->first()->id;
-                if ($request->hasFile('upload__category__image')) {
+                if ($request->hasFile('upload__category__image')) { 
                     $category_image = $request->file('upload__category__image');
                     $filename = 'category_image.'.$category_image->getClientOriginalExtension();
                     $save_path = storage_path().'categories/'.$category_id.'/category_images/';
@@ -134,15 +134,21 @@ class QuizCategoriesController extends Controller
                     // Save the file to the server
                     //Image::make($category_image)->save($save_path.$filename);
                     $category_image->move($save_path, $filename);
-        
-                    $categoryImage = QuizCategoryImage::findorfail($id);    
-        
+                   
+                    if($categoryImage = QuizCategoryImage::find($id)){    
+
                     $categoryImage->public_path       = $public_path;
                     $categoryImage->local_path        = $save_path . '/' . $filename;
                     $categoryImage->category_id       =$category_id;
         
                     $categoryImage->save();
-        
+                    }else{
+                    $categoryImage = new QuizCategoryImage;
+                    $categoryImage->public_path       = $public_path;
+                    $categoryImage->local_path        = $save_path . '/' . $filename;
+                    $categoryImage->category_id       =$category_id;
+                    $categoryImage->save();
+                    }
                 }
                
                return redirect('admin/categories');

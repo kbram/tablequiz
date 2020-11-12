@@ -540,7 +540,7 @@ class AdminQuestionController extends Controller
             
             $answer->save();
 
-          return redirect()->action( 'AdminQuestionController@create');    
+          return redirect()->action( 'Admin\AdminQuestionController@create');    
        } 
        public function search(Request $request)
        {
