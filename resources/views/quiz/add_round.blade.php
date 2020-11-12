@@ -558,7 +558,7 @@
 	    viewMode: 1,
 	    preview: '.preview'
     });
-	setTimeout(function(){console.log($('div.img-container>cropper-bg').attr('class'));
+	setTimeout(function(){
 		$('.cropper-bg').removeClass('cropper-bg');
 	},1000);
  });
@@ -576,7 +576,7 @@
   
 	});
 
-	setTimeout(function(){console.log($('div.img-container>cropper-bg').attr('class'));
+	setTimeout(function(){
 		$('.cropper-bg').removeClass('cropper-bg');
 	},1000);
     };
