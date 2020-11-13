@@ -41,70 +41,9 @@
                         <span class="helper__text" data-placement="left" data-toggle="tooltip" title="You can add background images to each round you create by uploading the image here."><i class="fa fa-info-circle"></i></span>
                     </div>
                     <div class=" col-md-4">
-                        <a href="#" class="d-block btn btn-outline-secondary edit-round-img-btn" data-toggle="modal" data-target="#edit__round__bg__modal">Upload</a>
-                    </div>
-                    <div class="col-md-3">
-                        <p class="form__explainer">
-                            <small class="form-text text-muted">250 x 250 pixels<br>Max. upload size 2mb</small>
-                        </p>
-                        
-                    </div>
-                    <div class="modal" id="edit__round__bg__modal" tabindex="-1" role="dialog" aria-labelledby="edit__round__bg__modal" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="modal__edit__image position-relative border">
-                                    <div class="img-container">
-											<div class="row">
-												<div class="col-md-12">
-													<img id="image" src="{{asset($round_image_data)}}" height="300px">
-												</div>										
-											</div>
-										</div>
-                                    </div>
-                                    <div class="modal__edit__image__range">
-                                        <div class="form-row align-items-center">
-                                            <div class="col-3">
-                                                <label><small>Rotate</small></label>
-                                            </div>
-                                            <div class="col-9 d-flex">
-                                                <div class="p-2 border d-flex align-items-center justify-content-center rounded">
-                                                    <button type="button" id="rotate"><i class="fas fa-undo"></i></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="col-3">
-                                                <label for="formControlRange"><small>Edit size</small></label>
-                                            </div>
-                                            <div class="col-9">
-                                                <!-- <input type="range" min="1" max="100" class="form-control-range" id="formControlRange"> -->
-                                                <input type="range" class="form-control-range slider" min="1" max="4" value="1" step="0.1" id="zoomer" oninput="deepdive()">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer justify-content-center row no-gutters align-items-stretch">
-                                    <div class="col-md-3 mr-0 mr-lg-1">
-                                        <label class="d-block" for="upload__quiz__icon">Upload
-                                            <input type="file" class="form-control-file" id="upload__quiz__icon" name="bg_image" value="Upload">
-                                            <input type="hidden" id="edit-round-image-crop" name="image_crop" value="" >
-                                        </label>
-                                    </div>
-                                    <div class="col-md-3 ml-0 ml-lg-1 d-flex">
-                                        <button id="pro" type="submit" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <img src='{{asset($round_image_data)}}' alt='image' width='50px' height='50px' style='border: 3px solid #dee2e6!important;' id='myImg'> 
+                   
+                    </div>    
                 </div>
 
                 <!-- <div class="form-row justify-content-center pt-3">
@@ -201,135 +140,35 @@
                         </div>
                         <div class="form-row">
                             <div class="col-md-4">
-                                <label>Add media</label>
+                                <label>media</label>
                             </div>
                             <div class="col-md-8">
                                 <div class="row mt-3">
+                                @if(isset($media[$question->id.'image']))
                                     <div class="col-md-4 pr-md-0 mb-3 mb-lg-0">
-                                        <a href="#" class="px-4 btn btn-outline-secondary grey d-flex align-items-center justify-content-center" data-toggle="modal" data-target="#add__image__media" data-title="Image" data-add-text="an image"><span class="pr-2 icon_"><i class="far fa-image"></i></span>Image </a>
+                                         <img src='{{asset($media[$question->id."image"])}}' alt='image' width='100px' height='100px' style='border: 3px solid #dee2e6!important;' id='myImg'>
                                     </div>
+                                    
+                                @endif
+                                   
+                                @if(isset($media[$question->id.'audio']))
                                     <div class="col-md-4 pr-md-0 mb-3 mb-lg-0">
-                                        <a href="#" class="px-4 btn btn-outline-secondary grey d-flex align-items-center justify-content-center" data-toggle="modal" data-target="#add__audio__media" data-title="Audio" data-add-text="any audio file"><span class="pr-2 icon_"><i class="fas fa-music"></i></span>Audio </a></a>
+                                      <audio controls style="width:200px;">
+                                        <source src='horse.ogg' type="audio/ogg">
+                                        <source src="horse.mp3" type="audio/mpeg">
+                                      </audio>
                                     </div>
+                                    @endif
+
+                                    @if(isset($media[$question->id.'video']))
                                     <div class="col-md-4 pr-md-0 pr-md-3">
-                                        <a href="#" class="px-4 btn btn-outline-secondary grey d-flex align-items-center justify-content-center" data-toggle="modal" data-target="#add__video__media" data-title="Video" data-add-text="any video file"><span class="pr-2 icon_"><i class="fas fa-video"></i></span>Video </a></a>
+                                       <video width="200" height="200" controls>
+                                         <source src="movie.mp4" type="video/mp4">
+                                         <source src="movie.ogg" type="video/ogg">
+                                       </video>                                    
                                     </div>
-                                </div>
-                            </div>
+                                    @endif
 
-                            <div class="modal" id="add__image__media" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title" id="add__image__media__modal__heading"></h1>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p class="text-center py-2">Add <span id="add__image__media__text"></span> to reference in your question</p>
-                                            <div class="form-row">
-                                                <div class="col-md-4">
-                                                    <label>Add link image</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <input type="url" name="add_link_to_image__media__0" class="form-control add-image-media-link" id="add__image__media__text">
-                                                </div>
-                                            </div>
-                                            <div class="text-center w-100">
-                                                <span>OR</span>
-                                            </div>
-                                            <div class="form-row justify-content-center pt-3">
-                                                <div class="col-md-3">
-                                                    <label class="d-block" for="upload__image__media__file">Upload
-                                                        <input type="file" class="form-control-file" id="upload__image__media__file" value="Upload" name="image_media">
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer justify-content-center">
-                                            <div class="col-sm-4">
-                                                <button id="pro1" type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="modal" id="add__audio__media" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title" id="add__audio__media__modal__heading"></h1>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p class="text-center py-2">Add <span id="add__audio__media__text"></span> to reference in your question</p>
-                                            <div class="form-row">
-                                                <div class="col-md-4">
-                                                    <label>Add link</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <input type="url" name="add_link_to_audio__media__0" class="form-control add-audio-media-link" id="add__audio__media__text">
-                                                </div>
-                                            </div>
-                                            <div class="text-center w-100">
-                                                <span>OR</span>
-                                            </div>
-                                            <div class="form-row justify-content-center pt-3">
-                                                <div class="col-md-3">
-                                                    <label class="d-block" for="upload__audio__media__file">Upload
-                                                        <input type="file" class="form-control-file" id="upload__audio__media__file" value="Upload" name="audio_media_0">
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer justify-content-center">
-                                            <div class="col-sm-4">
-                                                <button id="pro2" type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal" id="add__video__media" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title" id="add__video__media__modal__heading"></h1>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p class="text-center py-2">Add <span id="add__video__media__text"></span>to reference in your question</p>
-                                            <div class="form-row">
-                                                <div class="col-md-4">
-                                                    <label>Add link video</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <input type="url" name="add_link_to_video__media__0" class="form-control add-video-media-link" id="add__video__media__text">
-                                                </div>
-                                            </div>
-                                            <div class="text-center w-100">
-                                                <span>OR</span>
-                                            </div>
-                                            <div class="form-row justify-content-center pt-3">
-                                                <div class="col-md-3">
-                                                    <label class="d-block" for="upload__video__media__file">Upload
-                                                        <input type="file" class="form-control-file" id="upload__video__media__file" value="Upload" name="video_media_0">
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer justify-content-center">
-                                            <div class="col-sm-4">
-                                                <button id="pro3" type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -753,6 +592,12 @@
             </div>
         </div>
     </section> -->
+    	<!-- The Modal -->
+<div id="myModal" class="modal">
+  <span id="image-close">&times;</span>
+  <img class="modal-content" id="img01">
+  <div id="caption"></div>
+</div>
 </section>
 
 @endsection
@@ -873,6 +718,119 @@ var size = 2000;
 
 
 </script>
+
+<script>
+$(document).ready(function(){
+var modal = $("#myModal");
+
+var modalImg = $("#img01");
+var captionText = $("#caption");
+
+$("body").delegate("#myImg","click",function(){ 
+  modal.css("display","block");
+  modalImg.attr('src',this.src);
+  captionText.innerHTML = this.alt;
+  
+});
+
+$('#image-close').click(function(){
+	modal.css("display","none");
+	
+});
+
+
+});
+</script>
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+#myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+#myModal{
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {  
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+#image-close{
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
+</style>
 @include('scripts.add-round-image')
 @include('scripts.suggest')
 @include('scripts.bg-image');

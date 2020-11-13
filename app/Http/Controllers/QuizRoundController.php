@@ -7,6 +7,7 @@ use App\Models\QuizRound;
 use App\Models\QuizRoundImage;
 use App\Models\Quiz;
 use App\Models\Question;
+use App\Models\QuestionMedia;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Session;
@@ -152,8 +153,22 @@ class QuizRoundController extends Controller
         $lrid=$lastround->id;
               
         $questions=Question::where('round_id',$round->id)->get();
+        $media=[];
+      //  $media_type=[]; 
+     
+     foreach($questions as $question){
+         if(QuestionMedia::where('question_id',$question->id)->first()){
+        $meds=QuestionMedia::where('question_id',$question->id)->get(); 
+        foreach($meds as $med){
+        $media[$question->id.$med->media_type]=$med->public_path;  
+       // $media_type[$question->id.$med->id]=$med->media_type;
+        }
+       
+         }
+        
+     }
         $count=0;
-        return view('quiz.round_ques_list_show',compact('round_image_data','count','questions','answers','categories','round','round_count','id','rid','pay','frid','lrid'));
+        return view('quiz.round_ques_list_show',compact('round_image_data','count','questions','answers','categories','round','round_count','id','rid','pay','frid','lrid','media'));
     }
     public function round_ques_list_edit($name,$id){
        
