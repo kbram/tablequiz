@@ -140,7 +140,7 @@ class QuizRoundController extends Controller
        
         $categories = QuizCategory::all();
        //$rounds=QuizRound::where('id',$rid)->get();
-        $round_image=QuizRoundImage::find('round_id',$round->id)->first('public_path2');
+        $round_image=QuizRoundImage::where('round_id',$round->id)->first('public_path2');
         $round_image_data="";
         $answers=Answer::all();
         if($round_image->public_path2){
@@ -164,6 +164,7 @@ class QuizRoundController extends Controller
         }
        
          }
+
         
      }
         $count=0;

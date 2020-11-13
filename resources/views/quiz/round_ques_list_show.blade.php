@@ -30,8 +30,8 @@
                         <label for="round__name">Round name</label>
                     </div>
                     <div class="col-md-8">
-                        <input autocomplete="nothanks" type="text" name="round_name" class="form-control" value="{{$round->round_name}}">
-                        <input hidden autocomplete="nothanks" type="text" name="round_count" class="form-control" value="{{$round_count ?? '1'}}">
+                        <input autocomplete="nothanks" type="text" name="round_name" class="form-control" value="{{$round->round_name}}" disabled>
+                        <input hidden autocomplete="nothanks" type="text" name="round_count" class="form-control" value="{{$round_count ?? '1'}}" >
                         <input hidden autocomplete="nothanks" type="text" name="quiz" class="form-control" value="$quiz">
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                         <span class="helper__text" data-placement="left" data-toggle="tooltip" title="You can add background images to each round you create by uploading the image here."><i class="fa fa-info-circle"></i></span>
                     </div>
                     <div class=" col-md-4">
-                    <img src='{{asset($round_image_data)}}' alt='image' width='50px' height='50px' style='border: 3px solid #dee2e6!important;' class='myImg'> 
+                    <img src='{{asset($round_image_data)}}' alt='image' width='120px' height='80px' style='border: 3px solid #dee2e6!important;' class='myImg'> 
                    
                     </div>    
                 </div>
@@ -113,7 +113,7 @@
                                     </div>
                                     <div class="col-lg-4">
                                      <a class="d-block btn btn-outline-primary suggested_q_link" href="#" data-toggle="modal" data-target="#suggestedQuestion"><span style="color:var(--orange)">Use a suggested question</span></a> 
-										<!-- The modal for this is at the bottom of the page -->
+										 The modal for this is at the bottom of the page -->
                                         <!-- <a class="d-block btn btn-outline-primary suggested_q_link paysuggest"  href="#" data-toggle="modal" id="{{$id}}" ><span style="color:var(--orange)">Use a suggested question</span></a> -->
                                        
                                         
@@ -128,7 +128,7 @@
                                 
                             </div>
                             <div class="col-md-8">
-                                <input name="question" type="text" class="form-control question" value="{{$question->question}}">
+                                <input name="question" type="text" class="form-control question" value="{{$question->question}}" disabled>
                                 <input class="suggest" type="hidden" name="suggest" id="{{$id}}" value="">
 
                             </div>
@@ -142,34 +142,37 @@
                             <div class="col-md-4">
                                 <label>media</label>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-8 bg-light">
                                 <div class="row mt-3">
                                 @if(isset($media[$question->id.'image']))
-                                    <div class="col-md-4 pr-md-0 mb-3 mb-lg-0">
-                                         <img src='{{asset($media[$question->id."image"])}}' alt='image' width='100px' height='100px' style='border: 3px solid #dee2e6!important;' class='myImg'>
+                                    <div class="col-md-4 pr-md-0 mt-3 pb-4 ml-3  mb-lg-0">
+                                         <img src='{{asset($media[$question->id."image"])}}' alt='image' width='150px' height='100px' style='border: 3px solid #dee2e6!important;' class='myImg'>
                                     </div>
                                     
                                 @endif
                                    
-                                @if(isset($media[$question->id.'audio']))
-                                    <div class="col-md-4 pr-md-0 mb-3 mb-lg-0">
-                                      <audio controls style="width:200px;">
-                                        <source src='horse.ogg' type="audio/ogg">
-                                        <source src="horse.mp3" type="audio/mpeg">
-                                      </audio>
-                                    </div>
-                                    @endif
+                              
 
                                     @if(isset($media[$question->id.'video']))
                                     <div class="col-md-4 pr-md-0 pr-md-3">
-                                       <video width="200" height="200" controls>
-                                         <source src="movie.mp4" type="video/mp4">
-                                         <source src="movie.ogg" type="video/ogg">
+                                       <video width="300" height="200" controls>
+                                         <source src='{{asset($media[$question->id."video"])}}' type="video/mp4">
+                                         <source src='{{asset($media[$question->id."video"])}}' type="video/ogg">
                                        </video>                                    
                                     </div>
                                     @endif
 
+                                    
+
                                 </div>
+                                @if(isset($media[$question->id.'audio']))
+                                    <div class="col-md-4 pr-md-0 mb-3 mb-lg-0">
+                                      <audio controls style="width:470px;">
+                                        <source src='{{asset($media[$question->id."audio"])}}' type="audio/ogg">
+                                        <source src='{{asset($media[$question->id."audio"])}}' type="audio/mpeg">
+                                      </audio>
+                                    </div>
+                                @endif
                             </div>
                         </div>
 
@@ -181,7 +184,7 @@
                                         <label for="standard__question__answer">Answer</label>
                                     </div>
                                     <div class="col-md-8">
-                                        <input class="form-control answer" name="standard__question__answer" type="text" value="{{$answer->answer}}">
+                                        <input class="form-control answer" name="standard__question__answer" type="text" value="{{$answer->answer}}" disabled>
                                         <input type="hidden" name="standard__question__answer_id" value="{{$answer->id}}">
                                     </div>
                                 </div>
@@ -192,7 +195,7 @@
                                 <label for="numeric__question__answer">Answer</label>
                             </div>
                             <div class="col-md-8">
-                                <input class="form-control" name="numeric__question__answer" type="number">
+                                <input class="form-control" name="numeric__question__answer" type="number" disabled>
                             </div>
                         </div>
 
@@ -238,7 +241,7 @@
 
                                     <div class="col-md-8">
 
-                                        <input class="form-control" name="numeric__question__answer" type="number" value="{{$answer->answer}}">
+                                        <input class="form-control" name="numeric__question__answer" type="number" value="{{$answer->answer}}" disabled>
                                         <input type="hidden" name="numeric__question__answer_id" value="{{$answer->id}}">
 
                                     </div>
@@ -282,7 +285,7 @@
                                 <label for="standard__question__answer">Answer</label>
                             </div>
                             <div class="col-md-8">
-                                <input class="form-control answer" name="standard__question__answer__0" type="text">
+                                <input class="form-control answer" name="standard__question__answer__0" type="text" disabled>
                             </div>
                         </div>
                         @endif
@@ -328,7 +331,7 @@
                                                 <span class="plus">+</span>
                                             </div> -->
                                             <div class="col-3 col-md-3 text-center form-check px-0 px-md-4">
-                                                <input type="radio" value="0" class="multiple-choice-correct-answer" name="multiple__choice__correct__answer">
+                                                <input type="radio" value="0" class="multiple-choice-correct-answer" name="multiple__choice__correct__answer" disabled>
                                             </div>
                                     
                                     
@@ -346,7 +349,7 @@
                                 <label for="numeric__question__answer">Answer</label>
                             </div>
                             <div class="col-md-8">
-                                <input class="form-control" name="numeric__question__answer" type="number">
+                                <input class="form-control" name="numeric__question__answer" type="number" disabled>
                                 
                             </div>
                         </div>
@@ -368,7 +371,7 @@
                             <div class="col-md-8">
                                 <div class="row">
                                     <div class="col-md-4 pr-md-0">
-                                        <input class="form-control time-limit" min=0 oninput="validity.valid||(value='');" type="number" name="time__limit" value="{{$question->time_limit}}">
+                                        <input class="form-control time-limit" min=0 oninput="validity.valid||(value='');" type="number" name="time__limit" value="{{$question->time_limit}}" disabled>
                                     </div>
                                     @if ($errors->has('time__limit'))
                                     <span class="help-block">

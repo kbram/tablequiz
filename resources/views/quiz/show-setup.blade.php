@@ -179,7 +179,7 @@
 						  
 						  <div class="form-row form-footer d-flex justify-content-center">
 					<div class="text-center m-2">
-					<a href="/admin/quizzes" type="button" class="d-block btn btn-secondary hasArrow">Back</a>
+					<a href="/admin/quizzes"  class="d-block btn btn-secondary pl-3 pr-3 "> Back</a>
 						<!-- <input class="d-block btn btn-secondary hasArrow" type="submit" value="Save"> -->
 					</div>
 					<div class="text-center m-2">
