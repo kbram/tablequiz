@@ -77,20 +77,21 @@ class MasterQuestionController extends Controller
         if ($request->numeric__question__answer) {
             $answer = Answer::findorfail($request->numeric__question__answer_id);
             $answer->answer = $request->numeric__question__answer;
+            $answer->status = true ; 
             $answer->save();
         }
         if ($request->standard__question__answer) {
             $answer = Answer::findorfail($request->standard__question__answer_id);
             $answer->answer = $request->standard__question__answer;
+            $answer->status = true ; 
             $answer->save();
         }
         if ($request->multiple__choice__answer) {
             Answer::where('question_id', $id)->delete();
             $correct = $request->input('multiple__choice__correct__answer');
             $arr = $request->multiple__choice__answer;
-
             for ($i = 0; $i < count($arr); $i++) {
-                $answer = new GlobalAnswer;
+                $answer = new Answer;
                 $answer->answer = $arr[$i];
                 $answer->question_id = $id;
                 if ($correct == $arr[$i]) {
@@ -98,7 +99,6 @@ class MasterQuestionController extends Controller
                 } else {
                     $answer->status = false;
                 }
-                $answer->question_id = $id;
                 $answer->save();
             }
             //    $i=0;
@@ -132,7 +132,7 @@ class MasterQuestionController extends Controller
                 File::makeDirectory($save_path, $mode = 0755, true, true);
                 $image_media->move($save_path, $file_name);
 
-                $media_image = new GlobalQuestionMedia;
+                $media_image = new QuestionMedia;
                 $media_image->media_type        = "Image";
                 $media_image->public_path       = $public_path;
                 $media_image->local_path        = $save_path . '/' . $file_name;

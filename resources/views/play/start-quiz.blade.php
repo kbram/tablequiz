@@ -27,7 +27,7 @@
 			<form action="/playquiz/{{$quiz->id}}" method="post">
 			@csrf
 			@if($quiz->quiz_password)
-				<input class="form-control mb-2" placeholder="Enter quiz password" type="password" name="quiz__password" required>
+				<input class="form-control mb-2" placeholder="Enter quiz password" type="password" name="quiz__password" >
 
 
 				@if (Session::has('fail'))

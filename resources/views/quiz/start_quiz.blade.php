@@ -4,7 +4,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 
-
 @if($quizzes[0]->user_id==Auth::user()->id && $quizzes[0]->payment==1)
 <section class="container page__inner dashboard">
 	<div class="dashboard__wrapper">
@@ -34,6 +33,7 @@
 			</div>
 		</div>
 		<div class="row">
+
 			<aside class="col-lg-3 dashboard__sidebar d-flex flex-column order-1 order-md-0">
 				<div class="dashboard__container d-flex flex-column align-items-center mb-3">
 				<h5>Que No:<span id="que" class="question_number2"></span></h5> 
@@ -73,10 +73,10 @@
 					</ul>
 				</div>
 			</aside>
+
 			<div class="col-lg-9 order-0 order-md-1 ">
 				<div class="row">
-					<div class="col">
-
+					<div class="col ">
 
 						<div class="quiz__slider">
 						@php
@@ -87,12 +87,28 @@
 
 						
 							 @foreach($questions[$round->id] as $question)
-							<div class="quiz__single_question__container d-flex flex-column align-items-center">
+							<div class="quiz__single_question__container d-flex flex-column align-items-center ">
 								<h4>Question No: <span class="question_number">{{$i++}}</span></h4>
 								<p style="text-align:right;float:right; margin-right:0px;" align="right" >Time  :  {{isset($question->time_limit)? $question->time_limit.' sec' : 'Not set' }}</p>	
 								@if (count($medias[$question->id])>0) 
 
-<div class="quiz__single_question__image">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="quiz__single_question__image ">
+
+
+
 
 @foreach($medias[$question->id] as $media)
 @if($media->media_type == 'image')
@@ -303,7 +319,6 @@
 </div>
 
 @endsection
-
 @endif
 
 <script>

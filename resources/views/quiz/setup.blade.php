@@ -302,18 +302,16 @@ var image_src;
 						$("#pro").removeClass("btn-primary");
 						$("#pro").addClass("btn-danger");
 						$("#loading").removeClass("loader");
-
 						/**image crop */
 						
 						//$('#image_preview_container').attr('src','');
 						//$("#demo").hide();
 						clearInterval(id);
 						i = 0;
-					}
+					} 
 					else{
 						width++;
 					}
-					 
 				}
 			}
 		}

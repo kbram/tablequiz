@@ -77,8 +77,7 @@
 				</li>
 
 				<li>
-				<a  class="btn btn-primary d-block d-lg-inline-block card__from__modal publish-quiz" href="/admin/home">Dashboard</a>
-
+				<a  class="btn btn-primary d-block d-lg-inline-block card__from__modal " href="/admin/home">Dashboard</a>
 				</li>
 				
 				<!-- This is the avatar to be used when logged in
