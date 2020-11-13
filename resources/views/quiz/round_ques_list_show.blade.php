@@ -41,7 +41,7 @@
                         <span class="helper__text" data-placement="left" data-toggle="tooltip" title="You can add background images to each round you create by uploading the image here."><i class="fa fa-info-circle"></i></span>
                     </div>
                     <div class=" col-md-4">
-                    <img src='{{asset($round_image_data)}}' alt='image' width='50px' height='50px' style='border: 3px solid #dee2e6!important;' id='myImg'> 
+                    <img src='{{asset($round_image_data)}}' alt='image' width='50px' height='50px' style='border: 3px solid #dee2e6!important;' class='myImg'> 
                    
                     </div>    
                 </div>
@@ -146,7 +146,7 @@
                                 <div class="row mt-3">
                                 @if(isset($media[$question->id.'image']))
                                     <div class="col-md-4 pr-md-0 mb-3 mb-lg-0">
-                                         <img src='{{asset($media[$question->id."image"])}}' alt='image' width='100px' height='100px' style='border: 3px solid #dee2e6!important;' id='myImg'>
+                                         <img src='{{asset($media[$question->id."image"])}}' alt='image' width='100px' height='100px' style='border: 3px solid #dee2e6!important;' class='myImg'>
                                     </div>
                                     
                                 @endif
@@ -726,7 +726,7 @@ var modal = $("#myModal");
 var modalImg = $("#img01");
 var captionText = $("#caption");
 
-$("body").delegate("#myImg","click",function(){ 
+$("body").delegate(".myImg","click",function(){ 
   modal.css("display","block");
   modalImg.attr('src',this.src);
   captionText.innerHTML = this.alt;
@@ -744,7 +744,7 @@ $('#image-close').click(function(){
 <style>
 body {font-family: Arial, Helvetica, sans-serif;}
 
-#myImg {
+.myImg {
   border-radius: 5px;
   cursor: pointer;
   transition: 0.3s;
