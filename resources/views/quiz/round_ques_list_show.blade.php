@@ -42,7 +42,6 @@
                     </div>
                     <div class=" col-md-4">
                     <img src='{{asset($round_image_data)}}' alt='image' width='50px' height='50px' style='border: 3px solid #dee2e6!important;' class='myImg'> 
-                   
                     </div>    
                 </div>
 
@@ -750,7 +749,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
   transition: 0.3s;
 }
 
-#myImg:hover {opacity: 0.7;}
+.myImg:hover {opacity: 0.7;}
 
 /* The Modal (background) */
 #myModal{
