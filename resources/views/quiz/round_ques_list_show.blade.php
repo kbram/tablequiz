@@ -753,7 +753,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
   transition: 0.3s;
 }
 
-#myImg:hover {opacity: 0.7;}
+.myImg:hover {opacity: 0.7;}
 
 /* The Modal (background) */
 #myModal{
