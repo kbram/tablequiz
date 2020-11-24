@@ -4,6 +4,7 @@
 .swal-modal .swal-text {
     text-align: center;
 }
+
 </style>
 
 @endsection
@@ -225,13 +226,17 @@
 											<div class="text-center w-100">
 												<span>OR</span>
 											</div>
-											<div class="form-row justify-content-center pt-3">
-												<div class="col-md-3">
-													<label class="d-block" for="upload__image__media__file">Upload
+											<div class="row justify-content-center pt-3">
+												
+												<div class="col-md-3 d-flex">
+													<label class="d-block mr-2 upload__image__media__file" for="upload__image__media__file">Upload
 														<input type="file" class="form-control-file " id="upload__image__media__file" value="Upload" name="image_media_0">
 													</label>
+													<i class="fa fa-check d-none m-3" aria-hidden="true" style="color:#2ccfbe;" id="checkimagemedia0"></i>
 												</div>
+												
 											</div>
+											
 										</div>
 
 										<div class="modal-footer justify-content-center">
@@ -266,10 +271,12 @@
 												<span>OR</span>
 											</div>
 											<div class="form-row justify-content-center pt-3">
-												<div class="col-md-3">
-													<label class="d-block" for="upload__audio__media__file">Upload
+												<div class="col-md-3 d-flex">
+													<label class="d-block upload__audio__media__file mr-2" for="upload__audio__media__file">Upload
 														<input type="file" class="form-control-file" id="upload__audio__media__file" value="Upload" name="audio_media_0">
 													</label>
+													<i class="fa fa-check d-none m-3" aria-hidden="true" style="color:#2ccfbe;" id="checkaudiomedia0"></i>
+													
 												</div>
 											</div>
 										</div>
@@ -304,10 +311,11 @@
 												<span>OR</span>
 											</div>
 											<div class="form-row justify-content-center pt-3">
-												<div class="col-md-3">
-													<label class="d-block" for="upload__video__media__file">Upload
+												<div class="col-md-3 d-flex">
+													<label class="d-block upload__video__media__file mr-2" for="upload__video__media__file">Upload
 														<input type="file" class="form-control-file" id="upload__video__media__file" value="Upload" name="video_media_0">
 													</label>
+													<i class="fa fa-check d-none m-3" aria-hidden="true" style="color:#2ccfbe;" id="checkvideomedia0"></i>
 												</div>
 											</div>
 										</div>
@@ -655,15 +663,17 @@
 	});
 
 	var size1 = 2000;
-	$('#upload__image__media__file').on('change', function() {
-		size1 = this.files[0].size;
+	$("body").delegate(".upload__image__media__file","change", function(e) {
+		var y=e.target.id;
+		size1 = document.getElementById(y).files[0].size;
+		var x = $("#"+y).parent().next().attr("id");
+		$("#"+x).removeClass("d-none");
 	});
-
-	$("#pro1").click(function() {
-		var s = $('#upload__image__media__file').val();
+	$("body").delegate("#pro1","click",function() {
+		var s2 = $('#upload__image__media__file').val();
 		var s1 = $('#add__image__media__text').val();
 		s = Math.round(size1 / 1000);
-		if (s == "" && s1 == "") {
+		if (s2 == "" && s1 == "") {
 
 		} else {
 			let timerInterval
@@ -698,11 +708,15 @@
 
 	var size2 = 2000;
 
-	$('#upload__audio__media__file').on('change', function() {
-		size2 = this.files[0].size;
+	
+	$("body").delegate(".upload__audio__media__file","change", function(e) {
+		var y=e.target.id;
+		size2 = document.getElementById(y).files[0].size;
+		var x = $("#"+y).parent().next().attr("id");
+		$("#"+x).removeClass("d-none");
 	});
 
-	$("#pro2").click(function() {
+	$("body").delegate("#pro2","click",function() {
 		var s = $('#upload__audio__media__file').val();
 		var s1 = $('#add__audio__media__text').val();
 		s = Math.round(size2 / 1000);
@@ -740,10 +754,13 @@
 	});
 	var size3 = 2000;
 
-	$('#upload__video__media__file').on('change', function() {
-		size3 = this.files[0].size;
+	$("body").delegate(".upload__video__media__file","change", function(e) {
+		var y=e.target.id;
+		size3 = document.getElementById(y).files[0].size;
+		var x = $("#"+y).parent().next().attr("id");
+		$("#"+x).removeClass("d-none");
 	});
-	$("#pro3").click(function() {
+	$("body").delegate("#pro3","click",function() {
 		var s = $('#upload__video__media__file').val();
 		var s1 = $('#add__video__media__text').val();
 		s = Math.round(size3 / 1000);
