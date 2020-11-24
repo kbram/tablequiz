@@ -93,10 +93,7 @@
 											<label for="formControlRangesize">Edit size</label>
 											<!-- <input type="range" class="form-control-range slider" min="1" max="4" value="1" step="0.1" id="zoomer" oninput="deepdive()"> -->
 											<!-- <input type="range" class="form-control-range formControlRange " id="formControlRange" name="formControlRange" min="1" max="100"> -->
-											<div id="demo" class="d-none"></div>
-											<div id="myProgress">
-												<div id="myBar"></div>
-											</div>
+											
 										</div>
 									</div>
 								</div>
@@ -111,7 +108,7 @@
 										<button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button>
 									</div> -->
 									<div class="col-md-3 save_btn">
-										<button id="pro" type="button" class="d-block btn btn-primary" data-dismiss=""> Save</button>
+										<button id="pro" type="button" class="d-block btn btn-primary" data-dismiss=""> Save <span id ="loading" class=""></span></button>
 									</div>
 								</div>
 							</div>
@@ -291,7 +288,7 @@ $('.edit-quiz-upload').click(function(){
 
 
   $("#pro").click(function() {
-		
+	$("#loading").addClass("loader");
 		if((image_src) || (get_image_url)){
 		$image_crop.croppie('result', {
 							type: 'canvas',
@@ -312,7 +309,7 @@ $('.edit-quiz-upload').click(function(){
 			var i = 0;
 			if (i == 0) {
 				i = 1;
-				var elem = document.getElementById("myBar");
+				
 				var width = 1;
 				var id = setInterval(frame, 10);
 
@@ -323,7 +320,7 @@ $('.edit-quiz-upload').click(function(){
 						$("#pro").text("Close");
 						$("#pro").removeClass("btn-primary");
 						$("#pro").addClass("btn-danger");
-
+						$("#loading").removeClass("loader");
 						/**image crop */
 						
 						//$('#image_preview_container').attr('src','');
@@ -332,7 +329,7 @@ $('.edit-quiz-upload').click(function(){
 						i = 0;
 					} else {
 						width++;
-						elem.style.width = width + "%";
+						
 					}
 				}
 			}
