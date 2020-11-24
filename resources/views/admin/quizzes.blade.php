@@ -120,7 +120,7 @@
 									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
 										<div class="d-flex flex-column pl-0">
 											<i class="far fa-eye"></i>
-											<span class="view-qz" id="view-qz{{$quiz->id}}"><a href="/admin/home/view/{{$quiz->id}}">View Qs</a></span>
+											<span class="view-qz" id="view-qz{{$quiz->id}}"><a href="/quiz/{{$quiz->id}}/round/1">View Qs</a></span>
 										</div>
 										<div class="d-flex flex-column">
 										<i class="fas fa-share-alt"></i><span class="share" id="{{$quiz->id}}">Share</span>
