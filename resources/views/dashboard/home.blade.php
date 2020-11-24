@@ -177,63 +177,54 @@
 						
 							<tbody id="users">
 							@if(!empty($quizzes))
-							<thead>
-								<tr>
-									<th>Quiz name</th>
-									<th>Questions</th>
-									<th>Rounds</th>
-									<th class="d-none">Quiz Link</th>
-									<th class="text-center">Actions</th>
-								</tr>
-							</thead>
-							@foreach($quizzes as $quiz)
-
-							<tr>
-                                    
-									 <td>{{$quiz->quiz__name}}</td>
-									 <td>{{$questionCounts[$quiz->id]}}</td>
-									 <td>{{$roundCount[$quiz->id]}}</td>
- 									
-
-									<td class="d-none" id="quizLink{{$quiz->id}}">{{$quiz ->quiz_link}}</td>
-									<td class="quiz_actions d-flex flex-row justify-content-center">
-										<a href="{{ URL::to('quizzes/'. $quiz->id .'/edit') }}">			
-										<div class="d-flex flex-column pl-0 pl-md-4">
-											<i class="fas fa-edit"></i>
-											<span>Edit</span>
-										</div></a>
-							
-									
-									
-							
-										<div class="d-flex flex-column">
-											<i class="fas fa-share-alt"></i>
-											<input type="hidden" id="get_url" value="{{asset('/')}}">
-											<span class="share" id="{{$quiz->id}}">Share</span>
-										</div>
-										@if($quiz->payment==1)
-										<a href="/quiz/start_quiz/{{$quiz->id}}">
-											<div class="d-flex flex-column pl-3">
-												<i class="fas fa-play"></i>
-												<span>Start</span>
-											</div>
-										</a>
-										@else 
-										<a class="view-card"  id="{{$quiz->id}}">
-											<div class="d-flex flex-column">
-												<i class="fas fa-credit-card"></i>
-												<span>Unpaid</span>
-											</div>
-										</a>
-										@endif
-									</td>
-								</tr>
+								<thead>
+									<tr>
+										<th>Quiz name</th>
+										<th>Questions</th>
+										<th>Rounds</th>
+										<th class="d-none">Quiz Link</th>
+										<th class="text-center">Actions</th>
+									</tr>
+								</thead>
+								@foreach($quizzes as $quiz)
+									@if($roundCount[$quiz->id]!=0)				
+										<tr>
+											<td>{{$quiz->quiz__name}}</td>
+											<td>{{$questionCounts[$quiz->id]}}</td>
+											<td>{{$roundCount[$quiz->id]}}</td>
+											<td class="d-none" id="quizLink{{$quiz->id}}">{{$quiz ->quiz_link}}</td>
+											<td class="quiz_actions d-flex flex-row justify-content-center">
+												<a href="{{ URL::to('quizzes/'. $quiz->id .'/edit') }}">			
+													<div class="d-flex flex-column pl-0 pl-md-4">
+														<i class="fas fa-edit"></i>
+														<span>Edit</span>
+													</div>
+												</a>
+												<div class="d-flex flex-column">
+													<i class="fas fa-share-alt"></i>
+													<input type="hidden" id="get_url" value="{{asset('/')}}">
+													<span class="share" id="{{$quiz->id}}">Share</span>
+												</div>
+												@if($quiz->payment==1)
+													<a href="/quiz/start_quiz/{{$quiz->id}}">
+														<div class="d-flex flex-column pl-3">
+															<i class="fas fa-play"></i>
+															<span>Start</span>
+														</div>
+													</a>
+												@else 
+													<a class="view-card"  id="{{$quiz->id}}">
+														<div class="d-flex flex-column">
+															<i class="fas fa-credit-card"></i>
+															<span>Unpaid</span>
+														</div>
+													</a>
+												@endif
+											</td>
+										</tr>
+									@endif
 								@endforeach
-							
-									
-								
-								
-							</tbody>
+								</tbody>
 							@else
 							<br>
 							<br>
