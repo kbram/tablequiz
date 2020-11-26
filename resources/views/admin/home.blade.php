@@ -123,7 +123,7 @@
 									<td class="quiz_actions db d-flex flex-row justify-content-lg-center">
 										<div class="d-flex flex-column"  style=" pointer-events: none;opacity: 0.4;">
 											<i class="far fa-eye"></i>
-											<a href="/admin/home/view/{{$quiz->id}}"><span class="view-qz" id="view-qz{{$quiz->id}}">View Qs</span></a>
+											<a href="/quiz/{{$quiz->id}}/round/1"><span class="view-qz" id="view-qz{{$quiz->id}}">View Qs</span></a>
 										</div>
 										<div class="d-flex flex-column"  style=" pointer-events: none;opacity: 0.4;">
 									
@@ -154,7 +154,7 @@
 									<td class="quiz_actions db d-flex flex-row justify-content-lg-center">
 										<div class="d-flex flex-column">
 											
-											<span class="view-qz" id="view-qz{{$quiz->id}}"><a href="/admin/home/view/{{$quiz->id}}" ><i class="far fa-eye"></i><span class="d-block">View Qs</span></a></span>
+											<span class="view-qz" id="view-qz{{$quiz->id}}"><a href="/quiz/{{$quiz->id}}/round/1" ><i class="far fa-eye"></i><span class="d-block">View Qs</span></a></span>
 										</div>
 										<div class="d-flex flex-column">
 										<input type="hidden" id="get_url" value="{{asset('/')}}">

@@ -84,7 +84,7 @@
 
 			<div class="col-lg-9 order-0 order-md-1 " >
 
-		<div id="ss-holder" class="ss-holder row" style="height: 500px;">
+		<div id="ss-holder" class="ss-holder row" style="height: 550px;">
 		<div id="effects" class="col" >
 			<article id="articlehold" class="quiz__slider0" style="background: rgba(255, 255, 255, 0.25)">
 				@php
@@ -92,7 +92,7 @@
 				@endphp
 				@foreach($rounds as $round)
 			 		@foreach($questions[$round->id] as $question)
-						<section style="padding-top: 50px;">
+						<section >
 							<div class="ss-row peterriver go-anim">
 								<div class="hover-effect h-style" >
 									@if (count($medias[$question->id])>0) 
