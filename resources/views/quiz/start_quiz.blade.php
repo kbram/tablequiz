@@ -1,4 +1,12 @@
 @extends('layouts.tablequizapp')
+@section('head')
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" id="fontawesome-css" href="/slider/css/font-awesome/css/font-awesome.css" type="text/css" media="all">
+<link rel="stylesheet" id="prettyPhoto-css" href="/slider/css/prettyPhoto.css" type="text/css" media="all">
+<link rel="stylesheet" id="flexslider-css" href="/slider/css/flexslider.css" type="text/css" media="screen">
+<link rel="stylesheet" id="mainstyle-css" href="/slider/css/style0.css" type="text/css" media="all">
+
+@endsection
 
 @section('content')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -74,116 +82,238 @@
 				</div>
 			</aside>
 
-			<div class="col-lg-9 order-0 order-md-1 ">
-				<div class="row">
-					<div class="col ">
+			<div class="col-lg-9 order-0 order-md-1 " >
 
-						<div class="quiz__slider">
-						@php
-						$i=1
-						@endphp
-
-							@foreach($rounds as $round)
-
-						
-							 @foreach($questions[$round->id] as $question)
-							<div class="quiz__single_question__container d-flex flex-column align-items-center ">
-								<h4>Question No: <span class="question_number">{{$i++}}</span></h4>
-								<p style="text-align:right;float:right; margin-right:0px;" align="right" >Time  :  {{isset($question->time_limit)? $question->time_limit.' sec' : 'Not set' }}</p>	
-								@if (count($medias[$question->id])>0) 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="quiz__single_question__image ">
-
-
-
-
-@foreach($medias[$question->id] as $media)
-@if($media->media_type == 'image')
-	<img src="{{$media->public_path ? asset($media->public_path) : $media->media_link}}" height='225px'>
-@endif
-@if($media->media_type == 'audio')
-<audio controls>
-	<source src="{{$media->public_path ? asset($media->public_path) : $media->media_link}}" type="audio/mpeg" height='225px'>
-</audio>
-@endif
-@if($media->media_type == 'video')
-@if($media->media_link)
-<iframe height='225px' src="{{$media->media_link}}"> </iframe>
-@endif
-@if($media->public_path)
-<video controls>
-	<source src="{{$media->public_path ? asset($media->public_path) : $media->media_link}}" type="video/mp4" height='225px'>
-</video>
-@endif
-@endif
-@endforeach
-
-</div>
-
-@else
-
-							
-								<div class="quiz__single_question__image">
-									<img src="{{asset('site_design/images/homepage__logo.png')}}" height='225px'>
+		<div id="ss-holder" class="ss-holder row" style="height:100%;">
+		<div id="effects" class="col" >
+			<article id="articlehold" class="quiz__slider0" style="background: rgba(255, 255, 255, 0.25)">
+				@php
+				$i=1
+				@endphp
+				@foreach($rounds as $round)
+			 		@foreach($questions[$round->id] as $question)
+						<section style="padding-top: 50px;">
+							<div class="ss-row peterriver go-anim">
+								<div class="hover-effect h-style" >
+									@if (count($medias[$question->id])>0) 
+										<div class="quiz__single_question__image">
+											@foreach($medias[$question->id] as $media)
+												@if($media->media_type == 'image')
+												<div class="ribbon"><i class="fa fa-question-circle-o"></i> Question No:
+													<div class="seclevelribbon">
+														<div class="thirdlevelribbon">
+															<div class="ribbon-sec">{{$i++}}</div>
+														</div>
+													</div>
+												</div>
+												<!-- END RIBBON -->
+												<!-- START IMAGE HOLDER -->
+												<div class="hover-effect h-style">
+													<a href="{{$media->public_path ? asset($media->public_path) : $media->media_link}}" rel="prettyPhotoImages[1]">
+														<img src="{{$media->public_path ? asset($media->public_path) : $media->media_link}}" class="clean-img">
+														<div class="mask"><i class="icon-search"></i>
+															<span class="img-rollover"></span>
+														</div>
+													</a>
+												</div>
+													<!-- <img  height='225px'> -->
+												@endif
+												@if($media->media_type == 'audio')
+													<audio controls>
+														<source src="{{$media->public_path ? asset($media->public_path) : $media->media_link}}" type="audio/mpeg" height='225px'>
+													</audio>
+												@endif
+												@if($media->media_type == 'video')
+													@if($media->media_link)
+														<!-- <iframe height='225px' src="{{$media->media_link}}"> </iframe> -->
+														<div class="ss-row concrete go-anim"><!-- greensea is the class for the color scheme(there are 19) go-anim is for slide up animation on roll over -->
+															<!-- START RIBBON -->
+															<div class="ribbon"><i class="icon-time icon-large"></i>Question No:
+																<div class="seclevelribbon">
+																	<div class="thirdlevelribbon">
+																		<div class="ribbon-sec">{{$i++}}</div>
+																	</div>
+																</div>
+															</div>
+															<!-- END RIBBON -->
+															<!-- START CONTENT HOLDER -->
+															<div class="ss-container gcnopadding">
+																<iframe width="100%" height="315" src="{{$media->media_link}}" frameborder="0" allowfullscreen></iframe>
+															</div>
+															<!-- END CONTENT HOLDER -->
+														</div>
+													@endif
+													@if($media->public_path)
+														<!-- <video controls>
+															<source src="" type="video/mp4" height='225px'>
+														</video> -->
+														<div class="ss-row concrete go-anim"><!-- greensea is the class for the color scheme(there are 19) go-anim is for slide up animation on roll over -->
+															<!-- START RIBBON -->
+															<div class="ribbon"><i class="icon-time icon-large"></i>Question No:
+																<div class="seclevelribbon">
+																	<div class="thirdlevelribbon">
+																		<div class="ribbon-sec">{{$i++}}</div>
+																	</div>
+																</div>
+															</div>
+															<!-- END RIBBON -->
+															<!-- START CONTENT HOLDER -->
+															<div class="ss-container gcnopadding">
+																<iframe width="100%" height="315" src="{{$media->public_path ? asset($media->public_path) : $media->media_link}}" frameborder="0" allowfullscreen></iframe>
+															</div>
+															<!-- END CONTENT HOLDER -->
+														</div>
+													@endif
+												@endif
+											@endforeach
+										</div>
+									@else
+										<div class="quiz__single_question__image">
+											<img src="{{asset('site_design/images/homepage__logo.png')}}" height='225px'>
+										</div>
+										<div class="ribbon"><i class="icon-time icon-large"></i>Question No:
+											<div class="seclevelribbon">
+												<div class="thirdlevelribbon">
+													<div class="ribbon-sec">{{$i++}}</div>
+												</div>
+											</div>
+										</div>
+										<!-- END RIBBON -->
+										<!-- START IMAGE HOLDER -->
+										<div class="hover-effect h-style">
+											<a href="{{asset('site_design/images/homepage__logo.png')}}" rel="prettyPhotoImages[1]">
+												<img src="{{asset('site_design/images/homepage__logo.png')}}" class="clean-img">
+												<div class="mask"><i class="icon-search"></i>
+													<span class="img-rollover"></span>
+												</div>
+											</a>
+											</div>
+									@endif
 								</div>
-
-								@endif
 								<div class="quiz__single_question__qa text-center w-100 ">
-												
 								
-									<p class="question"><span>Question:</span><span>{{$question->question}}</span></p>
-									<input type="hidden" class="question-timer" value="{{$question->time_limit}}">
-									<input type="hidden" class="question-type" value="{{$question->question_type}}">
-									<input type="hidden" class="question-issue" value="0">
-									<input type="hidden" class="question-round" value="{{$question->round_id}}">
-									<input type="hidden" class="question-user" value="{{$question->user_id}}">
-									<input type="hidden" class="question-id" value="{{$question->id}}">
-									<input type="hidden" class="quiz-id" value="{{$quiz_id}}">
+									<p align="center"> <span class="question_number"></span><lable style="text-align:right;float:right; margin-right:5px;" align="right" >Time  :  {{isset($question->time_limit)? $question->time_limit.' sec' : 'Not set' }}</lable></p>
+									<h3 align="left" class="question"><span><b>Question:{{$question->question}}</b></span></h3>
+							<input type="hidden" class="question-timer" value="{{$question->time_limit}}">
+							<input type="hidden" class="question-type" value="{{$question->question_type}}">
+							<input type="hidden" class="question-issue" value="0">
+							<input type="hidden" class="question-round" value="{{$question->round_id}}">
+							<input type="hidden" class="question-user" value="{{$question->user_id}}">
+							<input type="hidden" class="question-id" value="{{$question->id}}">
+							<input type="hidden" class="quiz-id" value="{{$quiz_id}}">
+							@foreach($medias[$question->id] as $media)
+								<input type="hidden" class="question-media-type" value="{{$media->media_type}}">
+								<input type="hidden" class="question-media-path" value="{{$media->public_path}}">
+								<input type="hidden" class="question-media-ink" value="{{$media->media_link}}">
+							@endforeach
 
-									@foreach($medias[$question->id] as $media)
-									<input type="hidden" class="question-media-type" value="{{$media->media_type}}">
-									<input type="hidden" class="question-media-path" value="{{$media->public_path}}">
-									<input type="hidden" class="question-media-ink" value="{{$media->media_link}}">
-
-									@endforeach
-
-									@foreach($answers[$question->id] as $answer)
-									<p class="answer"><span>Answer:</span><span>{{$answer->answer}}</span></p>
-									<input type="hidden" class="answer-id" value="{{$answer->id}}">
-										@if($answer->status==1)
-										<input  type="hidden" class="answer-right" value="{{$answer->id}}">
-										
-										@endif
-									@endforeach
+							@foreach($answers[$question->id] as $answer)
+								<p class="answer"><span>Answer:</span><span>{{$answer->answer}}</span></p>
+								<input type="hidden" class="answer-id" value="{{$answer->id}}">
+								@if($answer->status==1)
+									<input  type="hidden" class="answer-right" value="{{$answer->id}}">
+								@endif
+							@endforeach
+									
 								</div>
 							</div>
-							@endforeach
+						</section>
+					@endforeach
+				@endforeach
+                   
+			</article>
+
+			<div class="ss-nav-arrows-next">
+				<i id="next-arrow" class="icon-angle-right slick-btns0 slick-next slick-arrow"></i>
+			</div>
+			<div class="ss-nav-arrows-prev" style="">
+				<i id="prev-arrow" class="icon-angle-left slick-btns0 slick-prev slick-arrow"></i>
+			</div>
+
+	
+				<!-- <div class="row">
+					<div class="col ">
+						<div class="quiz__slider">
+							
+							@php
+							$i=1
+							@endphp
+							@foreach($rounds as $round)
+							 	@foreach($questions[$round->id] as $question)
+									<div class="quiz__single_question__container d-flex flex-column align-items-center ">
+										<h4>Question No: <span class="question_number">{{$i++}}</span></h4>
+										<p style="text-align:right;float:right; margin-right:0px;" align="right" >Time  :  {{isset($question->time_limit)? $question->time_limit.' sec' : 'Not set' }}</p>	
+										@if (count($medias[$question->id])>0) 
+											<div class="quiz__single_question__image ">
+												@foreach($medias[$question->id] as $media)
+													@if($media->media_type == 'image')
+														<img src="{{$media->public_path ? asset($media->public_path) : $media->media_link}}" height='225px'>
+													@endif
+													@if($media->media_type == 'audio')
+														<audio controls>
+															<source src="{{$media->public_path ? asset($media->public_path) : $media->media_link}}" type="audio/mpeg" height='225px'>
+														</audio>
+													@endif
+													@if($media->media_type == 'video')
+														@if($media->media_link)
+															<iframe height='225px' src="{{$media->media_link}}"> </iframe>
+														@endif
+														@if($media->public_path)
+															<video controls>
+																<source src="{{$media->public_path ? asset($media->public_path) : $media->media_link}}" type="video/mp4" height='225px'>
+															</video>
+														@endif
+													@endif
+												@endforeach
+											</div>
+										@else
+											<div class="quiz__single_question__image">
+												<img src="{{asset('site_design/images/homepage__logo.png')}}" height='225px'>
+											</div>
+										@endif
+										<div class="quiz__single_question__qa text-center w-100 ">
+											<p class="question"><span>Question:</span><span>{{$question->question}}</span></p>
+											<input type="hidden" class="question-timer" value="{{$question->time_limit}}">
+											<input type="hidden" class="question-type" value="{{$question->question_type}}">
+											<input type="hidden" class="question-issue" value="0">
+											<input type="hidden" class="question-round" value="{{$question->round_id}}">
+											<input type="hidden" class="question-user" value="{{$question->user_id}}">
+											<input type="hidden" class="question-id" value="{{$question->id}}">
+											<input type="hidden" class="quiz-id" value="{{$quiz_id}}">
+											@foreach($medias[$question->id] as $media)
+												<input type="hidden" class="question-media-type" value="{{$media->media_type}}">
+												<input type="hidden" class="question-media-path" value="{{$media->public_path}}">
+												<input type="hidden" class="question-media-ink" value="{{$media->media_link}}">
+											@endforeach
+
+											@foreach($answers[$question->id] as $answer)
+												<p class="answer"><span>Answer:</span><span>{{$answer->answer}}</span></p>
+												<input type="hidden" class="answer-id" value="{{$answer->id}}">
+												@if($answer->status==1)
+													<input  type="hidden" class="answer-right" value="{{$answer->id}}">
+												@endif
+											@endforeach
+										</div>
+									</div>
+								@endforeach
 							@endforeach
                           
 						</div>
-
+					
+		
 					</div>
-				</div>
-
-
-
+				</div> -->
 			</div>
-
 		</div>
-
+		
+	</div>
+	<div class="ss-holder">
+		<div class="inifiniteLoader animated fadeOutDown">
+			<div class="bar"> <span></span>
+			</div>
+		</div>
+    </div>
+		</div>
 		<div class="row">
 			<aside class="col-lg-3 dashboard__sidebar d-flex flex-column order-1 order-md-0">
 				<div class="dashboard__container mt-2 p-0 d-flex flex-grow-1">
@@ -815,10 +945,80 @@ $(document).ready(function(){
 		
 	}
 </script>
-
-
-
-
+<!-- END LOADING BAR -->
+<script type="text/javascript"  src="/slider/js/jquery.js"></script>
+	<script type="text/javascript"  src="/slider/js/jquery-migrate.min.js"></script>
+	<script type="text/javascript"  src="/slider/js/modernizr.custom.79639.js"></script>
+	<script type="text/javascript"  src="/slider/js/jquery.prettyPhoto.js"></script>
+	<script type="text/javascript"  src="/slider/js/all-functions.js"></script>
+	<script type="text/javascript"  src="/slider/js/classList.js"></script>
+	<script type="text/javascript"  src="/slider/js/bespoke.js"></script>
+	<script type="text/javascript"  src="/slider/js/jquery.flexslider.js"></script>
+    <!-- START AUDIO SUPPORT ( comment or delete this if you not going to use audio 
+    <script  src="/slider/js/audioplayer/script/berniecode-animator.js"></script>
+	<script  src="/slider/js/audioplayer/script/soundmanager2.js"></script>
+    <script  src="/slider/js/audioplayer/mp3-player-button.js"></script>
+    <script  src="/slider/js/audioplayer/script/360player.js"></script>  
+	<script>
+		soundManager.setup({
+			url: 'js/audioplayer/swf',
+		});
+		threeSixtyPlayer.config.scaleFont = (navigator.userAgent.match(/msie/i)?false:true);
+		threeSixtyPlayer.config.showHMSTime = true;
+	
+		// enable some spectrum stuffs
+		
+		threeSixtyPlayer.config.useWaveformData = true;
+		threeSixtyPlayer.config.useEQData = true;
+		
+		// enable this in SM2 as well, as needed
+		
+		if (threeSixtyPlayer.config.useWaveformData) {
+		  soundManager.flash9Options.useWaveformData = true;
+		}
+		if (threeSixtyPlayer.config.useEQData) {
+		  soundManager.flash9Options.useEQData = true;
+		}
+		if (threeSixtyPlayer.config.usePeakData) {
+		  soundManager.flash9Options.usePeakData = true;
+		}
+		
+		if (threeSixtyPlayer.config.useWaveformData || threeSixtyPlayer.flash9Options.useEQData || threeSixtyPlayer.flash9Options.usePeakData) {
+		  // even if HTML5 supports MP3, prefer flash so the visualization features can be used.
+		  soundManager.preferFlash = true;
+		}
+		
+		// favicon is expensive CPU-wise, but can be used.
+		if (window.location.href.match(/hifi/i)) {
+		  threeSixtyPlayer.config.useFavIcon = true;
+		}
+		
+		if (window.location.href.match(/html5/i)) {
+		  // for testing IE 9, etc.
+		  soundManager.useHTML5Audio = true;
+		}
+    </script> -->
+    <!-- END AUDIO SUPPORT -->
+	<script>
+	jQuery(document).ready(function ($) {
+		/* LEGEND
+			scrollinit(); - default with no additional pages.
+			
+			scrollinit('carousel', 1, 0, true, true, true, true, true); - custom settings
+			
+			1. Scroll effect: 'classic', 'cube', 'carousel', 'concave', 'coverflow', 'spiraltop', 'spiralbottom', 'classictilt'.
+		 	2. Number of scroll pages. '1' means no additional pages.
+			3. Select which slide to be on focus when slider is loaded. '0' means first slide.
+			4. Enable / disable keys navigation: true, false.
+			5. Enable / disable buttons navigation: true, false.
+			6. Enable / disable slide gestures navigation on touch devices: true, false.
+			7. Enable / disable click navigation: true, false.
+			8. Enable / disable mouse wheel navigation: true, false.
+		*/
+		
+		scrollinit("coverflow", 1, 0, true, true, true, true, true);
+	});
+	</script>
 @endsection
 
 @section('footer_scripts')

@@ -233,7 +233,7 @@ class QuizController extends Controller
             Session::push('quiz_image', $filename);
             Session::push('quiz_image', $public_path2);
 
-            $cat = QuizCategory::all();
+            //$cat = QuizCategory::all();
             $categoriesImgs = QuizCategoryImage::all();
             $quiz = $request->input('quiz__link');
 

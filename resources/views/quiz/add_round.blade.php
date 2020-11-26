@@ -439,10 +439,10 @@
 									<div class="d-flex flex-column h-100 participants__choice justify-content-center align-items-center p-4">
 										<div class="icon pb-2">
 
-											 @if($category->id)
+											 @if($category->id && isset($categoriesImgs))
 												@foreach($categoriesImgs as $categoriesImg) 
 													@if($category->id==$categoriesImg->category_id)
-													<i ><img class="q-img mb-3" src="{{asset($categoriesImg->public_path)}}" height="200px"></i>
+													<i ><img class="q-img mb-3" src="{{asset($categoriesImg->public_path)}}" height="100%" width="100%"></i>
 														
 													@endif
 												@endforeach
