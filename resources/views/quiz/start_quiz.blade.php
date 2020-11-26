@@ -84,7 +84,7 @@
 
 			<div class="col-lg-9 order-0 order-md-1 " >
 
-		<div id="ss-holder" class="ss-holder row" style="height:100%;">
+		<div id="ss-holder" class="ss-holder row" style="height: 500px;">
 		<div id="effects" class="col" >
 			<article id="articlehold" class="quiz__slider0" style="background: rgba(255, 255, 255, 0.25)">
 				@php
