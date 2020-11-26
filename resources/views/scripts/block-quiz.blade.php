@@ -3,9 +3,8 @@
     
     $("body").delegate('.block', 'click',function(e) {
         e.preventDefault();
-        var id=e.target.id;
-        var text=$('#'+id).text();
-           
+        var id=$(this).attr('id');
+        var text=$('#'+id).find('span.child').text();
         if(text=='block'){
           swal({
                     title: "Are you sure?",

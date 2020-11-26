@@ -200,10 +200,10 @@
 														<span>Edit</span>
 													</div>
 												</a>
-												<div class="d-flex flex-column">
+												<div class="d-flex flex-column share" id="{{$quiz->id}}">
 													<i class="fas fa-share-alt"></i>
 													<input type="hidden" id="get_url" value="{{asset('/')}}">
-													<span class="share" id="{{$quiz->id}}">Share</span>
+													<span >Share</span>
 												</div>
 												@if($quiz->payment==1)
 													<a href="/quiz/start_quiz/{{$quiz->id}}">
