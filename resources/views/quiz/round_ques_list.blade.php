@@ -106,7 +106,15 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="form-row">
+                    <div class="col-md-4">
+                       
+                    </div>
+                    <div class=" col-md-4">
+                    <img src='{{asset($round_image_data)}}' alt='image' width='120px' height='80px' style='border: 3px solid #dee2e6!important;' class='myImg'> 
+                   
+                    </div>    
+                </div>
                 <!-- <div class="form-row justify-content-center pt-3">
 				<div class="col-md-4">	
 					<input class="justify-content-center px-4" type="submit" value="Save">
@@ -336,7 +344,43 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-row">
+                            <div class="col-md-4">
+                                <!-- <label>media</label> -->
+                            </div>
+                            <div class="col-md-8 bg-light">
+                                <div class="row mt-3">
+                                @if(isset($media[$question->id.'image']))
+                                    <div class="col-md-4 pr-md-0 mt-3 pb-4 ml-3  mb-lg-0">
+                                         <img src='{{asset($media[$question->id."image"])}}' alt='image' width='150px' height='100px' style='border: 3px solid #dee2e6!important;' class='myImg'>
+                                    </div>
+                                    
+                                @endif
+                                   
+                              
 
+                                    @if(isset($media[$question->id.'video']))
+                                    <div class="col-md-4 pr-md-0 pr-md-3">
+                                       <video width="300" height="200" controls>
+                                         <source src='{{asset($media[$question->id."video"])}}' type="video/mp4">
+                                         <source src='{{asset($media[$question->id."video"])}}' type="video/ogg">
+                                       </video>                                    
+                                    </div>
+                                    @endif
+
+                                    
+
+                                </div>
+                                @if(isset($media[$question->id.'audio']))
+                                    <div class="col-md-4 pr-md-0 mb-3 mb-lg-0">
+                                      <audio controls style="width:470px;">
+                                        <source src='{{asset($media[$question->id."audio"])}}' type="audio/ogg">
+                                        <source src='{{asset($media[$question->id."audio"])}}' type="audio/mpeg">
+                                      </audio>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
                         @if($question->question_type  =="standard__question")
                         @foreach($answers as $answer)
                             @if($answer->question_id==$question->id)
