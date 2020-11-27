@@ -451,14 +451,14 @@ class MasterQuestionController extends Controller
                 
 
                 $filename = 'image.' . $question_img->getClientOriginalExtension();
-                $save_path1 = '/storage/question/' . $question_image . '/question/';
+                $save_path1 = 'storage/question/' . $question_image . '/question/';
 
                 $save_path = storage_path('app/public') . '/question/' . $question_image . '/question/';
 
                 // $path = $save_path . $filename;
                 // $path_thumb    = $save_path_thumb . $filename;
 
-                $public_path = '/storage/question/' . $question_image . '/question/' . $filename;
+                $public_path = 'storage/question/' . $question_image . '/question/' . $filename;
 
                 //resize the image            
 
@@ -477,14 +477,14 @@ class MasterQuestionController extends Controller
                 $question_aud = $request->file($aud);
 
                 $filename = 'audio.' . $question_aud->getClientOriginalExtension();
-                $save_path1 = '/storage/question/' . $question_image . '/question/';
+                $save_path1 = 'storage/question/' . $question_image . '/question/';
 
                 $save_path = storage_path('app/public') . '/question/' . $question_image . '/question/';
 
                 // $path = $save_path . $filename;
                 // $path_thumb    = $save_path_thumb . $filename;
 
-                $public_path = '/storage/question/' . $question_image . '/question/' . $filename;
+                $public_path = 'storage/question/' . $question_image . '/question/' . $filename;
 
                 //resize the image            
 
@@ -505,14 +505,14 @@ class MasterQuestionController extends Controller
                 $question_vid = $request->file($vid);
 
                 $filename = 'video.' . $question_vid->getClientOriginalExtension();
-                $save_path1 = '/storage/question/' . $question_image . '/question/';
+                $save_path1 = 'storage/question/' . $question_image . '/question/';
 
                 $save_path = storage_path('app/public') . '/question/' . $question_image . '/question/';
 
                 // $path = $save_path . $filename;
                 // $path_thumb    = $save_path_thumb . $filename;
 
-                $public_path = '/storage/question/' . $question_image . '/question/' . $filename;
+                $public_path = 'storage/question/' . $question_image . '/question/' . $filename;
 
                 //resize the image            
 

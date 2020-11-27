@@ -99,7 +99,7 @@
 										<div class="quiz__single_question__image">
 											@foreach($medias[$question->id] as $media)
 												@if($media->media_type == 'image')
-												<div class="ribbon"><i class="fa fa-question-circle-o"></i> Question No:
+												<div class="ribbon"><i class="fa fa-question-circle-o"></i>  Question No:
 													<div class="seclevelribbon">
 														<div class="thirdlevelribbon">
 															<div class="ribbon-sec">{{$i++}}</div>
@@ -120,7 +120,7 @@
 												@endif
 												@if($media->media_type == 'audio')
 													<div style="padding-top:200px;padding-bottom:200px;">
-														<div class="ribbon"><i class="fa fa-question-circle-o"></i> Question No:
+														<div class="ribbon"><i class="fa fa-question-circle-o"></i>  Question No:
 															<div class="seclevelribbon">
 																<div class="thirdlevelribbon">
 																	<div class="ribbon-sec">{{$i++}}</div>
@@ -139,7 +139,7 @@
 														<!-- <iframe height='225px' src="{{$media->media_link}}"> </iframe> -->
 														<div class="ss-row concrete go-anim"><!-- greensea is the class for the color scheme(there are 19) go-anim is for slide up animation on roll over -->
 															<!-- START RIBBON -->
-															<div class="ribbon"><i class="icon-time icon-large"></i>Question No:
+															<div class="ribbon"><i class="fa fa-question-circle-o"></i>  Question No:
 																<div class="seclevelribbon">
 																	<div class="thirdlevelribbon">
 																		<div class="ribbon-sec">{{$i++}}</div>
@@ -160,7 +160,7 @@
 														</video> -->
 														<div class="ss-row concrete go-anim"><!-- greensea is the class for the color scheme(there are 19) go-anim is for slide up animation on roll over -->
 															<!-- START RIBBON -->
-															<div class="ribbon"><i class="icon-time icon-large"></i>Question No:
+															<div class="ribbon"><i class="fa fa-question-circle-o"></i>  Question No:
 																<div class="seclevelribbon">
 																	<div class="thirdlevelribbon">
 																		<div class="ribbon-sec">{{$i++}}</div>
@@ -182,7 +182,7 @@
 										<div class="quiz__single_question__image">
 											<img src="{{asset('site_design/images/homepage__logo.png')}}" height='225px'>
 										</div>
-										<div class="ribbon"><i class="icon-time icon-large"></i>Question No:
+										<div class="ribbon"><i class="fa fa-question-circle-o"></i>  Question No:
 											<div class="seclevelribbon">
 												<div class="thirdlevelribbon">
 													<div class="ribbon-sec">{{$i++}}</div>
@@ -204,27 +204,27 @@
 								<div class="quiz__single_question__qa text-center w-100 ">
 								
 									<p align="center"> <span class="question_number"></span><lable style="text-align:right;float:right; margin-right:5px;" align="right" >Time  :  {{isset($question->time_limit)? $question->time_limit.' sec' : 'Not set' }}</lable></p>
-									<h3 align="left" class="question"><span><b>Question:{{$question->question}}</b></span></h3>
-							<input type="hidden" class="question-timer" value="{{$question->time_limit}}">
-							<input type="hidden" class="question-type" value="{{$question->question_type}}">
-							<input type="hidden" class="question-issue" value="0">
-							<input type="hidden" class="question-round" value="{{$question->round_id}}">
-							<input type="hidden" class="question-user" value="{{$question->user_id}}">
-							<input type="hidden" class="question-id" value="{{$question->id}}">
-							<input type="hidden" class="quiz-id" value="{{$quiz_id}}">
-							@foreach($medias[$question->id] as $media)
-								<input type="hidden" class="question-media-type" value="{{$media->media_type}}">
-								<input type="hidden" class="question-media-path" value="{{$media->public_path}}">
-								<input type="hidden" class="question-media-ink" value="{{$media->media_link}}">
-							@endforeach
+									<p class="question" align="left" style="padding-left:10px;"><span>Question:</span><span>{{$question->question}}</span></p>
+									<input type="hidden" class="question-timer" value="{{$question->time_limit}}">
+									<input type="hidden" class="question-type" value="{{$question->question_type}}">
+									<input type="hidden" class="question-issue" value="0">
+									<input type="hidden" class="question-round" value="{{$question->round_id}}">
+									<input type="hidden" class="question-user" value="{{$question->user_id}}">
+									<input type="hidden" class="question-id" value="{{$question->id}}">
+									<input type="hidden" class="quiz-id" value="{{$quiz_id}}">
+									@foreach($medias[$question->id] as $media)
+										<input type="hidden" class="question-media-type" value="{{$media->media_type}}">
+										<input type="hidden" class="question-media-path" value="{{$media->public_path}}">
+										<input type="hidden" class="question-media-ink" value="{{$media->media_link}}">
+									@endforeach
 
-							@foreach($answers[$question->id] as $answer)
-								<p class="answer"><span>Answer:</span><span>{{$answer->answer}}</span></p>
-								<input type="hidden" class="answer-id" value="{{$answer->id}}">
-								@if($answer->status==1)
-									<input  type="hidden" class="answer-right" value="{{$answer->id}}">
-								@endif
-							@endforeach
+									@foreach($answers[$question->id] as $answer)
+										<p class="answer"><span>Answer:</span><span>{{$answer->answer}}</span></p>
+										<input type="hidden" class="answer-id" value="{{$answer->id}}">
+										@if($answer->status==1)
+											<input  type="hidden" class="answer-right" value="{{$answer->id}}">
+										@endif
+									@endforeach
 									
 								</div>
 							</div>
