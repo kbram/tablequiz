@@ -92,10 +92,7 @@
 										<div class="form-group">
 											<label for="formControlRange"></label>
 											<!-- <input type="range" class="form-control-range slider" min="1" max="4" value="1" step="0.1" id="zoomer"> -->
-											<div id="demo" style="display:none;" class="d-none"></div>
-											<div id="myProgress">
-												<div id="myBar"></div>
-											</div>
+											
 										</div>
 									</div>
 								</div>
@@ -246,11 +243,8 @@ $('.quiz-upload').click(function(){
 
 var image_src;
   $('.imagePreviewInput').on('change', function(){
-	  /**progress bar */	
+
 	  def_count=1;
-    //  $("#pro").text("Save");
-	var elem = document.getElementById("myBar");
-	elem.style.width = "1%";
 
     var reader = new FileReader();
     reader.onload = function (event) {
@@ -290,7 +284,7 @@ var image_src;
 			var i = 0;
 			if (i == 0) {
 				i = 1;
-				var elem = document.getElementById("myBar");
+				
 				var width = 1;
 				var id = setInterval(frame, 10);
 

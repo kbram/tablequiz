@@ -128,8 +128,23 @@ class QuizRoundController extends Controller
         $lrid=$lastround->id;
               
         $questions=Question::where('round_id',$round->id)->get();
+        $media=[];
+      //  $media_type=[]; 
+     
+     foreach($questions as $question){
+         if(QuestionMedia::where('question_id',$question->id)->first()){
+        $meds=QuestionMedia::where('question_id',$question->id)->get(); 
+        foreach($meds as $med){
+        $media[$question->id.$med->media_type]=$med->public_path;  
+       // $media_type[$question->id.$med->id]=$med->media_type;
+        }
+       
+         }
+
+        
+     }
         $count=0;
-        return view('quiz.round_ques_list',compact('round_image_data','count','questions','answers','categories','round','round_count','id','rid','pay','frid','lrid'));
+        return view('quiz.round_ques_list',compact('round_image_data','count','questions','answers','categories','round','round_count','id','rid','pay','frid','lrid','media'));
     }
     public function new_show($id,$rid){
         $round=QuizRound::where('quiz_id',$id)->get()->take($rid)->last();

@@ -61,11 +61,12 @@ class QuizCategoriesController extends Controller
 
             $category_image = $request->file('upload__category__image');
             $filename = 'category_image.'.$category_image->getClientOriginalExtension();
-            $save_path = storage_path('app/public'). '/categories/'.$category_id.'/category_images/';
+            $save_path = storage_path('app/public'). '/categories/'.$category_id.'/category_images';
             $path = $save_path.$filename;
-            $public_path = storage_path('app/public'). '/categories/'.$category_id.'/category_image/'.$filename;
+            $public_path ='/storage/categories/'.$category_id.'/category_images/'.$filename;
 
             // Make the user a folder and set permissions
+           // dd($save_path);
             File::makeDirectory($save_path, $mode = 0755, true, true);
 
             // Save the file to the server
@@ -124,9 +125,9 @@ class QuizCategoriesController extends Controller
                 if ($request->hasFile('upload__category__image')) { 
                     $category_image = $request->file('upload__category__image');
                     $filename = 'category_image.'.$category_image->getClientOriginalExtension();
-                    $save_path = storage_path().'categories/'.$category_id.'/category_images/';
+                    $save_path = storage_path('app/public').'categories/'.$category_id.'/category_images/';
                     $path = $save_path.$filename;
-                    $public_path = '/images/category_image/'.$category_id.'/category_image/'.$filename;
+                    $public_path = '/storage/category_image/'.$category_id.'/category_images/'.$filename;
         
                     // Make the user a folder and set permissions
                     File::makeDirectory($save_path, $mode = 0755, true, true);

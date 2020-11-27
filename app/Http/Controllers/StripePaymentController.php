@@ -47,6 +47,13 @@ class StripePaymentController extends Controller
      */
     public function stripePost(Request $request)
     {
+        if($request->total_card==0){
+            $quiz = Quiz::find($request->input('quiz_id'));
+            $quiz->payment = true ;
+
+            $quiz->save();
+            return redirect('dashboard/home');
+        }
         $quizzes=Auth::user()->quizzes()->get();
 
         $payment_deatils = UserPayment::where('user_id', Auth::id())->first();
@@ -245,8 +252,15 @@ $quiz->save();
                         'bg_image_cost' => $background_cost,
                          'quiz_id' => $quiz_id->id
                     );
+                    
+                    $total_card = (int)$participants_cost[0]->cost+ (int)$question_cost + (int)$background_cost;
+                    if($total_card==0){
+                        $quiz = Quiz::find($quiz_id->id);
+                        $quiz->payment = true ;
+                        $quiz->save();
+                    }
             }
-            
+           
             return response()->json($response);
         
     

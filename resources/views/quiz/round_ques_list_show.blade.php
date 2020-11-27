@@ -526,8 +526,9 @@
 			
 			<div class="col-md-4 px-0 px-md-4">
 				<!--<button type="button"  class="btn btn-primary d-block" id="publish-quiz">Publish Quiz</a>-->
-				<a href="/round/show/{{$id}}/{{$rid+1}}"  id="nextRound" class="btn btn-primary  d-block">Next Round  <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
-				<!-- <a href="#" data-toggle="modal" id="publish-quiz" data-target="#publishQuizModal" class="btn btn-primary d-block publish-quiz ">Publish Quiz</a> -->
+				<a href="/quiz/{{$id}}/round/{{$rid+1}}"  id="nextRound" class="btn btn-primary  d-block">Next Round  <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+				
+                <!-- <a href="#" data-toggle="modal" id="publish-quiz" data-target="#publishQuizModal" class="btn btn-primary d-block publish-quiz ">Publish Quiz</a> -->
 				
 			</div>
 	</section>
@@ -536,7 +537,7 @@
 			
             <div class="col-md-4 mb-3 mb-md-0 px-0 px-md-4" >
 				<!-- <button type="submit" class="btn btn-secondary d-block" id="nextRound"><span class="pr-3"><i class="fa fa-plus"></i></span>Next round</a> -->
-                <a href="/round/show/{{$id}}/{{$rid-1}}"  id="preRound" class="btn btn-secondary  d-block"><i class="fa fa-chevron-left" aria-hidden="true"></i>  Previous Round </a>
+                <a href="/quiz/{{$id}}/round/{{$rid-1}}"  id="preRound" class="btn btn-secondary  d-block"><i class="fa fa-chevron-left" aria-hidden="true"></i>  Previous Round </a>
 			</div>
 	</section>
 
@@ -544,11 +545,11 @@
     <section class="row round__page__buttons justify-content-center align-items-center pt-5 mt-5 border-top">
 			<div class="col-md-4 mb-3 mb-md-0 px-0 px-md-4" >
 				<!-- <button type="submit" class="btn btn-secondary d-block" id="nextRound"><span class="pr-3"><i class="fa fa-plus"></i></span>Next round</a> -->
-                <a href="/round/show/{{$id}}/{{$rid-1}}"  id="preRound" class="btn btn-secondary  d-block"><i class="fa fa-chevron-left" aria-hidden="true"></i>  Previous Round </a>
+                <a href="/quiz/{{$id}}/round/{{$rid-1}}"  id="preRound" class="btn btn-secondary  d-block"><i class="fa fa-chevron-left" aria-hidden="true"></i>  Previous Round </a>
 			</div>
 			<div class="col-md-4 px-0 px-md-4">
 				<!--<button type="button"  class="btn btn-primary d-block" id="publish-quiz">Publish Quiz</a>-->
-				<a href="/round/show/{{$id}}/{{$rid+1}}"  id="nextRound" class="btn btn-primary  d-block">Next Round  <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+				<a href="/quiz/{{$id}}/round/{{$rid+1}}"  id="nextRound" class="btn btn-primary  d-block">Next Round  <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
 				<!-- <a href="#" data-toggle="modal" id="publish-quiz" data-target="#publishQuizModal" class="btn btn-primary d-block publish-quiz ">Publish Quiz</a> -->
 				
 			</div>

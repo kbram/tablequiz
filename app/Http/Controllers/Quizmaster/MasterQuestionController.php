@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Question;
 use App\Models\Answer;
+use App\Models\QuizCategoryImage;
 use Validator;
 use Session;
 use App\Models\QuizRound;
@@ -365,7 +366,7 @@ class MasterQuestionController extends Controller
 
         //background image save 
 
-        if ($request->hasFile('bg_image')) {
+        if ($request->round_crop_image) {
 
             /** round_crop image decode start*/
             $data = $request->round_crop_image;
@@ -732,8 +733,8 @@ class MasterQuestionController extends Controller
                     Session::push('round_bg_filename', $filename);
                 }
             }
-
-            return View('quiz.add_round', compact('categories', 'answers', 'medias', 'round_count', 'quiz'));
+            $categoriesImgs = QuizCategoryImage::all();
+            return View('quiz.add_round', compact('categories', 'answers', 'medias', 'round_count', 'quiz','categoriesImgs'));
         
 
         // Session::push('round_question',$request->except('bg_image','image_media'));

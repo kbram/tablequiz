@@ -121,13 +121,15 @@
 									<td class="d-none" id="quizLink{{$quiz -> id}}">{{$quiz-> quiz_link}}</td>
 									<td class="d-none" id="emailLink{{$quiz->id}}">{{$result[$quiz->id]}}</td>
 									<td class="quiz_actions db d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column"  style=" pointer-events: none;opacity: 0.4;">
-											<i class="far fa-eye"></i>
-											<a href="/admin/home/view/{{$quiz->id}}"><span class="view-qz" id="view-qz{{$quiz->id}}">View Qs</span></a>
-										</div>
-										<div class="d-flex flex-column"  style=" pointer-events: none;opacity: 0.4;">
+										<a href="/quiz/{{$quiz->id}}/round/1">
+											<div class="d-flex flex-column"  >
+												<i class="far fa-eye"></i>
+												<span class="view-qz" id="view-qz{{$quiz->id}}">View Qs</span>
+											</div>
+										</a>
+										<div class="d-flex flex-column share" id="{{$quiz->id}}" >
 									
-											<i class="fas fa-share-alt"></i><span class="share" id="{{$quiz->id}}">Share</span>
+											<i class="fas fa-share-alt"></i><span >Share</span>
 
 										</div>
 									
@@ -153,25 +155,25 @@
 									<td class="d-none" id="emailLink{{$quiz->id}}">{{$result[$quiz->id]}}</td>
 									<td class="quiz_actions db d-flex flex-row justify-content-lg-center">
 										<div class="d-flex flex-column">
-											<i class="far fa-eye"></i>
-											<span class="view-qz" id="view-qz{{$quiz->id}}"><a href="/admin/home/view/{{$quiz->id}}">View Qs</a></span>
+											
+											<span class="view-qz" id="view-qz{{$quiz->id}}"><a href="/quiz/{{$quiz->id}}/round/1" ><i class="far fa-eye"></i><span class="d-block">View Qs</span></a></span>
 										</div>
-										<div class="d-flex flex-column">
+										<div class="d-flex flex-column share" id="{{$quiz->id}}">
 										<input type="hidden" id="get_url" value="{{asset('/')}}">
-											<i class="fas fa-share-alt"></i><span class="share" id="{{$quiz->id}}">Share</span>
+											<i class="fas fa-share-alt"></i><span >Share</span>
 
 										</div>
 									
 										<form method="POST" action="/admin/home/block/{{$quiz->id}}" class="p-0">
 										             @csrf
-											<div class="d-flex flex-column">
+											<div class="d-flex flex-column block" id="block{{$quiz->id}}">
 												<i class="fas fa-times-circle"></i>
-												<span class="block" id="block{{$quiz->id}}">block</span>
+												<span class="child">block</span>
 											</div>
 										</form>
 									
-										<div class="d-flex flex-column">
-											<i class="fas fa-envelope"></i><span class="message" id="{{$quiz->id}}">Message</span>
+										<div class="d-flex flex-column message" id="{{$quiz->id}}">
+											<i class="fas fa-envelope"></i><span >Message</span>
 											
 										</div>
 									</td>

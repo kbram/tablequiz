@@ -216,7 +216,8 @@ Route::get('round/show', 'QuizRoundController@show');
 Route::post('round/upload', 'QuizRoundController@upload');
 
 Route::get('round/edit/{id}/{rid}', 'QuizRoundController@new_edit');
-Route::get('round/show/{id}/{rid}', 'QuizRoundController@new_show');
+// Route::get('round/show/{id}/{rid}', 'QuizRoundController@new_show');
+Route::get('quiz/{id}/round/{rid}', 'QuizRoundController@new_show');
 //Route::get('round_ques_list/edit/{name}/{id}', 'QuizRoundController@round_ques_list_edit');
 Route::get('round_question/edit/{id}', 'Quizmaster\MasterQuestionController@edit');
 Route::post('question/upload/{id}', 'Quizmaster\MasterQuestionController@upload');
