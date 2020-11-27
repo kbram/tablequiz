@@ -350,6 +350,7 @@ class MasterQuestionController extends Controller
     public function add_round_question(Request $request)
     {
 
+
         $categories = QuizCategory::all();
         $questions = GlobalQuestion::all();
         $answers = GlobalAnswer::all();
@@ -358,6 +359,7 @@ class MasterQuestionController extends Controller
 
 
         $round_count = $request->input('round_count') + 1;
+        $round_s = $request->input('round_count') - 1;
         $quiz = $request->input('quiz');
 
         $quiz_link = $quiz . '/' . $round_count;
@@ -366,8 +368,7 @@ class MasterQuestionController extends Controller
 
         //background image save 
 
-        if ($request->round_crop_image) {
-
+        if ($request->input('round_crop_image')) {          
             /** round_crop image decode start*/
             $data = $request->round_crop_image;
             $image_array_1 = explode(";", $data);
@@ -377,7 +378,7 @@ class MasterQuestionController extends Controller
 
 
             $round_background = $request->file('bg_image');
-            $filename = 'round_bg.' . $round_background->getClientOriginalExtension();
+            $filename_round = 'round_bg.' . $round_background->getClientOriginalExtension();
             $save_path1 = '/storage/round_bg/' . $quiz_link . '/round_bg/';
 
             $save_path = storage_path('app/public') . '/round_bg/' . $quiz_link . '/round_bg/';
@@ -387,9 +388,9 @@ class MasterQuestionController extends Controller
             // $path = $save_path . $filename;
             // $path_thumb    = $save_path_thumb . $filename;
 
-            $public_path = '/storage/' . '/round_bg/' . $quiz_link . '/round_bg/' . $filename;
-            $public_path2 = '/storage/round_bg/' . $quiz_link . '/round_bg/' . '/orgimg/' . $filename;
-            $public_path_thumb = '/storage/round_bg/' . '/round_bg/' . $quiz_link . '/round_bg/' . '/thumb/' . $filename;
+            $public_path_round = '/storage/' . '/round_bg/' . $quiz_link . '/round_bg/' . $filename;
+            $public_path2_round = '/storage/round_bg/' . $quiz_link . '/round_bg/' . '/orgimg/' . $filename;
+            $public_path_thumb_round = '/storage/round_bg/' . '/round_bg/' . $quiz_link . '/round_bg/' . '/thumb/' . $filename;
 
             //resize the image            
 
@@ -400,14 +401,16 @@ class MasterQuestionController extends Controller
 
             Image::make($data)->save($save_path . $filename);
             $round_background->move($save_path2, $filename);
-        } else {
+        } 
+        
+        else {
 
-            $filename = 0;
-            $save_path1 = 0;
-            $save_path = 0;
-            $public_path = 0;
-            $public_path2 = 0;
-            $public_path_thumb = 0;
+            $filename_round = 0;
+            $save_path1_round = 0;
+            $save_path_round = 0;
+            $public_path_round = 0;
+            $public_path2_round = 0;
+            $public_path_thumb_round = 0;
         }
 
 
@@ -465,7 +468,7 @@ class MasterQuestionController extends Controller
 
                 $question_img->move($save_path, $filename);
 
-                Session::put('question_image_' . $m, $public_path);
+                Session::put('question_image_' . $round_s.$m, $public_path);
             }
             //audio
 
@@ -491,7 +494,7 @@ class MasterQuestionController extends Controller
 
                 $question_aud->move($save_path, $filename);
 
-                Session::put('question_audio_' . $m, $public_path);
+                Session::put('question_audio_' . $round_s.$m, $public_path);
             }
 
             //video
@@ -519,22 +522,22 @@ class MasterQuestionController extends Controller
 
                 $question_vid->move($save_path, $filename);
 
-                Session::put('question_video_' . $m, $public_path);
+                Session::put('question_video_' . $round_s.$m, $public_path);
             }
 
             //image
             if ($request->$img_link) {
-                Session::put('question_image_link_' . $m, $request->$img_link);
+                Session::put('question_image_link_' .$round_s.$m, $request->$img_link);
             }
 
             //audio
             if ($request->$aud_link) {
-                Session::put('question_audio_link_' . $m, $request->$aud_link);
+                Session::put('question_audio_link_' .$round_s.$m, $request->$aud_link);
             }
 
             //video
             if ($request->$vid_link) {
-                Session::put('question_video_link_' . $m, $request->$vid_link);
+                Session::put('question_video_link_' .$round_s.$m, $request->$vid_link);
             }
         }
 
@@ -620,28 +623,29 @@ class MasterQuestionController extends Controller
                 //media link save
 
 
-                if (Session::has('question_image_link_' . $i)) {
+                if (Session::has('question_image_link_' .$round_s.$i)) {
                     $question_media = new QuestionMedia;
                     $question_media->question_id = $questinon_save->id;
 
-                    $question_media->media_link = Session::get('question_image_link_' . $i);
+                    $question_media->media_link = Session::get('question_image_link_' .$round_s.$i);
                     $question_media->media_type = "image";
                     $question_media->save();
+
                 }
 
-                if (Session::has('question_audio_link_' . $i)) {
+                if (Session::has('question_audio_link_' .$round_s.$i)) {
                     $question_media = new QuestionMedia;
                     $question_media->question_id = $questinon_save->id;
 
-                    $question_media->media_link = Session::get('question_audio_link_' . $i);
+                    $question_media->media_link = Session::get('question_audio_link_' .$round_s.$i);
                     $question_media->media_type = "audio";
                     $question_media->save();
                 }
-                if (Session::has('question_video_link_' . $i)) {
+                if (Session::has('question_video_link_' .$round_s.$i)) {
                     $question_media = new QuestionMedia;
                     $question_media->question_id = $questinon_save->id;
 
-                    $question_media->media_link = Session::get('question_video_link_' . $i);
+                    $question_media->media_link = Session::get('question_video_link_' .$round_s.$i);
                     $question_media->media_type = "video";
                     $question_media->save();
                 }
@@ -649,29 +653,30 @@ class MasterQuestionController extends Controller
 
                 //media upload start here
 
-                if (Session::has('question_image_' . $i)) {
+                if (Session::has('question_image_' .$round_s.$i)) {
+
                     $question_media = new QuestionMedia;
                     $question_media->question_id = $questinon_save->id;
 
 
-                    $question_media->public_path = Session::get('question_image_' . $i);
+                    $question_media->public_path = Session::get('question_image_' .$round_s.$i);
 
                     $question_media->media_type = "image";
                     $question_media->save();
                 }
-                if (Session::has('question_audio_' . $i)) {
+                if (Session::has('question_audio_' .$round_s.$i)) {
                     $question_media = new QuestionMedia;
                     $question_media->question_id = $questinon_save->id;
 
-                    $question_media->public_path = Session::get('question_audio_' . $i);
+                    $question_media->public_path = Session::get('question_audio_' .$round_s.$i);
                     $question_media->media_type = "audio";
                     $question_media->save();
                 }
-                if (Session::has('question_video_' . $i)) {
+                if (Session::has('question_video_' .$round_s.$i)) {
                     $question_media = new QuestionMedia;
                     $question_media->question_id = $questinon_save->id;
 
-                    $question_media->public_path = Session::get('question_video_' . $i);
+                    $question_media->public_path = Session::get('question_video_' .$round_s.$i);
                     $question_media->media_type = "video";
                     $question_media->save();
                 }
@@ -725,12 +730,12 @@ class MasterQuestionController extends Controller
                 if ($request->question[0]) {   
 
                     Session::push('round_question', $_REQUEST);
-                    Session::push('round_bg_public_path', $public_path);
-                    Session::push('round_bg_public_path2', $public_path2);
+                    Session::push('round_bg_public_path', $public_path_round);
+                    Session::push('round_bg_public_path2', $public_path2_round);
 
-                    Session::push('round_bg_public_path_thumb', $public_path_thumb);
+                    Session::push('round_bg_public_path_thumb', $public_path_thumb_round);
                     Session::push('round_bg_save_path1', $save_path1);
-                    Session::push('round_bg_filename', $filename);
+                    Session::push('round_bg_filename', $filename_round);
                 }
             }
             $categoriesImgs = QuizCategoryImage::all();
