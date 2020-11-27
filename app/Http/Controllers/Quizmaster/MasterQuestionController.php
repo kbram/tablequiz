@@ -388,9 +388,9 @@ class MasterQuestionController extends Controller
             // $path = $save_path . $filename;
             // $path_thumb    = $save_path_thumb . $filename;
 
-            $public_path_round = '/storage/' . '/round_bg/' . $quiz_link . '/round_bg/' . $filename;
-            $public_path2_round = '/storage/round_bg/' . $quiz_link . '/round_bg/' . '/orgimg/' . $filename;
-            $public_path_thumb_round = '/storage/round_bg/' . '/round_bg/' . $quiz_link . '/round_bg/' . '/thumb/' . $filename;
+            $public_path_round = '/storage/' . '/round_bg/' . $quiz_link . '/round_bg/' . $filename_round;
+            $public_path2_round = '/storage/round_bg/' . $quiz_link . '/round_bg/' . '/orgimg/' . $filename_round;
+            $public_path_thumb_round = '/storage/round_bg/' . '/round_bg/' . $quiz_link . '/round_bg/' . '/thumb/' . $filename_round;
 
             //resize the image            
 
@@ -399,15 +399,15 @@ class MasterQuestionController extends Controller
             File::makeDirectory($save_path_thumb, $mode = 0755, true, true);
             File::makeDirectory($save_path2, $mode = 0755, true, true);
 
-            Image::make($data)->save($save_path . $filename);
-            $round_background->move($save_path2, $filename);
+            Image::make($data)->save($save_path . $filename_round);
+            $round_background->move($save_path2, $filename_round);
         } 
         
         else {
 
             $filename_round = 0;
-            $save_path1_round = 0;
-            $save_path_round = 0;
+            $save_path = 0;
+            $save_path2 = 0;
             $public_path_round = 0;
             $public_path2_round = 0;
             $public_path_thumb_round = 0;
@@ -574,12 +574,12 @@ class MasterQuestionController extends Controller
 
             $round_image = new QuizRoundImage;
 
-            $round_image->name       = $filename;
-            $round_image->public_path       = $public_path;
-            $round_image->public_path2       = $public_path2;
-            $round_image->local_path        = $save_path1 . '/' . $filename;
+            $round_image->name       = $filename_round;
+            $round_image->public_path       = $public_path_round;
+            $round_image->public_path2       = $public_path2_round;
+            $round_image->local_path        = $save_path . '/' . $filename_round;
             $round_image->round_id           = $round->id;
-            $round_image->thumb_path        = $public_path_thumb;
+            $round_image->thumb_path        = $public_path_thumb_round;
             $round_image->save();
 
             //save question part
@@ -734,7 +734,7 @@ class MasterQuestionController extends Controller
                     Session::push('round_bg_public_path2', $public_path2_round);
 
                     Session::push('round_bg_public_path_thumb', $public_path_thumb_round);
-                    Session::push('round_bg_save_path1', $save_path1);
+                    Session::push('round_bg_save_path1', $save_path);
                     Session::push('round_bg_filename', $filename_round);
                 }
             }
