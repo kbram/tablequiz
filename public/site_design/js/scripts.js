@@ -1067,6 +1067,8 @@ jQuery(document).ready(function ($) {
     $(document).ready(function () {
 
         $('.publish-quiz').click(function (e) {
+
+            $('#overlay').fadeIn();
             e.preventDefault();
 
             var quiz_id = "";
@@ -1088,6 +1090,10 @@ jQuery(document).ready(function ($) {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                 },
                 success: function (response) {
+                   
+                     $('#overlay').fadeOut();
+
+                     $('#publishQuizModal').modal('show');
 
                     $.ajax({
                         type: "POST",
