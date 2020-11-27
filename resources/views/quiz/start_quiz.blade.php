@@ -770,15 +770,17 @@ $(document).ready(function(){
 		}
 
 		var id;
-		$('.quiz__slider .quiz__single_question__container').each(function(){
+		$('.bespoke-slide').each(function () {
 				var current=$(this);
-				var hidden=current.attr('aria-hidden');
-				if(hidden=="false"){
+				// var hidden=current.attr('aria-hidden');
+				if(current.hasClass('bespoke-active')){
+
 				id =current.find('.question-id').val(); 
 				
 				}
 		});
 		if(id == m[5]){
+			
 				$(text).appendTo($("#all-answer_submit"));
 			}
 

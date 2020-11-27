@@ -614,7 +614,7 @@ $(document).ready(function() {
         $('h4.notification').text('');
 	});
 
-	Pusher.logToConsole = true;
+	Pusher.logToConsole = false;
 
 	var pusher = new Pusher('87436df86baf66b2192a', {
 		cluster: 'ap2'

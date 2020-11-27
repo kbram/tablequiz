@@ -3,11 +3,11 @@ $(document).ready(function() {
     $('.slick-btns').click(function(){ 
         var current;
         var question_id=0;
-        $('.quiz__slider .quiz__single_question__container').each(function(){
+        $('.bespoke-slide').each(function () {
       
       current=$(this);
-         var hidden=current.attr('aria-hidden');
-         if(hidden=="false"){
+         // var hidden=current.attr('aria-hidden');
+         if(current.hasClass('bespoke-active')){
             question_id=current.find('.question-id').val();
             round_id=current.find('.question-round').val();
          }
