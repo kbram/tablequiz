@@ -3,7 +3,7 @@
     
     $("body").delegate('.blockuser', 'click',function(e) {
         e.preventDefault();
-        var id=e.target.id;
+        var id=$(this).attr('id');
         var text=$('#'+id).text();
            
         if(text=='block'){

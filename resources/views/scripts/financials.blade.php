@@ -10,8 +10,8 @@
     $("body").on('click','.SavePriceband',function(e) {
      
     e.preventDefault();
-    var id=e.target.id;
-
+  
+    var id=$(this).attr('id');
     swal("Added !!!",'Another Price Band is added', "success");
     $.ajax({
         type: "POST",
