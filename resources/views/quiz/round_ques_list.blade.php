@@ -106,6 +106,7 @@
                         </div>
                     </div>
                 </div>
+                @if($round_image_data)
                 <div class="form-row">
                     <div class="col-md-4">
                        
@@ -115,6 +116,7 @@
                    
                     </div>    
                 </div>
+                @endif
                 <!-- <div class="form-row justify-content-center pt-3">
 				<div class="col-md-4">	
 					<input class="justify-content-center px-4" type="submit" value="Save">
