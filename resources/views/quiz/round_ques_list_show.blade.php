@@ -35,6 +35,7 @@
                         <input hidden autocomplete="nothanks" type="text" name="quiz" class="form-control" value="$quiz">
                     </div>
                 </div>
+                @if($round_image_data)
                 <div class="form-row">
                     <div class="col-md-4">
                         <label for="round__background">Round background</label>
@@ -45,7 +46,7 @@
                    
                     </div>    
                 </div>
-
+    @endif
                 <!-- <div class="form-row justify-content-center pt-3">
 				<div class="col-md-4">	
 					<input class="justify-content-center px-4" type="submit" value="Save">
