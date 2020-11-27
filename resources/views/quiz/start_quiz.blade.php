@@ -82,113 +82,70 @@
 				</div>
 			</aside>
 
-			<div class="col-lg-9 order-0 order-md-1 " >
+			<div class="col-lg-9 order-0 order-md-1 ">
+				<div class="row">
+					<div class="col ">
 
-		<div id="ss-holder" class="ss-holder row" style="height: 550px;">
-		<div id="effects" class="col" >
-			<article id="articlehold" class="quiz__slider0" style="background: rgba(255, 255, 255, 0.25)">
-				@php
-				$i=1
-				@endphp
-				@foreach($rounds as $round)
-			 		@foreach($questions[$round->id] as $question)
-						<section >
-							<div class="ss-row peterriver go-anim">
-								<div class="hover-effect h-style" >
-									@if (count($medias[$question->id])>0) 
-										<div class="quiz__single_question__image">
-											@foreach($medias[$question->id] as $media)
-												@if($media->media_type == 'image')
-												<div class="ribbon"><i class="fa fa-question-circle-o"></i> Question No:
-													<div class="seclevelribbon">
-														<div class="thirdlevelribbon">
-															<div class="ribbon-sec">{{$i++}}</div>
-														</div>
-													</div>
-												</div>
-												<!-- END RIBBON -->
-												<!-- START IMAGE HOLDER -->
-												<div class="hover-effect h-style">
-													<a href="{{$media->public_path ? asset($media->public_path) : $media->media_link}}" rel="prettyPhotoImages[1]">
-														<img src="{{$media->public_path ? asset($media->public_path) : $media->media_link}}" class="clean-img">
-														<div class="mask"><i class="icon-search"></i>
-															<span class="img-rollover"></span>
-														</div>
-													</a>
-												</div>
-													<!-- <img  height='225px'> -->
-												@endif
-												@if($media->media_type == 'audio')
-													<audio controls>
-														<source src="{{$media->public_path ? asset($media->public_path) : $media->media_link}}" type="audio/mpeg" height='225px'>
-													</audio>
-												@endif
-												@if($media->media_type == 'video')
-													@if($media->media_link)
-														<!-- <iframe height='225px' src="{{$media->media_link}}"> </iframe> -->
-														<div class="ss-row concrete go-anim"><!-- greensea is the class for the color scheme(there are 19) go-anim is for slide up animation on roll over -->
-															<!-- START RIBBON -->
-															<div class="ribbon"><i class="icon-time icon-large"></i>Question No:
-																<div class="seclevelribbon">
-																	<div class="thirdlevelribbon">
-																		<div class="ribbon-sec">{{$i++}}</div>
-																	</div>
-																</div>
-															</div>
-															<!-- END RIBBON -->
-															<!-- START CONTENT HOLDER -->
-															<div class="ss-container gcnopadding">
-																<iframe width="100%" height="315" src="{{$media->media_link}}" frameborder="0" allowfullscreen></iframe>
-															</div>
-															<!-- END CONTENT HOLDER -->
-														</div>
-													@endif
-													@if($media->public_path)
-														<!-- <video controls>
-															<source src="" type="video/mp4" height='225px'>
-														</video> -->
-														<div class="ss-row concrete go-anim"><!-- greensea is the class for the color scheme(there are 19) go-anim is for slide up animation on roll over -->
-															<!-- START RIBBON -->
-															<div class="ribbon"><i class="icon-time icon-large"></i>Question No:
-																<div class="seclevelribbon">
-																	<div class="thirdlevelribbon">
-																		<div class="ribbon-sec">{{$i++}}</div>
-																	</div>
-																</div>
-															</div>
-															<!-- END RIBBON -->
-															<!-- START CONTENT HOLDER -->
-															<div class="ss-container gcnopadding">
-																<iframe width="100%" height="315" src="{{$media->public_path ? asset($media->public_path) : $media->media_link}}" frameborder="0" allowfullscreen></iframe>
-															</div>
-															<!-- END CONTENT HOLDER -->
-														</div>
-													@endif
-												@endif
-											@endforeach
-										</div>
-									@else
-										<div class="quiz__single_question__image">
-											<img src="{{asset('site_design/images/homepage__logo.png')}}" height='225px'>
-										</div>
-										<div class="ribbon"><i class="icon-time icon-large"></i>Question No:
-											<div class="seclevelribbon">
-												<div class="thirdlevelribbon">
-													<div class="ribbon-sec">{{$i++}}</div>
-												</div>
-											</div>
-										</div>
-										<!-- END RIBBON -->
-										<!-- START IMAGE HOLDER -->
-										<div class="hover-effect h-style">
-											<a href="{{asset('site_design/images/homepage__logo.png')}}" rel="prettyPhotoImages[1]">
-												<img src="{{asset('site_design/images/homepage__logo.png')}}" class="clean-img">
-												<div class="mask"><i class="icon-search"></i>
-													<span class="img-rollover"></span>
-												</div>
-											</a>
-											</div>
-									@endif
+						<div class="quiz__slider">
+						@php
+						$i=1
+						@endphp
+
+							@foreach($rounds as $round)
+
+						
+							 @foreach($questions[$round->id] as $question)
+							<div class="quiz__single_question__container d-flex flex-column align-items-center ">
+								<h4>Question No: <span class="question_number">{{$i++}}</span></h4>
+								<p style="text-align:right;float:right; margin-right:0px;" align="right" >Time  :  {{isset($question->time_limit)? $question->time_limit.' sec' : 'Not set' }}</p>	
+								@if (count($medias[$question->id])>0) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="quiz__single_question__image " style="min-height:225px">
+
+
+
+
+@foreach($medias[$question->id] as $media)
+@if($media->media_type == 'image')
+	<img src="{{$media->public_path ? asset($media->public_path) : $media->media_link}}" height='225px'>
+@endif
+@if($media->media_type == 'audio')
+<audio controls>
+	<source src="{{$media->public_path ? asset($media->public_path) : $media->media_link}}" type="audio/mpeg" height='225px'>
+</audio>
+@endif
+@if($media->media_type == 'video')
+@if($media->media_link)
+<iframe height='225px' src="{{$media->media_link}}"> </iframe>
+@endif
+@if($media->public_path)
+<video controls>
+	<source src="{{$media->public_path ? asset($media->public_path) : $media->media_link}}" type="video/mp4" >
+</video>
+@endif
+@endif
+@endforeach
+
+</div>
+
+@else
+
+							
+								<div class="quiz__single_question__image">
+									<img src="{{asset('site_design/images/homepage__logo.png')}}" height='225px'>
 								</div>
 								<div class="quiz__single_question__qa text-center w-100 ">
 								

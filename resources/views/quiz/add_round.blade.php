@@ -5,6 +5,40 @@
     text-align: center;
 }
 
+#overlay {
+  background: #000;
+  color: #5D38BB;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: 5000;
+  top: 0;
+  left: 0;
+  float: left;
+  text-align: center;
+  padding-top: 25%;
+  opacity: .90;
+}
+
+
+
+.spinner {
+    margin: 0 auto;
+    height: 100px;
+    width: 100px;
+    animation: rotate 0.8s infinite linear;
+    border: 5px solid #5D38BB;
+    border-right-color: transparent;
+    border-radius: 50%;
+}
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
 </style>
 
 @endsection
@@ -543,10 +577,19 @@
 			<div class="col-md-4 px-0 px-md-4">
 				<!--<button type="button"  class="btn btn-primary d-block" id="publish-quiz">Publish Quiz</a>-->
 				
-				<a href="#" data-toggle="modal" id="publish-quiz" data-target="#publishQuizModal" class="btn btn-primary d-block publish-quiz ">Publish Quiz</a>
+				<a href="#" data-toggle="modal" id="publish-quiz" class="btn btn-primary d-block publish-quiz ">Publish Quiz</a>
 				
 			</div>
+
+			<!-- loading -->
+			<div id="overlay" style="display:none;">
+    <div class="spinner"></div>
+    <br/>
+<strong>Please wait. <strong>
+  Your Quiz Storing...
+</div>
 		</section>
+		
 	</form>
 </section>
 
