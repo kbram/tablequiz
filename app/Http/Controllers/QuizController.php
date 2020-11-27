@@ -333,28 +333,28 @@ class QuizController extends Controller
                     //media link save
 
 
-                    if (Session::has('question_image_link_' . $i)) {
+                    if (Session::has('question_image_link_' .$k.$i)) {
                         $question_media = new QuestionMedia;
                         $question_media->question_id = $questinon_save->id;
 
-                        $question_media->media_link = Session::get('question_image_link_' . $i);
+                        $question_media->media_link = Session::get('question_image_link_' .$k.$i);
                         $question_media->media_type = "image";
                         $question_media->save();
                     }
 
-                    if (Session::has('question_audio_link_' . $i)) {
+                    if (Session::has('question_audio_link_' .$k.$i)) {
                         $question_media = new QuestionMedia;
                         $question_media->question_id = $questinon_save->id;
 
-                        $question_media->media_link = Session::get('question_audio_link_' . $i);
+                        $question_media->media_link = Session::get('question_audio_link_' .$k.$i);
                         $question_media->media_type = "audio";
                         $question_media->save();
                     }
-                    if (Session::has('question_video_link_' . $i)) {
+                    if (Session::has('question_video_link_' .$k.$i)) {
                         $question_media = new QuestionMedia;
                         $question_media->question_id = $questinon_save->id;
 
-                        $question_media->media_link = Session::get('question_video_link_' . $i);
+                        $question_media->media_link = Session::get('question_video_link_' .$k.$i);
                         $question_media->media_type = "video";
                         $question_media->save();
                     }
@@ -362,27 +362,27 @@ class QuizController extends Controller
 
                     //media upload start here
 
-                    if (Session::has('question_image_' . $i)) {
+                    if (Session::has('question_image_' .$k.$i)) {
                         $question_media = new QuestionMedia;
                         $question_media->question_id = $questinon_save->id;
 
-                        $question_media->public_path = Session::get('question_image_' . $i);
+                        $question_media->public_path = Session::get('question_image_' .$k.$i);
                         $question_media->media_type = "image";
                         $question_media->save();
                     }
-                    if (Session::has('question_audio_' . $i)) {
+                    if (Session::has('question_audio_' .$k.$i)) {
                         $question_media = new QuestionMedia;
                         $question_media->question_id = $questinon_save->id;
 
-                        $question_media->public_path = Session::get('question_image_' . $i);
+                        $question_media->public_path = Session::get('question_audio_' .$k.$i);
                         $question_media->media_type = "audio";
                         $question_media->save();
                     }
-                    if (Session::has('question_video_' . $i)) {
+                    if (Session::has('question_video_' .$k.$i)) {
                         $question_media = new QuestionMedia;
                         $question_media->question_id = $questinon_save->id;
 
-                        $question_media->public_path = Session::get('question_image_' . $i);
+                        $question_media->public_path = Session::get('question_video_' .$k.$i);
                         $question_media->media_type = "video";
                         $question_media->save();
                     }
@@ -447,6 +447,7 @@ class QuizController extends Controller
                 }
             }
         }
+
             Session::forget('quiz');
             Session::forget('quiz_image');
             Session::forget('round_question');

@@ -105,7 +105,7 @@
 
 
 
-<div class="quiz__single_question__image ">
+<div class="quiz__single_question__image " style="min-height:225px">
 
 
 
@@ -125,7 +125,7 @@
 @endif
 @if($media->public_path)
 <video controls>
-	<source src="{{$media->public_path ? asset($media->public_path) : $media->media_link}}" type="video/mp4" height='225px'>
+	<source src="{{$media->public_path ? asset($media->public_path) : $media->media_link}}" type="video/mp4" >
 </video>
 @endif
 @endif

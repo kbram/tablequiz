@@ -759,7 +759,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 #myModal{
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  z-index: 5; /* Sit on top */
   padding-top: 100px; /* Location of the box */
   left: 0;
   top: 0;
