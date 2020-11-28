@@ -12,9 +12,9 @@
       var from =parseInt($('#from'+id).val());
       var to = parseInt($('#to'+id).val());
       var cost= parseInt($('#cost'+id).val());
-      if(!from){ from=parseInt($(this).closest('.price-band-financials').find('.new-from').val());}
-      if(!to){ to=parseInt($(this).closest('.price-band-financials').find('.new-to').val());}
-      if(!cost){ cost=parseInt($(this).closest('.price-band-financials').find('.new-cost').val());}
+      if(!from && from!=0){ from=parseInt($(this).closest('.price-band-financials').find('.new-from').val());}
+      if(!to ){ to=parseInt($(this).closest('.price-band-financials').find('.new-to').val());}
+      if(!cost && cost!=0){ cost=parseInt($(this).closest('.price-band-financials').find('.new-cost').val());}
       
       if($.isNumeric(from) && $.isNumeric(to) && $.isNumeric(cost)){
         if(from<=to){
