@@ -141,7 +141,7 @@
                         </div>
                         <div class="form-row">
                             <div class="col-md-4">
-                                <label>media</label>
+                                <label>Media</label>
                             </div>
                             <div class="col-md-8 bg-light">
                                 <div class="row mt-3">
@@ -215,13 +215,13 @@
                                     <div class="col-7 multi ">
                                         <input name="multiple__choice__answer__0[]" class="multiple-choice-answer form-control" type="text">
                                     </div>
-                                    <div class="col-1 justify-content-center p-0 d-flex">
+                                    <div class="col-2 justify-content-center p-0 d-flex">
                                         &nbsp;
                                     </div>
                                     <div class="col-1 justify-content-center">
                                         <span class="plus">+</span>
                                     </div>
-                                    <div class="col-3 col-md-3 text-center form-check px-0 px-md-4">
+                                    <div class="col-2 col-md-3 text-center form-check px-0 px-md-4">
                                         <input type="radio" value="0" class="multiple-choice-correct-answer" name="multiple__choice__correct__answer__0">
                                     </div>
                                 </div>
@@ -233,113 +233,101 @@
 
 
                         @if($question->question_type  =="numeric__question")
-                        @foreach($answers as $answer)
-                            @if($answer->question_id==$question->id)
-                                <div class="form-row d-flex numeric__answer" id="numeric__answer">
-                                    <div class="col-md-4">
-                                        <label for="numeric__question__answer">Answer</label>
+                            @foreach($answers as $answer)
+                                @if($answer->question_id==$question->id)
+                                    <div class="form-row d-flex numeric__answer" id="numeric__answer">
+                                        <div class="col-md-4">
+                                            <label for="numeric__question__answer">Answer</label>
+                                        </div>
+
+                                        <div class="col-md-8">
+
+                                            <input class="form-control" name="numeric__question__answer" type="number" value="{{$answer->answer}}" disabled>
+                                            <input type="hidden" name="numeric__question__answer_id" value="{{$answer->id}}">
+
+                                        </div>
+
                                     </div>
+                                @endif
+                            @endforeach
 
-                                    <div class="col-md-8">
+                            <div class="form-row d-none mb-n4 mb-md-4 multiple__choice__legend" style="min-height:0;" id="multiple__choice__legend">
+                                <div class="offset-9 offset-md-10 col-3 col-md-2">
+                                    <small class="d-block text-center pl-4">Correct answer</small>
+                                </div>
+                            </div>
+                            <div class="form-row d-none multiple__choice__answer" id="multiple__choice__answer">
+                                <div class="col-md-4 align-self-start">
+                                    <label for="multiple__choice__answer">Answer</label>
+                                </div>
+                                <div class="col-md-8">
 
-                                        <input class="form-control" name="numeric__question__answer" type="number" value="{{$answer->answer}}" disabled>
-                                        <input type="hidden" name="numeric__question__answer_id" value="{{$answer->id}}">
-
+                                    <div class="row multiple__choice__row   pb-3 align-items-center">
+                                        <div class="col-7 multi ">
+                                            <input name="multiple__choice__answer__0[]" class="multiple-choice-answer form-control" type="text">
+                                        </div>
+                                        <div class="col-2 justify-content-center p-0 d-flex">
+                                            &nbsp;
+                                        </div>
+                                        <div class="col-1 justify-content-center">
+                                            <span class="plus">+</span>
+                                        </div>
+                                        <div class="col-2 col-md-2 text-center form-check px-0 px-md-4">
+                                            <input type="radio" value="0" class="multiple-choice-correct-answer" name="multiple__choice__correct__answer__0">
+                                        </div>
                                     </div>
 
                                 </div>
-                            @endif
-                        @endforeach
 
-                        <div class="form-row d-none mb-n4 mb-md-4 multiple__choice__legend" style="min-height:0;" id="multiple__choice__legend">
-                            <div class="offset-9 offset-md-10 col-3 col-md-2">
-                                <small class="d-block text-center pl-4">Correct answer</small>
                             </div>
-                        </div>
-                        <div class="form-row d-none multiple__choice__answer" id="multiple__choice__answer">
-                            <div class="col-md-4 align-self-start">
-                                <label for="multiple__choice__answer">Answer</label>
-                            </div>
-                            <div class="col-md-8">
 
-                                <div class="row multiple__choice__row   pb-3 align-items-center">
-                                    <div class="col-7 multi ">
-                                        <input name="multiple__choice__answer__0[]" class="multiple-choice-answer form-control" type="text">
-                                    </div>
-                                    <div class="col-1 justify-content-center p-0 d-flex">
-                                        &nbsp;
-                                    </div>
-                                    <div class="col-1 justify-content-center">
-                                        <span class="plus">+</span>
-                                    </div>
-                                    <div class="col-3 col-md-3 text-center form-check px-0 px-md-4">
-                                        <input type="radio" value="0" class="multiple-choice-correct-answer" name="multiple__choice__correct__answer__0">
-                                    </div>
+                            <div class="form-row d-none standard__answer" id="standard__answer">
+                                <div class="col-md-4">
+                                    <label for="standard__question__answer">Answer</label>
                                 </div>
-
+                                <div class="col-md-8">
+                                    <input class="form-control answer" name="standard__question__answer__0" type="text" disabled>
+                                </div>
                             </div>
-
-                        </div>
-
-                        <div class="form-row d-none standard__answer" id="standard__answer">
-                            <div class="col-md-4">
-                                <label for="standard__question__answer">Answer</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input class="form-control answer" name="standard__question__answer__0" type="text" disabled>
-                            </div>
-                        </div>
                         @endif
 
                         @if($question->question_type  == "multiple__choice__question")
-                                @php
-                                $m=0;
-                                @endphp
-                        <div class="form-row  mb-n4 mb-md-4 multiple__choice__legend" style="min-height:0;" id="multiple__choice__legend">
-                            <div class="offset-9 offset-md-10 col-3 col-md-2">
-                                <small class="d-block text-center pl-4">Correct answer</small>
-                            </div>
-                        </div>
-
-                        <div class="form-row  multiple__choice__answer" id="multiple__choice__answer">
-
-                            <div class="col-md-4 align-self-start">
-                                <label for="multiple__choice__answer">Answer</label>
+                            @php
+                            $m=0;
+                            @endphp
+                            <div class="form-row  mb-n4 mb-md-4 multiple__choice__legend" style="min-height:0;" id="multiple__choice__legend">
+                                <div class="offset-9 offset-md-10 col-3 col-md-2">
+                                    <small class="d-block text-center pl-4">Correct answer</small>
+                                </div>
                             </div>
 
-                            <div class="col-md-8">
-                            @foreach($answers as $answer)
-                                @if($answer->question_id==$question->id)
-                                    @php
-                                    ++$m;
-                                    @endphp
-                                    <div class="row multiple__choice__row  pb-3 align-items-center">
-                                    
-                                            <div class="col-7 multi ">
-                                                <input name="multiple__choice__answer[]" class="multiple-choice-answer form-control" value="{{$answer->answer}}">
+                            <div class="form-row  multiple__choice__answer" id="multiple__choice__answer">
+                                <div class="col-md-4 align-self-start">
+                                    <label for="multiple__choice__answer">Answer</label>
+                                </div>
+                                <div class="col-md-8">
+                                @foreach($answers as $answer)
+                                    @if($answer->question_id==$question->id)
+                                        @php
+                                        ++$m;
+                                        @endphp
+                                        <div class="row multiple__choice__row  pb-3 align-items-center">
+                                            <div class="col-9 multi ">
+                                            <input name="multiple__choice__answer[]" class="multiple-choice-answer form-control" value="{{$answer->answer}}">
                                                 <!-- <input type="hidden" name="multiple__question__answer_id[]" class="get_correct_answer" value="{{$answer->id}}"> -->
+                                        </div>
+                                        @if($answer->status==1)
+                                            <div class="col-3 col-md-3 text-center form-check px-0 px-md-4">
+                                                <input type="radio" value="0" class="multiple-choice-correct-answer" name="multiple__choice__correct__answer" disabled checked>
                                             </div>
-                                            <!-- @if($m==1)
-                                            <div class="col-1 justify-content-center p-0 d-flex">
-                                                &nbsp;
-                                            </div>
-                                            @else
-                                            <div class="col-1 justify-content-center p-0 d-flex">
-                                                <span class="minus">-</span>
-                                            </div> -->
-                                        @endif
-                                            <!-- <div class="col-1 justify-content-center">
-                                                <span class="plus">+</span>
-                                            </div> -->
+                                        @else
                                             <div class="col-3 col-md-3 text-center form-check px-0 px-md-4">
                                                 <input type="radio" value="0" class="multiple-choice-correct-answer" name="multiple__choice__correct__answer" disabled>
                                             </div>
-                                    
-                                    
-
+                                        @endif
                                     </div>
-                                    @endif
-                                @endforeach
+                                 @endif
+                            @endforeach
 
                             </div>
 

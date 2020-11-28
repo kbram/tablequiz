@@ -101,7 +101,7 @@
 										
 										<input id="cost{{$questionCost->id}}" maxlength="10" class="form-control" placeholder="{{$questionCost->cost}}" value="{{$questionCost->cost}}">
 										
-										<button type="submit" id="{{ $questionCost->id }}" maxlength="3" class=" form-control ml-1 SavePriceband" value="" ><i class="fa fa-check-circle" style="color:blue"></i></button>
+										<button type="submit" id="{{ $questionCost->id }}" maxlength="3" class=" form-control ml-1 SavePriceband" value="" name="old"><i class="fa fa-check-circle" style="color:blue"></i></button>
 										
 										@if($c==1 && $c==$count)
 											<button  maxlength="3" class=" form-control ml-1 removePriceband" value="" id="question"><i class="fa fa-trash" style="color:grey"></i></button>
@@ -167,7 +167,7 @@
 								$c += 1;
 							@endphp
 							<span id="msg{{$backgroundCost->id}}" class="text-success"></span>
-							<form class="form-row pt-4 align-items-center mb-0 price-band-financials" action="" method="" id="price__band__backgrounds">
+							<form class="form-row pt-4 align-items-center mb-0 price-band-financials" action="" method="" >
 								<div class="col-4 col-md-1">
 									<span>From</span>
 								</div>
@@ -187,7 +187,7 @@
 											<span class="input-group-text">&euro;</span>
 										</div>
 										<input id="cost{{$backgroundCost->id}}" name="band__costs" maxlength="10" class="form-control" placeholder="{{$backgroundCost->cost}}" value="{{$backgroundCost->cost}}">
-										<button type="submit" id="{{$backgroundCost->id}}" maxlength="3" class=" form-control ml-1 SavePriceband" value="" ><i class="fa fa-check-circle" style="color:blue"></i></button>
+										<button type="submit" id="{{$backgroundCost->id}}" maxlength="3" class=" form-control ml-1 SavePriceband" value="" name="old"><i class="fa fa-check-circle" style="color:blue"></i></button>
 										
 										@if($c==1 && $c==$count)
 											<button  maxlength="3" class=" form-control ml-1 removePriceband" value="" id="background"><i class="fa fa-trash" style="color:grey"></i></button>
@@ -275,7 +275,7 @@
 											<span class="input-group-text">&euro;</span>
 										</div>
 										<input id="cost{{$participantCost->id}}" maxlength="10" class="form-control" placeholder="{{$participantCost->cost}}" value="{{$participantCost->cost}}">
-										<button id="{{$participantCost->id}}"  maxlength="3" class=" form-control ml-1 SavePriceband" value="" ><i class="fa fa-check-circle" style="color:blue"></i></button>
+										<button id="{{$participantCost->id}}"  maxlength="3" class=" form-control ml-1 SavePriceband" value="" name="old"><i class="fa fa-check-circle" style="color:blue"></i></button>
 										
 										
 										@if($c==1 && $c==$count)

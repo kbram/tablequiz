@@ -108,9 +108,9 @@
 												</div>
 												<!-- END RIBBON -->
 												<!-- START IMAGE HOLDER -->
-												<div class="hover-effect h-style">
+												<div class="hover-effect h-style" >
 													<a href="{{$media->public_path ? asset($media->public_path) : $media->media_link}}" rel="prettyPhotoImages[1]">
-														<img src="{{$media->public_path ? asset($media->public_path) : $media->media_link}}" class="clean-img">
+														<img src="{{$media->public_path ? asset($media->public_path) : $media->media_link}}" class="clean-img"  style="height:300px">
 														<div class="mask"><i class="icon-search"></i>
 															<span class="img-rollover"></span>
 														</div>
@@ -201,7 +201,7 @@
 											</div>
 									@endif
 								</div>
-								<div class="quiz__single_question__qa text-center w-100 ">
+								<div class="quiz__single_question__qa text-center w-100 " style="">
 								
 									<p align="center"> <span class="question_number"></span><lable style="text-align:right;float:right; margin-right:5px;" align="right" >Time  :  {{isset($question->time_limit)? $question->time_limit.' sec' : 'Not set' }}</lable></p>
 									<p class="question" align="left" style="padding-left:10px;"><span>Question:</span><span>{{$question->question}}</span></p>

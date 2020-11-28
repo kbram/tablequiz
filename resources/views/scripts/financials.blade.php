@@ -1,132 +1,138 @@
-
 <script type="text/javascript">
   $(document).ready(function() {
-
-  var background_band_type = <?php echo json_encode($band_type_configs['background_band_type']) ?>;
-  var participant_band_type = <?php echo json_encode($band_type_configs['participant_band_type']) ?>;
-  var question_band_type = <?php echo json_encode($band_type_configs['question_band_type']) ?>;
-
+    var background_band_type = <?php echo json_encode($band_type_configs['background_band_type']) ?>;
+    var participant_band_type = <?php echo json_encode($band_type_configs['participant_band_type']) ?>;
+    var question_band_type = <?php echo json_encode($band_type_configs['question_band_type']) ?>;
 
     $("body").on('click','.SavePriceband',function(e) {
-     
-    e.preventDefault();
-  
-    var id=$(this).attr('id');
-    swal("Added !!!",'Another Price Band is added', "success");
-    $.ajax({
-        type: "POST",
-        url: "{{route('update')}}",
-        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-        data:{
-             id   : id,
-             get_from : $('#from'+id).val(), 
-             get_to : $('#to'+id).val(), 
-             get_cost : $('#cost'+id).val(), 
-             type : $('#type'+id).val(),
+      e.preventDefault();
+      var id=$(this).attr('id');
+      var find=$(this).attr('name');
+      var from =$('#from'+id).val();
+      var to = $('#to'+id).val();
+      var cost= $('#cost'+id).val();
+      if($.isNumeric(from) && $.isNumeric(to) && $.isNumeric(cost)){
+        if(from<=to){
+          $.ajax({
+            type: "POST",
+            url: "{{route('update')}}",
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            data:{
+              id   : id,
+              get_from : $('#from'+id).val(), 
+              get_to : $('#to'+id).val(), 
+              get_cost : $('#cost'+id).val(), 
+              type : $('#type'+id).val(),
 
-             new_from : $(this).closest('.price-band-financials').find('.new-from').val(), 
-             new_to :   $(this).closest('.price-band-financials').find('.new-to').val(),
-             new_cost : $(this).closest('.price-band-financials').find('.new-cost').val(),
-             band_type: $(this).closest('.price-band-financials').find('.band-type').val(), 
+              new_from : $(this).closest('.price-band-financials').find('.new-from').val(), 
+              new_to :   $(this).closest('.price-band-financials').find('.new-to').val(),
+              new_cost : $(this).closest('.price-band-financials').find('.new-cost').val(),
+              band_type: $(this).closest('.price-band-financials').find('.band-type').val(), 
 
-            
-        },
-        success: function(results) {
-          
-           $('#msg'+id).text('updated sucessfully');
-           //location.reload();
-           setTimeout(function() {
-
-        $("#msg"+id).text('')
-    }, 1000);
-        },
-        error: function(result,error) {
-        
-        
-        },
-       
-      });
-    });
-    var i=1;
-
-    /***delete method */
-    $("body").on('click','.removePriceband',function(e) {     
-     e.preventDefault();
-
-    
-
-     swal("Deleted !!!",'Price Band is deleted...', "danger")
-     var idb=$(this).attr("id");
-    
-      if(idb=="question"){
-        var x='<div class="row d-flex">'+
-							'<span class="col-9">'+
-							'<p id="noq"> No Questions Cost created yet! </p>'+
-					  	
-						
-							'</div>	';
-              $(this).closest('.dashboard__container').find('.financial-append').append(x);
-      }else if(idb=="background"){
-        var x='<div class="row d-flex">'+
-							'<span class="col-9">'+
-							'<p id="nob"> No Background Cost created yet! </p>'+
-							
-							'</div>';
-              $(this).closest('.dashboard__container').find('.financial-append').append(x);
-      }else if(idb=="participant"){
-        var x='<div class="row d-flex">'+
-							'<span class="col-9">'+
-							'<p id="nop"> No price </p>'+
-							
-					
-						'</div>';
-              $(this).closest('.dashboard__container').find('.financial-append').append(x);
+            },
+            success: function(results) {
+              $('#msg'+id).text('updated sucessfully');
+              if(find=="old"){
+                swal("Updated !!!",'Another Price Band is updated', "success");
+              }else{
+                swal("Added !!!",'Another Price Band is added', "success");
+                $(this).attr('name',"old");
+              }
+              setTimeout(function() {
+                $("#msg"+id).text('')
+              }, 1000);
+            },
+            error: function(result,error) {
+              
+            },
+          });
+        }else{
+          swal("Invalid Input !!!",'Pleace type From Less than To...', "error")
+        }
+      }else{
+        swal("Invalid Input !!!",'Pleace type Number...', "error")
       }
+      
+    });
+  var i=1;
+      /***delete method */
+  $("body").on('click','.removePriceband',function(e) {     
+      e.preventDefault();
 
       
-      if($(this).closest('.price-band-financials').find(".pl").css("display")=="none"){
-       
-        //$(this).closest('.dashboard__container').find('.financial-append').append(x);
-         $(this).closest('.dashboard__container').find("#dem1").show();
-         $(this).closest('.dashboard__container').find("#dem2").show();
-         $(this).closest('.dashboard__container').find("#dem3").show();
-         
-      }
 
-        var id=$(this).closest('.price-band-financials').find('.SavePriceband').attr("id");
-      if(id==null){
+      swal("Deleted !!!",'Price Band is deleted...', "error")
+      var idb=$(this).attr("id");
+      
+        if(idb=="question"){
+          var x='<div class="row d-flex">'+
+                '<span class="col-9">'+
+                '<p id="noq"> No Questions Cost created yet! </p>'+
+                
+              
+                '</div>	';
+                $(this).closest('.dashboard__container').find('.financial-append').append(x);
+        }else if(idb=="background"){
+          var x='<div class="row d-flex">'+
+                '<span class="col-9">'+
+                '<p id="nob"> No Background Cost created yet! </p>'+
+                
+                '</div>';
+                $(this).closest('.dashboard__container').find('.financial-append').append(x);
+        }else if(idb=="participant"){
+          var x='<div class="row d-flex">'+
+                '<span class="col-9">'+
+                '<p id="nop"> No price </p>'+
+                
+            
+              '</div>';
+                $(this).closest('.dashboard__container').find('.financial-append').append(x);
+        }
+
+        
+        if($(this).closest('.price-band-financials').find(".pl").css("display")=="none"){
+        
+          //$(this).closest('.dashboard__container').find('.financial-append').append(x);
+          $(this).closest('.dashboard__container').find("#dem1").show();
+          $(this).closest('.dashboard__container').find("#dem2").show();
+          $(this).closest('.dashboard__container').find("#dem3").show();
+          
+        }
+
+          var id=$(this).closest('.price-band-financials').find('.SavePriceband').attr("id");
+        if(id==null){
+          $(this).closest('.price-band-financials').remove();
+          
+        }
+        else{
         $(this).closest('.price-band-financials').remove();
-        
-      }
-      else{
-      $(this).closest('.price-band-financials').remove();
-      $.ajax({
-         type: "POST",
-         url: "{{route('delete')}}",
-         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-         data:{
-              id   : id,
-             
-         },
-         success: function(results) {
-         
+        $.ajax({
+          type: "POST",
+          url: "{{route('delete')}}",
+          headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+          data:{
+                id   : id,
+              
+          },
+          success: function(results) {
+          
 
-            $('#msg'+id).text('Deleted sucessfully');
-            setTimeout(function() {
-         $("#msg"+id).text('');
-         
+              $('#msg'+id).text('Deleted sucessfully');
+              setTimeout(function() {
+          $("#msg"+id).text('');
+          
 
-     }, 1000);
+      }, 1000);
 
-         },
-         error: function(result,error) {
-         
-         
-         },
-        
-       });
-      }
-     });
+          },
+          error: function(result,error) {
+          
+          
+          },
+          
+        });
+        }
+      });
    
      
 $("body").delegate('.price-band-questions','click',function(e){

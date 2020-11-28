@@ -520,29 +520,31 @@
                                     ++$m;
                                     @endphp
                                     <div class="row multiple__choice__row  pb-3 align-items-center">
-                                    
                                             <div class="col-7 multi ">
                                                 <input name="multiple__choice__answer[]" class="multiple-choice-answer form-control" value="{{$answer->answer}}">
                                                 <!-- <input type="hidden" name="multiple__question__answer_id[]" class="get_correct_answer" value="{{$answer->id}}"> -->
                                             </div>
                                             @if($m==1)
-                                            <div class="col-1 justify-content-center p-0 d-flex">
-                                                &nbsp;
-                                            </div>
+                                                <div class="col-1 justify-content-center p-0 d-flex">
+                                                    &nbsp;
+                                                </div>
                                             @else
-                                            <div class="col-1 justify-content-center p-0 d-flex">
-                                                <span class="minus">-</span>
-                                            </div>
-                                        @endif
+                                                <div class="col-1 justify-content-center p-0 d-flex">
+                                                    <span class="minus">-</span>
+                                                </div>
+                                            @endif
                                             <div class="col-1 justify-content-center">
                                                 <span class="plus">+</span>
                                             </div>
+                                            @if($answer->status==1)
+                                            <div class="col-3 col-md-3 text-center form-check px-0 px-md-4">
+                                                <input type="radio" value="0" class="multiple-choice-correct-answer" name="multiple__choice__correct__answer" checked>
+                                            </div>
+                                            @else
                                             <div class="col-3 col-md-3 text-center form-check px-0 px-md-4">
                                                 <input type="radio" value="0" class="multiple-choice-correct-answer" name="multiple__choice__correct__answer">
                                             </div>
-                                    
-                                    
-
+                                            @endif
                                     </div>
                                     @endif
                                 @endforeach
