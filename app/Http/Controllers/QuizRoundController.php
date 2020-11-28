@@ -108,7 +108,6 @@ class QuizRoundController extends Controller
 
     public function new_edit($id,$rid){
         $round=QuizRound::where('quiz_id',$id)->get()->take($rid)->last();
-       
         $payment=Quiz::where('id',$id)->get();
         $pay=$payment[0]->payment;
        
@@ -144,6 +143,7 @@ class QuizRoundController extends Controller
         
      }
         $count=0;
+        // dd($round_image_data);
         return view('quiz.round_ques_list',compact('round_image_data','count','questions','answers','categories','round','round_count','id','rid','pay','frid','lrid','media'));
     }
     public function new_show($id,$rid){
@@ -191,8 +191,8 @@ class QuizRoundController extends Controller
 
 
     public function round_upload(Request $request,$id){
-         $get_round_name=QuizRound::where('id',$id)->get('round_name');
-     $round_name= $get_round_name[0]['round_name'];
+        $get_round_name=QuizRound::where('id',$id)->get('round_name');
+        $round_name= $get_round_name[0]['round_name'];
      if ($request->image_crop) { 
         /** crop image decode */
         $data = $request->image_crop;

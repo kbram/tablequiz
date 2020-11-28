@@ -281,6 +281,17 @@
 								</div>
 
 							</div>
+							@if($questionMedia)
+								<div class="form-row">
+									<div class="col-md-4">
+									
+									</div>
+									<div class=" col-md-4">
+									<img src='{{asset($questionMedia->public_path)}}' alt='image' width='120px' height='80px' style='border: 3px solid #dee2e6!important;' class='myImg'> 
+								
+									</div>    
+								</div>
+               				 @endif
 <!-- 							
 							<div class="form-row d-flex" id="standard__answer">
 								<div class="col-md-4">

@@ -377,17 +377,19 @@
 							    <td>{{$cat_name[$question->id]}}</td>
 						       
 						       <td class="quiz_actions d-flex flex-row justify-content-lg-center">
+							   <a href="{{ URL::to('questions/'. $question->id .'/edit') }}">
 							   <div class="d-flex flex-column">
 									<i class="fas fa-pencil-alt"></i>
-									<span><a href="{{ URL::to('questions/'. $question->id .'/edit') }}">
+									<span>
                                                    Edit
-                                                </a></span>
-								</div>
+                                                </span>
+								</div></a>
 								<form method="POST" action="/admin/questions/{{$question->id}}" class="p-0">
 												{{ csrf_field() }}	
+												<span class="delete">
 												<div class="d-flex flex-column">
-												<i class="fas fa-times-circle" ></i><span class="delete">Delete</span>
-												</div>
+												<i class="fas fa-times-circle" ></i>Delete
+												</div></span>
 								</form>
 								</td>
 							</tr>

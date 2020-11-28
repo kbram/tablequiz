@@ -297,8 +297,9 @@ class AdminQuestionController extends Controller
        $answers=GlobalAnswer::where('question_id',$id)->get();
        $question_type=$question->question_type;
       
-
-            return view('admin.questions-edit',compact('question_type','answers','question','categories','cat_name','categories','questions','standard_answer','multiple_answer','numeric_answer','image_media_edit','audio_media_edit','video_media_edit'));
+       $questionMedia = GlobalQuestionMedia::where('question_id',$id)->first();
+      //  dd($questionMedia);
+            return view('admin.questions-edit',compact('question_type','answers','question','categories','cat_name','categories','questions','standard_answer','multiple_answer','numeric_answer','image_media_edit','audio_media_edit','video_media_edit','questionMedia'));
         
         }
 
@@ -355,8 +356,8 @@ class AdminQuestionController extends Controller
                  $file_name = 'image_media.'.$image_media->getClientOriginalExtension();
                  $save_path = storage_path('app/public'). '/global_questions/'.$question_id.'/image_media/';
                  $path = $save_path.$file_name;
-                 $public_path = '/global_questions/image_media/'.$question_id.'/image_media/'.$file_name;
-              
+                 $public_path = 'storage/global_questions/'.$question_id.'/image_media/'.$file_name;
+
                  File::makeDirectory($save_path, $mode = 0755, true, true);
                   $image_media->move($save_path, $file_name);      
                 
@@ -375,7 +376,7 @@ class AdminQuestionController extends Controller
                   $file_name = 'image_media.'.$image_media->getClientOriginalExtension();
                   $save_path = storage_path('app/public'). '/global_questions/'.$question_id.'/image_media/';
                   $path = $save_path.$file_name;
-                  $public_path = '/global_questions/image_media/'.$question_id.'/image_media/'.$file_name;
+                  $public_path = 'storage/global_questions/'.$question_id.'/image_media/'.$file_name;
                
                   File::makeDirectory($save_path, $mode = 0755, true, true);
                   $image_media->move($save_path, $file_name);      
@@ -409,7 +410,7 @@ class AdminQuestionController extends Controller
                 $file_name = 'audio_media.'.$audio_media->getClientOriginalExtension();
                 $save_path = storage_path('app/public'). '/global_questions/'.$question_id.'/audio_media/';
                 $path = $save_path.$file_name;
-                $public_path = '/global_questions/audio_media/'.$question_id.'/audio_media/'.$file_name;
+                $public_path = 'storage/global_questions/'.$question_id.'/audio_media/'.$file_name;
 
                 File::makeDirectory($save_path, $mode = 0755, true, true);
 
@@ -429,7 +430,7 @@ class AdminQuestionController extends Controller
                $file_name = 'audio_media.'.$audio_media->getClientOriginalExtension();
                $save_path = storage_path('app/public'). '/global_questions/'.$question_id.'/audio_media/';
                $path = $save_path.$file_name;
-               $public_path = '/global_questions/audio_media/'.$question_id.'/audio_media/'.$file_name;
+               $public_path = 'storage/global_questions/'.$question_id.'/audio_media/'.$file_name;
 
                File::makeDirectory($save_path, $mode = 0755, true, true);
 
@@ -466,7 +467,7 @@ class AdminQuestionController extends Controller
                             $file_name = 'video_media.'.$video_media->getClientOriginalExtension();
                             $save_path = storage_path('app/public'). '/global_questions/'.$question_id.'/video_media/';
                             $path = $save_path.$file_name;
-                            $public_path = '/global_questions/video_media/'.$question_id.'/video_media/'.$file_name;
+                            $public_path = 'storage/global_questions/'.$question_id.'/video_media/'.$file_name;
 
                             File::makeDirectory($save_path, $mode = 0755, true, true);
 
@@ -486,7 +487,7 @@ class AdminQuestionController extends Controller
                         $file_name = 'video_media.'.$video_media->getClientOriginalExtension();
                         $save_path = storage_path('app/public'). '/global_questions/'.$question_id.'/video_media/';
                         $path = $save_path.$file_name;
-                        $public_path = '/global_questions/video_media/'.$question_id.'/video_media/'.$file_name;
+                        $public_path = 'storage/global_questions/'.$question_id.'/video_media/'.$file_name;
 
                         File::makeDirectory($save_path, $mode = 0755, true, true);
 

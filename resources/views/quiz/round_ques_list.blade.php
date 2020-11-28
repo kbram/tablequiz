@@ -107,7 +107,7 @@
                     </div>
                 </div>
                 @if($round_image_data)
-                <div class="form-row">
+                <!-- <div class="form-row">
                     <div class="col-md-4">
                        
                     </div>
@@ -115,7 +115,7 @@
                     <img src='{{asset($round_image_data)}}' alt='image' width='120px' height='80px' style='border: 3px solid #dee2e6!important;' class='myImg'> 
                    
                     </div>    
-                </div>
+                </div> -->
                 @endif
                 <!-- <div class="form-row justify-content-center pt-3">
 				<div class="col-md-4">	
@@ -182,17 +182,17 @@
                                             @endif
                                         </select>
                                     </div>
-                                    <div class="col-lg-2 d-flex align-items-center justify-content-center">
-                                        <p class="my-2 m-lg-0">OR</p>
-                                    </div>
+                                    <!-- <div class="col-lg-2 d-flex align-items-center justify-content-center">
+                                        <p class="my-2 m-lg-0">OR</p> -->
+                                    <!-- </div>
                                     <div class="col-lg-4">
-                                    <a class="d-block btn btn-outline-primary suggested_q_link" href="#" data-toggle="modal" data-target="#suggestedQuestion"><span style="color:var(--orange)">Use a suggested question</span></a>
+                                    <a class="d-block btn btn-outline-primary suggested_q_link" href="#" data-toggle="modal" data-target="#suggestedQuestion"><span style="color:var(--orange)">Use a suggested question</span></a> -->
 										<!-- The modal for this is at the bottom of the page -->
                                         <!-- <a class="d-block btn btn-outline-primary suggested_q_link paysuggest"  href="#" data-toggle="modal" id="{{$id}}" ><span style="color:var(--orange)">Use a suggested question</span></a> -->
                                        
                                         
                                         <!-- The modal for this is at the bottom of the page -->
-                                    </div>
+                                    <!-- </div> -->
                                 </div>
                             </div>
                         </div>
@@ -806,6 +806,11 @@
             </div>
         </div>
     </section> -->
+    <div id="myModal" class="modal">
+  <span id="image-close">&times;</span>
+  <img class="modal-content" id="img01">
+  <div id="caption"></div>
+</div>
 </section>
 
 @endsection
@@ -926,6 +931,119 @@ var size = 2000;
 
 
 </script>
+
+<script>
+$(document).ready(function(){
+var modal = $("#myModal");
+
+var modalImg = $("#img01");
+var captionText = $("#caption");
+
+$("body").delegate(".myImg","click",function(){ 
+  modal.css("display","block");
+  modalImg.attr('src',this.src);
+  captionText.innerHTML = this.alt;
+  
+});
+
+$('#image-close').click(function(){
+	modal.css("display","none");
+	
+});
+
+
+});
+</script>
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+.myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+#myModal{
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 5; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {  
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+#image-close{
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
+</style>
 @include('scripts.add-round-image')
 @include('scripts.suggest')
 @include('scripts.bg-image');

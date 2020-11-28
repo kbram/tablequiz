@@ -82,7 +82,27 @@
 									<input type="file" class="orange_text form-control-file" id="upload__category__image" name="upload__category__image" value="Upload"></label>
 								</div>
 							</div>
-
+							<div class="form-row">
+								<div class="col-12 col-md-3 text-left">
+									
+								</div>
+								<div class="col-12 col-md-4 pr-md-2 mb-2 mb-md-0">
+									
+								</div>
+							
+							
+								<div class="col-6 col-md-3 text-left">
+									
+								</div>
+								<div class="col-6 col-md-2">
+									@foreach($categoryImage as $categoryImages)
+										@if($categoryImages->category_id==$category->id)
+										<img id="image" src="{{asset($categoryImages->public_path)}}" height="70px" width="100px">
+										@endif
+									@endforeach
+									
+								</div>
+							</div>
 
 							<hr>
 							<div class="row justify-content-center">

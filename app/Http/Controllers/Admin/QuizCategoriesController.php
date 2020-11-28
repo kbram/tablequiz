@@ -93,8 +93,8 @@ class QuizCategoriesController extends Controller
   public function edit($id){
     $categories=QuizCategory::all();
     $category=QuizCategory::find($id);
-
-    return view('admin.categories_edit', compact('categories','category'));
+    $categoryImage=QuizCategoryImage::all();
+    return view('admin.categories_edit', compact('categories','category','categoryImage'));
     
     
   }
@@ -120,14 +120,17 @@ class QuizCategoriesController extends Controller
         $categories -> category_name =  $request->input('category_name');
         $categories -> category_slug = Str::slug($request->input('category_name'),'-');
         $categories->save();
-   
+        
         $category_id=QuizCategory::where('category_name',$categories -> category_name)->first()->id;
                 if ($request->hasFile('upload__category__image')) { 
                     $category_image = $request->file('upload__category__image');
                     $filename = 'category_image.'.$category_image->getClientOriginalExtension();
-                    $save_path = storage_path('app/public').'categories/'.$category_id.'/category_images/';
+                    $save_path = storage_path('app/public').'/categories/'.$category_id.'/category_images/';
+                    if (File::exists(public_path($category_image))) { 
+                      unlink(public_path($category_image));
+                    }
                     $path = $save_path.$filename;
-                    $public_path = '/storage/category_image/'.$category_id.'/category_images/'.$filename;
+                    $public_path = '/storage/categories/'.$category_id.'/category_images/'.$filename;
         
                     // Make the user a folder and set permissions
                     File::makeDirectory($save_path, $mode = 0755, true, true);
