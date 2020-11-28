@@ -139,14 +139,15 @@ class QuizCategoriesController extends Controller
                     //Image::make($category_image)->save($save_path.$filename);
                     $category_image->move($save_path, $filename);
                    
-                    if($categoryImage = QuizCategoryImage::find($id)){    
-
+                    if($categoryImage = QuizCategoryImage::where('category_id',$id)->first()){    
+                       
                     $categoryImage->public_path       = $public_path;
                     $categoryImage->local_path        = $save_path . '/' . $filename;
                     $categoryImage->category_id       =$category_id;
         
                     $categoryImage->save();
                     }else{
+                     
                     $categoryImage = new QuizCategoryImage;
                     $categoryImage->public_path       = $public_path;
                     $categoryImage->local_path        = $save_path . '/' . $filename;
