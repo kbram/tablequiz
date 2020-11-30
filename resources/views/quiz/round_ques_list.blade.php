@@ -808,7 +808,7 @@
     </section> -->
     <div id="myModal" class="modal">
   <span id="image-close">&times;</span>
-  <img class="modal-content" id="img01">
+  <img class="modal-contents" id="img01">
   <div id="caption"></div>
 </div>
 </section>
@@ -981,7 +981,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 }
 
 /* Modal Content (image) */
-.modal-content {
+.modal-contents {
   margin: auto;
   display: block;
   width: 80%;
@@ -1001,7 +1001,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 }
 
 /* Add Animation */
-.modal-content, #caption {  
+.modal-contents, #caption {  
   -webkit-animation-name: zoom;
   -webkit-animation-duration: 0.6s;
   animation-name: zoom;
