@@ -829,6 +829,9 @@ var size = 2000;
 	  viewMode:1,
 	  preview: '.preview'
     });
+    setTimeout(function(){
+      $('.cropper-bg').removeClass('cropper-bg');
+	},1000);
  });
      
 
