@@ -552,7 +552,7 @@ class QuizController extends Controller
         $quiz->save();
         
         $quiz_id = Quiz::where('quiz__name', $quiz->quiz__name)->first()->id;
-
+       
         if ($request->crop_image) { 
              /** crop image decode */
              $data = $request->crop_image;
@@ -562,23 +562,54 @@ class QuizController extends Controller
            /** crop image decode */
             $quizicon=QuizSetupIcon::where('quiz_id',$id)->first();
             $usersImage = public_path($quizicon->local_path);
-            if (File::exists($usersImage)) { 
+            if (File::exists($usersImage)) {
+                if($quizicon->local_path=="/storage/homepage__logo.png"){ 
+                    /*edit default image*/
+                    $link = $request->input('quiz__link');
+                $quiz_icon = $request->file('upload__quiz__icon');
+                $filename = $link .'.'.$quiz_icon->getClientOriginalExtension();
+                $save_path1 = '/storage/quizicon/' . $link . '/quiz_icon/';
+                $save_path = storage_path('app/public') . '/quizicon/' . $link . '/quiz_icon/';
+                $save_path2= storage_path('app/public') . '/quizicon/' . $link . '/quiz_icon/' . '/orgimg/';
+                $save_path_thumb = storage_path('app/public') . '/quizicon/' . $link . '/quiz_icon/' . '/thumb/';
+
+                $public_path = '/storage/quizicon/' . $link . '/quiz_icon/' . $filename;
+                $public_path2= '/storage/quizicon/' . $link . '/quiz_icon/orgimg/'. $filename;
+                $public_path_thumb = storage_path('app/public') . '/quizicon/' . $link . '/quiz_icon/' . '/thumb/' . $filename;
+  
+                $quizicon->public_path       = $public_path;
+                $quizicon->local_path        = $save_path1 . '/'. $filename;
+                $quizicon->quiz_id           = $quiz->id;
+                $quizicon->thumb_path        = $public_path_thumb;
+                $quizicon->public_path2      =$public_path2;
+                $quizicon->save();
+                // Make the user a folder and set permissions
+                File::makeDirectory($save_path, $mode = 0755, true, true);
+                File::makeDirectory($save_path_thumb, $mode = 0755, true, true);
+
+               Image::make($data)->save($save_path_thumb . $filename);
+               Image::make($data)->save($save_path.$filename);
+               $quiz_icon->move($save_path2, $filename);
+                    /*edit deafault image end*/
+                      
+                }else{
                 unlink($usersImage);
                 Image::make($data)->save($usersImage);
+                if($request->upload__quiz__icon){ 
+                    $usersImage = public_path($quizicon->public_path2);
+                    if (File::exists($usersImage)) { 
+                        unlink($usersImage);
+                        $quiz_icon = $request->file('upload__quiz__icon');
+                        Image::make($quiz_icon)->save($usersImage);
+                    }
+                 
+                  
+                }
+                }
             }
             
 
-            if($request->upload__quiz__icon){ 
-                $usersImage = public_path($quizicon->public_path2);
-               
-                if (File::exists($usersImage)) { 
-                    unlink($usersImage);
-                    $quiz_icon = $request->file('upload__quiz__icon');
-                    Image::make($quiz_icon)->save($usersImage);
-                }
-             
-              
-            }
+         
            
         }
 
