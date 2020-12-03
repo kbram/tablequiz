@@ -129,7 +129,7 @@
 
                      for (var j = 0; j < ans[f].length; j++) {
                         var get_ans = ans[f][j].answer;
-                        $("#ans" + get_id).before('<div class="form-row multiple__choice__row__in_modal pb-0 mb-2 align-items-center"><div class="col input-group"><input name="multiple__choice__answer__1" id="answer' + get_id + '"class="form-control readonly" type="text" value="' + get_ans + '"><div  class="input-group-prepend"><span class="input-group-text text-white border-danger bg-danger rounded-right "><i class="far fa-trash-alt"></i></span></div></div><div class="col-2 text-center form-check"><input type="radio" class="readonly" name="multiple__choice__correct__answer"></div></div>');
+                        $("#ans" + get_id).before('<div class="form-row multiple__choice__row__in_modal pb-0 mb-2 align-items-center"><div class="col input-group"><input name="multiple__choice__answer__1" id="answer' + get_id + '"class="form-control readonly" type="text" value="' + get_ans + '" readonly><div  class="input-group-prepend"><span class="input-group-text text-white border-danger bg-danger rounded-right d-none"><i class="far fa-trash-alt"></i></span></div></div><div class="col-2 text-center form-check"><input type="radio" class="readonly" name="multiple__choice__correct__answer"></div></div>');
 
                      }
 
@@ -201,7 +201,7 @@
                         for (var j = 0; j < ans[f].length; j++) {
                            var get_ans = ans[f][j].answer;
 
-                           $("#ans" + get_id).before('<div class="form-row multiple__choice__row__in_modal pb-0 mb-2 align-items-center"><div class="col input-group"><input name="multiple__choice__answer__1" id="answer' + get_id + '" class="answer' + get_id + ' form-control readonly" type="text" value="' + get_ans + '"><div  class="input-group-prepend"><span class="input-group-text text-white border-danger bg-danger rounded-right "><i class="far fa-trash-alt"></i></span></div></div><div class="col-2 text-center form-check"><input type="radio" class="readonly" name="multiple__choice__correct__answer"></div></div>');
+                           $("#ans" + get_id).before('<div class="form-row multiple__choice__row__in_modal pb-0 mb-2 align-items-center"><div class="col input-group"><input name="multiple__choice__answer__1" id="answer' + get_id + '" class="answer' + get_id + ' form-control readonly" type="text" value="' + get_ans + '" readonly><div  class="input-group-prepend"><span class="input-group-text text-white border-danger bg-danger rounded-right d-none"><i class="far fa-trash-alt"></i></span></div></div><div class="col-2 text-center form-check"><input type="radio" class="readonly" name="multiple__choice__correct__answer"></div></div>');
 
                         }
                      }
@@ -268,7 +268,7 @@
                         for (var j = 0; j < ans[f].length; j++) {
                            var get_ans = ans[f][j].answer;
 
-                           $("#ans" + get_id).before('<div class="form-row multiple__choice__row__in_modal pb-0 mb-2 align-items-center"><div class="col input-group"><input name="multiple__choice__answer__1" class="form-control readonly" type="text" value="' + get_ans + '"><div  class="input-group-prepend"><span class="input-group-text text-white border-danger bg-danger rounded-right "><i class="far fa-trash-alt"></i></span></div></div><div class="col-2 text-center form-check"><input type="radio" class="readonly" name="multiple__choice__correct__answer"></div></div>');
+                           $("#ans" + get_id).before('<div class="form-row multiple__choice__row__in_modal pb-0 mb-2 align-items-center"><div class="col input-group"><input name="multiple__choice__answer__1" class="form-control readonly" type="text" value="' + get_ans + '" readonly><div  class="input-group-prepend"><span class="input-group-text text-white border-danger bg-danger rounded-right d-none"><i class="far fa-trash-alt"></i></span></div></div><div class="col-2 text-center form-check"><input type="radio" class="readonly" name="multiple__choice__correct__answer"></div></div>');
 
                         }
 
@@ -336,7 +336,7 @@
                         for (var j = 0; j < ans[f].length; j++) {
                            var get_ans = ans[f][j].answer;
 
-                           $("#ans" + get_id).before('<div class="form-row multiple__choice__row__in_modal pb-0 mb-2 align-items-center"><div class="col input-group"><input name="multiple__choice__answer__1" class="form-control readonly" type="text" value="' + get_ans + '"><div  class="input-group-prepend"><span class="input-group-text text-white border-danger bg-danger rounded-right "><i class="far fa-trash-alt"></i></span></div></div><div class="col-2 text-center form-check"><input type="radio" class="readonly" name="multiple__choice__correct__answer"></div></div>');
+                           $("#ans" + get_id).before('<div class="form-row multiple__choice__row__in_modal pb-0 mb-2 align-items-center"><div class="col input-group"><input name="multiple__choice__answer__1" class="form-control readonly" type="text" value="' + get_ans + '" readonly><div  class="input-group-prepend"><span class="input-group-text text-white border-danger bg-danger rounded-right d-none"><i class="far fa-trash-alt"></i></span></div></div><div class="col-2 text-center form-check"><input type="radio" class="readonly" name="multiple__choice__correct__answer"></div></div>');
 
                         }
 
