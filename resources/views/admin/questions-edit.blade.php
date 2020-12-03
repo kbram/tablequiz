@@ -168,7 +168,7 @@
 								<div class="modal" id="add__image__media" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
 								  <div class="modal-dialog" role="document">
 									<div class="modal-content">
-									  <div class="modal-header justify-content-center">
+									  <div class="modal-header ">
 										<h1 class="modal-title" id="add__image__media__modal__heading"></h1>
 										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 										  <span aria-hidden="true">&times;</span>
@@ -206,7 +206,7 @@
                             	<div class="modal" id="add__audio__media" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
 								  <div class="modal-dialog" role="document">
 									<div class="modal-content">
-									  <div class="modal-header justify-content-center">
+									  <div class="modal-header ">
 										<h1 class="modal-title" id="add__audio__media__modal__heading"></h1>
 										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 										  <span aria-hidden="true">&times;</span>
@@ -244,7 +244,7 @@
 								<div class="modal" id="add__video__media" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
 								  <div class="modal-dialog" role="document">
 									<div class="modal-content">
-									  <div class="modal-header justify-content-center">
+									  <div class="modal-header ">
 										<h1 class="modal-title" id="add__video__media__modal__heading"></h1>
 										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 										  <span aria-hidden="true">&times;</span>
