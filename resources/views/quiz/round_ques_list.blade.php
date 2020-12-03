@@ -62,7 +62,14 @@
                                     <div class="img-container">
 											<div class="row">
 												<div class="col-md-12">
-													<img id="image" src="{{asset($round_image_data)}}" height="300px">
+                                                    <img id="image" height="300px" 
+                                                    @if($round_image_data)
+                                                    src="{{asset($round_image_data)}}" 
+                                                    @else
+                                                    src="{{asset('/storage/homepage__logo.png')}}"
+                                                    @endif
+                                                    >
+                                                    
 												</div>										
 											</div>
 										</div>

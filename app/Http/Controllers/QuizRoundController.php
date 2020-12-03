@@ -143,7 +143,7 @@ class QuizRoundController extends Controller
         
      }
         $count=0;
-        // dd($round_image_data);
+         
         return view('quiz.round_ques_list',compact('round_image_data','count','questions','answers','categories','round','round_count','id','rid','pay','frid','lrid','media'));
     }
     public function new_show($id,$rid){
@@ -190,40 +190,75 @@ class QuizRoundController extends Controller
     }
 
 
-    public function round_upload(Request $request,$id){
+    public function round_upload(Request $request,$id){ 
         $get_round_name=QuizRound::where('id',$id)->get('round_name');
         $round_name= $get_round_name[0]['round_name'];
-     if ($request->image_crop) { 
+
+       $round = QuizRound::findorfail($id); 
+       $quiz = Quiz::find($round->quiz_id); 
+       $round->round_name = $request->input('round_name');
+       $round->save();
+       $quiz_link =  $quiz->quiz_link.'/'.$round->id;
+     if ($request->image_crop) {
         /** crop image decode */
         $data = $request->image_crop;
         $image_array_1 = explode(";", $data);
         $image_array_2 = explode(",", $image_array_1[1]);
         $data = base64_decode($image_array_2[1]);
-      /** crop image decode */
-       $round_bg=QuizRoundImage::where('round_id',$id)->first();
-       $usersImage = public_path($round_bg->local_path);
-       if (File::exists($usersImage)) { 
-           unlink($usersImage);
-           Image::make($data)->save($usersImage);
-       }
-       
 
-       if($request->file('bg_image')){ 
-           $usersImage = public_path($round_bg->public_path2);
-          
-           if (File::exists($usersImage)) { 
-               unlink($usersImage);
-               $round_img= $request->file('bg_image');
-               Image::make($round_img)->save($usersImage);
-           }
-        
+      /** crop image decode */
+
+       $round_bg=QuizRoundImage::where('round_id',$id)->first(); 
+       $usersImage = public_path($round_bg->local_path);
+       $usersImagebg = public_path($round_bg->public_path2);
+
+       if (File::exists($usersImage)) { 
+             unlink($usersImage);
+             Image::make($data)->save($usersImage);
+
+        if (File::exists($usersImagebg)) { 
+              unlink($usersImagebg);
+              $round_img= $request->file('bg_image');
+            Image::make($round_img)->save($usersImagebg);
+            }
          
+       }else{
+           
+        $round_background = $request->file('bg_image');
+        $filename_round = 'round_bg.' . $round_background->getClientOriginalExtension();
+        $save_path1 = '/storage/round_bg/' . $quiz_link . '/round_bg/';
+
+        $save_path = storage_path('app/public') . '/round_bg/' . $quiz_link . '/round_bg/';
+        $save_path2 = storage_path('app/public') . '/round_bg/' . $quiz_link . '/round_bg/' . '/orgimg/';
+        $save_path_thumb = storage_path('app/public') . '/round_bg/' . $quiz_link . '/round_bg/' . '/thumb/';
+
+        $public_path_round = '/storage/' . '/round_bg/' . $quiz_link . '/round_bg/' . $filename_round;
+        $public_path2_round = '/storage/round_bg/' . $quiz_link . '/round_bg/' . '/orgimg/' . $filename_round;
+        $public_path_thumb_round = '/storage/round_bg/' . '/round_bg/' . $quiz_link . '/round_bg/' . '/thumb/' . $filename_round;
+
+        File::makeDirectory($save_path, $mode = 0755, true, true);
+        File::makeDirectory($save_path_thumb, $mode = 0755, true, true);
+        File::makeDirectory($save_path2, $mode = 0755, true, true);
+
+        Image::make($data)->save($save_path . $filename_round);
+        $round_background->move($save_path2, $filename_round);
+
+        
+        $round_bg ->name           = $filename_round;
+        $round_bg ->public_path    = $public_path_round;
+        $round_bg ->public_path2   = $public_path2_round;
+        $round_bg ->local_path     = $save_path . '/' . $filename_round;
+        $round_bg ->round_id       = $round->id;
+        $round_bg ->thumb_path     = $public_path_thumb_round;
+        $round_bg ->save();
+
        }
       
+             
+   
+      
    }
-           $round = QuizRound::findorfail($id); 
-            $round->round_name = $request->input('round_name');
-            $round->save();
+          
 
 
       return redirect()->back();
