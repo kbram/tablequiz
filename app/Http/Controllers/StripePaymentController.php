@@ -142,6 +142,7 @@ $quiz->save();
     }
 
     public function payment_detail(Request $request){
+        
 
         if(Auth::check()){
         
@@ -196,6 +197,7 @@ $quiz->save();
                         'quiz_id' => $request->id
                     );
             }
+
             else{
                 
                 $user = auth()->user();
@@ -253,15 +255,21 @@ $quiz->save();
                          'quiz_id' => $quiz_id->id
                     );
                     
-                    $total_card = (int)$participants_cost[0]->cost+ (int)$question_cost + (int)$background_cost;
+                    
+            }
+
+            $total_card = (int)$participants_cost[0]->cost+ (int)$question_cost + (int)$background_cost;
                     if($total_card==0){
                         $quiz = Quiz::find($quiz_id->id);
                         $quiz->payment = true ;
                         $quiz->save();
+                        return response()->json($total_card);
                     }
-            }
-           
+                    
             return response()->json($response);
+               
+           
+            
         
     
 

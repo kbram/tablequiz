@@ -142,7 +142,7 @@ jQuery(document).ready(function ($) {
     $("#login-btn").click(function (e) {
         e.preventDefault();
         $("#loading").addClass("loader");
-        var total_card=0;
+
 
         reload = function () {
             location.href = location.href;
@@ -169,6 +169,10 @@ jQuery(document).ready(function ($) {
                     data: {
                     },
                     success: function (data) {
+                        if(data == 0){
+                            window.location.href = "/dashboard/home";
+                        }
+                        else{
                         $("#loading").removeClass("loader");
                         var participants = data.participants.no_of_participants;
                         var participants_cost = data.participants_cost[0].cost;
@@ -205,12 +209,13 @@ jQuery(document).ready(function ($) {
                         }
 
                         var customised_backgrounds_price = $("#modal__payment").find(".customised-backgrounds td:nth-child(3)").text(data.bg_image_cost);
-                        
+
                         $("#modal__payment").find(".total-cost td:nth-child(2)>strong").text(Number(participants_cost) + Number(questions_cost) + Number(data.bg_image_cost));
-                        total_card = Number(participants_cost) + Number(questions_cost) + Number(data.bg_image_cost);
+                        var total_card = Number(participants_cost) + Number(questions_cost) + Number(data.bg_image_cost);
                         $("#card_total").val(total_card);
                         $("#quiz_id").val(quiz_id);
-                    },
+                   
+                     } },
                     error: function (result, error) { },
                 });
                 //card fill
@@ -226,13 +231,7 @@ jQuery(document).ready(function ($) {
                         .val(data.exp_year);
                     $("#modal__payment").find("#card-cvc").val(data.cvv);
                 });
-                if(total_card==0){
-                    window.location.href = "/dashboard/home";
-                }else{
-                     $("#publishQuizModal").modal("show");
-                    $("#modal__payment").removeClass("d-none");
-                }
-               
+                $("#modal__payment").removeClass("d-none");
             },
             error: function (result, error) {
 
@@ -265,7 +264,6 @@ jQuery(document).ready(function ($) {
     $("#signup-btn").click(function (e) {
         e.preventDefault();
         $("#loading1").addClass("loader");
-        var total_card=0;
         reload = function () {
             location.href = location.href;
         };
@@ -360,7 +358,7 @@ jQuery(document).ready(function ($) {
                                 Number(questions_cost) +
                                 Number(data.bg_image_cost)
                             );
-                        total_card =
+                        var total_card =
                             Number(participants_cost) +
                             Number(questions_cost) +
                             Number(data.bg_image_cost);
@@ -396,11 +394,7 @@ jQuery(document).ready(function ($) {
                         .val(data.exp_year);
                     $("#modal__payment").find("#card-cvc").val(data.cvv);
                 });
-                if(total_card==0){
-                    window.location.href = "/dashboard/home";
-                }else{
-                    $("#modal__payment").removeClass("d-none");
-                }
+                $("#modal__payment").removeClass("d-none");
             },
             error: function (result, error) {
                 $("#loading1").removeClass("loader");
@@ -831,35 +825,35 @@ jQuery(document).ready(function ($) {
             '" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true"><div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header "> <h1 class="modal-title" id="add__image__media__modal__heading"></h1> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div> <div class="modal-body"> <p class="text-center py-2">Add <span id="add__image__media__text"></span> to reference in your question</p> <div class="form-row"> <div class="col-md-4"> <label>Add link'+
             '</label> </div> <div class="col-md-8"> <input type="url" name="add_link_to_image__media__' +
             arcount +
-            '" class="form-control add-image-media-link" id="add__image__media__text"> </div> </div> <div class="text-center w-100"> <span>OR</span> </div> <div class="form-row justify-content-center pt-3"> <div class="col-md-3 d-flex"> <label class="d-block mr-2 upload__image__media__file" for="upload__image__media__file__' +
+            '" class="form-control add-image-media-link" id="add__image__media__text"> </div> </div> <div class="text-center w-100"> <span>OR</span> </div> <div class="form-row justify-content-center pt-3"> <div class="col-md-3"> <label class="d-block" for="upload__image__media__file__' +
             arcount +
             '">Upload <input type="file" class="form-control-file" id="upload__image__media__file__' +
             arcount +
             '" value="Upload" name="image_media_' +
             arcount +
-            '"> </label><i class="fa fa-check d-none m-3" aria-hidden="true" style="color:#2ccfbe;" id="checkimagemedia'+arcount+'"></i> </div> </div> </div> <div class="modal-footer justify-content-center"> <div class="col-sm-4"> <button id="pro1" type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button> </div> </div> </div> </div> </div> <div class="modal" id="add__audio__media' +
+            '"> </label> </div> </div> </div> <div class="modal-footer justify-content-center"> <div class="col-sm-4"> <button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button> </div> </div> </div> </div> </div> <div class="modal" id="add__audio__media' +
             count +
             '" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true"> <div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header"> <h1 class="modal-title" id="add__audio__media__modal__heading"></h1> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div> <div class="modal-body"> <p class="text-center py-2">Add <span id="add__audio__media__text"></span> to reference in your question</p> <div class="form-row"> <div class="col-md-4"> <label>Add link'+
             '</label> </div> <div class="col-md-8"> <input type="url" name="add_link_to_audio__media__' +
             arcount +
-            '" class="form-control add-audio-media-link" id="add__audio__media__text"> </div> </div> <div class="text-center w-100"> <span>OR</span> </div> <div class="form-row justify-content-center pt-3"> <div class="col-md-3 d-flex"> <label class="d-block mr-2 upload__audio__media__file" for="upload__audio__media__file__' + arcount + '">Upload <input type="file" class="form-control-file" id="upload__audio__media__file__' +
+            '" class="form-control add-audio-media-link" id="add__audio__media__text"> </div> </div> <div class="text-center w-100"> <span>OR</span> </div> <div class="form-row justify-content-center pt-3"> <div class="col-md-3"> <label class="d-block" for="upload__audio__media__file__' + arcount + '">Upload <input type="file" class="form-control-file" id="upload__audio__media__file__' +
             arcount +
             '" value="Upload" name="audio_media_' +
             arcount +
-            '"> </label><i class="fa fa-check d-none m-3" aria-hidden="true" style="color:#2ccfbe;" id="checkaudiomedia'+arcount+'"></i> </div> </div> </div> <div class="modal-footer justify-content-center"> <div class="col-sm-4"> <button id="pro2" type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button> </div> </div> </div> </div> </div> <div class="modal" id="add__video__media' +
+            '"> </label> </div> </div> </div> <div class="modal-footer justify-content-center"> <div class="col-sm-4"> <button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button> </div> </div> </div> </div> </div> <div class="modal" id="add__video__media' +
             count +
             '" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true"> <div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header"> <h1 class="modal-title" id="add__video__media__modal__heading"></h1> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div> <div class="modal-body"> <p class="text-center py-2">Add <span id="add__video__media__text"></span>to reference in your question</p> <div class="form-row"> <div class="col-md-4"> <label>Add link'+
             '</label> </div> <div class="col-md-8"> <input type="url" name="add_link_to_video__media__' +
             arcount +
-            '" class="form-control add-video-media-link" id="add__video__media__text"> </div> </div> <div class="text-center w-100"> <span>OR</span> </div> <div class="form-row justify-content-center pt-3"> <div class="col-md-3 d-flex"> <label class="d-block mr-2 upload__video__media__file" for="upload__video__media__file__' + arcount + '">Upload <input type="file" class="form-control-file" id="upload__video__media__file__' +
+            '" class="form-control add-video-media-link" id="add__video__media__text"> </div> </div> <div class="text-center w-100"> <span>OR</span> </div> <div class="form-row justify-content-center pt-3"> <div class="col-md-3"> <label class="d-block" for="upload__video__media__file__' + arcount + '">Upload <input type="file" class="form-control-file" id="upload__video__media__file__' +
             arcount +
             '" value="Upload" name="video_media_' +
             arcount +
-            '"> </label><i class="fa fa-check d-none m-3" aria-hidden="true" style="color:#2ccfbe;" id="checkvideomedia'+arcount+'"></i> </div> </div> </div> <div class="modal-footer justify-content-center"> <div class="col-sm-4"> <button id="pro3" type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button> </div> </div> </div> </div> </div> </div> <div class="form-row d-flex standard__answer" id="standard__answer"> <div class="col-md-4"><label for="standard__question__answer">Answer</label> </div> <div class="col-md-8"> <input class="form-control answer" name="standard__question__answer__' +
+            '"> </label> </div> </div> </div> <div class="modal-footer justify-content-center"> <div class="col-sm-4"> <button type="button" class="d-block btn btn-primary" data-dismiss="modal">Save</button> </div> </div> </div> </div> </div> </div> <div class="form-row d-flex standard__answer" id="standard__answer"> <div class="col-md-4"><label for="standard__question__answer">Answer</label> </div> <div class="col-md-8"> <input class="form-control answer" name="standard__question__answer__' +
             arcount +
             '" type="text" required> </div> </div> <div class="form-row d-none numeric__answer" id="numeric__answer"> <div class="col-md-4"> <label for="numeric__question__answer">Answer</label> </div> <div class="col-md-8"> <input class="form-control" name="numeric__question__answer__' +
             arcount +
-            '" type="number" > </div> </div> <div class="form-row d-none multiple__choice__legend" style="min-height:0;" id="multiple__choice__legend"> <div class="offset-9 offset-md-10 col-3 col-md-2"><small class="d-block text-center pl-4">Correct answer</small> </div> </div> <div class="form-row d-none multiple__choice__answer" id="multiple__choice__answer"> <div class="col-md-4 align-self-start"> <label for="multiple__choice__answer">Answer</label> </div> <div class="col-md-8 multi-choice"> <div class="row multiple__choice__row pb-3 align-items-center"> <div class="col-7"><input name="multiple__choice__answer__' +
+            '" type="number" > </div> </div> <div class="form-row d-none multiple__choice__legend" style="min-height:0;" id="multiple__choice__legend"> <div class="offset-md-10 col-2"><small class="d-block text-center pl-4">Correct answer</small> </div> </div> <div class="form-row d-none multiple__choice__answer" id="multiple__choice__answer"> <div class="col-md-4 align-self-start"> <label for="multiple__choice__answer">Answer</label> </div> <div class="col-md-8 multi-choice"> <div class="row multiple__choice__row pb-3 align-items-center"> <div class="col-7"><input name="multiple__choice__answer__' +
             arcount +
             '[]" class="multiple-choice-answer first-multi-answer form-control" type="text"> </div> <div class="col-1 justify-content-center">&nbsp; </div> <div class="col-1 justify-content-center"> <span class="plus">+</span> </div> <div class="col-3 text-center form-check"> <input type="radio" checked="checked" class="multiple-choice-correct-answer" name="multiple__choice__correct__answer__' +
             arcount +
@@ -961,7 +955,7 @@ jQuery(document).ready(function ($) {
                 id: quiz,
             },
             success: function (data) {
-                
+                $("#publishQuizModal").modal("show");
                 var participants = data.participants.no_of_participants;
                 var participants_cost = data.participants_cost[0].cost;
 
@@ -1036,11 +1030,6 @@ jQuery(document).ready(function ($) {
                     Number(participants_cost) +
                     Number(questions_cost) +
                     Number(data.bg_image_cost);
-                    if(total_card==0){
-                        window.location.href = "/dashboard/home";
-                    }else{
-                        $("#publishQuizModal").modal("show");
-                    }
                 $("#card_total").val(total_card);
                 $("#quiz_id").val(quiz_id);
             },
@@ -1083,10 +1072,9 @@ jQuery(document).ready(function ($) {
     $(document).ready(function () {
 
         $('.publish-quiz').click(function (e) {
-
             $('#overlay').fadeIn();
             e.preventDefault();
-           
+
             var quiz_id = "";
 
             var formdata = new FormData($("#add_round")[0]);
@@ -1106,18 +1094,20 @@ jQuery(document).ready(function ($) {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                 },
                 success: function (response) {
-                   
-                     $('#overlay').fadeOut();
+                    $('#overlay').fadeOut();
 
-                     $('#publishQuizModal').modal('show');
-
+                    $('#publishQuizModal').modal('show');
                     $.ajax({
                         type: "POST",
                         url: "/payment",
                         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
 
                         success: function (data) {
-                            if (data.participants != 0) {
+                            if(data == 0){
+                                window.location.href = "/dashboard/home";
+                            }  
+                                else{                     
+                             if (data.participants != 0) {
 
                                 var participants = data.participants.no_of_participants;
                                 var participants_cost = data.participants_cost[0].cost;
@@ -1164,16 +1154,11 @@ jQuery(document).ready(function ($) {
                                 $('#modal__payment').find('.total-cost td:nth-child(2)>strong').text(Number(participants_cost) + Number(questions_cost) + Number(data.bg_image_cost));
 
                                 var total_card = Number(participants_cost) + Number(questions_cost) + Number(data.bg_image_cost);
-                                if(total_card==0){
-                                    window.location.href = "/dashboard/home";
-                                }else{
-                                    $("#publishQuizModal").modal("show");
-                                }
                                 $("#card_total").val(total_card);
                                 $('#quiz_id').val(quiz_id);
 
                             }
-
+                        }
 
                         },
                         error: function (result, error) {
