@@ -116,17 +116,18 @@
 											<td>{{date('d/m/Y', strtotime($category->created_at))}}</td>
 
                                             <td class="quiz_actions d-flex flex-row justify-content-lg-center">
+											<a href="{{ URL::to('admin/categories/edit/'.$category->id)}}">
 												<div class="d-flex flex-column">
 													<i class="fas fa-pencil-alt"></i>
-													<span><a href="{{ URL::to('admin/categories/edit/'.$category->id)}}">Edit</a></span>
+													<span>Edit</span>
 												</div>
-												
+												</a>
 																	
 												
 												<form method="POST" action="/admin/categories/{{$category->id}}" class="p-0">
 												{{ csrf_field() }}	
-												<div class="d-flex flex-column">
-												<i class="fas fa-times-circle" ></i><span class="delete">Delete</span>
+												<div class="d-flex flex-column delete">
+												<i class="fas fa-times-circle" ></i><span >Delete</span>
 												</div>
 											</form>
 												
@@ -161,7 +162,7 @@
 @section('footer_scripts')
 <script>
 
-    $('span.delete').click(function(e){
+    $('div.delete').click(function(e){
          
         e.preventDefault() // Don't post the form, unless confirmed
         

@@ -135,9 +135,9 @@
 									
 										<form method="POST" action="/admin/home/un-block/{{$quiz->id}}" class="p-0">
 										      @csrf
-											<div class="d-flex flex-column" >
+											<div class="d-flex flex-column block" id="{{$quiz->id}}">
 												<i class="fas fa-times-circle"></i>
-												<span class="block" id="block{{$quiz->id}}">un-block</span>
+												<span id="block{{$quiz->id}}">Un-Block</span>
 											</div>
 										</form>
 									
@@ -166,9 +166,9 @@
 									
 										<form method="POST" action="/admin/home/block/{{$quiz->id}}" class="p-0">
 										             @csrf
-											<div class="d-flex flex-column block" id="block{{$quiz->id}}">
+											<div class="d-flex flex-column block" id="{{$quiz->id}}">
 												<i class="fas fa-times-circle"></i>
-												<span class="child">block</span>
+												<span id="block{{$quiz->id}}">Block</span>
 											</div>
 										</form>
 									

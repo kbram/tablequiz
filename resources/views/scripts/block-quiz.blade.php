@@ -4,8 +4,8 @@
     $("body").delegate('.block', 'click',function(e) {
         e.preventDefault();
         var id=$(this).attr('id');
-        var text=$('#'+id).find('span.child').text();
-        if(text=='block'){
+        var text=$('#block'+id).text();
+        if(text=='Block'){
           swal({
                     title: "Are you sure?",
                     text: "You are blocking this Quiz! You can unblock it at any time!",
@@ -29,7 +29,7 @@
                        }
 
 
-                       else if(text=='un-block'){
+                       else if(text=='Un-Block'){
                        swal({
                     title: "Are you sure?",
                     text: "You are un-blocking this Quiz!",
