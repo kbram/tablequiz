@@ -89,53 +89,47 @@
 
 									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
 
-									
-	
-											
-										<a href="{{route('userquizzes',$user->id)}}" data-toggle="tooltip" title="View Qs">
-											<div class="d-flex flex-column pl-0"  style=" pointer-events: none;opacity: 0.4;">
+									<div class="d-flex flex-column pl-0"  style=" pointer-events: none;opacity: 0.4;">
 
 												<i class="far fa-eye"></i>
-											<span>  View Qs</span></div></a>
+										<a href="{{route('userquizzes',$user->id)}}" data-toggle="tooltip" title="View Qs">
+											
+											<span>  View Qs</span></a>
 										
-
+											</div>
 
 										<form method="POST" action="/admin/home/un-blockuser/{{$user->id}}" class="p-0">
 										      @csrf
-											<div class="d-flex flex-column" >
+											<div class="d-flex flex-column blockuser" id="{{$user->id}}" >
 												<i class="fas fa-times-circle"></i>
-												<span class="blockuser" id="block{{$user->id}}">un-block</span>
+												<span id="block{{$user->id}}">Un-Block</span>
 											</div>
 										</form>
 
 										</td>
 								</tr>
 
-								@elsev
+								@else
 								<tr>
 									<td>{{$user->name}}</td>
 									<td>{{$quizcount[$user->id]}}</td>
 									<td>{{$questioncount[$user->id]}}</td>
 
 
-									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
-
-									
-	
-											
-											<a href="{{route('userquizzes',$user->id)}}" data-toggle="tooltip" title="View Qs">
-												<div class="d-flex flex-column pl-0">
-
-													<i class="far fa-eye"></i>
-										        <span>View Qs</span></div></a>
-										
+						<td class="quiz_actions d-flex flex-row justify-content-lg-center">
+                            <a href="{{route('userquizzes',$user->id)}}" data-toggle="tooltip" title="View Qs">
+								<div class="d-flex flex-column pl-0">
+									<i class="far fa-eye"></i>
+									<span>View Qs</span>
+								</div>
+							</a>
 
 
 										<form method="POST" action="/admin/home/blockuser/{{$user->id}}" class="p-0">
 										             @csrf
-											<div class="d-flex flex-column">
+											<div class="d-flex flex-column blockuser"  id="{{$user->id}}">
 												<i class="fas fa-times-circle"></i>
-												<span class="blockuser" id="block{{$user->id}}">block</span>
+												<span id="block{{$user->id}}">Block</span>
 											</div>
 										</form>
 

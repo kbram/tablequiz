@@ -4,9 +4,9 @@
     $("body").delegate('.blockuser', 'click',function(e) {
         e.preventDefault();
         var id=$(this).attr('id');
-        var text=$('#'+id).text();
+        var text=$('#block'+id).text();
            
-        if(text=='block'){
+        if(text=='Block'){
           swal({
                     title: "Are you sure?",
                     text: "You are blocking this User! You can unblock it at any time!",
@@ -30,7 +30,7 @@
                        }
 
 
-                       else if(text=='un-block'){
+                       else if(text=='Un-Block'){
                        swal({
                     title: "Are you sure?",
                     text: "You are un-blocking this User!",
