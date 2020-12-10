@@ -38,9 +38,9 @@
             success: function(results) {
               $('#msg'+id).text('updated sucessfully');
               if(find=="old"){
-                swal("Updated !!!",'Another Price Band is updated', "success");
+                swal("Updated !!!",'Price Band is updated', "success");
               }else{
-                swal("Added !!!",'Another Price Band is added', "success");
+                swal("Added !!!", 'Price Band is added', "success");
                 $(this).attr('name',"old");
               }
               setTimeout(function() {

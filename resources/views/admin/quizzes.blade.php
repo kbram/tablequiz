@@ -144,7 +144,7 @@
 								@endforeach
 								@else
 								<tr>
-								<p>No quizzes to show</p>
+								<p style="padding: 0.6rem;">No quizzes to show</p>
 								</tr>
 								
 								@endif

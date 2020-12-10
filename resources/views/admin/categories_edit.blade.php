@@ -95,11 +95,9 @@
 									
 								</div>
 								<div class="col-6 col-md-2">
-									@foreach($categoryImage as $categoryImages)
-										@if($categoryImages->category_id==$category->id)
-										<img id="image" src="{{asset($categoryImages->public_path)}}" height="70px" width="100px">
+										@if($category->quizCategoryImages())
+											<img id="image" src="{{asset($category->quizCategoryImages()->first()->public_path)}}"  width="100px">
 										@endif
-									@endforeach
 									
 								</div>
 							</div>

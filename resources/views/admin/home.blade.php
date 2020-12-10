@@ -42,7 +42,7 @@
 					<li>
 						<a href="/admin/questions">
 							<span><i class="fas fa-question-circle"></i></span>
-							Question
+							Questions
 						</a>
 					</li>
 
@@ -182,7 +182,7 @@
 								@endforeach
 								@else
 								<tr> 
-								<p>No quizzes to show</p>
+								<p style="padding: 0.6rem;">No quizzes to show</p>
 								</tr>
 							@endif
 							</tbody>

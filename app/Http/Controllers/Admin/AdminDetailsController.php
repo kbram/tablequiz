@@ -154,7 +154,9 @@ class AdminDetailsController extends Controller
     {   
              
         $user    = User::find($id);
-        $quizzes = Quiz::where('user_id',$user->id)->get();
+        $roundCount = [];
+        $questionCounts = [];
+        $quizzes = Quiz::where('user_id',$user->id)->paginate(10);
         foreach($quizzes as $quiz){
            $user[$quiz->id]   = User::where('id', $quiz->user_id)->value('name'); 
            $roundCount[$quiz->id]=$quiz->rounds()->count();

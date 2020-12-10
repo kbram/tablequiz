@@ -89,14 +89,15 @@
 
 									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
 
-										<div class="d-flex flex-column pl-0"  style=" pointer-events: none;opacity: 0.4;">
-
-											<i class="far fa-eye"></i>
+									
 	
 											
-											<span><a href="{{route('userquizzes',$user->id)}}" data-toggle="tooltip" title="View Qs">
-										         View Qs</a></span>
-										</div>
+										<a href="{{route('userquizzes',$user->id)}}" data-toggle="tooltip" title="View Qs">
+											<div class="d-flex flex-column pl-0"  style=" pointer-events: none;opacity: 0.4;">
+
+												<i class="far fa-eye"></i>
+											<span>  View Qs</span></div></a>
+										
 
 
 										<form method="POST" action="/admin/home/un-blockuser/{{$user->id}}" class="p-0">
@@ -110,7 +111,7 @@
 										</td>
 								</tr>
 
-								@else
+								@elsev
 								<tr>
 									<td>{{$user->name}}</td>
 									<td>{{$quizcount[$user->id]}}</td>
@@ -119,14 +120,15 @@
 
 									<td class="quiz_actions d-flex flex-row justify-content-lg-center">
 
-										<div class="d-flex flex-column pl-0">
-
-											<i class="far fa-eye"></i>
+									
 	
 											
-											<span><a href="{{route('userquizzes',$user->id)}}" data-toggle="tooltip" title="View Qs">
-										         View Qs</a></span>
-										</div>
+											<a href="{{route('userquizzes',$user->id)}}" data-toggle="tooltip" title="View Qs">
+												<div class="d-flex flex-column pl-0">
+
+													<i class="far fa-eye"></i>
+										        <span>View Qs</span></div></a>
+										
 
 
 										<form method="POST" action="/admin/home/blockuser/{{$user->id}}" class="p-0">
