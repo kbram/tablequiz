@@ -287,7 +287,7 @@
 									
 									</div>
 									<div class=" col-md-4">
-									<img src='{{asset($questionMedia->public_path)}}' alt='image' width='120px' height='80px' style='border: 3px solid #dee2e6!important;' class='myImg'> 
+									<img src='{{asset($questionMedia->public_path)}}' alt='image' width='100px'  style='border: 3px solid #dee2e6!important;' class='myImg'> 
 								
 									</div>    
 								</div>
