@@ -95,7 +95,7 @@
 									
 								</div>
 								<div class="col-6 col-md-2">
-										@if($category->quizCategoryImages())
+										@if(@isset($category->quizCategoryImages()->first()->public_path))
 											<img id="image" src="{{asset($category->quizCategoryImages()->first()->public_path)}}"  width="100px">
 										@endif
 									

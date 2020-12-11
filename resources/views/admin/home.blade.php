@@ -154,10 +154,12 @@
 									<td class="d-none" id="quizLink{{$quiz -> id}}">{{$quiz -> quiz_link}}</td>
 									<td class="d-none" id="emailLink{{$quiz->id}}">{{$result[$quiz->id]}}</td>
 									<td class="quiz_actions db d-flex flex-row justify-content-lg-center">
-										<div class="d-flex flex-column">
-											
-											<span class="view-qz" id="view-qz{{$quiz->id}}"><a href="/quiz/{{$quiz->id}}/round/1" ><i class="far fa-eye"></i><span class="d-block">View Qs</span></a></span>
-										</div>
+									<a href="/quiz/{{$quiz->id}}/round/1">
+											<div class="d-flex flex-column"  >
+												<i class="far fa-eye"></i>
+												<span class="view-qz" id="view-qz{{$quiz->id}}">View Qs</span>
+											</div>
+										</a>
 										<div class="d-flex flex-column share" id="{{$quiz->id}}">
 										<input type="hidden" id="get_url" value="{{asset('/')}}">
 											<i class="fas fa-share-alt"></i><span >Share</span>

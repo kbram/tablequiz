@@ -93,7 +93,7 @@ class QuizCategoriesController extends Controller
   public function edit($id){
     $categories=QuizCategory::all();
     $category=QuizCategory::find($id);
-    // $categoryImage=QuizCategoryImage::all();
+    
     return view('admin.categories_edit', compact('categories','category'));
     
     

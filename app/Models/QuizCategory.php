@@ -23,7 +23,7 @@ class QuizCategory extends Model
     }
     public function quizCategoryImages()
     {
-        return $this->hasOne('App\Models\QuizCategoryImage');
+        return $this->hasOne('App\Models\QuizCategoryImage','category_id');
     }
 
 
